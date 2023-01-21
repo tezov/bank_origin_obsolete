@@ -1,0 +1,2 @@
+- componentManager, is there a way to not destroy if screen is supposed to be behind ??? Same LocalPage in Module
+

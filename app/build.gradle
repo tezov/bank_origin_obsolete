@@ -1,0 +1,118 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+    id 'org.jetbrains.kotlin.kapt'
+}
+
+android {
+    compileSdk defaultCompileSdkVersion
+    compileOptions {
+        sourceCompatibility javaCompileVersion
+        targetCompatibility javaCompileVersion
+    }
+    kotlinOptions {
+        jvmTarget = jvmTarget
+    }
+    defaultConfig {
+        applicationId "com.tezov.bank"
+        resConfigs 'en', 'fr'
+        versionCode 10000
+        minSdk defaultMinCompileSdkVersion
+        targetSdk defaultTargetCompileSdkVersion
+        testInstrumentationRunner "com.tezov.bank.jUnit.JUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion composeVersion
+    }
+    packagingOptions {
+        resources{
+            pickFirst 'META-INF/gradle/incremental.annotation.processors'
+            excludes.add('META-INF/DEPENDENCIES')
+            excludes.add('META-INF/LICENSE')
+            excludes.add('META-INF/LICENSE.txt')
+            excludes.add('META-INF/license.txt')
+            excludes.add('META-INF/NOTICE')
+            excludes.add('META-INF/NOTICE')
+            excludes.add('META-INF/NOTICE.txt')
+            excludes.add('META-INF/notice.txt')
+            excludes.add('META-INF/ASL2.0')
+            excludes.add('META-INF/LGPL2.1')
+//            excludes.add('META-INF/*.kotlin_module')
+//            excludes.add("META-INF/**")
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        release {
+            shrinkResources true
+            minifyEnabled true
+            //signingConfig signingConfigs.releaseConfig
+            debuggable false
+        }
+        debug {
+            shrinkResources false
+            minifyEnabled false
+            //signingConfig signingConfigs.debugConfig
+        }
+    }
+    sourceSets {
+        main {
+            def main_layouts = file('src/main/res/layouts').listFiles()
+            res {
+                srcDirs 'src/main/res', main_layouts
+            }
+            java {
+                srcDirs 'src/main/java','src/main/kotlin'
+                filter.exclude '**/*TODO*'
+            }
+        }
+        debug {
+            res {
+                srcDirs 'src/build_type/debug/res'
+            }
+            java {
+                srcDirs 'src/build_type/debug/java','src/build_type/debug/kotlin'
+            }
+        }
+        release {
+            res {
+                srcDirs 'src/build_type/release/res'
+            }
+            java {
+                srcDirs 'src/build_type/release/java','src/build_type/release/kotlin'
+            }
+        }
+    }
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
+//        disable 'InvalidPackage'
+    }
+}
+
+dependencies {
+    implementation project(':lib_core_kotlin')
+    implementation project(':lib_core_android_kotlin')
+
+    implementation dependencies_lib.lib.threetenabp
+    implementation dependencies_lib.lib.webkit
+    implementation dependencies_lib.compose.accompanist_pager
+    implementation dependencies_lib.compose.accompanist_pager_indicators
+
+    implementation dependencies_lib.lib.dagger
+    kapt dependencies_lib.lib.dagger_kapt
+
+    // test
+    testImplementation project(':test_common')
+    androidTestImplementation project(':test_common')
+    debugImplementation dependencies_test.core_integration.compose_ui_manifest
+
+
+}

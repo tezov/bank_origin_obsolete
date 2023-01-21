@@ -1,0 +1,79 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    compileSdk defaultCompileSdkVersion
+    compileOptions {
+        sourceCompatibility javaCompileVersion
+        targetCompatibility javaCompileVersion
+    }
+    kotlinOptions {
+        jvmTarget = jvmTarget
+    }
+    defaultConfig {
+        minSdk defaultMinCompileSdkVersion
+        targetSdk defaultTargetCompileSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+    packagingOptions {
+        resources{
+            excludes.add('META-INF/DEPENDENCIES')
+            excludes.add('META-INF/LICENSE')
+            excludes.add('META-INF/LICENSE.txt')
+            excludes.add('META-INF/license.txt')
+            excludes.add('META-INF/NOTICE')
+            excludes.add('META-INF/NOTICE')
+            excludes.add('META-INF/NOTICE.txt')
+            excludes.add('META-INF/notice.txt')
+            excludes.add('META-INF/ASL2.0')
+            excludes.add('META-INF/LGPL2.1')
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets {
+        main {
+            def main_layouts = file('src/main/res/layouts').listFiles()
+            res {
+                srcDirs 'src/main/res', main_layouts
+            }
+            java {
+                srcDirs 'src/main/kotlin'
+                filter.exclude '**/*TODO*'
+            }
+        }
+        debug {
+            res {
+                srcDirs 'src/build_type/debug/res'
+            }
+            java {
+                srcDirs 'src/build_type/debug/kotlin'
+            }
+        }
+        release {
+            res {
+                srcDirs 'src/build_type/release/res'
+            }
+            java {
+                srcDirs 'src/build_type/release/kotlin'
+            }
+        }
+    }
+}
+
+dependencies {
+    implementation dependencies_lib.core.kotlin_core
+
+    api dependencies_test.core_unit.juint
+    api dependencies_test.core_unit.truth
+    api dependencies_test.core_unit.mockk
+    api dependencies_test.core_unit.mockk_android
+
+}

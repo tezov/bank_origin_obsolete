@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">TezovBank</string>
+
+    <!--    top app bar-->
+
+
+    <!--    bottom navigation-->
+
+
+    <!--    login-->
+    <string name="screen_login_field_login">Login</string>
+    <string name="screen_login_field_password">Password</string>
+    <string name="screen_login_link_login_forgotten">Login forgotten?</string>
+    <string name="screen_login_link_password_forgotten">Password forgotten?</string>
+    <string name="screen_login_btn_connect">Connect</string>
+    <string name="screen_login_btn_create_password">Create Password</string>
+    <string name="screen_login_btn_create_password_helper">First time connection ?</string>
+
+    <!--    help and service-->
+
+
+    <!--    dialog login auth-->
+
+
+</resources>

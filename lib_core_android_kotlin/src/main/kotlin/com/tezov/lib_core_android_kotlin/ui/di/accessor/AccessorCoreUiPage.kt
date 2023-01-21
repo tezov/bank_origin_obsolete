@@ -1,0 +1,43 @@
+package com.tezov.lib_core_android_kotlin.ui.di.accessor
+
+import androidx.compose.runtime.Composable
+import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiPage
+import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeCoreUiActivity
+import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiDialog
+import com.tezov.lib_core_android_kotlin.ui.di.component.DaggerComponentCoreUiDialog_EntryPoint
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
+import javax.inject.Inject
+import kotlin.reflect.KClass
+
+@ScopeCoreUiActivity
+class AccessorCoreUiPage @Inject protected constructor() :
+    AccessorBase<ComponentCoreUiPage.EntryPoint, KClass<out Dialog<*, *>>, ComponentCoreUiDialog.EntryPoint>() {
+
+    companion object{
+        @Composable
+        operator fun invoke() = AccessorCoreUiActivity().get(this).accessorPage()
+        @Composable
+        operator fun invoke(requester: Any) = AccessorCoreUiActivity().get(requester).accessorPage()
+    }
+
+    @Composable
+    override fun create() = AccessorCoreUiActivity().getChild(this)
+
+    @Composable
+    override fun onCreated() {
+        getChild(this)
+    }
+
+    @Composable
+    override fun createChild(type: KClass<out Dialog<*, *>>) =
+        DaggerComponentCoreUiDialog_EntryPoint.factory().create(this.get(this))
+
+    @Composable
+    override fun getChild(requester: Any, type: KClass<out Dialog<*, *>>) = throw Exception("use getChild(requester: Any) instead")
+
+    @Composable
+    fun getChild(requester: Any) = super.getChild(requester, Dialog::class)
+
+
+
+}
