@@ -14,9 +14,9 @@ object ThemeShapes {
         cardNormal = RoundedCornerShape(8.dp),
         cardSmall = RoundedCornerShape(4.dp),
 
-        buttonBig = RoundedCornerShape(12.dp),
-        buttonNormal = RoundedCornerShape(8.dp),
-        buttonSmall = RoundedCornerShape(4.dp),
+        buttonBig = RoundedCornerShape(20.dp),
+        buttonNormal = RoundedCornerShape(14.dp),
+        buttonSmall = RoundedCornerShape(8.dp),
 
         dialog = RoundedCornerShape(8.dp),
         snackbar = RoundedCornerShape(12.dp),

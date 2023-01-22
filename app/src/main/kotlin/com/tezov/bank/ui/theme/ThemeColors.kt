@@ -57,14 +57,14 @@ object ThemeColors {
         onBackgroundModal = ThemeColorsResource.Data.black,
         onBackgroundModalLight = ThemeColorsResource.Data.gray,
 
-        backgroundButtonConfirm = Data.blueSea,
+        backgroundButtonConfirm = Data.blueNight,
         onBackgroundButtonConfirm = ThemeColorsResource.Data.white,
 
         backgroundButtonCancel = Data.blueShadow,
         onBackgroundButtonCancel = Data.blueNight,
 
-        backgroundButtonProceed = ThemeColorsResource.Data.grayLight,
-        onBackgroundButtonProceed = ThemeColorsResource.Data.black,
+        backgroundButtonProceed = Data.whiteShady,
+        onBackgroundButtonProceed = Data.blueNight,
 
         topAppBarBackground = colorsLight.background,
         topAppBarContentText = colorsLight.primary,

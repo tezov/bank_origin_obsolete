@@ -1,6 +1,7 @@
 package com.tezov.bank.ui.theme
 
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsFontExtended
@@ -35,6 +36,11 @@ object ThemeTypography {
             fontFamily = FontRoboto.fontFamily,
             fontWeight = FontWeight.Normal,
             fontSize = dimensionsFontExtended.textBig
+        ),
+        textHuge = TextStyle(
+            fontFamily = FontRoboto.fontFamily,
+            fontWeight = FontWeight.Bold,
+            fontSize = dimensionsFontExtended.textHuge
         ),
         textSmall = TextStyle(
             fontFamily = FontRoboto.fontFamily,

@@ -18,6 +18,7 @@ object ThemeTypographyExtended{
         val textHelper: TextStyle,
         val textNormal: TextStyle,
         val textBig: TextStyle,
+        val textHuge: TextStyle,
         val textSmall: TextStyle,
         val textField: TextStyle,
         val textLink: TextStyle,
