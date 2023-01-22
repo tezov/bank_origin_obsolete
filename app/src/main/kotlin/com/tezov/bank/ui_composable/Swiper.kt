@@ -3,7 +3,6 @@ package com.tezov.bank.ui_composable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.snapshotFlow
@@ -13,13 +12,9 @@ import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.HorizontalPager
 import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsWidgetExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsWidgetExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapeWidgetExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 object Swiper {
-
 
     @OptIn(ExperimentalPagerApi::class, ExperimentalPagerApi::class)
     @Composable
@@ -45,13 +40,13 @@ object Swiper {
             HorizontalPagerIndicator(
                 pagerState = pagerState,
                 modifier = Modifier
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.elementSmall_v),
-                indicatorWidth = MaterialTheme.dimensionsWidgetExtended.swiperPagerIndicatorSizeNormal,
-                indicatorHeight = MaterialTheme.dimensionsWidgetExtended.swiperPagerIndicatorSizeNormal,
-                spacing = MaterialTheme.dimensionsWidgetExtended.swiperPagerIndicatorSpacingNormal,
-                activeColor = MaterialTheme.colorsWidgetExtended.swiperPagerIndicatorActive,
-                inactiveColor = MaterialTheme.colorsWidgetExtended.swiperPagerIndicatorInactive,
-                indicatorShape = MaterialTheme.shapeWidgetExtended.swiperPagerIndicator
+                    .padding(top = ThemeWidgetExtended.swiperPager.dimensionIndicatorPaddingTop),
+                indicatorWidth = ThemeWidgetExtended.swiperPager.dimensionIndicatorSize,
+                indicatorHeight = ThemeWidgetExtended.swiperPager.dimensionIndicatorSize,
+                spacing = ThemeWidgetExtended.swiperPager.dimensionIndicatorSpacing,
+                activeColor = ThemeWidgetExtended.swiperPager.colorIndicatorActive,
+                inactiveColor = ThemeWidgetExtended.swiperPager.colorIndicatorInactive,
+                indicatorShape = ThemeWidgetExtended.swiperPager.shapeIndicator
             )
         }
         LaunchedEffect(pagerState) {

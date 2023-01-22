@@ -1,6 +1,5 @@
-package com.tezov.bank.ui.page.help_and_service
+package com.tezov.bank.ui.page.login
 
-import android.util.Log
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -17,9 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -27,17 +24,15 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
-import com.tezov.bank.ui.page.login.PageLoginAction
-import com.tezov.bank.ui.page.login.PageLoginState
 import com.tezov.bank.ui_composable.Swiper
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
+import com.tezov.lib_core_android_kotlin.ui.util.ExtensionCompositionLocal
 
 @OptIn(ExperimentalComposeUiApi::class)
 object PageLogin : Page<PageLoginState, PageLoginAction> {
-    val SIZE_ICON_LOGIN = 32.dp
 
     @Composable
     override fun Page<PageLoginState, PageLoginAction>.content(innerPadding: PaddingValues) {
@@ -45,8 +40,20 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
         val state = accessor.state()
         val action = accessor.action()
         state.animationState.updateTransition()
-        contentLoading(state, action, innerPadding)
-        contentLoaded(state, action, innerPadding)
+        ExtensionCompositionLocal.CompositionLocalProvider(
+            parent = arrayOf(
+                PageLoginTheme.localColors provides PageLoginTheme.provideColors(),
+                PageLoginTheme.localDimensions provides PageLoginTheme.provideDimensions()
+            ),
+            child = {
+                arrayOf(
+                    ThemeWidgetExtended.localSwiperPager provides PageLoginTheme.provideSwiperPagerStyle()
+                )
+            }
+        ) {
+            contentLoading(state, action, innerPadding)
+            contentLoaded(state, action, innerPadding)
+        }
         LaunchedEffect(Unit) {
             if (state.animationState.isNotDone) {
                 state.animationState.startTransition()
@@ -108,7 +115,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Box(modifier = Modifier.weight(1f)) {
                 Image(
                     modifier = Modifier
-                        .size(64.dp),
+                        .size(PageLoginTheme.dimensions.logoSize),
                     painter = painterResource(id = R.drawable.logo_tezov_bank_inverse),
                     contentDescription = "bank logo"
                 )
@@ -116,30 +123,29 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
             Image(
                 modifier = Modifier
-                    .size(48.dp)
+                    .size(PageLoginTheme.dimensions.iconBigSize)
                     .clip(CircleShape)
-                    .border(2.dp, MaterialTheme.colorsCommonExtended.onPrimaryLight, CircleShape),
+                    .border(PageLoginTheme.dimensions.strokeIcon, PageLoginTheme.colors.backgroundButtonLight, CircleShape),
                 painter = painterResource(id = R.drawable.img_suitcase_blue),
                 contentScale = ContentScale.Crop,
                 contentDescription = "suit case"
             )
 
-            Spacer(modifier = Modifier.width(12.dp))
+            Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconBig))
 
             Image(
-                modifier = Modifier.size(48.dp),
+                modifier = Modifier.size(PageLoginTheme.dimensions.iconMediumSize),
                 painter = painterResource(id = R.drawable.ic_add_round_24dp),
                 contentDescription = "add account"
             )
 
-            Spacer(modifier = Modifier.width(6.dp))
+            Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconMedium))
 
             Image(
                 modifier = Modifier
-                    .size(32.dp)
+                    .size(PageLoginTheme.dimensions.iconSmallSize)
                     .clip(CircleShape)
-                    .border(2.dp, MaterialTheme.colors.secondary, CircleShape)
-                    .background(MaterialTheme.colors.secondary),
+                    .background(PageLoginTheme.colors.backgroundButtonDark),
                 painter = painterResource(id = R.drawable.ic_3dot_v_24dp),
                 contentDescription = "more action"
             )
@@ -164,17 +170,18 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
                     Text(
                         text = "M. ZOLLVER",
-                        style = MaterialTheme.typographyExtended.textHuge,
-                        color = MaterialTheme.colorsCommonExtended.onPrimaryLight
+                        style = MaterialTheme.typographyExtended.textHuge.copy(fontSize = PageLoginTheme.dimensions.textHuge),
+                        color = PageLoginTheme.colors.textContent
                     )
-                    Spacer(modifier = Modifier.height(22.dp))
+                    Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.paddingTopToTextHuge))
                     Text(
                         textAlign = TextAlign.Center,
                         text = "Balayer l'écran vers la gauche\npour afficher votre solde.",
                         style = MaterialTheme.typographyExtended.textNormal.copy(
+                            fontSize = PageLoginTheme.dimensions.textNormal,
                             fontWeight = FontWeight.Bold
                         ),
-                        color = MaterialTheme.colorsCommonExtended.onPrimaryLight
+                        color = PageLoginTheme.colors.textContent
                     )
 
 
@@ -190,17 +197,15 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         Text(
                             textAlign = TextAlign.Center,
                             text = "Accédez à votre solde\nen un coups d'oeil",
-                            style = MaterialTheme.typographyExtended.textHuge,
-                            color = MaterialTheme.colorsCommonExtended.onPrimaryLight
+                            style = MaterialTheme.typographyExtended.textHuge.copy(fontSize = PageLoginTheme.dimensions.textHuge),
+                            color = PageLoginTheme.colors.textContent
                         )
-                        Spacer(modifier = Modifier.height(22.dp))
+                        Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.paddingTopToTextHuge))
                         OutlinedButton(
-                            modifier = Modifier
-                                .padding(top = MaterialTheme.dimensionsPaddingExtended.elementNormal_v),
                             onClick = { },
                             border = BorderStroke(
-                                2.dp,
-                                MaterialTheme.colorsCommonExtended.onPrimaryLight
+                                PageLoginTheme.dimensions.strokeButton,
+                                PageLoginTheme.colors.textContent
                             ),
                             shape = MaterialTheme.shapeCommonExtended.buttonBig,
                             colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Transparent),
@@ -209,11 +214,11 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             Text(
                                 "Activer le solde",
                                 style = MaterialTheme.typographyExtended.textButton,
-                                color = MaterialTheme.colorsCommonExtended.onPrimaryLight,
+                                color = PageLoginTheme.colors.textContent,
                                 modifier = Modifier
                                     .padding(
-                                        horizontal = 32.dp,
-                                        vertical = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v
+                                        horizontal = PageLoginTheme.dimensions.paddingHorizontalButtonOutlined,
+                                        vertical = PageLoginTheme.dimensions.paddingVerticalButtonOutlined
                                     )
                             )
                         }
@@ -242,19 +247,19 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 onClick = { },
                 shape = MaterialTheme.shapeCommonExtended.buttonBig,
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm,
+                    backgroundColor = PageLoginTheme.colors.backgroundButtonDark,
                     disabledBackgroundColor = MaterialTheme.colorsResource.grayLight
                 ),
                 enabled = true
             ) {
                 Text(
                     "Accéder à mes comptes",
-                    style = MaterialTheme.typographyExtended.textButton,
-                    color = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm,
+                    style = MaterialTheme.typographyExtended.textButton.copy(fontSize = PageLoginTheme.dimensions.textButton),
+                    color = PageLoginTheme.colors.textButtonDark,
                     modifier = Modifier
                         .padding(
-                            horizontal = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
-                            vertical = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v
+                            horizontal = PageLoginTheme.dimensions.paddingHorizontalButton,
+                            vertical = PageLoginTheme.dimensions.paddingVerticalButton
                         )
                 )
             }
@@ -266,28 +271,29 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 onClick = { },
                 shape = MaterialTheme.shapeCommonExtended.buttonBig,
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = MaterialTheme.colorsCommonExtended.backgroundButtonProceed,
+                    backgroundColor = PageLoginTheme.colors.backgroundButtonLight,
                     disabledBackgroundColor = MaterialTheme.colorsResource.grayLight
                 ),
                 enabled = true
             ) {
                 Text(
                     "Envoyer de l'argent avec paylib",
-                    style = MaterialTheme.typographyExtended.textButton,
-                    color = MaterialTheme.colorsCommonExtended.onBackgroundButtonProceed,
+                    style = MaterialTheme.typographyExtended.textButton.copy(fontSize = PageLoginTheme.dimensions.textButton),
+                    color = PageLoginTheme.colors.textButtonLight,
                     modifier = Modifier
                         .padding(
-                            horizontal = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
-                            vertical = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v
+                            horizontal = PageLoginTheme.dimensions.paddingHorizontalButton,
+                            vertical = PageLoginTheme.dimensions.paddingVerticalButton
                         )
                 )
             }
 
-            Spacer(modifier = Modifier.height(60.dp))
+            Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.paddingTopFromLinkService))
 
             ClickableText(
                 text = AnnotatedString("Aide et Services"),
                 style = MaterialTheme.typographyExtended.textLink.copy(
+                    fontSize = PageLoginTheme.dimensions.textLink,
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorsCommonExtended.onPrimaryLight
                 )

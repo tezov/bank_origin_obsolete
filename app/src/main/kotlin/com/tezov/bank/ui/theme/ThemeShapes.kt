@@ -28,8 +28,4 @@ object ThemeShapes {
         button = BorderStroke(2.dp, colorsLight.primary),
     )
 
-    val shapeWidgetExtended = ThemeShapesExtended.Widget(
-        swiperPagerIndicator = CircleShape
-    )
-
 }

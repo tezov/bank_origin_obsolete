@@ -13,7 +13,7 @@ import com.tezov.bank.navigation.NavigationController.Companion.Route
 import com.tezov.bank.ui.activity.MainActivity
 import com.tezov.bank.ui.di.accessor.AccessorAppUiActivity
 import com.tezov.bank.ui.page.help_and_service.PageHelpAndService
-import com.tezov.bank.ui.page.help_and_service.PageLogin
+import com.tezov.bank.ui.page.login.PageLogin
 import com.tezov.bank.ui.page.help_and_service.PageSplash
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity

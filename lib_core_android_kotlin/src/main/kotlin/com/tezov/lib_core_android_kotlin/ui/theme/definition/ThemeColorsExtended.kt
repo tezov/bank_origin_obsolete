@@ -9,10 +9,6 @@ val MaterialTheme.colorsCommonExtended: ThemeColorsExtended.Common
     @ReadOnlyComposable
     get() = ThemeColorsExtended.localCommon.current
 
-val MaterialTheme.colorsWidgetExtended: ThemeColorsExtended.Widget
-    @Composable
-    @ReadOnlyComposable
-    get() = ThemeColorsExtended.localWidget.current
 
 object ThemeColorsExtended {
     @Immutable
@@ -29,14 +25,23 @@ object ThemeColorsExtended {
         val onBackgroundModal: Color,
         val onBackgroundModalLight:Color,
 
+        val backgroundInactive: Color,
+        val onBackgroundInactive: Color,
+
         val backgroundButtonProceed: Color,
+        val backgroundButtonProceedInactive: Color,
         val onBackgroundButtonProceed: Color,
+        val onBackgroundButtonProceedInactive: Color,
 
         val backgroundButtonConfirm: Color,
+        val backgroundButtonConfirmInactive: Color,
         val onBackgroundButtonConfirm: Color,
+        val onBackgroundButtonConfirmInactive: Color,
 
         val backgroundButtonCancel: Color,
+        val backgroundButtonCancelInactive: Color,
         val onBackgroundButtonCancel: Color,
+        val onBackgroundButtonCancelInactive: Color,
 
         val topAppBarBackground: Color,
         val topAppBarContentText: Color,
@@ -51,15 +56,6 @@ object ThemeColorsExtended {
         val snackbarAction: Color,
     )
     val localCommon:ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
-    @Immutable
-    data class Widget(
-        val swiperPagerIndicatorActive: Color,
-        val swiperPagerIndicatorInactive: Color,
-    )
-    val localWidget: ProvidableCompositionLocal<Widget> = staticCompositionLocalOf {
         error("not provided")
     }
 

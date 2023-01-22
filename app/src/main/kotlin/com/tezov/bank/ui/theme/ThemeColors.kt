@@ -8,6 +8,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.definition.ThemeColorsResource
 object ThemeColors {
     object Data {
         val blueNight = Color(0xFF01252B)
+        val blueElegant = Color(0xFF12263F)
         val blueSea = Color(0xFF11BAD5)
         val blueDark = Color(0xFF08465C)
         val blueShadow= Color(0xFF364C53)
@@ -15,8 +16,11 @@ object ThemeColors {
         val redSalmon = Color(0xFFF0767E)
         val redBlood = Color(0xFFAD1720)
 
+        val whiteShiny = Color(0xFFF0EEEE)
+        val whiteDark = Color(0xFFAAA9A9)
         val whiteShady = Color(0xFFDDDADA)
-        val whiteDark = Color(0xFFB3B1B1)
+
+        val grayDark = Color(0xFF3F3F3F)
 
         val purple = Color(0xFF945AC3)
         val greenFlashy = Color(0xFF2BD695)
@@ -36,8 +40,8 @@ object ThemeColors {
         surface = Data.whiteShady,
         onSurface = Data.blueNight,
 
-        background = Data.whiteShady,
-        onBackground = Data.blueNight,
+        background = Data.whiteShiny,
+        onBackground = Data.blueElegant,
 
         error = Data.redBlood,
         onError = Data.whiteDark,
@@ -45,26 +49,35 @@ object ThemeColors {
     )
 
     val colorsLightCommonExtended = ThemeColorsExtended.Common(
-        onPrimaryLight = ThemeColorsResource.Data.white,
+        onPrimaryLight = Data.whiteShiny,
         onSecondaryLight = Data.blueClear,
         onBackgroundLight = Data.blueShadow,
 
-        backgroundElevated = ThemeColorsResource.Data.whiteGray,
-        onBackgroundElevated = ThemeColorsResource.Data.black,
-        onBackgroundElevatedLight = ThemeColorsResource.Data.black,
+        backgroundElevated = Data.whiteShady,
+        onBackgroundElevated = Data.blueNight,
+        onBackgroundElevatedLight = Data.blueElegant,
 
-        backgroundModal = ThemeColorsResource.Data.white,
-        onBackgroundModal = ThemeColorsResource.Data.black,
-        onBackgroundModalLight = ThemeColorsResource.Data.gray,
+        backgroundModal = Data.whiteShady,
+        onBackgroundModal = Data.blueNight,
+        onBackgroundModalLight = Data.blueElegant,
 
-        backgroundButtonConfirm = Data.blueNight,
-        onBackgroundButtonConfirm = ThemeColorsResource.Data.white,
+        backgroundInactive = Data.blueClear,
+        onBackgroundInactive = Data.grayDark,
 
-        backgroundButtonCancel = Data.blueShadow,
-        onBackgroundButtonCancel = Data.blueNight,
+        backgroundButtonConfirm = Data.blueElegant,
+        backgroundButtonConfirmInactive = Data.whiteDark,
+        onBackgroundButtonConfirm = Data.whiteShiny,
+        onBackgroundButtonConfirmInactive = Data.grayDark,
 
-        backgroundButtonProceed = Data.whiteShady,
+        backgroundButtonCancel = Data.blueClear,
+        backgroundButtonCancelInactive = Data.whiteDark,
+        onBackgroundButtonCancel = Data.blueElegant,
+        onBackgroundButtonCancelInactive = Data.grayDark,
+
+        backgroundButtonProceed = Data.whiteShiny,
+        backgroundButtonProceedInactive = Data.whiteDark,
         onBackgroundButtonProceed = Data.blueNight,
+        onBackgroundButtonProceedInactive = Data.grayDark,
 
         topAppBarBackground = colorsLight.background,
         topAppBarContentText = colorsLight.primary,
@@ -77,10 +90,5 @@ object ThemeColors {
         snackbarBackground = colorsLight.primaryVariant,
         snackbarMessage = ThemeColorsResource.Data.white,
         snackbarAction = Data.blueSea,
-    )
-
-    val colorsLightWidgetExtended = ThemeColorsExtended.Widget(
-        swiperPagerIndicatorActive = Data.blueDark,
-        swiperPagerIndicatorInactive = Data.blueClear,
     )
 }

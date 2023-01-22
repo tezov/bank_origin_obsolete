@@ -15,15 +15,15 @@ val MaterialTheme.dimensionsPaddingExtended: ThemeDimensionsExtended.Padding
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localPadding.current
 
+val MaterialTheme.dimensionsSpacingExtended: ThemeDimensionsExtended.Spacing
+    @Composable
+    @ReadOnlyComposable
+    get() = ThemeDimensionsExtended.localSpacing.current
+
 val MaterialTheme.dimensionsElevationExtended: ThemeDimensionsExtended.Elevation
     @Composable
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localElevation.current
-
-val MaterialTheme.dimensionsWidgetExtended: ThemeDimensionsExtended.Widget
-    @Composable
-    @ReadOnlyComposable
-    get() = ThemeDimensionsExtended.localWidget.current
 
 object ThemeDimensionsExtended{
     @Immutable
@@ -89,6 +89,24 @@ object ThemeDimensionsExtended{
     }
 
     @Immutable
+    data class Spacing(
+        val micro_v:Dp,
+        val small_v:Dp,
+        val normal_v:Dp,
+        val big_v:Dp,
+        val huge_v:Dp,
+        val micro_h:Dp,
+        val small_h:Dp,
+        val normal_h:Dp,
+        val big_h:Dp,
+        val huge_h:Dp,
+
+    )
+    val localSpacing: ProvidableCompositionLocal<Spacing> = staticCompositionLocalOf {
+        error("not provided")
+    }
+
+    @Immutable
     data class Elevation(
         val elevationBig: Dp,
         val elevationNormal: Dp,
@@ -98,14 +116,6 @@ object ThemeDimensionsExtended{
         error("not provided")
     }
 
-    @Immutable
-    data class Widget(
-        val swiperPagerIndicatorSizeNormal: Dp,
-        val swiperPagerIndicatorSpacingNormal: Dp,
-    )
-    val localWidget: ProvidableCompositionLocal<Widget> = staticCompositionLocalOf {
-        error("not provided")
-    }
 }
 
 

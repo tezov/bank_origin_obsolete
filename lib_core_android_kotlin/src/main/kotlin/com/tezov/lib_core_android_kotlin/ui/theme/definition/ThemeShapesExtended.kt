@@ -14,11 +14,6 @@ val MaterialTheme.shapeBorderExtended: ThemeShapesExtended.Border
     @ReadOnlyComposable
     get() = ThemeShapesExtended.localBorder.current
 
-val MaterialTheme.shapeWidgetExtended: ThemeShapesExtended.Widget
-    @Composable
-    @ReadOnlyComposable
-    get() = ThemeShapesExtended.localWidget.current
-
 object ThemeShapesExtended{
 
     @Immutable
@@ -43,14 +38,6 @@ object ThemeShapesExtended{
         val button: BorderStroke,
     )
     val localBorder: ProvidableCompositionLocal<Border> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
-    @Immutable
-    data class Widget(
-        val swiperPagerIndicator: androidx.compose.ui.graphics.Shape,
-    )
-    val localWidget: ProvidableCompositionLocal<Widget> = staticCompositionLocalOf {
         error("not provided")
     }
 

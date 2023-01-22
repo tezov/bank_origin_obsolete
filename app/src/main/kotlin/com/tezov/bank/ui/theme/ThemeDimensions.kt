@@ -58,13 +58,23 @@ object ThemeDimensions {
         bottomNavigation = 4.dp,
         topNavigation = 4.dp
     )
+
+    val dimensionsSpacingExtended = ThemeDimensionsExtended.Spacing(
+        micro_v = 0.dp,
+        small_v = 0.dp,
+        normal_v = 0.dp,
+        big_v = 0.dp,
+        huge_v = 0.dp,
+        micro_h = 0.dp,
+        small_h = 0.dp,
+        normal_h = 0.dp,
+        big_h = 0.dp,
+        huge_h = 0.dp,
+    )
+
     val dimensionsElevationExtended = ThemeDimensionsExtended.Elevation(
         elevationBig = 10.dp,
         elevationNormal = 6.dp,
         elevationSmall = 3.dp,
-    )
-    val dimensionsWidgetExtended = ThemeDimensionsExtended.Widget(
-        swiperPagerIndicatorSizeNormal = 14.dp,
-        swiperPagerIndicatorSpacingNormal = 16.dp,
     )
 }
