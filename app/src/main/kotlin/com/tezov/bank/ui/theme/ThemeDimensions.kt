@@ -60,16 +60,16 @@ object ThemeDimensions {
     )
 
     val dimensionsSpacingExtended = ThemeDimensionsExtended.Spacing(
-        micro_v = 0.dp,
-        small_v = 0.dp,
-        normal_v = 0.dp,
-        big_v = 0.dp,
-        huge_v = 0.dp,
-        micro_h = 0.dp,
-        small_h = 0.dp,
-        normal_h = 0.dp,
-        big_h = 0.dp,
-        huge_h = 0.dp,
+        micro_v = 2.dp,
+        small_v = 5.dp,
+        normal_v = 8.dp,
+        big_v = 12.dp,
+        huge_v = 16.dp,
+        micro_h = 2.dp,
+        small_h = 6.dp,
+        normal_h = 10.dp,
+        big_h = 16.dp,
+        huge_h = 20.dp,
     )
 
     val dimensionsElevationExtended = ThemeDimensionsExtended.Elevation(

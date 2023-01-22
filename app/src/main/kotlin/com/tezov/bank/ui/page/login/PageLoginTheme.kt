@@ -1,12 +1,14 @@
 package com.tezov.bank.ui.page.login
 
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -22,6 +24,11 @@ val PageLoginTheme.dimensions: PageLoginTheme.Dimensions
     @Composable
     @ReadOnlyComposable
     get() = PageLoginTheme.localDimensions.current
+
+val PageLoginTheme.shapes: PageLoginTheme.Shapes
+    @Composable
+    @ReadOnlyComposable
+    get() = PageLoginTheme.localShapes.current
 
 object PageLoginTheme {
 
@@ -76,35 +83,49 @@ object PageLoginTheme {
         )
     @Composable
     fun provideDimensions() = Dimensions(
-        textHuge = 14.sp,
-        textNormal = 14.sp,
-        textButton = 14.sp,
-        textLink = 14.sp,
+        textHuge = MaterialTheme.dimensionsFontExtended.textHuge,
+        textNormal = MaterialTheme.dimensionsFontExtended.textNormal,
+        textButton = MaterialTheme.dimensionsFontExtended.textButton,
+        textLink = MaterialTheme.dimensionsFontExtended.textLink,
 
-        paddingTopToTextHuge = 14.dp,
-        paddingTopToIndicator = 14.dp,
-        paddingTopFromLinkService = 14.dp,
+        paddingTopToTextHuge = 24.dp,
+        paddingTopToIndicator = MaterialTheme.dimensionsPaddingExtended.elementBig_v,
+        paddingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.elementBig_v,
 
-        pagerIndicatorPaddingTop = 14.dp,
-        pagerIndicatorSize = 14.dp,
-        pagerIndicatorSpacing = 18.dp,
+        pagerIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,
+        pagerIndicatorSize = 16.dp,
+        pagerIndicatorSpacing = MaterialTheme.dimensionsSpacingExtended.big_h,
 
-        logoSize = 18.dp,
-        iconBigSize = 18.dp,
-        paddingStartToIconBig = 18.dp,
-        iconMediumSize = 18.dp,
-        paddingStartToIconMedium = 18.dp,
-        iconSmallSize = 18.dp,
+        logoSize = 64.dp,
+        iconBigSize = 52.dp,
+        paddingStartToIconBig = 28.dp,
+        iconMediumSize = 38.dp,
+        paddingStartToIconMedium = 12.dp,
+        iconSmallSize = 42.dp,
 
         strokeIcon = 2.dp,
-        strokeButton = 3.dp,
+        strokeButton = 2.dp,
 
         paddingHorizontalButtonOutlined = 32.dp,
-        paddingVerticalButtonOutlined = 4.dp,
-        paddingHorizontalButton = 4.dp,
-        paddingVerticalButton = 4.dp,
+        paddingVerticalButtonOutlined = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
+        paddingHorizontalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
+        paddingVerticalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
     )
     val localDimensions: ProvidableCompositionLocal<Dimensions> = staticCompositionLocalOf {
+        error("not provided")
+    }
+
+    data class Shapes(
+        val button: Shape,
+        val buttonOutline: Shape,
+
+    )
+    @Composable
+    fun provideShapes() = Shapes(
+        button = RoundedCornerShape(35),
+        buttonOutline = RoundedCornerShape(50)
+    )
+    val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
         error("not provided")
     }
 

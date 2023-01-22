@@ -15,6 +15,7 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
@@ -24,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
+import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.bank.ui_composable.Swiper
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -43,7 +45,8 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
         ExtensionCompositionLocal.CompositionLocalProvider(
             parent = arrayOf(
                 PageLoginTheme.localColors provides PageLoginTheme.provideColors(),
-                PageLoginTheme.localDimensions provides PageLoginTheme.provideDimensions()
+                PageLoginTheme.localDimensions provides PageLoginTheme.provideDimensions(),
+                PageLoginTheme.localShapes provides PageLoginTheme.provideShapes(),
             ),
             child = {
                 arrayOf(
@@ -125,7 +128,11 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 modifier = Modifier
                     .size(PageLoginTheme.dimensions.iconBigSize)
                     .clip(CircleShape)
-                    .border(PageLoginTheme.dimensions.strokeIcon, PageLoginTheme.colors.backgroundButtonLight, CircleShape),
+                    .border(
+                        PageLoginTheme.dimensions.strokeIcon,
+                        PageLoginTheme.colors.backgroundButtonLight,
+                        CircleShape
+                    ),
                 painter = painterResource(id = R.drawable.img_suitcase_blue),
                 contentScale = ContentScale.Crop,
                 contentDescription = "suit case"
@@ -134,8 +141,12 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconBig))
 
             Image(
-                modifier = Modifier.size(PageLoginTheme.dimensions.iconMediumSize),
-                painter = painterResource(id = R.drawable.ic_add_round_24dp),
+                modifier = Modifier
+                    .size(PageLoginTheme.dimensions.iconMediumSize)
+                    .clip(CircleShape)
+                    .background(PageLoginTheme.colors.backgroundButtonLight),
+                painter = painterResource(id = R.drawable.ic_add_24dp),
+                colorFilter = ColorFilter.tint(PageLoginTheme.colors.background),
                 contentDescription = "add account"
             )
 
@@ -147,6 +158,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     .clip(CircleShape)
                     .background(PageLoginTheme.colors.backgroundButtonDark),
                 painter = painterResource(id = R.drawable.ic_3dot_v_24dp),
+                colorFilter = ColorFilter.tint(PageLoginTheme.colors.backgroundButtonLight),
                 contentDescription = "more action"
             )
 
@@ -207,13 +219,13 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                                 PageLoginTheme.dimensions.strokeButton,
                                 PageLoginTheme.colors.textContent
                             ),
-                            shape = MaterialTheme.shapeCommonExtended.buttonBig,
+                            shape = PageLoginTheme.shapes.buttonOutline,
                             colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Transparent),
                             enabled = true
                         ) {
                             Text(
                                 "Activer le solde",
-                                style = MaterialTheme.typographyExtended.textButton,
+                                style = MaterialTheme.typographyExtended.textButton.copy(fontWeight = FontWeight.Bold),
                                 color = PageLoginTheme.colors.textContent,
                                 modifier = Modifier
                                     .padding(
@@ -245,7 +257,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
                 onClick = { },
-                shape = MaterialTheme.shapeCommonExtended.buttonBig,
+                shape = PageLoginTheme.shapes.button,
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = PageLoginTheme.colors.backgroundButtonDark,
                     disabledBackgroundColor = MaterialTheme.colorsResource.grayLight
@@ -254,7 +266,8 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             ) {
                 Text(
                     "Accéder à mes comptes",
-                    style = MaterialTheme.typographyExtended.textButton.copy(fontSize = PageLoginTheme.dimensions.textButton),
+                    style = MaterialTheme.typographyExtended.textButton
+                        .copy(fontSize = PageLoginTheme.dimensions.textButton),
                     color = PageLoginTheme.colors.textButtonDark,
                     modifier = Modifier
                         .padding(
@@ -267,9 +280,14 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.elementNormal_v),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
+                    .border(
+                        1.dp,
+                        ThemeColors.Data.whiteDark,
+                        PageLoginTheme.shapes.button
+                    ),
                 onClick = { },
-                shape = MaterialTheme.shapeCommonExtended.buttonBig,
+                shape = PageLoginTheme.shapes.button,
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = PageLoginTheme.colors.backgroundButtonLight,
                     disabledBackgroundColor = MaterialTheme.colorsResource.grayLight

@@ -1,2 +1,8 @@
+
+Shape / Font
+Theme application utile
+Default swiper
+CLean, check ALl
+
 - componentManager, is there a way to not destroy if screen is supposed to be behind ??? Same LocalPage in Module
 
