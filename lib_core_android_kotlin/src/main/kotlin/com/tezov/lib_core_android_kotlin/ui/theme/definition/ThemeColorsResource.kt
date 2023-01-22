@@ -13,21 +13,22 @@ object ThemeColorsResource {
 
     object Data {
         val transparent: Color = Color.Transparent
-        val red: Color = Color.Red
-        val blue: Color = Color.Blue
-        val green: Color = Color.Green
-        val yellow: Color = Color.Yellow
-        val black: Color = Color.Black
-        val white: Color = Color.White
-        val gray: Color = Color.Gray
-        val grayLight: Color = Color(0xFFCFCCCC)
-        val grayVeryLight: Color = Color(0xFFE9E7E7)
-        val cian: Color = Color.Cyan
-        val magenta: Color = Color.Magenta
-
-        val whiteGrayDark: Color = Color(0xFF8D8D8D)
-        val grayDark: Color = Color(0xFF4F5050)
-        val whiteGrayLight: Color = Color(0xFFEFF3F0)
+        val red: Color = Color(0xFFFF0000)
+        val green: Color = Color(0xFF00FF00)
+        val blue: Color = Color(0xFF0000FF)
+        val yellow: Color = Color(0xFFFFFF00)
+        val black: Color = Color(0xFF000000)
+        val white: Color = Color(0xFFFFFFFF)
+        val cian: Color = Color(0xFF00FFFF)
+        val magenta: Color = Color(0xFFFF00FF)
+        val gray: Color = Color(0xFF888888)
+        val grayLight: Color = Color(0xFF4F5050)
+        val whiteGray: Color = Color(0xFF8D8D8D)
+        val orange: Color = Color(0xFFD37A73)
+        val orangeGray: Color = Color(0xFFDF9C86)
+        val orangeLight: Color = Color(0xFFE4B8AA)
+        val blueLight: Color = Color(0xFF6741BB)
+        val greenMelon: Color = Color(0xFF52E057)
 
     }
     val local = staticCompositionLocalOf { Data }

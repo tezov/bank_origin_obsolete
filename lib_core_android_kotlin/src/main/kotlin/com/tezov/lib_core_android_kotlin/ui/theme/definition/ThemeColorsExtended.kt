@@ -29,17 +29,22 @@ object ThemeColorsExtended {
         val onBackgroundModal: Color,
         val onBackgroundModalLight:Color,
 
-        val backgroundButton: Color,
-        val onBackgroundButton: Color,
-        val onBackgroundButtonLight:Color,
+        val backgroundButtonProceed: Color,
+        val onBackgroundButtonProceed: Color,
+
+        val backgroundButtonConfirm: Color,
+        val onBackgroundButtonConfirm: Color,
+
+        val backgroundButtonCancel: Color,
+        val onBackgroundButtonCancel: Color,
 
         val topAppBarBackground: Color,
         val topAppBarContentText: Color,
         val topAppBarContentIcon: Color,
 
         val bottomNavigationBackground: Color,
-        val bottomNavigationSelected: Color,
-        val bottomNavigationUnselected: Color,
+        val bottomNavigationActive: Color,
+        val bottomNavigationInactive: Color,
 
         val snackbarBackground: Color,
         val snackbarMessage: Color,

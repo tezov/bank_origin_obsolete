@@ -42,8 +42,8 @@ object BottomNavigation:
                             style = MaterialTheme.typographyExtended.bottomNavigationLabel,
                         )
                     },
-                    selectedContentColor = MaterialTheme.colorsCommonExtended.bottomNavigationSelected,
-                    unselectedContentColor = MaterialTheme.colorsCommonExtended.bottomNavigationUnselected,
+                    selectedContentColor = MaterialTheme.colorsCommonExtended.bottomNavigationActive,
+                    unselectedContentColor = MaterialTheme.colorsCommonExtended.bottomNavigationInactive,
                     alwaysShowLabel = true,
                     selected = action.navigationController.currentRoute() == item.route,
                     onClick = {
