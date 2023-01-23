@@ -1,6 +1,7 @@
 package com.tezov.bank.ui.dialog.login.auth
 
 import android.util.Log
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -15,12 +16,14 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.*
+import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -28,6 +31,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
 import com.tezov.bank.ui.page.login.*
@@ -106,10 +110,10 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v)
-                .height(240.dp)
                 .border(1.dp, DialogLoginAuthTheme.colors.onBackground, RoundedCornerShape(2))
 
         ) {
+
             Row {
                 val focusManager = LocalFocusManager.current
                 val keyboardController = LocalSoftwareKeyboardController.current
@@ -205,6 +209,51 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     contentDescription = null
                 )
             }
+
+            KeyBoardDigital()
+        }
+    }
+
+    @OptIn(ExperimentalTextApi::class)
+    @Composable
+    private fun KeyBoardDigital() {
+        val color = DialogLoginAuthTheme.colors.onBackground
+        val strokeWidth = 2.dp / 1.5f
+        val textMeasure = rememberTextMeasurer()
+
+        Canvas(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(120.dp)
+        ) {
+            val canvasWidth = size.width
+            val canvasHeight = size.height
+
+            drawLine(
+                start = Offset(x = 0f, y = 0f),
+                end = Offset(x = canvasWidth, y = 0f),
+                color = color,
+                strokeWidth = strokeWidth.toPx()
+            )
+
+            drawLine(
+                start = Offset(x = 0f, y = canvasHeight / 2),
+                end = Offset(x = canvasWidth, y = canvasHeight / 2),
+                color = color,
+                strokeWidth = strokeWidth.toPx()
+            )
+
+            drawText(
+                textMeasurer = textMeasure,
+                text = "0123456789",
+                topLeft = Offset(8.dp.toPx(), canvasHeight / 4),
+                style = TextStyle(
+                    color = Color.White,
+                    fontSize = 22.sp,
+                    fontStyle = FontStyle.Italic
+                )
+            )
+
         }
     }
 
