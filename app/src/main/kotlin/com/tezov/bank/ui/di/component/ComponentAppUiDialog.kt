@@ -21,7 +21,6 @@ object ComponentAppUiDialog {
 
         fun contextLoginAuth(): ComponentContextLazy<DialogLoginAuthState, DialogLoginAuthAction>
 
-
     }
 
     interface Exposer {

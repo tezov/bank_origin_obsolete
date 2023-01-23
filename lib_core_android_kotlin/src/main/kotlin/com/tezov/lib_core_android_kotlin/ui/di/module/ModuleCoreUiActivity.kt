@@ -9,14 +9,12 @@ import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavi
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarAction
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarState
-import com.tezov.lib_core_android_kotlin.ui.activity.ActivityMainAction
-import com.tezov.lib_core_android_kotlin.ui.activity.ActivityMainState
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheetAction
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheetState
-import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card.Dialog
-import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card.DialogAction
-import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card.DialogState
+import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
+import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction
+import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogState
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.SnackbarState
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.qualifier.*
@@ -25,7 +23,6 @@ import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeCoreUiActiv
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentContextLazy
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentContextMap
 import com.tezov.lib_core_android_kotlin.ui.navigation.bottom_navigation.BottomNavigationState
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.Composition
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject
@@ -140,9 +137,9 @@ object ModuleCoreUiActivity {
         }
 
         @ScopeCoreUiActivity
-        class DialogState @Inject constructor(): ComposableHolder< com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card.DialogState>() {
+        class DialogState @Inject constructor(): ComposableHolder<com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogState>() {
             @androidx.compose.runtime.Composable
-            override fun create() =  com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card.DialogState.create()
+            override fun create() =  com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogState.create()
         }
 
         @ScopeCoreUiActivity
@@ -201,9 +198,9 @@ object ModuleCoreUiActivity {
         class DialogAction @Inject constructor(
             @QualifierCoroutineScopeMain private val coroutineScope: State.CoroutineScope,
             private val dialogState: State.DialogState,
-        ): ComposableHolder< com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card.DialogAction>() {
+        ): ComposableHolder<com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction>() {
             @androidx.compose.runtime.Composable
-            override fun create() =  com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card.DialogAction.create(
+            override fun create() =  com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction.create(
                 coroutineScope.get(),
                 dialogState.get()
             )

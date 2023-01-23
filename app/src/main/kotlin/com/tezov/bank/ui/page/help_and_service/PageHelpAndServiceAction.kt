@@ -1,6 +1,6 @@
 package com.tezov.bank.ui.page.help_and_service
 
-import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card.DialogAction
+import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageAction
 
 class PageHelpAndServiceAction private constructor(

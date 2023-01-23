@@ -26,6 +26,9 @@ object ThemeColors {
         val greenFlashy = Color(0xFF2BD695)
         val pinkFlashy = Color(0xFFFF00C7)
         val blueFlashy = Color(0xFF19D9FF)
+
+        val blueOverlay = Color(0x3400DCFF)
+        val blackOverlay = Color(0xDD000000)
     }
 
     val colorsLight = Colors(

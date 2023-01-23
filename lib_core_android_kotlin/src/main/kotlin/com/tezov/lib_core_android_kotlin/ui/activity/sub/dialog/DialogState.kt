@@ -1,4 +1,4 @@
-package com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card
+package com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

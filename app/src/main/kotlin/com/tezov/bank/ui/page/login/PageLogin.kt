@@ -100,8 +100,11 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     .fillMaxWidth()
             )
             ContentFooter(
-                Modifier
-                    .fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth(),
+                onClickConnect = { action.onClickConnect() },
+                onClickSendMoney = {},
+                onClickHelpAndService = {},
             )
         }
     }
@@ -140,25 +143,25 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconBig))
 
-            Image(
+            Icon(
                 modifier = Modifier
                     .size(PageLoginTheme.dimensions.iconMediumSize)
                     .clip(CircleShape)
                     .background(PageLoginTheme.colors.backgroundButtonLight),
                 painter = painterResource(id = R.drawable.ic_add_24dp),
-                colorFilter = ColorFilter.tint(PageLoginTheme.colors.background),
+                tint = PageLoginTheme.colors.background,
                 contentDescription = "add account"
             )
 
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconMedium))
 
-            Image(
+            Icon(
                 modifier = Modifier
                     .size(PageLoginTheme.dimensions.iconSmallSize)
                     .clip(CircleShape)
                     .background(PageLoginTheme.colors.backgroundButtonDark),
                 painter = painterResource(id = R.drawable.ic_3dot_v_24dp),
-                colorFilter = ColorFilter.tint(PageLoginTheme.colors.backgroundButtonLight),
+                tint = PageLoginTheme.colors.backgroundButtonLight,
                 contentDescription = "more action"
             )
 
@@ -246,6 +249,9 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
     @Composable
     private fun ContentFooter(
         modifier: Modifier,
+        onClickConnect: ()->Unit,
+        onClickSendMoney: ()->Unit,
+        onClickHelpAndService: ()->Unit,
     ) {
         Column(
             modifier = modifier,
@@ -256,7 +262,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
-                onClick = { },
+                onClick = onClickConnect,
                 shape = PageLoginTheme.shapes.button,
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = PageLoginTheme.colors.backgroundButtonDark,
@@ -286,7 +292,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         ThemeColors.Data.whiteDark,
                         PageLoginTheme.shapes.button
                     ),
-                onClick = { },
+                onClick = onClickSendMoney,
                 shape = PageLoginTheme.shapes.button,
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = PageLoginTheme.colors.backgroundButtonLight,
@@ -315,10 +321,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     fontWeight = FontWeight.Bold,
                     color = MaterialTheme.colorsCommonExtended.onPrimaryLight
                 )
-            ) {
-
-
-            }
+            ) { onClickHelpAndService() }
 
         }
 

@@ -1,4 +1,4 @@
-package com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card
+package com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog
 
 import androidx.compose.runtime.Composable
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySubAction
@@ -37,6 +37,10 @@ class DialogAction private constructor(
             state.show(false)
             state.dialogContent({state.EmptyContent()}) //todo wait animation done
         }
+    }
+
+    fun showOnCardWithOverlay(content: @Composable () -> Unit) {
+        show{ Dialog.Card(content) }
     }
 
 }

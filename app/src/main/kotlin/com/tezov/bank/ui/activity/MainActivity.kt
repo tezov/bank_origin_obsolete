@@ -15,7 +15,7 @@ import com.tezov.bank.ui.theme.ThemeApplication
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarItemData
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
-import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card.Dialog
+import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 
@@ -58,7 +58,6 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
         val accessor = AccessorAppUiActivity().get(requester = this)
         val mainState = accessor.contextMain().state()
         BottomSheet {
-            Dialog()
             Scaffold(
                 modifier = Modifier.fillMaxSize(),
                 scaffoldState = mainState.coreState.scaffoldState,
@@ -77,6 +76,7 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                 },
                 content = content
             )
+            Dialog()
         }
     }
 
@@ -90,10 +90,8 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
         val accessor = AccessorAppUiActivity().get(requester = this)
         val mainState = accessor.contextMain().state()
         BottomSheet {
-            Dialog()
             Scaffold(
-                modifier = Modifier
-                    .fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
                 scaffoldState = mainState.coreState.scaffoldState,
                 topBar = {
                     TopAppBar(
@@ -107,6 +105,7 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                 },
                 content = content
             )
+            Dialog()
         }
     }
 
@@ -117,10 +116,8 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
         val accessor = AccessorAppUiActivity().get(requester = this)
         val mainState = accessor.contextMain().state()
         BottomSheet {
-            Dialog()
             Scaffold(
-                modifier = Modifier
-                    .fillMaxSize(),
+                modifier = Modifier.fillMaxSize(),
                 scaffoldState = mainState.coreState.scaffoldState,
                 bottomBar = {
                     BottomNavigation(BottomNavigationItems.items)
@@ -131,6 +128,7 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                 },
                 content = content
             )
+            Dialog()
         }
     }
 
@@ -140,7 +138,7 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
     ) {
         val accessor = AccessorAppUiActivity().get(requester = this)
         val mainState = accessor.contextMain().state()
-        BottomSheet() {
+        BottomSheet{
             Scaffold(
                 modifier = Modifier.fillMaxSize(),
                 scaffoldState = mainState.coreState.scaffoldState,
@@ -149,6 +147,7 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                 },
                 content = content
             )
+            Dialog()
         }
     }
 

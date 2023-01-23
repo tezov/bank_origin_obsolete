@@ -1,26 +1,27 @@
 package com.tezov.bank.ui.dialog.login.auth
 
-import androidx.activity.ComponentActivity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.DialogAction
-import com.tezov.lib_core_android_kotlin.util.UtilsIntent
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 
 class DialogLoginAuthAction private constructor(
     private val coroutineScope: CoroutineScope,
-    private val action:  com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card.DialogAction,
+    private val action: com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction,
 
-): DialogAction<DialogLoginAuthState> {
+    ): DialogAction<DialogLoginAuthState> {
 
 
     companion object {
         fun create(
             coroutineScope: CoroutineScope,
-            action:  com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.empty_card.DialogAction,
+            action: com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction,
         ) = DialogLoginAuthAction(
             coroutineScope = coroutineScope,
             action = action,
         )
+    }
+
+    fun hide() {
+        action.hide()
     }
 
 
