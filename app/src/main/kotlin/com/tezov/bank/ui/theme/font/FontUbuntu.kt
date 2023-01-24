@@ -12,14 +12,17 @@ import com.tezov.bank.R
 val MaterialTheme.fontUbuntu: FontFamily
     @Composable
     @ReadOnlyComposable
-    get() = FontUbuntu.local.current
+    get() = FontUbuntu.local.current.value
 
 object FontUbuntu{
-    val local = compositionLocalOf { fontFamily }
-    val fontFamily = FontFamily(
-        Font(R.font.ubuntu_light, FontWeight.Light),
-        Font(R.font.ubuntu_medium, FontWeight.Medium),
-        Font(R.font.ubuntu_bold, FontWeight.Bold),
-        Font(R.font.ubuntu_regular, FontWeight.Normal),
-    )
+    val local = compositionLocalOf {
+        lazy {
+            FontFamily(
+                Font(R.font.ubuntu_light, FontWeight.Light),
+                Font(R.font.ubuntu_medium, FontWeight.Medium),
+                Font(R.font.ubuntu_bold, FontWeight.Bold),
+                Font(R.font.ubuntu_regular, FontWeight.Normal),
+            )
+        }
+    }
 }

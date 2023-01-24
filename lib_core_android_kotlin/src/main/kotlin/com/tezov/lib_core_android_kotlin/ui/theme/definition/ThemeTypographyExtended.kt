@@ -5,31 +5,32 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.text.TextStyle
 
 
-val MaterialTheme.typographyExtended: ThemeTypographyExtended.Data
+val MaterialTheme.typographyExtended: ThemeTypographyExtended.Common
     @Composable
     @ReadOnlyComposable
     get() = ThemeTypographyExtended.local.current
 
 object ThemeTypographyExtended{
     @Immutable
-    data class Data(
+    data class Common(
         val textTitle: TextStyle,
         val textSubtitle: TextStyle,
         val textHelper: TextStyle,
         val textNormal: TextStyle,
+        val textSupra: TextStyle,
         val textBig: TextStyle,
         val textHuge: TextStyle,
         val textSmall: TextStyle,
         val textField: TextStyle,
         val textLink: TextStyle,
         val textButton: TextStyle,
-        val textButtonIcon: TextStyle,
+        val textButtonOutline: TextStyle,
         val topNavigationTitle: TextStyle,
         val bottomNavigationLabel: TextStyle,
         val snackBarMessage: TextStyle,
         val snackBarAction: TextStyle,
     )
-    val local: ProvidableCompositionLocal<Data> = staticCompositionLocalOf {
+    val local: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
         error("not provided")
     }
 

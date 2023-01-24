@@ -5,32 +5,33 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 
-val MaterialTheme.dimensionsFontExtended: ThemeDimensionsExtended.Font
+val MaterialTheme.dimensionsFontExtended: ThemeDimensionsExtended.Fonts
     @Composable
     @ReadOnlyComposable
-    get() = ThemeDimensionsExtended.localFont.current
+    get() = ThemeDimensionsExtended.localFonts.current
 
-val MaterialTheme.dimensionsPaddingExtended: ThemeDimensionsExtended.Padding
+val MaterialTheme.dimensionsPaddingExtended: ThemeDimensionsExtended.Paddings
     @Composable
     @ReadOnlyComposable
-    get() = ThemeDimensionsExtended.localPadding.current
+    get() = ThemeDimensionsExtended.localPaddings.current
 
-val MaterialTheme.dimensionsSpacingExtended: ThemeDimensionsExtended.Spacing
+val MaterialTheme.dimensionsSpacingExtended: ThemeDimensionsExtended.Spacings
     @Composable
     @ReadOnlyComposable
-    get() = ThemeDimensionsExtended.localSpacing.current
+    get() = ThemeDimensionsExtended.localSpacings.current
 
-val MaterialTheme.dimensionsElevationExtended: ThemeDimensionsExtended.Elevation
+val MaterialTheme.dimensionsElevationExtended: ThemeDimensionsExtended.Elevations
     @Composable
     @ReadOnlyComposable
-    get() = ThemeDimensionsExtended.localElevation.current
+    get() = ThemeDimensionsExtended.localElevations.current
 
 object ThemeDimensionsExtended{
     @Immutable
-    data class Font(
+    data class Fonts(
         val textTitle: TextUnit,
         val textSubtitle: TextUnit,
         val textHelper: TextUnit,
+        val textSupra: TextUnit,
         val textHuge: TextUnit,
         val textBig: TextUnit,
         val textNormal: TextUnit,
@@ -39,18 +40,18 @@ object ThemeDimensionsExtended{
         val textField: TextUnit,
         val textLink: TextUnit,
         val textButton: TextUnit,
-        val textButton_icon: TextUnit,
+        val textButtonOutlined: TextUnit,
         val bottomNavigation: TextUnit,
         val topNavigation: TextUnit,
         val snackBarMessage: TextUnit,
         val snackBarAction: TextUnit,
     )
-    val localFont: ProvidableCompositionLocal<Font> = staticCompositionLocalOf {
+    val localFonts: ProvidableCompositionLocal<Fonts> = staticCompositionLocalOf {
         error("not provided")
     }
 
     @Immutable
-    data class Padding(
+    data class Paddings(
         val screen_h: Dp,
         val screen_v: Dp,
         val elementHuge_v: Dp,
@@ -84,12 +85,12 @@ object ThemeDimensionsExtended{
         val bottomNavigation: Dp,
         val topNavigation: Dp
     )
-    val localPadding: ProvidableCompositionLocal<Padding> = staticCompositionLocalOf {
+    val localPaddings: ProvidableCompositionLocal<Paddings> = staticCompositionLocalOf {
         error("not provided")
     }
 
     @Immutable
-    data class Spacing(
+    data class Spacings(
         val micro_v:Dp,
         val small_v:Dp,
         val normal_v:Dp,
@@ -102,17 +103,17 @@ object ThemeDimensionsExtended{
         val huge_h:Dp,
 
     )
-    val localSpacing: ProvidableCompositionLocal<Spacing> = staticCompositionLocalOf {
+    val localSpacings: ProvidableCompositionLocal<Spacings> = staticCompositionLocalOf {
         error("not provided")
     }
 
     @Immutable
-    data class Elevation(
+    data class Elevations(
         val elevationBig: Dp,
         val elevationNormal: Dp,
         val elevationSmall: Dp,
         )
-    val localElevation: ProvidableCompositionLocal<Elevation> = staticCompositionLocalOf {
+    val localElevations: ProvidableCompositionLocal<Elevations> = staticCompositionLocalOf {
         error("not provided")
     }
 

@@ -15,8 +15,8 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsResource
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapeCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonResource
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
 
 object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
 
@@ -32,15 +32,15 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
         val state = accessor.with<BottomSheet,_,_>().state()
 
         ModalBottomSheetLayout(
-            sheetContentColor = MaterialTheme.colorsResource.transparent,
-            sheetBackgroundColor = MaterialTheme.colorsResource.transparent,
+            sheetContentColor = MaterialTheme.colorsCommonResource.transparent,
+            sheetBackgroundColor = MaterialTheme.colorsCommonResource.transparent,
             sheetState = state.bottomSheetState,
             sheetShape = RectangleShape,
             sheetElevation = 0.dp,
             sheetContent = {
                 Card(
                     modifier = Modifier.padding(start = 1.dp, end = 1.dp),
-                    shape = MaterialTheme.shapeCommonExtended.bottomSheet,
+                    shape = MaterialTheme.shapesExtended.bottomSheet,
                     elevation = ModalBottomSheetDefaults.Elevation
                 ) {
                     val locals = LocalPages.current.last()

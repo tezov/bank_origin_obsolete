@@ -20,8 +20,8 @@ object Swiper {
     @Composable
     fun Pager(
         modifier: Modifier = Modifier,
-        pages: List<@Composable () -> Unit>,
         pageSelected: Int = 0,
+        pages: List<@Composable () -> Unit>,
         onPageChange: (pageIndex: Int) -> Unit
     ) {
         val pagerState = rememberPagerState()

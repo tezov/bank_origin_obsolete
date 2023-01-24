@@ -4,40 +4,43 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 
-val MaterialTheme.shapeCommonExtended: ThemeShapesExtended.Common
+val MaterialTheme.shapesExtended: ThemeShapesExtended.Shapes
     @Composable
     @ReadOnlyComposable
-    get() = ThemeShapesExtended.localCommon.current
+    get() = ThemeShapesExtended.localShapes.current
 
-val MaterialTheme.shapeBorderExtended: ThemeShapesExtended.Border
+val MaterialTheme.bordersExtended: ThemeShapesExtended.Borders
     @Composable
     @ReadOnlyComposable
-    get() = ThemeShapesExtended.localBorder.current
+    get() = ThemeShapesExtended.localBorders.current
 
 object ThemeShapesExtended{
 
     @Immutable
-    data class Common(
+    data class Shapes(
         val cardSmall: androidx.compose.ui.graphics.Shape,
         val cardNormal: androidx.compose.ui.graphics.Shape,
         val cardBig: androidx.compose.ui.graphics.Shape,
         val buttonSmall: androidx.compose.ui.graphics.Shape,
         val buttonNormal: androidx.compose.ui.graphics.Shape,
         val buttonBig: androidx.compose.ui.graphics.Shape,
+        val buttonOutlinedSmall: androidx.compose.ui.graphics.Shape,
+        val buttonOutlinedNormal: androidx.compose.ui.graphics.Shape,
+        val buttonOutlinedBig: androidx.compose.ui.graphics.Shape,
         val dialog: androidx.compose.ui.graphics.Shape,
         val snackbar: androidx.compose.ui.graphics.Shape,
         val bottomSheet: androidx.compose.ui.graphics.Shape,
     )
-    val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
+    val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
         error("not provided")
     }
 
     @Immutable
-    data class Border(
+    data class Borders(
         val dialog: BorderStroke,
         val button: BorderStroke,
     )
-    val localBorder: ProvidableCompositionLocal<Border> = staticCompositionLocalOf {
+    val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
         error("not provided")
     }
 

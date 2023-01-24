@@ -84,14 +84,14 @@ object ThemeColors {
 
         topAppBarBackground = colorsLight.background,
         topAppBarContentText = colorsLight.primary,
-        topAppBarContentIcon = ThemeColorsResource.Data.black,
+        topAppBarContentIcon = ThemeColorsResource.Common.black,
 
         bottomNavigationBackground = colorsLight.background,
         bottomNavigationActive = Data.blueSea,
-        bottomNavigationInactive = ThemeColorsResource.Data.grayLight,
+        bottomNavigationInactive = ThemeColorsResource.Common.grayLight,
 
         snackbarBackground = colorsLight.primaryVariant,
-        snackbarMessage = ThemeColorsResource.Data.white,
+        snackbarMessage = ThemeColorsResource.Common.white,
         snackbarAction = Data.blueSea,
     )
 }

@@ -1,12 +1,9 @@
 package com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog
 
-import androidx.compose.foundation.background
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
@@ -19,8 +16,8 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsElevationExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapeBorderExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapeCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.bordersExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
 
 @OptIn(ExperimentalComposeUiApi::class)
 object Dialog : ActivitySub<DialogState, DialogAction> {
@@ -56,9 +53,9 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
     @Composable
     fun Card(content: @Composable () -> Unit) {
         Card(
-            shape = MaterialTheme.shapeCommonExtended.dialog,
+            shape = MaterialTheme.shapesExtended.dialog,
             elevation = MaterialTheme.dimensionsElevationExtended.elevationNormal,
-            border = MaterialTheme.shapeBorderExtended.dialog
+            border = MaterialTheme.bordersExtended.dialog
         ) {
             Surface(color = MaterialTheme.colorsCommonExtended.backgroundModal) {
                 val locals = LocalPages.current.last()

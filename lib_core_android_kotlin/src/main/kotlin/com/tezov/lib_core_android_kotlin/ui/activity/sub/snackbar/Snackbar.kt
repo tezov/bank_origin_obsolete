@@ -12,7 +12,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapeCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
 
 object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
@@ -39,7 +39,7 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
             Snackbar(
                 backgroundColor = MaterialTheme.colorsCommonExtended.snackbarBackground,
                 elevation = 0.dp,
-                shape = MaterialTheme.shapeCommonExtended.snackbar,
+                shape = MaterialTheme.shapesExtended.snackbar,
                 content = {
                     Text(
                         text = data.message,

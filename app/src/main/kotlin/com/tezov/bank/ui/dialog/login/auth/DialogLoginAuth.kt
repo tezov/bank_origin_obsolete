@@ -1,9 +1,6 @@
 package com.tezov.bank.ui.dialog.login.auth
 
-import android.util.Log
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -21,25 +18,18 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
-import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
 import com.tezov.bank.ui.page.login.*
-import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
-import com.tezov.lib_core_android_kotlin.ui.util.ExtensionCompositionLocal
 
 object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
 
@@ -129,7 +119,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     },
                     singleLine = true,
                     colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = MaterialTheme.colorsResource.transparent
+                        backgroundColor = MaterialTheme.colorsCommonResource.transparent
                     ),
                     textStyle = MaterialTheme.typographyExtended.textField,
                     keyboardOptions = KeyboardOptions(
@@ -181,7 +171,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     },
                     singleLine = true,
                     colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = MaterialTheme.colorsResource.transparent
+                        backgroundColor = MaterialTheme.colorsCommonResource.transparent
                     ),
 //                    visualTransformation = when (passwordVisible.value) {
 //                        false -> PasswordVisualTransformation()
@@ -273,7 +263,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 shape = DialogLoginAuthTheme.shapes.button,
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = DialogLoginAuthTheme.colors.backgroundButtonDark,
-                    disabledBackgroundColor = MaterialTheme.colorsResource.grayLight
+                    disabledBackgroundColor = MaterialTheme.colorsCommonResource.grayLight
                 ),
                 enabled = true
             ) {

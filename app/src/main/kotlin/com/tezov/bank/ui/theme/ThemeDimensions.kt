@@ -6,25 +6,26 @@ import com.tezov.lib_core_android_kotlin.ui.theme.definition.ThemeDimensionsExte
 
 object ThemeDimensions {
 
-    val dimensionsFontExtended = ThemeDimensionsExtended.Font(
+    val dimensionsFontExtended = ThemeDimensionsExtended.Fonts(
         textTitle = 20.sp,
         textSubtitle = 15.sp,
         textHelper = 12.sp,
-        textHuge = 32.sp,
-        textBig = 24.sp,
+        textSupra = 34.sp,
+        textHuge = 26.sp,
+        textBig = 20.sp,
         textNormal = 14.sp,
         textSmall = 12.sp,
         textMicro = 10.sp,
         textField = 14.sp,
         textLink = 20.sp,
-        textButton = 22.sp,
-        textButton_icon = 16.sp,
+        textButton = 18.sp,
+        textButtonOutlined = 16.sp,
         bottomNavigation = 14.sp,
         topNavigation = 19.sp,
         snackBarMessage = 19.sp,
         snackBarAction = 19.sp,
     )
-    val dimensionsPaddingExtended = ThemeDimensionsExtended.Padding(
+    val dimensionsPaddingExtended = ThemeDimensionsExtended.Paddings(
         screen_h = 6.dp,
         screen_v = 4.dp,
         elementHuge_v = 18.dp,
@@ -59,7 +60,7 @@ object ThemeDimensions {
         topNavigation = 4.dp
     )
 
-    val dimensionsSpacingExtended = ThemeDimensionsExtended.Spacing(
+    val dimensionsSpacingExtended = ThemeDimensionsExtended.Spacings(
         micro_v = 2.dp,
         small_v = 5.dp,
         normal_v = 8.dp,
@@ -72,7 +73,7 @@ object ThemeDimensions {
         huge_h = 20.dp,
     )
 
-    val dimensionsElevationExtended = ThemeDimensionsExtended.Elevation(
+    val dimensionsElevationExtended = ThemeDimensionsExtended.Elevations(
         elevationBig = 10.dp,
         elevationNormal = 6.dp,
         elevationSmall = 3.dp,

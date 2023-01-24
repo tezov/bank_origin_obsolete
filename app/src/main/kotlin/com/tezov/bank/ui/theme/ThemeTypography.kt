@@ -1,92 +1,104 @@
 package com.tezov.bank.ui.theme
 
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsFontExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.ThemeTypographyExtended
 import com.tezov.bank.ui.theme.font.FontRoboto
 import com.tezov.bank.ui.theme.font.FontUbuntu
+import com.tezov.bank.ui.theme.font.fontRoboto
+import com.tezov.bank.ui.theme.font.fontUbuntu
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsFontExtended
 
 object ThemeTypography {
-    val typography = androidx.compose.material.Typography()
-    val typographyExtended = ThemeTypographyExtended.Data(
+    @Composable
+    fun providesTypographies() = androidx.compose.material.Typography()
+    
+    @Composable
+    fun providesTypographiesExtended() = ThemeTypographyExtended.Common(
         textTitle = TextStyle(
-            fontFamily = FontRoboto.fontFamily,
+            fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
-            fontSize = dimensionsFontExtended.textTitle
+            fontSize = MaterialTheme.dimensionsFontExtended.textTitle
         ),
         textSubtitle = TextStyle(
-            fontFamily = FontRoboto.fontFamily,
+            fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
-            fontSize = dimensionsFontExtended.textSubtitle
+            fontSize = MaterialTheme.dimensionsFontExtended.textSubtitle
         ),
         textHelper = TextStyle(
-            fontFamily = FontRoboto.fontFamily,
+            fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
-            fontSize = dimensionsFontExtended.textHelper
+            fontSize = MaterialTheme.dimensionsFontExtended.textHelper
         ),
         textNormal = TextStyle(
-            fontFamily = FontRoboto.fontFamily,
+            fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
-            fontSize = dimensionsFontExtended.textNormal
+            fontSize = MaterialTheme.dimensionsFontExtended.textNormal
+        ),
+        textSupra = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Normal,
+            fontSize = MaterialTheme.dimensionsFontExtended.textSupra
         ),
         textBig = TextStyle(
-            fontFamily = FontRoboto.fontFamily,
+            fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
-            fontSize = dimensionsFontExtended.textBig
+            fontSize = MaterialTheme.dimensionsFontExtended.textBig
         ),
         textHuge = TextStyle(
-            fontFamily = FontRoboto.fontFamily,
+            fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Bold,
-            fontSize = dimensionsFontExtended.textHuge
+            fontSize = MaterialTheme.dimensionsFontExtended.textHuge
         ),
         textSmall = TextStyle(
-            fontFamily = FontRoboto.fontFamily,
+            fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
-            fontSize = dimensionsFontExtended.textSmall
+            fontSize = MaterialTheme.dimensionsFontExtended.textSmall
         ),
         textField = TextStyle(
-            fontFamily = FontRoboto.fontFamily,
+            fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
-            fontSize = dimensionsFontExtended.textField
+            fontSize = MaterialTheme.dimensionsFontExtended.textField
         ),
         textLink = TextStyle(
-            fontFamily = FontRoboto.fontFamily,
+            fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
-            fontSize = dimensionsFontExtended.textLink,
+            fontSize = MaterialTheme.dimensionsFontExtended.textLink,
             textDecoration = TextDecoration.Underline
         ),
         textButton = TextStyle(
-            fontFamily = FontRoboto.fontFamily,
+            fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
-            fontSize = dimensionsFontExtended.textButton
+            fontSize = MaterialTheme.dimensionsFontExtended.textButton
         ),
-        textButtonIcon = TextStyle(
-            fontFamily = FontRoboto.fontFamily,
-            fontWeight = FontWeight.Normal,
-            fontSize = dimensionsFontExtended.textButton_icon
+        textButtonOutline = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Bold,
+            fontSize = MaterialTheme.dimensionsFontExtended.textButtonOutlined
         ),
         topNavigationTitle = TextStyle(
-            fontFamily = FontUbuntu.fontFamily,
+            fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Bold,
-            fontSize = dimensionsFontExtended.topNavigation
+            fontSize = MaterialTheme.dimensionsFontExtended.topNavigation
         ),
         bottomNavigationLabel = TextStyle(
-            fontFamily = FontUbuntu.fontFamily,
+            fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Normal,
-            fontSize = dimensionsFontExtended.bottomNavigation
+            fontSize = MaterialTheme.dimensionsFontExtended.bottomNavigation
         ),
         snackBarMessage = TextStyle(
-            fontFamily = FontUbuntu.fontFamily,
+            fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Normal,
-            fontSize = dimensionsFontExtended.snackBarMessage
+            fontSize = MaterialTheme.dimensionsFontExtended.snackBarMessage
         ),
         snackBarAction = TextStyle(
-            fontFamily = FontUbuntu.fontFamily,
+            fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Bold,
-            fontSize = dimensionsFontExtended.snackBarMessage
+            fontSize = MaterialTheme.dimensionsFontExtended.snackBarMessage
         ),
     )
 }

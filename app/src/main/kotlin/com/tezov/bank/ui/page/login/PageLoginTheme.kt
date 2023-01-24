@@ -1,7 +1,7 @@
 package com.tezov.bank.ui.page.login
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
@@ -9,10 +9,11 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
+import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val PageLoginTheme.colors: PageLoginTheme.Colors
@@ -30,87 +31,80 @@ val PageLoginTheme.shapes: PageLoginTheme.Shapes
     @ReadOnlyComposable
     get() = PageLoginTheme.localShapes.current
 
+val PageLoginTheme.borders: PageLoginTheme.Borders
+    @Composable
+    @ReadOnlyComposable
+    get() = PageLoginTheme.localBorders.current
+
+val PageLoginTheme.typographies: PageLoginTheme.Typographies
+    @Composable
+    @ReadOnlyComposable
+    get() = PageLoginTheme.localTypographies.current
+
 object PageLoginTheme {
 
     data class Colors(
         val background: Color,
         val backgroundButtonDark: Color,
-        val backgroundInactive: Color,
         val backgroundButtonLight: Color,
+        val backgroundInactive: Color,
         val textContent: Color,
         val textButtonDark: Color,
         val textButtonLight: Color,
     )
+
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.primary,
         backgroundButtonDark = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm,
-        backgroundInactive = MaterialTheme.colorsCommonExtended.backgroundInactive,
         backgroundButtonLight = MaterialTheme.colorsCommonExtended.backgroundButtonCancel,
+        backgroundInactive = MaterialTheme.colorsCommonExtended.backgroundInactive,
         textContent = MaterialTheme.colorsCommonExtended.onPrimaryLight,
         textButtonDark = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm,
         textButtonLight = MaterialTheme.colorsCommonExtended.onBackgroundButtonCancel,
     )
+
     val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
         error("not provided")
     }
 
     data class Dimensions(
-        val textHuge: TextUnit,
-        val textNormal:TextUnit,
-        val textButton:TextUnit,
-        val textLink:TextUnit,
-        val paddingTopToTextHuge:Dp,
-        val paddingTopToIndicator:Dp,
-        val paddingTopFromLinkService:Dp,
-        val pagerIndicatorPaddingTop:Dp,
-        val pagerIndicatorSize:Dp,
-        val pagerIndicatorSpacing:Dp,
-        val logoSize:Dp,
-        val iconBigSize:Dp,
-        val paddingStartToIconBig:Dp,
-        val iconMediumSize:Dp,
-        val paddingStartToIconMedium:Dp,
-        val iconSmallSize:Dp,
+        val paddingTopToTitle: Dp,
+        val paddingTopFromLinkService: Dp,
+        val pagerIndicatorPaddingTop: Dp,
+        val pagerIndicatorSize: Dp,
+        val pagerIndicatorSpacing: Dp,
+        val logoSize: Dp,
+        val iconBigSize: Dp,
+        val paddingStartToIconBig: Dp,
+        val iconMediumSize: Dp,
+        val paddingStartToIconMedium: Dp,
+        val iconSmallSize: Dp,
+        val paddingHorizontalButtonOutlined: Dp,
+        val paddingVerticalButtonOutlined: Dp,
+        val paddingHorizontalButton: Dp,
+        val paddingVerticalButton: Dp,
+    )
 
-        val strokeIcon:Dp,
-        val strokeButton:Dp,
-        val paddingHorizontalButtonOutlined:Dp,
-        val paddingVerticalButtonOutlined:Dp,
-        val paddingHorizontalButton:Dp,
-        val paddingVerticalButton:Dp,
-
-        )
     @Composable
     fun provideDimensions() = Dimensions(
-        textHuge = MaterialTheme.dimensionsFontExtended.textHuge,
-        textNormal = MaterialTheme.dimensionsFontExtended.textNormal,
-        textButton = MaterialTheme.dimensionsFontExtended.textButton,
-        textLink = MaterialTheme.dimensionsFontExtended.textLink,
-
-        paddingTopToTextHuge = 24.dp,
-        paddingTopToIndicator = MaterialTheme.dimensionsPaddingExtended.elementBig_v,
+        paddingTopToTitle = 24.dp,
         paddingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.elementBig_v,
-
         pagerIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,
-        pagerIndicatorSize = 16.dp,
+        pagerIndicatorSize = 12.dp,
         pagerIndicatorSpacing = MaterialTheme.dimensionsSpacingExtended.big_h,
-
         logoSize = 64.dp,
         iconBigSize = 52.dp,
         paddingStartToIconBig = 28.dp,
         iconMediumSize = 38.dp,
         paddingStartToIconMedium = 12.dp,
         iconSmallSize = 42.dp,
-
-        strokeIcon = 2.dp,
-        strokeButton = 2.dp,
-
         paddingHorizontalButtonOutlined = 32.dp,
         paddingVerticalButtonOutlined = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
         paddingHorizontalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
         paddingVerticalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
     )
+
     val localDimensions: ProvidableCompositionLocal<Dimensions> = staticCompositionLocalOf {
         error("not provided")
     }
@@ -119,13 +113,84 @@ object PageLoginTheme {
         val button: Shape,
         val buttonOutline: Shape,
 
-    )
+        )
+
     @Composable
     fun provideShapes() = Shapes(
-        button = RoundedCornerShape(35),
-        buttonOutline = RoundedCornerShape(50)
+        button = MaterialTheme.shapesExtended.buttonNormal,
+        buttonOutline = MaterialTheme.shapesExtended.buttonOutlinedBig
     )
+
     val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
+        error("not provided")
+    }
+
+
+    data class Borders(
+        val iconBig: BorderStroke,
+        val buttonDark: BorderStroke,
+        val buttonOutline: BorderStroke,
+
+    )
+
+    @Composable
+    fun provideBorders() = Borders(
+        iconBig = BorderStroke(
+            2.dp,
+            colors.textContent
+        ),
+        buttonDark = BorderStroke(
+            1.dp,
+            ThemeColors.Data.whiteDark
+        ),
+        buttonOutline = BorderStroke(
+            2.dp,
+            colors.textContent
+        )
+    )
+
+    val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
+        error("not provided")
+    }
+
+    data class Typographies(
+        val supra: TextStyle,
+        val huge: TextStyle,
+        val body: TextStyle,
+        val button: TextStyle,
+        val buttonOutlined: TextStyle,
+        val link: TextStyle,
+    )
+
+    @Composable
+    fun provideTypographies() = Typographies(
+        supra = MaterialTheme.typographyExtended.textSupra.copy(
+            color = colors.textContent
+        ),
+        huge = MaterialTheme.typographyExtended.textHuge.copy(
+            color = colors.textContent
+        ),
+        body = MaterialTheme.typographyExtended.textNormal.copy(
+            color = colors.textContent,
+            fontWeight = FontWeight.Bold
+        ),
+        button = MaterialTheme.typographyExtended.textButton.copy(
+            fontSize = MaterialTheme.dimensionsFontExtended.textButton
+        ),
+        buttonOutlined = MaterialTheme.typographyExtended.textButtonOutline.copy(
+            fontSize = MaterialTheme.dimensionsFontExtended.textButtonOutlined,
+            color = colors.textContent,
+            fontWeight = FontWeight.Bold
+        ),
+        link = MaterialTheme.typographyExtended.textLink.copy(
+            fontSize = MaterialTheme.dimensionsFontExtended.textLink,
+            color = colors.textContent,
+            fontWeight = FontWeight.Bold
+        )
+
+    )
+
+    val localTypographies: ProvidableCompositionLocal<Typographies> = staticCompositionLocalOf {
         error("not provided")
     }
 
@@ -138,7 +203,6 @@ object PageLoginTheme {
         dimensionIndicatorSpacing = dimensions.pagerIndicatorSpacing,
         shapeIndicator = CircleShape
     )
-
 
 
 }

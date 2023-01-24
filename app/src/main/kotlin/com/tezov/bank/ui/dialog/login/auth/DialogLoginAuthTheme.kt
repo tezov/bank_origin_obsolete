@@ -1,6 +1,5 @@
 package com.tezov.bank.ui.dialog.login.auth
 
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -11,8 +10,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 

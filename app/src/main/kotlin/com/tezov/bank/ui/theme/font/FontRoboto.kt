@@ -12,16 +12,19 @@ import com.tezov.bank.R
 val MaterialTheme.fontRoboto: FontFamily
     @Composable
     @ReadOnlyComposable
-    get() = FontRoboto.local.current
+    get() = FontRoboto.local.current.value
 
-object FontRoboto{
-    val local = compositionLocalOf { fontFamily }
-    val fontFamily = FontFamily(
-        Font(R.font.roboto_light, FontWeight.Light),
-        Font(R.font.roboto_medium, FontWeight.Medium),
-        Font(R.font.roboto_bold, FontWeight.Bold),
-        Font(R.font.roboto_regular, FontWeight.Normal),
-    )
+object FontRoboto {
+    val local = compositionLocalOf {
+        lazy {
+            FontFamily(
+                Font(R.font.roboto_light, FontWeight.Light),
+                Font(R.font.roboto_medium, FontWeight.Medium),
+                Font(R.font.roboto_bold, FontWeight.Bold),
+                Font(R.font.roboto_regular, FontWeight.Normal),
+            )
+        }
+    }
 }
 
 

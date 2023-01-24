@@ -9,7 +9,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySubState
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsResource
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonResource
 
 class DialogState private constructor(
     private val showDialog: MutableState<Boolean>,
@@ -31,7 +31,7 @@ class DialogState private constructor(
     internal fun EmptyContent(){
         Box(
             Modifier
-                .background(MaterialTheme.colorsResource.transparent)
+                .background(MaterialTheme.colorsCommonResource.transparent)
                 .fillMaxWidth()
                 .height(1.dp)
         )
