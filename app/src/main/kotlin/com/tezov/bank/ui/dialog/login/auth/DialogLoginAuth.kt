@@ -217,6 +217,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 .height(120.dp)
         ) {
             val canvasWidth = size.width
+            val canvasWidthSplit = canvasWidth / 5
             val canvasHeight = size.height
 
             drawLine(
@@ -233,17 +234,38 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 strokeWidth = strokeWidth.toPx()
             )
 
-            drawText(
-                textMeasurer = textMeasure,
-                text = "0123456789",
-                topLeft = Offset(8.dp.toPx(), canvasHeight / 4),
-                style = TextStyle(
-                    color = Color.White,
-                    fontSize = 22.sp,
-                    fontStyle = FontStyle.Italic
+            for( i in 1 until 5){
+                drawLine(
+                    start = Offset(x = canvasWidthSplit * i, y = 0f),
+                    end = Offset(x = canvasWidthSplit * i, y = canvasHeight),
+                    color = color,
+                    strokeWidth = strokeWidth.toPx()
                 )
-            )
+            }
 
+            val numbers = "0123456789".toMutableList().shuffled()
+            for( i in 0 until 5){
+                drawText(
+                    textMeasurer = textMeasure,
+                    text = numbers[i*2].toString(),
+                    topLeft = Offset(canvasWidthSplit * i + canvasWidthSplit / 2, 0f),
+                    style = TextStyle(
+                        color = Color.White,
+                        fontSize = 48.sp,
+                        fontStyle = FontStyle.Italic
+                    )
+                )
+                drawText(
+                    textMeasurer = textMeasure,
+                    text = numbers[(i*2)+1].toString(),
+                    topLeft = Offset(canvasWidthSplit * i + canvasWidthSplit / 2, 140f),
+                    style = TextStyle(
+                        color = Color.White,
+                        fontSize = 48.sp,
+                        fontStyle = FontStyle.Italic
+                    )
+                )
+            }
         }
     }
 
