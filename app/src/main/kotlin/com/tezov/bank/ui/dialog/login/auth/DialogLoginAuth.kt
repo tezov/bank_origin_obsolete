@@ -10,18 +10,24 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.drawscope.DrawScope
+import androidx.compose.ui.layout.*
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.R
@@ -200,73 +206,99 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 )
             }
 
-            KeyBoardDigital()
+            val digits = remember {
+                listOf(
+                    KeyBoardDigit.make("0", { }),
+                    KeyBoardDigit.make("1", { }),
+                    KeyBoardDigit.make("2", { }),
+                    KeyBoardDigit.make("3", { }),
+                    KeyBoardDigit.make("4", { }),
+                    KeyBoardDigit.make("5", { }),
+                    KeyBoardDigit.make("6", { }),
+                    KeyBoardDigit.make("7", { }),
+                    KeyBoardDigit.make("8", { }),
+                    KeyBoardDigit.make("9", { }),
+                )
+            }
+            KeyBoardDigital(digits.shuffled())
         }
+    }
+
+    interface KeyBoardDigit{
+
+        val value:String
+
+        fun onClick()
+
+        companion object{
+            fun make(value: String, onClick: () -> Unit) = object : KeyBoardDigit {
+                override val value get() = value
+                override fun onClick() = onClick.invoke()
+            }
+        }
+
     }
 
     @OptIn(ExperimentalTextApi::class)
     @Composable
-    private fun KeyBoardDigital() {
+    private fun KeyBoardDigital(digits:List<KeyBoardDigit>) {
         val color = DialogLoginAuthTheme.colors.onBackground
         val strokeWidth = 2.dp / 1.5f
         val textMeasure = rememberTextMeasurer()
 
-        Canvas(
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(120.dp)
-        ) {
-            val canvasWidth = size.width
-            val canvasWidthSplit = canvasWidth / 5
-            val canvasHeight = size.height
-
-            drawLine(
-                start = Offset(x = 0f, y = 0f),
-                end = Offset(x = canvasWidth, y = 0f),
-                color = color,
-                strokeWidth = strokeWidth.toPx()
-            )
-
-            drawLine(
-                start = Offset(x = 0f, y = canvasHeight / 2),
-                end = Offset(x = canvasWidth, y = canvasHeight / 2),
-                color = color,
-                strokeWidth = strokeWidth.toPx()
-            )
-
-            for( i in 1 until 5){
-                drawLine(
-                    start = Offset(x = canvasWidthSplit * i, y = 0f),
-                    end = Offset(x = canvasWidthSplit * i, y = canvasHeight),
-                    color = color,
-                    strokeWidth = strokeWidth.toPx()
-                )
-            }
-
-            val numbers = "0123456789".toMutableList().shuffled()
-            for( i in 0 until 5){
-                drawText(
-                    textMeasurer = textMeasure,
-                    text = numbers[i*2].toString(),
-                    topLeft = Offset(canvasWidthSplit * i + canvasWidthSplit / 2, 0f),
-                    style = TextStyle(
-                        color = Color.White,
-                        fontSize = 48.sp,
-                        fontStyle = FontStyle.Italic
+        Layout(
+            measurePolicy = { measurables, constraints ->
+                with(constraints) {
+                    val xLength = digits.size / 2
+                    val digitSize = maxWidth / xLength
+                    val maxHeight = digitSize * 2
+                    layout(maxWidth, maxHeight) {}
+                }
+            },
+            content = {},
+            modifier = Modifier.padding(4.dp).drawBehind{
+                val xLength = digits.size / 2
+                val canvasWidth = size.width
+                val canvasHeight = size.height
+                val digitSize = canvasWidth / xLength
+                val digitSizeHalf = (digitSize / 3.5).toFloat()
+                //vertical line
+                for( i in 0..2){
+                    val y = digitSize * i
+                    drawLine(
+                        start = Offset(x = 0f, y = y),
+                        end = Offset(x = canvasWidth, y = y),
+                        color = color,
+                        strokeWidth = strokeWidth.toPx()
                     )
-                )
-                drawText(
-                    textMeasurer = textMeasure,
-                    text = numbers[(i*2)+1].toString(),
-                    topLeft = Offset(canvasWidthSplit * i + canvasWidthSplit / 2, 140f),
-                    style = TextStyle(
-                        color = Color.White,
-                        fontSize = 48.sp,
-                        fontStyle = FontStyle.Italic
+                }
+                //horizontal line
+                for( i in 0..(xLength+1)){
+                    val x = digitSize * i
+                    drawLine(
+                        start = Offset(x = x, y = 0f),
+                        end = Offset(x = x, y = canvasHeight),
+                        color = color,
+                        strokeWidth = strokeWidth.toPx()
                     )
-                )
+                }
+
+                digits.forEachIndexed{ index, keyBoardDigit ->
+                    val x = (index / 2) * digitSize + digitSizeHalf
+                    val y = (index % 2) * digitSize
+                    drawText(
+                        textMeasurer = textMeasure,
+                        text = keyBoardDigit.value,
+                        topLeft = Offset(x, y),
+                        style = TextStyle(
+                            color = color,
+                            fontSize = 48.sp,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    )
+                }
             }
-        }
+        )
     }
 
     @Composable
