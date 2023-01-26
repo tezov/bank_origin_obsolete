@@ -69,8 +69,8 @@ object PageLoginTheme {
     }
 
     data class Dimensions(
-        val paddingTopToTitle: Dp,
-        val paddingTopFromLinkService: Dp,
+        val spacingTopToTitle: Dp,
+        val spacingTopFromLinkService: Dp,
         val pagerIndicatorPaddingTop: Dp,
         val pagerIndicatorSize: Dp,
         val pagerIndicatorSpacing: Dp,
@@ -88,8 +88,8 @@ object PageLoginTheme {
 
     @Composable
     fun provideDimensions() = Dimensions(
-        paddingTopToTitle = 24.dp,
-        paddingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.elementBig_v,
+        spacingTopToTitle = 24.dp,
+        spacingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.elementBig_v,
         pagerIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,
         pagerIndicatorSize = 12.dp,
         pagerIndicatorSpacing = MaterialTheme.dimensionsSpacingExtended.big_h,
@@ -112,8 +112,7 @@ object PageLoginTheme {
     data class Shapes(
         val button: Shape,
         val buttonOutline: Shape,
-
-        )
+    )
 
     @Composable
     fun provideShapes() = Shapes(

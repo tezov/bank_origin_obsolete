@@ -8,6 +8,7 @@ import com.tezov.bank.ui.theme.ThemeColors.colorsLightCommonExtended
 import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsElevationExtended
 import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsFontExtended
 import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsPaddingExtended
+import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsSizeExtended
 import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsSpacingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 import com.tezov.bank.ui.theme.font.FontRoboto
@@ -27,6 +28,7 @@ object ThemeApplication {
                 ThemeDimensionsExtended.localPaddings provides dimensionsPaddingExtended,
                 ThemeDimensionsExtended.localSpacings provides dimensionsSpacingExtended,
                 ThemeDimensionsExtended.localElevations provides dimensionsElevationExtended,
+                ThemeDimensionsExtended.localSizes provides dimensionsSizeExtended,
             ),
             child = {
                 arrayOf(

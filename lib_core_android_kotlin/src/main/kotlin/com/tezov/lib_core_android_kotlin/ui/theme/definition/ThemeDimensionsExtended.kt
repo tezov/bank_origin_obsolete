@@ -25,6 +25,11 @@ val MaterialTheme.dimensionsElevationExtended: ThemeDimensionsExtended.Elevation
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localElevations.current
 
+val MaterialTheme.dimensionsSizeExtended: ThemeDimensionsExtended.Sizes
+    @Composable
+    @ReadOnlyComposable
+    get() = ThemeDimensionsExtended.localSizes.current
+
 object ThemeDimensionsExtended{
     @Immutable
     data class Fonts(
@@ -114,6 +119,16 @@ object ThemeDimensionsExtended{
         val elevationSmall: Dp,
         )
     val localElevations: ProvidableCompositionLocal<Elevations> = staticCompositionLocalOf {
+        error("not provided")
+    }
+
+    @Immutable
+    data class Sizes(
+        val iconModal:Dp,
+        val iconField:Dp,
+
+        )
+    val localSizes: ProvidableCompositionLocal<Sizes> = staticCompositionLocalOf {
         error("not provided")
     }
 

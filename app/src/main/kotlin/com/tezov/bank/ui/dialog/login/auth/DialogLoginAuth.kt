@@ -1,40 +1,29 @@
 package com.tezov.bank.ui.dialog.login.auth
 
 import android.util.Log
-import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.gestures.detectTapGestures
-import androidx.compose.foundation.gestures.forEachGesture
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.drawscope.DrawScope
-import androidx.compose.ui.input.pointer.PointerEvent
-import androidx.compose.ui.input.pointer.PointerInputChange
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.*
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.*
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.R
@@ -43,6 +32,7 @@ import com.tezov.bank.ui.page.login.*
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
+import com.tezov.lib_core_android_kotlin.ui.util.ExtensionCompositionLocal
 
 object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
 
@@ -50,11 +40,19 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
     override fun Dialog<DialogLoginAuthState, DialogLoginAuthAction>.content() {
         val accessor = AccessorAppUiDialog().get(requester = this).contextLoginAuth()
         val action = accessor.action()
-        CompositionLocalProvider(
-            DialogLoginAuthTheme.localColors provides DialogLoginAuthTheme.provideColors(),
-            DialogLoginAuthTheme.localDimensions provides DialogLoginAuthTheme.provideDimensions(),
-            DialogLoginAuthTheme.localShapes provides DialogLoginAuthTheme.provideShapes(),
-        ) {
+        ExtensionCompositionLocal.CompositionLocalProvider(
+            parent = arrayOf(
+                DialogLoginAuthTheme.localColors provides DialogLoginAuthTheme.provideColors(),
+                DialogLoginAuthTheme.localDimensions provides DialogLoginAuthTheme.provideDimensions(),
+            ),
+            child = {
+                arrayOf(
+                    DialogLoginAuthTheme.localShapes provides DialogLoginAuthTheme.provideShapes(),
+                    DialogLoginAuthTheme.localBorders provides DialogLoginAuthTheme.provideBorders(),
+                    DialogLoginAuthTheme.localTypographies provides DialogLoginAuthTheme.provideTypographies()
+                )
+            }
+        ){
             Surface(color = DialogLoginAuthTheme.colors.background) {
                 Box(
                     modifier = Modifier
@@ -68,6 +66,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         modifier = Modifier.align(Alignment.TopStart),
                         onClick = { action.hide() }) {
                         Icon(
+                            modifier = Modifier.size(DialogLoginAuthTheme.dimensions.iconCloseSize),
                             painter = painterResource(id = R.drawable.ic_close_24dp),
                             contentDescription = null,
                             tint = DialogLoginAuthTheme.colors.onBackground,
@@ -79,9 +78,11 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         ContentHeader()
+                        Spacer(modifier = Modifier.height(DialogLoginAuthTheme.dimensions.spacingTopToTitle))
                         ContentBody {
 
                         }
+                        Spacer(modifier = Modifier.height(DialogLoginAuthTheme.dimensions.spacingTopFromButton))
                         ContentFooter {
 
                         }
@@ -96,13 +97,10 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         Text(
             text = "Saisissez votre code secret pour\naccéder à vos comptes",
             textAlign = TextAlign.Center,
-            style = MaterialTheme.typographyExtended.textTitle.copy(fontSize = DialogLoginAuthTheme.dimensions.textTitle),
-            color = DialogLoginAuthTheme.colors.onBackground
+            style = DialogLoginAuthTheme.typographies.title
         )
 
     }
-
-    private val SIZE_ICON_LOGIN = 32.dp
 
     @OptIn(ExperimentalComposeUiApi::class)
     @Composable
@@ -112,8 +110,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v)
-                .border(1.dp, DialogLoginAuthTheme.colors.onBackground, RoundedCornerShape(2))
+                .border(DialogLoginAuthTheme.borders.authCard)
 
         ) {
 
@@ -134,7 +131,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = MaterialTheme.colorsCommonResource.transparent
                     ),
-                    textStyle = MaterialTheme.typographyExtended.textField,
+                    textStyle = DialogLoginAuthTheme.typographies.field,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Text,
 //                        imeAction = if (password.value.isBlank()) ImeAction.Next else ImeAction.Done
@@ -149,7 +146,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 )
                 Icon(
                     modifier = Modifier
-                        .size(SIZE_ICON_LOGIN)
+                        .size(DialogLoginAuthTheme.dimensions.iconFieldSize)
                         .align(Alignment.CenterVertically),
                     painter = painterResource(id = R.drawable.ic_person_24dp),
                     tint = DialogLoginAuthTheme.colors.onBackground,
@@ -205,7 +202,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 )
                 Icon(
                     modifier = Modifier
-                        .size(SIZE_ICON_LOGIN)
+                        .size(DialogLoginAuthTheme.dimensions.iconFieldSize)
                         .align(Alignment.CenterVertically),
                     painter = painterResource(id = R.drawable.ic_lock_24dp),
                     tint = DialogLoginAuthTheme.colors.onBackground,
@@ -358,8 +355,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         ) {
             Button(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
+                    .fillMaxWidth(),
                 onClick = { },
                 shape = DialogLoginAuthTheme.shapes.button,
                 colors = ButtonDefaults.buttonColors(
@@ -370,9 +366,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
             ) {
                 Text(
                     "Se connecter",
-                    style = MaterialTheme.typographyExtended.textButton
-                        .copy(fontSize = DialogLoginAuthTheme.dimensions.textButton),
-                    color = DialogLoginAuthTheme.colors.textButtonDark,
+                    style = DialogLoginAuthTheme.typographies.button,
                     modifier = Modifier
                         .padding(
                             horizontal = DialogLoginAuthTheme.dimensions.paddingHorizontalButton,
@@ -384,27 +378,18 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(
-                        horizontal = MaterialTheme.dimensionsPaddingExtended.elementBig_h,
-                        vertical = MaterialTheme.dimensionsPaddingExtended.elementBig_v
-                    ),
+                    .padding(top = DialogLoginAuthTheme.dimensions.paddingTopFromLink),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 ClickableText(
                     text = AnnotatedString("Mon n°client ?"),
-                    style = MaterialTheme.typographyExtended.textLink.copy(
-                        fontSize = DialogLoginAuthTheme.dimensions.textLink,
-                        color = MaterialTheme.colorsCommonExtended.onPrimaryLight
-                    )
+                    style = DialogLoginAuthTheme.typographies.link
                 ) {
                     onClick(0)
                 }
                 ClickableText(
                     text = AnnotatedString("Code secret oublié ?"),
-                    style = MaterialTheme.typographyExtended.textLink.copy(
-                        fontSize = DialogLoginAuthTheme.dimensions.textLink,
-                        color = MaterialTheme.colorsCommonExtended.onPrimaryLight
-                    )
+                    style = DialogLoginAuthTheme.typographies.link
                 ) {
                     onClick(1)
                 }

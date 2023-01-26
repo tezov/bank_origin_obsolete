@@ -61,21 +61,26 @@ object ThemeDimensions {
     )
 
     val dimensionsSpacingExtended = ThemeDimensionsExtended.Spacings(
-        micro_v = 2.dp,
-        small_v = 5.dp,
-        normal_v = 8.dp,
-        big_v = 12.dp,
-        huge_v = 16.dp,
-        micro_h = 2.dp,
-        small_h = 6.dp,
-        normal_h = 10.dp,
-        big_h = 16.dp,
-        huge_h = 20.dp,
+        micro_v = 4.dp,
+        small_v = 8.dp,
+        normal_v = 14.dp,
+        big_v = 22.dp,
+        huge_v = 38.dp,
+        micro_h = 6.dp,
+        small_h = 12.dp,
+        normal_h = 18.dp,
+        big_h = 28.dp,
+        huge_h = 42.dp,
     )
 
     val dimensionsElevationExtended = ThemeDimensionsExtended.Elevations(
         elevationBig = 10.dp,
         elevationNormal = 6.dp,
         elevationSmall = 3.dp,
+    )
+
+    val dimensionsSizeExtended = ThemeDimensionsExtended.Sizes(
+        iconModal = 42.dp,
+        iconField = 32.dp,
     )
 }

@@ -183,7 +183,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             text = "M. ZOLLVER",
                             style = PageLoginTheme.typographies.supra
                         )
-                        Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.paddingTopToTitle))
+                        Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         Text(
                             textAlign = TextAlign.Center,
                             text = "Balayer l'écran vers la gauche\npour afficher votre solde.",
@@ -204,7 +204,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             text = "Accédez à votre solde en\nun coups d'oeil",
                             style = PageLoginTheme.typographies.huge
                         )
-                        Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.paddingTopToTitle))
+                        Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         OutlinedButton(
                             onClick = { },
                             border = PageLoginTheme.borders.buttonOutline,
@@ -294,7 +294,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 )
             }
 
-            Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.paddingTopFromLinkService))
+            Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopFromLinkService))
 
             ClickableText(
                 text = AnnotatedString("Aide et Services"),
