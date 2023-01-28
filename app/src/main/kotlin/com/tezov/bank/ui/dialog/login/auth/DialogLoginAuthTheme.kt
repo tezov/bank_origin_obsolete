@@ -8,12 +8,14 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.bank.ui.page.login.PageLoginTheme
 import com.tezov.bank.ui.theme.ThemeColors
+import com.tezov.lib_core_android_kotlin.ui.component.widget.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
+import com.tezov.lib_core_android_kotlin.ui.util.ExtensionDensity.toPx
 
 val DialogLoginAuthTheme.colors: DialogLoginAuthTheme.Colors
     @Composable
@@ -169,6 +171,15 @@ object DialogLoginAuthTheme {
         staticCompositionLocalOf {
             error("not provided")
         }
+
+    @Composable
+    fun provideKeyBoardGridCubeStyle() = KeyBoard.GridCube.Style(
+        colorContent = colors.onBackground,
+        colorBackground = Color.Transparent,
+        colorBorder = colors.onBackground,
+        borderOuter = Stroke(width = 3.dp.toPx),
+        borderInner = Stroke(width = 1.5.dp.toPx),
+    )
 
 
 }

@@ -2,33 +2,28 @@ package com.tezov.bank.ui.dialog.login.auth
 
 import android.util.Log
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.*
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.*
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
 import com.tezov.bank.ui.page.login.*
+import com.tezov.lib_core_android_kotlin.ui.component.widget.KeyBoard
+import com.tezov.lib_core_android_kotlin.ui.component.widget.provides
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
@@ -49,7 +44,8 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 arrayOf(
                     DialogLoginAuthTheme provides DialogLoginAuthTheme.provideShapes(),
                     DialogLoginAuthTheme provides DialogLoginAuthTheme.provideBorders(),
-                    DialogLoginAuthTheme provides DialogLoginAuthTheme.provideTypographies()
+                    DialogLoginAuthTheme provides DialogLoginAuthTheme.provideTypographies(),
+                    KeyBoard.GridCube provides DialogLoginAuthTheme.provideKeyBoardGridCubeStyle()
                 )
             }
         ){
@@ -210,139 +206,11 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 )
             }
 
-            val keyBoardDigits = remember {
-                val digits = listOf(
-                    KeyBoardDigit.make("0"),
-                    KeyBoardDigit.make("1"),
-                    KeyBoardDigit.make("2"),
-                    KeyBoardDigit.make("3"),
-                    KeyBoardDigit.make("4"),
-                    KeyBoardDigit.make("5"),
-                    KeyBoardDigit.make("6"),
-                    KeyBoardDigit.make("7"),
-                    KeyBoardDigit.make("8"),
-                    KeyBoardDigit.make("9"),
-                )
-                KeyBoardDigits.make(digits.shuffled()){
-                    Log.d(">>:", "ContentBody: ${this.value}")
-                }
-            }
+            KeyBoard.GridCubeDigitsTwoRowShuffled(modifier = Modifier.padding(6.dp)){
+                Log.d(">>:", "ContentBody: $it")
 
-            KeyBoardDigital(keyBoardDigits)
-        }
-    }
-
-    interface KeyBoardDigits {
-
-        val value: List<KeyBoardDigit>
-
-        val size get() = value.size
-
-        fun forEachIndexed(action: (Int, KeyBoardDigit) -> Unit) = value.forEachIndexed(action)
-
-        fun onClicked(index:Int){
-            kotlin.runCatching { value[index] }.getOrNull()?.onClicked()
-        }
-
-        fun KeyBoardDigit.onClicked()
-
-        companion object {
-            fun make(value: List<KeyBoardDigit>, onclick: KeyBoardDigit.()->Unit) = object : KeyBoardDigits {
-                override val value get() = value
-                override fun KeyBoardDigit.onClicked() = onclick()
             }
         }
-    }
-
-    interface KeyBoardDigit {
-
-        val value: String
-
-        companion object {
-            fun make(value: String) = object : KeyBoardDigit {
-                override val value get() = value
-            }
-        }
-
-    }
-
-    @OptIn(ExperimentalTextApi::class)
-    @Composable
-    private fun KeyBoardDigital(digits: KeyBoardDigits) {
-        val color = DialogLoginAuthTheme.colors.onBackground
-        val strokeWidth = 2.dp / 1.5f
-        val textMeasure = rememberTextMeasurer()
-
-        val yLength = 2
-        val xLength = digits.size / yLength
-
-        Layout(
-            measurePolicy = { measurables, constraints ->
-                with(constraints) {
-                    val digitSize = maxWidth / xLength
-                    val maxHeight = digitSize * yLength
-                    layout(maxWidth, maxHeight) {}
-                }
-            },
-            content = {},
-            modifier = Modifier
-                .padding(4.dp)
-                .pointerInput(Unit) {
-                    detectTapGestures(
-                        onTap = { offset ->
-                            val xPosition = ((offset.x / size.width) * xLength).toInt()
-                            val yPosition = ((offset.y / size.height) * yLength).toInt()
-                            val index = xLength * yPosition + xPosition
-                            digits.onClicked(index)
-                        }
-                    )
-                }
-                .drawBehind {
-                    val canvasWidth = size.width
-                    val canvasHeight = size.height
-                    val digitSize = canvasWidth / xLength
-                    val digitSizeHalf = (digitSize / 3.5).toFloat()
-                    val fontSize = digitSize * 0.25
-                    //vertical line
-                    for (i in 0..yLength) {
-                        val y = digitSize * i
-                        drawLine(
-                            start = Offset(x = 0f, y = y),
-                            end = Offset(x = canvasWidth, y = y),
-                            color = color,
-                            strokeWidth = strokeWidth.toPx()
-                        )
-                    }
-                    //horizontal line
-                    for (i in 0..(xLength + 1)) {
-                        val x = digitSize * i
-                        drawLine(
-                            start = Offset(x = x, y = 0f),
-                            end = Offset(x = x, y = canvasHeight),
-                            color = color,
-                            strokeWidth = strokeWidth.toPx()
-                        )
-                    }
-                    val overflow = xLength * yLength
-                    digits.forEachIndexed { index, keyBoardDigit ->
-                        if(index>=overflow){
-                            return@forEachIndexed
-                        }
-                        val x = (index % xLength) * digitSize + digitSizeHalf
-                        val y = (index / xLength) * digitSize
-                        drawText(
-                            textMeasurer = textMeasure,
-                            text = keyBoardDigit.value,
-                            topLeft = Offset(x, y),
-                            style = TextStyle(
-                                color = color,
-                                fontSize = fontSize.sp,
-                                fontWeight = FontWeight.SemiBold
-                            )
-                        )
-                    }
-                }
-        )
     }
 
     @Composable
