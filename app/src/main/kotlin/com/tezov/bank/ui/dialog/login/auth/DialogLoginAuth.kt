@@ -42,14 +42,14 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         val action = accessor.action()
         ExtensionCompositionLocal.CompositionLocalProvider(
             parent = arrayOf(
-                DialogLoginAuthTheme.localColors provides DialogLoginAuthTheme.provideColors(),
-                DialogLoginAuthTheme.localDimensions provides DialogLoginAuthTheme.provideDimensions(),
+                DialogLoginAuthTheme provides DialogLoginAuthTheme.provideColors(),
+                DialogLoginAuthTheme provides DialogLoginAuthTheme.provideDimensions(),
             ),
             child = {
                 arrayOf(
-                    DialogLoginAuthTheme.localShapes provides DialogLoginAuthTheme.provideShapes(),
-                    DialogLoginAuthTheme.localBorders provides DialogLoginAuthTheme.provideBorders(),
-                    DialogLoginAuthTheme.localTypographies provides DialogLoginAuthTheme.provideTypographies()
+                    DialogLoginAuthTheme provides DialogLoginAuthTheme.provideShapes(),
+                    DialogLoginAuthTheme provides DialogLoginAuthTheme.provideBorders(),
+                    DialogLoginAuthTheme provides DialogLoginAuthTheme.provideTypographies()
                 )
             }
         ){

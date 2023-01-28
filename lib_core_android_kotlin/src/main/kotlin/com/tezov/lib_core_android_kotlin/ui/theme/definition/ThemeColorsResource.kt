@@ -7,7 +7,8 @@ import androidx.compose.ui.graphics.Color
 val MaterialTheme.colorsCommonResource: ThemeColorsResource.Common
     @Composable
     @ReadOnlyComposable
-    get() = ThemeColorsResource.local.current
+    get() = ThemeColorsResource.localCommon.current
+infix fun MaterialTheme.provides(value: ThemeColorsResource.Common) = ThemeColorsResource.localCommon provides value
 
 object ThemeColorsResource {
 
@@ -31,7 +32,7 @@ object ThemeColorsResource {
         val greenMelon: Color = Color(0xFF52E057)
 
     }
-    val local = staticCompositionLocalOf { Common }
+    internal val localCommon = staticCompositionLocalOf { Common }
 
 }
 

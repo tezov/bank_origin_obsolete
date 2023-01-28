@@ -11,6 +11,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.ui.page.login.PageLoginTheme
 import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
@@ -19,25 +20,40 @@ val DialogLoginAuthTheme.colors: DialogLoginAuthTheme.Colors
     @ReadOnlyComposable
     get() = DialogLoginAuthTheme.localColors.current
 
+infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Colors) =
+    DialogLoginAuthTheme.localColors provides value
+
 val DialogLoginAuthTheme.dimensions: DialogLoginAuthTheme.Dimensions
     @Composable
     @ReadOnlyComposable
     get() = DialogLoginAuthTheme.localDimensions.current
+
+infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Dimensions) =
+    DialogLoginAuthTheme.localDimensions provides value
 
 val DialogLoginAuthTheme.shapes: DialogLoginAuthTheme.Shapes
     @Composable
     @ReadOnlyComposable
     get() = DialogLoginAuthTheme.localShapes.current
 
+infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Shapes) =
+    DialogLoginAuthTheme.localShapes provides value
+
 val DialogLoginAuthTheme.borders: DialogLoginAuthTheme.Borders
     @Composable
     @ReadOnlyComposable
     get() = DialogLoginAuthTheme.localBorders.current
 
+infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Borders) =
+    DialogLoginAuthTheme.localBorders provides value
+
 val DialogLoginAuthTheme.typographies: DialogLoginAuthTheme.Typographies
     @Composable
     @ReadOnlyComposable
     get() = DialogLoginAuthTheme.localTypographies.current
+
+infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Typographies) =
+    DialogLoginAuthTheme.localTypographies provides value
 
 object DialogLoginAuthTheme {
 
@@ -48,6 +64,7 @@ object DialogLoginAuthTheme {
         val backgroundInactive: Color,
         val textButtonDark: Color,
     )
+
     @Composable
     fun provideColors() = Colors(
         background = ThemeColors.Data.blackOverlay,
@@ -56,21 +73,23 @@ object DialogLoginAuthTheme {
         backgroundInactive = MaterialTheme.colorsCommonExtended.backgroundInactive,
         textButtonDark = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm,
     )
-    val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
+
+    internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
         error("not provided")
     }
 
     data class Dimensions(
-        val paddingKeyboard_v:Dp,
-        val paddingKeyboard_h:Dp,
-        val spacingTopToTitle:Dp,
-        val spacingTopFromButton:Dp,
-        val paddingTopFromLink:Dp,
-        val iconCloseSize:Dp,
-        val iconFieldSize:Dp,
-        val paddingHorizontalButton:Dp,
-        val paddingVerticalButton:Dp,
+        val paddingKeyboard_v: Dp,
+        val paddingKeyboard_h: Dp,
+        val spacingTopToTitle: Dp,
+        val spacingTopFromButton: Dp,
+        val paddingTopFromLink: Dp,
+        val iconCloseSize: Dp,
+        val iconFieldSize: Dp,
+        val paddingHorizontalButton: Dp,
+        val paddingVerticalButton: Dp,
     )
+
     @Composable
     fun provideDimensions() = Dimensions(
         paddingKeyboard_v = MaterialTheme.dimensionsPaddingExtended.elementMicro_v,
@@ -83,20 +102,24 @@ object DialogLoginAuthTheme {
         paddingHorizontalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
         paddingVerticalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
     )
-    val localDimensions: ProvidableCompositionLocal<Dimensions> = staticCompositionLocalOf {
-        error("not provided")
-    }
+
+    internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
+        staticCompositionLocalOf {
+            error("not provided")
+        }
 
     data class Shapes(
         val button: Shape,
         val authCard: Shape,
     )
+
     @Composable
     fun provideShapes() = Shapes(
         button = MaterialTheme.shapesExtended.buttonNormal,
         authCard = MaterialTheme.shapesExtended.cardSmall,
     )
-    val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
+
+    internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
         error("not provided")
     }
 
@@ -112,7 +135,7 @@ object DialogLoginAuthTheme {
         ),
     )
 
-    val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
+    internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
         error("not provided")
     }
 
@@ -142,10 +165,10 @@ object DialogLoginAuthTheme {
 
     )
 
-    val localTypographies: ProvidableCompositionLocal<Typographies> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
+    internal val localTypographies: ProvidableCompositionLocal<Typographies> =
+        staticCompositionLocalOf {
+            error("not provided")
+        }
 
 
 }

@@ -21,22 +21,22 @@ object ThemeApplication {
         ExtensionCompositionLocal.CompositionLocalProvider(
             parent = arrayOf(
                 //colors
-                ThemeColorsResource.local provides ThemeColorsResource.Common,
-                ThemeColorsExtended.localCommon provides colorsLightCommonExtended,
+                MaterialTheme provides ThemeColorsResource.Common,
+                MaterialTheme provides colorsLightCommonExtended,
                 //dimensions
-                ThemeDimensionsExtended.localFonts provides dimensionsFontExtended,
-                ThemeDimensionsExtended.localPaddings provides dimensionsPaddingExtended,
-                ThemeDimensionsExtended.localSpacings provides dimensionsSpacingExtended,
-                ThemeDimensionsExtended.localElevations provides dimensionsElevationExtended,
-                ThemeDimensionsExtended.localSizes provides dimensionsSizeExtended,
+                MaterialTheme provides dimensionsFontExtended,
+                MaterialTheme provides dimensionsPaddingExtended,
+                MaterialTheme provides dimensionsSpacingExtended,
+                MaterialTheme provides dimensionsElevationExtended,
+                MaterialTheme provides dimensionsSizeExtended,
             ),
             child = {
                 arrayOf(
                     //shapes
-                    ThemeShapesExtended.localShapes provides ThemeShapes.provideShapes(),
-                    ThemeShapesExtended.localBorders provides ThemeShapes.provideBorders(),
+                    MaterialTheme provides ThemeShapes.provideShapes(),
+                    MaterialTheme provides ThemeShapes.provideBorders(),
                     //Typography
-                    ThemeTypographyExtended.local provides ThemeTypography.providesTypographiesExtended(),
+                    MaterialTheme provides ThemeTypography.providesTypographiesExtended(),
                 )
             }
         ) {

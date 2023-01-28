@@ -108,6 +108,7 @@ dependencies {
     kapt dependencies_lib.lib.dagger_kapt
 
     implementation dependencies_lib.lib.webkit
-
+    implementation dependencies_lib.compose.accompanist_pager
+    implementation dependencies_lib.compose.accompanist_pager_indicators
 
 }

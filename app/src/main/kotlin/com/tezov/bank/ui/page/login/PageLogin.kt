@@ -21,7 +21,8 @@ import androidx.compose.ui.text.style.TextAlign
 import com.google.accompanist.pager.*
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
-import com.tezov.bank.ui_composable.Swiper
+import com.tezov.lib_core_android_kotlin.ui.component.widget.Swiper
+import com.tezov.lib_core_android_kotlin.ui.component.widget.provides
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
@@ -38,15 +39,15 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
         state.animationState.updateTransition()
         ExtensionCompositionLocal.CompositionLocalProvider(
             parent = arrayOf(
-                PageLoginTheme.localColors provides PageLoginTheme.provideColors(),
-                PageLoginTheme.localDimensions provides PageLoginTheme.provideDimensions(),
+                PageLoginTheme provides PageLoginTheme.provideColors(),
+                PageLoginTheme provides PageLoginTheme.provideDimensions(),
             ),
             child = {
                 arrayOf(
-                    PageLoginTheme.localShapes provides PageLoginTheme.provideShapes(),
-                    PageLoginTheme.localBorders provides PageLoginTheme.provideBorders(),
-                    PageLoginTheme.localTypographies provides PageLoginTheme.provideTypographies(),
-                    ThemeWidgetExtended.localSwiperPager provides PageLoginTheme.provideSwiperPagerStyle()
+                    PageLoginTheme provides PageLoginTheme.provideShapes(),
+                    PageLoginTheme provides PageLoginTheme.provideBorders(),
+                    PageLoginTheme provides PageLoginTheme.provideTypographies(),
+                    Swiper.Pager provides PageLoginTheme.provideSwiperPagerStyle()
                 )
             }
         ) {

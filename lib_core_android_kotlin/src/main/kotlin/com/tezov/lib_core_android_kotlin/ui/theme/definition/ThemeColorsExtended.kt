@@ -8,7 +8,7 @@ val MaterialTheme.colorsCommonExtended: ThemeColorsExtended.Common
     @Composable
     @ReadOnlyComposable
     get() = ThemeColorsExtended.localCommon.current
-
+infix fun MaterialTheme.provides(value: ThemeColorsExtended.Common) = ThemeColorsExtended.localCommon provides value
 
 object ThemeColorsExtended {
     @Immutable
@@ -55,7 +55,7 @@ object ThemeColorsExtended {
         val snackbarMessage: Color,
         val snackbarAction: Color,
     )
-    val localCommon:ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
+    internal val localCommon:ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
         error("not provided")
     }
 

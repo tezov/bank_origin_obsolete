@@ -4,31 +4,37 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import com.tezov.lib_core_android_kotlin.ui.component.widget.Swiper
 
 val MaterialTheme.dimensionsFontExtended: ThemeDimensionsExtended.Fonts
     @Composable
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localFonts.current
+infix fun MaterialTheme.provides(value: ThemeDimensionsExtended.Fonts) = ThemeDimensionsExtended.localFonts provides value
 
 val MaterialTheme.dimensionsPaddingExtended: ThemeDimensionsExtended.Paddings
     @Composable
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localPaddings.current
+infix fun MaterialTheme.provides(value:  ThemeDimensionsExtended.Paddings) = ThemeDimensionsExtended.localPaddings provides value
 
 val MaterialTheme.dimensionsSpacingExtended: ThemeDimensionsExtended.Spacings
     @Composable
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localSpacings.current
+infix fun MaterialTheme.provides(value:  ThemeDimensionsExtended.Spacings) = ThemeDimensionsExtended.localSpacings provides value
 
 val MaterialTheme.dimensionsElevationExtended: ThemeDimensionsExtended.Elevations
     @Composable
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localElevations.current
+infix fun MaterialTheme.provides(value:  ThemeDimensionsExtended.Elevations) = ThemeDimensionsExtended.localElevations provides value
 
 val MaterialTheme.dimensionsSizeExtended: ThemeDimensionsExtended.Sizes
     @Composable
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localSizes.current
+infix fun MaterialTheme.provides(value:  ThemeDimensionsExtended.Sizes) = ThemeDimensionsExtended.localSizes provides value
 
 object ThemeDimensionsExtended{
     @Immutable
@@ -51,7 +57,7 @@ object ThemeDimensionsExtended{
         val snackBarMessage: TextUnit,
         val snackBarAction: TextUnit,
     )
-    val localFonts: ProvidableCompositionLocal<Fonts> = staticCompositionLocalOf {
+    internal val localFonts: ProvidableCompositionLocal<Fonts> = staticCompositionLocalOf {
         error("not provided")
     }
 
@@ -90,7 +96,7 @@ object ThemeDimensionsExtended{
         val bottomNavigation: Dp,
         val topNavigation: Dp
     )
-    val localPaddings: ProvidableCompositionLocal<Paddings> = staticCompositionLocalOf {
+    internal val localPaddings: ProvidableCompositionLocal<Paddings> = staticCompositionLocalOf {
         error("not provided")
     }
 
@@ -108,7 +114,7 @@ object ThemeDimensionsExtended{
         val huge_h:Dp,
 
     )
-    val localSpacings: ProvidableCompositionLocal<Spacings> = staticCompositionLocalOf {
+    internal val localSpacings: ProvidableCompositionLocal<Spacings> = staticCompositionLocalOf {
         error("not provided")
     }
 
@@ -118,7 +124,7 @@ object ThemeDimensionsExtended{
         val elevationNormal: Dp,
         val elevationSmall: Dp,
         )
-    val localElevations: ProvidableCompositionLocal<Elevations> = staticCompositionLocalOf {
+    internal val localElevations: ProvidableCompositionLocal<Elevations> = staticCompositionLocalOf {
         error("not provided")
     }
 
@@ -128,7 +134,7 @@ object ThemeDimensionsExtended{
         val iconField:Dp,
 
         )
-    val localSizes: ProvidableCompositionLocal<Sizes> = staticCompositionLocalOf {
+    internal val localSizes: ProvidableCompositionLocal<Sizes> = staticCompositionLocalOf {
         error("not provided")
     }
 

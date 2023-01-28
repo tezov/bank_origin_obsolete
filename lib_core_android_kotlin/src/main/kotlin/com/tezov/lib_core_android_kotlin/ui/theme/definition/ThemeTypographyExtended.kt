@@ -8,7 +8,8 @@ import androidx.compose.ui.text.TextStyle
 val MaterialTheme.typographyExtended: ThemeTypographyExtended.Common
     @Composable
     @ReadOnlyComposable
-    get() = ThemeTypographyExtended.local.current
+    get() = ThemeTypographyExtended.localCommon.current
+infix fun MaterialTheme.provides(value: ThemeTypographyExtended.Common) = ThemeTypographyExtended.localCommon provides value
 
 object ThemeTypographyExtended{
     @Immutable
@@ -30,7 +31,7 @@ object ThemeTypographyExtended{
         val snackBarMessage: TextStyle,
         val snackBarAction: TextStyle,
     )
-    val local: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
+    internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
         error("not provided")
     }
 

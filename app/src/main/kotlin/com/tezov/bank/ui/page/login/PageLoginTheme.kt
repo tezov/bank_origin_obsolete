@@ -14,32 +14,38 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.theme.ThemeColors
+import com.tezov.lib_core_android_kotlin.ui.component.widget.Swiper
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val PageLoginTheme.colors: PageLoginTheme.Colors
     @Composable
     @ReadOnlyComposable
     get() = PageLoginTheme.localColors.current
+infix fun PageLoginTheme.provides(value: PageLoginTheme.Colors) = PageLoginTheme.localColors provides value
 
 val PageLoginTheme.dimensions: PageLoginTheme.Dimensions
     @Composable
     @ReadOnlyComposable
     get() = PageLoginTheme.localDimensions.current
+infix fun PageLoginTheme.provides(value: PageLoginTheme.Dimensions) = PageLoginTheme.localDimensions provides value
 
 val PageLoginTheme.shapes: PageLoginTheme.Shapes
     @Composable
     @ReadOnlyComposable
     get() = PageLoginTheme.localShapes.current
+infix fun PageLoginTheme.provides(value: PageLoginTheme.Shapes) = PageLoginTheme.localShapes provides value
 
 val PageLoginTheme.borders: PageLoginTheme.Borders
     @Composable
     @ReadOnlyComposable
     get() = PageLoginTheme.localBorders.current
+infix fun PageLoginTheme.provides(value: PageLoginTheme.Borders) = PageLoginTheme.localBorders provides value
 
 val PageLoginTheme.typographies: PageLoginTheme.Typographies
     @Composable
     @ReadOnlyComposable
     get() = PageLoginTheme.localTypographies.current
+infix fun PageLoginTheme.provides(value: PageLoginTheme.Typographies) = PageLoginTheme.localTypographies provides value
 
 object PageLoginTheme {
 
@@ -64,7 +70,7 @@ object PageLoginTheme {
         textButtonLight = MaterialTheme.colorsCommonExtended.onBackgroundButtonCancel,
     )
 
-    val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
+    internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
         error("not provided")
     }
 
@@ -105,7 +111,7 @@ object PageLoginTheme {
         paddingVerticalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
     )
 
-    val localDimensions: ProvidableCompositionLocal<Dimensions> = staticCompositionLocalOf {
+    internal val localDimensions: ProvidableCompositionLocal<Dimensions> = staticCompositionLocalOf {
         error("not provided")
     }
 
@@ -120,7 +126,7 @@ object PageLoginTheme {
         buttonOutline = MaterialTheme.shapesExtended.buttonOutlinedBig
     )
 
-    val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
+    internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
         error("not provided")
     }
 
@@ -148,7 +154,7 @@ object PageLoginTheme {
         )
     )
 
-    val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
+    internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
         error("not provided")
     }
 
@@ -189,12 +195,12 @@ object PageLoginTheme {
 
     )
 
-    val localTypographies: ProvidableCompositionLocal<Typographies> = staticCompositionLocalOf {
+    internal val localTypographies: ProvidableCompositionLocal<Typographies> = staticCompositionLocalOf {
         error("not provided")
     }
 
     @Composable
-    fun provideSwiperPagerStyle() = ThemeWidgetExtended.SwiperPager(
+    fun provideSwiperPagerStyle() = Swiper.Pager.Style(
         colorIndicatorActive = colors.backgroundButtonDark,
         colorIndicatorInactive = colors.backgroundInactive,
         dimensionIndicatorPaddingTop = dimensions.pagerIndicatorPaddingTop,
@@ -202,6 +208,5 @@ object PageLoginTheme {
         dimensionIndicatorSpacing = dimensions.pagerIndicatorSpacing,
         shapeIndicator = CircleShape
     )
-
 
 }
