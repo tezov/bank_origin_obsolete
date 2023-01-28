@@ -63,7 +63,7 @@ object DialogLoginAuthTheme {
         val background: Color,
         val onBackground: Color,
         val backgroundButtonDark: Color,
-        val backgroundInactive: Color,
+        val backgroundButtonInactive: Color,
         val textButtonDark: Color,
     )
 
@@ -71,8 +71,8 @@ object DialogLoginAuthTheme {
     fun provideColors() = Colors(
         background = ThemeColors.Data.blackOverlay,
         onBackground = MaterialTheme.colorsCommonExtended.onPrimaryLight,
-        backgroundButtonDark = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm,
-        backgroundInactive = MaterialTheme.colorsCommonExtended.backgroundInactive,
+        backgroundButtonDark = MaterialTheme.colors.primary,
+        backgroundButtonInactive = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm,
         textButtonDark = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm,
     )
 
