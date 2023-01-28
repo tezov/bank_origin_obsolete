@@ -4,7 +4,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
-import com.tezov.lib_core_android_kotlin.ui.component.widget.Swiper
 
 val MaterialTheme.dimensionsFontExtended: ThemeDimensionsExtended.Fonts
     @Composable
@@ -131,7 +130,8 @@ object ThemeDimensionsExtended{
     @Immutable
     data class Sizes(
         val iconModal:Dp,
-        val iconField:Dp,
+        val iconFieldInfo:Dp,
+        val iconFieldAction:Dp,
 
         )
     internal val localSizes: ProvidableCompositionLocal<Sizes> = staticCompositionLocalOf {

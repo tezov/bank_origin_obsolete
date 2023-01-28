@@ -1,6 +1,6 @@
 package com.tezov.bank.ui.dialog.login.auth
 
-import android.util.Log
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
@@ -26,6 +26,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
+import com.tezov.bank.ui.dialog.login.auth.DialogLoginAuthState.Companion.LOGIN_LENGTH
+import com.tezov.bank.ui.dialog.login.auth.DialogLoginAuthState.Companion.PASSWORD_LENGTH
 import com.tezov.bank.ui.page.login.*
 import com.tezov.lib_core_android_kotlin.ui.component.widget.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.component.widget.provides
@@ -132,6 +134,15 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 FocusRequester.createRefs()
             }
             Row {
+                Icon(
+                    modifier = Modifier
+                        .padding(MaterialTheme.dimensionsPaddingExtended.elementMicro_h)
+                        .size(DialogLoginAuthTheme.dimensions.iconFieldInfoSize)
+                        .align(Alignment.CenterVertically),
+                    painter = painterResource(id = R.drawable.ic_person_24dp),
+                    tint = DialogLoginAuthTheme.colors.onBackground,
+                    contentDescription = null
+                )
                 TextField(
                     modifier = Modifier
                         .focusRequester(focusLogin)
@@ -140,7 +151,17 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     value = login.value,
                     label = { Text(text = "label") },
                     onValueChange = {
-                        login.value = it
+                        if(it.length <= LOGIN_LENGTH){
+                            login.value = it
+                        }
+                        else if(password.value.length < PASSWORD_LENGTH){
+                            keyboardController?.hide()
+                            focusPassword.requestFocus()
+                        }
+                        else{
+                            keyboardController?.hide()
+                            focusManager.clearFocus(true)
+                        }
                     },
                     singleLine = true,
                     colors = TextFieldDefaults.textFieldColors(
@@ -149,11 +170,14 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     textStyle = DialogLoginAuthTheme.typographies.field,
                     keyboardOptions = KeyboardOptions(
                         keyboardType = KeyboardType.Number,
-                        imeAction = ImeAction.Next
+                        imeAction = if (password.value.length < PASSWORD_LENGTH) ImeAction.Next else ImeAction.Done
                     ),
-                    keyboardActions = KeyboardActions(onNext = {
-                        focusManager.clearFocus(true)
+                    keyboardActions = KeyboardActions(onDone = {
                         keyboardController?.hide()
+                        focusManager.clearFocus(true)
+                    }, onNext = {
+                        keyboardController?.hide()
+                        focusPassword.requestFocus()
                     }),
                     trailingIcon = {
                         IconButton(onClick = {
@@ -163,7 +187,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         }) {
                             Icon(
                                 modifier = Modifier
-                                    .size(DialogLoginAuthTheme.dimensions.iconFieldSize)
+                                    .size(DialogLoginAuthTheme.dimensions.iconFieldActionSize)
                                     .align(Alignment.CenterVertically),
                                 painter = when (login.value.isEmpty()) {
                                     false -> painterResource(id = R.drawable.ic_cancel_round_24dp)
@@ -181,6 +205,15 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 CompositionLocalProvider(
                     LocalTextInputService provides null
                 ) {
+                    Icon(
+                        modifier = Modifier
+                            .padding(MaterialTheme.dimensionsPaddingExtended.elementMicro_h)
+                            .size(DialogLoginAuthTheme.dimensions.iconFieldInfoSize)
+                            .align(Alignment.CenterVertically),
+                        painter = painterResource(id = R.drawable.ic_lock_24dp),
+                        tint = DialogLoginAuthTheme.colors.onBackground,
+                        contentDescription = null
+                    )
                     TextField(
                         modifier = Modifier
                             .focusRequester(focusPassword)
@@ -189,7 +222,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         value = password.value,
                         label = { Text(text = "label") },
                         onValueChange = {
-                            password.value = it
+
                         },
                         singleLine = true,
                         colors = TextFieldDefaults.textFieldColors(
@@ -207,7 +240,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                             }) {
                                 Icon(
                                     modifier = Modifier
-                                        .size(DialogLoginAuthTheme.dimensions.iconFieldSize)
+                                        .size(DialogLoginAuthTheme.dimensions.iconFieldActionSize)
                                         .align(Alignment.CenterVertically),
                                     painter = when (password.value.isEmpty()) {
                                         false -> painterResource(id = R.drawable.ic_backspace_24dp)
@@ -223,9 +256,17 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
             }
 
             KeyBoard.GridCubeDigitsTwoRowShuffled(modifier = Modifier.padding(6.dp)) {
-                focusPassword.requestFocus()
-                keyboardController?.hide()
-                password.value = password.value + it
+                if(password.value.length < PASSWORD_LENGTH) {
+                    focusPassword.requestFocus()
+                    keyboardController?.hide()
+                    password.value = password.value + it
+                }else if(login.value.length < LOGIN_LENGTH){
+                    focusLogin.requestFocus()
+                    keyboardController?.show()
+                }
+                else{
+                    focusManager.clearFocus(true)
+                }
             }
 
             LaunchedEffect(Unit){

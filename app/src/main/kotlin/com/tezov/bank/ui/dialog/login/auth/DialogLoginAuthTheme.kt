@@ -87,7 +87,8 @@ object DialogLoginAuthTheme {
         val spacingTopFromButton: Dp,
         val paddingTopFromLink: Dp,
         val iconCloseSize: Dp,
-        val iconFieldSize: Dp,
+        val iconFieldInfoSize: Dp,
+        val iconFieldActionSize: Dp,
         val paddingHorizontalButton: Dp,
         val paddingVerticalButton: Dp,
     )
@@ -100,7 +101,8 @@ object DialogLoginAuthTheme {
         spacingTopFromButton = MaterialTheme.dimensionsSpacingExtended.huge_v,
         paddingTopFromLink = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,
         iconCloseSize = MaterialTheme.dimensionsSizeExtended.iconModal,
-        iconFieldSize = MaterialTheme.dimensionsSizeExtended.iconField,
+        iconFieldInfoSize = MaterialTheme.dimensionsSizeExtended.iconFieldInfo,
+        iconFieldActionSize = MaterialTheme.dimensionsSizeExtended.iconFieldAction,
         paddingHorizontalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
         paddingVerticalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
     )

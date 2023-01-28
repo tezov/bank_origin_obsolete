@@ -81,6 +81,7 @@ object ThemeDimensions {
 
     val dimensionsSizeExtended = ThemeDimensionsExtended.Sizes(
         iconModal = 42.dp,
-        iconField = 32.dp,
+        iconFieldInfo = 32.dp,
+        iconFieldAction = 22.dp,
     )
 }
