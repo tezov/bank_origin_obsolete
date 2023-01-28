@@ -53,10 +53,11 @@ object PageLoginTheme {
         val background: Color,
         val backgroundButtonDark: Color,
         val backgroundButtonLight: Color,
-        val backgroundInactive: Color,
+        val backgroundDropDownMenu: Color,
         val textContent: Color,
         val textButtonDark: Color,
         val textButtonLight: Color,
+        val textDropDownMenu: Color,
     )
 
     @Composable
@@ -64,10 +65,11 @@ object PageLoginTheme {
         background = MaterialTheme.colors.primary,
         backgroundButtonDark = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm,
         backgroundButtonLight = MaterialTheme.colorsCommonExtended.backgroundButtonCancel,
-        backgroundInactive = MaterialTheme.colorsCommonExtended.backgroundInactive,
+        backgroundDropDownMenu = ThemeColors.Data.blueOverlay,
         textContent = MaterialTheme.colorsCommonExtended.onPrimaryLight,
         textButtonDark = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm,
         textButtonLight = MaterialTheme.colorsCommonExtended.onBackgroundButtonCancel,
+        textDropDownMenu = MaterialTheme.colorsCommonExtended.onBackgroundModal,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -165,6 +167,7 @@ object PageLoginTheme {
         val button: TextStyle,
         val buttonOutlined: TextStyle,
         val link: TextStyle,
+        val dropDownMenu: TextStyle,
     )
 
     @Composable
@@ -191,6 +194,11 @@ object PageLoginTheme {
             fontSize = MaterialTheme.dimensionsFontExtended.textLink,
             color = colors.textContent,
             fontWeight = FontWeight.Bold
+        ),
+        dropDownMenu = MaterialTheme.typographyExtended.textNormal.copy(
+            fontSize = MaterialTheme.dimensionsFontExtended.textNormal,
+            color = colors.textDropDownMenu,
+            fontWeight = FontWeight.SemiBold
         )
 
     )
@@ -202,7 +210,7 @@ object PageLoginTheme {
     @Composable
     fun provideSwiperPagerStyle() = Swiper.Pager.Style(
         colorIndicatorActive = colors.backgroundButtonDark,
-        colorIndicatorInactive = colors.backgroundInactive,
+        colorIndicatorInactive = ThemeColors.Data.blueClear,
         dimensionIndicatorPaddingTop = dimensions.pagerIndicatorPaddingTop,
         dimensionIndicatorSize = dimensions.pagerIndicatorSize,
         dimensionIndicatorSpacing = dimensions.pagerIndicatorSpacing,

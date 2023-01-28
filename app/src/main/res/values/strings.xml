@@ -18,6 +18,10 @@
     <string name="pg_login_img_suit_case">suit case image</string>
     <string name="pg_login_icon_add_account">add account icon</string>
     <string name="pg_login_icon_more_action">more action icon</string>
+    <string-array name="pg_login_drop_down_menu">
+        <item>Se connecter avec un autre compte</item>
+        <item>Supprimer le profil</item>
+    </string-array>
 
     <!--    help and service-->
 

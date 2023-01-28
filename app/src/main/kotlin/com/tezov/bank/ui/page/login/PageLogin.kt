@@ -3,6 +3,7 @@ package com.tezov.bank.ui.page.login
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.ClickableText
@@ -13,12 +14,17 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.DpOffset
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.window.PopupProperties
 import com.google.accompanist.pager.*
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
@@ -154,22 +160,55 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconMedium))
 
-            Icon(
-                modifier = Modifier
-                    .size(PageLoginTheme.dimensions.iconSmallSize)
-                    .clip(CircleShape)
-                    .background(PageLoginTheme.colors.backgroundButtonDark),
-                painter = painterResource(id = R.drawable.ic_3dot_v_24dp),
-                tint = PageLoginTheme.colors.backgroundButtonLight,
-                contentDescription = stringResource(id = R.string.pg_login_icon_more_action)
-            )
+            Box {
+                var expanded by remember { mutableStateOf(false) }
+                val items = stringArrayResource(id = R.array.pg_login_drop_down_menu)
+                IconButton(onClick = {
+                    expanded = true
+                }) {
+                    Icon(
+                        modifier = Modifier
+                            .size(PageLoginTheme.dimensions.iconSmallSize)
+                            .clip(CircleShape)
+                            .background(PageLoginTheme.colors.backgroundButtonDark),
+                        painter = painterResource(id = R.drawable.ic_3dot_v_24dp),
+                        tint = PageLoginTheme.colors.backgroundButtonLight,
+                        contentDescription = stringResource(id = R.string.pg_login_icon_more_action)
+                    )
+                }
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                    modifier = Modifier
+                        .background(PageLoginTheme.colors.backgroundDropDownMenu),
+                    properties = PopupProperties(focusable = true),
+                    offset = DpOffset(
+                        PageLoginTheme.dimensions.iconSmallSize / 2,
+                        -PageLoginTheme.dimensions.iconSmallSize / 4
+                    )
+                ) {
+                    items.forEach { text ->
+                        DropdownMenuItem(
+                            onClick = {
+                                //on click here
+
+                                expanded = false
+                            },
+                            contentPadding = PaddingValues(8.dp, 0.dp)
+                        ) {
+                            Text(text = text, style = PageLoginTheme.typographies.dropDownMenu)
+                        }
+                    }
+                }
+            }
+
         }
     }
 
     @Composable
     private fun ContentBody(
         modifier: Modifier,
-        nameState:State<String>
+        nameState: State<String>
     ) {
         Swiper.Pager(
             modifier = modifier,
@@ -253,8 +292,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 onClick = onClickConnect,
                 shape = PageLoginTheme.shapes.button,
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = PageLoginTheme.colors.backgroundButtonDark,
-                    disabledBackgroundColor = MaterialTheme.colorsCommonResource.grayLight
+                    backgroundColor = PageLoginTheme.colors.backgroundButtonDark
                 ),
                 enabled = true
             ) {
@@ -281,8 +319,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 onClick = onClickSendMoney,
                 shape = PageLoginTheme.shapes.button,
                 colors = ButtonDefaults.buttonColors(
-                    backgroundColor = PageLoginTheme.colors.backgroundButtonLight,
-                    disabledBackgroundColor = MaterialTheme.colorsCommonResource.grayLight
+                    backgroundColor = PageLoginTheme.colors.backgroundButtonLight
                 ),
                 enabled = true
             ) {
