@@ -98,7 +98,7 @@ object PageLoginTheme {
         spacingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.elementBig_v,
         pagerIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,
         pagerIndicatorSize = 12.dp,
-        pagerIndicatorSpacing = MaterialTheme.dimensionsSpacingExtended.big_h,
+        pagerIndicatorSpacing = MaterialTheme.dimensionsSpacingExtended.normal_h,
         logoSize = 64.dp,
         iconBigSize = 52.dp,
         paddingStartToIconBig = 28.dp,

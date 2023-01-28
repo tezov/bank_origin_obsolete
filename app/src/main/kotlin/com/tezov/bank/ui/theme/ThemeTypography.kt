@@ -5,10 +5,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsFontExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.ThemeTypographyExtended
-import com.tezov.bank.ui.theme.font.FontRoboto
-import com.tezov.bank.ui.theme.font.FontUbuntu
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.bank.ui.theme.font.fontUbuntu
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsFontExtended
@@ -59,10 +56,15 @@ object ThemeTypography {
             fontWeight = FontWeight.Normal,
             fontSize = MaterialTheme.dimensionsFontExtended.textSmall
         ),
-        textField = TextStyle(
+        textFieldValue = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
-            fontSize = MaterialTheme.dimensionsFontExtended.textField
+            fontSize = MaterialTheme.dimensionsFontExtended.textFieldValue
+        ),
+        textFieldLabel = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = MaterialTheme.dimensionsFontExtended.textFieldLabel
         ),
         textLink = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,

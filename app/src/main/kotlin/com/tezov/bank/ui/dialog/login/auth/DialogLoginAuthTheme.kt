@@ -145,7 +145,8 @@ object DialogLoginAuthTheme {
 
     data class Typographies(
         val title: TextStyle,
-        val field: TextStyle,
+        val fieldValue: TextStyle,
+        val fieldLabel: TextStyle,
         val button: TextStyle,
         val link: TextStyle,
     )
@@ -155,7 +156,10 @@ object DialogLoginAuthTheme {
         title = MaterialTheme.typographyExtended.textTitle.copy(
             color = colors.onBackground
         ),
-        field = MaterialTheme.typographyExtended.textField.copy(
+        fieldValue = MaterialTheme.typographyExtended.textFieldValue.copy(
+            color = colors.onBackground
+        ),
+        fieldLabel = MaterialTheme.typographyExtended.textFieldValue.copy(
             color = colors.onBackground
         ),
         button = MaterialTheme.typographyExtended.textButton.copy(

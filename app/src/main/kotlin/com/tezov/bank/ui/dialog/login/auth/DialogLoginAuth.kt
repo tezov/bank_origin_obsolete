@@ -1,6 +1,5 @@
 package com.tezov.bank.ui.dialog.login.auth
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
@@ -18,12 +17,12 @@ import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.LocalTextInputService
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
 import com.tezov.bank.ui.dialog.login.auth.DialogLoginAuthState.Companion.LOGIN_LENGTH
@@ -75,7 +74,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         Icon(
                             modifier = Modifier.size(DialogLoginAuthTheme.dimensions.iconCloseSize),
                             painter = painterResource(id = R.drawable.ic_close_24dp),
-                            contentDescription = null,
+                            contentDescription = stringResource(id = R.string.dlg_login_auth_icon_close),
                             tint = DialogLoginAuthTheme.colors.onBackground,
                         )
                     }
@@ -109,7 +108,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
     @Composable
     private fun ContentHeader() {
         Text(
-            text = "Saisissez votre code secret pour\naccéder à vos comptes",
+            text = stringResource(id = R.string.dlg_login_auth_enter_password),
             textAlign = TextAlign.Center,
             style = DialogLoginAuthTheme.typographies.title
         )
@@ -130,7 +129,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         ) {
             val keyboardController = LocalSoftwareKeyboardController.current
             val focusManager = LocalFocusManager.current
-            val (focusLogin, focusPassword) = remember{
+            val (focusLogin, focusPassword) = remember {
                 FocusRequester.createRefs()
             }
             Row {
@@ -141,7 +140,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         .align(Alignment.CenterVertically),
                     painter = painterResource(id = R.drawable.ic_person_24dp),
                     tint = DialogLoginAuthTheme.colors.onBackground,
-                    contentDescription = null
+                    contentDescription = stringResource(id = R.string.dlg_login_auth_icon_login)
                 )
                 TextField(
                     modifier = Modifier
@@ -149,16 +148,19 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         .fillMaxWidth()
                         .align(Alignment.CenterVertically),
                     value = login.value,
-                    label = { Text(text = "label") },
+                    label = {
+                        Text(
+                            text = stringResource(id = R.string.dlg_login_auth_fld_label_login),
+                            style = DialogLoginAuthTheme.typographies.fieldLabel
+                        )
+                    },
                     onValueChange = {
-                        if(it.length <= LOGIN_LENGTH){
+                        if (it.length <= LOGIN_LENGTH) {
                             login.value = it
-                        }
-                        else if(password.value.length < PASSWORD_LENGTH){
+                        } else if (password.value.length < PASSWORD_LENGTH) {
                             keyboardController?.hide()
                             focusPassword.requestFocus()
-                        }
-                        else{
+                        } else {
                             keyboardController?.hide()
                             focusManager.clearFocus(true)
                         }
@@ -167,9 +169,9 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     colors = TextFieldDefaults.textFieldColors(
                         backgroundColor = MaterialTheme.colorsCommonResource.transparent
                     ),
-                    textStyle = DialogLoginAuthTheme.typographies.field,
+                    textStyle = DialogLoginAuthTheme.typographies.fieldValue,
                     keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.Number,
+                        keyboardType = KeyboardType.NumberPassword,
                         imeAction = if (password.value.length < PASSWORD_LENGTH) ImeAction.Next else ImeAction.Done
                     ),
                     keyboardActions = KeyboardActions(onDone = {
@@ -212,7 +214,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                             .align(Alignment.CenterVertically),
                         painter = painterResource(id = R.drawable.ic_lock_24dp),
                         tint = DialogLoginAuthTheme.colors.onBackground,
-                        contentDescription = null
+                        contentDescription = stringResource(id = R.string.dlg_login_auth_icon_password)
                     )
                     TextField(
                         modifier = Modifier
@@ -220,7 +222,12 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                             .fillMaxWidth()
                             .align(Alignment.CenterVertically),
                         value = password.value,
-                        label = { Text(text = "label") },
+                        label = {
+                            Text(
+                                text = stringResource(id = R.string.dlg_login_auth_fld_label_password),
+                                style = DialogLoginAuthTheme.typographies.fieldLabel
+                            )
+                        },
                         onValueChange = {
 
                         },
@@ -230,10 +237,10 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                             cursorColor = MaterialTheme.colorsCommonResource.transparent
                         ),
                         visualTransformation = PasswordVisualTransformation(),
-                        textStyle = DialogLoginAuthTheme.typographies.field,
+                        textStyle = DialogLoginAuthTheme.typographies.fieldValue,
                         trailingIcon = {
                             IconButton(onClick = {
-                                password.takeIf{ it.value.isNotEmpty() }?.apply{
+                                password.takeIf { it.value.isNotEmpty() }?.apply {
                                     focusPassword.requestFocus()
                                     value = value.dropLast(1)
                                 }
@@ -255,27 +262,28 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 }
             }
 
-            KeyBoard.GridCubeDigitsTwoRowShuffled(modifier = Modifier.padding(6.dp)) {
-                if(password.value.length < PASSWORD_LENGTH) {
+            KeyBoard.GridCubeDigitsTwoRowShuffled(
+                modifier = Modifier
+                    .padding(MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
+            ) {
+                if (password.value.length < PASSWORD_LENGTH) {
                     focusPassword.requestFocus()
                     keyboardController?.hide()
                     password.value = password.value + it
-                }else if(login.value.length < LOGIN_LENGTH){
+                } else if (login.value.length < LOGIN_LENGTH) {
                     focusLogin.requestFocus()
                     keyboardController?.show()
-                }
-                else{
+                } else {
                     focusManager.clearFocus(true)
                 }
             }
 
-            LaunchedEffect(Unit){
+            LaunchedEffect(Unit) {
                 delay(100)
-                if(login.value.isEmpty()){
+                if (login.value.isEmpty()) {
                     focusLogin.requestFocus()
                     keyboardController?.show()
-                }
-                else{
+                } else {
                     focusPassword.requestFocus()
                     keyboardController?.hide()
                 }
@@ -306,7 +314,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 enabled = credentialValidState
             ) {
                 Text(
-                    "Se connecter",
+                    stringResource(id = R.string.dlg_login_auth_btn_connect),
                     style = DialogLoginAuthTheme.typographies.button,
                     modifier = Modifier
                         .padding(
@@ -323,13 +331,13 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 ClickableText(
-                    text = AnnotatedString("Mon n°client ?"),
+                    text = AnnotatedString(stringResource(id = R.string.dlg_login_auth_link_login_forgotten)),
                     style = DialogLoginAuthTheme.typographies.link
                 ) {
                     onClickForgotLogin()
                 }
                 ClickableText(
-                    text = AnnotatedString("Code secret oublié ?"),
+                    text = AnnotatedString(stringResource(id = R.string.dlg_login_auth_link_password_forgotten)),
                     style = DialogLoginAuthTheme.typographies.link
                 ) {
                     onClickForgotPassword()

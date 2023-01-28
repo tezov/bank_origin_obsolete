@@ -16,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import com.google.accompanist.pager.*
@@ -36,6 +37,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
         val accessor = AccessorAppUiPage().get(requester = this).contextLogin()
         val state = accessor.state()
         val action = accessor.action()
+
         state.animationState.updateTransition()
         ExtensionCompositionLocal.CompositionLocalProvider(
             parent = arrayOf(
@@ -92,7 +94,8 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             ContentBody(
                 Modifier
                     .weight(1f)
-                    .fillMaxWidth()
+                    .fillMaxWidth(),
+                nameState = state.nameState
             )
             ContentFooter(
                 modifier = Modifier
@@ -120,7 +123,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     modifier = Modifier
                         .size(PageLoginTheme.dimensions.logoSize),
                     painter = painterResource(id = R.drawable.logo_tezov_bank_inverse),
-                    contentDescription = "bank logo"
+                    contentDescription = stringResource(id = R.string.pg_login_img_logo)
                 )
             }
 
@@ -134,7 +137,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     ),
                 painter = painterResource(id = R.drawable.img_suitcase_blue),
                 contentScale = ContentScale.Crop,
-                contentDescription = "suit case"
+                contentDescription = stringResource(id = R.string.pg_login_img_suit_case)
             )
 
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconBig))
@@ -146,7 +149,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     .background(PageLoginTheme.colors.backgroundButtonLight),
                 painter = painterResource(id = R.drawable.ic_add_24dp),
                 tint = PageLoginTheme.colors.background,
-                contentDescription = "add account"
+                contentDescription = stringResource(id = R.string.pg_login_icon_add_account)
             )
 
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconMedium))
@@ -158,15 +161,15 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     .background(PageLoginTheme.colors.backgroundButtonDark),
                 painter = painterResource(id = R.drawable.ic_3dot_v_24dp),
                 tint = PageLoginTheme.colors.backgroundButtonLight,
-                contentDescription = "more action"
+                contentDescription = stringResource(id = R.string.pg_login_icon_more_action)
             )
-
         }
     }
 
     @Composable
     private fun ContentBody(
         modifier: Modifier,
+        nameState:State<String>
     ) {
         Swiper.Pager(
             modifier = modifier,
@@ -181,13 +184,13 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     ) {
 
                         Text(
-                            text = "M. ZOLLVER",
+                            text = nameState.value,
                             style = PageLoginTheme.typographies.supra
                         )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         Text(
                             textAlign = TextAlign.Center,
-                            text = "Balayer l'écran vers la gauche\npour afficher votre solde.",
+                            text = stringResource(id = R.string.pg_login_pager_0),
                             style = PageLoginTheme.typographies.body
                         )
 
@@ -202,7 +205,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     ) {
                         Text(
                             textAlign = TextAlign.Center,
-                            text = "Accédez à votre solde en\nun coups d'oeil",
+                            text = stringResource(id = R.string.pg_login_pager_1),
                             style = PageLoginTheme.typographies.huge
                         )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
@@ -214,7 +217,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             enabled = true
                         ) {
                             Text(
-                                "Activer le solde",
+                                stringResource(id = R.string.pg_login_btn_activate_balance),
                                 style = PageLoginTheme.typographies.buttonOutlined,
                                 modifier = Modifier
                                     .padding(
@@ -256,7 +259,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 enabled = true
             ) {
                 Text(
-                    "Accéder à mes comptes",
+                    stringResource(id = R.string.pg_login_btn_connect),
                     style = PageLoginTheme.typographies.button,
                     color = PageLoginTheme.colors.textButtonDark,
                     modifier = Modifier
@@ -284,7 +287,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 enabled = true
             ) {
                 Text(
-                    "Envoyer de l'argent avec paylib",
+                    stringResource(id = R.string.pg_login_btn_send_money),
                     style = PageLoginTheme.typographies.button,
                     color = PageLoginTheme.colors.textButtonLight,
                     modifier = Modifier
@@ -298,7 +301,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopFromLinkService))
 
             ClickableText(
-                text = AnnotatedString("Aide et Services"),
+                text = AnnotatedString(stringResource(id = R.string.pg_login_link_help_and_service)),
                 style = PageLoginTheme.typographies.link
             ) {
                 onClickHelpAndService()
