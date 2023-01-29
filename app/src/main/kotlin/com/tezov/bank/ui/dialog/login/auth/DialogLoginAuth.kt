@@ -5,17 +5,20 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.text.selection.LocalTextSelectionColors
+import androidx.compose.foundation.text.selection.TextSelectionColors
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.focus.onFocusChanged
+import androidx.compose.ui.geometry.Rect
 import androidx.compose.ui.layout.*
-import androidx.compose.ui.platform.LocalFocusManager
-import androidx.compose.ui.platform.LocalSoftwareKeyboardController
-import androidx.compose.ui.platform.LocalTextInputService
+import androidx.compose.ui.platform.*
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.*
@@ -36,6 +39,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 import com.tezov.lib_core_android_kotlin.ui.util.ExtensionCompositionLocal
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
 
@@ -120,175 +124,239 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         login: MutableState<String>,
         password: MutableState<String>,
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .border(DialogLoginAuthTheme.borders.authCard)
+        val textSelectionDisableColors = TextSelectionColors(
+            handleColor = MaterialTheme.colorsCommonResource.transparent,
+            backgroundColor = MaterialTheme.colorsCommonResource.transparent
+        )
+        val textSelectionDisableToolbar = object : TextToolbar {
+            override val status: TextToolbarStatus = TextToolbarStatus.Hidden
 
+            override fun hide() {  }
+
+            override fun showMenu(
+                rect: Rect,
+                onCopyRequested: (() -> Unit)?,
+                onPasteRequested: (() -> Unit)?,
+                onCutRequested: (() -> Unit)?,
+                onSelectAllRequested: (() -> Unit)?,
+            ) {
+            }
+        }
+
+        CompositionLocalProvider(
+            LocalTextSelectionColors provides textSelectionDisableColors,
+            LocalTextToolbar provides textSelectionDisableToolbar
         ) {
+            val coroutine = rememberCoroutineScope()
             val keyboardController = LocalSoftwareKeyboardController.current
             val focusManager = LocalFocusManager.current
-            val (focusLogin, focusPassword) = remember {
-                FocusRequester.createRefs()
+            val focusLogin = remember {
+                FocusRequester()
             }
-            Row {
-                Icon(
-                    modifier = Modifier
-                        .padding(MaterialTheme.dimensionsPaddingExtended.elementMicro_h)
-                        .size(DialogLoginAuthTheme.dimensions.iconFieldInfoSize)
-                        .align(Alignment.CenterVertically),
-                    painter = painterResource(id = R.drawable.ic_person_24dp),
-                    tint = DialogLoginAuthTheme.colors.onBackground,
-                    contentDescription = stringResource(id = R.string.dlg_login_auth_icon_login_clear)
-                )
-                TextField(
-                    modifier = Modifier
-                        .focusRequester(focusLogin)
-                        .fillMaxWidth()
-                        .align(Alignment.CenterVertically),
-                    value = login.value,
-                    label = {
-                        Text(
-                            text = stringResource(id = R.string.dlg_login_auth_fld_label_login),
-                            style = DialogLoginAuthTheme.typographies.fieldLabel
-                        )
-                    },
-                    onValueChange = {
-                        if (it.length <= LOGIN_LENGTH) {
-                            login.value = it
-                        } else {
-                            keyboardController?.hide()
-                            if (password.value.length < PASSWORD_LENGTH) {
-                                focusPassword.requestFocus()
-                            } else {
-                                focusManager.clearFocus(true)
-                            }
-                        }
-                    },
-                    singleLine = true,
-                    colors = TextFieldDefaults.textFieldColors(
-                        backgroundColor = MaterialTheme.colorsCommonResource.transparent
-                    ),
-                    textStyle = DialogLoginAuthTheme.typographies.fieldValue,
-                    keyboardOptions = KeyboardOptions(
-                        keyboardType = KeyboardType.NumberPassword,
-                        imeAction = if (password.value.length < PASSWORD_LENGTH) ImeAction.Next else ImeAction.Done
-                    ),
-                    keyboardActions = KeyboardActions(
-                        onDone = {
-                            keyboardController?.hide()
-                            focusManager.clearFocus(true)
-                        },
-                        onNext = {
-                            keyboardController?.hide()
-                            focusPassword.requestFocus()
-                        }
-                    ),
-                    trailingIcon = {
-                        IconButton(onClick = {
-                            login.value = ""
-                            focusLogin.requestFocus()
-                            keyboardController?.show()
-                        }) {
-                            Icon(
-                                modifier = Modifier
-                                    .size(DialogLoginAuthTheme.dimensions.iconFieldActionSize)
-                                    .align(Alignment.CenterVertically),
-                                painter = when (login.value.isEmpty()) {
-                                    false -> painterResource(id = R.drawable.ic_cancel_round_24dp)
-                                    true -> painterResource(id = R.drawable.ic_transparent_24dp)
-                                },
-                                tint = DialogLoginAuthTheme.colors.onBackground,
-                                contentDescription = stringResource(id = R.string.dlg_login_auth_icon_login_clear)
-                            )
-                        }
-                    }
-                )
+            val focusPassword = remember {
+                FocusRequester()
+            }
+            val focusOwner = remember {
+                mutableStateOf<FocusRequester?>(null)
             }
 
-            Row {
-                CompositionLocalProvider(
-                    LocalTextInputService provides null
-                ) {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .border(DialogLoginAuthTheme.borders.authCard)
+
+            ) {
+                Row(modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)) {
                     Icon(
                         modifier = Modifier
                             .padding(MaterialTheme.dimensionsPaddingExtended.elementMicro_h)
                             .size(DialogLoginAuthTheme.dimensions.iconFieldInfoSize)
                             .align(Alignment.CenterVertically),
-                        painter = painterResource(id = R.drawable.ic_lock_24dp),
+                        painter = painterResource(id = R.drawable.ic_person_24dp),
                         tint = DialogLoginAuthTheme.colors.onBackground,
-                        contentDescription = stringResource(id = R.string.dlg_login_auth_icon_password_info)
+                        contentDescription = stringResource(id = R.string.dlg_login_auth_icon_login_clear)
                     )
                     TextField(
                         modifier = Modifier
-                            .focusRequester(focusPassword)
                             .fillMaxWidth()
-                            .align(Alignment.CenterVertically),
-                        value = password.value,
+                            .align(Alignment.CenterVertically)
+                            .focusRequester(focusLogin)
+                            .onFocusChanged {
+                                if (it.isFocused) {
+                                    focusOwner.value = focusLogin
+                                    coroutine.launch {
+                                        delay(100)
+                                        keyboardController?.show()
+                                    }
+                                }
+                            },
+                        value = login.value,
                         label = {
                             Text(
-                                text = stringResource(id = R.string.dlg_login_auth_fld_label_password),
+                                text = stringResource(id = R.string.dlg_login_auth_fld_label_login),
                                 style = DialogLoginAuthTheme.typographies.fieldLabel
                             )
                         },
-                        onValueChange = {},
+                        onValueChange = {
+                            if (it.length <= LOGIN_LENGTH) {
+                                login.value = it
+                            }
+                            if (it.length >= LOGIN_LENGTH) {
+                                if (password.value.length < PASSWORD_LENGTH) {
+                                    focusPassword.requestFocus()
+                                } else {
+                                    keyboardController?.hide()
+                                    focusManager.clearFocus(true)
+                                }
+                            }
+                        },
                         singleLine = true,
                         colors = TextFieldDefaults.textFieldColors(
-                            backgroundColor = MaterialTheme.colorsCommonResource.transparent,
-                            cursorColor = MaterialTheme.colorsCommonResource.transparent
+                            backgroundColor = MaterialTheme.colorsCommonResource.transparent
                         ),
-                        visualTransformation = PasswordVisualTransformation(),
                         textStyle = DialogLoginAuthTheme.typographies.fieldValue,
+                        keyboardOptions = KeyboardOptions(
+                            keyboardType = KeyboardType.NumberPassword,
+                            imeAction = if (password.value.length < PASSWORD_LENGTH) ImeAction.Next else ImeAction.Done
+                        ),
+                        keyboardActions = KeyboardActions(
+                            onDone = {
+                                keyboardController?.hide()
+                                focusManager.clearFocus(true)
+                            },
+                            onNext = {
+                                focusPassword.requestFocus()
+                            }
+                        ),
                         trailingIcon = {
                             IconButton(onClick = {
-                                password.takeIf { it.value.isNotEmpty() }?.apply {
-                                    value = value.dropLast(1)
-                                    focusPassword.requestFocus()
-                                }
+                                login.value = ""
+                                focusLogin.requestFocus()
                             }) {
                                 Icon(
                                     modifier = Modifier
                                         .size(DialogLoginAuthTheme.dimensions.iconFieldActionSize)
                                         .align(Alignment.CenterVertically),
-                                    painter = when (password.value.isEmpty()) {
-                                        false -> painterResource(id = R.drawable.ic_backspace_24dp)
+                                    painter = when (login.value.isEmpty()) {
+                                        false -> painterResource(id = R.drawable.ic_cancel_round_24dp)
                                         true -> painterResource(id = R.drawable.ic_transparent_24dp)
                                     },
                                     tint = DialogLoginAuthTheme.colors.onBackground,
-                                    contentDescription = stringResource(id = R.string.dlg_login_auth_icon_password_delete)
+                                    contentDescription = stringResource(id = R.string.dlg_login_auth_icon_login_clear)
                                 )
                             }
                         }
                     )
                 }
-            }
 
-            KeyBoard.GridCubeDigitsTwoRowShuffled(
-                modifier = Modifier
-                    .padding(MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
-            ) {
-                if (password.value.length < PASSWORD_LENGTH) {
-                    focusPassword.requestFocus()
-                    keyboardController?.hide()
-                    password.value = password.value + it
-                } else if (login.value.length < LOGIN_LENGTH) {
-                    focusLogin.requestFocus()
-                    keyboardController?.show()
-                } else {
-                    focusManager.clearFocus(true)
+                Row(modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)) {
+                    CompositionLocalProvider(
+                        LocalTextInputService provides null
+                    ) {
+                        Icon(
+                            modifier = Modifier
+                                .padding(MaterialTheme.dimensionsPaddingExtended.elementMicro_h)
+                                .size(DialogLoginAuthTheme.dimensions.iconFieldInfoSize)
+                                .align(Alignment.CenterVertically),
+                            painter = painterResource(id = R.drawable.ic_lock_24dp),
+                            tint = DialogLoginAuthTheme.colors.onBackground,
+                            contentDescription = stringResource(id = R.string.dlg_login_auth_icon_password_info)
+                        )
+
+                        TextField(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .align(Alignment.CenterVertically)
+                                .focusRequester(focusPassword)
+                                .onFocusChanged {
+                                    if (it.isFocused) {
+                                        focusOwner.value = focusPassword
+                                        coroutine.launch {
+                                            delay(100)
+                                            keyboardController?.hide()
+                                        }
+                                    }
+                                },
+                            value = password.value,
+                            label = {
+                                Text(
+                                    text = stringResource(id = R.string.dlg_login_auth_fld_label_password),
+                                    style = DialogLoginAuthTheme.typographies.fieldLabel
+                                )
+                            },
+                            onValueChange = {},
+                            singleLine = true,
+                            colors = TextFieldDefaults.textFieldColors(
+                                backgroundColor = MaterialTheme.colorsCommonResource.transparent,
+                                cursorColor = MaterialTheme.colorsCommonResource.transparent
+                            ),
+                            visualTransformation = PasswordVisualTransformation(),
+                            textStyle = DialogLoginAuthTheme.typographies.fieldValue,
+                            keyboardOptions = KeyboardOptions(
+                                keyboardType = KeyboardType.NumberPassword,
+                            ),
+                            keyboardActions = KeyboardActions(),
+                            trailingIcon = {
+                                IconButton(onClick = {
+                                    password.takeIf { it.value.isNotEmpty() }?.apply {
+                                        value = value.dropLast(1)
+                                        if (focusOwner.value != focusPassword) {
+                                            focusPassword.requestFocus()
+                                        }
+                                    }
+                                }) {
+                                    Icon(
+                                        modifier = Modifier
+                                            .size(DialogLoginAuthTheme.dimensions.iconFieldActionSize)
+                                            .align(Alignment.CenterVertically),
+                                        painter = when (password.value.isEmpty()) {
+                                            false -> painterResource(id = R.drawable.ic_backspace_24dp)
+                                            true -> painterResource(id = R.drawable.ic_transparent_24dp)
+                                        },
+                                        tint = DialogLoginAuthTheme.colors.onBackground,
+                                        contentDescription = stringResource(id = R.string.dlg_login_auth_icon_password_delete)
+                                    )
+                                }
+                            }
+                        )
+                    }
+                }
+
+                KeyBoard.GridCubeDigitsTwoRowShuffled(
+                    modifier = Modifier
+                        .padding(MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
+                        .alpha(
+                            when (focusOwner.value == focusPassword) {
+                                true -> 1.0f
+                                false -> 0.35f
+                            }
+                        )
+                ) {
+                    if (password.value.length < PASSWORD_LENGTH) {
+                        password.value = password.value + it
+                        if (focusOwner.value != focusPassword) {
+                            focusPassword.requestFocus()
+                        }
+                    } else if (login.value.length < LOGIN_LENGTH) {
+                        if (focusOwner.value != focusLogin) {
+                            focusLogin.requestFocus()
+                        }
+                    } else {
+                        keyboardController?.hide()
+                        focusManager.clearFocus(true)
+                    }
                 }
             }
 
             LaunchedEffect(Unit) {
-                delay(100)
                 if (login.value.isEmpty()) {
                     focusLogin.requestFocus()
-                    keyboardController?.show()
                 } else {
                     focusPassword.requestFocus()
-                    keyboardController?.hide()
                 }
             }
+
+
         }
     }
 
