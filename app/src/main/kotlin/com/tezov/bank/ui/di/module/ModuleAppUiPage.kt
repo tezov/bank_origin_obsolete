@@ -106,13 +106,13 @@ interface ModuleAppUiPage {
 
         @ScopeAppUiPage
         class PageLoginAction @Inject constructor(
-            private val state: State.PageLoginState,
+            private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
             private val dialogAction: ModuleCoreUiActivity.Action.DialogAction,
         ) : ComposableHolder<com.tezov.bank.ui.page.login.PageLoginAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
                 com.tezov.bank.ui.page.login.PageLoginAction.create(
-                    state.get(),
+                    navigationController.get(),
                     dialogAction.get()
                 )
         }

@@ -87,7 +87,9 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
     ) {
         Column(
             modifier = Modifier
-                .background(MaterialTheme.colors.primary)
+                .fillMaxSize()
+                .background(PageLoginTheme.colors.background)
+                .padding(innerPadding)
                 .padding(
                     vertical = MaterialTheme.dimensionsPaddingExtended.blockBig_v,
                     horizontal = MaterialTheme.dimensionsPaddingExtended.blockBig_v
@@ -95,7 +97,8 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
         ) {
             ContentHeader(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
                 onClickAdd = {
 
                 },
@@ -105,13 +108,14 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             )
             ContentBody(
                 Modifier
-                    .weight(1f)
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .weight(1f),
                 nameState = state.nameState
             )
             ContentFooter(
                 modifier = Modifier
-                    .fillMaxWidth(),
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
                 onClickConnect = {
                     action.onClickConnect()
                 },
@@ -119,7 +123,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
                 },
                 onClickHelpAndService = {
-
+                    action.onClickHelpAndService()
                 },
             )
         }
@@ -136,7 +140,9 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             verticalAlignment = Alignment.CenterVertically
         ) {
 
-            Box(modifier = Modifier.weight(1f)) {
+            Box(modifier = Modifier
+                .wrapContentHeight()
+                .weight(1f)) {
                 Image(
                     modifier = Modifier
                         .size(PageLoginTheme.dimensions.logoSize),
@@ -162,7 +168,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
             IconButton(onClick = {
                 onClickAdd()
-            }){
+            }) {
                 Icon(
                     modifier = Modifier
                         .size(PageLoginTheme.dimensions.iconMediumSize)
@@ -195,7 +201,8 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     expanded = expanded,
                     onDismissRequest = { expanded = false },
                     modifier = Modifier
-                        .background(PageLoginTheme.colors.backgroundDropDownMenu),
+                        .background(PageLoginTheme.colors.backgroundDropDownMenu)
+                        .wrapContentSize(),
                     offset = DpOffset(
                         PageLoginTheme.dimensions.iconSmallSize / 2,
                         -PageLoginTheme.dimensions.iconSmallSize / 4
@@ -209,7 +216,12 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             },
                             contentPadding = PaddingValues(8.dp, 0.dp)
                         ) {
-                            Text(text = text, style = PageLoginTheme.typographies.dropDownMenu)
+                            Text(
+                                modifier = Modifier
+                                    .wrapContentSize(),
+                                text = text,
+                                style = PageLoginTheme.typographies.dropDownMenu
+                            )
                         }
                     }
                 }
@@ -235,11 +247,15 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     ) {
 
                         Text(
+                            modifier = Modifier
+                                .wrapContentSize(),
                             text = nameState.value,
                             style = PageLoginTheme.typographies.supra
                         )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         Text(
+                            modifier = Modifier
+                                .wrapContentSize(),
                             textAlign = TextAlign.Center,
                             text = stringResource(id = R.string.pg_login_pager_0),
                             style = PageLoginTheme.typographies.body
@@ -255,12 +271,15 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
                         Text(
+                            modifier = Modifier
+                                .wrapContentSize(),
                             textAlign = TextAlign.Center,
                             text = stringResource(id = R.string.pg_login_pager_1),
                             style = PageLoginTheme.typographies.huge
                         )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         OutlinedButton(
+                            modifier = Modifier .wrapContentSize(),
                             onClick = { },
                             border = PageLoginTheme.borders.buttonOutline,
                             shape = PageLoginTheme.shapes.buttonOutline,
@@ -268,9 +287,10 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             enabled = true
                         ) {
                             Text(
-                                stringResource(id = R.string.pg_login_btn_activate_balance),
+                                text = stringResource(id = R.string.pg_login_btn_activate_balance),
                                 style = PageLoginTheme.typographies.buttonOutlined,
                                 modifier = Modifier
+                                    .wrapContentSize()
                                     .padding(
                                         horizontal = PageLoginTheme.dimensions.paddingHorizontalButtonOutlined,
                                         vertical = PageLoginTheme.dimensions.paddingVerticalButtonOutlined
@@ -300,6 +320,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .wrapContentHeight()
                     .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
                 onClick = onClickConnect,
                 shape = PageLoginTheme.shapes.button,
@@ -313,6 +334,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     style = PageLoginTheme.typographies.button,
                     color = PageLoginTheme.colors.textButtonDark,
                     modifier = Modifier
+                        .wrapContentSize()
                         .padding(
                             horizontal = PageLoginTheme.dimensions.paddingHorizontalButton,
                             vertical = PageLoginTheme.dimensions.paddingVerticalButton
@@ -323,6 +345,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .wrapContentHeight()
                     .padding(top = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                     .border(
                         PageLoginTheme.borders.buttonDark,
@@ -340,6 +363,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     style = PageLoginTheme.typographies.button,
                     color = PageLoginTheme.colors.textButtonLight,
                     modifier = Modifier
+                        .wrapContentSize()
                         .padding(
                             horizontal = PageLoginTheme.dimensions.paddingHorizontalButton,
                             vertical = PageLoginTheme.dimensions.paddingVerticalButton
@@ -350,6 +374,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopFromLinkService))
 
             ClickableText(
+                modifier = Modifier.wrapContentSize(),
                 text = AnnotatedString(stringResource(id = R.string.pg_login_link_help_and_service)),
                 style = PageLoginTheme.typographies.link
             ) {

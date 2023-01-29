@@ -79,7 +79,16 @@ class NavigationController(
 
     private fun navigateFromLoginPage(from: RouteManager.Route?, to: RouteManager.Route){
         with(navigationController){
-            showSnackBarNotImplemented()
+            when(to){
+                Route.HelpAndService -> {
+                    navigate(to) {
+                        launchSingleTop = true
+                    }
+                }
+                else -> {
+                    showSnackBarNotImplemented()
+                }
+            }
         }
     }
 }
