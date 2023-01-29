@@ -94,8 +94,14 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 )
         ) {
             ContentHeader(
-                Modifier
-                    .fillMaxWidth()
+                modifier = Modifier
+                    .fillMaxWidth(),
+                onClickAdd = {
+
+                },
+                onClickDropDownMenu = { index ->
+
+                }
             )
             ContentBody(
                 Modifier
@@ -109,8 +115,12 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 onClickConnect = {
                     action.onClickConnect()
                 },
-                onClickSendMoney = {},
-                onClickHelpAndService = {},
+                onClickSendMoney = {
+
+                },
+                onClickHelpAndService = {
+
+                },
             )
         }
     }
@@ -118,6 +128,8 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
     @Composable
     private fun ContentHeader(
         modifier: Modifier,
+        onClickAdd: () -> Unit,
+        onClickDropDownMenu: (id: Int) -> Unit
     ) {
         Row(
             modifier = modifier,
@@ -148,16 +160,19 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconBig))
 
-            Icon(
-                modifier = Modifier
-                    .size(PageLoginTheme.dimensions.iconMediumSize)
-                    .clip(CircleShape)
-                    .background(PageLoginTheme.colors.backgroundButtonLight),
-                painter = painterResource(id = R.drawable.ic_add_24dp),
-                tint = PageLoginTheme.colors.background,
-                contentDescription = stringResource(id = R.string.pg_login_icon_add_account)
-            )
-
+            IconButton(onClick = {
+                onClickAdd()
+            }){
+                Icon(
+                    modifier = Modifier
+                        .size(PageLoginTheme.dimensions.iconMediumSize)
+                        .clip(CircleShape)
+                        .background(PageLoginTheme.colors.backgroundButtonLight),
+                    painter = painterResource(id = R.drawable.ic_add_24dp),
+                    tint = PageLoginTheme.colors.background,
+                    contentDescription = stringResource(id = R.string.pg_login_icon_add_account)
+                )
+            }
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconMedium))
 
             Box {
@@ -181,18 +196,16 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     onDismissRequest = { expanded = false },
                     modifier = Modifier
                         .background(PageLoginTheme.colors.backgroundDropDownMenu),
-                    properties = PopupProperties(focusable = true),
                     offset = DpOffset(
                         PageLoginTheme.dimensions.iconSmallSize / 2,
                         -PageLoginTheme.dimensions.iconSmallSize / 4
                     )
                 ) {
-                    items.forEach { text ->
+                    items.forEachIndexed { index, text ->
                         DropdownMenuItem(
                             onClick = {
-                                //on click here
-
                                 expanded = false
+                                onClickDropDownMenu(index)
                             },
                             contentPadding = PaddingValues(8.dp, 0.dp)
                         ) {
@@ -201,7 +214,6 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     }
                 }
             }
-
         }
     }
 

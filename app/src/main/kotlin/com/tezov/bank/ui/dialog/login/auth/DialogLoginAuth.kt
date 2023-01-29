@@ -112,7 +112,6 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
             textAlign = TextAlign.Center,
             style = DialogLoginAuthTheme.typographies.title
         )
-
     }
 
     @OptIn(ExperimentalComposeUiApi::class)
@@ -140,7 +139,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         .align(Alignment.CenterVertically),
                     painter = painterResource(id = R.drawable.ic_person_24dp),
                     tint = DialogLoginAuthTheme.colors.onBackground,
-                    contentDescription = stringResource(id = R.string.dlg_login_auth_icon_login)
+                    contentDescription = stringResource(id = R.string.dlg_login_auth_icon_login_clear)
                 )
                 TextField(
                     modifier = Modifier
@@ -157,12 +156,13 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     onValueChange = {
                         if (it.length <= LOGIN_LENGTH) {
                             login.value = it
-                        } else if (password.value.length < PASSWORD_LENGTH) {
-                            keyboardController?.hide()
-                            focusPassword.requestFocus()
                         } else {
                             keyboardController?.hide()
-                            focusManager.clearFocus(true)
+                            if (password.value.length < PASSWORD_LENGTH) {
+                                focusPassword.requestFocus()
+                            } else {
+                                focusManager.clearFocus(true)
+                            }
                         }
                     },
                     singleLine = true,
@@ -174,13 +174,16 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         keyboardType = KeyboardType.NumberPassword,
                         imeAction = if (password.value.length < PASSWORD_LENGTH) ImeAction.Next else ImeAction.Done
                     ),
-                    keyboardActions = KeyboardActions(onDone = {
-                        keyboardController?.hide()
-                        focusManager.clearFocus(true)
-                    }, onNext = {
-                        keyboardController?.hide()
-                        focusPassword.requestFocus()
-                    }),
+                    keyboardActions = KeyboardActions(
+                        onDone = {
+                            keyboardController?.hide()
+                            focusManager.clearFocus(true)
+                        },
+                        onNext = {
+                            keyboardController?.hide()
+                            focusPassword.requestFocus()
+                        }
+                    ),
                     trailingIcon = {
                         IconButton(onClick = {
                             login.value = ""
@@ -196,7 +199,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                                     true -> painterResource(id = R.drawable.ic_transparent_24dp)
                                 },
                                 tint = DialogLoginAuthTheme.colors.onBackground,
-                                contentDescription = null
+                                contentDescription = stringResource(id = R.string.dlg_login_auth_icon_login_clear)
                             )
                         }
                     }
@@ -214,7 +217,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                             .align(Alignment.CenterVertically),
                         painter = painterResource(id = R.drawable.ic_lock_24dp),
                         tint = DialogLoginAuthTheme.colors.onBackground,
-                        contentDescription = stringResource(id = R.string.dlg_login_auth_icon_password)
+                        contentDescription = stringResource(id = R.string.dlg_login_auth_icon_password_info)
                     )
                     TextField(
                         modifier = Modifier
@@ -228,9 +231,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                                 style = DialogLoginAuthTheme.typographies.fieldLabel
                             )
                         },
-                        onValueChange = {
-
-                        },
+                        onValueChange = {},
                         singleLine = true,
                         colors = TextFieldDefaults.textFieldColors(
                             backgroundColor = MaterialTheme.colorsCommonResource.transparent,
@@ -241,8 +242,8 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         trailingIcon = {
                             IconButton(onClick = {
                                 password.takeIf { it.value.isNotEmpty() }?.apply {
-                                    focusPassword.requestFocus()
                                     value = value.dropLast(1)
+                                    focusPassword.requestFocus()
                                 }
                             }) {
                                 Icon(
@@ -254,7 +255,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                                         true -> painterResource(id = R.drawable.ic_transparent_24dp)
                                     },
                                     tint = DialogLoginAuthTheme.colors.onBackground,
-                                    contentDescription = null
+                                    contentDescription = stringResource(id = R.string.dlg_login_auth_icon_password_delete)
                                 )
                             }
                         }

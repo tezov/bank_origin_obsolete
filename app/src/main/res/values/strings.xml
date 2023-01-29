@@ -29,10 +29,12 @@
     <!--    dialog login auth-->
     <string name="dlg_login_auth_icon_close">close icon</string>
     <string name="dlg_login_auth_enter_password">Saisissez votre code secret pour\naccéder à vos comptes</string>
-    <string name="dlg_login_auth_icon_login">login icon</string>
+    <string name="dlg_login_auth_icon_login_info">login info icon</string>
     <string name="dlg_login_auth_fld_label_login">Login</string>
-    <string name="dlg_login_auth_icon_password">password icon</string>
+    <string name="dlg_login_auth_icon_login_clear">login clear icon</string>
+    <string name="dlg_login_auth_icon_password_info">password info icon</string>
     <string name="dlg_login_auth_fld_label_password">Password</string>
+    <string name="dlg_login_auth_icon_password_delete">password delete icon</string>
     <string name="dlg_login_auth_btn_connect">Se connecter</string>
     <string name="dlg_login_auth_link_login_forgotten">Mon n° client?</string>
     <string name="dlg_login_auth_link_password_forgotten">Code secret oublié ?</string>
