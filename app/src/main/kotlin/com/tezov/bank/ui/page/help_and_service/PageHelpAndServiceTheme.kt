@@ -58,7 +58,7 @@ object PageHelpAndServiceTheme {
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.background,
-        backgroundSection = ThemeColors.Data.whiteDark,
+        backgroundSection = ThemeColors.Data.whiteDark.copy(alpha = 0.10f),
         onBackgroundLight = MaterialTheme.colors.primary,
         onBackgroundDark = MaterialTheme.colors.onSecondary,
         icon = MaterialTheme.colors.primary,
@@ -80,7 +80,7 @@ object PageHelpAndServiceTheme {
         iconCloseSize = MaterialTheme.dimensionsSizeExtended.iconModal,
         iconCardSize = 48.dp,
         iconRowSize = 32.dp,
-        iconChevronSize = 24.dp,
+        iconChevronSize = 16.dp,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> = staticCompositionLocalOf {
