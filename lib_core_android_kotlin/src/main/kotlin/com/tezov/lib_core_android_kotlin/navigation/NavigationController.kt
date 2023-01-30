@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 30/01/2023 22:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:12
+ *  Last modified 30/01/2023 22:23
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.lib_core_android_kotlin.navigation
 
+import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.LifecycleOwner
@@ -26,6 +27,7 @@ import com.tezov.lib_core_android_kotlin.navigation.RouteManager.Route
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.CompositionAction
 import com.tezov.lib_core_kotlin.type.collection.ListEntry
 import kotlin.reflect.KClass
+import kotlin.reflect.full.isSubclassOf
 
 class NavigationController constructor(
     val snackbarAction: SnackbarAction, //todo remove snackbar here. have nothing to with navigation!
@@ -87,9 +89,9 @@ class NavigationController constructor(
     }
 
     fun requestNavigate(from: Route?, to: Route, askedBy: CompositionAction<*>) {
-        actionControllers.getValue(askedBy::class)?.let {
-            it(from, to)
-        }?: kotlin.run {
+        actionControllers.find{
+            askedBy::class.isInstance(it.key) || askedBy::class.isSubclassOf(it.key)
+        }?.value?.invoke(from, to) ?: run {
             showSnackBarNotImplemented()
         }
     }

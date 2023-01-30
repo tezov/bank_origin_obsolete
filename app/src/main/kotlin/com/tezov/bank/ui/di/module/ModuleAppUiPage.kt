@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 30/01/2023 22:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 30/01/2023 21:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,6 +16,8 @@ import com.tezov.bank.ui.page.help_and_service.PageHelpAndServiceAction
 import com.tezov.bank.ui.page.help_and_service.PageHelpAndServiceState
 import com.tezov.bank.ui.page.login.PageLoginAction
 import com.tezov.bank.ui.page.login.PageLoginState
+import com.tezov.bank.ui.page.account.PageAccountAction
+import com.tezov.bank.ui.page.account.PageAccountState
 import com.tezov.bank.ui.page.splash.PageSplashAction
 import com.tezov.bank.ui.page.splash.PageSplashState
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ComposableHolder
@@ -77,6 +79,21 @@ interface ModuleAppUiPage {
 
             }
 
+        @ScopeAppUiPage
+        @Provides
+        fun provideContextAccount(
+            state: State.PageAccountState,
+            action: Action.PageAccountAction
+        ): ComponentContextLazy<PageAccountState, PageAccountAction> =
+            object :
+                ComponentContextLazy<PageAccountState, PageAccountAction> {
+
+                override fun lazyState() = state
+
+                override fun lazyAction() = action
+
+            }
+
     }
 
     object State {
@@ -102,6 +119,17 @@ interface ModuleAppUiPage {
             override fun create() =
                 com.tezov.bank.ui.page.help_and_service.PageHelpAndServiceState.create()
         }
+
+        @ScopeAppUiPage
+        class PageAccountState @Inject constructor() :
+            ComposableHolder<com.tezov.bank.ui.page.account.PageAccountState>() {
+            @androidx.compose.runtime.Composable
+            override fun create() = com.tezov.bank.ui.page.account.PageAccountState.create()
+        }
+
+
+
+
     }
 
     object Action {
@@ -139,6 +167,18 @@ interface ModuleAppUiPage {
                     navigationController.get(),
                 )
         }
+
+        @ScopeAppUiPage
+        class PageAccountAction @Inject constructor(
+            private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
+        ) : ComposableHolder<com.tezov.bank.ui.page.account.PageAccountAction>() {
+            @androidx.compose.runtime.Composable
+            override fun create() =
+                com.tezov.bank.ui.page.account.PageAccountAction.create(
+                    navigationController.get()
+                )
+        }
+
 
     }
 

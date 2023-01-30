@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 30/01/2023 22:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 30/01/2023 21:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,7 +24,7 @@ object ComponentAppUiDialog {
 
     @ScopeAppUiDialog
     @Component(dependencies = [ComponentCoreUiDialog.EntryPoint::class, ComponentAppUiPage.EntryPoint::class], modules = [ModuleAppUiDialog.MapperContext::class])
-    interface EntryPoint:Exposer {
+    interface EntryPoint {
 
         @Component.Factory
         interface Factory{
@@ -35,12 +35,6 @@ object ComponentAppUiDialog {
 
     }
 
-    interface Exposer {
-
-//        fun exposeAppLoginAuthState(): ModuleAppUiDialog.State.DialogLoginAuthState
-//        fun exposeAppLoginAuthAction(): ModuleAppUiDialog.Action.DialogLoginAuthAction
-
-    }
 
 }
 

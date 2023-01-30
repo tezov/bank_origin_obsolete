@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 30/01/2023 22:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 30/01/2023 22:22
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,11 +12,11 @@
 
 package com.tezov.bank.navigation
 
-import com.tezov.bank.ui.page.login.PageLoginAction
-import com.tezov.bank.ui.page.splash.PageSplashAction
 import com.tezov.lib_core_android_kotlin.navigation.RouteManager
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigationAction
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarAction
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.DialogAction
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageAction
 
 class NavigationController(
     private val navigationController: com.tezov.lib_core_android_kotlin.navigation.NavigationController
@@ -24,9 +24,17 @@ class NavigationController(
     companion object{
         sealed class Route(value:String):RouteManager.Route(value) {
 
+            //outside auth
             object Splash : Route("splash")
             object Login : Route("login")
             object HelpAndService : Route("help_and_service")
+
+            //inside auth
+            object Account : Route("account")
+            object Discover : Route("discover")
+            object Payment : Route("payment")
+            object Help : Route("help")
+            object Profile : Route("Profile")
 
             companion object{
                 val items get():Set<RouteManager.Route> = setOf(
@@ -48,9 +56,8 @@ class NavigationController(
         navigationController.addAction(mapOf(
             TopAppBarAction::class to this::navigateFromTopAppBar,
             BottomNavigationAction::class to this::navigateFromBottomNavigation,
-            PageSplashAction::class to this::navigateFromSplashPage,
-            PageLoginAction::class to this::navigateFromLoginPage,
-
+            PageAction::class to this::navigateFromPage,
+            DialogAction::class to this::navigateFromDialog,
         ))
     }
 
@@ -78,28 +85,60 @@ class NavigationController(
         }
     }
 
-    private fun navigateFromSplashPage(from: RouteManager.Route?, to: RouteManager.Route){
+    private fun navigateFromPage(from: RouteManager.Route?, to: RouteManager.Route){
         with(navigationController){
-            navigate(to) {
-                popUpTo(Route.Splash.value) {
-                    inclusive = true
+            var showSnackBarNotImplemented = true
+            when(from){
+                Route.Splash -> {
+                    when(to){
+                        Route.Login -> {
+                            navigate(to) {
+                                popUpTo(Route.Splash.value) {
+                                    inclusive = true
+                                }
+                                launchSingleTop = true
+                            }
+                            showSnackBarNotImplemented = false
+                        }
+                    }
                 }
-                launchSingleTop = true
+                Route.Login -> {
+                    when(to){
+                        Route.HelpAndService -> {
+                            navigate(to) {
+                                launchSingleTop = true
+                            }
+                            showSnackBarNotImplemented = false
+                        }
+                    }
+                }
+            }
+            if(showSnackBarNotImplemented){
+                showSnackBarNotImplemented()
             }
         }
     }
 
-    private fun navigateFromLoginPage(from: RouteManager.Route?, to: RouteManager.Route){
+    private fun navigateFromDialog(from: RouteManager.Route?, to: RouteManager.Route){
         with(navigationController){
-            when(to){
-                Route.HelpAndService -> {
-                    navigate(to) {
-                        launchSingleTop = true
+            var showSnackBarNotImplemented = true
+            when(from) {
+                Route.Login -> {
+                    when(to){
+                        Route.Account -> {
+                            navigate(to) {
+                                popUpTo(Route.Login.value) {
+                                    inclusive = true
+                                }
+                                launchSingleTop = true
+                            }
+                            showSnackBarNotImplemented = false
+                        }
                     }
                 }
-                else -> {
-                    showSnackBarNotImplemented()
-                }
+            }
+            if(showSnackBarNotImplemented){
+                showSnackBarNotImplemented()
             }
         }
     }

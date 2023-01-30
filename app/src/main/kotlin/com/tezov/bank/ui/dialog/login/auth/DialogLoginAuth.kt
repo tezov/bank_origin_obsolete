@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 30/01/2023 22:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 30/01/2023 22:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -105,7 +105,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     ContentFooter(
                         credentialValidState = state.credentialValidState,
                         onClickConnect = {
-
+                            action.connect()
                         },
                         onClickForgotLogin = {
 
@@ -373,7 +373,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     backgroundColor = DialogLoginAuthTheme.colors.backgroundButtonDark,
                     disabledBackgroundColor = DialogLoginAuthTheme.colors.backgroundButtonInactive
                 ),
-                enabled = credentialValidState
+                enabled = credentialValidState || true
             ) {
                 Text(
                     stringResource(id = R.string.dlg_login_auth_btn_connect),

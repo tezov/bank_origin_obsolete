@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 30/01/2023 22:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 30/01/2023 22:16
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,11 +10,13 @@
  *  *********************************************************************************
  */
 
-package com.tezov.bank.ui.page.help_and_service
+package com.tezov.bank.ui.page.splash
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.*
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
+import com.tezov.bank.ui.page.account.PageAccountAction
+import com.tezov.bank.ui.page.account.PageAccountState
 import com.tezov.bank.ui.page.splash.PageSplashAction
 import com.tezov.bank.ui.page.splash.PageSplashState
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action

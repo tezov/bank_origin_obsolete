@@ -2,7 +2,7 @@
  *  *********************************************************************************
  *  Created by Tezov on 30/01/2023 22:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 22:10
+ *  Last modified 30/01/2023 21:25
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,37 +10,30 @@
  *  *********************************************************************************
  */
 
-package com.tezov.bank.ui.dialog.login.auth
+package com.tezov.bank.ui.page.account
 
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import com.tezov.bank.navigation.NavigationController.Companion.Route
-import com.tezov.bank.ui.page.login.PageLoginAction
 import com.tezov.lib_core_android_kotlin.navigation.NavigationController
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.DialogAction
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageAction
 
-class DialogLoginAuthAction private constructor(
-    private val action: com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction,
+class PageAccountAction private constructor(
     private val navigationController: NavigationController,
-    ): DialogAction<DialogLoginAuthState> {
+) :
+    PageAction<PageAccountState> {
 
 
     companion object {
-        fun create(
-            action: com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction,
+        @Composable
+         fun create(
             navigationController: NavigationController
-        ) = DialogLoginAuthAction(
-            action = action,
-            navigationController = navigationController,
-        )
+        ) = PageAccountAction(
+                navigationController = navigationController,
+            )
     }
 
-    fun hide() {
-        action.hide()
-    }
-
-
-    fun connect() {
-        hide()
-        navigationController.requestNavigate(Route.Account, this)
-    }
 
 }

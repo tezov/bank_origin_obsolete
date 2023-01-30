@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 30/01/2023 22:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 30/01/2023 22:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,7 +10,7 @@
  *  *********************************************************************************
  */
 
-package com.tezov.bank.ui.navigation
+package com.tezov.bank.navigation
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.PaddingValues
@@ -20,13 +20,13 @@ import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.tezov.bank.navigation.NavigationController
 import com.tezov.bank.navigation.NavigationController.Companion.Route
 import com.tezov.bank.ui.activity.MainActivity
 import com.tezov.bank.ui.di.accessor.AccessorAppUiActivity
 import com.tezov.bank.ui.page.help_and_service.PageHelpAndService
 import com.tezov.bank.ui.page.login.PageLogin
-import com.tezov.bank.ui.page.help_and_service.PageSplash
+import com.tezov.bank.ui.page.account.PageAccount
+import com.tezov.bank.ui.page.splash.PageSplash
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 
@@ -63,6 +63,12 @@ object NavigationGraph {
             composableWithAnimation(Route.HelpAndService) {
                 (LocalActivity.current as MainActivity).empty{
                     PageHelpAndService(innerPadding = it)
+                }
+            }
+
+            composableWithAnimation(Route.Account){
+                (LocalActivity.current as MainActivity).withBottomNavigationBar{
+                    PageAccount(PaddingValues())
                 }
             }
 

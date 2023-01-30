@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 30/01/2023 22:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 30/01/2023 21:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,7 @@ import androidx.lifecycle.lifecycleScope
 import com.tezov.lib_core_android_kotlin.ui.activity.ActivityBase
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
 import com.tezov.bank.ui.di.accessor.AccessorAppUiActivity
-import com.tezov.bank.ui.navigation.NavigationGraph
+import com.tezov.bank.navigation.NavigationGraph
 import com.tezov.bank.ui.navigation.bottom_navigation.BottomNavigationItems
 import com.tezov.bank.ui.theme.ThemeApplication
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarItemData
