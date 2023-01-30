@@ -205,7 +205,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         .wrapContentSize(),
                     offset = DpOffset(
                         PageLoginTheme.dimensions.iconSmallSize / 2,
-                        -PageLoginTheme.dimensions.iconSmallSize / 4
+                        -PageLoginTheme.dimensions.iconSmallSize / 5
                     )
                 ) {
                     items.forEachIndexed { index, text ->

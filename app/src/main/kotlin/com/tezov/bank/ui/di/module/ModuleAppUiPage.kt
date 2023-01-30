@@ -119,14 +119,12 @@ interface ModuleAppUiPage {
 
         @ScopeAppUiPage
         class PageHelpAndServiceAction @Inject constructor(
-            private val state: State.PageHelpAndServiceState,
-            private val dialogAction: ModuleCoreUiActivity.Action.DialogAction,
+            private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
         ) : ComposableHolder<com.tezov.bank.ui.page.help_and_service.PageHelpAndServiceAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
                 com.tezov.bank.ui.page.help_and_service.PageHelpAndServiceAction.create(
-                    state.get(),
-                    dialogAction.get(),
+                    navigationController.get(),
                 )
         }
 

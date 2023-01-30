@@ -72,7 +72,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                         modifier = Modifier
                             .wrapContentSize()
                             .align(Alignment.TopStart),
-                        onClick = { }) {
+                        onClick = { action.close() }) {
                         Icon(
                             modifier = Modifier.size(PageHelpAndServiceTheme.dimensions.iconCloseSize),
                             painter = painterResource(id = R.drawable.ic_close_24dp),
