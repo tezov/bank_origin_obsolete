@@ -12,9 +12,9 @@ object ThemeShapes {
 
     @Composable
     fun provideShapes() = ThemeShapesExtended.Shapes(
-        cardBig = RoundedCornerShape(12.dp),
-        cardNormal = RoundedCornerShape(8.dp),
-        cardSmall = RoundedCornerShape(4.dp),
+        cardBig = RoundedCornerShape(22.dp),
+        cardNormal = RoundedCornerShape(12.dp),
+        cardSmall = RoundedCornerShape(8.dp),
 
         buttonBig = RoundedCornerShape(20.dp),
         buttonNormal = RoundedCornerShape(14.dp),

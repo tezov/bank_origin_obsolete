@@ -29,6 +29,7 @@ object ThemeColors {
 
         val blueOverlay = Color(0x3400DCFF)
         val blackOverlay = Color(0xAA000000)
+        val grayOverlay = Color(0x333F3F3F)
     }
 
     val colorsLight = Colors(

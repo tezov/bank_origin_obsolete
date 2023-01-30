@@ -53,6 +53,7 @@ object PageHelpAndServiceTheme {
         val onBackgroundLight: Color,
         val onBackgroundDark: Color,
         val icon: Color,
+        val divider: Color,
     )
 
     @Composable
@@ -62,6 +63,7 @@ object PageHelpAndServiceTheme {
         onBackgroundLight = MaterialTheme.colors.primary,
         onBackgroundDark = MaterialTheme.colors.onSecondary,
         icon = MaterialTheme.colors.primary,
+        divider = ThemeColors.Data.grayOverlay,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -73,6 +75,7 @@ object PageHelpAndServiceTheme {
         val iconCardSize: Dp,
         val iconRowSize: Dp,
         val iconChevronSize: Dp,
+        val divider: Dp,
     )
 
     @Composable
@@ -81,6 +84,7 @@ object PageHelpAndServiceTheme {
         iconCardSize = 48.dp,
         iconRowSize = 32.dp,
         iconChevronSize = 16.dp,
+        divider = 2.dp,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> = staticCompositionLocalOf {
@@ -93,7 +97,7 @@ object PageHelpAndServiceTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        card = MaterialTheme.shapesExtended.cardNormal,
+        card = MaterialTheme.shapesExtended.cardBig,
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -109,8 +113,8 @@ object PageHelpAndServiceTheme {
     @Composable
     fun provideBorders() = Borders(
         card = BorderStroke(
-            1.dp,
-            ThemeColors.Data.grayDark
+            1.5.dp,
+            ThemeColors.Data.grayOverlay
         ),
     )
 
@@ -121,7 +125,8 @@ object PageHelpAndServiceTheme {
     data class Typographies(
         val titleBig: TextStyle,
         val titleNormal: TextStyle,
-        val text: TextStyle,
+        val textCard: TextStyle,
+        val textRow: TextStyle,
     )
 
     @Composable
@@ -134,9 +139,12 @@ object PageHelpAndServiceTheme {
             color = ThemeColors.Data.grayDark,
             fontWeight = FontWeight.SemiBold
         ),
-        text = MaterialTheme.typographyExtended.textNormal.copy(
+        textCard = MaterialTheme.typographyExtended.textNormal.copy(
             color = colors.onBackgroundDark,
             fontWeight = FontWeight.Bold
+        ),
+        textRow = MaterialTheme.typographyExtended.textBig.copy(
+            color = colors.onBackgroundDark,
         ),
     )
 

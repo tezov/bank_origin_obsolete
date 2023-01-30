@@ -96,7 +96,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
         datas: List<Pair<String, Int>>,
         onClick: (Int) -> Unit
     ) {
-        if(datas.isEmpty()){
+        if (datas.isEmpty()) {
             return
         }
         Column(
@@ -143,7 +143,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                                 .weight(1f),
                             text = endData.first,
                             iconResourceId = endData.second,
-                            onClick = { onClick(i+1) }
+                            onClick = { onClick(i + 1) }
                         )
                     }
                 }
@@ -155,7 +155,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                             .wrapContentHeight(),
                         text = data.first,
                         iconResourceId = data.second,
-                        onClick = { onClick(datas.size-1) }
+                        onClick = { onClick(datas.lastIndex) }
                     )
                 }
             }
@@ -217,7 +217,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 Text(
                     modifier = Modifier.layoutId(ID_TEXT),
                     text = text,
-                    style = PageHelpAndServiceTheme.typographies.text,
+                    style = PageHelpAndServiceTheme.typographies.textCard,
                     overflow = TextOverflow.Visible
                 )
             }
@@ -252,7 +252,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                         .weight(1f)
                         .align(Alignment.Bottom),
                     text = text,
-                    style = PageHelpAndServiceTheme.typographies.text
+                    style = PageHelpAndServiceTheme.typographies.textCard
                 )
                 Icon(
                     modifier = Modifier
@@ -271,7 +271,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
         datas: List<Pair<String, Int>>,
         onClick: (Int) -> Unit
     ) {
-        if(datas.isEmpty()){
+        if (datas.isEmpty()) {
             return
         }
         Column(
@@ -287,7 +287,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
             ) {
                 Text(
                     modifier = Modifier
-                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
+                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementBig_v)
                         .wrapContentSize(),
                     text = stringResource(id = R.string.pg_h_and_s_section_contact),
                     style = PageHelpAndServiceTheme.typographies.titleNormal
@@ -340,7 +340,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                     .wrapContentHeight()
                     .weight(1f),
                 text = text,
-                style = PageHelpAndServiceTheme.typographies.text
+                style = PageHelpAndServiceTheme.typographies.textRow
             )
             Icon(
                 modifier = Modifier
@@ -357,7 +357,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
         datas: List<String>,
         onClick: (Int) -> Unit
     ) {
-        if(datas.isEmpty()){
+        if (datas.isEmpty()) {
             return
         }
         Column(
@@ -373,7 +373,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
             ) {
                 Text(
                     modifier = Modifier
-                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
+                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementBig_v)
                         .wrapContentSize(),
                     text = stringResource(id = R.string.pg_h_and_s_section_notice),
                     style = PageHelpAndServiceTheme.typographies.titleNormal
@@ -382,12 +382,22 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight(),
+                    .wrapContentHeight()
+                    .padding(vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_h),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_h),
             ) {
-                datas.forEachIndexed{ index, data ->
-                    RowNormal(data){
+                datas.forEachIndexed { index, data ->
+                    RowNormal(data) {
                         onClick(index)
+                    }
+                    if (index != datas.lastIndex) {
+                        Divider(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = MaterialTheme.dimensionsPaddingExtended.blockBig_h),
+                            color = PageHelpAndServiceTheme.colors.divider,
+                            thickness = PageHelpAndServiceTheme.dimensions.divider,
+                        )
                     }
                 }
             }
@@ -407,7 +417,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .padding(
-                    vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
+                    vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_h,
                     horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
                 ),
             verticalAlignment = Alignment.CenterVertically
@@ -417,7 +427,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                     .wrapContentHeight()
                     .weight(1f),
                 text = text,
-                style = PageHelpAndServiceTheme.typographies.text
+                style = PageHelpAndServiceTheme.typographies.textRow
             )
             Icon(
                 modifier = Modifier
