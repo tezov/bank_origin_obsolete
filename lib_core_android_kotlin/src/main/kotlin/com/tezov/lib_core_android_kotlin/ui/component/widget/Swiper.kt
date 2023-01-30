@@ -1,9 +1,20 @@
+/*
+ *  *********************************************************************************
+ *  Created by Tezov on 30/01/2023 20:18
+ *  Copyright (c) 2023 . All rights reserved.
+ *  Last modified 30/01/2023 20:11
+ *  First project bank / bank.lib_core_android_kotlin.main
+ *  This file is private and it is not allowed to use it, copy it or modified it
+ *  without the permission granted by the owner Tezov. For any request request,
+ *  please send an email to tezov.app@gmail.com
+ *  *********************************************************************************
+ */
+
 package com.tezov.lib_core_android_kotlin.ui.component.widget
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -16,7 +27,7 @@ import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.rememberPagerState
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
-infix fun Swiper.Pager.provides(value: Swiper.Pager.Style) = Swiper.Pager.local provides value
+infix fun Swiper.Pager.provides(value: Swiper.Pager.Style) = local provides value
 
 object Swiper {
 
@@ -42,7 +53,7 @@ object Swiper {
             pageSelected: Int = 0,
             pages: List<@Composable () -> Unit>,
             onPageChange: (pageIndex: Int) -> Unit
-        ){
+        ) {
             Content(modifier, pageSelected, pages, onPageChange)
         }
 

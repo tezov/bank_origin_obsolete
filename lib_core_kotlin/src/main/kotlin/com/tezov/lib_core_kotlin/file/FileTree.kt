@@ -1,13 +1,22 @@
+/*
+ *  *********************************************************************************
+ *  Created by Tezov on 30/01/2023 20:18
+ *  Copyright (c) 2023 . All rights reserved.
+ *  Last modified 30/01/2023 20:11
+ *  First project bank / bank.lib_core_kotlin.main
+ *  This file is private and it is not allowed to use it, copy it or modified it
+ *  without the permission granted by the owner Tezov. For any request request,
+ *  please send an email to tezov.app@gmail.com
+ *  *********************************************************************************
+ */
+
 package com.tezov.lib_core_kotlin.file
 
-import kotlin.jvm.JvmOverloads
-import com.tezov.lib_core_kotlin.file.FileTree
 import com.tezov.lib_core_kotlin.toolbox.ExtensionNull.nullify
-import java.util.ArrayList
 import java.util.regex.Pattern
 
 class FileTree @JvmOverloads constructor(
-    private var directory: Directory? = null as Directory?,
+    private var directory: Directory? = null,
     private var recursive: Boolean = false
 ) {
     private var directoryLinks: MutableList<String>? = null
@@ -18,8 +27,7 @@ class FileTree @JvmOverloads constructor(
     constructor(
         storageType: StoragePackage.Type?,
         recursive: Boolean
-    ) : this(Directory(storageType), recursive) {
-    }
+    ) : this(Directory(storageType), recursive)
 
     private fun copyPattern(fileTreeSource: FileTree) {
         patternPath = fileTreeSource.patternPath

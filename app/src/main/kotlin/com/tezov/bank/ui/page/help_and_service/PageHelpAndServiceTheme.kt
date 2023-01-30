@@ -1,3 +1,15 @@
+/*
+ *  *********************************************************************************
+ *  Created by Tezov on 30/01/2023 20:18
+ *  Copyright (c) 2023 . All rights reserved.
+ *  Last modified 30/01/2023 20:11
+ *  First project bank / bank.app.main
+ *  This file is private and it is not allowed to use it, copy it or modified it
+ *  without the permission granted by the owner Tezov. For any request request,
+ *  please send an email to tezov.app@gmail.com
+ *  *********************************************************************************
+ */
+
 package com.tezov.bank.ui.page.help_and_service
 
 import androidx.compose.foundation.BorderStroke
@@ -13,37 +25,49 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.theme.ThemeColors
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSizeExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
 
 val PageHelpAndServiceTheme.colors: PageHelpAndServiceTheme.Colors
     @Composable
     @ReadOnlyComposable
-    get() = PageHelpAndServiceTheme.localColors.current
-infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Colors) = PageHelpAndServiceTheme.localColors provides value
+    get() = localColors.current
+
+infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Colors) =
+    localColors provides value
 
 val PageHelpAndServiceTheme.dimensions: PageHelpAndServiceTheme.Dimensions
     @Composable
     @ReadOnlyComposable
-    get() = PageHelpAndServiceTheme.localDimensions.current
-infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Dimensions) = PageHelpAndServiceTheme.localDimensions provides value
+    get() = localDimensions.current
+
+infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Dimensions) =
+    localDimensions provides value
 
 val PageHelpAndServiceTheme.shapes: PageHelpAndServiceTheme.Shapes
     @Composable
     @ReadOnlyComposable
-    get() = PageHelpAndServiceTheme.localShapes.current
-infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Shapes) = PageHelpAndServiceTheme.localShapes provides value
+    get() = localShapes.current
+
+infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Shapes) =
+    localShapes provides value
 
 val PageHelpAndServiceTheme.borders: PageHelpAndServiceTheme.Borders
     @Composable
     @ReadOnlyComposable
-    get() = PageHelpAndServiceTheme.localBorders.current
-infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Borders) = PageHelpAndServiceTheme.localBorders provides value
+    get() = localBorders.current
+
+infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Borders) =
+    localBorders provides value
 
 val PageHelpAndServiceTheme.typographies: PageHelpAndServiceTheme.Typographies
     @Composable
     @ReadOnlyComposable
-    get() = PageHelpAndServiceTheme.localTypographies.current
-infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Typographies) = PageHelpAndServiceTheme.localTypographies provides value
+    get() = localTypographies.current
+
+infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Typographies) =
+    localTypographies provides value
 
 object PageHelpAndServiceTheme {
 
@@ -87,9 +111,10 @@ object PageHelpAndServiceTheme {
         divider = 2.dp,
     )
 
-    internal val localDimensions: ProvidableCompositionLocal<Dimensions> = staticCompositionLocalOf {
-        error("not provided")
-    }
+    internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
+        staticCompositionLocalOf {
+            error("not provided")
+        }
 
     data class Shapes(
         val card: Shape,
@@ -108,7 +133,7 @@ object PageHelpAndServiceTheme {
     data class Borders(
         val card: BorderStroke,
 
-    )
+        )
 
     @Composable
     fun provideBorders() = Borders(
@@ -148,8 +173,9 @@ object PageHelpAndServiceTheme {
         ),
     )
 
-    internal val localTypographies: ProvidableCompositionLocal<Typographies> = staticCompositionLocalOf {
-        error("not provided")
-    }
+    internal val localTypographies: ProvidableCompositionLocal<Typographies> =
+        staticCompositionLocalOf {
+            error("not provided")
+        }
 
 }

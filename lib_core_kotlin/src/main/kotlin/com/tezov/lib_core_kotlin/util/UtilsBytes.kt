@@ -1,7 +1,19 @@
+/*
+ *  *********************************************************************************
+ *  Created by Tezov on 30/01/2023 20:18
+ *  Copyright (c) 2023 . All rights reserved.
+ *  Last modified 30/01/2023 20:11
+ *  First project bank / bank.lib_core_kotlin.main
+ *  This file is private and it is not allowed to use it, copy it or modified it
+ *  without the permission granted by the owner Tezov. For any request request,
+ *  please send an email to tezov.app@gmail.com
+ *  *********************************************************************************
+ */
+
 package com.tezov.lib_core_kotlin.util
 
-import com.tezov.lib_core_kotlin.cipher.SecureProvider.randomGenerator
 import com.tezov.lib_core_java.type.unit.UnitByte
+import com.tezov.lib_core_kotlin.cipher.SecureProvider.randomGenerator
 
 @OptIn(ExperimentalUnsignedTypes::class)
 object UtilsBytes {
@@ -33,9 +45,10 @@ object UtilsBytes {
             return ubyteArrayOf(0x00.toUByte())
         }
         val out = UByteArray(length)
-        UtilsBytes.copy(bytes, countZero, out, 0, length)
+        copy(bytes, countZero, out, 0, length)
         return out
     }
+
     fun copyAndRepeat(src: UByteArray, dest: UByteArray, destOffset: Int = 0) {
         val end = dest.size
         var i = destOffset
@@ -54,11 +67,13 @@ object UtilsBytes {
     fun copy(src: UByteArray, dest: UByteArray) {
         copy(src, 0, dest, 0, src.size)
     }
+
     fun copy(src: UByteArray, dest: UByteArray, destOffset: Int) {
         copy(src, 0, dest, destOffset, src.size)
     }
+
     fun copy(src: UByteArray, srcOffset: Int, dest: UByteArray, destOffset: Int, length: Int) {
-        System.arraycopy(src.asByteArray(), srcOffset, dest.asByteArray() , destOffset, length)
+        System.arraycopy(src.asByteArray(), srcOffset, dest.asByteArray(), destOffset, length)
     }
 
     fun random(length: Int): UByteArray? {
@@ -71,6 +86,7 @@ object UtilsBytes {
             null
         }
     }
+
     fun random(): UByte? {
         return try {
             val sr = randomGenerator()
@@ -88,6 +104,7 @@ object UtilsBytes {
         }
         return this
     }
+
     fun UByteArray.xor(alter: UByteArray): UByteArray {
         for (i in this.indices) {
             this[i] = (this[i] xor alter[i % alter.size])

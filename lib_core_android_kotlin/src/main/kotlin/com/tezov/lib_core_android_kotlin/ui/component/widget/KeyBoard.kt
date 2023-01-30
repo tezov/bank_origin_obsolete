@@ -1,3 +1,15 @@
+/*
+ *  *********************************************************************************
+ *  Created by Tezov on 30/01/2023 20:18
+ *  Copyright (c) 2023 . All rights reserved.
+ *  Last modified 30/01/2023 20:11
+ *  First project bank / bank.lib_core_android_kotlin.main
+ *  This file is private and it is not allowed to use it, copy it or modified it
+ *  without the permission granted by the owner Tezov. For any request request,
+ *  please send an email to tezov.app@gmail.com
+ *  *********************************************************************************
+ */
+
 package com.tezov.lib_core_android_kotlin.ui.component.widget
 
 import androidx.compose.foundation.gestures.detectTapGestures
@@ -17,7 +29,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 import kotlin.properties.Delegates
 
 infix fun KeyBoard.GridCube.provides(value: KeyBoard.GridCube.Style) =
-    KeyBoard.GridCube.local provides value
+    local provides value
 
 object KeyBoard {
 
@@ -26,19 +38,19 @@ object KeyBoard {
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
-            onclick: (value:String) -> Unit
-         ) = Content(modifier, onclick)
+            onclick: (value: String) -> Unit
+        ) = Content(modifier, onclick)
 
         @Composable
         private fun Content(
             modifier: Modifier = Modifier,
-            onclick: (value:String) -> Unit
+            onclick: (value: String) -> Unit
         ) {
             val keyBoardDigits = remember {
                 val digits = List(10) {
                     GridCube.Common.CubeChar(it.toString()[0])
                 }
-                GridCube.Common.CubesChar(2, digits.shuffled()){
+                GridCube.Common.CubesChar(2, digits.shuffled()) {
                     onclick(_char)
                 }
             }
@@ -191,9 +203,9 @@ object KeyBoard {
             }
         }
 
-        object Common{
+        object Common {
 
-            class CubeChar(char: Char) : Cube{
+            class CubeChar(char: Char) : Cube {
                 val _char = char.toString()
             }
 

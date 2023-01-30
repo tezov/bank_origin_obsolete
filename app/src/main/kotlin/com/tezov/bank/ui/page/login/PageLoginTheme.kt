@@ -1,3 +1,15 @@
+/*
+ *  *********************************************************************************
+ *  Created by Tezov on 30/01/2023 20:18
+ *  Copyright (c) 2023 . All rights reserved.
+ *  Last modified 30/01/2023 20:11
+ *  First project bank / bank.app.main
+ *  This file is private and it is not allowed to use it, copy it or modified it
+ *  without the permission granted by the owner Tezov. For any request request,
+ *  please send an email to tezov.app@gmail.com
+ *  *********************************************************************************
+ */
+
 package com.tezov.bank.ui.page.login
 
 import androidx.compose.foundation.BorderStroke
@@ -20,32 +32,38 @@ import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 val PageLoginTheme.colors: PageLoginTheme.Colors
     @Composable
     @ReadOnlyComposable
-    get() = PageLoginTheme.localColors.current
-infix fun PageLoginTheme.provides(value: PageLoginTheme.Colors) = PageLoginTheme.localColors provides value
+    get() = localColors.current
+
+infix fun PageLoginTheme.provides(value: PageLoginTheme.Colors) = localColors provides value
 
 val PageLoginTheme.dimensions: PageLoginTheme.Dimensions
     @Composable
     @ReadOnlyComposable
-    get() = PageLoginTheme.localDimensions.current
-infix fun PageLoginTheme.provides(value: PageLoginTheme.Dimensions) = PageLoginTheme.localDimensions provides value
+    get() = localDimensions.current
+
+infix fun PageLoginTheme.provides(value: PageLoginTheme.Dimensions) = localDimensions provides value
 
 val PageLoginTheme.shapes: PageLoginTheme.Shapes
     @Composable
     @ReadOnlyComposable
-    get() = PageLoginTheme.localShapes.current
-infix fun PageLoginTheme.provides(value: PageLoginTheme.Shapes) = PageLoginTheme.localShapes provides value
+    get() = localShapes.current
+
+infix fun PageLoginTheme.provides(value: PageLoginTheme.Shapes) = localShapes provides value
 
 val PageLoginTheme.borders: PageLoginTheme.Borders
     @Composable
     @ReadOnlyComposable
-    get() = PageLoginTheme.localBorders.current
-infix fun PageLoginTheme.provides(value: PageLoginTheme.Borders) = PageLoginTheme.localBorders provides value
+    get() = localBorders.current
+
+infix fun PageLoginTheme.provides(value: PageLoginTheme.Borders) = localBorders provides value
 
 val PageLoginTheme.typographies: PageLoginTheme.Typographies
     @Composable
     @ReadOnlyComposable
-    get() = PageLoginTheme.localTypographies.current
-infix fun PageLoginTheme.provides(value: PageLoginTheme.Typographies) = PageLoginTheme.localTypographies provides value
+    get() = localTypographies.current
+
+infix fun PageLoginTheme.provides(value: PageLoginTheme.Typographies) =
+    localTypographies provides value
 
 object PageLoginTheme {
 
@@ -113,9 +131,10 @@ object PageLoginTheme {
         paddingVerticalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
     )
 
-    internal val localDimensions: ProvidableCompositionLocal<Dimensions> = staticCompositionLocalOf {
-        error("not provided")
-    }
+    internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
+        staticCompositionLocalOf {
+            error("not provided")
+        }
 
     data class Shapes(
         val button: Shape,
@@ -138,7 +157,7 @@ object PageLoginTheme {
         val buttonDark: BorderStroke,
         val buttonOutline: BorderStroke,
 
-    )
+        )
 
     @Composable
     fun provideBorders() = Borders(
@@ -203,9 +222,10 @@ object PageLoginTheme {
 
     )
 
-    internal val localTypographies: ProvidableCompositionLocal<Typographies> = staticCompositionLocalOf {
-        error("not provided")
-    }
+    internal val localTypographies: ProvidableCompositionLocal<Typographies> =
+        staticCompositionLocalOf {
+            error("not provided")
+        }
 
     @Composable
     fun provideSwiperPagerStyle() = Swiper.Pager.Style(

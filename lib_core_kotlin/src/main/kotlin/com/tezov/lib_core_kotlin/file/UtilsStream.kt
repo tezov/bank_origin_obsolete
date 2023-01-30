@@ -1,8 +1,19 @@
+/*
+ *  *********************************************************************************
+ *  Created by Tezov on 30/01/2023 20:18
+ *  Copyright (c) 2023 . All rights reserved.
+ *  Last modified 30/01/2023 20:11
+ *  First project bank / bank.lib_core_kotlin.main
+ *  This file is private and it is not allowed to use it, copy it or modified it
+ *  without the permission granted by the owner Tezov. For any request request,
+ *  please send an email to tezov.app@gmail.com
+ *  *********************************************************************************
+ */
+
 package com.tezov.lib_core_kotlin.file
 
-import com.tezov.lib_core_kotlin.socket.UtilsSocket.receive
-import kotlin.Throws
 import com.tezov.lib_core_kotlin.file.UtilsFile.DigesterCRC32
+import com.tezov.lib_core_kotlin.socket.UtilsSocket.receive
 import java.io.*
 
 object UtilsStream {
@@ -473,7 +484,7 @@ object UtilsStream {
         private val oneByteBuffer = ByteArray(1)
         private var crcHasBeenChecked = false
 
-        constructor(file: File) : this(file.outputStream) {}
+        constructor(file: File) : this(file.outputStream)
 
         fun setTotalLengthToWrite(value: Int?) {
             lengthWritten = 0

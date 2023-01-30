@@ -1,9 +1,18 @@
+/*
+ *  *********************************************************************************
+ *  Created by Tezov on 30/01/2023 20:18
+ *  Copyright (c) 2023 . All rights reserved.
+ *  Last modified 30/01/2023 20:11
+ *  First project bank / bank.lib_core_kotlin.main
+ *  This file is private and it is not allowed to use it, copy it or modified it
+ *  without the permission granted by the owner Tezov. For any request request,
+ *  please send an email to tezov.app@gmail.com
+ *  *********************************************************************************
+ */
+
 package com.tezov.lib_core_kotlin.file
 
 import com.tezov.lib_core_kotlin.type.collection.ListEntry
-import kotlin.properties.Delegates
-import kotlin.properties.ReadWriteProperty
-import kotlin.reflect.KProperty
 
 object StoragePackage {
 
@@ -16,21 +25,33 @@ object StoragePackage {
         val publicDataPath: String
     }
 
-    private lateinit var _environnement:Environnement
-    var environnement:Environnement
-    get() = _environnement
-    set(value) {
-        _environnement =value
-        Type.items.clear()
-        Type.items.apply {
-            add("PRIVATE_DATA", Type("PRIVATE_DATA",_environnement.privateDataPath))
-            add("PRIVATE_DATA_CACHE", Type("PRIVATE_DATA_CACHE",_environnement.privateDataCachePath))
-            add("PRIVATE_DATA_FILE", Type("PRIVATE_DATA_FILE",_environnement.privateDataFilePath))
-            add("PRIVATE_DATABASE", Type("PRIVATE_DATABASE",_environnement.privateDataBasePath))
-            add("PRIVATE_SHARE_PREFERENCE", Type("PRIVATE_SHARE_PREFERENCE",_environnement.privateSharePreferencePath))
-            add("PUBLIC_DATA", Type("PUBLIC_DATA",_environnement.publicDataPath))
+    private lateinit var _environnement: Environnement
+    var environnement: Environnement
+        get() = _environnement
+        set(value) {
+            _environnement = value
+            Type.items.clear()
+            Type.items.apply {
+                add("PRIVATE_DATA", Type("PRIVATE_DATA", _environnement.privateDataPath))
+                add(
+                    "PRIVATE_DATA_CACHE",
+                    Type("PRIVATE_DATA_CACHE", _environnement.privateDataCachePath)
+                )
+                add(
+                    "PRIVATE_DATA_FILE",
+                    Type("PRIVATE_DATA_FILE", _environnement.privateDataFilePath)
+                )
+                add(
+                    "PRIVATE_DATABASE",
+                    Type("PRIVATE_DATABASE", _environnement.privateDataBasePath)
+                )
+                add(
+                    "PRIVATE_SHARE_PREFERENCE",
+                    Type("PRIVATE_SHARE_PREFERENCE", _environnement.privateSharePreferencePath)
+                )
+                add("PUBLIC_DATA", Type("PUBLIC_DATA", _environnement.publicDataPath))
+            }
         }
-    }
 
     init {
         Path.items.apply {
@@ -43,27 +64,28 @@ object StoragePackage {
     }
 
 
-    class Type(val name:String, val path: String) {
+    class Type(val name: String, val path: String) {
         fun newDirectory(path: Path?) = path?.let { Directory(this, it) } ?: let { Directory(this) }
         fun newFile(path: Path?) = path?.let { File(this, it) } ?: let { File(this) }
         fun newFileW() = FileW(path)
-        companion object{
-            internal val items = ListEntry<String, Type>()
-            fun valueOf(name:String) = items.getValue(name)
 
-            val PRIVATE_DATA get() = Type.valueOf("PRIVATE_DATA")
-            val PRIVATE_DATA_CACHE get() = Type.valueOf("PRIVATE_DATA_CACHE")
-            val PRIVATE_DATA_FILE get() = Type.valueOf("PRIVATE_DATA_FILE")
-            val PRIVATE_DATABASE get() = Type.valueOf("PRIVATE_DATABASE")
-            val PRIVATE_SHARE_PREFERENCE get() = Type.valueOf("PRIVATE_SHARE_PREFERENCE")
-            val PUBLIC_DATA get() = Type.valueOf("PUBLIC_DATA")
+        companion object {
+            internal val items = ListEntry<String, Type>()
+            fun valueOf(name: String) = items.getValue(name)
+
+            val PRIVATE_DATA get() = valueOf("PRIVATE_DATA")
+            val PRIVATE_DATA_CACHE get() = valueOf("PRIVATE_DATA_CACHE")
+            val PRIVATE_DATA_FILE get() = valueOf("PRIVATE_DATA_FILE")
+            val PRIVATE_DATABASE get() = valueOf("PRIVATE_DATABASE")
+            val PRIVATE_SHARE_PREFERENCE get() = valueOf("PRIVATE_SHARE_PREFERENCE")
+            val PUBLIC_DATA get() = valueOf("PUBLIC_DATA")
         }
     }
 
-    class Path(val name:String, val value: String) {
-        companion object{
+    class Path(val name: String, val value: String) {
+        companion object {
             internal val items = ListEntry<String, Path>()
-            fun valueOf(name:String) = items.getValue(name)
+            fun valueOf(name: String) = items.getValue(name)
             val TEMP get() = valueOf("TEMP")
             val TRASH get() = valueOf("TRASH")
             val DATABASE get() = valueOf("DATABASE")
@@ -71,7 +93,6 @@ object StoragePackage {
             val SHARED_PREFERENCES get() = valueOf("SHARED_PREFERENCES")
         }
     }
-
 
 
 }

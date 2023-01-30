@@ -1,3 +1,15 @@
+/*
+ *  *********************************************************************************
+ *  Created by Tezov on 30/01/2023 20:18
+ *  Copyright (c) 2023 . All rights reserved.
+ *  Last modified 30/01/2023 20:11
+ *  First project bank / bank.app.main
+ *  This file is private and it is not allowed to use it, copy it or modified it
+ *  without the permission granted by the owner Tezov. For any request request,
+ *  please send an email to tezov.app@gmail.com
+ *  *********************************************************************************
+ */
+
 package com.tezov.bank.ui.dialog.login.auth
 
 import androidx.compose.foundation.BorderStroke
@@ -20,42 +32,42 @@ import com.tezov.lib_core_android_kotlin.ui.util.ExtensionDensity.toPx
 val DialogLoginAuthTheme.colors: DialogLoginAuthTheme.Colors
     @Composable
     @ReadOnlyComposable
-    get() = DialogLoginAuthTheme.localColors.current
+    get() = localColors.current
 
 infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Colors) =
-    DialogLoginAuthTheme.localColors provides value
+    localColors provides value
 
 val DialogLoginAuthTheme.dimensions: DialogLoginAuthTheme.Dimensions
     @Composable
     @ReadOnlyComposable
-    get() = DialogLoginAuthTheme.localDimensions.current
+    get() = localDimensions.current
 
 infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Dimensions) =
-    DialogLoginAuthTheme.localDimensions provides value
+    localDimensions provides value
 
 val DialogLoginAuthTheme.shapes: DialogLoginAuthTheme.Shapes
     @Composable
     @ReadOnlyComposable
-    get() = DialogLoginAuthTheme.localShapes.current
+    get() = localShapes.current
 
 infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Shapes) =
-    DialogLoginAuthTheme.localShapes provides value
+    localShapes provides value
 
 val DialogLoginAuthTheme.borders: DialogLoginAuthTheme.Borders
     @Composable
     @ReadOnlyComposable
-    get() = DialogLoginAuthTheme.localBorders.current
+    get() = localBorders.current
 
 infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Borders) =
-    DialogLoginAuthTheme.localBorders provides value
+    localBorders provides value
 
 val DialogLoginAuthTheme.typographies: DialogLoginAuthTheme.Typographies
     @Composable
     @ReadOnlyComposable
-    get() = DialogLoginAuthTheme.localTypographies.current
+    get() = localTypographies.current
 
 infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Typographies) =
-    DialogLoginAuthTheme.localTypographies provides value
+    localTypographies provides value
 
 object DialogLoginAuthTheme {
 
