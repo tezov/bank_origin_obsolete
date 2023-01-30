@@ -4,7 +4,6 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.DialogA
 import kotlinx.coroutines.CoroutineScope
 
 class DialogLoginAuthAction private constructor(
-    private val coroutineScope: CoroutineScope,
     private val action: com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction,
 
     ): DialogAction<DialogLoginAuthState> {
@@ -12,10 +11,8 @@ class DialogLoginAuthAction private constructor(
 
     companion object {
         fun create(
-            coroutineScope: CoroutineScope,
             action: com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction,
         ) = DialogLoginAuthAction(
-            coroutineScope = coroutineScope,
             action = action,
         )
     }

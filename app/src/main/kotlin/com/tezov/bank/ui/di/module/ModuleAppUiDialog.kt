@@ -49,13 +49,11 @@ interface ModuleAppUiDialog {
 
         @ScopeAppUiDialog
         class DialogLoginAuthAction @Inject constructor(
-            @QualifierCoroutineScopeMain private val coroutineScope: ModuleCoreUiActivity.State.CoroutineScope,
             private val action: ModuleCoreUiActivity.Action.DialogAction,
         ) : ComposableHolder<com.tezov.bank.ui.dialog.login.auth.DialogLoginAuthAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
                 com.tezov.bank.ui.dialog.login.auth.DialogLoginAuthAction.create(
-                    coroutineScope.get(),
                     action.get()
                 )
         }

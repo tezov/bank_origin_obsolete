@@ -14,7 +14,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Rect
@@ -39,8 +38,6 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 import com.tezov.lib_core_android_kotlin.ui.util.ExtensionCompositionLocal
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
 
@@ -120,7 +117,6 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         )
     }
 
-    @OptIn(ExperimentalComposeUiApi::class)
     @Composable
     private fun ContentBody(
         login: MutableState<String>,
@@ -149,18 +145,10 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
             LocalTextSelectionColors provides textSelectionDisableColors,
             LocalTextToolbar provides textSelectionDisableToolbar
         ) {
-            val coroutine = rememberCoroutineScope()
-            val keyboardController = LocalSoftwareKeyboardController.current
-            val focusManager = LocalFocusManager.current
-            val focusLogin = remember {
-                FocusRequester()
+            val focusManagement = remember {
+                DialogLoginAuthFocusManager(login, password)
             }
-            val focusPassword = remember {
-                FocusRequester()
-            }
-            val focusOwner = remember {
-                mutableStateOf<FocusRequester?>(null)
-            }
+            focusManagement.compose()
 
             Column(
                 modifier = Modifier
@@ -189,14 +177,10 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                             .fillMaxWidth()
                             .wrapContentHeight()
                             .align(Alignment.CenterVertically)
-                            .focusRequester(focusLogin)
+                            .focusRequester(focusManagement.focusLogin)
                             .onFocusChanged {
                                 if (it.isFocused) {
-                                    focusOwner.value = focusLogin
-                                    coroutine.launch {
-                                        delay(100)
-                                        keyboardController?.show()
-                                    }
+                                    focusManagement.onLoginFocus()
                                 }
                             },
                         value = login.value,
@@ -210,14 +194,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                             if (it.length <= LOGIN_LENGTH) {
                                 login.value = it
                             }
-                            if (it.length >= LOGIN_LENGTH) {
-                                if (password.value.length < PASSWORD_LENGTH) {
-                                    focusPassword.requestFocus()
-                                } else {
-                                    keyboardController?.hide()
-                                    focusManager.clearFocus(true)
-                                }
-                            }
+                            focusManagement.onLoginChange()
                         },
                         singleLine = true,
                         colors = TextFieldDefaults.textFieldColors(
@@ -230,17 +207,16 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         ),
                         keyboardActions = KeyboardActions(
                             onDone = {
-                                keyboardController?.hide()
-                                focusManager.clearFocus(true)
+                                focusManagement.requestClearFocus()
                             },
                             onNext = {
-                                focusPassword.requestFocus()
+                                focusManagement.requestPasswordFocus()
                             }
                         ),
                         trailingIcon = {
                             IconButton(onClick = {
                                 login.value = ""
-                                focusLogin.requestFocus()
+                                focusManagement.requestLoginFocus()
                             }) {
                                 Icon(
                                     modifier = Modifier
@@ -282,14 +258,10 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                                 .fillMaxWidth()
                                 .wrapContentHeight()
                                 .align(Alignment.CenterVertically)
-                                .focusRequester(focusPassword)
+                                .focusRequester(focusManagement.focusPassword)
                                 .onFocusChanged {
                                     if (it.isFocused) {
-                                        focusOwner.value = focusPassword
-                                        coroutine.launch {
-                                            delay(100)
-                                            keyboardController?.hide()
-                                        }
+                                        focusManagement.onPasswordFocus()
                                     }
                                 },
                             value = password.value,
@@ -315,9 +287,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                                 IconButton(onClick = {
                                     password.takeIf { it.value.isNotEmpty() }?.apply {
                                         value = value.dropLast(1)
-                                        if (focusOwner.value != focusPassword) {
-                                            focusPassword.requestFocus()
-                                        }
+                                        focusManagement.requestPasswordFocus()
                                     }
                                 }) {
                                     Icon(
@@ -343,36 +313,28 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         .wrapContentHeight()
                         .padding(MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                         .alpha(
-                            when (focusOwner.value == focusPassword) {
+                            when (focusManagement.isPasswordHasFocus()) {
                                 true -> 1.0f
                                 false -> 0.35f
                             }
                         )
                 ) {
+
                     if (password.value.length < PASSWORD_LENGTH) {
                         password.value = password.value + it
-                        if (focusOwner.value != focusPassword) {
-                            focusPassword.requestFocus()
-                        }
-                    } else if (login.value.length < LOGIN_LENGTH) {
-                        if (focusOwner.value != focusLogin) {
-                            focusLogin.requestFocus()
-                        }
-                    } else {
-                        keyboardController?.hide()
-                        focusManager.clearFocus(true)
+
                     }
+                    focusManagement.onPasswordChange()
                 }
             }
 
             LaunchedEffect(Unit) {
                 if (login.value.isEmpty()) {
-                    focusLogin.requestFocus()
+                    focusManagement.requestLoginFocus()
                 } else {
-                    focusPassword.requestFocus()
+                    focusManagement.requestPasswordFocus()
                 }
             }
-
 
         }
     }
