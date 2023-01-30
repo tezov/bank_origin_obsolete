@@ -24,6 +24,10 @@
     </string-array>
 
     <!--    help and service-->
+    <string name="pg_h_and_s_title_help_and_service">Aide &amp; services</string>
+    <string name="pg_h_and_s_section_contact">CONTACTER LA HELLO TEAM</string>
+    <string name="pg_h_and_s_section_notice">MENTION LEGALES</string>
+    <string name="pg_h_and_s_icon_close">close icon</string>
 
 
     <!--    dialog login auth-->

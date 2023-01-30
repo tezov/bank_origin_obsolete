@@ -1,36 +1,26 @@
 package com.tezov.bank.ui.page.help_and_service
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.GridItemSpan
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
-import com.tezov.bank.ui.dialog.login.auth.DialogLoginAuthTheme
-import com.tezov.bank.ui.dialog.login.auth.colors
-import com.tezov.bank.ui.dialog.login.auth.dimensions
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonResource
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
@@ -76,7 +66,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                         Icon(
                             modifier = Modifier.size(PageHelpAndServiceTheme.dimensions.iconCloseSize),
                             painter = painterResource(id = R.drawable.ic_close_24dp),
-                            contentDescription = null,
+                            contentDescription = stringResource(id = R.string.pg_h_and_s_icon_close),
                             tint = PageHelpAndServiceTheme.colors.onBackgroundLight,
                         )
                     }
@@ -86,14 +76,14 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                 ) {
-                    contentHelpAndService {
+                    contentHelpAndService(state.helpAndServices) { index ->
 
                     }
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.normal_v))
-                    contentContact {
+                    contentContact(state.contacts) { index ->
 
                     }
-                    contentLegalNotice {
+                    contentLegalNotice(state.notices) { index ->
 
                     }
                 }
@@ -103,18 +93,12 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
     @Composable
     private fun contentHelpAndService(
+        datas: List<Pair<String, Int>>,
         onClick: (Int) -> Unit
     ) {
-        val itemsData = listOf(
-            Pair("Opposer une carte", com.tezov.bank.R.drawable.ic_crisis_24dp),
-            Pair("Contester un prélèvement", com.tezov.bank.R.drawable.ic_argue_24dp),
-            Pair("Suivre mon dossier", com.tezov.bank.R.drawable.ic_checklist_24dp),
-            Pair("Trouver un distributeur", com.tezov.bank.R.drawable.ic_euro_24dp),
-            Pair("Retirer à l'étranger", com.tezov.bank.R.drawable.ic_explore_24dp),
-            Pair("Découvrir l'application", com.tezov.bank.R.drawable.ic_search_24dp),
-            Pair("Accéder à l'assitance technique", com.tezov.bank.R.drawable.ic_help_24dp),
-        )
-
+        if(datas.isEmpty()){
+            return
+        }
         Column(
             modifier = Modifier
                 .padding(
@@ -124,7 +108,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
         ) {
             Text(
                 modifier = Modifier.wrapContentSize(),
-                text = "Aide & services",
+                text = stringResource(id = R.string.pg_h_and_s_title_help_and_service),
                 style = PageHelpAndServiceTheme.typographies.titleBig
             )
             Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.normal_v))
@@ -135,10 +119,10 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                     .wrapContentHeight(),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_h),
             ) {
-                val end = (itemsData.size % 2).takeIf { it == 0 } ?: let { itemsData.size - 1 }
+                val end = (datas.size % 2).takeIf { it == 0 } ?: let { datas.size - 1 }
                 for (i in 0 until end step 2) {
-                    val startData = itemsData[i]
-                    val endData = itemsData[i + 1]
+                    val startData = datas[i]
+                    val endData = datas[i + 1]
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
@@ -150,25 +134,28 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                                 .wrapContentHeight()
                                 .weight(1f),
                             text = startData.first,
-                            iconResourceId = startData.second
+                            iconResourceId = startData.second,
+                            onClick = { onClick(i) }
                         )
                         CardSmall(
                             modifier = Modifier
                                 .wrapContentHeight()
                                 .weight(1f),
                             text = endData.first,
-                            iconResourceId = endData.second
+                            iconResourceId = endData.second,
+                            onClick = { onClick(i+1) }
                         )
                     }
                 }
-                if (end != itemsData.size) {
-                    val data = itemsData.last()
+                if (end != datas.size) {
+                    val data = datas.last()
                     CardLarge(
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentHeight(),
                         text = data.first,
-                        iconResourceId = data.second
+                        iconResourceId = data.second,
+                        onClick = { onClick(datas.size-1) }
                     )
                 }
             }
@@ -179,7 +166,8 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     private fun CardSmall(
         modifier: Modifier,
         text: String,
-        iconResourceId: Int
+        iconResourceId: Int,
+        onClick: () -> Unit
     ) {
         val iconSize = PageHelpAndServiceTheme.dimensions.iconCardSize
         val ID_ICON = "icon"
@@ -203,7 +191,9 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
             }
         }
         Surface(
-            modifier = modifier,
+            modifier = modifier.clickable {
+                onClick()
+            },
             color = MaterialTheme.colorsCommonResource.transparent,
             shape = PageHelpAndServiceTheme.shapes.card,
             border = PageHelpAndServiceTheme.borders.card,
@@ -231,7 +221,6 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                     overflow = TextOverflow.Visible
                 )
             }
-
         }
     }
 
@@ -239,10 +228,11 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     private fun CardLarge(
         modifier: Modifier,
         text: String,
-        iconResourceId: Int
+        iconResourceId: Int,
+        onClick: () -> Unit
     ) {
         Surface(
-            modifier = modifier,
+            modifier = modifier.clickable { onClick() },
             color = MaterialTheme.colorsCommonResource.transparent,
             shape = PageHelpAndServiceTheme.shapes.card,
             border = PageHelpAndServiceTheme.borders.card
@@ -278,13 +268,12 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
     @Composable
     private fun contentContact(
+        datas: List<Pair<String, Int>>,
         onClick: (Int) -> Unit
     ) {
-        val itemsData = listOf(
-            Pair("Appeler", R.drawable.ic_call_24dp),
-            Pair("Service sourds et malentendats", R.drawable.ic_hearing_disabled_24dp),
-        )
-
+        if(datas.isEmpty()){
+            return
+        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -300,7 +289,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                     modifier = Modifier
                         .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                         .wrapContentSize(),
-                    text = "CONTACTER LA HELLO TEAM",
+                    text = stringResource(id = R.string.pg_h_and_s_section_contact),
                     style = PageHelpAndServiceTheme.typographies.titleNormal
                 )
             }
@@ -310,10 +299,11 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                     .wrapContentHeight(),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_h),
             ) {
-                itemsData.forEach { data ->
+                datas.forEachIndexed { index, data ->
                     RowWithStartIcon(
                         text = data.first,
-                        iconResourceId = data.second
+                        iconResourceId = data.second,
+                        onClick = { onClick(index) }
                     )
                 }
             }
@@ -323,10 +313,12 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     @Composable
     private fun RowWithStartIcon(
         text: String,
-        iconResourceId: Int
+        iconResourceId: Int,
+        onClick: () -> Unit
     ) {
         Row(
             modifier = Modifier
+                .clickable { onClick() }
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .padding(
@@ -362,16 +354,12 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
     @Composable
     private fun contentLegalNotice(
+        datas: List<String>,
         onClick: (Int) -> Unit
     ) {
-        val itemsData = listOf(
-            "Mentions légales",
-            "Mentions légales Bourse",
-            "Politique des cookies",
-            "Paramètres des cookies",
-            "A propos de l'accessibilité",
-        )
-
+        if(datas.isEmpty()){
+            return
+        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -387,7 +375,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                     modifier = Modifier
                         .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                         .wrapContentSize(),
-                    text = "MENTION LEGALES",
+                    text = stringResource(id = R.string.pg_h_and_s_section_notice),
                     style = PageHelpAndServiceTheme.typographies.titleNormal
                 )
             }
@@ -397,8 +385,10 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                     .wrapContentHeight(),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_h),
             ) {
-                itemsData.forEach { data ->
-                    RowNormal(data)
+                datas.forEachIndexed{ index, data ->
+                    RowNormal(data){
+                        onClick(index)
+                    }
                 }
             }
         }
@@ -407,9 +397,13 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     @Composable
     private fun RowNormal(
         text: String,
+        onClick: () -> Unit
     ) {
         Row(
             modifier = Modifier
+                .clickable {
+                    onClick
+                }
                 .fillMaxWidth()
                 .wrapContentHeight()
                 .padding(
