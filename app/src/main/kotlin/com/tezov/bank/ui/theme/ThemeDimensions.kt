@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 31/01/2023 20:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 31/01/2023 20:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,7 +33,7 @@ object ThemeDimensions {
         textLink = 20.sp,
         textButton = 18.sp,
         textButtonOutlined = 16.sp,
-        bottomNavigation = 14.sp,
+        bottomNavigation = 12.sp,
         topNavigation = 19.sp,
         snackBarMessage = 19.sp,
         snackBarAction = 19.sp,
