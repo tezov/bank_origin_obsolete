@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 22:29
+ *  Created by Tezov on 31/01/2023 20:01
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 22:28
+ *  Last modified 31/01/2023 20:00
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,6 +26,10 @@ import com.tezov.bank.ui.di.accessor.AccessorAppUiActivity
 import com.tezov.bank.ui.page.help_and_service.PageHelpAndService
 import com.tezov.bank.ui.page.login.PageLogin
 import com.tezov.bank.ui.page.account.PageAccount
+import com.tezov.bank.ui.page.discover.PageDiscover
+import com.tezov.bank.ui.page.help.PageHelp
+import com.tezov.bank.ui.page.payment.PagePayment
+import com.tezov.bank.ui.page.profile.PageProfile
 import com.tezov.bank.ui.page.splash.PageSplash
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
@@ -69,6 +73,30 @@ object NavigationGraph {
             composableWithAnimation(Route.Account){
                 (LocalActivity.current as MainActivity).withBottomNavigationBar{
                     PageAccount(PaddingValues())
+                }
+            }
+
+            composableWithAnimation(Route.Discover){
+                (LocalActivity.current as MainActivity).withBottomNavigationBar{
+                    PageDiscover(PaddingValues())
+                }
+            }
+
+            composableWithAnimation(Route.Help){
+                (LocalActivity.current as MainActivity).withBottomNavigationBar{
+                    PageHelp(PaddingValues())
+                }
+            }
+
+            composableWithAnimation(Route.Profile){
+                (LocalActivity.current as MainActivity).withBottomNavigationBar{
+                    PageProfile(PaddingValues())
+                }
+            }
+
+            composableWithAnimation(Route.Payment){
+                (LocalActivity.current as MainActivity).withBottomNavigationBar{
+                    PagePayment(PaddingValues())
                 }
             }
 

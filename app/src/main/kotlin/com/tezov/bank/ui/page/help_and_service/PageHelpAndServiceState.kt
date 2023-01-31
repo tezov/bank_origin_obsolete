@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 31/01/2023 20:01
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 31/01/2023 19:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -45,7 +45,7 @@ class PageHelpAndServiceState private constructor(
                 Pair("Opposer une carte", R.drawable.ic_crisis_24dp),
                 Pair("Contester un prélèvement", R.drawable.ic_argue_24dp),
                 Pair("Suivre mon dossier", R.drawable.ic_checklist_24dp),
-                Pair("Trouver un distributeur", R.drawable.ic_euro_24dp),
+                Pair("Trouver un distributeur", R.drawable.ic_atm_24dp),
                 Pair("Retirer à l'étranger", R.drawable.ic_explore_24dp),
                 Pair("Découvrir l'application", R.drawable.ic_search_24dp),
                 Pair("Accéder à l'assitance technique", R.drawable.ic_help_24dp),

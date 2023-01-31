@@ -1,0 +1,26 @@
+<!--
+  ~  *********************************************************************************
+  ~  Created by Tezov on 31/01/2023 20:01
+  ~  Copyright (c) 2023 . All rights reserved.
+  ~  Last modified 31/01/2023 19:57
+  ~  First project bank / bank.app.main
+  ~  This file is private and it is not allowed to use it, copy it or modified it
+  ~  without the permission granted by the owner Tezov. For any request request,
+  ~  please send an email to tezov.app@gmail.com
+  ~  *********************************************************************************
+  -->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <group
+        android:pivotX="12"
+        android:pivotY="12"
+        android:rotation="90">
+        <path
+            android:fillColor="@android:color/black"
+            android:pathData="M9,3L5,6.99h3L8,14h2L10,6.99h3L9,3zM16,17.01L16,10h-2v7.01h-3L15,21l4,-3.99h-3z" />
+    </group>
+</vector>

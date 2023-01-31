@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 31/01/2023 20:01
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 31/01/2023 19:35
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,15 +32,7 @@ interface ModuleAppUiActivity {
         fun provideContextMain(
             state: State.ActivityMainState,
             action: Action.ActivityMainAction
-        ): ComponentContextLazy<MainActivityState, MainActivityAction> =
-            object :
-                ComponentContextLazy<MainActivityState, MainActivityAction> {
-
-                override fun lazyState() = state
-
-                override fun lazyAction() = action
-
-            }
+        ) = ComponentContextLazy.make(state, action)
 
     }
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 22:29
+ *  Created by Tezov on 31/01/2023 20:01
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 22:28
+ *  Last modified 31/01/2023 19:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,11 +21,11 @@ sealed class BottomNavigationItems(titleResourceId: Int, icon: Int, route: Route
     companion object {
         val items: Set<BottomNavigationItemData> by lazy {
             setOf(
-                BottomNavigationItemData(R.string.nav_btm_A, R.drawable.ic_cancel_round_24dp, Route.Account),
-                BottomNavigationItemData(R.string.nav_btm_B, R.drawable.ic_cancel_round_24dp, Route.Help),
-                BottomNavigationItemData(R.string.nav_btm_C, R.drawable.ic_cancel_round_24dp, Route.Discover),
-                BottomNavigationItemData(R.string.nav_btm_D, R.drawable.ic_cancel_round_24dp, Route.Payment),
-                BottomNavigationItemData(R.string.nav_btm_E, R.drawable.ic_cancel_round_24dp, Route.Profile),
+                BottomNavigationItemData(R.string.nav_btm_account, R.drawable.ic_home_24dp, Route.Account),
+                BottomNavigationItemData(R.string.nav_btm_help, R.drawable.ic_help_square24dp, Route.Help),
+                BottomNavigationItemData(R.string.nav_btm_discover, R.drawable.ic_list_24dp, Route.Discover),
+                BottomNavigationItemData(R.string.nav_btm_payment, R.drawable.ic_transfert_24dp, Route.Payment),
+                BottomNavigationItemData(R.string.nav_btm_profile, R.drawable.ic_profile_24dp, Route.Profile),
             )
         }
     }

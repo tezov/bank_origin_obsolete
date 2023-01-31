@@ -1,8 +1,8 @@
 <!--
   ~  *********************************************************************************
-  ~  Created by Tezov on 30/01/2023 22:29
+  ~  Created by Tezov on 31/01/2023 20:01
   ~  Copyright (c) 2023 . All rights reserved.
-  ~  Last modified 30/01/2023 22:28
+  ~  Last modified 31/01/2023 19:44
   ~  First project bank / bank.app.main
   ~  This file is private and it is not allowed to use it, copy it or modified it
   ~  without the permission granted by the owner Tezov. For any request request,
@@ -17,11 +17,11 @@
 
 
     <!--    bottom navigation-->
-    <string name="nav_btm_A">A</string>
-    <string name="nav_btm_B">B</string>
-    <string name="nav_btm_C">C</string>
-    <string name="nav_btm_D">D</string>
-    <string name="nav_btm_E">E</string>
+    <string name="nav_btm_account">Account</string>
+    <string name="nav_btm_help">Help</string>
+    <string name="nav_btm_discover">Discover</string>
+    <string name="nav_btm_payment">Payment</string>
+    <string name="nav_btm_profile">Profile</string>
 
     <!--    login-->
     <string name="pg_login_pager_0">Balayer l\'écran vers la gauche\npour afficher votre solde.</string>
