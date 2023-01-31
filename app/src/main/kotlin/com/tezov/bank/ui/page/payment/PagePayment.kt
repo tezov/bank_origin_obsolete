@@ -10,7 +10,7 @@
  *  *********************************************************************************
  */
 
-package com.tezov.bank.ui.page.discover
+package com.tezov.bank.ui.page.payment
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -25,25 +25,25 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.util.ExtensionCompositionLocal
 
-object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
+object PagePayment : Page<PagePaymentState, PagePaymentAction> {
 
     @Composable
-    override fun Page<PageDiscoverState, PageDiscoverAction>.content(innerPadding: PaddingValues) {
-        val accessor = AccessorAppUiPage().get(requester = this).contextDiscover()
+    override fun Page<PagePaymentState, PagePaymentAction>.content(innerPadding: PaddingValues) {
+        val accessor = AccessorAppUiPage().get(requester = this).contextPayment()
         val action = accessor.action()
         val state = accessor.state()
 
 
         ExtensionCompositionLocal.CompositionLocalProvider(
             parent = arrayOf(
-                PageDiscoverTheme provides PageDiscoverTheme.provideColors(),
-                PageDiscoverTheme provides PageDiscoverTheme.provideDimensions(),
+                PagePaymentTheme provides PagePaymentTheme.provideColors(),
+                PagePaymentTheme provides PagePaymentTheme.provideDimensions(),
             ),
             child = {
                 arrayOf(
-                    PageDiscoverTheme provides PageDiscoverTheme.provideShapes(),
-                    PageDiscoverTheme provides PageDiscoverTheme.provideBorders(),
-                    PageDiscoverTheme provides PageDiscoverTheme.provideTypographies(),
+                    PagePaymentTheme provides PagePaymentTheme.provideShapes(),
+                    PagePaymentTheme provides PagePaymentTheme.provideBorders(),
+                    PagePaymentTheme provides PagePaymentTheme.provideTypographies(),
                 )
             }
         ) {
