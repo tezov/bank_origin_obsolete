@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 22:29
+ *  Created by Tezov on 31/01/2023 20:43
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 22:22
+ *  Last modified 31/01/2023 20:33
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.bank.navigation
 
+import android.util.Log
 import com.tezov.lib_core_android_kotlin.navigation.RouteManager
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigationAction
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarAction
@@ -41,8 +42,12 @@ class NavigationController(
                     Splash,
                     Login,
                     HelpAndService,
+                    Discover,
+                    Payment,
+                    Help,
+                    Profile,
+                    Account,
                 )
-
             }
         }
 
@@ -75,7 +80,7 @@ class NavigationController(
     }
 
     private fun navigateFromBottomNavigation(from: RouteManager.Route?, to: RouteManager.Route){
-        with(navigationController){
+         with(navigationController){
             navigate(to) {
                 popUpTo(to.value) {
                     inclusive = false
@@ -93,7 +98,7 @@ class NavigationController(
                     when(to){
                         Route.Login -> {
                             navigate(to) {
-                                popUpTo(Route.Splash.value) {
+                                popUpTo(from.value) {
                                     inclusive = true
                                 }
                                 launchSingleTop = true
@@ -127,7 +132,7 @@ class NavigationController(
                     when(to){
                         Route.Account -> {
                             navigate(to) {
-                                popUpTo(Route.Login.value) {
+                                popUpTo(from.value) {
                                     inclusive = true
                                 }
                                 launchSingleTop = true

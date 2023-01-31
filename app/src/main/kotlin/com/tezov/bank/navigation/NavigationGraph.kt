@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:01
+ *  Created by Tezov on 31/01/2023 20:43
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:00
+ *  Last modified 31/01/2023 20:18
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,14 +23,14 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.tezov.bank.navigation.NavigationController.Companion.Route
 import com.tezov.bank.ui.activity.MainActivity
 import com.tezov.bank.ui.di.accessor.AccessorAppUiActivity
-import com.tezov.bank.ui.page.help_and_service.PageHelpAndService
-import com.tezov.bank.ui.page.login.PageLogin
-import com.tezov.bank.ui.page.account.PageAccount
-import com.tezov.bank.ui.page.discover.PageDiscover
-import com.tezov.bank.ui.page.help.PageHelp
-import com.tezov.bank.ui.page.payment.PagePayment
-import com.tezov.bank.ui.page.profile.PageProfile
-import com.tezov.bank.ui.page.splash.PageSplash
+import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndService
+import com.tezov.bank.ui.page.lobby.login.PageLogin
+import com.tezov.bank.ui.page.auth.account.PageAccount
+import com.tezov.bank.ui.page.auth.discover.PageDiscover
+import com.tezov.bank.ui.page.auth.help.PageHelp
+import com.tezov.bank.ui.page.auth.payment.PagePayment
+import com.tezov.bank.ui.page.auth.profile.PageProfile
+import com.tezov.bank.ui.page.lobby.splash.PageSplash
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 
