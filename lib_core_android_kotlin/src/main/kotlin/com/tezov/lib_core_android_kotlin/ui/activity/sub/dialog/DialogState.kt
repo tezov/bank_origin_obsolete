@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/02/2023 21:18
+ *  Created by Tezov on 01/02/2023 22:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/02/2023 21:12
+ *  Last modified 01/02/2023 21:19
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/02/2023 21:18
+ *  Created by Tezov on 01/02/2023 22:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/02/2023 20:37
+ *  Last modified 01/02/2023 21:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,7 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 class PageDiscoverState private constructor(
     val cardWithButtonData: SnapshotStateList<CardButtonData>,
     val cardWithLinkData: SnapshotStateList<CardLinkData>,
-    val actionCardData: SnapshotStateList<ActionCardData>,
+    val actionCardData: SnapshotStateList<ActionRowRichData>,
     val actionRowData: SnapshotStateList<ActionRowData>,
 ) : PageState {
 
@@ -28,7 +28,7 @@ class PageDiscoverState private constructor(
         fun create(
             cardWithButtonData: SnapshotStateList<CardButtonData> = mutableStateListOf(),
             cardWithLinkData: SnapshotStateList<CardLinkData> = mutableStateListOf(),
-            actionCardData: SnapshotStateList<ActionCardData> = mutableStateListOf(),
+            actionCardData: SnapshotStateList<ActionRowRichData> = mutableStateListOf(),
             actionRowData: SnapshotStateList<ActionRowData> = mutableStateListOf(),
         ) = PageDiscoverState(
             cardWithButtonData = cardWithButtonData,
@@ -57,9 +57,14 @@ class PageDiscoverState private constructor(
         val iconResourceId: Int,
     )
 
-    data class ActionRowData(
+    data class ActionRowRichData(
         val title: String,
         val iconInfoResourceId: Int? = null,
+        val iconActionResourceId: Int = R.drawable.ic_arrow_cut_right_24dp,
+    )
+
+    data class ActionRowData(
+        val title: String,
         val iconActionResourceId: Int = R.drawable.ic_arrow_cut_right_24dp,
     )
 
@@ -68,29 +73,21 @@ class PageDiscoverState private constructor(
         cardWithButtonData.addAll(
             listOf(
                 CardButtonData("title", "text", "button", R.drawable.ic_call_24dp),
-                CardButtonData("title", "text", "button", R.drawable.ic_call_24dp),
-                CardButtonData("title", "text", "button", R.drawable.ic_call_24dp),
+
             )
         )
 
         cardWithLinkData.addAll(
             listOf(
                 CardLinkData("title", "text", "link", R.drawable.ic_call_24dp),
-                CardLinkData("title", "text", "link", R.drawable.ic_call_24dp),
-                CardLinkData("title", "text", "link", R.drawable.ic_call_24dp),
+
             )
         )
 
         actionCardData.addAll(
             listOf(
-                ActionCardData("title", R.drawable.ic_call_24dp),
-                ActionCardData("title", R.drawable.ic_call_24dp),
-                ActionCardData("title", R.drawable.ic_call_24dp),
-                ActionCardData("title", R.drawable.ic_call_24dp),
-                ActionCardData("title", R.drawable.ic_call_24dp),
-                ActionCardData("title", R.drawable.ic_call_24dp),
-                ActionCardData("title", R.drawable.ic_call_24dp),
-                ActionCardData("title", R.drawable.ic_call_24dp),
+                ActionRowRichData("title", R.drawable.ic_call_24dp),
+
             )
         )
 

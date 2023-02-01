@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 01/02/2023 22:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 01/02/2023 21:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,13 +13,15 @@
 package com.tezov.bank.ui.page.auth.profile
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
+import com.tezov.bank.ui.page.auth.help.PageHelpState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -48,11 +50,48 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
             }
         ) {
 
-            Box(modifier = Modifier
+            Column(modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Gray)) {
+                .background(Color.Gray)
+                .verticalScroll(rememberScrollState())) {
+
+                contentListRich(state.profils)
+                contentList(0, state.documents)
+                contentList(0, state.offers)
+                contentList(0, state.help)
+
             }
         }
+    }
+
+
+    @Composable
+    private fun contentListRich(
+        datas: List<PageProfileState.ActionRowRichData>,
+//        onClick: (Int) -> Unit
+    ) {
+
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .padding(30.dp)
+            .height(250.dp)
+            .background(Color.Red))
+
+    }
+
+    @Composable
+    private fun contentList(
+        title: Int,
+        datas: List<PageProfileState.ActionRowData>,
+//        onClick: (Int) -> Unit
+    ) {
+
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .padding(30.dp)
+            .height(250.dp)
+            .background(Color.Red))
+
     }
 
 

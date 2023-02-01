@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/02/2023 21:18
+ *  Created by Tezov on 01/02/2023 22:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/02/2023 20:19
+ *  Last modified 01/02/2023 21:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,7 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageHelpAndServiceState private constructor(
     val helpAndServices: SnapshotStateList<ActionCardData>,
-    val contacts: SnapshotStateList<ActionRowData>,
+    val contacts: SnapshotStateList<ActionRowRichData>,
     val notices: SnapshotStateList<ActionRowData>,
 ) : PageState {
 
@@ -28,7 +28,7 @@ class PageHelpAndServiceState private constructor(
         @Composable
         fun create(
             helpAndServices: SnapshotStateList<ActionCardData> = mutableStateListOf(),
-            contacts: SnapshotStateList<ActionRowData> = mutableStateListOf(),
+            contacts: SnapshotStateList<ActionRowRichData> = mutableStateListOf(),
             notices: SnapshotStateList<ActionRowData> = mutableStateListOf(),
         ) = PageHelpAndServiceState(
             helpAndServices = helpAndServices,
@@ -42,9 +42,14 @@ class PageHelpAndServiceState private constructor(
         val iconResourceId: Int,
     )
 
-    data class ActionRowData(
+    data class ActionRowRichData(
         val title: String,
         val iconInfoResourceId: Int? = null,
+        val iconActionResourceId: Int = R.drawable.ic_arrow_cut_right_24dp,
+    )
+
+    data class ActionRowData(
+        val title: String,
         val iconActionResourceId: Int = R.drawable.ic_arrow_cut_right_24dp,
     )
 
@@ -62,8 +67,8 @@ class PageHelpAndServiceState private constructor(
         )
         contacts.addAll(
             listOf(
-                ActionRowData("Appeler", R.drawable.ic_call_24dp),
-                ActionRowData(
+                ActionRowRichData("Appeler", R.drawable.ic_call_24dp),
+                ActionRowRichData(
                     "Service sourds et malentendats",
                     R.drawable.ic_hearing_disabled_24dp
                 ),

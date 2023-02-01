@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/02/2023 21:18
+ *  Created by Tezov on 01/02/2023 22:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/02/2023 20:41
+ *  Last modified 01/02/2023 21:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -114,7 +114,7 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
 
     @Composable
     private fun contentProduct(
-//        datas: List<PageDiscoverState.ActionCardData>,
+//        datas: List<PageDiscoverState.ActionRowRichData>,
 //        onClick: (Int) -> Unit
     ) {
 

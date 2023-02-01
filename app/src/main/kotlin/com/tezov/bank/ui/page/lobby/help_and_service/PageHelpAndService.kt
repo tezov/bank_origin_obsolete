@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/02/2023 21:18
+ *  Created by Tezov on 01/02/2023 22:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/02/2023 20:37
+ *  Last modified 01/02/2023 21:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -173,7 +173,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
     @Composable
     private fun contentContact(
-        datas: List<PageHelpAndServiceState.ActionRowData>,
+        datas: List<PageHelpAndServiceState.ActionRowRichData>,
         onClick: (Int) -> Unit
     ) {
         if (datas.isEmpty()) {
@@ -372,7 +372,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
     @Composable
     private fun RowWithStartIcon(
-        data: PageHelpAndServiceState.ActionRowData,
+        data: PageHelpAndServiceState.ActionRowRichData,
         onClick: () -> Unit
     ) {
         Row(

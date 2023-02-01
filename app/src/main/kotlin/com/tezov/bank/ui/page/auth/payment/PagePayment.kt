@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 01/02/2023 22:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 01/02/2023 21:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,12 +13,14 @@
 package com.tezov.bank.ui.page.auth.payment
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.gestures.scrollable
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
@@ -48,11 +50,42 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
             }
         ) {
 
-            Box(modifier = Modifier
+            Column(modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Yellow)) {
+                .background(Color.Yellow)
+                .verticalScroll(rememberScrollState())) {
+                contentCardSmall()
+                contentCardLarge()
             }
         }
+    }
+
+    @Composable
+    private fun contentCardSmall(
+//        datas: List<PagePaymentState.ActionCardData>,
+//        onClick: (Int) -> Unit
+    ) {
+
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .padding(30.dp)
+            .height(250.dp)
+            .background(Color.Cyan))
+
+    }
+
+    @Composable
+    private fun contentCardLarge(
+//        datas: List<PagePaymentState.ActionCardRichData>,
+//        onClick: (Int) -> Unit
+    ) {
+
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .padding(30.dp)
+            .height(250.dp)
+            .background(Color.Cyan))
+
     }
 
 
