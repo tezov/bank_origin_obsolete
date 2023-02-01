@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 01/02/2023 21:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 01/02/2023 20:37
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -105,7 +105,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
     @Composable
     private fun contentHelpAndService(
-        datas: List<Pair<String, Int>>,
+        datas: List<PageHelpAndServiceState.ActionCardData>,
         onClick: (Int) -> Unit
     ) {
         if (datas.isEmpty()) {
@@ -145,16 +145,14 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                             modifier = Modifier
                                 .wrapContentHeight()
                                 .weight(1f),
-                            text = startData.first,
-                            iconResourceId = startData.second,
+                            data = startData,
                             onClick = { onClick(i) }
                         )
                         CardSmall(
                             modifier = Modifier
                                 .wrapContentHeight()
                                 .weight(1f),
-                            text = endData.first,
-                            iconResourceId = endData.second,
+                            data = endData,
                             onClick = { onClick(i + 1) }
                         )
                     }
@@ -165,8 +163,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                         modifier = Modifier
                             .fillMaxWidth()
                             .wrapContentHeight(),
-                        text = data.first,
-                        iconResourceId = data.second,
+                        data = data,
                         onClick = { onClick(datas.lastIndex) }
                     )
                 }
@@ -175,10 +172,107 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     }
 
     @Composable
+    private fun contentContact(
+        datas: List<PageHelpAndServiceState.ActionRowData>,
+        onClick: (Int) -> Unit
+    ) {
+        if (datas.isEmpty()) {
+            return
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+        ) {
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                color = PageHelpAndServiceTheme.colors.backgroundSection
+            ) {
+                Text(
+                    modifier = Modifier
+                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementBig_v)
+                        .wrapContentSize(),
+                    text = stringResource(id = R.string.pg_h_and_s_section_contact),
+                    style = PageHelpAndServiceTheme.typographies.titleNormal
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_h),
+            ) {
+                datas.forEachIndexed { index, data ->
+                    RowWithStartIcon(
+                        data = data,
+                        onClick = { onClick(index) }
+                    )
+                }
+            }
+        }
+    }
+
+    @Composable
+    private fun contentLegalNotice(
+        datas: List<PageHelpAndServiceState.ActionRowData>,
+        onClick: (Int) -> Unit
+    ) {
+        if (datas.isEmpty()) {
+            return
+        }
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .wrapContentHeight()
+        ) {
+            Surface(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight(),
+                color = PageHelpAndServiceTheme.colors.backgroundSection
+            ) {
+                Text(
+                    modifier = Modifier
+                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementBig_v)
+                        .wrapContentSize(),
+                    text = stringResource(id = R.string.pg_h_and_s_section_notice),
+                    style = PageHelpAndServiceTheme.typographies.titleNormal
+                )
+            }
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .wrapContentHeight()
+                    .padding(vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_h),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_h),
+            ) {
+                datas.forEachIndexed { index, data ->
+                    RowSimple(data = data) {
+                        onClick(index)
+                    }
+                    if (index != datas.lastIndex) {
+                        Divider(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(start = MaterialTheme.dimensionsPaddingExtended.blockBig_h),
+                            color = PageHelpAndServiceTheme.colors.divider,
+                            thickness = PageHelpAndServiceTheme.dimensions.divider,
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+
+
+
+    @Composable
     private fun CardSmall(
         modifier: Modifier,
-        text: String,
-        iconResourceId: Int,
+        data: PageHelpAndServiceState.ActionCardData,
         onClick: () -> Unit
     ) {
         val iconSize = PageHelpAndServiceTheme.dimensions.iconCardSize
@@ -222,13 +316,13 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
             ) {
                 Icon(
                     modifier = Modifier.layoutId(ID_ICON),
-                    painter = painterResource(id = iconResourceId),
+                    painter = painterResource(id = data.iconResourceId),
                     tint = PageHelpAndServiceTheme.colors.onBackgroundLight,
-                    contentDescription = text,
+                    contentDescription = data.title,
                 )
                 Text(
                     modifier = Modifier.layoutId(ID_TEXT),
-                    text = text,
+                    text = data.title,
                     style = PageHelpAndServiceTheme.typographies.textCard,
                     overflow = TextOverflow.Visible
                 )
@@ -238,9 +332,8 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
     @Composable
     private fun CardLarge(
-        modifier: Modifier,
-        text: String,
-        iconResourceId: Int,
+        modifier:Modifier,
+        data: PageHelpAndServiceState.ActionCardData,
         onClick: () -> Unit
     ) {
         Surface(
@@ -263,69 +356,23 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                         .wrapContentHeight()
                         .weight(1f)
                         .align(Alignment.Bottom),
-                    text = text,
+                    text = data.title,
                     style = PageHelpAndServiceTheme.typographies.textCard
                 )
                 Icon(
                     modifier = Modifier
                         .size(PageHelpAndServiceTheme.dimensions.iconCardSize),
-                    painter = painterResource(id = iconResourceId),
+                    painter = painterResource(id = data.iconResourceId),
                     tint = PageHelpAndServiceTheme.colors.onBackgroundLight,
-                    contentDescription = text,
+                    contentDescription = data.title,
                 )
-            }
-        }
-    }
-
-
-    @Composable
-    private fun contentContact(
-        datas: List<Pair<String, Int>>,
-        onClick: (Int) -> Unit
-    ) {
-        if (datas.isEmpty()) {
-            return
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-        ) {
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-                color = PageHelpAndServiceTheme.colors.backgroundSection
-            ) {
-                Text(
-                    modifier = Modifier
-                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementBig_v)
-                        .wrapContentSize(),
-                    text = stringResource(id = R.string.pg_h_and_s_section_contact),
-                    style = PageHelpAndServiceTheme.typographies.titleNormal
-                )
-            }
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_h),
-            ) {
-                datas.forEachIndexed { index, data ->
-                    RowWithStartIcon(
-                        text = data.first,
-                        iconResourceId = data.second,
-                        onClick = { onClick(index) }
-                    )
-                }
             }
         }
     }
 
     @Composable
     private fun RowWithStartIcon(
-        text: String,
-        iconResourceId: Int,
+        data: PageHelpAndServiceState.ActionRowData,
         onClick: () -> Unit
     ) {
         Row(
@@ -339,86 +386,36 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(
-                modifier = Modifier
-                    .size(PageHelpAndServiceTheme.dimensions.iconRowSize),
-                painter = painterResource(id = iconResourceId),
-                tint = PageHelpAndServiceTheme.colors.onBackgroundLight,
-                contentDescription = text,
-            )
+            data.iconInfoResourceId?.let {
+                Icon(
+                    modifier = Modifier
+                        .size(PageHelpAndServiceTheme.dimensions.iconRowSize),
+                    painter = painterResource(id = it),
+                    tint = PageHelpAndServiceTheme.colors.onBackgroundLight,
+                    contentDescription = data.title,
+                )
+            }
             Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.normal_h))
             Text(
                 modifier = Modifier
                     .wrapContentHeight()
                     .weight(1f),
-                text = text,
+                text = data.title,
                 style = PageHelpAndServiceTheme.typographies.textRow
             )
             Icon(
                 modifier = Modifier
                     .size(PageHelpAndServiceTheme.dimensions.iconChevronSize),
-                painter = painterResource(id = R.drawable.ic_arrow_cut_right_24dp),
+                painter = painterResource(id = data.iconActionResourceId),
                 tint = PageHelpAndServiceTheme.colors.onBackgroundLight,
-                contentDescription = text,
+                contentDescription = data.title,
             )
         }
     }
 
     @Composable
-    private fun contentLegalNotice(
-        datas: List<String>,
-        onClick: (Int) -> Unit
-    ) {
-        if (datas.isEmpty()) {
-            return
-        }
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-        ) {
-            Surface(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-                color = PageHelpAndServiceTheme.colors.backgroundSection
-            ) {
-                Text(
-                    modifier = Modifier
-                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementBig_v)
-                        .wrapContentSize(),
-                    text = stringResource(id = R.string.pg_h_and_s_section_notice),
-                    style = PageHelpAndServiceTheme.typographies.titleNormal
-                )
-            }
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_h),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_h),
-            ) {
-                datas.forEachIndexed { index, data ->
-                    RowNormal(data) {
-                        onClick(index)
-                    }
-                    if (index != datas.lastIndex) {
-                        Divider(
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(start = MaterialTheme.dimensionsPaddingExtended.blockBig_h),
-                            color = PageHelpAndServiceTheme.colors.divider,
-                            thickness = PageHelpAndServiceTheme.dimensions.divider,
-                        )
-                    }
-                }
-            }
-        }
-    }
-
-    @Composable
-    private fun RowNormal(
-        text: String,
+    private fun RowSimple(
+        data:PageHelpAndServiceState.ActionRowData,
         onClick: () -> Unit
     ) {
         Row(
@@ -438,17 +435,18 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 modifier = Modifier
                     .wrapContentHeight()
                     .weight(1f),
-                text = text,
+                text = data.title,
                 style = PageHelpAndServiceTheme.typographies.textRow
             )
             Icon(
                 modifier = Modifier
                     .size(PageHelpAndServiceTheme.dimensions.iconChevronSize),
-                painter = painterResource(id = R.drawable.ic_arrow_cut_right_24dp),
+                painter = painterResource(id = data.iconActionResourceId),
                 tint = PageHelpAndServiceTheme.colors.onBackgroundLight,
-                contentDescription = text,
+                contentDescription = data.title,
             )
         }
     }
+
 
 }

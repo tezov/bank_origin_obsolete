@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 01/02/2023 21:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 01/02/2023 21:17
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,16 +16,20 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySubState
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonResource
 
 @OptIn(ExperimentalMaterialApi::class)
 class BottomSheetState private constructor(
     val bottomSheetState: ModalBottomSheetState,
+    private val showState: MutableState<Boolean>,
     private val sheetContentUpdated: MutableState<Int>
 ) : ActivitySubState {
 
@@ -37,9 +41,11 @@ class BottomSheetState private constructor(
             bottomSheetState: ModalBottomSheetState = rememberModalBottomSheetState(
                 initialValue = ModalBottomSheetValue.Hidden
             ),
+            showState: MutableState<Boolean> = mutableStateOf(false),
             sheetContentUpdated: MutableState<Int> = mutableStateOf(0)
         ) = BottomSheetState(
             bottomSheetState = bottomSheetState,
+            showState = showState,
             sheetContentUpdated = sheetContentUpdated,
         )
     }
@@ -59,10 +65,25 @@ class BottomSheetState private constructor(
         EmptyContent()
     }
 
+    fun isVisible() = showState.value
+    fun show(visible: Boolean) {
+        showState.value = visible
+    }
+
     @Composable
     internal fun sheetContent() {
-        if (sheetContentUpdated.value >= 0) {
-            _sheetContent()
+        if (isVisible() && sheetContentUpdated.value >= 0) {
+            val locals = Activity.LocalPages.current.last()
+            CompositionLocalProvider(
+                Activity.DebugLocalLevel provides 1,
+                Page.LocalPage provides locals.page,
+                Page.LocalModals provides locals.modals
+            ) {
+                _sheetContent()
+            }
+        }
+        else{
+            EmptyContent()
         }
     }
 

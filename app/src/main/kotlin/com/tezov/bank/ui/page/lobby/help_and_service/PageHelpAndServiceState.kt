@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 01/02/2023 21:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 01/02/2023 20:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,25 +13,23 @@
 package com.tezov.bank.ui.page.lobby.help_and_service
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.tezov.bank.R
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageHelpAndServiceState private constructor(
-    val helpAndServices:SnapshotStateList<Pair<String, Int>>,
-    val contacts:SnapshotStateList<Pair<String, Int>>,
-    val notices:SnapshotStateList<String>,
+    val helpAndServices: SnapshotStateList<ActionCardData>,
+    val contacts: SnapshotStateList<ActionRowData>,
+    val notices: SnapshotStateList<ActionRowData>,
 ) : PageState {
 
     companion object {
         @Composable
         fun create(
-            helpAndServices:SnapshotStateList<Pair<String, Int>> = mutableStateListOf(),
-            contacts:SnapshotStateList<Pair<String, Int>> = mutableStateListOf(),
-            notices:SnapshotStateList<String> = mutableStateListOf(),
+            helpAndServices: SnapshotStateList<ActionCardData> = mutableStateListOf(),
+            contacts: SnapshotStateList<ActionRowData> = mutableStateListOf(),
+            notices: SnapshotStateList<ActionRowData> = mutableStateListOf(),
         ) = PageHelpAndServiceState(
             helpAndServices = helpAndServices,
             contacts = contacts,
@@ -39,31 +37,45 @@ class PageHelpAndServiceState private constructor(
         )
     }
 
+    data class ActionCardData(
+        val title: String,
+        val iconResourceId: Int,
+    )
+
+    data class ActionRowData(
+        val title: String,
+        val iconInfoResourceId: Int? = null,
+        val iconActionResourceId: Int = R.drawable.ic_arrow_cut_right_24dp,
+    )
+
     init {
         helpAndServices.addAll(
             listOf(
-                Pair("Opposer une carte", R.drawable.ic_crisis_24dp),
-                Pair("Contester un prélèvement", R.drawable.ic_argue_24dp),
-                Pair("Suivre mon dossier", R.drawable.ic_checklist_24dp),
-                Pair("Trouver un distributeur", R.drawable.ic_atm_24dp),
-                Pair("Retirer à l'étranger", R.drawable.ic_explore_24dp),
-                Pair("Découvrir l'application", R.drawable.ic_search_24dp),
-                Pair("Accéder à l'assitance technique", R.drawable.ic_help_24dp),
+                ActionCardData("Opposer une carte", R.drawable.ic_crisis_24dp),
+                ActionCardData("Contester un prélèvement", R.drawable.ic_argue_24dp),
+                ActionCardData("Suivre mon dossier", R.drawable.ic_checklist_24dp),
+                ActionCardData("Trouver un distributeur", R.drawable.ic_atm_24dp),
+                ActionCardData("Retirer à l'étranger", R.drawable.ic_explore_24dp),
+                ActionCardData("Découvrir l'application", R.drawable.ic_search_24dp),
+                ActionCardData("Accéder à l'assitance technique", R.drawable.ic_help_24dp),
             )
         )
         contacts.addAll(
             listOf(
-                Pair("Appeler", R.drawable.ic_call_24dp),
-                Pair("Service sourds et malentendats", R.drawable.ic_hearing_disabled_24dp),
+                ActionRowData("Appeler", R.drawable.ic_call_24dp),
+                ActionRowData(
+                    "Service sourds et malentendats",
+                    R.drawable.ic_hearing_disabled_24dp
+                ),
             )
         )
         notices.addAll(
             listOf(
-                "Mentions légales",
-                "Mentions légales Bourse",
-                "Politique des cookies",
-                "Paramètres des cookies",
-                "A propos de l'accessibilité",
+                ActionRowData("Mentions légales"),
+                ActionRowData("Mentions légales Bourse"),
+                ActionRowData("Politique des cookies"),
+                ActionRowData("Paramètres des cookies"),
+                ActionRowData("A propos de l'accessibilité"),
             )
         )
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 01/02/2023 21:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 01/02/2023 21:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -42,6 +42,7 @@ class BottomSheetAction constructor(
         currentJob?.cancel()
         currentJob = coroutineScope.launch {
             state.sheetContent(content)
+            state.show(true)
             state.bottomSheetState.show()
         }
     }
@@ -51,7 +52,8 @@ class BottomSheetAction constructor(
         currentJob?.cancel()
         currentJob = coroutineScope.launch {
             state.bottomSheetState.hide()
-            state.sheetContent({state.EmptyContent()}) //todo wait animation done
+            state.show(false)
+            state.sheetContent { state.EmptyContent() } //todo wait animation done
         }
     }
 
