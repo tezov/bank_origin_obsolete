@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 02/02/2023 20:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 02/02/2023 20:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,6 +24,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val PageHelpTheme.colors: PageHelpTheme.Colors
@@ -47,13 +48,6 @@ val PageHelpTheme.shapes: PageHelpTheme.Shapes
 
 infix fun PageHelpTheme.provides(value: PageHelpTheme.Shapes) = localShapes provides value
 
-val PageHelpTheme.borders: PageHelpTheme.Borders
-    @Composable
-    @ReadOnlyComposable
-    get() = localBorders.current
-
-infix fun PageHelpTheme.provides(value: PageHelpTheme.Borders) = localBorders provides value
-
 val PageHelpTheme.typographies: PageHelpTheme.Typographies
     @Composable
     @ReadOnlyComposable
@@ -66,13 +60,21 @@ object PageHelpTheme {
 
     data class Colors(
         val background: Color,
-        val textContent: Color,
+        val backgroundSection: Color,
+        val divider: Color,
+        val textTitle: Color,
+        val textNormal: Color,
+        val iconSection: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
-        background = MaterialTheme.colors.primary,
-        textContent = MaterialTheme.colorsCommonExtended.onPrimaryLight,
+        background = MaterialTheme.colors.background,
+        backgroundSection = ThemeColors.Data.grayOverlay,
+        divider = ThemeColors.Data.grayOverlay,
+        textTitle = MaterialTheme.colors.primaryVariant,
+        textNormal = MaterialTheme.colors.onSecondary,
+        iconSection = MaterialTheme.colors.primary,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -80,12 +82,16 @@ object PageHelpTheme {
     }
 
     data class Dimensions(
+        val iconChevronSize: Dp,
         val iconSize: Dp,
+        val divider: Dp,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
-        iconSize = 24.dp,
+        iconChevronSize = 18.dp,
+        iconSize = 42.dp,
+        divider = 2.dp,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -106,38 +112,34 @@ object PageHelpTheme {
         error("not provided")
     }
 
-
-    data class Borders(
-        val card: BorderStroke,
-    )
-
-    @Composable
-    fun provideBorders() = Borders(
-        card = BorderStroke(
-            2.dp,
-            colors.textContent
-        )
-    )
-
-    internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
     data class Typographies(
-        val title: TextStyle,
+        val titleHuge: TextStyle,
+        val titleBig: TextStyle,
+        val titleNormal: TextStyle,
         val normal: TextStyle,
+        val row: TextStyle,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographyExtended.textTitle.copy(
-            color = colors.textContent
-        ),
-        normal = MaterialTheme.typographyExtended.textNormal.copy(
-            color = colors.textContent,
+        titleHuge = MaterialTheme.typographyExtended.textHuge.copy(
+            color = colors.textTitle,
             fontWeight = FontWeight.Bold
         ),
-
+        titleBig = MaterialTheme.typographyExtended.textBig.copy(
+            color = colors.textTitle,
+            fontWeight = FontWeight.SemiBold
+        ),
+        titleNormal = MaterialTheme.typographyExtended.textTitle.copy(
+            color = colors.textTitle,
+            fontWeight = FontWeight.SemiBold
+        ),
+        normal = MaterialTheme.typographyExtended.textNormal.copy(
+            color = colors.textNormal
+        ),
+        row = MaterialTheme.typographyExtended.textNormal.copy(
+            color = colors.textNormal
+        ),
     )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:01
+ *  Created by Tezov on 02/02/2023 20:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 19:52
+ *  Last modified 02/02/2023 18:50
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,9 +22,9 @@ sealed class BottomNavigationItems(titleResourceId: Int, icon: Int, route: Route
         val items: Set<BottomNavigationItemData> by lazy {
             setOf(
                 BottomNavigationItemData(R.string.nav_btm_account, R.drawable.ic_home_24dp, Route.Account),
-                BottomNavigationItemData(R.string.nav_btm_help, R.drawable.ic_help_square24dp, Route.Help),
                 BottomNavigationItemData(R.string.nav_btm_discover, R.drawable.ic_list_24dp, Route.Discover),
                 BottomNavigationItemData(R.string.nav_btm_payment, R.drawable.ic_transfert_24dp, Route.Payment),
+                BottomNavigationItemData(R.string.nav_btm_help, R.drawable.ic_help_square24dp, Route.Help),
                 BottomNavigationItemData(R.string.nav_btm_profile, R.drawable.ic_profile_24dp, Route.Profile),
             )
         }

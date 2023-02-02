@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/02/2023 22:00
+ *  Created by Tezov on 02/02/2023 20:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/02/2023 21:59
+ *  Last modified 02/02/2023 20:06
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -51,7 +51,7 @@ class NavigationController(
             }
         }
 
-        val startRoute = Route.Splash
+        val startRoute = Route.Help
     }
 
     val navHostController get() = navigationController.navHostController
