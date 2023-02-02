@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 02/02/2023 22:16
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:41
+ *  Last modified 02/02/2023 22:16
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,8 +40,8 @@ import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.LOGIN_LENGTH
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.PASSWORD_LENGTH
-import com.tezov.lib_core_android_kotlin.ui.component.widget.KeyBoard
-import com.tezov.lib_core_android_kotlin.ui.component.widget.provides
+import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
+import com.tezov.lib_core_android_kotlin.ui.component.branch.provides
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -57,11 +57,11 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         val action = accessor.action()
 
         ExtensionCompositionLocal.CompositionLocalProvider(
-            parent = arrayOf(
+            ancestor = arrayOf(
                 DialogLoginAuthTheme provides DialogLoginAuthTheme.provideColors(),
                 DialogLoginAuthTheme provides DialogLoginAuthTheme.provideDimensions(),
             ),
-            child = {
+            parent = {
                 arrayOf(
                     DialogLoginAuthTheme provides DialogLoginAuthTheme.provideShapes(),
                     DialogLoginAuthTheme provides DialogLoginAuthTheme.provideBorders(),

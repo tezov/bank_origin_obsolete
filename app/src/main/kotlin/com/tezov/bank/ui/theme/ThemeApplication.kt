@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 02/02/2023 22:16
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 02/02/2023 22:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,15 +23,13 @@ import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsPaddingExtended
 import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsSizeExtended
 import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsSpacingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
-import com.tezov.bank.ui.theme.font.FontRoboto
-import com.tezov.bank.ui.theme.font.FontUbuntu
 import com.tezov.lib_core_android_kotlin.ui.util.ExtensionCompositionLocal
 
 object ThemeApplication {
     @Composable
     fun BankDefault(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
         ExtensionCompositionLocal.CompositionLocalProvider(
-            parent = arrayOf(
+            ancestor = arrayOf(
                 //colors
                 MaterialTheme provides ThemeColorsResource.Common,
                 MaterialTheme provides colorsLightCommonExtended,
@@ -42,7 +40,7 @@ object ThemeApplication {
                 MaterialTheme provides dimensionsElevationExtended,
                 MaterialTheme provides dimensionsSizeExtended,
             ),
-            child = {
+            parent = {
                 arrayOf(
                     //shapes
                     MaterialTheme provides ThemeShapes.provideShapes(),

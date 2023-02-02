@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/02/2023 20:23
+ *  Created by Tezov on 02/02/2023 22:16
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/02/2023 20:19
+ *  Last modified 02/02/2023 22:16
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,18 +12,18 @@
 
 package com.tezov.bank.ui.page.auth.help
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.ui.component.leaf.ActionRow
+import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
@@ -41,13 +41,6 @@ val PageHelpTheme.dimensions: PageHelpTheme.Dimensions
 
 infix fun PageHelpTheme.provides(value: PageHelpTheme.Dimensions) = localDimensions provides value
 
-val PageHelpTheme.shapes: PageHelpTheme.Shapes
-    @Composable
-    @ReadOnlyComposable
-    get() = localShapes.current
-
-infix fun PageHelpTheme.provides(value: PageHelpTheme.Shapes) = localShapes provides value
-
 val PageHelpTheme.typographies: PageHelpTheme.Typographies
     @Composable
     @ReadOnlyComposable
@@ -64,7 +57,7 @@ object PageHelpTheme {
         val divider: Color,
         val textTitle: Color,
         val textNormal: Color,
-        val iconSection: Color,
+        val icon: Color,
     )
 
     @Composable
@@ -74,7 +67,7 @@ object PageHelpTheme {
         divider = ThemeColors.Data.grayOverlay,
         textTitle = MaterialTheme.colors.primaryVariant,
         textNormal = MaterialTheme.colors.onSecondary,
-        iconSection = MaterialTheme.colors.primary,
+        icon = MaterialTheme.colors.primary,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -82,15 +75,15 @@ object PageHelpTheme {
     }
 
     data class Dimensions(
-        val iconChevronSize: Dp,
-        val iconSize: Dp,
+        val iconAction: Dp,
+        val iconSection: Dp,
         val divider: Dp,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
-        iconChevronSize = 18.dp,
-        iconSize = 42.dp,
+        iconAction = 18.dp,
+        iconSection = 42.dp,
         divider = 2.dp,
     )
 
@@ -99,25 +92,12 @@ object PageHelpTheme {
             error("not provided")
         }
 
-    data class Shapes(
-        val card: Shape,
-    )
-
-    @Composable
-    fun provideShapes() = Shapes(
-        card = MaterialTheme.shapesExtended.cardNormal,
-    )
-
-    internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
     data class Typographies(
         val titleHuge: TextStyle,
         val titleBig: TextStyle,
         val titleNormal: TextStyle,
         val normal: TextStyle,
-        val row: TextStyle,
+        val actionRow: TextStyle,
     )
 
     @Composable
@@ -137,7 +117,7 @@ object PageHelpTheme {
         normal = MaterialTheme.typographyExtended.textNormal.copy(
             color = colors.textNormal
         ),
-        row = MaterialTheme.typographyExtended.textNormal.copy(
+        actionRow = MaterialTheme.typographyExtended.textNormal.copy(
             color = colors.textNormal
         ),
     )
@@ -146,5 +126,22 @@ object PageHelpTheme {
         staticCompositionLocalOf {
             error("not provided")
         }
+
+    @Composable
+    fun provideSectionRowStyle() = SectionActionRow.Style(
+        colorIcon = colors.icon,
+        dimensionIcon = dimensions.iconSection,
+        textStyleContent = typographies.titleNormal,
+        colorBackground = colors.backgroundSection,
+        colorDivider = colors.divider,
+        dimensionDivider = dimensions.divider,
+    )
+
+    @Composable
+    fun provideActionRowStyle() = ActionRow.Style(
+        textStyleContent = typographies.actionRow,
+        colorIconAction = colors.icon,
+        dimensionIconAction = dimensions.iconAction,
+    )
 
 }

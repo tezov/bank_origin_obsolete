@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/02/2023 22:00
+ *  Created by Tezov on 02/02/2023 22:16
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/02/2023 21:39
+ *  Last modified 02/02/2023 22:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -46,11 +46,11 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
         val state = accessor.state()
         val action = accessor.action()
         ExtensionCompositionLocal.CompositionLocalProvider(
-            parent = arrayOf(
+            ancestor = arrayOf(
                 PageHelpAndServiceTheme provides PageHelpAndServiceTheme.provideColors(),
                 PageHelpAndServiceTheme provides PageHelpAndServiceTheme.provideDimensions(),
             ),
-            child = {
+            parent = {
                 arrayOf(
                     PageHelpAndServiceTheme provides PageHelpAndServiceTheme.provideShapes(),
                     PageHelpAndServiceTheme provides PageHelpAndServiceTheme.provideBorders(),

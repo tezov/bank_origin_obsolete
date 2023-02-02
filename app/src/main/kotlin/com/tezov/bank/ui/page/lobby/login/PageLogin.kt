@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 02/02/2023 22:16
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:15
+ *  Last modified 02/02/2023 22:16
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,7 +15,6 @@ package com.tezov.bank.ui.page.lobby.login
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.ClickableText
@@ -26,7 +25,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -36,12 +34,11 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.PopupProperties
 import com.google.accompanist.pager.*
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
-import com.tezov.lib_core_android_kotlin.ui.component.widget.Swiper
-import com.tezov.lib_core_android_kotlin.ui.component.widget.provides
+import com.tezov.lib_core_android_kotlin.ui.component.branch.Swiper
+import com.tezov.lib_core_android_kotlin.ui.component.branch.provides
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
@@ -58,11 +55,11 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
         state.animationState.updateTransition()
         ExtensionCompositionLocal.CompositionLocalProvider(
-            parent = arrayOf(
+            ancestor = arrayOf(
                 PageLoginTheme provides PageLoginTheme.provideColors(),
                 PageLoginTheme provides PageLoginTheme.provideDimensions(),
             ),
-            child = {
+            parent = {
                 arrayOf(
                     PageLoginTheme provides PageLoginTheme.provideShapes(),
                     PageLoginTheme provides PageLoginTheme.provideBorders(),

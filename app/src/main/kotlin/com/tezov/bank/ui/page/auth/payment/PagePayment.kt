@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/02/2023 22:00
+ *  Created by Tezov on 02/02/2023 22:16
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/02/2023 21:49
+ *  Last modified 02/02/2023 22:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,6 @@
 package com.tezov.bank.ui.page.auth.payment
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -37,11 +36,11 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
 
 
         ExtensionCompositionLocal.CompositionLocalProvider(
-            parent = arrayOf(
+            ancestor = arrayOf(
                 PagePaymentTheme provides PagePaymentTheme.provideColors(),
                 PagePaymentTheme provides PagePaymentTheme.provideDimensions(),
             ),
-            child = {
+            parent = {
                 arrayOf(
                     PagePaymentTheme provides PagePaymentTheme.provideShapes(),
                     PagePaymentTheme provides PagePaymentTheme.provideBorders(),

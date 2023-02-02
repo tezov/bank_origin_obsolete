@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/02/2023 22:00
+ *  Created by Tezov on 02/02/2023 22:16
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/02/2023 21:59
+ *  Last modified 02/02/2023 22:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
-import com.tezov.bank.ui.page.auth.help.PageHelpState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -37,11 +36,11 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
 
 
         ExtensionCompositionLocal.CompositionLocalProvider(
-            parent = arrayOf(
+            ancestor = arrayOf(
                 PageProfileTheme provides PageProfileTheme.provideColors(),
                 PageProfileTheme provides PageProfileTheme.provideDimensions(),
             ),
-            child = {
+            parent = {
                 arrayOf(
                     PageProfileTheme provides PageProfileTheme.provideShapes(),
                     PageProfileTheme provides PageProfileTheme.provideBorders(),

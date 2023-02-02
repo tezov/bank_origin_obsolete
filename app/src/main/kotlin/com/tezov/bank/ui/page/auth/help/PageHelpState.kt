@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/02/2023 20:23
+ *  Created by Tezov on 02/02/2023 22:16
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/02/2023 20:21
+ *  Last modified 02/02/2023 22:16
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,29 +13,29 @@
 package com.tezov.bank.ui.page.auth.help
 
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.tezov.bank.R
+import com.tezov.bank.ui.component.leaf.ActionRow
+import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageHelpState private constructor(
     val header: Header,
-    val emergencies: Section<ActionRowData>,
-    val paymentModes: Section<ActionRowData>,
-    val configuration: Section<ActionRowData>,
-    val account: Section<ActionRowData>,
-    val misc: Section<ActionRowData>,
+    val emergencies: MutableState<SectionActionRow.Data?>,
+    val paymentModes: MutableState<SectionActionRow.Data?>,
+    val configuration: MutableState<SectionActionRow.Data?>,
+    val account: MutableState<SectionActionRow.Data?>,
+    val misc: MutableState<SectionActionRow.Data?>,
 ) : PageState {
 
     companion object {
         fun create(
             header: Header = Header.empty(),
-            emergencies: Section<ActionRowData> = Section.empty(),
-            paymentModes: Section<ActionRowData> = Section.empty(),
-            configuration: Section<ActionRowData> = Section.empty(),
-            account: Section<ActionRowData> = Section.empty(),
-            misc: Section<ActionRowData> = Section.empty(),
+            emergencies: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
+            paymentModes: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
+            configuration: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
+            account: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
+            misc: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
         ) = PageHelpState(
             header = header,
             emergencies = emergencies,
@@ -60,25 +60,6 @@ class PageHelpState private constructor(
         }
     }
 
-    data class Section<T>(
-        val iconResourceId: MutableState<Int?>,
-        val title: MutableState<String?>,
-        val datas: SnapshotStateList<T>
-    ) {
-        companion object {
-            fun <T> empty() = Section<T>(
-                mutableStateOf(null),
-                mutableStateOf(null),
-                mutableStateListOf()
-            )
-        }
-    }
-
-    data class ActionRowData(
-        val title: String,
-        val iconActionResourceId: Int = R.drawable.ic_arrow_cut_right_24dp,
-    )
-
     init {
         header.apply {
             headline.value = "Assistance"
@@ -86,79 +67,68 @@ class PageHelpState private constructor(
             text.value = "Trouvez une réponse rapide en sélectionnant la thméatique qui correspoond à votre besoin."
         }
 
-        emergencies.apply {
-            title.value = "Urgence"
-            iconResourceId.value = R.drawable.ic_call_24dp
-            datas.addAll(
-                listOf(
-                    ActionRowData("Paiment carte ou retrait refusé"),
-                    ActionRowData("Perte ou vol de ma carte"),
-                    ActionRowData("Victime d'une fraude"),
-                    ActionRowData("Assistance déplacements et voyage"),
-                    ActionRowData("Assistance médicale et juridique"),
-                    ActionRowData("Sinistre habitation, auto ou appareils mobiles"),
-                )
+        emergencies.value = SectionActionRow.Data(
+            title = "Urgence",
+            iconResourceId = R.drawable.ic_call_24dp,
+            rows = listOf(
+                ActionRow.Data(title = "Paiment carte ou retrait refusé"),
+                ActionRow.Data(title = "Perte ou vol de ma carte"),
+                ActionRow.Data(title = "Victime d'une fraude"),
+                ActionRow.Data(title = "Assistance déplacements et voyage"),
+                ActionRow.Data(title = "Assistance médicale et juridique"),
+                ActionRow.Data(title = "Sinistre habitation, auto ou appareils mobiles"),
             )
-        }
+        )
 
-        paymentModes.apply {
-            title.value = "Moyens de paiment"
-            iconResourceId.value = R.drawable.ic_call_24dp
-            datas.addAll(
-                listOf(
-                    ActionRowData("Carte bancaire"),
-                    ActionRowData("Virement"),
-                    ActionRowData("Prélèvement"),
-                    ActionRowData("Chéque"),
-
-                    )
+        paymentModes.value = SectionActionRow.Data(
+            title = "Moyens de paiment",
+            iconResourceId = R.drawable.ic_call_24dp,
+            rows = listOf(
+                ActionRow.Data(title = "Carte bancaire"),
+                ActionRow.Data(title = "Virement"),
+                ActionRow.Data(title = "Prélèvement"),
+                ActionRow.Data(title = "Chéque"),
             )
-        }
+        )
 
-        configuration.apply {
-            title.value = "Profile, paramétres et sécurité"
-            iconResourceId.value = R.drawable.ic_call_24dp
-            datas.addAll(
-                listOf(
-                    ActionRowData("Clé Digitale"),
-                    ActionRowData("Adresse postale"),
-                    ActionRowData("Adresse email"),
-                    ActionRowData("Numéro de téléphone"),
-                    ActionRowData("Pièce d'identité"),
-                )
+        configuration.value = SectionActionRow.Data(
+            title = "Profile, paramétres et sécurité",
+            iconResourceId = R.drawable.ic_call_24dp,
+            rows = listOf(
+                ActionRow.Data(title = "Clé Digitale"),
+                ActionRow.Data(title = "Adresse postale"),
+                ActionRow.Data(title = "Adresse email"),
+                ActionRow.Data(title = "Numéro de téléphone"),
+                ActionRow.Data(title = "Pièce d'identité"),
             )
-        }
+        )
 
-        account.apply {
-            title.value = "Comptes, épargnes, crédit, assurance"
-            iconResourceId.value = R.drawable.ic_call_24dp
-            datas.addAll(
-                listOf(
-                    ActionRowData("Relevés, RIB"),
-                    ActionRowData("Ouverture de compte individuel"),
-                    ActionRowData("Ouverture de compte joint"),
-                    ActionRowData("Clôture de compte"),
-                    ActionRowData("Épargne et investissements"),
-                    ActionRowData("Crédit immobilier"),
-                    ActionRowData("Crédit à la consommation"),
-                    ActionRowData("Assurance"),
-
-                    )
+        account.value = SectionActionRow.Data(
+            title = "Comptes, épargnes, crédit, assurance",
+            iconResourceId = R.drawable.ic_call_24dp,
+            rows = listOf(
+                ActionRow.Data(title = "Relevés, RIB"),
+                ActionRow.Data(title = "Ouverture de compte individuel"),
+                ActionRow.Data(title = "Ouverture de compte joint"),
+                ActionRow.Data(title = "Clôture de compte"),
+                ActionRow.Data(title = "Épargne et investissements"),
+                ActionRow.Data(title = "Crédit immobilier"),
+                ActionRow.Data(title = "Crédit à la consommation"),
+                ActionRow.Data(title = "Assurance"),
             )
-        }
+        )
 
-        misc.apply {
-            title.value = "Autres"
-            iconResourceId.value = R.drawable.ic_call_24dp
-            datas.addAll(
-                listOf(
-                    ActionRowData("Parrainage"),
-                    ActionRowData("Signaler un problème technique"),
-                    ActionRowData("Faire une réclamation"),
-                    ActionRowData("Transmettre un document"),
-                )
+        misc.value = SectionActionRow.Data(
+            title = "Autres",
+            iconResourceId = R.drawable.ic_call_24dp,
+            rows = listOf(
+                ActionRow.Data(title = "Parrainage"),
+                ActionRow.Data(title = "Signaler un problème technique"),
+                ActionRow.Data(title = "Faire une réclamation"),
+                ActionRow.Data(title = "Transmettre un document"),
             )
-        }
+        )
+
     }
 
 }
