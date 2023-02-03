@@ -1,8 +1,8 @@
 <!--
   ~  *********************************************************************************
-  ~  Created by Tezov on 31/01/2023 20:01
+  ~  Created by Tezov on 03/02/2023 18:20
   ~  Copyright (c) 2023 . All rights reserved.
-  ~  Last modified 31/01/2023 19:44
+  ~  Last modified 03/02/2023 18:18
   ~  First project bank / bank.app.main
   ~  This file is private and it is not allowed to use it, copy it or modified it
   ~  without the permission granted by the owner Tezov. For any request request,
@@ -40,9 +40,6 @@
     </string-array>
 
     <!--    help and service-->
-    <string name="pg_h_and_s_title_help_and_service">Aide &amp; services</string>
-    <string name="pg_h_and_s_section_contact">CONTACTER LA HELLO TEAM</string>
-    <string name="pg_h_and_s_section_notice">MENTION LEGALES</string>
     <string name="pg_h_and_s_icon_close">close icon</string>
 
 

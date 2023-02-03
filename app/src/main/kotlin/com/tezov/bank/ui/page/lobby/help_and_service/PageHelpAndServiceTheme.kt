@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 03/02/2023 18:20
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 03/02/2023 18:18
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,6 +24,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.ui.component.branch.SectionActionRow
+import com.tezov.bank.ui.component.leaf.ActionRow
+import com.tezov.bank.ui.page.auth.help.colors
+import com.tezov.bank.ui.page.auth.help.dimensions
+import com.tezov.bank.ui.page.auth.help.typographies
 import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSizeExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
@@ -177,5 +182,22 @@ object PageHelpAndServiceTheme {
         staticCompositionLocalOf {
             error("not provided")
         }
+
+    @Composable
+    fun provideSectionRowStyle() = SectionActionRow.Style(
+        colorIcon = colors.icon,
+        dimensionIcon = dimensions.iconRowSize,
+        textStyleContent = typographies.titleNormal,
+        colorBackground = colors.backgroundSection,
+        colorDivider = colors.divider,
+        dimensionDivider = dimensions.divider,
+    )
+
+    @Composable
+    fun provideActionRowStyle() = ActionRow.Style(
+        textStyleContent = typographies.textRow,
+        colorIconAction = colors.icon,
+        dimensionIconAction = dimensions.iconChevronSize,
+    )
 
 }
