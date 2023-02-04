@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/02/2023 22:16
+ *  Created by Tezov on 04/02/2023 19:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/02/2023 22:16
+ *  Last modified 04/02/2023 18:58
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -76,7 +76,6 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     .background(DialogLoginAuthTheme.colors.background)
             ) {
                 IconButton(
-                    modifier = Modifier.wrapContentSize(),
                     onClick = { action.hide() }) {
                     Icon(
                         modifier = Modifier.size(DialogLoginAuthTheme.dimensions.iconCloseSize),
@@ -119,7 +118,6 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
     @Composable
     private fun ContentHeader() {
         Text(
-            modifier = Modifier.wrapContentSize(),
             text = stringResource(id = R.string.dlg_login_auth_enter_password),
             textAlign = TextAlign.Center,
             style = DialogLoginAuthTheme.typographies.title
@@ -163,14 +161,12 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight()
                     .border(DialogLoginAuthTheme.borders.authCard)
 
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .wrapContentHeight()
                         .padding(bottom = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                 ) {
                     Icon(
@@ -185,7 +181,6 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     TextField(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .wrapContentHeight()
                             .align(Alignment.CenterVertically)
                             .focusRequester(focusManagement.focusLogin)
                             .onFocusChanged {
@@ -247,7 +242,6 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .wrapContentHeight()
                         .padding(bottom = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                 ) {
                     CompositionLocalProvider(
@@ -266,7 +260,6 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         TextField(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .wrapContentHeight()
                                 .align(Alignment.CenterVertically)
                                 .focusRequester(focusManagement.focusPassword)
                                 .onFocusChanged {
@@ -320,7 +313,6 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 KeyBoard.GridCubeDigitsTwoRowShuffled(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .wrapContentHeight()
                         .padding(MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                         .alpha(
                             when (focusManagement.isPasswordHasFocus()) {
@@ -362,12 +354,10 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .wrapContentHeight()
         ) {
             Button(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
+                    .fillMaxWidth(),
                 onClick = onClickConnect,
                 shape = DialogLoginAuthTheme.shapes.button,
                 colors = ButtonDefaults.buttonColors(
@@ -380,7 +370,6 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     stringResource(id = R.string.dlg_login_auth_btn_connect),
                     style = DialogLoginAuthTheme.typographies.button,
                     modifier = Modifier
-                        .wrapContentSize()
                         .padding(
                             horizontal = DialogLoginAuthTheme.dimensions.paddingHorizontalButton,
                             vertical = DialogLoginAuthTheme.dimensions.paddingVerticalButton
@@ -391,19 +380,16 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .wrapContentHeight()
                     .padding(top = DialogLoginAuthTheme.dimensions.paddingTopFromLink),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 ClickableText(
-                    modifier = Modifier.wrapContentSize(),
                     text = AnnotatedString(stringResource(id = R.string.dlg_login_auth_link_login_forgotten)),
                     style = DialogLoginAuthTheme.typographies.link
                 ) {
                     onClickForgotLogin()
                 }
                 ClickableText(
-                    modifier = Modifier.wrapContentSize(),
                     text = AnnotatedString(stringResource(id = R.string.dlg_login_auth_link_password_forgotten)),
                     style = DialogLoginAuthTheme.typographies.link
                 ) {
