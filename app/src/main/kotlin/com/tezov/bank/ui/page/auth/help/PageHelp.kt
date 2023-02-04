@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/02/2023 22:16
+ *  Created by Tezov on 04/02/2023 18:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/02/2023 22:16
+ *  Last modified 04/02/2023 17:44
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -63,31 +63,31 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
             ) {
                 contentHeader(state.header)
                 state.emergencies.value?.let {
-                    SectionActionRow(it){
+                    SectionActionRow(data = it){
 
 
                     }
                 }
                 state.paymentModes.value?.let {
-                    SectionActionRow(it){
+                    SectionActionRow(data = it){
 
 
                     }
                 }
                 state.configuration.value?.let {
-                    SectionActionRow(it){
+                    SectionActionRow(data = it){
 
 
                     }
                 }
                 state.account.value?.let {
-                    SectionActionRow(it){
+                    SectionActionRow(data = it){
 
 
                     }
                 }
                 state.misc.value?.let {
-                    SectionActionRow(it){
+                    SectionActionRow(data = it){
 
 
                     }

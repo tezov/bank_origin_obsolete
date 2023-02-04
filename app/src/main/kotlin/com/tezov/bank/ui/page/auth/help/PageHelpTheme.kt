@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/02/2023 22:16
+ *  Created by Tezov on 04/02/2023 18:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/02/2023 22:16
+ *  Last modified 04/02/2023 16:41
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,6 +25,7 @@ import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.theme.ThemeColors
+import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val PageHelpTheme.colors: PageHelpTheme.Colors
@@ -128,20 +129,9 @@ object PageHelpTheme {
         }
 
     @Composable
-    fun provideSectionRowStyle() = SectionActionRow.Style(
-        colorIcon = colors.icon,
-        dimensionIcon = dimensions.iconSection,
-        textStyleContent = typographies.titleNormal,
-        colorBackground = colors.backgroundSection,
-        colorDivider = colors.divider,
-        dimensionDivider = dimensions.divider,
-    )
+    fun provideSectionRowStyle() = ThemeComponent.provideSectionRowStyle()
 
     @Composable
-    fun provideActionRowStyle() = ActionRow.Style(
-        textStyleContent = typographies.actionRow,
-        colorIconAction = colors.icon,
-        dimensionIconAction = dimensions.iconAction,
-    )
+    fun provideActionRowStyle() = ThemeComponent.provideActionRowStyle()
 
 }

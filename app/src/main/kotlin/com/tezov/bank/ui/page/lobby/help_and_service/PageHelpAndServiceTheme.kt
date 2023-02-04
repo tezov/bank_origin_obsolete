@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/02/2023 18:20
+ *  Created by Tezov on 04/02/2023 18:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/02/2023 18:18
+ *  Last modified 04/02/2023 17:43
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,6 +30,7 @@ import com.tezov.bank.ui.page.auth.help.colors
 import com.tezov.bank.ui.page.auth.help.dimensions
 import com.tezov.bank.ui.page.auth.help.typographies
 import com.tezov.bank.ui.theme.ThemeColors
+import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSizeExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
@@ -184,20 +185,15 @@ object PageHelpAndServiceTheme {
         }
 
     @Composable
-    fun provideSectionRowStyle() = SectionActionRow.Style(
-        colorIcon = colors.icon,
-        dimensionIcon = dimensions.iconRowSize,
-        textStyleContent = typographies.titleNormal,
-        colorBackground = colors.backgroundSection,
-        colorDivider = colors.divider,
-        dimensionDivider = dimensions.divider,
-    )
+    fun provideSectionRowStyle() = ThemeComponent.provideSectionRowStyle()
 
     @Composable
-    fun provideActionRowStyle() = ActionRow.Style(
-        textStyleContent = typographies.textRow,
-        colorIconAction = colors.icon,
-        dimensionIconAction = dimensions.iconChevronSize,
-    )
+    fun provideActionRowStyle() = ThemeComponent.provideActionRowStyle()
+
+    @Composable
+    fun provideSectionCardStyle() = ThemeComponent.provideSectionCardStyle()
+
+    @Composable
+    fun provideActionCardStyle() = ThemeComponent.provideActionCardStyle()
 
 }

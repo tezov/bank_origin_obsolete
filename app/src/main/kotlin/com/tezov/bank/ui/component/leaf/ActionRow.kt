@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/02/2023 22:16
+ *  Created by Tezov on 04/02/2023 18:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/02/2023 22:16
+ *  Last modified 04/02/2023 18:37
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.bank.ui.component.leaf
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
@@ -33,16 +34,17 @@ infix fun ActionRow.provides(value: ActionRow.Style) = local provides value
 object ActionRow {
 
     internal val local: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
-        error("not provided")
+        Style()
     }
 
     @Immutable
     data class Style(
-        val colorIconInfo: Color = Color.Transparent,
-        val dimensionIconInfo: Dp = 0.dp,
-        val textStyleContent: TextStyle,
+        val colorIconInfo: Color = Color.Black,
+        val dimensionIconInfo: Dp = 24.dp,
+        val typography: TextStyle = TextStyle(),
         val colorIconAction: Color = Color.Black,
         val dimensionIconAction: Dp = 24.dp,
+        val background: Color = Color.Transparent,
     )
 
     data class Data(
@@ -53,26 +55,27 @@ object ActionRow {
 
     @Composable
     operator fun invoke(
+        modifier: Modifier = Modifier,
         data: Data,
         onClick: () -> Unit
     ) {
-        Content(data, onClick)
+        Content(modifier, data, onClick)
     }
 
     @Composable
     private fun Content(
+        modifier: Modifier,
         data: Data,
         onClick: () -> Unit
     ) {
         val style = local.current
         Row(
-            modifier = Modifier
-                .clickable { onClick() }
+            modifier = modifier
                 .fillMaxWidth()
-                .wrapContentHeight()
+                .clickable { onClick() }
+                .background(style.background)
                 .padding(
                     vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
-                    horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -84,14 +87,13 @@ object ActionRow {
                     tint = style.colorIconInfo,
                     contentDescription = null,
                 )
+                Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.normal_h))
             }
-            Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.normal_h))
             Text(
                 modifier = Modifier
-                    .wrapContentHeight()
                     .weight(1f),
                 text = data.title,
-                style = style.textStyleContent
+                style = style.typography
             )
             Icon(
                 modifier = Modifier

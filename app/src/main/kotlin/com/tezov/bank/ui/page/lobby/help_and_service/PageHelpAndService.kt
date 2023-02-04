@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/02/2023 18:20
+ *  Created by Tezov on 04/02/2023 18:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/02/2023 18:18
+ *  Last modified 04/02/2023 18:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,11 +29,14 @@ import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.ConstraintSet
 import androidx.constraintlayout.compose.Dimension
 import com.tezov.bank.R
+import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.component.branch.provides
+import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.component.leaf.provides
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
+import com.tezov.bank.ui.page.auth.help.PageHelpState
 import com.tezov.bank.ui.page.auth.help.PageHelpTheme
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
@@ -66,6 +69,8 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 arrayOf(
                     ActionRow provides PageHelpAndServiceTheme.provideActionRowStyle(),
                     SectionActionRow provides PageHelpAndServiceTheme.provideSectionRowStyle(),
+                    ActionCard.Simple provides PageHelpAndServiceTheme.provideActionCardStyle(),
+                    SectionActionCard provides PageHelpAndServiceTheme.provideSectionCardStyle(),
                 )
             }
         ) {
@@ -99,18 +104,22 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                         .fillMaxSize()
                         .verticalScroll(rememberScrollState())
                 ) {
-                    contentHelpAndService(state.helpAndServices) { index ->
+                    contentHeader(state.header)
+                    state.helpAndServices.value?.let {
+                        SectionActionCard(data = it){
 
+
+                        }
                     }
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.normal_v))
                     state.contacts.value?.let {
-                        SectionActionRow(it){
+                        SectionActionRow(data = it){
 
 
                         }
                     }
                     state.notices.value?.let {
-                        SectionActionRow(it){
+                        SectionActionRow(data = it){
 
 
                         }
@@ -121,175 +130,20 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     }
 
     @Composable
-    private fun contentHelpAndService(
-        datas: List<PageHelpAndServiceState.ActionCardData>,
-        onClick: (Int) -> Unit
+    private fun contentHeader(
+        header: PageHelpAndServiceState.Header
     ) {
-        if (datas.isEmpty()) {
-            return
-        }
-        Column(
-            modifier = Modifier
-                .padding(
-                    vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
-                    horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
-                )
-        ) {
-//            Text(
-//                modifier = Modifier.wrapContentSize(),
-//                text = stringResource(id = R.string.pg_h_and_s_title_help_and_service),
-//                style = PageHelpAndServiceTheme.typographies.titleBig
-//            )
+        header.headline.value?.let{
+            Text(
+                modifier = Modifier.wrapContentSize(),
+                text = it,
+                style = PageHelpAndServiceTheme.typographies.titleBig
+            )
             Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.normal_v))
-
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight(),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_h),
-            ) {
-                val end = (datas.size % 2).takeIf { it == 0 } ?: let { datas.size - 1 }
-                for (i in 0 until end step 2) {
-                    val startData = datas[i]
-                    val endData = datas[i + 1]
-                    Row(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight(),
-                        horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_v),
-                    ) {
-                        CardSmall(
-                            modifier = Modifier
-                                .wrapContentHeight()
-                                .weight(1f),
-                            data = startData,
-                            onClick = { onClick(i) }
-                        )
-                        CardSmall(
-                            modifier = Modifier
-                                .wrapContentHeight()
-                                .weight(1f),
-                            data = endData,
-                            onClick = { onClick(i + 1) }
-                        )
-                    }
-                }
-                if (end != datas.size) {
-                    val data = datas.last()
-                    CardLarge(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .wrapContentHeight(),
-                        data = data,
-                        onClick = { onClick(datas.lastIndex) }
-                    )
-                }
-            }
         }
     }
 
 
-
-    @Composable
-    private fun CardSmall(
-        modifier: Modifier,
-        data: PageHelpAndServiceState.ActionCardData,
-        onClick: () -> Unit
-    ) {
-        val iconSize = PageHelpAndServiceTheme.dimensions.iconCardSize
-        val ID_ICON = "icon"
-        val ID_TEXT = "text"
-        val constraintSet = ConstraintSet {
-            val refIcon = createRefFor(ID_ICON)
-            val refText = createRefFor(ID_TEXT)
-            constrain(refIcon) {
-                top.linkTo(parent.top)
-                end.linkTo(parent.end)
-                width = Dimension.value(iconSize)
-                height = Dimension.value(iconSize)
-            }
-            constrain(refText) {
-                top.linkTo(refIcon.bottom)
-                start.linkTo(parent.start)
-                end.linkTo(refIcon.start)
-                bottom.linkTo(parent.bottom)
-                width = Dimension.fillToConstraints
-                height = Dimension.wrapContent
-            }
-        }
-        Surface(
-            modifier = modifier.clickable {
-                onClick()
-            },
-            color = MaterialTheme.colorsCommonResource.transparent,
-            shape = PageHelpAndServiceTheme.shapes.card,
-            border = PageHelpAndServiceTheme.borders.card,
-        ) {
-            ConstraintLayout(
-                constraintSet = constraintSet,
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(
-                        vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
-                        horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
-                    ),
-            ) {
-                Icon(
-                    modifier = Modifier.layoutId(ID_ICON),
-                    painter = painterResource(id = data.iconResourceId),
-                    tint = PageHelpAndServiceTheme.colors.onBackgroundLight,
-                    contentDescription = data.title,
-                )
-                Text(
-                    modifier = Modifier.layoutId(ID_TEXT),
-                    text = data.title,
-                    style = PageHelpAndServiceTheme.typographies.textCard,
-                    overflow = TextOverflow.Visible
-                )
-            }
-        }
-    }
-
-    @Composable
-    private fun CardLarge(
-        modifier:Modifier,
-        data: PageHelpAndServiceState.ActionCardData,
-        onClick: () -> Unit
-    ) {
-        Surface(
-            modifier = modifier.clickable { onClick() },
-            color = MaterialTheme.colorsCommonResource.transparent,
-            shape = PageHelpAndServiceTheme.shapes.card,
-            border = PageHelpAndServiceTheme.borders.card
-        ) {
-            Row(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .wrapContentHeight()
-                    .padding(
-                        vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
-                        horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
-                    ),
-            ) {
-                Text(
-                    modifier = Modifier
-                        .wrapContentHeight()
-                        .weight(1f)
-                        .align(Alignment.Bottom),
-                    text = data.title,
-                    style = PageHelpAndServiceTheme.typographies.textCard
-                )
-                Icon(
-                    modifier = Modifier
-                        .size(PageHelpAndServiceTheme.dimensions.iconCardSize),
-                    painter = painterResource(id = data.iconResourceId),
-                    tint = PageHelpAndServiceTheme.colors.onBackgroundLight,
-                    contentDescription = data.title,
-                )
-            }
-        }
-    }
 
 
 }
