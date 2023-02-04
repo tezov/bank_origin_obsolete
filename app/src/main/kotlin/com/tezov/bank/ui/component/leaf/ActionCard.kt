@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/02/2023 18:53
+ *  Created by Tezov on 04/02/2023 20:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 18:37
+ *  Last modified 04/02/2023 20:11
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,18 +28,13 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.ConstraintSet
-import androidx.constraintlayout.compose.Dimension
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 
 infix fun ActionCard.Simple.provides(value: ActionCard.Simple.Style) = local provides value
@@ -62,34 +57,35 @@ object ActionCard {
             val borderCard: BorderStroke = BorderStroke(1.dp, Color.Black),
             val colorIcon: Color = Color.Black,
             val dimensionsIcon: Dp = 24.dp,
-            val typography: TextStyle = TextStyle(),
+            val typographyTitle: TextStyle = TextStyle(),
+            val typographySubtitle: TextStyle = TextStyle(),
             val background: Color = Color.Transparent,
         )
 
         data class Data(
+            val template: Template = Template.IconTopEnd,
             val title: String,
+            val subtitle: String? = null,
             val iconResourceId: Int,
         )
 
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
-            template: Template = Template.IconTopEnd,
             data: Data,
             onClick: () -> Unit
         ) {
-            Content(modifier, template, data, onClick)
+            Content(modifier, data, onClick)
         }
 
         @Composable
         private fun Content(
             modifier: Modifier,
-            template: Template,
             data: Data,
             onClick: () -> Unit
         ) {
             val style = local.current
-            when (template) {
+            when (data.template) {
                 Template.IconTopEnd -> {
                     ContentIconTopEnd(style, modifier, data, onClick)
                 }
@@ -106,31 +102,8 @@ object ActionCard {
             data: Data,
             onClick: () -> Unit
         ) {
-            val iconSize = style.dimensionsIcon
-            val ID_ICON = "icon"
-            val ID_TEXT = "text"
-            val constraintSet = ConstraintSet {
-                val refIcon = createRefFor(ID_ICON)
-                val refText = createRefFor(ID_TEXT)
-                constrain(refIcon) {
-                    top.linkTo(parent.top)
-                    end.linkTo(parent.end)
-                    width = Dimension.value(iconSize)
-                    height = Dimension.value(iconSize)
-                }
-                constrain(refText) {
-                    top.linkTo(refIcon.bottom)
-                    start.linkTo(parent.start)
-                    end.linkTo(refIcon.start)
-                    bottom.linkTo(parent.bottom)
-                    width = Dimension.fillToConstraints
-                    height = Dimension.wrapContent
-                }
-            }
-            ConstraintLayout(
-                constraintSet = constraintSet,
+            Row(
                 modifier = modifier
-                    .fillMaxWidth()
                     .border(style.borderCard, style.shapeCard)
                     .clip(style.shapeCard)
                     .background(style.background)
@@ -140,21 +113,36 @@ object ActionCard {
                     .padding(
                         vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
                         horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
-                    ),
+                    )
             ) {
+                Column(
+                    modifier = Modifier
+                        .weight(1f)
+                        .align(Alignment.CenterVertically)
+                ) {
+                    Spacer(modifier = Modifier.height(style.dimensionsIcon))
+                    Text(
+                        text = data.title,
+                        style = style.typographyTitle,
+                        overflow = TextOverflow.Visible
+                    )
+                    data.subtitle?.let {
+                        Text(
+                            text = it,
+                            style = style.typographySubtitle,
+                            overflow = TextOverflow.Visible
+                        )
+                    }
+                }
                 Icon(
-                    modifier = Modifier.layoutId(ID_ICON),
+                    modifier = Modifier
+                        .size(style.dimensionsIcon),
                     painter = painterResource(id = data.iconResourceId),
                     tint = style.colorIcon,
                     contentDescription = data.title,
                 )
-                Text(
-                    modifier = Modifier.layoutId(ID_TEXT),
-                    text = data.title,
-                    style = style.typography,
-                    overflow = TextOverflow.Visible
-                )
             }
+
         }
 
         @Composable
@@ -176,16 +164,26 @@ object ActionCard {
                         horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
                     ),
             ) {
-                Text(
+                Column(
                     modifier = Modifier
+                        .align(Alignment.Bottom)
                         .weight(1f)
-                        .align(Alignment.Bottom),
-                    text = data.title,
-                    style = style.typography
-                )
+                ) {
+                    Text(
+                        text = data.title,
+                        style = style.typographyTitle
+                    )
+                    data.subtitle?.let {
+                        Text(
+                            text = it,
+                            style = style.typographyTitle
+                        )
+                    }
+                }
                 Icon(
                     modifier = Modifier
-                        .size(style.dimensionsIcon),
+                        .size(style.dimensionsIcon)
+                        .align(Alignment.CenterVertically),
                     painter = painterResource(id = data.iconResourceId),
                     tint = style.colorIcon,
                     contentDescription = data.title,

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/02/2023 18:53
+ *  Created by Tezov on 04/02/2023 20:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 18:45
+ *  Last modified 04/02/2023 19:31
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,6 @@ import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
-import com.tezov.bank.ui.page.auth.help.PageHelpState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageHelpAndServiceState private constructor(
@@ -38,7 +37,7 @@ class PageHelpAndServiceState private constructor(
             contacts: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
             notices: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
         ) = PageHelpAndServiceState(
-        header = header,
+            header = header,
             helpAndServices = helpAndServices,
             contacts = contacts,
             notices = notices,
@@ -62,13 +61,34 @@ class PageHelpAndServiceState private constructor(
 
         helpAndServices.value = SectionActionCard.Data(
             cards = listOf(
-                ActionCard.Simple.Data("Opposer une carte", R.drawable.ic_crisis_24dp),
-                ActionCard.Simple.Data("Contester un prélèvement", R.drawable.ic_argue_24dp),
-                ActionCard.Simple.Data("Suivre mon dossier", R.drawable.ic_checklist_24dp),
-                ActionCard.Simple.Data("Trouver un distributeur", R.drawable.ic_atm_24dp),
-                ActionCard.Simple.Data("Retirer à l'étranger", R.drawable.ic_explore_24dp),
-                ActionCard.Simple.Data("Découvrir l'application", R.drawable.ic_search_24dp),
-                ActionCard.Simple.Data("Accéder à l'assitance technique", R.drawable.ic_help_24dp),
+                ActionCard.Simple.Data(
+                    title = "Opposer une carte",
+                    iconResourceId = R.drawable.ic_crisis_24dp
+                ),
+                ActionCard.Simple.Data(
+                    title = "Contester un prélèvement",
+                    iconResourceId = R.drawable.ic_argue_24dp
+                ),
+                ActionCard.Simple.Data(
+                    title = "Suivre mon dossier",
+                    iconResourceId = R.drawable.ic_checklist_24dp
+                ),
+                ActionCard.Simple.Data(
+                    title = "Trouver un distributeur",
+                    iconResourceId = R.drawable.ic_atm_24dp
+                ),
+                ActionCard.Simple.Data(
+                    title = "Retirer à l'étranger",
+                    iconResourceId = R.drawable.ic_explore_24dp
+                ),
+                ActionCard.Simple.Data(
+                    title = "Découvrir l'application",
+                    iconResourceId = R.drawable.ic_search_24dp
+                ),
+                ActionCard.Simple.Data(
+                    title = "Accéder à l'assitance technique",
+                    iconResourceId = R.drawable.ic_help_24dp
+                ),
             )
         )
 
@@ -76,7 +96,10 @@ class PageHelpAndServiceState private constructor(
             title = "CONTACTER LA HELLO TEAM",
             rows = listOf(
                 ActionRow.Data(title = "Appeler", iconInfoResourceId = R.drawable.ic_call_24dp),
-                ActionRow.Data(title = "Service sourds et malentendats", iconInfoResourceId = R.drawable.ic_hearing_disabled_24dp),
+                ActionRow.Data(
+                    title = "Service sourds et malentendats",
+                    iconInfoResourceId = R.drawable.ic_hearing_disabled_24dp
+                ),
             )
         )
 

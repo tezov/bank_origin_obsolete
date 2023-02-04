@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/02/2023 18:53
+ *  Created by Tezov on 04/02/2023 20:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 18:52
+ *  Last modified 04/02/2023 19:50
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -120,17 +120,20 @@ object SectionActionCard {
                     val endData = data.cards[i + 1]
                     Row(
                         modifier = Modifier
+                            .height(IntrinsicSize.Max)
                             .fillMaxWidth(),
                         horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_v),
                     ) {
                         ActionCard.Simple(
                             modifier = Modifier
+                                .fillMaxSize()
                                 .weight(1f),
                             data = startData,
                             onClick = { onClick(i) }
                         )
                         ActionCard.Simple(
                             modifier = Modifier
+                                .fillMaxSize()
                                 .weight(1f),
                             data = endData,
                             onClick = { onClick(i + 1) }
@@ -142,8 +145,7 @@ object SectionActionCard {
                     ActionCard.Simple(
                         modifier = Modifier
                             .fillMaxWidth(),
-                        template = ActionCard.Simple.Template.IconEnd,
-                        data = card,
+                        data = card.copy(template = ActionCard.Simple.Template.IconEnd),
                         onClick = { onClick(data.cards.lastIndex) }
                     )
                 }
