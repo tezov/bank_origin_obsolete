@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 05/02/2023 13:38
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 05/02/2023 13:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,7 +24,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
+import com.tezov.bank.ui.theme.ThemeComponent
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
 
 val PageProfileTheme.colors: PageProfileTheme.Colors
     @Composable
@@ -38,7 +41,8 @@ val PageProfileTheme.dimensions: PageProfileTheme.Dimensions
     @ReadOnlyComposable
     get() = localDimensions.current
 
-infix fun PageProfileTheme.provides(value: PageProfileTheme.Dimensions) = localDimensions provides value
+infix fun PageProfileTheme.provides(value: PageProfileTheme.Dimensions) =
+    localDimensions provides value
 
 val PageProfileTheme.shapes: PageProfileTheme.Shapes
     @Composable
@@ -138,11 +142,17 @@ object PageProfileTheme {
             fontWeight = FontWeight.Bold
         ),
 
-    )
+        )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =
         staticCompositionLocalOf {
             error("not provided")
         }
+
+    @Composable
+    fun provideSectionRowStyle() = ThemeComponent.provideSectionRowStyle()
+
+    @Composable
+    fun provideActionRowStyle() = ThemeComponent.provideActionRowStyle()
 
 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/02/2023 22:00
+ *  Created by Tezov on 05/02/2023 13:38
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/02/2023 21:59
+ *  Last modified 05/02/2023 13:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,74 +12,93 @@
 
 package com.tezov.bank.ui.page.auth.profile
 
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.tezov.bank.R
+import com.tezov.bank.ui.component.branch.SectionActionRow
+import com.tezov.bank.ui.component.leaf.ActionRow
+import com.tezov.bank.ui.page.auth.help.PageHelpState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageProfileState private constructor(
-    val profils: SnapshotStateList<ActionRowRichData>,
-    val documents: SnapshotStateList<ActionRowData>,
-    val offers: SnapshotStateList<ActionRowData>,
-    val help: SnapshotStateList<ActionRowData>,
-
+    val header: Header,
+    val profils: MutableState<SectionActionRow.Data?>,
+    val documents: MutableState<SectionActionRow.Data?>,
+    val offers: MutableState<SectionActionRow.Data?>,
+    val helps: MutableState<SectionActionRow.Data?>,
     ) : PageState {
 
     companion object {
         fun create(
-            profils: SnapshotStateList<ActionRowRichData> = mutableStateListOf(),
-            documents: SnapshotStateList<ActionRowData> = mutableStateListOf(),
-            offers: SnapshotStateList<ActionRowData> = mutableStateListOf(),
-            help: SnapshotStateList<ActionRowData> = mutableStateListOf(),
+            header: Header = Header.empty(),
+            profils: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
+            documents: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
+            offers: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
+            helps: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
 
             ) = PageProfileState(
+            header = header,
             profils = profils,
             documents = documents,
             offers = offers,
-            help = help,
+            helps = helps,
         )
     }
 
-    data class ActionRowData(
-        val title: String,
-        val iconActionResourceId: Int = R.drawable.ic_arrow_cut_right_24dp,
-    )
-
-    data class ActionRowRichData(
-        val title: String,
-        val iconInfoResourceId: Int? = null,
-        val iconActionResourceId: Int = R.drawable.ic_arrow_cut_right_24dp,
-    )
-
+    data class Header(
+        val name: MutableState<String?>,
+        val imageResourceId: MutableState<Int?>
+    ) {
+        companion object {
+            fun empty() = Header(
+                mutableStateOf(null),
+                mutableStateOf(null),
+            )
+        }
+    }
 
     init {
 
-        profils.addAll(
-            listOf(
-                ActionRowRichData("title", R.drawable.ic_call_24dp),
+        header.apply {
+            name.value = "M.Zollver"
+            imageResourceId.value = R.drawable.logo_tezov_bank_inverse
+        }
 
-                )
+        profils.value = SectionActionRow.Data(
+            rows = listOf(
+                ActionRow.Data(title = "Mes infos de profil", iconInfoResourceId = R.drawable.ic_profile_24dp),
+                ActionRow.Data(title = "Mes paramètres", iconInfoResourceId = R.drawable.ic_setting_24dp),
+            )
         )
 
-        documents.addAll(
-            listOf(
-                ActionRowData("title"),
-
-                )
+        documents.value = SectionActionRow.Data(
+            title = "MES DOCUMENTS",
+            rows = listOf(
+                ActionRow.Data(title = "Mes RIB et Documents"),
+                ActionRow.Data(title = "Mes assurances"),
+                ActionRow.Data(title = "Suivi de mes demandes"),
+            )
         )
 
-        offers.addAll(
-            listOf(
-                ActionRowData("title"),
-
-                )
+        offers.value = SectionActionRow.Data(
+            title = "L'OFFRE HELLO BANK!",
+            rows = listOf(
+                ActionRow.Data(title = "Mon offre"),
+                ActionRow.Data(title = "Bourse"),
+                ActionRow.Data(title = "Parrainage"),
+            )
         )
 
-        help.addAll(
-            listOf(
-                ActionRowData("title"),
-
-                )
+        offers.value = SectionActionRow.Data(
+            title = "AIDE",
+            rows = listOf(
+                ActionRow.Data(title = "Service sourds et malentendants"),
+                ActionRow.Data(title = "Trouver un distributeur"),
+                ActionRow.Data(title = "Accéder à l'assistance technique"),
+                ActionRow.Data(title = "Sécurité et infos légales"),
+            )
         )
 
     }
