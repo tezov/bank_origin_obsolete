@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 01:03
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 01:02
+ *  Last modified 05/02/2023 17:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -35,6 +35,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 
 object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceAction> {
 
@@ -50,8 +51,6 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
             ),
             parent = {
                 arrayOf(
-                    PageHelpAndServiceTheme provides PageHelpAndServiceTheme.provideShapes(),
-                    PageHelpAndServiceTheme provides PageHelpAndServiceTheme.provideBorders(),
                     PageHelpAndServiceTheme provides PageHelpAndServiceTheme.provideTypographies(),
                 )
             },
@@ -73,8 +72,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .wrapContentHeight()
-                        .background(PageHelpAndServiceTheme.colors.backgroundSection)
+                        .background(PageHelpAndServiceTheme.colors.backgroundElevated)
                 ) {
                     IconButton(
                         modifier = Modifier
@@ -85,7 +83,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                             modifier = Modifier.size(PageHelpAndServiceTheme.dimensions.iconCloseSize),
                             painter = painterResource(id = R.drawable.ic_close_24dp),
                             contentDescription = stringResource(id = R.string.pg_h_and_s_icon_close),
-                            tint = PageHelpAndServiceTheme.colors.onBackgroundLight,
+                            tint = PageHelpAndServiceTheme.colors.iconClose,
                         )
                     }
                 }
@@ -125,7 +123,9 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     ) {
         header.headline.value?.let{
             Text(
-                modifier = Modifier.wrapContentSize(),
+                modifier = Modifier.wrapContentSize().padding(
+                    horizontal = MaterialTheme.dimensionsPaddingExtended.page_h
+                ),
                 text = it,
                 style = PageHelpAndServiceTheme.typographies.titleBig
             )

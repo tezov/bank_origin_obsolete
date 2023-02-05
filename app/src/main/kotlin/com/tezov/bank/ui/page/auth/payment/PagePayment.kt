@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 01:03
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 01:02
+ *  Last modified 05/02/2023 18:16
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,8 +28,9 @@ import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
 
 object PagePayment : Page<PagePaymentState, PagePaymentAction> {
 
@@ -39,16 +40,12 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
         val action = accessor.action()
         val state = accessor.state()
 
-
         ExtensionCompositionLocal.CompositionLocalProvider(
             ancestor = arrayOf(
                 PagePaymentTheme provides PagePaymentTheme.provideColors(),
-                PagePaymentTheme provides PagePaymentTheme.provideDimensions(),
             ),
             parent = {
                 arrayOf(
-                    PagePaymentTheme provides PagePaymentTheme.provideShapes(),
-                    PagePaymentTheme provides PagePaymentTheme.provideBorders(),
                     PagePaymentTheme provides PagePaymentTheme.provideTypographies(),
                 )
             },
@@ -68,13 +65,13 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
             ) {
                 contentHeader(state.header)
                 state.cardSmall.value?.let {
-                    SectionActionCard(data = it){
+                    SectionActionCard(data = it) {
 
 
                     }
                 }
                 state.cardLarge.value?.let {
-                    SectionActionCard(data = it){
+                    SectionActionCard(data = it) {
 
 
                     }
@@ -87,11 +84,12 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
     private fun contentHeader(
         header: PagePaymentState.Header
     ) {
-        header.headline.value?.let{
+        header.headline.value?.let {
             Text(
-                modifier = Modifier.wrapContentSize(),
+                modifier = Modifier
+                    .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.page_h),
                 text = it,
-                style = PagePaymentTheme.typographies.title
+                style = PagePaymentTheme.typographies.titleHuge
             )
             Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.normal_v))
         }

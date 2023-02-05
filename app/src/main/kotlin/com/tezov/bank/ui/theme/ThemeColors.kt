@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 14:26
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 14:13
+ *  Last modified 05/02/2023 18:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,7 +30,7 @@ object ThemeColors {
         val redBlood = Color(0xFFAD1720)
 
         val whiteShiny = Color(0xFFF0EEEE)
-        val whiteDark = Color(0xFFAAA9A9)
+        val whiteDark = Color(0xFFDDDDDD)
         val whiteShady = Color(0xFFDDDADA)
 
         val grayDark = Color(0xFF3F3F3F)
@@ -42,7 +42,7 @@ object ThemeColors {
 
         val blueOverlay = Color(0x3400DCFF)
         val blackOverlay = Color(0xAA000000)
-        val grayOverlay = Color(0x333F3F3F)
+        val grayOverlay = Color(0x063F3F3F)
     }
 
     val colorsLight = Colors(
@@ -88,7 +88,7 @@ object ThemeColors {
         onBackgroundButtonConfirm = Common.whiteShiny,
         onBackgroundButtonConfirmInactive = Common.grayDark,
 
-        backgroundButtonCancel = Common.blueClear,
+        backgroundButtonCancel = Common.blueShadow,
         backgroundButtonCancelInactive = Common.whiteDark,
         onBackgroundButtonCancel = Common.blueElegant,
         onBackgroundButtonCancelInactive = Common.grayDark,

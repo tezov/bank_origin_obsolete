@@ -1,9 +1,7 @@
 
 theme
 -divider
--border card
-
-clean theme page useless + padding
+-border card / shape
 
 profil
 clean theme

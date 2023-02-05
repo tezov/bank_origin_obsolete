@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 14:26
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 14:11
+ *  Last modified 05/02/2023 18:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,6 +24,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.ui.page.auth.help.colors
 import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
@@ -33,27 +34,6 @@ val PagePaymentTheme.colors: PagePaymentTheme.Colors
     get() = localColors.current
 
 infix fun PagePaymentTheme.provides(value: PagePaymentTheme.Colors) = localColors provides value
-
-val PagePaymentTheme.dimensions: PagePaymentTheme.Dimensions
-    @Composable
-    @ReadOnlyComposable
-    get() = localDimensions.current
-
-infix fun PagePaymentTheme.provides(value: PagePaymentTheme.Dimensions) = localDimensions provides value
-
-val PagePaymentTheme.shapes: PagePaymentTheme.Shapes
-    @Composable
-    @ReadOnlyComposable
-    get() = localShapes.current
-
-infix fun PagePaymentTheme.provides(value: PagePaymentTheme.Shapes) = localShapes provides value
-
-val PagePaymentTheme.borders: PagePaymentTheme.Borders
-    @Composable
-    @ReadOnlyComposable
-    get() = localBorders.current
-
-infix fun PagePaymentTheme.provides(value: PagePaymentTheme.Borders) = localBorders provides value
 
 val PagePaymentTheme.typographies: PagePaymentTheme.Typographies
     @Composable
@@ -67,78 +47,29 @@ object PagePaymentTheme {
 
     data class Colors(
         val background: Color,
-        val textContent: Color,
+        val textTitle: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
-        background = MaterialTheme.colors.primary,
-        textContent = MaterialTheme.colorsCommonExtended.onPrimaryVariant,
+        background = MaterialTheme.colors.background,
+        textTitle = MaterialTheme.colors.primaryVariant,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
         error("not provided")
     }
 
-    data class Dimensions(
-        val iconSize: Dp,
-    )
-
-    @Composable
-    fun provideDimensions() = Dimensions(
-        iconSize = 24.dp,
-    )
-
-    internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
-        staticCompositionLocalOf {
-            error("not provided")
-        }
-
-    data class Shapes(
-        val card: Shape,
-    )
-
-    @Composable
-    fun provideShapes() = Shapes(
-        card = MaterialTheme.shapesExtended.cardNormal,
-    )
-
-    internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
-
-    data class Borders(
-        val card: BorderStroke,
-    )
-
-    @Composable
-    fun provideBorders() = Borders(
-        card = BorderStroke(
-            2.dp,
-            colors.textContent
-        )
-    )
-
-    internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
     data class Typographies(
-        val title: TextStyle,
-        val normal: TextStyle,
+        val titleHuge: TextStyle,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographyExtended.textTitle.copy(
-            color = colors.textContent
-        ),
-        normal = MaterialTheme.typographyExtended.textNormal.copy(
-            color = colors.textContent,
+        titleHuge = MaterialTheme.typographyExtended.textHuge.copy(
+            color = colors.textTitle,
             fontWeight = FontWeight.Bold
         ),
-
     )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =

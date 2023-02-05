@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 13:38
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 13:11
+ *  Last modified 05/02/2023 18:17
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -50,7 +50,7 @@ class PagePaymentState private constructor(
     init {
 
         header.apply {
-            headline.value = "Aide & Service"
+            headline.value = "Paiments"
         }
 
         cardSmall.value = SectionActionCard.Data(

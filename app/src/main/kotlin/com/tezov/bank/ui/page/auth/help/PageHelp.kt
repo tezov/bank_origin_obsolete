@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 01:03
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 23:13
+ *  Last modified 05/02/2023 18:16
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,6 +30,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 
 object PageHelp : Page<PageHelpState, PageHelpAction> {
 
@@ -41,7 +42,6 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
         ExtensionCompositionLocal.CompositionLocalProvider(
             ancestor = arrayOf(
                 PageHelpTheme provides PageHelpTheme.provideColors(),
-                PageHelpTheme provides PageHelpTheme.provideDimensions(),
             ),
             parent = {
                 arrayOf(
@@ -103,10 +103,10 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.page_h)
         ) {
             header.headline.value?.let {
                 Text(
-                    modifier = Modifier.wrapContentSize(),
                     text = it,
                     style = PageHelpTheme.typographies.titleHuge
                 )
@@ -118,7 +118,6 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
             }
             header.title.value?.let {
                 Text(
-                    modifier = Modifier.wrapContentSize(),
                     text = it,
                     style = PageHelpTheme.typographies.titleBig
                 )
@@ -130,7 +129,6 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
             }
             header.text.value?.let {
                 Text(
-                    modifier = Modifier.wrapContentSize(),
                     text = it,
                     style = PageHelpTheme.typographies.normal
                 )

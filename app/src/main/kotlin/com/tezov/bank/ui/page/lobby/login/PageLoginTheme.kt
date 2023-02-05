@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 14:26
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 14:13
+ *  Last modified 05/02/2023 18:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -82,8 +82,8 @@ object PageLoginTheme {
     fun provideColors() = Colors(
         background = MaterialTheme.colors.primary,
         backgroundButtonDark = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm,
-        backgroundButtonLight = MaterialTheme.colorsCommonExtended.backgroundButtonCancel,
-        backgroundDropDownMenu = ThemeColors.Common.blueOverlay,
+        backgroundButtonLight = MaterialTheme.colorsCommonExtended.onSecondaryVariant,
+        backgroundDropDownMenu = ThemeColors.Common.whiteDark,
         textContent = MaterialTheme.colorsCommonExtended.onPrimaryVariant,
         textButtonDark = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm,
         textButtonLight = MaterialTheme.colorsCommonExtended.onBackgroundButtonCancel,
@@ -230,7 +230,7 @@ object PageLoginTheme {
     @Composable
     fun provideSwiperPagerStyle() = Swiper.Pager.Style(
         colorIndicatorActive = colors.backgroundButtonDark,
-        colorIndicatorInactive = ThemeColors.Common.blueClear,
+        colorIndicatorInactive = colors.backgroundButtonLight,
         dimensionIndicatorPaddingTop = dimensions.pagerIndicatorPaddingTop,
         dimensionIndicatorSize = dimensions.pagerIndicatorSize,
         dimensionIndicatorSpacing = dimensions.pagerIndicatorSpacing,

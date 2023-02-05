@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 01:03
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 01:01
+ *  Last modified 05/02/2023 17:37
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,7 +33,6 @@ import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable.loopOver
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
-import com.tezov.lib_core_kotlin.extension.ExtensionInt.on
 
 infix fun SectionActionCard.provides(value: SectionActionCard.Style) = local provides value
 
@@ -49,7 +48,8 @@ object SectionActionCard {
         val dimensionIcon: Dp = 24.dp,
         val typographyHeader: TextStyle = TextStyle(),
         val colorBackgroundHeader: Color = Color.Transparent,
-        val colorBackgroundBody: Color = Color.Transparent
+        val colorBackgroundBody: Color = Color.Transparent,
+        val dimensionPaddingBody_h: Dp = 0.dp,
     )
 
     data class Data(
@@ -110,35 +110,34 @@ object SectionActionCard {
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(style.colorBackgroundBody)
-                    .padding(vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_h),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_h),
+                    .padding(
+                        vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_h,
+                        horizontal = style.dimensionPaddingBody_h
+                    ),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_v),
             ) {
-                data.cards.loopOver{
+                data.cards.loopOver {
                     val first = next
                     val second = next
-                    if(first != null && second != null){
-                        if(first.data.template == ActionCard.Template.IconEnd){
+                    if (first != null && second != null) {
+                        if (first.data.template == ActionCard.Template.IconEnd) {
                             push(second)
                             ContentRowUno(first, onClick)
-                        }
-                        else if(second.data.template == ActionCard.Template.IconEnd) {
+                        } else if (second.data.template == ActionCard.Template.IconEnd) {
                             push(first)
                             ContentRowUno(second, onClick)
-                        }
-                        else{
+                        } else {
                             ContentRowDuo(first, second, onClick)
                         }
-                        if(hasReachEnd && isStackEmpty){
+                        if (hasReachEnd && isStackEmpty) {
                             done()
                         }
-                    }
-                    else if(first != null){
-                        ContentRowUno(first){
+                    } else if (first != null) {
+                        ContentRowUno(first) {
 
                         }
                         done()
-                    }
-                    else {
+                    } else {
                         done()
                     }
                 }

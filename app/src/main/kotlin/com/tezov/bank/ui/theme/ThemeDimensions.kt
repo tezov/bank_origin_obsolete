@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 14:26
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 14:11
+ *  Last modified 05/02/2023 17:50
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -39,8 +39,8 @@ object ThemeDimensions {
         snackBarAction = 19.sp,
     )
     val dimensionsPaddingExtended = ThemeDimensionsExtended.Paddings(
-        screen_h = 6.dp,
-        screen_v = 4.dp,
+        page_h = 6.dp,
+        page_v = 4.dp,
         elementHuge_v = 18.dp,
         elementBig_v = 14.dp,
         elementNormal_v = 6.dp,
@@ -95,7 +95,7 @@ object ThemeDimensions {
     val dimensionsSizeExtended = ThemeDimensionsExtended.Sizes(
         iconModal = 42.dp,
         iconInfo = 36.dp,
-        iconAction = 28.dp,
+        iconAction = 22.dp,
         iconFieldInfo = 32.dp,
         iconFieldAction = 22.dp,
     )

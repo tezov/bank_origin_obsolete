@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 14:26
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 14:13
+ *  Last modified 05/02/2023 17:44
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,13 +24,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.component.leaf.ActionRow
-import com.tezov.bank.ui.page.auth.help.colors
-import com.tezov.bank.ui.page.auth.help.dimensions
-import com.tezov.bank.ui.page.auth.help.typographies
 import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.bank.ui.theme.ThemeComponent
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSizeExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
@@ -51,22 +47,6 @@ val PageHelpAndServiceTheme.dimensions: PageHelpAndServiceTheme.Dimensions
 infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Dimensions) =
     localDimensions provides value
 
-val PageHelpAndServiceTheme.shapes: PageHelpAndServiceTheme.Shapes
-    @Composable
-    @ReadOnlyComposable
-    get() = localShapes.current
-
-infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Shapes) =
-    localShapes provides value
-
-val PageHelpAndServiceTheme.borders: PageHelpAndServiceTheme.Borders
-    @Composable
-    @ReadOnlyComposable
-    get() = localBorders.current
-
-infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Borders) =
-    localBorders provides value
-
 val PageHelpAndServiceTheme.typographies: PageHelpAndServiceTheme.Typographies
     @Composable
     @ReadOnlyComposable
@@ -79,21 +59,17 @@ object PageHelpAndServiceTheme {
 
     data class Colors(
         val background: Color,
-        val backgroundSection: Color,
-        val onBackgroundLight: Color,
-        val onBackgroundDark: Color,
-        val icon: Color,
-        val divider: Color,
+        val backgroundElevated: Color,
+        val onBackground: Color,
+        val iconClose: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.background,
-        backgroundSection = ThemeColors.Common.whiteDark.copy(alpha = 0.10f),
-        onBackgroundLight = MaterialTheme.colors.primary,
-        onBackgroundDark = MaterialTheme.colors.onSecondary,
-        icon = MaterialTheme.colors.primary,
-        divider = ThemeColors.Common.grayOverlay,
+        backgroundElevated = MaterialTheme.colorsCommonExtended.backgroundElevated,
+        onBackground = MaterialTheme.colors.onBackground,
+        iconClose = MaterialTheme.colors.primary,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -101,20 +77,12 @@ object PageHelpAndServiceTheme {
     }
 
     data class Dimensions(
-        val iconCloseSize: Dp,
-        val iconCardSize: Dp,
-        val iconRowSize: Dp,
-        val iconChevronSize: Dp,
-        val divider: Dp,
+        val iconCloseSize: Dp
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
         iconCloseSize = MaterialTheme.dimensionsSizeExtended.iconModal,
-        iconCardSize = 48.dp,
-        iconRowSize = 32.dp,
-        iconChevronSize = 16.dp,
-        divider = 2.dp,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -122,60 +90,15 @@ object PageHelpAndServiceTheme {
             error("not provided")
         }
 
-    data class Shapes(
-        val card: Shape,
-    )
-
-    @Composable
-    fun provideShapes() = Shapes(
-        card = MaterialTheme.shapesExtended.cardBig,
-    )
-
-    internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
-
-    data class Borders(
-        val card: BorderStroke,
-
-        )
-
-    @Composable
-    fun provideBorders() = Borders(
-        card = BorderStroke(
-            1.5.dp,
-            ThemeColors.Common.grayOverlay
-        ),
-    )
-
-    internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
     data class Typographies(
         val titleBig: TextStyle,
-        val titleNormal: TextStyle,
-        val textCard: TextStyle,
-        val textRow: TextStyle,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
         titleBig = MaterialTheme.typographyExtended.textHuge.copy(
-            color = colors.onBackgroundDark,
+            color = colors.onBackground,
             fontWeight = FontWeight.Bold
-        ),
-        titleNormal = MaterialTheme.typographyExtended.textNormal.copy(
-            color = ThemeColors.Common.grayDark,
-            fontWeight = FontWeight.SemiBold
-        ),
-        textCard = MaterialTheme.typographyExtended.textNormal.copy(
-            color = colors.onBackgroundDark,
-            fontWeight = FontWeight.Bold
-        ),
-        textRow = MaterialTheme.typographyExtended.textBig.copy(
-            color = colors.onBackgroundDark,
         ),
     )
 

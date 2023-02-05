@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 14:26
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 14:24
+ *  Last modified 05/02/2023 18:06
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,10 +28,12 @@ object ThemeComponent {
 
     @Composable
     fun provideSectionRowStyle() = SectionActionRow.Style(
-        colorIcon = MaterialTheme.colors.primaryVariant,
+        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
+        colorIcon = MaterialTheme.colors.primary,
         dimensionIcon = MaterialTheme.dimensionsSizeExtended.iconInfo,
         typographyHeader = MaterialTheme.typographyExtended.textNormal.copy(
-            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
+            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated,
+            fontWeight = FontWeight.SemiBold
         ),
         colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated,
         colorDivider = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
@@ -53,12 +55,16 @@ object ThemeComponent {
 
     @Composable
     fun provideSectionCardStyle() = SectionActionCard.Style(
-        colorIcon = MaterialTheme.colors.primaryVariant,
+        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
+        colorIcon = MaterialTheme.colors.primary,
         dimensionIcon = MaterialTheme.dimensionsSizeExtended.iconInfo,
         typographyHeader = MaterialTheme.typographyExtended.textNormal.copy(
-            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
+            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated,
+            fontWeight = FontWeight.SemiBold
         ),
-        colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated
+        colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
+            alpha = 0.14f
+        )
     )
 
     @Composable
@@ -67,7 +73,7 @@ object ThemeComponent {
         borderCard = MaterialTheme.bordersExtended.dialog.copy(
             brush = SolidColor(
                 MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
-                    alpha = 0.15f
+                    alpha = 0.12f
                 )
             )
         ),
@@ -77,9 +83,7 @@ object ThemeComponent {
             fontWeight = FontWeight.Bold
         ),
         typographySubtitle = MaterialTheme.typographyExtended.textSubtitle,
-        background = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
-            alpha = 0.05f
-        ),
+        background = MaterialTheme.colorsCommonExtended.backgroundElevated,
     )
 
 

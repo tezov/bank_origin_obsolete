@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 14:26
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 14:11
+ *  Last modified 05/02/2023 18:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -75,8 +75,8 @@ object PageProfileTheme {
 
     @Composable
     fun provideColors() = Colors(
-        background = MaterialTheme.colors.primary,
-        textContent = MaterialTheme.colorsCommonExtended.onPrimaryVariant,
+        background = MaterialTheme.colors.background,
+        textContent = MaterialTheme.colors.primaryVariant,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -110,7 +110,6 @@ object PageProfileTheme {
         error("not provided")
     }
 
-
     data class Borders(
         val card: BorderStroke,
     )
@@ -142,7 +141,7 @@ object PageProfileTheme {
             fontWeight = FontWeight.Bold
         ),
 
-        )
+    )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =
         staticCompositionLocalOf {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/02/2023 18:53
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 18:52
+ *  Last modified 05/02/2023 17:53
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -50,6 +50,7 @@ object SectionActionRow {
         val colorBackgroundBody: Color = Color.Transparent,
         val colorDivider: Color = Color.Gray,
         val dimensionDivider: Dp = 1.dp,
+        val dimensionPaddingBody_h: Dp = 0.dp,
     )
 
     data class Data(
@@ -86,14 +87,14 @@ object SectionActionRow {
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(style.colorBackgroundHeader)
-                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementNormal_v),
+                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementBig_h),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.elementNormal_h))
+                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.elementBig_h))
                     data.iconResourceId?.let {
                         Icon(
                             modifier = Modifier
-                                .padding(end = MaterialTheme.dimensionsPaddingExtended.elementBig_h)
+                                .padding(end = MaterialTheme.dimensionsPaddingExtended.elementNormal_h)
                                 .size(style.dimensionIcon),
                             painter = painterResource(id = it),
                             tint = style.colorIcon,
@@ -110,8 +111,11 @@ object SectionActionRow {
                 modifier = Modifier
                     .fillMaxWidth()
                     .background(style.colorBackgroundBody)
-                    .padding(vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_h),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_h),
+                    .padding(
+                        vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
+                        horizontal = style.dimensionPaddingBody_h
+                    ),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_v),
             ) {
                 data.rows.forEachIndexed { index, row ->
                     ActionRow(data = row) {

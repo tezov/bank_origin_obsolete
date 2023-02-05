@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 13:38
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 13:33
+ *  Last modified 05/02/2023 18:22
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,10 +28,13 @@ import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.component.leaf.provides
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.page.auth.help.*
+import com.tezov.bank.ui.page.auth.payment.PagePaymentTheme
+import com.tezov.bank.ui.page.auth.payment.typographies
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
 
 object PageProfile : Page<PageProfileState, PageProfileAction> {
@@ -102,8 +105,14 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
     private fun contentHeader(
         header: PageProfileState.Header
     ) {
-
+        header.name.value?.let {
+            Text(
+                modifier = Modifier
+                    .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.page_h),
+                text = it,
+                style = PageProfileTheme.typographies.title
+            )
+            Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.normal_v))
+        }
     }
-
-
 }

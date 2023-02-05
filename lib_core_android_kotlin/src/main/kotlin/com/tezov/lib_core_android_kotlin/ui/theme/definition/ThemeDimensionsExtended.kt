@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 14:26
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 14:11
+ *  Last modified 05/02/2023 17:31
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -75,8 +75,8 @@ object ThemeDimensionsExtended{
 
     @Immutable
     data class Paddings(
-        val screen_h: Dp,
-        val screen_v: Dp,
+        val page_h: Dp,
+        val page_v: Dp,
         val elementHuge_v: Dp,
         val elementBig_v: Dp,
         val elementNormal_v: Dp,

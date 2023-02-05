@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 14:26
+ *  Created by Tezov on 05/02/2023 18:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 14:13
+ *  Last modified 05/02/2023 18:10
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -35,13 +35,6 @@ val PageHelpTheme.colors: PageHelpTheme.Colors
 
 infix fun PageHelpTheme.provides(value: PageHelpTheme.Colors) = localColors provides value
 
-val PageHelpTheme.dimensions: PageHelpTheme.Dimensions
-    @Composable
-    @ReadOnlyComposable
-    get() = localDimensions.current
-
-infix fun PageHelpTheme.provides(value: PageHelpTheme.Dimensions) = localDimensions provides value
-
 val PageHelpTheme.typographies: PageHelpTheme.Typographies
     @Composable
     @ReadOnlyComposable
@@ -54,51 +47,25 @@ object PageHelpTheme {
 
     data class Colors(
         val background: Color,
-        val backgroundSection: Color,
-        val divider: Color,
         val textTitle: Color,
         val textNormal: Color,
-        val icon: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.background,
-        backgroundSection = ThemeColors.Common.grayOverlay,
-        divider = ThemeColors.Common.grayOverlay,
         textTitle = MaterialTheme.colors.primaryVariant,
         textNormal = MaterialTheme.colors.onSecondary,
-        icon = MaterialTheme.colors.primary,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
         error("not provided")
     }
 
-    data class Dimensions(
-        val iconAction: Dp,
-        val iconSection: Dp,
-        val divider: Dp,
-    )
-
-    @Composable
-    fun provideDimensions() = Dimensions(
-        iconAction = 18.dp,
-        iconSection = 42.dp,
-        divider = 2.dp,
-    )
-
-    internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
-        staticCompositionLocalOf {
-            error("not provided")
-        }
-
     data class Typographies(
         val titleHuge: TextStyle,
         val titleBig: TextStyle,
-        val titleNormal: TextStyle,
         val normal: TextStyle,
-        val actionRow: TextStyle,
     )
 
     @Composable
@@ -111,14 +78,7 @@ object PageHelpTheme {
             color = colors.textTitle,
             fontWeight = FontWeight.SemiBold
         ),
-        titleNormal = MaterialTheme.typographyExtended.textTitle.copy(
-            color = colors.textTitle,
-            fontWeight = FontWeight.SemiBold
-        ),
         normal = MaterialTheme.typographyExtended.textNormal.copy(
-            color = colors.textNormal
-        ),
-        actionRow = MaterialTheme.typographyExtended.textNormal.copy(
             color = colors.textNormal
         ),
     )
