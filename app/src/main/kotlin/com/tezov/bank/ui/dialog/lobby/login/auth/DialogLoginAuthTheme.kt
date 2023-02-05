@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/02/2023 22:16
+ *  Created by Tezov on 05/02/2023 01:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/02/2023 22:16
+ *  Last modified 04/02/2023 23:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,7 +27,7 @@ import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
-import com.tezov.lib_core_android_kotlin.ui.util.ExtensionDensity.toPx
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionDensity.toPx
 
 val DialogLoginAuthTheme.colors: DialogLoginAuthTheme.Colors
     @Composable

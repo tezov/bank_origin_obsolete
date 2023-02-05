@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 05/02/2023 01:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 04/02/2023 22:44
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,6 +24,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val PagePaymentTheme.colors: PagePaymentTheme.Colors
@@ -144,5 +145,11 @@ object PagePaymentTheme {
         staticCompositionLocalOf {
             error("not provided")
         }
+
+    @Composable
+    fun provideSectionCardStyle() = ThemeComponent.provideSectionCardStyle()
+
+    @Composable
+    fun provideActionCardStyle() = ThemeComponent.provideActionCardStyle()
 
 }

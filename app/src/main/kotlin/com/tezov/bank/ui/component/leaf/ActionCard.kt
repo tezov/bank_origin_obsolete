@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/02/2023 20:11
+ *  Created by Tezov on 05/02/2023 01:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 20:11
+ *  Last modified 05/02/2023 01:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -37,160 +37,158 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 
-infix fun ActionCard.Simple.provides(value: ActionCard.Simple.Style) = local provides value
+infix fun ActionCard.provides(value: ActionCard.Style) = local provides value
 
 object ActionCard {
 
-    object Simple {
-        internal val local: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
-            Style()
-        }
+    internal val local: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
+        Style()
+    }
 
-        enum class Template {
-            IconTopEnd,
-            IconEnd,
-        }
+    enum class Template {
+        Undefined,
+        IconTopEnd,
+        IconEnd,
+    }
 
-        @Immutable
-        data class Style(
-            val shapeCard: Shape = RoundedCornerShape(8.dp),
-            val borderCard: BorderStroke = BorderStroke(1.dp, Color.Black),
-            val colorIcon: Color = Color.Black,
-            val dimensionsIcon: Dp = 24.dp,
-            val typographyTitle: TextStyle = TextStyle(),
-            val typographySubtitle: TextStyle = TextStyle(),
-            val background: Color = Color.Transparent,
-        )
+    @Immutable
+    data class Style(
+        val shapeCard: Shape = RoundedCornerShape(8.dp),
+        val borderCard: BorderStroke = BorderStroke(1.dp, Color.Black),
+        val colorIcon: Color = Color.Black,
+        val dimensionsIcon: Dp = 24.dp,
+        val typographyTitle: TextStyle = TextStyle(),
+        val typographySubtitle: TextStyle = TextStyle(),
+        val background: Color = Color.Transparent,
+    )
 
-        data class Data(
-            val template: Template = Template.IconTopEnd,
-            val title: String,
-            val subtitle: String? = null,
-            val iconResourceId: Int,
-        )
+    data class Data(
+        var template: Template = Template.Undefined,
+        val title: String,
+        val subtitle: String? = null,
+        val iconResourceId: Int,
+    )
 
-        @Composable
-        operator fun invoke(
-            modifier: Modifier = Modifier,
-            data: Data,
-            onClick: () -> Unit
-        ) {
-            Content(modifier, data, onClick)
-        }
+    @Composable
+    operator fun invoke(
+        modifier: Modifier = Modifier,
+        data: Data,
+        onClick: () -> Unit
+    ) {
+        Content(modifier, data, onClick)
+    }
 
-        @Composable
-        private fun Content(
-            modifier: Modifier,
-            data: Data,
-            onClick: () -> Unit
-        ) {
-            val style = local.current
-            when (data.template) {
-                Template.IconTopEnd -> {
-                    ContentIconTopEnd(style, modifier, data, onClick)
-                }
-                Template.IconEnd -> {
-                    ContentIconEnd(style, modifier, data, onClick)
-                }
+    @Composable
+    private fun Content(
+        modifier: Modifier,
+        data: Data,
+        onClick: () -> Unit
+    ) {
+        val style = local.current
+        when (data.template) {
+            Template.IconTopEnd, Template.Undefined  -> {
+                ContentIconTopEnd(style, modifier, data, onClick)
+            }
+            Template.IconEnd -> {
+                ContentIconEnd(style, modifier, data, onClick)
             }
         }
+    }
 
-        @Composable
-        private fun ContentIconTopEnd(
-            style: Style,
-            modifier: Modifier,
-            data: Data,
-            onClick: () -> Unit
+    @Composable
+    private fun ContentIconTopEnd(
+        style: Style,
+        modifier: Modifier,
+        data: Data,
+        onClick: () -> Unit
+    ) {
+        Row(
+            modifier = modifier
+                .border(style.borderCard, style.shapeCard)
+                .clip(style.shapeCard)
+                .background(style.background)
+                .clickable {
+                    onClick()
+                }
+                .padding(
+                    vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
+                    horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
+                )
         ) {
-            Row(
-                modifier = modifier
-                    .border(style.borderCard, style.shapeCard)
-                    .clip(style.shapeCard)
-                    .background(style.background)
-                    .clickable {
-                        onClick()
-                    }
-                    .padding(
-                        vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
-                        horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
-                    )
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .align(Alignment.CenterVertically)
             ) {
-                Column(
-                    modifier = Modifier
-                        .weight(1f)
-                        .align(Alignment.CenterVertically)
-                ) {
-                    Spacer(modifier = Modifier.height(style.dimensionsIcon))
+                Spacer(modifier = Modifier.height(style.dimensionsIcon))
+                Text(
+                    text = data.title,
+                    style = style.typographyTitle,
+                    overflow = TextOverflow.Visible
+                )
+                data.subtitle?.let {
                     Text(
-                        text = data.title,
-                        style = style.typographyTitle,
+                        text = it,
+                        style = style.typographySubtitle,
                         overflow = TextOverflow.Visible
                     )
-                    data.subtitle?.let {
-                        Text(
-                            text = it,
-                            style = style.typographySubtitle,
-                            overflow = TextOverflow.Visible
-                        )
-                    }
                 }
-                Icon(
-                    modifier = Modifier
-                        .size(style.dimensionsIcon),
-                    painter = painterResource(id = data.iconResourceId),
-                    tint = style.colorIcon,
-                    contentDescription = data.title,
-                )
             }
-
+            Icon(
+                modifier = Modifier
+                    .size(style.dimensionsIcon),
+                painter = painterResource(id = data.iconResourceId),
+                tint = style.colorIcon,
+                contentDescription = data.title,
+            )
         }
 
-        @Composable
-        private fun ContentIconEnd(
-            style: Style,
-            modifier: Modifier,
-            data: Data,
-            onClick: () -> Unit
+    }
+
+    @Composable
+    private fun ContentIconEnd(
+        style: Style,
+        modifier: Modifier,
+        data: Data,
+        onClick: () -> Unit
+    ) {
+        Row(
+            modifier = modifier
+                .fillMaxWidth()
+                .border(style.borderCard, style.shapeCard)
+                .clip(style.shapeCard)
+                .background(style.background)
+                .clickable { onClick() }
+                .padding(
+                    vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
+                    horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
+                ),
         ) {
-            Row(
-                modifier = modifier
-                    .fillMaxWidth()
-                    .border(style.borderCard, style.shapeCard)
-                    .clip(style.shapeCard)
-                    .background(style.background)
-                    .clickable { onClick() }
-                    .padding(
-                        vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
-                        horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
-                    ),
+            Column(
+                modifier = Modifier
+                    .align(Alignment.Bottom)
+                    .weight(1f)
             ) {
-                Column(
-                    modifier = Modifier
-                        .align(Alignment.Bottom)
-                        .weight(1f)
-                ) {
+                Text(
+                    text = data.title,
+                    style = style.typographyTitle
+                )
+                data.subtitle?.let {
                     Text(
-                        text = data.title,
+                        text = it,
                         style = style.typographyTitle
                     )
-                    data.subtitle?.let {
-                        Text(
-                            text = it,
-                            style = style.typographyTitle
-                        )
-                    }
                 }
-                Icon(
-                    modifier = Modifier
-                        .size(style.dimensionsIcon)
-                        .align(Alignment.CenterVertically),
-                    painter = painterResource(id = data.iconResourceId),
-                    tint = style.colorIcon,
-                    contentDescription = data.title,
-                )
             }
+            Icon(
+                modifier = Modifier
+                    .size(style.dimensionsIcon)
+                    .align(Alignment.CenterVertically),
+                painter = painterResource(id = data.iconResourceId),
+                tint = style.colorIcon,
+                contentDescription = data.title,
+            )
         }
-
     }
 
 

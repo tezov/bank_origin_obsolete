@@ -1,9 +1,7 @@
 
-
-- application theme for SectionRow / ActionRow
-- faire leaf card small/large + SectionActionCard(laissé le choix de la card?)
-- finir refactor help and service
-- faire page autre auth avec leaf/branch
+profil
+clean theme
+icon
 
 - componentManager, is there a way to not destroy if screen is supposed to be behind ??? Same LocalPage in Module
 

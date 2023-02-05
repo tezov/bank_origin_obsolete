@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 05/02/2023 01:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 04/02/2023 23:13
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,8 +22,8 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.ActivityAction
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.ActivityState
 import com.tezov.lib_core_kotlin.type.collection.ListEntry
-import com.tezov.lib_core_kotlin.util.ExtensionCompletable.notifyComplete
-import com.tezov.lib_core_kotlin.util.ExtensionCompletable.onComplete
+import com.tezov.lib_core_kotlin.extension.ExtensionCompletable.notifyComplete
+import com.tezov.lib_core_kotlin.extension.ExtensionCompletable.onComplete
 import kotlinx.coroutines.*
 import java.util.*
 import kotlin.properties.Delegates

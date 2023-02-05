@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/02/2023 22:00
+ *  Created by Tezov on 05/02/2023 01:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/02/2023 21:49
+ *  Last modified 05/02/2023 01:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,52 +12,88 @@
 
 package com.tezov.bank.ui.page.auth.payment
 
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
-import com.tezov.bank.ui.page.auth.discover.PageDiscoverState
+import com.tezov.bank.ui.component.branch.SectionActionCard
+import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PagePaymentState private constructor(
-    val actionCardData: SnapshotStateList<ActionCardData>,
-    val actionCardRichData: SnapshotStateList<ActionCardRichData>,
+    val header: Header,
+    val cardSmall: MutableState<SectionActionCard.Data?>,
+    val cardLarge: MutableState<SectionActionCard.Data?>,
 ) : PageState {
 
     companion object {
         fun create(
-            actionCardData: SnapshotStateList<ActionCardData> = mutableStateListOf(),
-            actionCardRichData: SnapshotStateList<ActionCardRichData> = mutableStateListOf(),
+            header: Header = Header.empty(),
+            cardSmall: MutableState<SectionActionCard.Data?> = mutableStateOf(null),
+            cardLarge: MutableState<SectionActionCard.Data?> = mutableStateOf(null),
         ) = PagePaymentState(
-            actionCardData = actionCardData,
-            actionCardRichData = actionCardRichData,
+            header = header,
+            cardSmall = cardSmall,
+            cardLarge = cardLarge,
         )
     }
 
-
-    data class ActionCardData(
-        val title: String,
-        val iconResourceId: Int,
-    )
-
-    data class ActionCardRichData(
-        val title: String,
-        val subtitle: String,
-        val iconResourceId: Int,
-    )
+    data class Header(
+        val headline: MutableState<String?>,
+    ) {
+        companion object {
+            fun empty() = Header(
+                mutableStateOf(null),
+            )
+        }
+    }
 
     init {
 
-        actionCardData.addAll(
-            listOf(
-                ActionCardData("title", R.drawable.ic_call_24dp),
+        header.apply {
+            headline.value = "Aide & Service"
+        }
 
+        cardSmall.value = SectionActionCard.Data(
+            cards = listOf(
+                ActionCard.Data(
+                    title = "Partager mon RIB",
+                    iconResourceId = R.drawable.ic_crisis_24dp
+                ),
+                ActionCard.Data(
+                    title = "Faire un virement",
+                    iconResourceId = R.drawable.ic_crisis_24dp
+                ),
+                ActionCard.Data(
+                    title = "Gérer mes chèques",
+                    iconResourceId = R.drawable.ic_crisis_24dp
+                ),
+                ActionCard.Data(
+                    title = "Gérer mes cartes",
+                    iconResourceId = R.drawable.ic_crisis_24dp
+                ),
             )
         )
 
-        actionCardRichData.addAll(
-            listOf(
-                ActionCardRichData("title", "subtitle", R.drawable.ic_call_24dp),
-
+        cardLarge.value = SectionActionCard.Data(
+            cards = listOf(
+                ActionCard.Data(
+                    title = "Lyf Pay",
+                    template = ActionCard.Template.IconEnd,
+                    subtitle = "Payer avec votre mobile.",
+                    iconResourceId = R.drawable.ic_crisis_24dp
+                ),
+                ActionCard.Data(
+                    title = "Paylib",
+                    template = ActionCard.Template.IconEnd,
+                    subtitle = "Envoyer de l'argent vers un mobile",
+                    iconResourceId = R.drawable.ic_crisis_24dp
+                ),
+                ActionCard.Data(
+                    title = "PaypPal",
+                    template = ActionCard.Template.IconEnd,
+                    subtitle = "Payer en ligne",
+                    iconResourceId = R.drawable.ic_crisis_24dp
+                ),
             )
         )
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/02/2023 18:53
+ *  Created by Tezov on 05/02/2023 01:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 18:45
+ *  Last modified 05/02/2023 01:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,6 @@
 package com.tezov.bank.ui.page.lobby.help_and_service
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -21,13 +20,8 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.style.TextOverflow
-import androidx.constraintlayout.compose.ConstraintLayout
-import androidx.constraintlayout.compose.ConstraintSet
-import androidx.constraintlayout.compose.Dimension
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
@@ -36,15 +30,11 @@ import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.component.leaf.provides
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
-import com.tezov.bank.ui.page.auth.help.PageHelpState
-import com.tezov.bank.ui.page.auth.help.PageHelpTheme
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonResource
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
-import com.tezov.lib_core_android_kotlin.ui.util.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
 
 object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceAction> {
 
@@ -69,7 +59,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 arrayOf(
                     ActionRow provides PageHelpAndServiceTheme.provideActionRowStyle(),
                     SectionActionRow provides PageHelpAndServiceTheme.provideSectionRowStyle(),
-                    ActionCard.Simple provides PageHelpAndServiceTheme.provideActionCardStyle(),
+                    ActionCard provides PageHelpAndServiceTheme.provideActionCardStyle(),
                     SectionActionCard provides PageHelpAndServiceTheme.provideSectionCardStyle(),
                 )
             }

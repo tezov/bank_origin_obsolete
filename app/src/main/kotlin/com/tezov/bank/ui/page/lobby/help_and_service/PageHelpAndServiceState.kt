@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/02/2023 20:11
+ *  Created by Tezov on 05/02/2023 01:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 19:31
+ *  Last modified 05/02/2023 01:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -61,31 +61,31 @@ class PageHelpAndServiceState private constructor(
 
         helpAndServices.value = SectionActionCard.Data(
             cards = listOf(
-                ActionCard.Simple.Data(
+                ActionCard.Data(
                     title = "Opposer une carte",
                     iconResourceId = R.drawable.ic_crisis_24dp
                 ),
-                ActionCard.Simple.Data(
+                ActionCard.Data(
                     title = "Contester un prélèvement",
                     iconResourceId = R.drawable.ic_argue_24dp
                 ),
-                ActionCard.Simple.Data(
+                ActionCard.Data(
                     title = "Suivre mon dossier",
                     iconResourceId = R.drawable.ic_checklist_24dp
                 ),
-                ActionCard.Simple.Data(
+                ActionCard.Data(
                     title = "Trouver un distributeur",
                     iconResourceId = R.drawable.ic_atm_24dp
                 ),
-                ActionCard.Simple.Data(
+                ActionCard.Data(
                     title = "Retirer à l'étranger",
                     iconResourceId = R.drawable.ic_explore_24dp
                 ),
-                ActionCard.Simple.Data(
+                ActionCard.Data(
                     title = "Découvrir l'application",
                     iconResourceId = R.drawable.ic_search_24dp
                 ),
-                ActionCard.Simple.Data(
+                ActionCard.Data(
                     title = "Accéder à l'assitance technique",
                     iconResourceId = R.drawable.ic_help_24dp
                 ),
