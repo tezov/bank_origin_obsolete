@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 05/02/2023 14:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 05/02/2023 14:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,13 +18,14 @@ import com.tezov.lib_core_android_kotlin.ui.theme.definition.ThemeColorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.ThemeColorsResource
 
 object ThemeColors {
-    object Data {
+    object Common {
         val blueNight = Color(0xFF01252B)
         val blueElegant = Color(0xFF12263F)
         val blueSea = Color(0xFF11BAD5)
         val blueDark = Color(0xFF08465C)
         val blueShadow= Color(0xFF364C53)
         val blueClear= Color(0xFFD0E9F1)
+
         val redSalmon = Color(0xFFF0767E)
         val redBlood = Color(0xFFAD1720)
 
@@ -45,66 +46,68 @@ object ThemeColors {
     }
 
     val colorsLight = Colors(
-        primary = Data.blueSea,
-        primaryVariant = Data.blueDark,
-        onPrimary = Data.whiteShady,
+        primary = Common.blueSea,
+        primaryVariant = Common.blueDark,
+        onPrimary = Common.whiteShady,
 
-        secondary = Data.whiteShady,
-        secondaryVariant = Data.whiteDark,
-        onSecondary = Data.blueNight,
+        secondary = Common.whiteShady,
+        secondaryVariant = Common.whiteDark,
+        onSecondary = Common.blueNight,
 
-        surface = Data.whiteShady,
-        onSurface = Data.blueNight,
+        surface = Color.Transparent,
+        onSurface = Common.blueElegant,
 
-        background = Data.whiteShiny,
-        onBackground = Data.blueElegant,
+        background = Common.whiteShiny,
+        onBackground = Common.blueElegant,
 
-        error = Data.redBlood,
-        onError = Data.whiteDark,
+        error = Common.redBlood,
+        onError = Common.whiteDark,
         isLight = true
     )
 
     val colorsLightCommonExtended = ThemeColorsExtended.Common(
-        onPrimaryLight = Data.whiteShiny,
-        onSecondaryLight = Data.blueClear,
-        onBackgroundLight = Data.blueShadow,
+        onPrimaryVariant = Common.whiteShiny,
+        onSecondaryVariant = Common.blueClear,
 
-        backgroundElevated = Data.whiteShady,
-        onBackgroundElevated = Data.blueNight,
-        onBackgroundElevatedLight = Data.blueElegant,
+        backgroundVariant = Common.blueSea,
+        onBackgroundVariant = Common.whiteShiny,
 
-        backgroundModal = Data.whiteShady,
-        onBackgroundModal = Data.blueNight,
-        onBackgroundModalLight = Data.blueElegant,
+        backgroundElevated = Common.grayOverlay,
+        onBackgroundElevated = Common.blueNight,
+        onBackgroundElevatedVariant = Common.blueElegant,
 
-        backgroundInactive = Data.blueClear,
-        onBackgroundInactive = Data.grayDark,
+        backgroundModal = Common.whiteShady,
+        onBackgroundModal = Common.blueNight,
+        onBackgroundModalVariant = Common.blueElegant,
 
-        backgroundButtonConfirm = Data.blueElegant,
-        backgroundButtonConfirmInactive = Data.whiteDark,
-        onBackgroundButtonConfirm = Data.whiteShiny,
-        onBackgroundButtonConfirmInactive = Data.grayDark,
+        backgroundInactive = Common.blueClear,
+        onBackgroundInactive = Common.grayDark,
 
-        backgroundButtonCancel = Data.blueClear,
-        backgroundButtonCancelInactive = Data.whiteDark,
-        onBackgroundButtonCancel = Data.blueElegant,
-        onBackgroundButtonCancelInactive = Data.grayDark,
+        backgroundButtonConfirm = Common.blueElegant,
+        backgroundButtonConfirmInactive = Common.whiteDark,
+        onBackgroundButtonConfirm = Common.whiteShiny,
+        onBackgroundButtonConfirmInactive = Common.grayDark,
 
-        backgroundButtonProceed = Data.whiteShiny,
-        backgroundButtonProceedInactive = Data.whiteDark,
-        onBackgroundButtonProceed = Data.blueNight,
-        onBackgroundButtonProceedInactive = Data.grayDark,
+        backgroundButtonCancel = Common.blueClear,
+        backgroundButtonCancelInactive = Common.whiteDark,
+        onBackgroundButtonCancel = Common.blueElegant,
+        onBackgroundButtonCancelInactive = Common.grayDark,
 
-        topAppBarBackground = colorsLight.background,
-        topAppBarContentText = colorsLight.primary,
-        topAppBarContentIcon = ThemeColorsResource.Common.black,
+        backgroundButtonProceed = Common.whiteShiny,
+        backgroundButtonProceedInactive = Common.whiteDark,
+        onBackgroundButtonProceed = Common.blueNight,
+        onBackgroundButtonProceedInactive = Common.grayDark,
 
-        bottomNavigationBackground = colorsLight.background,
-        bottomNavigationActive = Data.blueSea,
-        bottomNavigationInactive = ThemeColorsResource.Common.grayLight,
+        topAppBarBackground = colorsLight.primary,
+        topAppBarContentText = colorsLight.onPrimary,
+        topAppBarContentIcon = colorsLight.onPrimary,
+
+        bottomNavigationBackground = Common.whiteShady,
+        bottomNavigationActive = Common.blueSea,
+        bottomNavigationInactive = Common.grayDark,
 
         snackbarBackground = colorsLight.primaryVariant,
-        snackbarMessage = ThemeColorsResource.Common.white,
-        snackbarAction = Data.blueSea,
+        snackbarMessage = Common.whiteShiny,
+        snackbarAction = Common.blueFlashy,
     )
 }

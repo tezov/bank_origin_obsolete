@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 05/02/2023 14:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 05/02/2023 14:11
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -72,7 +72,7 @@ object PageDiscoverTheme {
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.primary,
-        textContent = MaterialTheme.colorsCommonExtended.onPrimaryLight,
+        textContent = MaterialTheme.colorsCommonExtended.onPrimaryVariant,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {

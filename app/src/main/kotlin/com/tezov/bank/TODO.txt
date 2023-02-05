@@ -1,4 +1,10 @@
 
+theme
+-divider
+-border card
+
+clean theme page useless + padding
+
 profil
 clean theme
 icon

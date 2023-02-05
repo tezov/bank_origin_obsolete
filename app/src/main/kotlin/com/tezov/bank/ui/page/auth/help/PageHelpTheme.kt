@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/02/2023 18:53
+ *  Created by Tezov on 05/02/2023 14:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 16:41
+ *  Last modified 05/02/2023 14:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -64,8 +64,8 @@ object PageHelpTheme {
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.background,
-        backgroundSection = ThemeColors.Data.grayOverlay,
-        divider = ThemeColors.Data.grayOverlay,
+        backgroundSection = ThemeColors.Common.grayOverlay,
+        divider = ThemeColors.Common.grayOverlay,
         textTitle = MaterialTheme.colors.primaryVariant,
         textNormal = MaterialTheme.colors.onSecondary,
         icon = MaterialTheme.colors.primary,

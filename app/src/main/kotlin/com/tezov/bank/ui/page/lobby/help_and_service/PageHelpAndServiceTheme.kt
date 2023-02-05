@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/02/2023 18:53
+ *  Created by Tezov on 05/02/2023 14:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 17:43
+ *  Last modified 05/02/2023 14:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -89,11 +89,11 @@ object PageHelpAndServiceTheme {
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.background,
-        backgroundSection = ThemeColors.Data.whiteDark.copy(alpha = 0.10f),
+        backgroundSection = ThemeColors.Common.whiteDark.copy(alpha = 0.10f),
         onBackgroundLight = MaterialTheme.colors.primary,
         onBackgroundDark = MaterialTheme.colors.onSecondary,
         icon = MaterialTheme.colors.primary,
-        divider = ThemeColors.Data.grayOverlay,
+        divider = ThemeColors.Common.grayOverlay,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -145,7 +145,7 @@ object PageHelpAndServiceTheme {
     fun provideBorders() = Borders(
         card = BorderStroke(
             1.5.dp,
-            ThemeColors.Data.grayOverlay
+            ThemeColors.Common.grayOverlay
         ),
     )
 
@@ -167,7 +167,7 @@ object PageHelpAndServiceTheme {
             fontWeight = FontWeight.Bold
         ),
         titleNormal = MaterialTheme.typographyExtended.textNormal.copy(
-            color = ThemeColors.Data.grayDark,
+            color = ThemeColors.Common.grayDark,
             fontWeight = FontWeight.SemiBold
         ),
         textCard = MaterialTheme.typographyExtended.textNormal.copy(

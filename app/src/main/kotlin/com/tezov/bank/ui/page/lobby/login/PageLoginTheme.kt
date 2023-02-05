@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/02/2023 22:16
+ *  Created by Tezov on 05/02/2023 14:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/02/2023 22:16
+ *  Last modified 05/02/2023 14:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -83,8 +83,8 @@ object PageLoginTheme {
         background = MaterialTheme.colors.primary,
         backgroundButtonDark = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm,
         backgroundButtonLight = MaterialTheme.colorsCommonExtended.backgroundButtonCancel,
-        backgroundDropDownMenu = ThemeColors.Data.blueOverlay,
-        textContent = MaterialTheme.colorsCommonExtended.onPrimaryLight,
+        backgroundDropDownMenu = ThemeColors.Common.blueOverlay,
+        textContent = MaterialTheme.colorsCommonExtended.onPrimaryVariant,
         textButtonDark = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm,
         textButtonLight = MaterialTheme.colorsCommonExtended.onBackgroundButtonCancel,
         textDropDownMenu = MaterialTheme.colorsCommonExtended.onBackgroundModal,
@@ -167,7 +167,7 @@ object PageLoginTheme {
         ),
         buttonDark = BorderStroke(
             1.dp,
-            ThemeColors.Data.whiteDark
+            ThemeColors.Common.whiteDark
         ),
         buttonOutline = BorderStroke(
             2.dp,
@@ -230,7 +230,7 @@ object PageLoginTheme {
     @Composable
     fun provideSwiperPagerStyle() = Swiper.Pager.Style(
         colorIndicatorActive = colors.backgroundButtonDark,
-        colorIndicatorInactive = ThemeColors.Data.blueClear,
+        colorIndicatorInactive = ThemeColors.Common.blueClear,
         dimensionIndicatorPaddingTop = dimensions.pagerIndicatorPaddingTop,
         dimensionIndicatorSize = dimensions.pagerIndicatorSize,
         dimensionIndicatorSpacing = dimensions.pagerIndicatorSpacing,

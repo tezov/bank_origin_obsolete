@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 05/02/2023 14:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 05/02/2023 14:11
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,17 +25,19 @@ infix fun MaterialTheme.provides(value: ThemeColorsExtended.Common) = ThemeColor
 object ThemeColorsExtended {
     @Immutable
     data class Common(
-        val onPrimaryLight :Color,
-        val onSecondaryLight :Color,
-        val onBackgroundLight :Color,
+        val onPrimaryVariant :Color,
+        val onSecondaryVariant :Color,
+
+        val backgroundVariant :Color,
+        val onBackgroundVariant :Color,
 
         val backgroundElevated: Color,
         val onBackgroundElevated: Color,
-        val onBackgroundElevatedLight:Color,
+        val onBackgroundElevatedVariant:Color,
 
         val backgroundModal: Color,
         val onBackgroundModal: Color,
-        val onBackgroundModalLight:Color,
+        val onBackgroundModalVariant:Color,
 
         val backgroundInactive: Color,
         val onBackgroundInactive: Color,
