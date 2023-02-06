@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 18:22
+ *  Created by Tezov on 06/02/2023 21:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 18:19
+ *  Last modified 06/02/2023 20:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,12 +20,13 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.theme.ThemeComponent
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.bordersExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
 
@@ -103,7 +104,7 @@ object PageProfileTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        card = MaterialTheme.shapesExtended.cardNormal,
+        card = MaterialTheme.shapesExtended.roundedCornerNormal,
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -116,9 +117,8 @@ object PageProfileTheme {
 
     @Composable
     fun provideBorders() = Borders(
-        card = BorderStroke(
-            2.dp,
-            colors.textContent
+        card = MaterialTheme.bordersExtended.strokeNormal.copy(
+            brush = SolidColor( colors.textContent),
         )
     )
 

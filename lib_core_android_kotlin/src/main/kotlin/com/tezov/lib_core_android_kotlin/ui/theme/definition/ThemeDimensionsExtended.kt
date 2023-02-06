@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 18:22
+ *  Created by Tezov on 06/02/2023 21:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 17:31
+ *  Last modified 06/02/2023 20:39
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -124,7 +124,6 @@ object ThemeDimensionsExtended{
         val normal_h:Dp,
         val big_h:Dp,
         val huge_h:Dp,
-
     )
     internal val localSpacings: ProvidableCompositionLocal<Spacings> = staticCompositionLocalOf {
         error("not provided")
@@ -147,6 +146,9 @@ object ThemeDimensionsExtended{
         val iconAction:Dp,
         val iconFieldInfo:Dp,
         val iconFieldAction:Dp,
+        val dividerSmall:Dp,
+        val dividerNormal:Dp,
+        val dividerBig:Dp,
 
         )
     internal val localSizes: ProvidableCompositionLocal<Sizes> = staticCompositionLocalOf {

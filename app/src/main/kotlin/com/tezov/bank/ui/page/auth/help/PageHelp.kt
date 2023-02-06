@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 18:22
+ *  Created by Tezov on 06/02/2023 21:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 18:16
+ *  Last modified 06/02/2023 21:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -59,6 +59,7 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
                 modifier = Modifier
                     .fillMaxSize()
                     .background(PageHelpTheme.colors.background)
+                    .padding(innerPadding)
                     .verticalScroll(rememberScrollState())
             ) {
                 contentHeader(state.header)

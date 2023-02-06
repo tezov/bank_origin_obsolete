@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 18:22
+ *  Created by Tezov on 06/02/2023 21:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 18:06
+ *  Last modified 06/02/2023 20:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,7 +15,6 @@ package com.tezov.bank.ui.theme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.branch.SectionActionCard
@@ -39,7 +38,7 @@ object ThemeComponent {
         colorDivider = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
             alpha = 0.05f
         ),
-        dimensionDivider = 1.dp,
+        dimensionDivider = MaterialTheme.dimensionsSizeExtended.dividerNormal,
     )
 
     @Composable
@@ -69,8 +68,8 @@ object ThemeComponent {
 
     @Composable
     fun provideActionCardStyle() = ActionCard.Style(
-        shapeCard = MaterialTheme.shapesExtended.cardNormal,
-        borderCard = MaterialTheme.bordersExtended.dialog.copy(
+        shapeCard = MaterialTheme.shapesExtended.roundedCornerNormal,
+        borderCard = MaterialTheme.bordersExtended.strokeNormal.copy(
             brush = SolidColor(
                 MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
                     alpha = 0.12f

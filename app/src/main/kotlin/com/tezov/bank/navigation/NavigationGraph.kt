@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 06/02/2023 21:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 06/02/2023 21:11
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.bank.navigation
 
+import android.util.Log
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.*
@@ -72,31 +73,31 @@ object NavigationGraph {
 
             composableWithAnimation(Route.Account){
                 (LocalActivity.current as MainActivity).withBottomNavigationBar{
-                    PageAccount(PaddingValues())
+                    PageAccount(innerPadding = it)
                 }
             }
 
             composableWithAnimation(Route.Discover){
                 (LocalActivity.current as MainActivity).withBottomNavigationBar{
-                    PageDiscover(PaddingValues())
+                    PageDiscover(innerPadding = it)
                 }
             }
 
             composableWithAnimation(Route.Help){
                 (LocalActivity.current as MainActivity).withBottomNavigationBar{
-                    PageHelp(PaddingValues())
+                    PageHelp(innerPadding = it)
                 }
             }
 
             composableWithAnimation(Route.Profile){
                 (LocalActivity.current as MainActivity).withBottomNavigationBar{
-                    PageProfile(PaddingValues())
+                    PageProfile(innerPadding = it)
                 }
             }
 
             composableWithAnimation(Route.Payment){
                 (LocalActivity.current as MainActivity).withBottomNavigationBar{
-                    PagePayment(PaddingValues())
+                    PagePayment(innerPadding = it)
                 }
             }
 

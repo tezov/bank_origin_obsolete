@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 06/02/2023 21:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 06/02/2023 20:39
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,15 +32,11 @@ object ThemeShapesExtended{
 
     @Immutable
     data class Shapes(
-        val cardSmall: androidx.compose.ui.graphics.Shape,
-        val cardNormal: androidx.compose.ui.graphics.Shape,
-        val cardBig: androidx.compose.ui.graphics.Shape,
-        val buttonSmall: androidx.compose.ui.graphics.Shape,
-        val buttonNormal: androidx.compose.ui.graphics.Shape,
-        val buttonBig: androidx.compose.ui.graphics.Shape,
-        val buttonOutlinedSmall: androidx.compose.ui.graphics.Shape,
-        val buttonOutlinedNormal: androidx.compose.ui.graphics.Shape,
-        val buttonOutlinedBig: androidx.compose.ui.graphics.Shape,
+        val roundedCornerMicro: androidx.compose.ui.graphics.Shape,
+        val roundedCornerSmall: androidx.compose.ui.graphics.Shape,
+        val roundedCornerNormal: androidx.compose.ui.graphics.Shape,
+        val roundedCornerBig: androidx.compose.ui.graphics.Shape,
+        val roundedCornerHuge: androidx.compose.ui.graphics.Shape,
         val dialog: androidx.compose.ui.graphics.Shape,
         val snackbar: androidx.compose.ui.graphics.Shape,
         val bottomSheet: androidx.compose.ui.graphics.Shape,
@@ -51,8 +47,14 @@ object ThemeShapesExtended{
 
     @Immutable
     data class Borders(
+        val strokeSmall: BorderStroke,
+        val strokeNormal: BorderStroke,
+        val strokeBig: BorderStroke,
+        val strokeHuge: BorderStroke,
+        val strokeSupra: BorderStroke,
         val dialog: BorderStroke,
         val button: BorderStroke,
+        val buttonOutlined: BorderStroke,
     )
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
         error("not provided")

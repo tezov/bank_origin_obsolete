@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 18:22
+ *  Created by Tezov on 06/02/2023 21:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 18:01
+ *  Last modified 06/02/2023 20:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,6 +21,7 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -106,10 +107,10 @@ object PageLoginTheme {
         val iconMediumSize: Dp,
         val paddingStartToIconMedium: Dp,
         val iconSmallSize: Dp,
-        val paddingHorizontalButtonOutlined: Dp,
-        val paddingVerticalButtonOutlined: Dp,
-        val paddingHorizontalButton: Dp,
-        val paddingVerticalButton: Dp,
+        val paddingButtonOutlined_h: Dp,
+        val paddingButtonOutlined_v: Dp,
+        val paddingButton_h: Dp,
+        val paddingButton_v: Dp,
     )
 
     @Composable
@@ -125,10 +126,10 @@ object PageLoginTheme {
         iconMediumSize = 38.dp,
         paddingStartToIconMedium = 12.dp,
         iconSmallSize = 42.dp,
-        paddingHorizontalButtonOutlined = 32.dp,
-        paddingVerticalButtonOutlined = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
-        paddingHorizontalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
-        paddingVerticalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
+        paddingButtonOutlined_h = 32.dp,
+        paddingButtonOutlined_v = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
+        paddingButton_h = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
+        paddingButton_v = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -143,8 +144,8 @@ object PageLoginTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        button = MaterialTheme.shapesExtended.buttonNormal,
-        buttonOutline = MaterialTheme.shapesExtended.buttonOutlinedBig
+        button = MaterialTheme.shapesExtended.roundedCornerNormal,
+        buttonOutline = MaterialTheme.shapesExtended.roundedCornerBig
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -156,23 +157,19 @@ object PageLoginTheme {
         val iconBig: BorderStroke,
         val buttonDark: BorderStroke,
         val buttonOutline: BorderStroke,
-
-        )
+    )
 
     @Composable
     fun provideBorders() = Borders(
-        iconBig = BorderStroke(
-            2.dp,
-            colors.textContent
+        iconBig = MaterialTheme.bordersExtended.strokeBig.copy(
+            brush = SolidColor(colors.textContent)
         ),
-        buttonDark = BorderStroke(
-            1.dp,
-            ThemeColors.Common.whiteDark
+        buttonDark = MaterialTheme.bordersExtended.strokeSmall.copy(
+            brush = SolidColor(ThemeColors.Common.whiteDark)
         ),
-        buttonOutline = BorderStroke(
-            2.dp,
-            colors.textContent
-        )
+        buttonOutline = MaterialTheme.bordersExtended.strokeBig.copy(
+            brush = SolidColor(colors.textContent)
+,        )
     )
 
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {

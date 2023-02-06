@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/02/2023 22:16
+ *  Created by Tezov on 06/02/2023 21:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/02/2023 22:16
+ *  Last modified 06/02/2023 20:58
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.branch
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -68,9 +69,8 @@ object KeyBoard {
         data class Style(
             val colorContent: Color,
             val colorBackground: Color,
-            val colorBorder: Color,
-            val borderOuter: Stroke,
-            val borderInner: Stroke,
+            val borderOuter: BorderStroke,
+            val borderInner: BorderStroke,
         )
 
         interface Cube
@@ -157,10 +157,10 @@ object KeyBoard {
                 }
                 // border outer
                 drawRect(
-                    color = style.colorBorder,
+                    brush = style.borderOuter.brush,
                     topLeft = Offset(0f, 0f),
                     size = Size(size.width, size.height),
-                    style = style.borderOuter,
+                    style = Stroke(width = style.borderOuter.width.toPx()),
                 )
                 //vertical line
                 for (i in 1 until cubes.rowCount) {
@@ -168,8 +168,8 @@ object KeyBoard {
                     drawLine(
                         start = Offset(x = 0f, y = y),
                         end = Offset(x = size.width, y = y),
-                        color = style.colorBorder,
-                        strokeWidth = style.borderInner.width
+                        brush = style.borderInner.brush,
+                        strokeWidth = style.borderInner.width.toPx()
                     )
                 }
                 //horizontal line
@@ -178,8 +178,8 @@ object KeyBoard {
                     drawLine(
                         start = Offset(x = x, y = 0f),
                         end = Offset(x = x, y = size.height),
-                        color = style.colorBorder,
-                        strokeWidth = style.borderInner.width
+                        brush = style.borderInner.brush,
+                        strokeWidth = style.borderInner.width.toPx()
                     )
                 }
                 val overflow = cubes.columnCount * cubes.rowCount

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 14:26
+ *  Created by Tezov on 06/02/2023 21:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 14:13
+ *  Last modified 06/02/2023 20:58
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,10 +20,12 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.ui.page.lobby.login.colors
 import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
@@ -131,8 +133,8 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        button = MaterialTheme.shapesExtended.buttonNormal,
-        authCard = MaterialTheme.shapesExtended.cardSmall,
+        button = MaterialTheme.shapesExtended.roundedCornerNormal,
+        authCard = MaterialTheme.shapesExtended.roundedCornerSmall,
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -145,9 +147,8 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideBorders() = Borders(
-        authCard = BorderStroke(
-            1.5.dp,
-            colors.onBackground
+        authCard = MaterialTheme.bordersExtended.strokeNormal.copy(
+            brush = SolidColor(colors.onBackground)
         ),
     )
 
@@ -194,9 +195,12 @@ object DialogLoginAuthTheme {
     fun provideKeyBoardGridCubeStyle() = KeyBoard.GridCube.Style(
         colorContent = colors.onBackground,
         colorBackground = Color.Transparent,
-        colorBorder = colors.onBackground,
-        borderOuter = Stroke(width = 3.dp.toPx),
-        borderInner = Stroke(width = 1.5.dp.toPx),
+        borderOuter = MaterialTheme.bordersExtended.strokeNormal.copy(
+            brush = SolidColor(colors.onBackground)
+        ),
+        borderInner = MaterialTheme.bordersExtended.strokeBig.copy(
+            brush = SolidColor(colors.onBackground)
+        ),
     )
 
 
