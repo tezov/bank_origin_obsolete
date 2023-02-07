@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/02/2023 20:11
+ *  Created by Tezov on 07/02/2023 22:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 19:00
+ *  Last modified 07/02/2023 22:27
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,7 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.DialogA
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageAction
 
 class NavigationController(
-    private val navigationController: com.tezov.lib_core_android_kotlin.navigation.NavigationController
+    val navigationController: com.tezov.lib_core_android_kotlin.navigation.NavigationController
 ) {
     companion object{
         sealed class Route(value:String):RouteManager.Route(value) {
@@ -51,7 +51,7 @@ class NavigationController(
             }
         }
 
-        val startRoute = Route.Splash
+        val startRoute = Route.Account
     }
 
     val navHostController get() = navigationController.navHostController
@@ -65,6 +65,10 @@ class NavigationController(
             DialogAction::class to this::navigateFromDialog,
         ))
     }
+
+    fun isLastRoute() = navigationController.isLastRoute()
+
+    fun navigateBack() = navigationController.navigateBack()
 
     private fun navigateFromTopAppBar(from: RouteManager.Route?, to: RouteManager.Route){
         with(navigationController){

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/02/2023 21:15
+ *  Created by Tezov on 07/02/2023 22:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/02/2023 21:11
+ *  Last modified 07/02/2023 21:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,13 +12,13 @@
 
 package com.tezov.bank.navigation
 
+import android.os.Bundle
 import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.*
-import androidx.navigation.NamedNavArgument
-import androidx.navigation.NavBackStackEntry
-import androidx.navigation.NavGraphBuilder
+import androidx.navigation.*
 import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.tezov.bank.navigation.NavigationController.Companion.Route
@@ -34,6 +34,7 @@ import com.tezov.bank.ui.page.auth.profile.PageProfile
 import com.tezov.bank.ui.page.lobby.splash.PageSplash
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
+import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 
 @OptIn(ExperimentalAnimationApi::class)
 object NavigationGraph {
@@ -48,7 +49,6 @@ object NavigationGraph {
     private fun graph() {
         val accessor = AccessorAppUiActivity().get(requester = this)
         val mainAction = accessor.contextMain().action()
-
 
         AnimatedNavHost(
             navController = mainAction.navigationController.navHostController,

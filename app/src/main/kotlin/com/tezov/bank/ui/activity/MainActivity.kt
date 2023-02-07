@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 22:29
+ *  Created by Tezov on 07/02/2023 22:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 21:49
+ *  Last modified 07/02/2023 22:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,6 +13,9 @@
 package com.tezov.bank.ui.activity
 
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.compose.BackHandler
+import androidx.activity.compose.LocalOnBackPressedDispatcherOwner
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.*
@@ -30,6 +33,7 @@ import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
+import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 
 import kotlinx.coroutines.*
 
@@ -127,6 +131,7 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
     ) {
         val accessor = AccessorAppUiActivity().get(requester = this)
         val mainState = accessor.contextMain().state()
+
         BottomSheet {
             Scaffold(
                 modifier = Modifier.fillMaxSize(),

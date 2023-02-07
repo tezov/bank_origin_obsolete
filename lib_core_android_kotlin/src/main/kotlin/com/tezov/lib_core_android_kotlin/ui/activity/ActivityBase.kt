@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 01:03
+ *  Created by Tezov on 07/02/2023 22:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 23:13
+ *  Last modified 07/02/2023 22:33
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,33 +12,45 @@
 
 package com.tezov.lib_core_android_kotlin.ui.activity
 
-import androidx.activity.result.ActivityResultLauncher
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.ActivityAction
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.ActivityState
-import com.tezov.lib_core_kotlin.type.collection.ListEntry
+import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
+import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_kotlin.extension.ExtensionCompletable.notifyComplete
 import com.tezov.lib_core_kotlin.extension.ExtensionCompletable.onComplete
-import kotlinx.coroutines.*
+import com.tezov.lib_core_kotlin.type.collection.ListEntry
+import kotlinx.coroutines.CompletableDeferred
+import kotlinx.coroutines.suspendCancellableCoroutine
 import java.util.*
 import kotlin.properties.Delegates
 
 
-abstract class ActivityBase<S: ActivityState,A: ActivityAction<S>> protected constructor() : androidx.activity.ComponentActivity(),
+abstract class ActivityBase<S : ActivityState, A : ActivityAction<S>> protected constructor() :
+    androidx.activity.ComponentActivity(),
     Activity<S, A> {
 
     private lateinit var activityResultLauncher: ActivityResultLauncher<Intent>
-    private val requestForResultStack: Queue<CompletableDeferred<ActivityResult>> by lazy{
+
+    private val requestForResultStack: Queue<CompletableDeferred<ActivityResult>> by lazy {
         LinkedList()
     }
 
     private lateinit var activityPermissionLauncher: ActivityResultLauncher<Array<String>>
-    private val requestForPermissionStack: Queue<CompletableDeferred<Map<String, Boolean>>> by lazy{
+    private val requestForPermissionStack: Queue<CompletableDeferred<Map<String, Boolean>>> by lazy {
         LinkedList()
     }
 
@@ -78,7 +90,10 @@ abstract class ActivityBase<S: ActivityState,A: ActivityAction<S>> protected con
         requestForPermissionStack.remove(task)
     }
 
-    class RequestForResult(private val activity: ActivityBase<ActivityState, ActivityAction<ActivityState>>, val intent: Intent) {
+    class RequestForResult(
+        private val activity: ActivityBase<ActivityState, ActivityAction<ActivityState>>,
+        val intent: Intent
+    ) {
         data class Response(val resultCode: Int, val intent: Intent?) {
             fun isOk() = resultCode == RESULT_OK
             fun isNotOk() = resultCode != RESULT_OK

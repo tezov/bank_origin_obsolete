@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 22:29
+ *  Created by Tezov on 07/02/2023 22:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 22:23
+ *  Last modified 07/02/2023 22:38
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,6 @@
 
 package com.tezov.lib_core_android_kotlin.navigation
 
-import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.LifecycleOwner
@@ -26,6 +25,7 @@ import com.tezov.lib_core_kotlin.util.Event
 import com.tezov.lib_core_android_kotlin.navigation.RouteManager.Route
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.CompositionAction
 import com.tezov.lib_core_kotlin.type.collection.ListEntry
+import kotlinx.coroutines.*
 import kotlin.reflect.KClass
 import kotlin.reflect.full.isSubclassOf
 
@@ -49,9 +49,18 @@ class NavigationController constructor(
 
     private val actionControllers:ListEntry<KClass<out CompositionAction<*>>, (from: Route?, to: Route)->Unit> = ListEntry()
 
+    fun handleOnBackPressed():Boolean{
+        if(!isLastRoute()){
+            navigateBack()
+            return true
+        }
+        return false
+    }
+
     fun addAction(klass:KClass<out CompositionAction<*>>, action:(from: Route?, to: Route)->Unit){
         actionControllers.add(klass, action)
     }
+
     fun addAction(actions: Map<KClass<out CompositionAction<*>>, ((from: Route?, to: Route)->Unit)>){
         actions.forEach{ (klass, action) ->
             actionControllers.add(klass, action)
@@ -75,6 +84,8 @@ class NavigationController constructor(
     }
 
     fun currentRoute() = routes.find(navHostController.currentBackStackEntry?.destination?.route)
+
+    fun isLastRoute() = navHostController.backQueue.sumOf { (if(it.destination.route != null) 1 else 0).toInt() } <= 1
 
     fun navigate(route: Route, builder: NavOptionsBuilder.() -> Unit) {
         navHostController.navigate(route = route.value, builder = builder)
