@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/02/2023 22:45
+ *  Created by Tezov on 08/02/2023 18:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/02/2023 22:43
+ *  Last modified 08/02/2023 18:15
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,7 @@
 
 package com.tezov.lib_core_android_kotlin.ui.compositionTree.activity
 
-import androidx.activity.compose.BackHandler
+import android.util.Log
 import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import com.tezov.lib_core_android_kotlin.application.Application
@@ -48,13 +48,6 @@ interface Activity<S : ActivityState, A : ActivityAction<S>> : Composition<S, A>
             LocalActivity provides this,
             LocalPages provides ArrayDeque()
         ) {
-            val onBackPressedState = remember {
-                mutableStateOf(false)
-            }
-            BackHandler(true) {
-                onBackPressedState.value = true
-            }
-            onBackPressedStateUpdate(onBackPressedState)
             content()
         }
     }
@@ -63,19 +56,15 @@ interface Activity<S : ActivityState, A : ActivityAction<S>> : Composition<S, A>
     fun Activity<S, A>.content()
 
     @Composable
-    private fun onBackPressedStateUpdate(onBackPressedState: MutableState<Boolean>) {
-        if (!onBackPressedState.value) {
-            return
-        }
-        LocalPages.current.lastOrNull()?.page?.handleOnBackPressed()
-            .takeIf { (it == false || it == null) && !this.handleOnBackPressed() }?.let {
+    fun onBackPressedDispatch():Boolean {
+        if(!this.handleOnBackPressed()) {
             val accessor = AccessorCoreUiActivity().get(requester = this)
             val mainAction = accessor.contextMain().action()
-            if (!mainAction.navigationController.handleOnBackPressed()) {
+            if (!mainAction.navigationController.onBackPressedDispatch()) {
                 (LocalActivity.current as? ActivityBase)?.finishAffinity()
             }
         }
-        onBackPressedState.value = false
+        return true
     }
 
     @Composable

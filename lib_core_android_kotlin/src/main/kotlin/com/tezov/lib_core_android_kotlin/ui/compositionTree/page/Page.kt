@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/02/2023 22:45
+ *  Created by Tezov on 08/02/2023 18:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/02/2023 22:38
+ *  Last modified 08/02/2023 18:15
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,12 +13,16 @@
 package com.tezov.lib_core_android_kotlin.ui.compositionTree.page
 
 import android.annotation.SuppressLint
+import android.util.Log
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.*
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPages
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.Composition
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.Modal
+import com.tezov.lib_core_kotlin.extension.ExtensionBoolean.isFalseOrNull
 import com.tezov.lib_core_kotlin.extension.ExtensionCollection.push
 
 interface Page<S : PageState, A : PageAction<S>> : Composition<S, A> {
@@ -50,12 +54,38 @@ interface Page<S : PageState, A : PageAction<S>> : Composition<S, A> {
             LocalPage provides locals.page,
             LocalModals provides locals.modals
         ) {
+            val onBackPressedState = remember {
+                mutableStateOf(false)
+            }
+            BackHandler(true) {
+                onBackPressedState.value = true
+            }
+            onBackPressedDispatch(onBackPressedState)
             content(innerPadding = innerPadding)
         }
     }
 
     @Composable
     fun Page<S, A>.content(innerPadding: PaddingValues)
+
+    @SuppressLint("UnrememberedMutableState")
+    @Composable
+    fun onBackPressedDispatch() = onBackPressedDispatch(mutableStateOf(true))
+
+    @Composable
+    private fun onBackPressedDispatch(onBackPressedState: MutableState<Boolean>):Boolean {
+        if (!onBackPressedState.value) {
+            return false
+        }
+        var handled = false
+            if(LocalModals.current.lastOrNull()?.modal?.onBackPressedDispatch().isFalseOrNull()
+                && !this.handleOnBackPressed()
+            ) {
+                handled = LocalActivity.current.onBackPressedDispatch()
+            }
+        onBackPressedState.value = false
+        return handled
+    }
 
     @Composable
     fun handleOnBackPressed() = false

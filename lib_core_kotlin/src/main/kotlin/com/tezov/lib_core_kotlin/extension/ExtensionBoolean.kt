@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 01:03
+ *  Created by Tezov on 08/02/2023 18:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 23:17
+ *  Last modified 08/02/2023 18:15
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,16 +12,23 @@
 
 package com.tezov.lib_core_kotlin.extension
 
+import com.tezov.lib_core_kotlin.extension.ExtensionBoolean.isTrueOrNull
+
 object ExtensionBoolean {
-    inline fun <T> Boolean.onOk(run: () -> T) = if (this) {
+
+    inline fun Boolean?.isTrueOrNull() = this == null || this
+
+    inline fun Boolean?.isFalseOrNull() = this == null || !this
+
+    inline fun <T> Boolean.onOk(crossinline run: () -> T) = if (this) {
         run()
     } else null
 
-    inline fun <T> Boolean.onKo(run: () -> T) = if (!this) {
+    inline fun <T> Boolean.onKo(crossinline run: () -> T) = if (!this) {
         run()
     } else null
 
-    inline fun <T> Boolean.on(ok: () -> T, ko: () -> T) = if (this) {
+    inline fun <T> Boolean.on(crossinline ok: () -> T,crossinline ko: () -> T) = if (this) {
         ok()
     } else {
         ko()

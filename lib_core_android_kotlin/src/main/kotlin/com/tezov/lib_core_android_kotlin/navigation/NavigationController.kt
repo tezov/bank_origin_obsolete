@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/02/2023 22:45
+ *  Created by Tezov on 08/02/2023 18:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/02/2023 22:38
+ *  Last modified 08/02/2023 18:09
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,8 @@
 
 package com.tezov.lib_core_android_kotlin.navigation
 
+import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.LifecycleOwner
@@ -19,12 +21,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
-import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.SnackbarAction
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import com.tezov.lib_core_kotlin.util.Event
 import com.tezov.lib_core_android_kotlin.navigation.RouteManager.Route
+import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.SnackbarAction
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.CompositionAction
+import com.tezov.lib_core_kotlin.extension.ExtensionBoolean.on
 import com.tezov.lib_core_kotlin.type.collection.ListEntry
+import com.tezov.lib_core_kotlin.util.Event
 import kotlinx.coroutines.*
 import kotlin.reflect.KClass
 import kotlin.reflect.full.isSubclassOf
@@ -49,13 +52,17 @@ class NavigationController constructor(
 
     private val actionControllers:ListEntry<KClass<out CompositionAction<*>>, (from: Route?, to: Route)->Unit> = ListEntry()
 
-    fun handleOnBackPressed():Boolean{
-        if(!isLastRoute()){
+    @Composable
+    fun onBackPressedDispatch() =  handleOnBackPressed()
+
+    @Composable
+    fun handleOnBackPressed() = isLastRoute().on(
+        ok = { false },
+        ko = {
             navigateBack()
-            return true
+            true
         }
-        return false
-    }
+    ).also { Log.d(">>:", "handleOnBackPressed: navigator") }
 
     fun addAction(klass:KClass<out CompositionAction<*>>, action:(from: Route?, to: Route)->Unit){
         actionControllers.add(klass, action)
