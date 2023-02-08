@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 18:22
+ *  Created by Tezov on 08/02/2023 21:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 17:45
+ *  Last modified 08/02/2023 21:04
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -76,7 +76,6 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 ) {
                     IconButton(
                         modifier = Modifier
-                            .wrapContentSize()
                             .align(Alignment.TopStart),
                         onClick = { action.close() }) {
                         Icon(
@@ -123,7 +122,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     ) {
         header.headline.value?.let{
             Text(
-                modifier = Modifier.wrapContentSize().padding(
+                modifier = Modifier.padding(
                     horizontal = MaterialTheme.dimensionsPaddingExtended.page_h
                 ),
                 text = it,

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 08/02/2023 21:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 08/02/2023 20:22
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,9 +31,16 @@ interface ModuleAppUiDialog {
 
         @ScopeAppUiDialog
         @Provides
-        fun provideContextSendEmail(
+        fun provideContextDialogLoginAuth(
             state: State.DialogLoginAuthState,
             action: Action.DialogLoginAuthAction
+        ) = ComponentContextLazy.make(state, action)
+
+        @ScopeAppUiDialog
+        @Provides
+        fun provideContextDialogAuthCloseAppConfirmation(
+            state: State.DialogAuthCloseAppConfirmationState,
+            action: Action.DialogAuthCloseAppConfirmationAction
         ) = ComponentContextLazy.make(state, action)
 
     }
@@ -48,6 +55,14 @@ interface ModuleAppUiDialog {
                 com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.create()
         }
 
+        @ScopeAppUiDialog
+        class DialogAuthCloseAppConfirmationState @Inject constructor() :
+            ComposableHolder<com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppConfirmationState>() {
+            @androidx.compose.runtime.Composable
+            override fun create() =
+                com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppConfirmationState.create()
+        }
+
     }
 
     object Action {
@@ -60,6 +75,19 @@ interface ModuleAppUiDialog {
             @androidx.compose.runtime.Composable
             override fun create() =
                 com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthAction.create(
+                    action.get(),
+                    navigationController.get()
+                )
+        }
+
+        @ScopeAppUiDialog
+        class DialogAuthCloseAppConfirmationAction @Inject constructor(
+            private val action: ModuleCoreUiActivity.Action.DialogAction,
+            private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
+        ) : ComposableHolder<com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppConfirmationAction>() {
+            @androidx.compose.runtime.Composable
+            override fun create() =
+                com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppConfirmationAction.create(
                     action.get(),
                     navigationController.get()
                 )

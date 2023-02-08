@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 01:03
+ *  Created by Tezov on 08/02/2023 21:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 23:13
+ *  Last modified 08/02/2023 20:56
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,35 +28,34 @@ import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
 object ThemeApplication {
     @Composable
     fun BankDefault(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
-        ExtensionCompositionLocal.CompositionLocalProvider(
-            ancestor = arrayOf(
-                //colors
-                MaterialTheme provides ThemeColorsResource.Common,
-                MaterialTheme provides colorsLightCommonExtended,
-                //dimensions
-                MaterialTheme provides dimensionsFontExtended,
-                MaterialTheme provides dimensionsPaddingExtended,
-                MaterialTheme provides dimensionsSpacingExtended,
-                MaterialTheme provides dimensionsElevationExtended,
-                MaterialTheme provides dimensionsSizeExtended,
-            ),
-            parent = {
-                arrayOf(
-                    //shapes
-                    MaterialTheme provides ThemeShapes.provideShapes(),
-                    MaterialTheme provides ThemeShapes.provideBorders(),
-                    //Typography
-                    MaterialTheme provides ThemeTypography.providesTypographiesExtended(),
-                )
-            }
-        ) {
-            MaterialTheme(
-                colors = colorsLight,
-                typography = ThemeTypography.providesTypographies(),
+        MaterialTheme(
+            colors = colorsLight,
+            typography = ThemeTypography.providesTypographies(),
+        ){
+            ExtensionCompositionLocal.CompositionLocalProvider(
+                ancestor = arrayOf(
+                    //colors
+                    MaterialTheme provides ThemeColorsResource.Common,
+                    MaterialTheme provides colorsLightCommonExtended,
+                    //dimensions
+                    MaterialTheme provides dimensionsFontExtended,
+                    MaterialTheme provides dimensionsPaddingExtended,
+                    MaterialTheme provides dimensionsSpacingExtended,
+                    MaterialTheme provides dimensionsElevationExtended,
+                    MaterialTheme provides dimensionsSizeExtended,
+                ),
+                parent = {
+                    arrayOf(
+                        //shapes
+                        MaterialTheme provides ThemeShapes.provideShapes(),
+                        MaterialTheme provides ThemeShapes.provideBorders(),
+                        //Typography
+                        MaterialTheme provides ThemeTypography.providesTypographiesExtended(),
+                    )
+                },
                 content = content
             )
         }
-
     }
 }
 

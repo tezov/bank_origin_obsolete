@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 08/02/2023 21:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 08/02/2023 20:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,6 +32,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ComposableHolder
 import com.tezov.lib_core_android_kotlin.ui.di.module.ModuleCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeAppUiPage
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentContextLazy
+import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentLazy
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject
@@ -41,6 +42,12 @@ interface ModuleAppUiPage {
 
     @Module
     class MapperContext{
+
+        @ScopeAppUiPage
+        @Provides
+        fun provideDialogAuthCloseAppController(
+            ref: Misc.DialogAuthCloseAppController
+        ) = ComponentLazy.make(ref)
 
         @ScopeAppUiPage
         @Provides
@@ -253,7 +260,22 @@ interface ModuleAppUiPage {
                     navigationController.get()
                 )
         }
+    }
 
+    object Misc{
+
+        @ScopeAppUiPage
+        class DialogAuthCloseAppController @Inject constructor(
+            private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
+            private val dialogAction: ModuleCoreUiActivity.Action.DialogAction,
+        ) : ComposableHolder<com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController>() {
+            @androidx.compose.runtime.Composable
+            override fun create() =
+                com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController.create(
+                    navigationController.get(),
+                    dialogAction.get()
+                )
+        }
 
     }
 

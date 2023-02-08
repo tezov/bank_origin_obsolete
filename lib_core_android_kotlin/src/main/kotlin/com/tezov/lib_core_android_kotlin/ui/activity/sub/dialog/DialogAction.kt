@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 08/02/2023 21:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 08/02/2023 20:09
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -43,16 +43,18 @@ class DialogAction private constructor(
             state.show(true)
         }
     }
+
+    fun showOnCardWithOverlay(content: @Composable () -> Unit) {
+        show{ Dialog.Card(content) }
+    }
+
+
     fun hide() {
         currentJob?.cancel()
         currentJob = coroutineScope.launch {
             state.show(false)
-            state.dialogContent({state.EmptyContent()}) //todo wait animation done
+            state.dialogContent { state.EmptyContent() } //todo wait animation done
         }
-    }
-
-    fun showOnCardWithOverlay(content: @Composable () -> Unit) {
-        show{ Dialog.Card(content) }
     }
 
 }

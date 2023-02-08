@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 08/02/2023 21:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 08/02/2023 20:09
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,6 +13,8 @@
 package com.tezov.bank.ui.di.component
 
 import com.tezov.bank.ui.di.module.ModuleAppUiDialog
+import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppConfirmationAction
+import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppConfirmationState
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthAction
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiDialog
@@ -32,9 +34,9 @@ object ComponentAppUiDialog {
         }
 
         fun contextLoginAuth(): ComponentContextLazy<DialogLoginAuthState, DialogLoginAuthAction>
+        fun contextAuthCloseAppConfirmation(): ComponentContextLazy<DialogAuthCloseAppConfirmationState, DialogAuthCloseAppConfirmationAction>
 
     }
-
 
 }
 

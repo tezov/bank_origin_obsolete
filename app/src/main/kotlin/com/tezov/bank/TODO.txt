@@ -1,10 +1,8 @@
 
-theme
--divider
--border card / shape
+Finir page profil
+Faire modal oui/non
 
 profil
-clean theme
 icon
 
 - componentManager, is there a way to not destroy if screen is supposed to be behind ??? Same LocalPage in Module

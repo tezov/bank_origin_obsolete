@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 08/02/2023 21:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 08/02/2023 20:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,6 +14,7 @@ package com.tezov.bank.ui.di.component
 
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
 import com.tezov.bank.ui.di.module.ModuleAppUiPage
+import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
 import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceAction
 import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceState
 import com.tezov.bank.ui.page.lobby.login.PageLoginAction
@@ -58,6 +59,8 @@ object ComponentAppUiPage {
         fun contextPayment(): ComponentContextLazy<PagePaymentState, PagePaymentAction>
         fun contextProfile(): ComponentContextLazy<PageProfileState, PageProfileAction>
         fun contextHelp(): ComponentContextLazy<PageHelpState, PageHelpAction>
+
+        fun controllerDialogAuthCloseApp(): ComponentLazy<DialogAuthCloseAppController>
 
     }
 
