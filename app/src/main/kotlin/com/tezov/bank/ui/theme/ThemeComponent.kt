@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/02/2023 21:15
+ *  Created by Tezov on 09/02/2023 20:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/02/2023 20:39
+ *  Last modified 09/02/2023 19:55
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,7 +34,9 @@ object ThemeComponent {
             color = MaterialTheme.colorsCommonExtended.onBackgroundElevated,
             fontWeight = FontWeight.SemiBold
         ),
-        colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated,
+        colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
+            alpha = 0.14f
+        ),
         colorDivider = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
             alpha = 0.05f
         ),

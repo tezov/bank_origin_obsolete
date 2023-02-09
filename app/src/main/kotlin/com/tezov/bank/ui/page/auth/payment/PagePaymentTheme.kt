@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 18:22
+ *  Created by Tezov on 09/02/2023 20:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 18:14
+ *  Last modified 09/02/2023 20:37
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,19 +12,17 @@
 
 package com.tezov.bank.ui.page.auth.payment
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import com.tezov.bank.ui.page.auth.help.colors
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
@@ -34,6 +32,13 @@ val PagePaymentTheme.colors: PagePaymentTheme.Colors
     get() = localColors.current
 
 infix fun PagePaymentTheme.provides(value: PagePaymentTheme.Colors) = localColors provides value
+
+val PagePaymentTheme.dimensions: PagePaymentTheme.Dimensions
+    @Composable
+    @ReadOnlyComposable
+    get() = localDimensions.current
+
+infix fun PagePaymentTheme.provides(value: PagePaymentTheme.Dimensions) = localDimensions provides value
 
 val PagePaymentTheme.typographies: PagePaymentTheme.Typographies
     @Composable
@@ -48,25 +53,47 @@ object PagePaymentTheme {
     data class Colors(
         val background: Color,
         val textTitle: Color,
+        val headerDivider: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.background,
         textTitle = MaterialTheme.colors.primaryVariant,
+        headerDivider = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
+            alpha = 0.05f
+        ),
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
         error("not provided")
     }
 
+    data class Dimensions(
+        val textTitleMin: TextUnit,
+        val textTitleMax: TextUnit,
+        val headerDivider: Dp,
+    )
+
+    @Composable
+    fun provideDimensions() = Dimensions(
+        textTitleMin = 24.sp,
+        textTitleMax = 48.sp,
+        headerDivider = MaterialTheme.dimensionsSizeExtended.dividerSmall,
+    )
+
+    internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
+        staticCompositionLocalOf {
+            error("not provided")
+        }
+
     data class Typographies(
-        val titleHuge: TextStyle,
+        val title: TextStyle,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        titleHuge = MaterialTheme.typographyExtended.textHuge.copy(
+        title = MaterialTheme.typographyExtended.textTitle.copy(
             color = colors.textTitle,
             fontWeight = FontWeight.Bold
         ),
