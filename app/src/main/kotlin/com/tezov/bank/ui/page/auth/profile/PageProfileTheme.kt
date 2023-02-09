@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/02/2023 21:11
+ *  Created by Tezov on 09/02/2023 19:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/02/2023 21:10
+ *  Last modified 09/02/2023 18:53
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,8 +25,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.ui.page.lobby.login.colors
 import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.bordersExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSizeExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
 
@@ -44,13 +46,6 @@ val PageProfileTheme.dimensions: PageProfileTheme.Dimensions
 
 infix fun PageProfileTheme.provides(value: PageProfileTheme.Dimensions) =
     localDimensions provides value
-
-val PageProfileTheme.shapes: PageProfileTheme.Shapes
-    @Composable
-    @ReadOnlyComposable
-    get() = localShapes.current
-
-infix fun PageProfileTheme.provides(value: PageProfileTheme.Shapes) = localShapes provides value
 
 val PageProfileTheme.borders: PageProfileTheme.Borders
     @Composable
@@ -72,12 +67,14 @@ object PageProfileTheme {
     data class Colors(
         val background: Color,
         val textContent: Color,
+        val iconUser: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.background,
         textContent = MaterialTheme.colors.primaryVariant,
+        iconUser = MaterialTheme.colors.primary,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -85,12 +82,14 @@ object PageProfileTheme {
     }
 
     data class Dimensions(
-        val iconSize: Dp,
+        val iconCloseSize: Dp,
+        val iconUserSize: Dp,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
-        iconSize = 24.dp,
+        iconCloseSize = MaterialTheme.dimensionsSizeExtended.iconModal,
+        iconUserSize = 84.dp,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -98,27 +97,14 @@ object PageProfileTheme {
             error("not provided")
         }
 
-    data class Shapes(
-        val card: Shape,
-    )
-
-    @Composable
-    fun provideShapes() = Shapes(
-        card = MaterialTheme.shapesExtended.roundedCornerNormal,
-    )
-
-    internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
     data class Borders(
-        val card: BorderStroke,
+        val iconUser: BorderStroke,
     )
 
     @Composable
     fun provideBorders() = Borders(
-        card = MaterialTheme.bordersExtended.strokeNormal.copy(
-            brush = SolidColor( colors.textContent),
+        iconUser = MaterialTheme.bordersExtended.strokeBig.copy(
+            brush = SolidColor(colors.iconUser),
         )
     )
 

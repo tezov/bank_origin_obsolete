@@ -1,8 +1,8 @@
 <!--
   ~  *********************************************************************************
-  ~  Created by Tezov on 31/01/2023 20:01
+  ~  Created by Tezov on 09/02/2023 19:39
   ~  Copyright (c) 2023 . All rights reserved.
-  ~  Last modified 31/01/2023 19:51
+  ~  Last modified 09/02/2023 19:30
   ~  First project bank / bank.app.main
   ~  This file is private and it is not allowed to use it, copy it or modified it
   ~  without the permission granted by the owner Tezov. For any request request,
@@ -18,5 +18,5 @@
     android:viewportHeight="24">
     <path
         android:fillColor="@android:color/black"
-        android:pathData="M3,5v14h18V5H3zM7,7v2H5V7H7zM5,13v-2h2v2H5zM5,15h2v2H5V15zM19,17H9v-2h10V17zM19,13H9v-2h10V13zM19,9H9V7h10V9z" />
+        android:pathData="M3,13h2v-2L3,11v2zM3,17h2v-2L3,15v2zM3,9h2L5,7L3,7v2zM7,13h14v-2L7,11v2zM7,17h14v-2L7,15v2zM7,7v2h14L21,7L7,7zM3,13h2v-2L3,11v2zM3,17h2v-2L3,15v2zM3,9h2L5,7L3,7v2zM7,13h14v-2L7,11v2zM7,17h14v-2L7,15v2zM7,7v2h14L21,7L7,7z" />
 </vector>

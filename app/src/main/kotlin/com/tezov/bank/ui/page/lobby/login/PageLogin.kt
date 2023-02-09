@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/02/2023 21:15
+ *  Created by Tezov on 09/02/2023 19:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/02/2023 20:39
+ *  Last modified 09/02/2023 19:38
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -105,8 +105,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 )
         ) {
             ContentHeader(
-                modifier = Modifier
-                    .fillMaxWidth(),
+                iconState = state.iconState,
                 onClickAdd = {
 
                 },
@@ -115,14 +114,9 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 }
             )
             ContentBody(
-                Modifier
-                    .fillMaxWidth()
-                    .weight(1f),
                 nameState = state.nameState
             )
             ContentFooter(
-                modifier = Modifier
-                    .fillMaxWidth(),
                 onClickConnect = {
                     action.onClickConnect()
                 },
@@ -138,12 +132,12 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
     @Composable
     private fun ContentHeader(
-        modifier: Modifier,
+        iconState: State<Int>,
         onClickAdd: () -> Unit,
         onClickDropDownMenu: (id: Int) -> Unit
     ) {
         Row(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
 
@@ -165,7 +159,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         PageLoginTheme.borders.iconBig,
                         CircleShape
                     ),
-                painter = painterResource(id = R.drawable.img_suitcase_blue),
+                painter = painterResource(id = iconState.value),
                 contentScale = ContentScale.Crop,
                 contentDescription = stringResource(id = R.string.pg_login_img_suit_case)
             )
@@ -233,12 +227,11 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
     }
 
     @Composable
-    private fun ContentBody(
-        modifier: Modifier,
+    private fun ColumnScope.ContentBody(
         nameState: State<String>
     ) {
         Swiper.Pager(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth().weight(1f),
             pageSelected = 0,
             pages = arrayListOf(
                 {
@@ -302,13 +295,12 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
     @Composable
     private fun ContentFooter(
-        modifier: Modifier,
         onClickConnect: () -> Unit,
         onClickSendMoney: () -> Unit,
         onClickHelpAndService: () -> Unit,
     ) {
         Column(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 

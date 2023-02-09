@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/02/2023 21:11
+ *  Created by Tezov on 09/02/2023 19:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/02/2023 21:10
+ *  Last modified 09/02/2023 18:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,12 +23,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.component.branch.provides
@@ -40,7 +37,6 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
 
 object PageProfile : Page<PageProfileState, PageProfileAction> {
@@ -59,7 +55,6 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
             ),
             parent = {
                 arrayOf(
-                    PageProfileTheme provides PageProfileTheme.provideShapes(),
                     PageProfileTheme provides PageProfileTheme.provideBorders(),
                     PageProfileTheme provides PageProfileTheme.provideTypographies(),
                 )
@@ -126,26 +121,27 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
 
                 }) {
                 Icon(
-                    modifier = Modifier.size(48.dp),
+                    modifier = Modifier.size(PageProfileTheme.dimensions.iconCloseSize),
                     painter = painterResource(id = R.drawable.ic_close_24dp),
-                    contentDescription = null,
-                    tint = Color.Blue,
+                    contentDescription = stringResource(id = R.string.pg_profile_icon_close),
                 )
             }
             Row(modifier = Modifier.fillMaxWidth()) {
-                Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.normal_v))
-                Image(
-                    modifier = Modifier
-                        .size(84.dp)
-                        .clip(CircleShape)
-                        .border(
-                            BorderStroke(3.dp, SolidColor(Color.Blue)),
-                            CircleShape
-                        ),
-                    painter = painterResource(id = R.drawable.img_suitcase_blue),
-                    contentScale = ContentScale.Crop,
-                    contentDescription = stringResource(id = R.string.pg_login_img_suit_case)
-                )
+                header.imageResourceId.value?.let {
+                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.normal_v))
+                    Image(
+                        modifier = Modifier
+                            .size(PageProfileTheme.dimensions.iconUserSize)
+                            .clip(CircleShape)
+                            .border(
+                                PageProfileTheme.borders.iconUser,
+                                CircleShape
+                            ),
+                        painter = painterResource(id = it),
+                        contentScale = ContentScale.Crop,
+                        contentDescription = stringResource(id = R.string.pg_profile_icon_use)
+                    )
+                }
                 header.name.value?.let {
                     Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.big_h))
                     Text(
@@ -156,10 +152,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                     )
                 }
             }
-
         }
-
-
     }
 
     @Composable
