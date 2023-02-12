@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/02/2023 19:39
+ *  Created by Tezov on 12/02/2023 16:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/02/2023 18:53
+ *  Last modified 12/02/2023 15:55
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,17 +19,14 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.bank.ui.page.lobby.login.colors
 import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.bordersExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSizeExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
 
 val PageProfileTheme.colors: PageProfileTheme.Colors
@@ -68,6 +65,7 @@ object PageProfileTheme {
         val background: Color,
         val textContent: Color,
         val iconUser: Color,
+        val iconLogout: Color,
     )
 
     @Composable
@@ -75,6 +73,7 @@ object PageProfileTheme {
         background = MaterialTheme.colors.background,
         textContent = MaterialTheme.colors.primaryVariant,
         iconUser = MaterialTheme.colors.primary,
+        iconLogout = MaterialTheme.colors.primary,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {

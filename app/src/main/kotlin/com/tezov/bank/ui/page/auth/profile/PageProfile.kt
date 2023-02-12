@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/02/2023 19:39
+ *  Created by Tezov on 12/02/2023 16:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/02/2023 18:52
+ *  Last modified 12/02/2023 15:55
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -122,8 +122,9 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                 }) {
                 Icon(
                     modifier = Modifier.size(PageProfileTheme.dimensions.iconCloseSize),
-                    painter = painterResource(id = R.drawable.ic_close_24dp),
+                    painter = painterResource(id = R.drawable.ic_logout_24dp),
                     contentDescription = stringResource(id = R.string.pg_profile_icon_close),
+                    tint = PageProfileTheme.colors.iconLogout
                 )
             }
             Row(modifier = Modifier.fillMaxWidth()) {

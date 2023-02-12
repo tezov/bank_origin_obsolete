@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/02/2023 20:45
+ *  Created by Tezov on 12/02/2023 16:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/02/2023 20:37
+ *  Last modified 12/02/2023 15:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,9 +22,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
 import com.tezov.bank.ui.theme.ThemeComponent
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSizeExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
 
 val PagePaymentTheme.colors: PagePaymentTheme.Colors
     @Composable
@@ -38,7 +42,8 @@ val PagePaymentTheme.dimensions: PagePaymentTheme.Dimensions
     @ReadOnlyComposable
     get() = localDimensions.current
 
-infix fun PagePaymentTheme.provides(value: PagePaymentTheme.Dimensions) = localDimensions provides value
+infix fun PagePaymentTheme.provides(value: PagePaymentTheme.Dimensions) =
+    localDimensions provides value
 
 val PagePaymentTheme.typographies: PagePaymentTheme.Typographies
     @Composable
@@ -72,14 +77,16 @@ object PagePaymentTheme {
     data class Dimensions(
         val textTitleMin: TextUnit,
         val textTitleMax: TextUnit,
-        val headerDivider: Dp,
+        val headerDividerSize: Dp,
+        val headerHeight: ColumnCollapsibleHeader.Properties,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
         textTitleMin = 24.sp,
         textTitleMax = 48.sp,
-        headerDivider = MaterialTheme.dimensionsSizeExtended.dividerSmall,
+        headerDividerSize = MaterialTheme.dimensionsSizeExtended.dividerSmall,
+        headerHeight = ColumnCollapsibleHeader.Properties(48.dp, 150.dp)
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
