@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 01:03
+ *  Created by Tezov on 12/02/2023 22:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 01:01
+ *  Last modified 12/02/2023 22:21
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -48,6 +48,7 @@ object ActionCard {
     enum class Template {
         Undefined,
         IconTopEnd,
+        IconTop,
         IconEnd,
     }
 
@@ -88,6 +89,9 @@ object ActionCard {
         when (data.template) {
             Template.IconTopEnd, Template.Undefined  -> {
                 ContentIconTopEnd(style, modifier, data, onClick)
+            }
+            Template.IconTop -> {
+                ContentIconTop(style, modifier, data, onClick)
             }
             Template.IconEnd -> {
                 ContentIconEnd(style, modifier, data, onClick)
@@ -146,6 +150,50 @@ object ActionCard {
     }
 
     @Composable
+    private fun ContentIconTop(
+        style: Style,
+        modifier: Modifier,
+        data: Data,
+        onClick: () -> Unit
+    ) {
+        Column(
+            modifier = modifier
+                .border(style.borderCard, style.shapeCard)
+                .clip(style.shapeCard)
+                .background(style.background)
+                .clickable {
+                    onClick()
+                }
+                .padding(
+                    vertical = MaterialTheme.dimensionsPaddingExtended.blockBig_v,
+                    horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
+                ),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Icon(
+                modifier = Modifier
+                    .size(style.dimensionsIcon),
+                painter = painterResource(id = data.iconResourceId),
+                tint = style.colorIcon,
+                contentDescription = data.title,
+            )
+            Text(
+                text = data.title,
+                style = style.typographyTitle,
+                overflow = TextOverflow.Visible
+            )
+            data.subtitle?.let {
+                Text(
+                    text = it,
+                    style = style.typographySubtitle,
+                    overflow = TextOverflow.Visible
+                )
+            }
+        }
+
+    }
+
+    @Composable
     private fun ContentIconEnd(
         style: Style,
         modifier: Modifier,
@@ -176,7 +224,7 @@ object ActionCard {
                 data.subtitle?.let {
                     Text(
                         text = it,
-                        style = style.typographyTitle
+                        style = style.typographySubtitle
                     )
                 }
             }

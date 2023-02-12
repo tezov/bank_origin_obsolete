@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 18:22
+ *  Created by Tezov on 12/02/2023 22:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 17:37
+ *  Last modified 12/02/2023 22:22
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -176,18 +176,14 @@ object SectionActionCard {
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f),
-                data = first.data.apply {
-                    template = ActionCard.Template.IconTopEnd
-                },
+                data = first.data,
                 onClick = { onClick(first.index) }
             )
             ActionCard(
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f),
-                data = second.data.apply {
-                    template = ActionCard.Template.IconTopEnd
-                },
+                data = second.data,
                 onClick = { onClick(second.index) }
             )
         }

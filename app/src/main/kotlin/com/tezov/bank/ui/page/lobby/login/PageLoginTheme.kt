@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 19:14
+ *  Created by Tezov on 12/02/2023 22:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 19:00
+ *  Last modified 12/02/2023 21:29
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,6 @@
 package com.tezov.bank.ui.page.lobby.login
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
@@ -28,7 +27,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.bank.ui.theme.ThemeComponent
-import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val PageLoginTheme.colors: PageLoginTheme.Colors
@@ -150,7 +148,7 @@ object PageLoginTheme {
 
     data class Borders(
         val iconBig: BorderStroke,
-        val buttonDark: BorderStroke,
+        val buttonLight: BorderStroke,
         val buttonOutline: BorderStroke,
     )
 
@@ -159,12 +157,12 @@ object PageLoginTheme {
         iconBig = MaterialTheme.bordersExtended.strokeBig.copy(
             brush = SolidColor(colors.textContent)
         ),
-        buttonDark = MaterialTheme.bordersExtended.strokeSmall.copy(
-            brush = SolidColor(ThemeColors.Common.whiteDark)
+        buttonLight = MaterialTheme.bordersExtended.strokeSmall.copy(
+            brush = SolidColor(ThemeColors.Common.blueShadow.copy(alpha = 0.5f))
         ),
         buttonOutline = MaterialTheme.bordersExtended.strokeBig.copy(
-            brush = SolidColor(colors.textContent)
-,        )
+            brush = SolidColor(colors.textContent),
+        )
     )
 
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 19:14
+ *  Created by Tezov on 12/02/2023 22:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 19:04
+ *  Last modified 12/02/2023 19:54
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,14 +12,10 @@
 
 package com.tezov.bank.ui.theme
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -27,8 +23,6 @@ import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
-import com.tezov.bank.ui.page.lobby.login.colors
-import com.tezov.bank.ui.page.lobby.login.dimensions
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
@@ -108,12 +102,12 @@ object ThemeComponent {
 
     @Composable
     fun provideCarouselStyle() = providePagerStyle().copy(
-        contentPadding = PaddingValues(horizontal = 26.dp)
+        padding = PaddingValues(horizontal = 26.dp)
     )
 
     @Composable
     fun provideCarouselCardStyle() = HorizontalScrollable.CarouselCard.Style(
-        paddingCard = PaddingValues(horizontal = 4.dp),
+        marginCard = PaddingValues(horizontal = 4.dp),
         shapeCard = MaterialTheme.shapesExtended.roundedCornerBig,
         borderCard = MaterialTheme.bordersExtended.strokeNormal.copy(
             brush = SolidColor(

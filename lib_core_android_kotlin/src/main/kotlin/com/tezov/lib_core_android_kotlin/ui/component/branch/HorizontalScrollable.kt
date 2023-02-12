@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 19:14
+ *  Created by Tezov on 12/02/2023 22:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 19:10
+ *  Last modified 12/02/2023 21:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,13 +13,9 @@
 package com.tezov.lib_core_android_kotlin.ui.component.branch
 
 import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -53,7 +49,7 @@ object HorizontalScrollable {
             val dimensionIndicatorSize: Dp = 6.dp,
             val dimensionIndicatorSpacing: Dp = 6.dp,
             val shapeIndicator: Shape? = CircleShape,
-            val contentPadding: PaddingValues = PaddingValues(),
+            val padding: PaddingValues = PaddingValues(),
         )
 
         @Composable
@@ -75,15 +71,19 @@ object HorizontalScrollable {
             onPageChange: (pageIndex: Int) -> Unit
         ) {
             val pagerState = rememberPagerState()
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally
+            Box(
+                modifier = modifier,
             ) {
                 val style = local.current
+                val spacingIndicator = remember {
+                    style.shapeIndicator?.let {
+                        style.dimensionIndicatorPaddingTop + style.dimensionIndicatorSize
+                    } ?: 0.dp
+                }
                 HorizontalPager(
-                    modifier = modifier
-                        .fillMaxWidth(),
+                    modifier = Modifier.padding(bottom = spacingIndicator),
                     count = pages.size, state = pagerState,
-                    contentPadding = style.contentPadding
+                    contentPadding = style.padding
                 ) { pageIndex ->
                     pages[pageIndex].invoke()
                 }
@@ -91,7 +91,7 @@ object HorizontalScrollable {
                     HorizontalPagerIndicator(
                         pagerState = pagerState,
                         modifier = Modifier
-                            .padding(top = style.dimensionIndicatorPaddingTop),
+                            .align(Alignment.BottomCenter),
                         indicatorWidth = style.dimensionIndicatorSize,
                         indicatorHeight = style.dimensionIndicatorSize,
                         spacing = style.dimensionIndicatorSpacing,
@@ -120,7 +120,7 @@ object HorizontalScrollable {
 
         @Immutable
         data class Style(
-            val paddingCard: PaddingValues = PaddingValues(horizontal = 4.dp),
+            val marginCard: PaddingValues = PaddingValues(horizontal = 4.dp),
             val shapeCard: Shape = RoundedCornerShape(8.dp),
             val borderCard: BorderStroke = BorderStroke(1.dp, Color.Black),
             val backgroundCard: Color = Color.Transparent,
@@ -147,7 +147,7 @@ object HorizontalScrollable {
             Pager(modifier, pageSelected, pages.map { content ->
                 {
                     Surface(
-                        modifier = modifier.padding(style.paddingCard),
+                        modifier = modifier.padding(style.marginCard),
                         shape = style.shapeCard,
                         border = style.borderCard,
                         color = style.backgroundCard,

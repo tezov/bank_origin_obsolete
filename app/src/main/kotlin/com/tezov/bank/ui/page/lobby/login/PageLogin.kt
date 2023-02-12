@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 19:14
+ *  Created by Tezov on 12/02/2023 22:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 19:00
+ *  Last modified 12/02/2023 21:33
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -236,8 +236,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             pages = arrayListOf(
                 {
                     Column(
-                        modifier = Modifier
-                            .fillMaxSize(),
+                        modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
@@ -252,13 +251,11 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             text = stringResource(id = R.string.pg_login_pager_0),
                             style = PageLoginTheme.typographies.body
                         )
-
                     }
                 },
                 {
                     Column(
-                        modifier = Modifier
-                            .fillMaxSize(),
+                        modifier = Modifier.fillMaxSize(),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
@@ -330,13 +327,10 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Button(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
-                    .border(
-                        PageLoginTheme.borders.buttonDark,
-                        PageLoginTheme.shapes.button
-                    ),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.elementNormal_v),
                 onClick = onClickSendMoney,
                 shape = PageLoginTheme.shapes.button,
+                border = PageLoginTheme.borders.buttonLight,
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = PageLoginTheme.colors.backgroundButtonLight
                 ),

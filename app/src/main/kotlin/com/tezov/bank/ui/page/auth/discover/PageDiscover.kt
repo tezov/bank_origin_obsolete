@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 19:14
+ *  Created by Tezov on 12/02/2023 22:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 19:11
+ *  Last modified 12/02/2023 22:11
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,11 +21,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.R
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.component.branch.provides
 import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
+import com.tezov.bank.ui.component.leaf.CardButton
 import com.tezov.bank.ui.component.leaf.provides
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
@@ -75,45 +77,50 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
 
                 CompositionLocalProvider(
                     HorizontalScrollable.Pager provides ThemeComponent.provideCarouselStyle(),
-                    HorizontalScrollable.CarouselCard provides ThemeComponent.provideCarouselCardStyle()
-
+                    CardButton provides CardButton.Style()
                 ) {
-                    HorizontalScrollable.CarouselCard(
+                    val data = CardButton.Data(
+                        template = CardButton.Template.Button,
+                        iconInfoResourceId = R.drawable.ic_info_24dp,
+                        tag = "tag",
+                        title = "title",
+                        text = "text",
+                        button = "button"
+                    )
+                    HorizontalScrollable.Pager(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(150.dp),
+                            .padding(top = 20.dp, bottom = 20.dp)
+                            .fillMaxWidth(),
                         pages = listOf(
                             {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
+                                CardButton(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    data = data
                                 )
                             },
                             {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
+                                CardButton(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    data = data
                                 )
                             },
                             {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
+                                CardButton(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    data = data
                                 )
                             },
                             {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
+                                CardButton(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    data = data
                                 )
-
                             },
                             {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
+                                CardButton(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    data = data
                                 )
-
                             }
                         )
                     )
@@ -121,45 +128,50 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
 
                 CompositionLocalProvider(
                     HorizontalScrollable.Pager provides ThemeComponent.provideCarouselStyle(),
-                    HorizontalScrollable.CarouselCard provides ThemeComponent.provideCarouselCardStyle()
-
+                    CardButton provides CardButton.Style()
                 ) {
-                    HorizontalScrollable.CarouselCard(
+                    val data = CardButton.Data(
+                        template = CardButton.Template.Link,
+                        iconInfoResourceId = R.drawable.ic_info_24dp,
+                        tag = "tag",
+                        title = "title",
+                        text = "text",
+                        button = "link"
+                    )
+                    HorizontalScrollable.Pager(
                         modifier = Modifier
-                            .fillMaxWidth()
-                            .height(150.dp),
+                            .padding(top = 20.dp, bottom = 20.dp)
+                            .fillMaxWidth(),
                         pages = listOf(
                             {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
+                                CardButton(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    data = data
                                 )
                             },
                             {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
+                                CardButton(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    data = data
                                 )
                             },
                             {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
+                                CardButton(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    data = data
                                 )
                             },
                             {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
+                                CardButton(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    data = data
                                 )
-
                             },
                             {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxSize()
+                                CardButton(
+                                    modifier = Modifier.fillMaxWidth(),
+                                    data = data
                                 )
-
                             }
                         )
                     )
