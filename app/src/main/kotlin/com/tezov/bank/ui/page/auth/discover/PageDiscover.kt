@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 17:12
+ *  Created by Tezov on 12/02/2023 19:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 17:12
+ *  Last modified 12/02/2023 19:11
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,7 +18,9 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.component.branch.provides
@@ -27,8 +29,9 @@ import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.component.leaf.provides
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
-import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceTheme
-import com.tezov.bank.ui.page.lobby.help_and_service.colors
+import com.tezov.bank.ui.theme.ThemeComponent
+import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
+import com.tezov.lib_core_android_kotlin.ui.component.branch.provides
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -69,15 +72,108 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                     .background(PageDiscoverTheme.colors.background)
                     .verticalScroll(rememberScrollState())
             ) {
+
+                CompositionLocalProvider(
+                    HorizontalScrollable.Pager provides ThemeComponent.provideCarouselStyle(),
+                    HorizontalScrollable.CarouselCard provides ThemeComponent.provideCarouselCardStyle()
+
+                ) {
+                    HorizontalScrollable.CarouselCard(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(150.dp),
+                        pages = listOf(
+                            {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                )
+                            },
+                            {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                )
+                            },
+                            {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                )
+                            },
+                            {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                )
+
+                            },
+                            {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                )
+
+                            }
+                        )
+                    )
+                }
+
+                CompositionLocalProvider(
+                    HorizontalScrollable.Pager provides ThemeComponent.provideCarouselStyle(),
+                    HorizontalScrollable.CarouselCard provides ThemeComponent.provideCarouselCardStyle()
+
+                ) {
+                    HorizontalScrollable.CarouselCard(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .height(150.dp),
+                        pages = listOf(
+                            {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                )
+                            },
+                            {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                )
+                            },
+                            {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                )
+                            },
+                            {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                )
+
+                            },
+                            {
+                                Box(
+                                    modifier = Modifier
+                                        .fillMaxSize()
+                                )
+
+                            }
+                        )
+                    )
+                }
+
                 state.offers.value?.let {
-                    SectionActionCard(data = it){
+                    SectionActionCard(data = it) {
 
 
                     }
                 }
                 Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.big_v))
                 state.tips.value?.let {
-                    SectionActionRow(data = it){
+                    SectionActionRow(data = it) {
 
 
                     }

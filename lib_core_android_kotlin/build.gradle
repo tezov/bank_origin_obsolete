@@ -103,6 +103,7 @@ dependencies {
     api dependencies_lib.compose.livedata
     api dependencies_lib.compose.navigation
     api dependencies_lib.compose.navigation_accompanist
+    api dependencies_lib.compose.ui_util
 
     implementation dependencies_lib.lib.dagger
     kapt dependencies_lib.lib.dagger_kapt

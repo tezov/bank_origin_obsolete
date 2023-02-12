@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/02/2023 21:11
+ *  Created by Tezov on 12/02/2023 19:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/02/2023 20:49
+ *  Last modified 12/02/2023 19:00
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,7 +27,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.theme.ThemeColors
-import com.tezov.lib_core_android_kotlin.ui.component.branch.Swiper
+import com.tezov.bank.ui.theme.ThemeComponent
+import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val PageLoginTheme.colors: PageLoginTheme.Colors
@@ -98,9 +99,6 @@ object PageLoginTheme {
     data class Dimensions(
         val spacingTopToTitle: Dp,
         val spacingTopFromLinkService: Dp,
-        val pagerIndicatorPaddingTop: Dp,
-        val pagerIndicatorSize: Dp,
-        val pagerIndicatorSpacing: Dp,
         val logoSize: Dp,
         val iconBigSize: Dp,
         val paddingStartToIconBig: Dp,
@@ -117,9 +115,6 @@ object PageLoginTheme {
     fun provideDimensions() = Dimensions(
         spacingTopToTitle = 24.dp,
         spacingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.elementBig_v,
-        pagerIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,
-        pagerIndicatorSize = 12.dp,
-        pagerIndicatorSpacing = MaterialTheme.dimensionsSpacingExtended.normal_h,
         logoSize = 64.dp,
         iconBigSize = 52.dp,
         paddingStartToIconBig = 28.dp,
@@ -222,13 +217,6 @@ object PageLoginTheme {
         }
 
     @Composable
-    fun provideSwiperPagerStyle() = Swiper.Pager.Style(
-        colorIndicatorActive = colors.backgroundButtonDark,
-        colorIndicatorInactive = colors.backgroundButtonLight,
-        dimensionIndicatorPaddingTop = dimensions.pagerIndicatorPaddingTop,
-        dimensionIndicatorSize = dimensions.pagerIndicatorSize,
-        dimensionIndicatorSpacing = dimensions.pagerIndicatorSpacing,
-        shapeIndicator = CircleShape
-    )
+    fun providePagerStyle() = ThemeComponent.providePagerStyle()
 
 }

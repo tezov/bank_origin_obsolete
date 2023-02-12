@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/02/2023 22:00
+ *  Created by Tezov on 12/02/2023 19:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/02/2023 21:19
+ *  Last modified 12/02/2023 19:09
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -49,7 +49,7 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
             sheetShape = RectangleShape,
             sheetElevation = 0.dp,
             sheetContent = {
-                Card(
+                Surface(
                     modifier = Modifier.padding(start = 1.dp, end = 1.dp),
                     shape = MaterialTheme.shapesExtended.bottomSheet,
                     elevation = ModalBottomSheetDefaults.Elevation

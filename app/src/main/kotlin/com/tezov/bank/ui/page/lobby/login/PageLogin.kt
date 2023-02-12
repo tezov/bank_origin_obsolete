@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/02/2023 19:39
+ *  Created by Tezov on 12/02/2023 19:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/02/2023 19:38
+ *  Last modified 12/02/2023 19:00
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -37,7 +37,7 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
-import com.tezov.lib_core_android_kotlin.ui.component.branch.Swiper
+import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.branch.provides
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -64,7 +64,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     PageLoginTheme provides PageLoginTheme.provideShapes(),
                     PageLoginTheme provides PageLoginTheme.provideBorders(),
                     PageLoginTheme provides PageLoginTheme.provideTypographies(),
-                    Swiper.Pager provides PageLoginTheme.provideSwiperPagerStyle()
+                    HorizontalScrollable.Pager provides PageLoginTheme.providePagerStyle()
                 )
             }
         ) {
@@ -230,7 +230,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
     private fun ColumnScope.ContentBody(
         nameState: State<String>
     ) {
-        Swiper.Pager(
+        HorizontalScrollable.Pager(
             modifier = Modifier.fillMaxWidth().weight(1f),
             pageSelected = 0,
             pages = arrayListOf(
