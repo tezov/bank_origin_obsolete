@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 01:03
+ *  Created by Tezov on 12/02/2023 13:31
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 23:13
+ *  Last modified 11/02/2023 18:34
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,6 +17,9 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 
 object ExtensionDensity {
+
     val Dp.toPx @Composable get() = (value * LocalDensity.current.density)
     val Int.toDp @Composable get() = Dp((this / LocalDensity.current.density))
+
+
 }
