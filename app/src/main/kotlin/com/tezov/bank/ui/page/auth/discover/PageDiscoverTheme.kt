@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/02/2023 21:15
+ *  Created by Tezov on 12/02/2023 17:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/02/2023 20:22
+ *  Last modified 12/02/2023 16:50
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,6 +24,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val PageDiscoverTheme.colors: PageDiscoverTheme.Colors
@@ -33,116 +34,33 @@ val PageDiscoverTheme.colors: PageDiscoverTheme.Colors
 
 infix fun PageDiscoverTheme.provides(value: PageDiscoverTheme.Colors) = localColors provides value
 
-val PageDiscoverTheme.dimensions: PageDiscoverTheme.Dimensions
-    @Composable
-    @ReadOnlyComposable
-    get() = localDimensions.current
-
-infix fun PageDiscoverTheme.provides(value: PageDiscoverTheme.Dimensions) = localDimensions provides value
-
-val PageDiscoverTheme.shapes: PageDiscoverTheme.Shapes
-    @Composable
-    @ReadOnlyComposable
-    get() = localShapes.current
-
-infix fun PageDiscoverTheme.provides(value: PageDiscoverTheme.Shapes) = localShapes provides value
-
-val PageDiscoverTheme.borders: PageDiscoverTheme.Borders
-    @Composable
-    @ReadOnlyComposable
-    get() = localBorders.current
-
-infix fun PageDiscoverTheme.provides(value: PageDiscoverTheme.Borders) = localBorders provides value
-
-val PageDiscoverTheme.typographies: PageDiscoverTheme.Typographies
-    @Composable
-    @ReadOnlyComposable
-    get() = localTypographies.current
-
-infix fun PageDiscoverTheme.provides(value: PageDiscoverTheme.Typographies) =
-    localTypographies provides value
-
 object PageDiscoverTheme {
 
     data class Colors(
         val background: Color,
-        val textContent: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
-        background = MaterialTheme.colors.primary,
-        textContent = MaterialTheme.colorsCommonExtended.onPrimaryVariant,
+        background = MaterialTheme.colors.background,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
         error("not provided")
     }
 
-    data class Dimensions(
-        val iconSize: Dp,
-    )
+
 
     @Composable
-    fun provideDimensions() = Dimensions(
-        iconSize = 24.dp,
-    )
-
-    internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
-        staticCompositionLocalOf {
-            error("not provided")
-        }
-
-    data class Shapes(
-        val card: Shape,
-    )
+    fun provideSectionRowStyle() = ThemeComponent.provideSectionRowStyle()
 
     @Composable
-    fun provideShapes() = Shapes(
-        card = MaterialTheme.shapesExtended.roundedCornerNormal,
-    )
-
-    internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
-
-    data class Borders(
-        val card: BorderStroke,
-    )
+    fun provideActionRowStyle() = ThemeComponent.provideActionRowStyle()
 
     @Composable
-    fun provideBorders() = Borders(
-        card = BorderStroke(
-            2.dp,
-            colors.textContent
-        )
-    )
-
-    internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
-    data class Typographies(
-        val title: TextStyle,
-        val normal: TextStyle,
-    )
+    fun provideSectionCardStyle() = ThemeComponent.provideSectionCardStyle()
 
     @Composable
-    fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographyExtended.textTitle.copy(
-            color = colors.textContent
-        ),
-        normal = MaterialTheme.typographyExtended.textNormal.copy(
-            color = colors.textContent,
-            fontWeight = FontWeight.Bold
-        ),
-
-    )
-
-    internal val localTypographies: ProvidableCompositionLocal<Typographies> =
-        staticCompositionLocalOf {
-            error("not provided")
-        }
+    fun provideActionCardStyle() = ThemeComponent.provideActionCardStyle()
 
 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/02/2023 18:17
+ *  Created by Tezov on 12/02/2023 17:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/02/2023 18:15
+ *  Last modified 12/02/2023 16:55
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,6 @@
 package com.tezov.lib_core_android_kotlin.ui.compositionTree.page
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.*
