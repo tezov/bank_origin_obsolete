@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 16:03
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 15:51
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,8 +24,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
+import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.theme.ThemeComponent
+import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSizeExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
@@ -52,6 +53,13 @@ val PagePaymentTheme.typographies: PagePaymentTheme.Typographies
 
 infix fun PagePaymentTheme.provides(value: PagePaymentTheme.Typographies) =
     localTypographies provides value
+
+val PagePaymentTheme.styles: PagePaymentTheme.Style
+    @Composable
+    @ReadOnlyComposable
+    get() = localStyles.current
+
+infix fun PagePaymentTheme.provides(value: PagePaymentTheme.Style) = localStyles provides value
 
 object PagePaymentTheme {
 
@@ -111,10 +119,17 @@ object PagePaymentTheme {
             error("not provided")
         }
 
-    @Composable
-    fun provideSectionCardStyle() = ThemeComponent.provideSectionCardStyle()
+    data class Style(
+        val sectionCard: SectionActionCard.Style,
+
+        )
 
     @Composable
-    fun provideActionCardStyle() = ThemeComponent.provideActionCardStyle()
+    fun provideStyles() = Style(
+        sectionCard = ThemeComponent.provideSectionCardStyle(),
+    )
 
+    internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
+        error("not provided")
+    }
 }

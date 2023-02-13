@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 22:23
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 22:11
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,16 +24,12 @@ import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.component.branch.provides
-import com.tezov.bank.ui.component.leaf.ActionCard
-import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.component.leaf.CardButton
-import com.tezov.bank.ui.component.leaf.provides
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
-import com.tezov.bank.ui.theme.ThemeComponent
+import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
+import com.tezov.bank.ui.page.lobby.login.provides
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
-import com.tezov.lib_core_android_kotlin.ui.component.branch.provides
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -52,18 +48,9 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
             ancestor = arrayOf(
                 PageDiscoverTheme provides PageDiscoverTheme.provideColors(),
             ),
-            parent = {
-                arrayOf(
-
-
-                )
-            },
             child = {
                 arrayOf(
-                    ActionRow provides PageDiscoverTheme.provideActionRowStyle(),
-                    SectionActionRow provides PageDiscoverTheme.provideSectionRowStyle(),
-                    ActionCard provides PageDiscoverTheme.provideActionCardStyle(),
-                    SectionActionCard provides PageDiscoverTheme.provideSectionCardStyle(),
+                    PageDiscoverTheme provides PageDiscoverTheme.provideStyles(),
                 )
             }
         ) {
@@ -75,10 +62,7 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                     .verticalScroll(rememberScrollState())
             ) {
 
-                CompositionLocalProvider(
-                    HorizontalScrollable.Pager provides ThemeComponent.provideCarouselStyle(),
-                    CardButton provides CardButton.Style()
-                ) {
+                run {
                     val data = CardButton.Data(
                         template = CardButton.Template.Button,
                         iconInfoResourceId = R.drawable.ic_info_24dp,
@@ -91,45 +75,48 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                         modifier = Modifier
                             .padding(top = 20.dp, bottom = 20.dp)
                             .fillMaxWidth(),
+                        style = PageDiscoverTheme.styles.carousel,
                         pages = listOf(
                             {
                                 CardButton(
                                     modifier = Modifier.fillMaxWidth(),
-                                    data = data
+                                    data = data,
+                                    style = PageDiscoverTheme.styles.cardButton
                                 )
                             },
                             {
                                 CardButton(
                                     modifier = Modifier.fillMaxWidth(),
-                                    data = data
+                                    data = data,
+                                    style = PageDiscoverTheme.styles.cardButton
                                 )
                             },
                             {
                                 CardButton(
                                     modifier = Modifier.fillMaxWidth(),
-                                    data = data
+                                    data = data,
+                                    style = PageDiscoverTheme.styles.cardButton
                                 )
                             },
                             {
                                 CardButton(
                                     modifier = Modifier.fillMaxWidth(),
-                                    data = data
+                                    data = data,
+                                    style = PageDiscoverTheme.styles.cardButton
                                 )
                             },
                             {
                                 CardButton(
                                     modifier = Modifier.fillMaxWidth(),
-                                    data = data
+                                    data = data,
+                                    style = PageDiscoverTheme.styles.cardButton
                                 )
                             }
                         )
                     )
                 }
 
-                CompositionLocalProvider(
-                    HorizontalScrollable.Pager provides ThemeComponent.provideCarouselStyle(),
-                    CardButton provides CardButton.Style()
-                ) {
+                run {
                     val data = CardButton.Data(
                         template = CardButton.Template.Link,
                         iconInfoResourceId = R.drawable.ic_info_24dp,
@@ -142,35 +129,41 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                         modifier = Modifier
                             .padding(top = 20.dp, bottom = 20.dp)
                             .fillMaxWidth(),
+                        style = PageDiscoverTheme.styles.carousel,
                         pages = listOf(
                             {
                                 CardButton(
                                     modifier = Modifier.fillMaxWidth(),
-                                    data = data
+                                    data = data,
+                                    style = PageDiscoverTheme.styles.cardLink
                                 )
                             },
                             {
                                 CardButton(
                                     modifier = Modifier.fillMaxWidth(),
-                                    data = data
+                                    data = data,
+                                    style = PageDiscoverTheme.styles.cardLink
                                 )
                             },
                             {
                                 CardButton(
                                     modifier = Modifier.fillMaxWidth(),
-                                    data = data
+                                    data = data,
+                                    style = PageDiscoverTheme.styles.cardLink
                                 )
                             },
                             {
                                 CardButton(
                                     modifier = Modifier.fillMaxWidth(),
-                                    data = data
+                                    data = data,
+                                    style = PageDiscoverTheme.styles.cardLink
                                 )
                             },
                             {
                                 CardButton(
                                     modifier = Modifier.fillMaxWidth(),
-                                    data = data
+                                    data = data,
+                                    style = PageDiscoverTheme.styles.cardLink
                                 )
                             }
                         )
@@ -178,14 +171,14 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                 }
 
                 state.offers.value?.let {
-                    SectionActionCard(data = it) {
+                    SectionActionCard(data = it, style = PageDiscoverTheme.styles.sectionCard) {
 
 
                     }
                 }
                 Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.big_v))
                 state.tips.value?.let {
-                    SectionActionRow(data = it) {
+                    SectionActionRow(data = it, style = PageDiscoverTheme.styles.sectionRow) {
 
 
                     }

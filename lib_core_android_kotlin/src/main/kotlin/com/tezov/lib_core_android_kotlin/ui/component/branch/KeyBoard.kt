@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/02/2023 21:15
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/02/2023 20:58
+ *  Last modified 13/02/2023 20:56
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,12 +25,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 import kotlin.properties.Delegates
-
-infix fun KeyBoard.GridCube.provides(value: KeyBoard.GridCube.Style) =
-    local provides value
 
 object KeyBoard {
 
@@ -39,12 +37,7 @@ object KeyBoard {
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
-            onclick: (value: String) -> Unit
-        ) = Content(modifier, onclick)
-
-        @Composable
-        private fun Content(
-            modifier: Modifier = Modifier,
+            style: GridCube.Style,
             onclick: (value: String) -> Unit
         ) {
             val keyBoardDigits = remember {
@@ -55,22 +48,44 @@ object KeyBoard {
                     onclick(_char)
                 }
             }
-            GridCube(modifier = modifier, keyBoardDigits)
+            GridCube(modifier = modifier, style, keyBoardDigits)
         }
     }
 
     object GridCube {
 
-        internal val local: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
-            error("not provided")
-        }
+        private val default = Style(
+            colorContent = Color.White,
+            colorBackground = Color.Black,
+            borderOuter = BorderStroke(2.dp, Color.White),
+            borderInner = BorderStroke(1.dp, Color.White),
+        )
 
         @Immutable
-        data class Style(
-            val colorContent: Color,
-            val colorBackground: Color,
-            val borderOuter: BorderStroke,
-            val borderInner: BorderStroke,
+        open class Style(
+            val colorContent: Color = default.colorContent,
+            val colorBackground: Color = default.colorBackground,
+            val borderOuter: BorderStroke = default.borderOuter,
+            val borderInner: BorderStroke = default.borderInner,
+        ) {
+            constructor(style: Style) : this(
+                colorContent = style.colorContent,
+                colorBackground = style.colorBackground,
+                borderOuter = style.borderOuter,
+                borderInner = style.borderInner,
+            )
+        }
+
+        fun Style.copy(
+            colorContent: Color? = null,
+            colorBackground: Color? = null,
+            borderOuter: BorderStroke? = null,
+            borderInner: BorderStroke? = null,
+        ) = Style(
+            colorContent = colorContent ?: this.colorContent,
+            colorBackground = colorBackground ?: this.colorBackground,
+            borderOuter = borderOuter ?: this.borderOuter,
+            borderInner = borderInner ?: this.borderInner,
         )
 
         interface Cube
@@ -103,12 +118,7 @@ object KeyBoard {
         @Composable
         operator fun <P : Cubes<C>, C : Cube> invoke(
             modifier: Modifier = Modifier,
-            cubes: P,
-        ) = Content(modifier, cubes)
-
-        @Composable
-        private fun <P : Cubes<C>, C : Cube> Content(
-            modifier: Modifier = Modifier,
+            style: Style,
             cubes: P,
         ) {
             Layout(
@@ -122,7 +132,7 @@ object KeyBoard {
                 content = {},
                 modifier = modifier
                     .onTouched(cubes)
-                    .onDraw(cubes)
+                    .onDraw(style, cubes)
             )
         }
 
@@ -141,8 +151,7 @@ object KeyBoard {
         }
 
         @Composable
-        private fun <P : Cubes<C>, C : Cube> Modifier.onDraw(cubes: P): Modifier {
-            val style = local.current
+        private fun <P : Cubes<C>, C : Cube> Modifier.onDraw(style: Style, cubes: P): Modifier {
             cubes.beforeDraw(style = style)
             return drawBehind {
                 val cubeSize = size.width / cubes.columnCount

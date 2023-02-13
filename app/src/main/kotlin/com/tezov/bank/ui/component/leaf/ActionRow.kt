@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/02/2023 18:53
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 18:37
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,7 +18,10 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,15 +30,10 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
-
-infix fun ActionRow.provides(value: ActionRow.Style) = local provides value
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
 
 object ActionRow {
-
-    internal val local: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
-        Style()
-    }
 
     @Immutable
     data class Style(
@@ -56,19 +54,10 @@ object ActionRow {
     @Composable
     operator fun invoke(
         modifier: Modifier = Modifier,
+        style:Style,
         data: Data,
-        onClick: () -> Unit
+        onClick: () -> Unit = {}
     ) {
-        Content(modifier, data, onClick)
-    }
-
-    @Composable
-    private fun Content(
-        modifier: Modifier,
-        data: Data,
-        onClick: () -> Unit
-    ) {
-        val style = local.current
         Row(
             modifier = modifier
                 .fillMaxWidth()

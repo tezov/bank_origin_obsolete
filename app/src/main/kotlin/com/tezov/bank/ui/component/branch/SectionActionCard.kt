@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 22:23
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 22:22
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,18 +29,13 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.leaf.ActionCard
+import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable.loopOver
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
 
-infix fun SectionActionCard.provides(value: SectionActionCard.Style) = local provides value
-
 object SectionActionCard {
-
-    internal val local: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
-        Style()
-    }
 
     @Immutable
     data class Style(
@@ -50,6 +45,7 @@ object SectionActionCard {
         val colorBackgroundHeader: Color = Color.Transparent,
         val colorBackgroundBody: Color = Color.Transparent,
         val dimensionPaddingBody_h: Dp = 0.dp,
+        val actionCardStyle: ActionCard.Style = ActionCard.Style()
     )
 
     data class Data(
@@ -61,22 +57,13 @@ object SectionActionCard {
     @Composable
     operator fun invoke(
         modifier: Modifier = Modifier,
+        style:Style,
         data: Data,
-        onClick: (Int) -> Unit
-    ) {
-        Content(modifier, data, onClick)
-    }
-
-    @Composable
-    private fun Content(
-        modifier: Modifier,
-        data: Data,
-        onClick: (Int) -> Unit
+        onClick: (Int) -> Unit = {}
     ) {
         if (data.cards.isEmpty()) {
             return
         }
-        val style = local.current
         Column(
             modifier = modifier
                 .fillMaxWidth()
@@ -122,18 +109,18 @@ object SectionActionCard {
                     if (first != null && second != null) {
                         if (first.data.template == ActionCard.Template.IconEnd) {
                             push(second)
-                            ContentRowUno(first, onClick)
+                            ContentRowUno(style.actionCardStyle, first, onClick)
                         } else if (second.data.template == ActionCard.Template.IconEnd) {
                             push(first)
-                            ContentRowUno(second, onClick)
+                            ContentRowUno(style.actionCardStyle, second, onClick)
                         } else {
-                            ContentRowDuo(first, second, onClick)
+                            ContentRowDuo(style.actionCardStyle, first, second, onClick)
                         }
                         if (hasReachEnd && isStackEmpty) {
                             done()
                         }
                     } else if (first != null) {
-                        ContentRowUno(first) {
+                        ContentRowUno(style.actionCardStyle, first) {
 
                         }
                         done()
@@ -147,12 +134,14 @@ object SectionActionCard {
 
     @Composable
     private fun ContentRowUno(
+        style: ActionCard.Style,
         first: ExtensionComposable.LoopOver.Entry<ActionCard.Data>,
         onClick: (Int) -> Unit
     ) {
         ActionCard(
             modifier = Modifier
                 .fillMaxWidth(),
+            style = style,
             data = first.data.apply {
                 template = ActionCard.Template.IconEnd
             },
@@ -162,6 +151,7 @@ object SectionActionCard {
 
     @Composable
     private fun ContentRowDuo(
+        style: ActionCard.Style,
         first: ExtensionComposable.LoopOver.Entry<ActionCard.Data>,
         second: ExtensionComposable.LoopOver.Entry<ActionCard.Data>,
         onClick: (Int) -> Unit
@@ -176,6 +166,7 @@ object SectionActionCard {
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f),
+                style = style,
                 data = first.data,
                 onClick = { onClick(first.index) }
             )
@@ -183,6 +174,7 @@ object SectionActionCard {
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f),
+                style = style,
                 data = second.data,
                 onClick = { onClick(second.index) }
             )

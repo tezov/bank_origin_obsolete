@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 18:22
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 17:44
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,12 +24,17 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.ui.component.branch.SectionActionCard
+import com.tezov.bank.ui.component.branch.SectionActionRow
+import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
+import com.tezov.bank.ui.page.lobby.login.colors
+import com.tezov.bank.ui.page.lobby.login.shapes
+import com.tezov.bank.ui.page.lobby.login.typographies
 import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.bank.ui.theme.ThemeComponent
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSizeExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
+import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
+import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val PageHelpAndServiceTheme.colors: PageHelpAndServiceTheme.Colors
     @Composable
@@ -54,6 +59,13 @@ val PageHelpAndServiceTheme.typographies: PageHelpAndServiceTheme.Typographies
 
 infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Typographies) =
     localTypographies provides value
+
+val PageHelpAndServiceTheme.styles: PageHelpAndServiceTheme.Style
+    @Composable
+    @ReadOnlyComposable
+    get() = localStyles.current
+
+infix fun PageHelpAndServiceTheme.provides(value: PageHelpAndServiceTheme.Style) = localStyles provides value
 
 object PageHelpAndServiceTheme {
 
@@ -107,16 +119,21 @@ object PageHelpAndServiceTheme {
             error("not provided")
         }
 
-    @Composable
-    fun provideSectionRowStyle() = ThemeComponent.provideSectionRowStyle()
+
+    data class Style(
+        val sectionRow: SectionActionRow.Style,
+        val sectionCard: SectionActionCard.Style,
+
+    )
 
     @Composable
-    fun provideActionRowStyle() = ThemeComponent.provideActionRowStyle()
+    fun provideStyles() = Style(
+        sectionRow = ThemeComponent.provideSectionRowStyle(),
+        sectionCard = ThemeComponent.provideSectionCardStyle(),
+    )
 
-    @Composable
-    fun provideSectionCardStyle() = ThemeComponent.provideSectionCardStyle()
-
-    @Composable
-    fun provideActionCardStyle() = ThemeComponent.provideActionCardStyle()
+    internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
+        error("not provided")
+    }
 
 }

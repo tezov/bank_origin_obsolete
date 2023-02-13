@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 16:03
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 15:55
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,7 +24,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.ui.component.branch.SectionActionCard
+import com.tezov.bank.ui.component.branch.SectionActionRow
+import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceTheme
 import com.tezov.bank.ui.theme.ThemeComponent
+import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.bordersExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSizeExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
@@ -58,6 +62,13 @@ val PageProfileTheme.typographies: PageProfileTheme.Typographies
 
 infix fun PageProfileTheme.provides(value: PageProfileTheme.Typographies) =
     localTypographies provides value
+
+val PageProfileTheme.styles: PageProfileTheme.Style
+    @Composable
+    @ReadOnlyComposable
+    get() = localStyles.current
+
+infix fun PageProfileTheme.provides(value: PageProfileTheme.Style) = localStyles provides value
 
 object PageProfileTheme {
 
@@ -134,10 +145,19 @@ object PageProfileTheme {
             error("not provided")
         }
 
-    @Composable
-    fun provideSectionRowStyle() = ThemeComponent.provideSectionRowStyle()
+
+    data class Style(
+        val sectionRow: SectionActionRow.Style,
+
+        )
 
     @Composable
-    fun provideActionRowStyle() = ThemeComponent.provideActionRowStyle()
+    fun provideStyles() = Style(
+        sectionRow = ThemeComponent.provideSectionRowStyle(),
+    )
+
+    internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
+        error("not provided")
+    }
 
 }

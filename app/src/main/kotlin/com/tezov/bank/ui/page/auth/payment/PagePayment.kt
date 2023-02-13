@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 16:03
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 15:51
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,12 +22,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.branch.SectionActionCard
-import com.tezov.bank.ui.component.branch.provides
-import com.tezov.bank.ui.component.leaf.ActionCard
-import com.tezov.bank.ui.component.leaf.provides
 import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
+import com.tezov.bank.ui.page.auth.discover.PageDiscoverTheme
+import com.tezov.bank.ui.page.auth.discover.provides
+import com.tezov.bank.ui.page.auth.profile.PageProfileTheme
+import com.tezov.bank.ui.page.auth.profile.styles
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -54,8 +55,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
             },
             child = {
                 arrayOf(
-                    ActionCard provides PagePaymentTheme.provideActionCardStyle(),
-                    SectionActionCard provides PagePaymentTheme.provideSectionCardStyle()
+                    PagePaymentTheme provides PagePaymentTheme.provideStyles(),
                 )
             }
         ) {
@@ -74,13 +74,13 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                 },
                 body = {
                     state.cardSmall.value?.let {
-                        SectionActionCard(data = it) {
+                        SectionActionCard(data = it, style = PagePaymentTheme.styles.sectionCard) {
 
 
                         }
                     }
                     state.cardLarge.value?.let {
-                        SectionActionCard(data = it) {
+                        SectionActionCard(data = it, style = PagePaymentTheme.styles.sectionCard) {
 
 
                         }

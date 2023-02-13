@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 22:23
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 21:33
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,7 +25,6 @@ import androidx.compose.ui.ExperimentalComposeUiApi
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
@@ -38,7 +37,7 @@ import com.google.accompanist.pager.*
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
-import com.tezov.lib_core_android_kotlin.ui.component.branch.provides
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
@@ -64,7 +63,11 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     PageLoginTheme provides PageLoginTheme.provideShapes(),
                     PageLoginTheme provides PageLoginTheme.provideBorders(),
                     PageLoginTheme provides PageLoginTheme.provideTypographies(),
-                    HorizontalScrollable.Pager provides PageLoginTheme.providePagerStyle()
+                )
+            },
+            child = {
+                arrayOf(
+                    PageLoginTheme provides PageLoginTheme.provideStyles()
                 )
             }
         ) {
@@ -87,7 +90,6 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
     }
 
-    @OptIn(ExperimentalComposeUiApi::class)
     @Composable
     private fun contentLoaded(
         state: PageLoginState,
@@ -231,7 +233,10 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
         nameState: State<String>
     ) {
         HorizontalScrollable.Pager(
-            modifier = Modifier.fillMaxWidth().weight(1f),
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            style = PageLoginTheme.styles.pager,
             pageSelected = 0,
             pages = arrayListOf(
                 {
@@ -265,23 +270,20 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             style = PageLoginTheme.typographies.huge
                         )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
-                        OutlinedButton(
+                        Button.TextOutlined(
+                            modifierButton = Modifier
+                                .fillMaxWidth()
+                                .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
+                            modifierText = Modifier
+                                .padding(
+                                    horizontal = PageLoginTheme.dimensions.paddingButtonOutlined_h,
+                                    vertical = PageLoginTheme.dimensions.paddingButtonOutlined_v
+                                ),
                             onClick = { },
-                            border = PageLoginTheme.borders.buttonOutline,
-                            shape = PageLoginTheme.shapes.buttonOutline,
-                            colors = ButtonDefaults.outlinedButtonColors(backgroundColor = Color.Transparent),
-                            enabled = true
-                        ) {
-                            Text(
-                                text = stringResource(id = R.string.pg_login_btn_activate_balance),
-                                style = PageLoginTheme.typographies.buttonOutlined,
-                                modifier = Modifier
-                                    .padding(
-                                        horizontal = PageLoginTheme.dimensions.paddingButtonOutlined_h,
-                                        vertical = PageLoginTheme.dimensions.paddingButtonOutlined_v
-                                    )
-                            )
-                        }
+                            text = stringResource(id = R.string.pg_login_btn_activate_balance),
+                            style = PageLoginTheme.styles.buttonOutlined
+                        )
+
                     }
                 }),
             onPageChange = {
@@ -301,52 +303,33 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Button(
-                modifier = Modifier
+            Button.TextFill(
+                modifierButton = Modifier
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
+                modifierText = Modifier
+                    .padding(
+                        horizontal = PageLoginTheme.dimensions.paddingButton_h,
+                        vertical = PageLoginTheme.dimensions.paddingButton_v
+                    ),
                 onClick = onClickConnect,
-                shape = PageLoginTheme.shapes.button,
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = PageLoginTheme.colors.backgroundButtonDark
-                ),
-                enabled = true
-            ) {
-                Text(
-                    stringResource(id = R.string.pg_login_btn_connect),
-                    style = PageLoginTheme.typographies.button,
-                    color = PageLoginTheme.colors.textButtonDark,
-                    modifier = Modifier
-                        .padding(
-                            horizontal = PageLoginTheme.dimensions.paddingButton_h,
-                            vertical = PageLoginTheme.dimensions.paddingButton_v
-                        )
-                )
-            }
+                text = stringResource(id = R.string.pg_login_btn_connect),
+                style = PageLoginTheme.styles.buttonDark
+            )
 
-            Button(
-                modifier = Modifier
+            Button.TextFill(
+                modifierButton = Modifier
                     .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.elementNormal_v),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
+                modifierText = Modifier
+                    .padding(
+                        horizontal = PageLoginTheme.dimensions.paddingButton_h,
+                        vertical = PageLoginTheme.dimensions.paddingButton_v
+                    ),
                 onClick = onClickSendMoney,
-                shape = PageLoginTheme.shapes.button,
-                border = PageLoginTheme.borders.buttonLight,
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = PageLoginTheme.colors.backgroundButtonLight
-                ),
-                enabled = true
-            ) {
-                Text(
-                    stringResource(id = R.string.pg_login_btn_send_money),
-                    style = PageLoginTheme.typographies.button,
-                    color = PageLoginTheme.colors.textButtonLight,
-                    modifier = Modifier
-                        .padding(
-                            horizontal = PageLoginTheme.dimensions.paddingButton_h,
-                            vertical = PageLoginTheme.dimensions.paddingButton_v
-                        )
-                )
-            }
+                text = stringResource(id = R.string.pg_login_btn_send_money),
+                style = PageLoginTheme.styles.buttonLight
+            )
 
             Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopFromLinkService))
 

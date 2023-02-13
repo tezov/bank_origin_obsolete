@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 17:12
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 16:50
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,7 +24,16 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.bank.ui.component.branch.SectionActionCard
+import com.tezov.bank.ui.component.branch.SectionActionRow
+import com.tezov.bank.ui.component.leaf.CardButton
+import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
+import com.tezov.bank.ui.page.lobby.login.colors
+import com.tezov.bank.ui.page.lobby.login.shapes
+import com.tezov.bank.ui.page.lobby.login.typographies
 import com.tezov.bank.ui.theme.ThemeComponent
+import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val PageDiscoverTheme.colors: PageDiscoverTheme.Colors
@@ -33,6 +42,13 @@ val PageDiscoverTheme.colors: PageDiscoverTheme.Colors
     get() = localColors.current
 
 infix fun PageDiscoverTheme.provides(value: PageDiscoverTheme.Colors) = localColors provides value
+
+val PageDiscoverTheme.styles: PageDiscoverTheme.Style
+    @Composable
+    @ReadOnlyComposable
+    get() = localStyles.current
+
+infix fun PageDiscoverTheme.provides(value: PageDiscoverTheme.Style) = localStyles provides value
 
 object PageDiscoverTheme {
 
@@ -50,17 +66,25 @@ object PageDiscoverTheme {
     }
 
 
+    data class Style(
+        val carousel: HorizontalScrollable.Pager.Style,
+        val cardButton: CardButton.Style,
+        val cardLink: CardButton.Style,
+        val sectionRow: SectionActionRow.Style,
+        val sectionCard: SectionActionCard.Style,
+    )
 
     @Composable
-    fun provideSectionRowStyle() = ThemeComponent.provideSectionRowStyle()
+    fun provideStyles() = Style(
+        carousel = ThemeComponent.provideCarouselStyle(),
+        cardButton = CardButton.Style(),
+        cardLink = CardButton.Style(),
+        sectionRow = ThemeComponent.provideSectionRowStyle(),
+        sectionCard = ThemeComponent.provideSectionCardStyle(),
+    )
 
-    @Composable
-    fun provideActionRowStyle() = ThemeComponent.provideActionRowStyle()
-
-    @Composable
-    fun provideSectionCardStyle() = ThemeComponent.provideSectionCardStyle()
-
-    @Composable
-    fun provideActionCardStyle() = ThemeComponent.provideActionCardStyle()
+    internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
+        error("not provided")
+    }
 
 }

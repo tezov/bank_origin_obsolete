@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 22:23
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 21:29
+ *  Last modified 13/02/2023 20:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,6 +27,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.bank.ui.theme.ThemeComponent
+import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val PageLoginTheme.colors: PageLoginTheme.Colors
@@ -62,8 +64,14 @@ val PageLoginTheme.typographies: PageLoginTheme.Typographies
     @ReadOnlyComposable
     get() = localTypographies.current
 
-infix fun PageLoginTheme.provides(value: PageLoginTheme.Typographies) =
-    localTypographies provides value
+infix fun PageLoginTheme.provides(value: PageLoginTheme.Typographies) = localTypographies provides value
+
+val PageLoginTheme.styles: PageLoginTheme.Style
+    @Composable
+    @ReadOnlyComposable
+    get() = localStyles.current
+
+infix fun PageLoginTheme.provides(value: PageLoginTheme.Style) = localStyles provides value
 
 object PageLoginTheme {
 
@@ -132,13 +140,13 @@ object PageLoginTheme {
 
     data class Shapes(
         val button: Shape,
-        val buttonOutline: Shape,
+        val buttonOutlined: Shape,
     )
 
     @Composable
     fun provideShapes() = Shapes(
         button = MaterialTheme.shapesExtended.roundedCornerNormal,
-        buttonOutline = MaterialTheme.shapesExtended.roundedCornerBig
+        buttonOutlined = MaterialTheme.shapesExtended.roundedCornerBig
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -214,7 +222,37 @@ object PageLoginTheme {
             error("not provided")
         }
 
+    data class Style(
+        val pager: HorizontalScrollable.Pager.Style,
+        val buttonDark: Button.TextFill.Style,
+        val buttonLight: Button.TextFill.Style,
+        val buttonOutlined: Button.TextOutlined.Style,
+    )
+
     @Composable
-    fun providePagerStyle() = ThemeComponent.providePagerStyle()
+    fun provideStyles() = Style(
+        pager = ThemeComponent.providePagerStyle(),
+        buttonDark = Button.TextFill.Style(
+            shape = PageLoginTheme.shapes.button,
+            backgroundColorActive =  PageLoginTheme.colors.backgroundButtonDark,
+            textStyle = PageLoginTheme.typographies.button,
+            textColorActive = PageLoginTheme.colors.textButtonDark
+        ),
+        buttonLight = Button.TextFill.Style(
+            shape = PageLoginTheme.shapes.button,
+            backgroundColorActive =  PageLoginTheme.colors.backgroundButtonLight,
+            textStyle = PageLoginTheme.typographies.button,
+            textColorActive = PageLoginTheme.colors.textButtonLight
+        ),
+        buttonOutlined = Button.TextOutlined.Style(
+            border = MaterialTheme.bordersExtended.strokeBig.width,
+            shape = PageLoginTheme.shapes.buttonOutlined,
+            textStyle = PageLoginTheme.typographies.buttonOutlined,
+        ),
+    )
+
+    internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
+        error("not provided")
+    }
 
 }

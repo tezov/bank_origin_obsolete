@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 22:23
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 22:11
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -41,13 +41,7 @@ import com.tezov.bank.ui.page.lobby.login.typographies
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 
 
-infix fun CardButton.provides(value: CardButton.Style) = local provides value
-
 object CardButton {
-
-    internal val local: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
-        Style()
-    }
 
     enum class Template {
         Undefined,
@@ -88,23 +82,13 @@ object CardButton {
         val button: String,
     )
 
-
     @Composable
     operator fun invoke(
         modifier: Modifier = Modifier,
+        style:Style,
         data: Data,
-        onClick: () -> Unit = {}
+        onClick: () -> Unit= {}
     ) {
-        Content(modifier, data, onClick)
-    }
-
-    @Composable
-    private fun Content(
-        modifier: Modifier,
-        data: Data,
-        onClick: () -> Unit
-    ) {
-        val style = local.current
         when (data.template) {
             Template.Button, Template.Undefined -> {
                 ContentButton(style, modifier, data, onClick)

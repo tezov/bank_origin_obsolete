@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 22:23
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 22:21
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -37,13 +37,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 
-infix fun ActionCard.provides(value: ActionCard.Style) = local provides value
-
 object ActionCard {
-
-    internal val local: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
-        Style()
-    }
 
     enum class Template {
         Undefined,
@@ -73,21 +67,12 @@ object ActionCard {
     @Composable
     operator fun invoke(
         modifier: Modifier = Modifier,
+        style:Style,
         data: Data,
-        onClick: () -> Unit
+        onClick: () -> Unit = {}
     ) {
-        Content(modifier, data, onClick)
-    }
-
-    @Composable
-    private fun Content(
-        modifier: Modifier,
-        data: Data,
-        onClick: () -> Unit
-    ) {
-        val style = local.current
         when (data.template) {
-            Template.IconTopEnd, Template.Undefined  -> {
+            Template.IconTopEnd, Template.Undefined -> {
                 ContentIconTopEnd(style, modifier, data, onClick)
             }
             Template.IconTop -> {

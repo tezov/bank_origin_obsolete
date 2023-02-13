@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 18:22
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 17:53
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,13 +33,7 @@ import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
 
-infix fun SectionActionRow.provides(value: SectionActionRow.Style) = local provides value
-
 object SectionActionRow {
-
-    internal val local: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
-        Style()
-    }
 
     @Immutable
     data class Style(
@@ -51,6 +45,7 @@ object SectionActionRow {
         val colorDivider: Color = Color.Gray,
         val dimensionDivider: Dp = 1.dp,
         val dimensionPaddingBody_h: Dp = 0.dp,
+        val actionRowStyle:ActionRow.Style = ActionRow.Style()
     )
 
     data class Data(
@@ -62,22 +57,13 @@ object SectionActionRow {
     @Composable
     operator fun invoke(
         modifier: Modifier = Modifier,
+        style:Style,
         data: Data,
-        onClick: (Int) -> Unit
-    ) {
-        Content(modifier, data, onClick)
-    }
-
-    @Composable
-    private fun Content(
-        modifier: Modifier,
-        data: Data,
-        onClick: (Int) -> Unit
+        onClick: (Int) -> Unit = {}
     ) {
         if (data.rows.isEmpty()) {
             return
         }
-        val style = local.current
         Column(
             modifier = modifier
                 .fillMaxWidth()
@@ -118,7 +104,7 @@ object SectionActionRow {
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_v),
             ) {
                 data.rows.forEachIndexed { index, row ->
-                    ActionRow(data = row) {
+                    ActionRow(data = row, style = style.actionRowStyle) {
                         onClick(index)
                     }
                     if (style.dimensionDivider > 0.dp && index != data.rows.lastIndex) {

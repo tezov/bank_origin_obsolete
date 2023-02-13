@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 22:23
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 21:03
+ *  Last modified 13/02/2023 20:46
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,13 +25,9 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
+import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.CarouselCard.copy
+import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
-
-infix fun HorizontalScrollable.Pager.provides(value: HorizontalScrollable.Pager.Style) =
-    local provides value
-
-infix fun HorizontalScrollable.CarouselCard.provides(value: HorizontalScrollable.CarouselCard.Style) =
-    local provides value
 
 object HorizontalScrollable {
 
@@ -41,40 +37,67 @@ object HorizontalScrollable {
             error("not provided")
         }
 
-        @Immutable
-        data class Style(
-            val colorIndicatorActive: Color = Color.Black,
-            val colorIndicatorInactive: Color = Color.Gray,
-            val dimensionIndicatorPaddingTop: Dp = 6.dp,
-            val dimensionIndicatorSize: Dp = 6.dp,
-            val dimensionIndicatorSpacing: Dp = 6.dp,
-            val shapeIndicator: Shape? = CircleShape,
-            val padding: PaddingValues = PaddingValues(),
+        private val default = Style(
+            colorIndicatorActive = Color.Black,
+            colorIndicatorInactive = Color.Gray,
+            dimensionIndicatorPaddingTop = 6.dp,
+            dimensionIndicatorSize = 6.dp,
+            dimensionIndicatorSpacing = 6.dp,
+            shapeIndicator = CircleShape,
+            padding = PaddingValues(),
         )
-
-        @Composable
-        operator fun invoke(
-            modifier: Modifier = Modifier,
-            pageSelected: Int = 0,
-            pages: List<@Composable () -> Unit>,
-            onPageChange: (pageIndex: Int) -> Unit = {}
-        ) {
-            Content(modifier, pageSelected, pages, onPageChange)
+        @Immutable
+        open class Style(
+            val colorIndicatorActive: Color = default.colorIndicatorActive,
+            val colorIndicatorInactive: Color = default.colorIndicatorInactive,
+            val dimensionIndicatorPaddingTop: Dp = default.dimensionIndicatorPaddingTop,
+            val dimensionIndicatorSize: Dp = default.dimensionIndicatorSize,
+            val dimensionIndicatorSpacing: Dp = default.dimensionIndicatorSpacing,
+            val shapeIndicator: Shape? = default.shapeIndicator,
+            val padding: PaddingValues = default.padding,
+        ){
+            constructor(style:Style) : this(
+                colorIndicatorActive = style.colorIndicatorActive,
+                colorIndicatorInactive = style.colorIndicatorInactive,
+                dimensionIndicatorPaddingTop = style.dimensionIndicatorPaddingTop,
+                dimensionIndicatorSize = style.dimensionIndicatorSize,
+                dimensionIndicatorSpacing = style.dimensionIndicatorSpacing,
+                shapeIndicator = style.shapeIndicator,
+                padding = style.padding,
+            )
         }
+
+        fun Style.copy(
+            colorIndicatorActive: Color? = null,
+            colorIndicatorInactive: Color? = null,
+            dimensionIndicatorPaddingTop: Dp? = null,
+            dimensionIndicatorSize: Dp? = null,
+            dimensionIndicatorSpacing: Dp? = null,
+            shapeIndicator: Shape? = null,
+            padding: PaddingValues? = null,
+        ) = Style(
+            colorIndicatorActive = colorIndicatorActive ?: this.colorIndicatorActive,
+            colorIndicatorInactive = colorIndicatorInactive ?: this.colorIndicatorInactive,
+            dimensionIndicatorPaddingTop = dimensionIndicatorPaddingTop ?: this.dimensionIndicatorPaddingTop,
+            dimensionIndicatorSize = dimensionIndicatorSize ?: this.dimensionIndicatorSize,
+            dimensionIndicatorSpacing = dimensionIndicatorSpacing ?: this.dimensionIndicatorSpacing,
+            shapeIndicator = shapeIndicator ?: this.shapeIndicator,
+            padding = padding ?: this.padding,
+        )
 
         @OptIn(ExperimentalPagerApi::class)
         @Composable
-        private fun Content(
+        operator fun invoke(
             modifier: Modifier = Modifier,
-            pageSelected: Int,
+            style:Style,
+            pageSelected: Int = 0,
             pages: List<@Composable () -> Unit>,
-            onPageChange: (pageIndex: Int) -> Unit
+            onPageChange: (pageIndex: Int) -> Unit = {}
         ) {
             val pagerState = rememberPagerState()
             Box(
                 modifier = modifier,
             ) {
-                val style = local.current
                 val spacingIndicator = remember {
                     style.shapeIndicator?.let {
                         style.dimensionIndicatorPaddingTop + style.dimensionIndicatorSize
@@ -118,33 +141,66 @@ object HorizontalScrollable {
             error("not provided")
         }
 
+        private val default = Style(
+            marginCard = PaddingValues(horizontal = 4.dp),
+            shapeCard = RoundedCornerShape(8.dp),
+            borderCard = BorderStroke(1.dp, Color.Black),
+            backgroundCard = Color.Transparent,
+        )
+
         @Immutable
-        data class Style(
-            val marginCard: PaddingValues = PaddingValues(horizontal = 4.dp),
-            val shapeCard: Shape = RoundedCornerShape(8.dp),
-            val borderCard: BorderStroke = BorderStroke(1.dp, Color.Black),
-            val backgroundCard: Color = Color.Transparent,
+        open class Style(
+            pagerStyle: Pager.Style = Pager.Style(),
+            val marginCard: PaddingValues = default.marginCard,
+            val shapeCard: Shape = default.shapeCard,
+            val borderCard: BorderStroke = default.borderCard,
+            val backgroundCard: Color = default.backgroundCard,
+        ):Pager.Style(pagerStyle){
+
+            constructor(style:Style) : this (
+                marginCard = style.marginCard,
+                shapeCard = style.shapeCard,
+                borderCard = style.borderCard,
+                backgroundCard = style.backgroundCard,
+            )
+        }
+
+        fun Style.copy(
+            pagerStyle: Pager.Style? = null,
+            marginCard: PaddingValues? = null,
+            shapeCard: Shape? = null,
+            borderCard: BorderStroke? = null,
+            backgroundCard: Color? = null,
+        ) = Style(
+            pagerStyle = pagerStyle ?: this,
+            marginCard = marginCard ?: this.marginCard,
+            shapeCard = shapeCard ?: this.shapeCard,
+            borderCard = borderCard ?: this.borderCard,
+            backgroundCard = backgroundCard ?: this.backgroundCard,
+        )
+
+        fun Pager.Style.copyToCarouselStyle(
+            marginCard: PaddingValues = default.marginCard,
+            shapeCard: Shape = default.shapeCard,
+            borderCard: BorderStroke = default.borderCard,
+            backgroundCard: Color = default.backgroundCard,
+        ) =  Style(
+            pagerStyle = this,
+            marginCard = marginCard,
+            shapeCard = shapeCard,
+            borderCard = borderCard,
+            backgroundCard = backgroundCard,
         )
 
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
+            style: Style,
             pageSelected: Int = 0,
             pages: List<@Composable () -> Unit>,
             onPageChange: (pageIndex: Int) -> Unit = {}
         ) {
-            Content(modifier, pageSelected, pages, onPageChange)
-        }
-
-        @Composable
-        private fun Content(
-            modifier: Modifier = Modifier,
-            pageSelected: Int,
-            pages: List<@Composable () -> Unit>,
-            onPageChange: (pageIndex: Int) -> Unit
-        ) {
-            val style = local.current
-            Pager(modifier, pageSelected, pages.map { content ->
+            Pager(modifier, style, pageSelected, pages.map { content ->
                 {
                     Surface(
                         modifier = modifier.padding(style.marginCard),

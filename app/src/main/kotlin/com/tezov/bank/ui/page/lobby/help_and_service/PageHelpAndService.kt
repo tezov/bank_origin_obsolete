@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/02/2023 21:11
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/02/2023 21:04
+ *  Last modified 13/02/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,11 +25,10 @@ import androidx.compose.ui.res.stringResource
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.component.branch.provides
-import com.tezov.bank.ui.component.leaf.ActionCard
-import com.tezov.bank.ui.component.leaf.ActionRow
-import com.tezov.bank.ui.component.leaf.provides
+
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
+import com.tezov.bank.ui.page.auth.profile.PageProfileTheme
+import com.tezov.bank.ui.page.auth.profile.provides
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -56,10 +55,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
             },
             child = {
                 arrayOf(
-                    ActionRow provides PageHelpAndServiceTheme.provideActionRowStyle(),
-                    SectionActionRow provides PageHelpAndServiceTheme.provideSectionRowStyle(),
-                    ActionCard provides PageHelpAndServiceTheme.provideActionCardStyle(),
-                    SectionActionCard provides PageHelpAndServiceTheme.provideSectionCardStyle(),
+                    PageHelpAndServiceTheme provides PageHelpAndServiceTheme.provideStyles(),
                 )
             }
         ) {
@@ -93,20 +89,20 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 ) {
                     contentHeader(state.header)
                     state.helpAndServices.value?.let {
-                        SectionActionCard(data = it){
+                        SectionActionCard(data = it, style = PageHelpAndServiceTheme.styles.sectionCard){
 
 
                         }
                     }
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.normal_v))
                     state.contacts.value?.let {
-                        SectionActionRow(data = it){
+                        SectionActionRow(data = it, style = PageHelpAndServiceTheme.styles.sectionRow){
 
 
                         }
                     }
                     state.notices.value?.let {
-                        SectionActionRow(data = it){
+                        SectionActionRow(data = it, style = PageHelpAndServiceTheme.styles.sectionRow){
 
 
                         }

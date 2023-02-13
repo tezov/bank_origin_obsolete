@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/02/2023 21:11
+ *  Created by Tezov on 13/02/2023 21:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/02/2023 20:48
+ *  Last modified 13/02/2023 20:56
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,15 +21,12 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import com.tezov.bank.ui.page.lobby.login.colors
+import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
 import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionDensity.toPx
 
 val DialogLoginAuthTheme.colors: DialogLoginAuthTheme.Colors
     @Composable
@@ -70,6 +67,14 @@ val DialogLoginAuthTheme.typographies: DialogLoginAuthTheme.Typographies
 
 infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Typographies) =
     localTypographies provides value
+
+
+val DialogLoginAuthTheme.styles: DialogLoginAuthTheme.Style
+    @Composable
+    @ReadOnlyComposable
+    get() = localStyles.current
+
+infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Style) = localStyles provides value
 
 object DialogLoginAuthTheme {
 
@@ -189,17 +194,27 @@ object DialogLoginAuthTheme {
             error("not provided")
         }
 
-    @Composable
-    fun provideKeyBoardGridCubeStyle() = KeyBoard.GridCube.Style(
-        colorContent = colors.onBackground,
-        colorBackground = Color.Transparent,
-        borderOuter = MaterialTheme.bordersExtended.strokeNormal.copy(
-            brush = SolidColor(colors.onBackground)
-        ),
-        borderInner = MaterialTheme.bordersExtended.strokeBig.copy(
-            brush = SolidColor(colors.onBackground)
-        ),
+    data class Style(
+        val keyBoardGridCube: KeyBoard.GridCube.Style,
     )
+
+    @Composable
+    fun provideStyles() = Style(
+        keyBoardGridCube = KeyBoard.GridCube.Style(
+            colorContent = colors.onBackground,
+            colorBackground = Color.Transparent,
+            borderOuter = MaterialTheme.bordersExtended.strokeNormal.copy(
+                brush = SolidColor(colors.onBackground)
+            ),
+            borderInner = MaterialTheme.bordersExtended.strokeBig.copy(
+                brush = SolidColor(colors.onBackground)
+            ),
+        )
+    )
+
+    internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
+        error("not provided")
+    }
 
 
 }
