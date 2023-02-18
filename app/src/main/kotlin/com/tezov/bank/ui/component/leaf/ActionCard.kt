@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 18/02/2023 14:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 21:32
+ *  Last modified 18/02/2023 14:17
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,8 +23,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.ProvidableCompositionLocal
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -43,7 +41,15 @@ object ActionCard {
         Undefined,
         IconTopEnd,
         IconTop,
-        IconEnd,
+        IconEnd;
+
+        val isInlined get() = this == IconEnd
+        val isUndefined get() = this == Undefined
+        val isDefined get() = this != Undefined
+
+        companion object{
+            val InlineDefault get() = IconEnd
+        }
     }
 
     @Immutable

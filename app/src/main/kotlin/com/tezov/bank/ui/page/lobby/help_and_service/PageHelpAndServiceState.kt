@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 01:03
+ *  Created by Tezov on 18/02/2023 14:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 01:01
+ *  Last modified 18/02/2023 14:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -60,6 +60,7 @@ class PageHelpAndServiceState private constructor(
         }
 
         helpAndServices.value = SectionActionCard.Data(
+            template = ActionCard.Template.IconTopEnd,
             cards = listOf(
                 ActionCard.Data(
                     title = "Opposer une carte",

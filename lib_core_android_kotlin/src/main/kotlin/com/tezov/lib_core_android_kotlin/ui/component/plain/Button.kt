@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 18/02/2023 14:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 21:32
+ *  Last modified 18/02/2023 14:17
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,40 +22,39 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.TextFill.copy
 
 object Button {
 
     object TextFill{
 
-        private val default = Style(
-            textStyle = null,
-            elevation = null,
-            shape = null,
-            border = null,
-            borderColorActive = Color.Black,
-            borderColorInactive = Color.Black.copy(alpha = 0.25f),
-            textColorActive = Color.Black,
-            textColorInactive = Color.Black.copy(alpha = 0.5f),
-            backgroundColorActive = Color.Gray,
-            backgroundColorInactive = Color.Gray.copy(alpha = 0.25f),
-        )
-
         @Immutable
         open class Style(
-            val textStyle: TextStyle? = default.textStyle,
-            val elevation: Dp? = default.elevation,
-            val shape: Shape? = default.shape,
-            val border: Dp? = default.border,
-            val borderColorActive: Color = default.borderColorActive,
-            val borderColorInactive: Color = default.borderColorInactive,
-            val textColorActive: Color = default.textColorActive,
-            val textColorInactive: Color = default.textColorInactive,
-            val backgroundColorActive: Color = default.backgroundColorActive,
-            val backgroundColorInactive: Color = default.backgroundColorActive,
+            val textStyle: TextStyle? = Default.textStyle,
+            val elevation: Dp? = Default.elevation,
+            val shape: Shape? = Default.shape,
+            val border: Dp? = Default.border,
+            val borderColorActive: Color = Default.borderColorActive,
+            val borderColorInactive: Color = Default.borderColorInactive,
+            val textColorActive: Color = Default.textColorActive,
+            val textColorInactive: Color = Default.textColorInactive,
+            val backgroundColorActive: Color = Default.backgroundColorActive,
+            val backgroundColorInactive: Color = Default.backgroundColorActive,
         ){
+            companion object{
+                internal val Default = Style(
+                    textStyle = null,
+                    elevation = null,
+                    shape = null,
+                    border = null,
+                    borderColorActive = Color.Black,
+                    borderColorInactive = Color.Black.copy(alpha = 0.25f),
+                    textColorActive = Color.Black,
+                    textColorInactive = Color.Black.copy(alpha = 0.5f),
+                    backgroundColorActive = Color.Gray,
+                    backgroundColorInactive = Color.Gray.copy(alpha = 0.25f),
+                )
+            }
+
             constructor(style: Style) : this(
                 textStyle = style.textStyle,
                 elevation = style.elevation,
@@ -135,28 +134,30 @@ object Button {
 
     object TextOutlined{
 
-        private val default = Style(
-            textStyle = null,
-            elevation = null,
-            shape = null,
-            border = null,
-            borderColorActive = Color.Black,
-            borderColorInactive = Color.Black.copy(alpha = 0.25f),
-            textColorActive = Color.Black,
-            textColorInactive = Color.Black.copy(alpha = 0.5f),
-        )
-
         @Immutable
         open class Style(
-            val textStyle: TextStyle? = null,
-            val elevation: Dp? = null,
-            val shape: Shape? = null,
-            val border: Dp? = null,
-            val borderColorActive: Color = Color.Black,
-            val borderColorInactive: Color = Color.Black.copy(alpha = 0.25f),
-            val textColorActive: Color = Color.Black,
-            val textColorInactive: Color = Color.Black.copy(alpha = 0.5f),
+            val textStyle: TextStyle? = Default.textStyle,
+            val elevation: Dp? = Default.elevation,
+            val shape: Shape? = Default.shape,
+            val border: Dp? = Default.border,
+            val borderColorActive: Color = Default.borderColorActive,
+            val borderColorInactive: Color = Default.borderColorInactive,
+            val textColorActive: Color = Default.textColorActive,
+            val textColorInactive: Color = Default.textColorInactive,
         ){
+            companion object{
+                internal val Default = Style(
+                    textStyle = null,
+                    elevation = null,
+                    shape = null,
+                    border = null,
+                    borderColorActive = Color.Black,
+                    borderColorInactive = Color.Black.copy(alpha = 0.25f),
+                    textColorActive = Color.Black,
+                    textColorInactive = Color.Black.copy(alpha = 0.5f),
+                )
+            }
+
             constructor(style: Style) : this(
                 textStyle = style.textStyle,
                 elevation = style.elevation,

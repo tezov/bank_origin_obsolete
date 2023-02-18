@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 18/02/2023 14:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 20:46
+ *  Last modified 18/02/2023 14:17
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,8 +25,6 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
-import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.CarouselCard.copy
-import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 object HorizontalScrollable {
@@ -37,25 +35,31 @@ object HorizontalScrollable {
             error("not provided")
         }
 
-        private val default = Style(
-            colorIndicatorActive = Color.Black,
-            colorIndicatorInactive = Color.Gray,
-            dimensionIndicatorPaddingTop = 6.dp,
-            dimensionIndicatorSize = 6.dp,
-            dimensionIndicatorSpacing = 6.dp,
-            shapeIndicator = CircleShape,
-            padding = PaddingValues(),
-        )
-        @Immutable
+       @Immutable
         open class Style(
-            val colorIndicatorActive: Color = default.colorIndicatorActive,
-            val colorIndicatorInactive: Color = default.colorIndicatorInactive,
-            val dimensionIndicatorPaddingTop: Dp = default.dimensionIndicatorPaddingTop,
-            val dimensionIndicatorSize: Dp = default.dimensionIndicatorSize,
-            val dimensionIndicatorSpacing: Dp = default.dimensionIndicatorSpacing,
-            val shapeIndicator: Shape? = default.shapeIndicator,
-            val padding: PaddingValues = default.padding,
+           val colorIndicatorActive: Color = Default.colorIndicatorActive,
+           val colorIndicatorInactive: Color = Default.colorIndicatorInactive,
+           val dimensionIndicatorPaddingTop: Dp = Default.dimensionIndicatorPaddingTop,
+           val dimensionIndicatorSize: Dp = Default.dimensionIndicatorSize,
+           val dimensionIndicatorSpacing: Dp = Default.dimensionIndicatorSpacing,
+           val shapeIndicator: Shape? = Default.shapeIndicator,
+           val padding: PaddingValues = Default.padding,
         ){
+
+            companion object{
+                internal val Default = Style(
+                    colorIndicatorActive = Color.Black,
+                    colorIndicatorInactive = Color.Gray,
+                    dimensionIndicatorPaddingTop = 6.dp,
+                    dimensionIndicatorSize = 6.dp,
+                    dimensionIndicatorSpacing = 6.dp,
+                    shapeIndicator = CircleShape,
+                    padding = PaddingValues(),
+                )
+
+            }
+
+
             constructor(style:Style) : this(
                 colorIndicatorActive = style.colorIndicatorActive,
                 colorIndicatorInactive = style.colorIndicatorInactive,
@@ -141,21 +145,23 @@ object HorizontalScrollable {
             error("not provided")
         }
 
-        private val default = Style(
-            marginCard = PaddingValues(horizontal = 4.dp),
-            shapeCard = RoundedCornerShape(8.dp),
-            borderCard = BorderStroke(1.dp, Color.Black),
-            backgroundCard = Color.Transparent,
-        )
-
         @Immutable
         open class Style(
             pagerStyle: Pager.Style = Pager.Style(),
-            val marginCard: PaddingValues = default.marginCard,
-            val shapeCard: Shape = default.shapeCard,
-            val borderCard: BorderStroke = default.borderCard,
-            val backgroundCard: Color = default.backgroundCard,
+            val marginCard: PaddingValues = Default.marginCard,
+            val shapeCard: Shape = Default.shapeCard,
+            val borderCard: BorderStroke = Default.borderCard,
+            val backgroundCard: Color = Default.backgroundCard,
         ):Pager.Style(pagerStyle){
+
+            companion object{
+                internal val Default = Style(
+                    marginCard = PaddingValues(horizontal = 4.dp),
+                    shapeCard = RoundedCornerShape(8.dp),
+                    borderCard = BorderStroke(1.dp, Color.Black),
+                    backgroundCard = Color.Transparent,
+                )
+            }
 
             constructor(style:Style) : this (
                 marginCard = style.marginCard,
@@ -179,11 +185,11 @@ object HorizontalScrollable {
             backgroundCard = backgroundCard ?: this.backgroundCard,
         )
 
-        fun Pager.Style.copyToCarouselStyle(
-            marginCard: PaddingValues = default.marginCard,
-            shapeCard: Shape = default.shapeCard,
-            borderCard: BorderStroke = default.borderCard,
-            backgroundCard: Color = default.backgroundCard,
+        fun Pager.Style.copyAsStyleCarousel(
+            marginCard: PaddingValues = Style.Default.marginCard,
+            shapeCard: Shape = Style.Default.shapeCard,
+            borderCard: BorderStroke = Style.Default.borderCard,
+            backgroundCard: Color = Style.Default.backgroundCard,
         ) =  Style(
             pagerStyle = this,
             marginCard = marginCard,

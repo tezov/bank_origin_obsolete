@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 18/02/2023 14:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 21:32
+ *  Last modified 18/02/2023 14:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,7 +24,6 @@ import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
-import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.CarouselCard.copyToCarouselStyle
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 17:12
+ *  Created by Tezov on 18/02/2023 14:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 17:05
+ *  Last modified 18/02/2023 14:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -54,6 +54,7 @@ class PagePaymentState private constructor(
         }
 
         cardSmall.value = SectionActionCard.Data(
+            template = ActionCard.Template.IconTopEnd,
             cards = listOf(
                 ActionCard.Data(
                     title = "Partager mon RIB",
@@ -75,22 +76,20 @@ class PagePaymentState private constructor(
         )
 
         cardLarge.value = SectionActionCard.Data(
+            template = ActionCard.Template.IconEnd,
             cards = listOf(
                 ActionCard.Data(
                     title = "Lyf Pay",
-                    template = ActionCard.Template.IconEnd,
                     subtitle = "Payer avec votre mobile.",
                     iconResourceId = R.drawable.img_lyf
                 ),
                 ActionCard.Data(
                     title = "Paylib",
-                    template = ActionCard.Template.IconEnd,
                     subtitle = "Envoyer de l'argent vers un mobile",
                     iconResourceId = R.drawable.img_paylib
                 ),
                 ActionCard.Data(
                     title = "PaypPal",
-                    template = ActionCard.Template.IconEnd,
                     subtitle = "Payer en ligne",
                     iconResourceId = R.drawable.img_paypal
                 ),

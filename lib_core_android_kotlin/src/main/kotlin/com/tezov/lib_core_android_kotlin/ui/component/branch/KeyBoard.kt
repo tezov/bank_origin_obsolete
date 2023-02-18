@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 18/02/2023 14:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 20:56
+ *  Last modified 18/02/2023 14:17
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -54,20 +54,23 @@ object KeyBoard {
 
     object GridCube {
 
-        private val default = Style(
-            colorContent = Color.White,
-            colorBackground = Color.Black,
-            borderOuter = BorderStroke(2.dp, Color.White),
-            borderInner = BorderStroke(1.dp, Color.White),
-        )
-
         @Immutable
         open class Style(
-            val colorContent: Color = default.colorContent,
-            val colorBackground: Color = default.colorBackground,
-            val borderOuter: BorderStroke = default.borderOuter,
-            val borderInner: BorderStroke = default.borderInner,
+            val colorContent: Color = Default.colorContent,
+            val colorBackground: Color = Default.colorBackground,
+            val borderOuter: BorderStroke = Default.borderOuter,
+            val borderInner: BorderStroke = Default.borderInner,
         ) {
+
+            companion object{
+                internal val Default = Style(
+                    colorContent = Color.White,
+                    colorBackground = Color.Black,
+                    borderOuter = BorderStroke(2.dp, Color.White),
+                    borderInner = BorderStroke(1.dp, Color.White),
+                )
+            }
+
             constructor(style: Style) : this(
                 colorContent = style.colorContent,
                 colorBackground = style.colorBackground,

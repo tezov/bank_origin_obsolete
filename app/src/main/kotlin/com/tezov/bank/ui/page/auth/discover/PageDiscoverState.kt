@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 22:23
+ *  Created by Tezov on 18/02/2023 14:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 22:17
+ *  Last modified 18/02/2023 14:31
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -75,44 +75,37 @@ class PageDiscoverState private constructor(
 
         offers.value = SectionActionCard.Data(
             title = "Toute l'offre Hello bank!",
+            template = ActionCard.Template.IconTop,
             cards = listOf(
                 ActionCard.Data(
-                    template = ActionCard.Template.IconTop,
                     title = "Comptes et cartes",
                     iconResourceId = R.drawable.img_account_card
                 ),
                 ActionCard.Data(
-                    template = ActionCard.Template.IconTop,
                     title = "Épargne",
                     iconResourceId = R.drawable.img_coin
                 ),
                 ActionCard.Data(
-                    template = ActionCard.Template.IconTop,
                     title = "Crédit",
                     iconResourceId = R.drawable.img_credit
                 ),
                 ActionCard.Data(
-                    template = ActionCard.Template.IconTop,
                     title = "Assurances",
                     iconResourceId = R.drawable.img_insurance
                 ),
                 ActionCard.Data(
-                    template = ActionCard.Template.IconTop,
                     title = "Compte professionnel",
                     iconResourceId = R.drawable.img_account_pro
                 ),
                 ActionCard.Data(
-                    template = ActionCard.Template.IconTop,
                     title = "Bourse",
                     iconResourceId = R.drawable.img_market
                 ),
                 ActionCard.Data(
-                    template = ActionCard.Template.IconTop,
                     title = "Offre enfants",
                     iconResourceId = R.drawable.img_children
                 ),
                 ActionCard.Data(
-                    template = ActionCard.Template.IconTop,
                     title = "Mobilité bancaire",
                     iconResourceId = R.drawable.img_account_mobility
                 ),

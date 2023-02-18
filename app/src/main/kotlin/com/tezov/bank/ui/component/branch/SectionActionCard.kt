@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 18/02/2023 14:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 21:32
+ *  Last modified 18/02/2023 14:26
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,8 +19,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.ProvidableCompositionLocal
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,11 +27,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.leaf.ActionCard
-import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable.loopOver
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
+import com.tezov.lib_core_kotlin.util.UtilsNull
 
 object SectionActionCard {
 
@@ -51,6 +49,7 @@ object SectionActionCard {
     data class Data(
         val iconResourceId: Int? = null,
         val title: String? = null,
+        var template: ActionCard.Template = ActionCard.Template.Undefined,
         val cards: List<ActionCard.Data>
     )
 
@@ -106,11 +105,25 @@ object SectionActionCard {
                 data.cards.loopOver {
                     val first = next
                     val second = next
+                    // set default section template
+                    if(data.template.isDefined){
+                        first?.let {
+                            if(first.data.template.isUndefined){
+                                first.data.template = data.template
+                            }
+                        }
+                        second?.let {
+                            if(second.data.template.isUndefined){
+                                second.data.template = data.template
+                            }
+                        }
+                    }
+                    // compose row
                     if (first != null && second != null) {
-                        if (first.data.template == ActionCard.Template.IconEnd) {
+                        if (first.data.template.isInlined) {
                             push(second)
                             ContentRowUno(style.actionCardStyle, first, onClick)
-                        } else if (second.data.template == ActionCard.Template.IconEnd) {
+                        } else if (second.data.template.isInlined) {
                             push(first)
                             ContentRowUno(style.actionCardStyle, second, onClick)
                         } else {
@@ -119,12 +132,12 @@ object SectionActionCard {
                         if (hasReachEnd && isStackEmpty) {
                             done()
                         }
-                    } else if (first != null) {
-                        ContentRowUno(style.actionCardStyle, first) {
-
-                        }
+                    }
+                    else if (first != null) {
+                        ContentRowUno(style.actionCardStyle, first, onClick)
                         done()
-                    } else {
+                    }
+                    else {
                         done()
                     }
                 }
@@ -143,7 +156,7 @@ object SectionActionCard {
                 .fillMaxWidth(),
             style = style,
             data = first.data.apply {
-                template = ActionCard.Template.IconEnd
+                template = ActionCard.Template.InlineDefault
             },
             onClick = { onClick(first.index) }
         )
