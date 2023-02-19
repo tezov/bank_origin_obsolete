@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 19/02/2023 18:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 19/02/2023 17:46
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -212,12 +212,12 @@ object DialogLoginAuthTheme {
             ),
         ),
         button = Button.TextFilled.Style(
-            shape = shapes.button,
-            backgroundColorActive = colors.backgroundButtonActive,
-            backgroundColorInactive =  colors.backgroundButtonInactive,
-            textStyle = typographies.button,
-            textColorActive = colors.onBackground,
-            textColorInactive = colors.onBackground,
+//            outfitShape = shapes.button,
+//            backgroundColorActive = colors.backgroundButtonActive,
+//            backgroundColorInactive =  colors.backgroundButtonInactive,
+//            textStyle = typographies.button,
+//            textColorActive = colors.onBackground,
+//            textColorInactive = colors.onBackground,
         ),
         link = Link.Underlined.Style(
             textStyle = typographies.link,

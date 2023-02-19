@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 19/02/2023 18:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 19/02/2023 18:23
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,16 +12,14 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.plain
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
 
 object Button {
 
@@ -29,67 +27,34 @@ object Button {
 
         @Immutable
         open class Style(
-            val textStyle: TextStyle? = Default.textStyle,
+            val outfitFrame: OutfitFrameState = Default.outfitFrame,
+            val outfitText: OutfitTextState = Default.outfitText,
             val elevation: Dp? = Default.elevation,
-            val shape: Shape? = Default.shape,
-            val border: Dp? = Default.border,
-            val borderColorActive: Color = Default.borderColorActive,
-            val borderColorInactive: Color = Default.borderColorInactive,
-            val textColorActive: Color = Default.textColorActive,
-            val textColorInactive: Color = Default.textColorInactive,
-            val backgroundColorActive: Color = Default.backgroundColorActive,
-            val backgroundColorInactive: Color = Default.backgroundColorActive,
-        ){
+         ){
             companion object{
                 internal val Default = Style(
-                    textStyle = null,
+                    outfitFrame = OutfitFrameState(
+//                        border = OutfitBorderState.Transparent
+                    ),
+                    outfitText = OutfitTextState(),
                     elevation = null,
-                    shape = null,
-                    border = null,
-                    borderColorActive = Color.Black,
-                    borderColorInactive = Color.Black.copy(alpha = 0.25f),
-                    textColorActive = Color.Black,
-                    textColorInactive = Color.Black.copy(alpha = 0.5f),
-                    backgroundColorActive = Color.Gray,
-                    backgroundColorInactive = Color.Gray.copy(alpha = 0.25f),
                 )
 
                 fun Style.copy(
-                    textStyle: TextStyle? = null,
+                    outfitFrame: OutfitFrameState? = null,
+                    outfitText: OutfitTextState? = null,
                     elevation: Dp? = null,
-                    shape: Shape? = null,
-                    border: Dp? = null,
-                    borderColorActive: Color? = null,
-                    borderColorInactive: Color? = null,
-                    textColorActive: Color? = null,
-                    textColorInactive: Color? = null,
-                    backgroundColorActive: Color? = null,
-                    backgroundColorInactive: Color? = null,
                 ) = Style(
-                    textStyle = textStyle ?: this.textStyle,
+                    outfitFrame = outfitFrame ?: this.outfitFrame,
+                    outfitText = outfitText ?: this.outfitText,
                     elevation = elevation ?: this.elevation,
-                    shape = shape ?: this.shape,
-                    border = border ?: this.border,
-                    borderColorActive = borderColorActive ?: this.borderColorActive,
-                    borderColorInactive = borderColorInactive ?: this.borderColorInactive,
-                    textColorActive = textColorActive ?: this.textColorActive,
-                    textColorInactive = textColorInactive ?: this.textColorInactive,
-                    backgroundColorActive = backgroundColorActive ?: this.backgroundColorActive,
-                    backgroundColorInactive = backgroundColorInactive ?: this.backgroundColorInactive,
                 )
             }
 
             constructor(style: Style) : this(
-                textStyle = style.textStyle,
+                outfitFrame = style.outfitFrame,
+                outfitText = style.outfitText,
                 elevation = style.elevation,
-                shape = style.shape,
-                border = style.border,
-                borderColorActive = style.borderColorActive,
-                borderColorInactive = style.borderColorInactive,
-                textColorActive = style.textColorActive,
-                textColorInactive = style.textColorInactive,
-                backgroundColorActive = style.backgroundColorActive,
-                backgroundColorInactive = style.backgroundColorInactive,
             )
         }
 
@@ -109,25 +74,19 @@ object Button {
                 enabled = enabled,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it,it,it,it,it) },
-                shape = style.shape ?: MaterialTheme.shapes.small,
-                border =  style.border?.let {
-                    BorderStroke(it, if(enabled) style.borderColorActive else style.borderColorInactive)
-                },
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = style.backgroundColorActive,
-                    disabledBackgroundColor = style.backgroundColorInactive,
-                ),
+                shape = style.outfitFrame.outfitShape.get() ?: MaterialTheme.shapesExtended.roundedCornerNormal,
+                border =  style.outfitFrame.border.get(enabled),
+                colors = style.outfitFrame.outfitShape.outfitColor.colorButton(),
                 contentPadding = contentPadding,
                 onClick = onClick,
             ) {
                 Text(
                     text,
-                    style = style.textStyle ?: TextStyle(),
-                    color = if(enabled) style.textColorActive else style.textColorInactive,
+                    style = style.outfitText.text,
+                    color = style.outfitText.outfitColor.resolve(enabled),
                     modifier = modifierText
                 )
             }
-
         }
 
     }
@@ -136,57 +95,34 @@ object Button {
 
         @Immutable
         open class Style(
-            val textStyle: TextStyle? = Default.textStyle,
+            val outfitFrame: OutfitFrameState = Style.Default.outfitFrame,
+            val outfitText: OutfitTextState = Style.Default.outfitText,
             val elevation: Dp? = Default.elevation,
-            val shape: Shape? = Default.shape,
-            val border: Dp? = Default.border,
-            val borderColorActive: Color = Default.borderColorActive,
-            val borderColorInactive: Color = Default.borderColorInactive,
-            val textColorActive: Color = Default.textColorActive,
-            val textColorInactive: Color = Default.textColorInactive,
         ){
             companion object{
                 internal val Default = Style(
-                    textStyle = null,
+                    outfitFrame = OutfitFrameState(
+                        outfitShape = OutfitShapeState.Transparent
+                    ),
+                    outfitText = OutfitTextState(),
                     elevation = null,
-                    shape = null,
-                    border = null,
-                    borderColorActive = Color.Black,
-                    borderColorInactive = Color.Black.copy(alpha = 0.25f),
-                    textColorActive = Color.Black,
-                    textColorInactive = Color.Black.copy(alpha = 0.5f),
                 )
 
                 fun Style.copy(
-                    textStyle: TextStyle? = null,
+                    outfitFrame: OutfitFrameState? = null,
+                    outfitText: OutfitTextState? = null,
                     elevation: Dp? = null,
-                    shape: Shape? = null,
-                    border: Dp? = null,
-                    borderColorActive: Color? = null,
-                    borderColorInactive: Color? = null,
-                    textColorActive: Color? = null,
-                    textColorInactive: Color? = null,
                 ) = Style(
-                    textStyle = textStyle ?: this.textStyle,
+                    outfitFrame = outfitFrame ?: this.outfitFrame,
+                    outfitText = outfitText ?: this.outfitText,
                     elevation = elevation ?: this.elevation,
-                    shape = shape ?: this.shape,
-                    border = border ?: this.border,
-                    borderColorActive = borderColorActive ?: this.borderColorActive,
-                    borderColorInactive = borderColorInactive ?: this.borderColorInactive,
-                    textColorActive = textColorActive ?: this.textColorActive,
-                    textColorInactive = textColorInactive ?: this.textColorInactive,
                 )
             }
 
-            constructor(style: Style) : this(
-                textStyle = style.textStyle,
+            constructor(style: TextFilled.Style) : this(
+                outfitFrame = style.outfitFrame,
+                outfitText = style.outfitText,
                 elevation = style.elevation,
-                shape = style.shape,
-                border = style.border,
-                borderColorActive = style.borderColorActive,
-                borderColorInactive = style.borderColorInactive,
-                textColorActive = style.textColorActive,
-                textColorInactive = style.textColorInactive,
             )
         }
 
@@ -206,24 +142,19 @@ object Button {
                 enabled = enabled,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it,it,it,it,it) },
-                shape = style.shape ?: MaterialTheme.shapes.small,
-                border = style.border?.let {
-                    BorderStroke(it, if(enabled) style.borderColorActive else style.borderColorInactive)
-                } ?: ButtonDefaults.outlinedBorder,
-                colors = ButtonDefaults.outlinedButtonColors(
-                    backgroundColor = Color.Transparent,
-                ),
+                shape = style.outfitFrame.outfitShape.get() ?: MaterialTheme.shapesExtended.roundedCornerNormal,
+                border = style.outfitFrame.border.get(enabled),
+                colors = style.outfitFrame.outfitShape.outfitColor.colorButton(),
                 contentPadding = contentPadding,
                 onClick = onClick,
             ) {
                 Text(
                     text,
-                    style = style.textStyle ?: TextStyle(),
-                    color = if(enabled) style.textColorActive else style.textColorInactive,
+                    style = style.outfitText.text,
+                    color = style.outfitText.outfitColor.resolve(enabled),
                     modifier = modifierText
                 )
             }
-
         }
 
     }

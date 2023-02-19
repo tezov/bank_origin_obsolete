@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 19/02/2023 18:23
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 19/02/2023 18:23
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,6 +30,7 @@ import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageLoginTheme.colors: PageLoginTheme.Colors
@@ -219,27 +220,76 @@ object PageLoginTheme {
     @Composable
     fun provideStyles() = Style(
         pager = ThemeComponent.providePagerStyle(),
+
         buttonDark = Button.TextFilled.Style(
-            shape = shapes.button,
-            backgroundColorActive =  colors.backgroundButtonDark,
-            textStyle = typographies.buttonFilled,
-            textColorActive = colors.textButtonDark
+            outfitFrame = OutfitFrameState(
+                outfitShape = OutfitShapeState(
+                    template = OutfitShape.Template.Rounded,
+//                    size = shapes.button
+                    outfitColor = OutfitColorsSimple(
+                        active = colors.backgroundButtonDark
+                    )
+                ),
+                border = OutfitBorderState.Transparent,
+            ),
+            outfitText = OutfitTextState(
+                text = typographies.buttonFilled,
+                outfitColor = OutfitColorsSimple(
+                    active = colors.textButtonDark
+                )
+            )
         ),
+
         buttonLight = Button.TextFilled.Style(
-            shape = shapes.button,
-            border = MaterialTheme.bordersExtended.strokeSmall.width,
-            borderColorActive = ThemeColors.Common.blueShadow.copy(alpha = 0.5f),
-            backgroundColorActive =  colors.backgroundButtonLight,
-            textStyle = typographies.buttonFilled,
-            textColorActive = colors.textButtonLight
+            outfitFrame = OutfitFrameState(
+                outfitShape = OutfitShapeState(
+                    template = OutfitShape.Template.Rounded,
+//                    size = shapes.button
+                    outfitColor = OutfitColorsSimple(
+                        active = colors.backgroundButtonLight
+                    )
+                ),
+                border = OutfitBorderState(
+                    template = OutfitBorder.Template.Fill,
+                    size = MaterialTheme.bordersExtended.strokeSmall.width,
+                    colors = OutfitColorsSimple(
+                        active = ThemeColors.Common.blueShadow.copy(alpha = 0.5f)
+                    )
+                ),
+            ),
+            outfitText = OutfitTextState(
+                text = typographies.buttonFilled,
+                outfitColor = OutfitColorsSimple(
+                    active = colors.textButtonLight
+                )
+            )
         ),
+
         buttonOutlined = Button.TextOutlined.Style(
-            border = MaterialTheme.bordersExtended.strokeBig.width,
-            shape = shapes.button,
-            borderColorActive = colors.textContent,
-            textStyle = typographies.buttonOutlined,
-            textColorActive = colors.textContent,
+            outfitFrame = OutfitFrameState(
+                outfitShape = OutfitShapeState(
+                    template = OutfitShape.Template.Rounded,
+//                    size = shapes.button
+                    outfitColor = OutfitColorsSimple(
+                        active = colors.backgroundButtonDark
+                    )
+                ),
+                border = OutfitBorderState(
+                    template = OutfitBorder.Template.Fill,
+                    size = MaterialTheme.bordersExtended.strokeBig.width,
+                    colors = OutfitColorsSimple(
+                        active = colors.textContent
+                    )
+                ),
+            ),
+            outfitText = OutfitTextState(
+                text = typographies.buttonOutlined,
+                outfitColor = OutfitColorsSimple(
+                    active = colors.textContent
+                )
+            )
         ),
+
         link = Link.Underlined.Style(
             textStyle = typographies.link,
         )
