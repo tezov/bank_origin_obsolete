@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 19/02/2023 20:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 19/02/2023 20:30
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,6 +15,8 @@ package com.tezov.lib_core_android_kotlin.ui.theme.theme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.TextStyle
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextState
 
 
 val MaterialTheme.typographyExtended: ThemeTypographyExtended.Common
@@ -26,23 +28,23 @@ infix fun MaterialTheme.provides(value: ThemeTypographyExtended.Common) = ThemeT
 object ThemeTypographyExtended{
     @Immutable
     data class Common(
-        val textTitle: TextStyle,
-        val textSubtitle: TextStyle,
-        val textHelper: TextStyle,
-        val textNormal: TextStyle,
-        val textSupra: TextStyle,
-        val textBig: TextStyle,
-        val textHuge: TextStyle,
-        val textSmall: TextStyle,
-        val textFieldValue: TextStyle,
-        val textFieldLabel: TextStyle,
-        val textLink: TextStyle,
-        val textButton: TextStyle,
-        val textButtonOutline: TextStyle,
-        val topNavigationTitle: TextStyle,
-        val bottomNavigationLabel: TextStyle,
-        val snackBarMessage: TextStyle,
-        val snackBarAction: TextStyle,
+        val textTitle: OutfitTextSimple,
+        val textSubtitle: OutfitTextSimple,
+        val textHelper: OutfitTextSimple,
+        val textNormal: OutfitTextSimple,
+        val textSupra: OutfitTextSimple,
+        val textBig: OutfitTextSimple,
+        val textHuge: OutfitTextSimple,
+        val textSmall: OutfitTextSimple,
+        val textFieldValue: OutfitTextSimple,
+        val textFieldLabel: OutfitTextSimple,
+        val textLink: OutfitTextSimple,
+        val textButton: OutfitTextSimple,
+        val textButtonOutline: OutfitTextSimple,
+        val topNavigationTitle: OutfitTextSimple,
+        val bottomNavigationLabel: OutfitTextSimple,
+        val snackBarMessage: OutfitTextSimple,
+        val snackBarAction: OutfitTextSimple,
     )
     internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
         error("not provided")

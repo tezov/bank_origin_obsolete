@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 18:23
+ *  Created by Tezov on 19/02/2023 20:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 18:23
+ *  Last modified 19/02/2023 20:30
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,10 +14,13 @@ package com.tezov.lib_core_android_kotlin.ui.component.plain
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
 
@@ -25,20 +28,20 @@ object Button {
 
     object TextFilled{
 
-        @Immutable
         open class Style(
-            val outfitFrame: OutfitFrameState = Default.outfitFrame,
-            val outfitText: OutfitTextState = Default.outfitText,
-            val elevation: Dp? = Default.elevation,
+            val outfitFrame: OutfitFrameState = OutfitFrameState(
+                outfitShape = OutfitShapeState(
+                    size = CornerSize(8.dp),
+                    outfitColor = OutfitColorsSimple(
+                        active = Color.Gray,
+                        inactive = Color.Gray.copy(alpha = 0.25f),
+                    )
+                )
+            ),
+            val outfitText: OutfitTextState = OutfitTextState(),
+            val elevation: Dp? = null,
          ){
             companion object{
-                internal val Default = Style(
-                    outfitFrame = OutfitFrameState(
-//                        border = OutfitBorderState.Transparent
-                    ),
-                    outfitText = OutfitTextState(),
-                    elevation = null,
-                )
 
                 fun Style.copy(
                     outfitFrame: OutfitFrameState? = null,
@@ -74,8 +77,8 @@ object Button {
                 enabled = enabled,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it,it,it,it,it) },
-                shape = style.outfitFrame.outfitShape.get() ?: MaterialTheme.shapesExtended.roundedCornerNormal,
-                border =  style.outfitFrame.border.get(enabled),
+                shape = style.outfitFrame.outfitShape.get() ?: MaterialTheme.shapesExtended.roundedCornerNormal.get() ?: MaterialTheme.shapes.medium,
+                border =  style.outfitFrame.outfitBorder.get(enabled),
                 colors = style.outfitFrame.outfitShape.outfitColor.colorButton(),
                 contentPadding = contentPadding,
                 onClick = onClick,
@@ -93,20 +96,24 @@ object Button {
 
     object TextOutlined{
 
-        @Immutable
         open class Style(
-            val outfitFrame: OutfitFrameState = Style.Default.outfitFrame,
-            val outfitText: OutfitTextState = Style.Default.outfitText,
-            val elevation: Dp? = Default.elevation,
+            val outfitFrame: OutfitFrameState = OutfitFrameState(
+                outfitShape = OutfitShapeState(
+                    size = CornerSize(8.dp),
+                    outfitColor = OutfitColorsSimple()
+                ),
+                outfitBorder = OutfitBorderState(
+                    size = 1.dp,
+                    outfitColor = OutfitColorsSimple(
+                        active = Color.Gray,
+                        inactive = Color.Gray.copy(alpha = 0.25f),
+                    )
+                )
+            ),
+            val outfitText: OutfitTextState = OutfitTextState(),
+            val elevation: Dp? = null,
         ){
             companion object{
-                internal val Default = Style(
-                    outfitFrame = OutfitFrameState(
-                        outfitShape = OutfitShapeState.Transparent
-                    ),
-                    outfitText = OutfitTextState(),
-                    elevation = null,
-                )
 
                 fun Style.copy(
                     outfitFrame: OutfitFrameState? = null,
@@ -142,8 +149,8 @@ object Button {
                 enabled = enabled,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it,it,it,it,it) },
-                shape = style.outfitFrame.outfitShape.get() ?: MaterialTheme.shapesExtended.roundedCornerNormal,
-                border = style.outfitFrame.border.get(enabled),
+                shape = style.outfitFrame.outfitShape.get() ?: MaterialTheme.shapesExtended.roundedCornerNormal.get() ?: MaterialTheme.shapes.medium,
+                border = style.outfitFrame.outfitBorder.get(enabled),
                 colors = style.outfitFrame.outfitShape.outfitColor.colorButton(),
                 contentPadding = contentPadding,
                 onClick = onClick,

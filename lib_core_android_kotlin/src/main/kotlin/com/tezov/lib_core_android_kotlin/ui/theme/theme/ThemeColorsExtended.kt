@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 19/02/2023 20:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 19/02/2023 20:30
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,6 +15,7 @@ package com.tezov.lib_core_android_kotlin.ui.theme.theme
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsSimple
 
 val MaterialTheme.colorsCommonExtended: ThemeColorsExtended.Common
     @Composable
@@ -39,31 +40,23 @@ object ThemeColorsExtended {
         val onBackgroundModal: Color,
         val onBackgroundModalVariant:Color,
 
-        val backgroundInactive: Color,
-        val onBackgroundInactive: Color,
+        val background: OutfitColorsSimple,
 
-        val backgroundButtonProceed: Color,
-        val backgroundButtonProceedInactive: Color,
-        val onBackgroundButtonProceed: Color,
-        val onBackgroundButtonProceedInactive: Color,
+        val backgroundButtonProceed: OutfitColorsSimple,
+        val onBackgroundButtonProceed: OutfitColorsSimple,
 
-        val backgroundButtonConfirm: Color,
-        val backgroundButtonConfirmInactive: Color,
-        val onBackgroundButtonConfirm: Color,
-        val onBackgroundButtonConfirmInactive: Color,
+        val backgroundButtonConfirm: OutfitColorsSimple,
+        val onBackgroundButtonConfirm: OutfitColorsSimple,
 
-        val backgroundButtonCancel: Color,
-        val backgroundButtonCancelInactive: Color,
-        val onBackgroundButtonCancel: Color,
-        val onBackgroundButtonCancelInactive: Color,
+        val backgroundButtonCancel: OutfitColorsSimple,
+        val onBackgroundButtonCancel: OutfitColorsSimple,
 
         val topAppBarBackground: Color,
         val topAppBarContentText: Color,
         val topAppBarContentIcon: Color,
 
         val bottomNavigationBackground: Color,
-        val bottomNavigationActive: Color,
-        val bottomNavigationInactive: Color,
+        val bottomNavigation: OutfitColorsSimple,
 
         val snackbarBackground: Color,
         val snackbarMessage: Color,

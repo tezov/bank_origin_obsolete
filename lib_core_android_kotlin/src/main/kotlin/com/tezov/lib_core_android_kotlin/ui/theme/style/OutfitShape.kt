@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 18:23
+ *  Created by Tezov on 19/02/2023 20:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 18:23
+ *  Last modified 19/02/2023 20:50
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,35 +12,34 @@
 
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 object OutfitShape{
 
     enum class Template{
-        Rounded,
+        Rounded;
+
+        fun get(size: CornerSize?) = size?.let {
+            when(this){
+                Rounded -> RoundedCornerShape(corner = size)
+            }
+        }
     }
 
     object Simple{
 
         open class Style(
-            val template: Template = Default.template,
-            val size: CornerSize? = Default.size,
-            val color: Color = Default.color,
+            val template: Template = Template.Rounded,
+            val size: CornerSize? = null,
+            val color: Color = Color.Transparent,
         ) {
 
             companion object{
-                val Default = Style(
-                    template = Template.Rounded,
-                    size = CornerSize(8.dp),
-                    color = Color.Gray,
-                )
-
-                val Transparent = Style(
-                    color = Color.Transparent,
-                )
 
                 fun Style.copy(
                     template: Template? = null,
@@ -59,11 +58,8 @@ object OutfitShape{
                 color = style.color,
             )
 
-            fun get() = size?.let {
-                when(template){
-                    Template.Rounded -> RoundedCornerShape(corner = size)
-                }
-            }
+            fun get() = template.get(size)
+            fun getOrDefault() = get() ?: RoundedCornerShape(8.dp)
         }
 
     }
@@ -71,33 +67,21 @@ object OutfitShape{
     object State{
 
         open class Style(
-            val template: Template = Simple.Style.Default.template,
-            val size: CornerSize? = Default.size,
-            val outfitColor: OutfitColorsSimple = Default.outfitColor,
+            val template: Template = Template.Rounded,
+            val size: CornerSize? = null,
+            val outfitColor: OutfitColorsSimple = OutfitColorsSimple(),
         ) {
 
             companion object{
-                val Default = Style(
-                    template = Template.Rounded,
-                    size = CornerSize(8.dp),
-                    outfitColor = OutfitColorsSimple(
-                        active = Color.Gray,
-                        inactive = Color.Gray.copy(alpha = 0.25f)
-                    ),
-                )
-
-                val Transparent = Style(
-                    outfitColor = OutfitColorsSimple.Transparent,
-                )
 
                 fun Style.copy(
                     template: Template? = null,
                     size: CornerSize? = null,
-                    colors: OutfitColorsSimple? = null,
+                    outfitColor: OutfitColorsSimple? = null,
                 ) = Style(
                     template = template ?: this.template,
                     size = size ?: this.size,
-                    outfitColor = colors ?: this.outfitColor,
+                    outfitColor = outfitColor ?: this.outfitColor,
                 )
             }
 
@@ -105,13 +89,10 @@ object OutfitShape{
                 template = style.template,
                 size = style.size,
                 outfitColor = style.outfitColor,
-            )
+             )
 
-            fun get() = size?.let {
-                when(template){
-                    Template.Rounded -> RoundedCornerShape(corner = size)
-                }
-            }
+            fun get() = template.get(size)
+            fun getOrDefault() = get() ?: RoundedCornerShape(8.dp)
 
         }
 

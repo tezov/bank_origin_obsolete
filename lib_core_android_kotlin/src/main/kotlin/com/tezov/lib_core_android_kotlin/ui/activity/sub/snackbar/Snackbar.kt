@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 19/02/2023 20:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 19/02/2023 20:50
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -51,11 +51,11 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
             Snackbar(
                 backgroundColor = MaterialTheme.colorsCommonExtended.snackbarBackground,
                 elevation = 0.dp,
-                shape = MaterialTheme.shapesExtended.snackbar,
+                shape = MaterialTheme.shapesExtended.snackbar.getOrDefault(),
                 content = {
                     Text(
                         text = data.message,
-                        style = MaterialTheme.typographyExtended.snackBarMessage,
+                        style = MaterialTheme.typographyExtended.snackBarMessage.text,
                         color = MaterialTheme.colorsCommonExtended.snackbarMessage,
                     )
                 },
@@ -65,7 +65,7 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
                             onClick = { data.performAction() }) {
                             Text(
                                 text = label,
-                                style = MaterialTheme.typographyExtended.snackBarAction,
+                                style = MaterialTheme.typographyExtended.snackBarAction.text,
                                 color = MaterialTheme.colorsCommonExtended.snackbarAction,
                             )
                         }

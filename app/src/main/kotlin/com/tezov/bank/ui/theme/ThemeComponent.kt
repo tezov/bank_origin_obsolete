@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 18:23
+ *  Created by Tezov on 19/02/2023 20:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 17:25
+ *  Last modified 19/02/2023 20:35
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,6 +14,7 @@ package com.tezov.bank.ui.theme
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.SolidColor
@@ -34,7 +35,7 @@ object ThemeComponent {
         dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
         colorIcon = MaterialTheme.colors.primary,
         dimensionIcon = MaterialTheme.dimensionsSizeExtended.iconInfo,
-        typographyHeader = MaterialTheme.typographyExtended.textNormal.copy(
+        typographyHeader = MaterialTheme.typographyExtended.textNormal.text.copy(
             color = MaterialTheme.colorsCommonExtended.onBackgroundElevated,
             fontWeight = FontWeight.SemiBold
         ),
@@ -52,7 +53,7 @@ object ThemeComponent {
     fun provideActionRowStyle() = ActionRow.Style(
         colorIconInfo = MaterialTheme.colors.primary,
         dimensionIconInfo = MaterialTheme.dimensionsSizeExtended.iconInfo,
-        typography = MaterialTheme.typographyExtended.textNormal.copy(
+        typography = MaterialTheme.typographyExtended.textNormal.text.copy(
             fontWeight = FontWeight.SemiBold
         ),
         colorIconAction = MaterialTheme.colors.primary,
@@ -64,7 +65,7 @@ object ThemeComponent {
         dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
         colorIcon = MaterialTheme.colors.primary,
         dimensionIcon = MaterialTheme.dimensionsSizeExtended.iconInfo,
-        typographyHeader = MaterialTheme.typographyExtended.textNormal.copy(
+        typographyHeader = MaterialTheme.typographyExtended.textNormal.text.copy(
             color = MaterialTheme.colorsCommonExtended.onBackgroundElevated,
             fontWeight = FontWeight.SemiBold
         ),
@@ -76,26 +77,26 @@ object ThemeComponent {
 
     @Composable
     fun provideActionCardStyle() = ActionCard.Style(
-        shapeCard = MaterialTheme.shapesExtended.roundedCornerNormal,
-        borderCard = MaterialTheme.bordersExtended.strokeNormal.copy(
-            brush = SolidColor(
-                MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
-                    alpha = 0.12f
-                )
-            )
-        ),
+        shapeCard = MaterialTheme.shapesExtended.roundedCornerNormal.get() ?: RoundedCornerShape(4.dp),
+//        borderCard = MaterialTheme.bordersExtended.strokeNormal.copy(
+//            brush = SolidColor(
+//                MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
+//                    alpha = 0.12f
+//                )
+//            )
+//        ),
         colorIcon = MaterialTheme.colors.primary,
         dimensionsIcon = 56.dp,
-        typographyTitle = MaterialTheme.typographyExtended.textNormal.copy(
+        typographyTitle = MaterialTheme.typographyExtended.textNormal.text.copy(
             fontWeight = FontWeight.Bold
         ),
-        typographySubtitle = MaterialTheme.typographyExtended.textSubtitle,
+        typographySubtitle = MaterialTheme.typographyExtended.textSubtitle.text,
         background = MaterialTheme.colorsCommonExtended.backgroundElevated,
     )
 
     @Composable
     fun providePagerStyle() = HorizontalScrollable.Pager.Style(
-        colorIndicatorActive = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm,
+        colorIndicatorActive = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm.active,
         colorIndicatorInactive = MaterialTheme.colorsCommonExtended.onSecondaryVariant,
         dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,
         dimensionIndicatorSize = 12.dp,

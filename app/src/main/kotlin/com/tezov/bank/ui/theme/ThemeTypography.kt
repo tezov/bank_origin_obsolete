@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 19/02/2023 20:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 19/02/2023 20:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,6 +20,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeTypographyExtended
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.bank.ui.theme.font.fontUbuntu
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsFontExtended
 
 object ThemeTypography {
@@ -28,91 +29,125 @@ object ThemeTypography {
     
     @Composable
     fun providesTypographiesExtended() = ThemeTypographyExtended.Common(
-        textTitle = TextStyle(
-            fontFamily = MaterialTheme.fontRoboto,
-            fontWeight = FontWeight.Normal,
-            fontSize = MaterialTheme.dimensionsFontExtended.textTitle
+        textTitle = OutfitTextSimple(
+            TextStyle(
+                fontFamily = MaterialTheme.fontRoboto,
+                fontWeight = FontWeight.Normal,
+                fontSize = MaterialTheme.dimensionsFontExtended.textTitle
+            )
         ),
-        textSubtitle = TextStyle(
+        textSubtitle = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = MaterialTheme.dimensionsFontExtended.textSubtitle
+            )
         ),
-        textHelper = TextStyle(
+        textHelper = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = MaterialTheme.dimensionsFontExtended.textHelper
+            )
         ),
-        textNormal = TextStyle(
+        textNormal = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = MaterialTheme.dimensionsFontExtended.textNormal
+            )
         ),
-        textSupra = TextStyle(
+        textSupra = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = MaterialTheme.dimensionsFontExtended.textSupra
+            )
         ),
-        textBig = TextStyle(
+        textBig = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = MaterialTheme.dimensionsFontExtended.textBig
+            )
         ),
-        textHuge = TextStyle(
+        textHuge = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Bold,
             fontSize = MaterialTheme.dimensionsFontExtended.textHuge
+            )
         ),
-        textSmall = TextStyle(
+        textSmall = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = MaterialTheme.dimensionsFontExtended.textSmall
+            )
         ),
-        textFieldValue = TextStyle(
+        textFieldValue = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = MaterialTheme.dimensionsFontExtended.textFieldValue
+            )
         ),
-        textFieldLabel = TextStyle(
+        textFieldLabel = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.SemiBold,
             fontSize = MaterialTheme.dimensionsFontExtended.textFieldLabel
+            )
         ),
-        textLink = TextStyle(
+        textLink = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = MaterialTheme.dimensionsFontExtended.textLink,
             textDecoration = TextDecoration.Underline
+            )
         ),
-        textButton = TextStyle(
+        textButton = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = MaterialTheme.dimensionsFontExtended.textButton
+            )
         ),
-        textButtonOutline = TextStyle(
+        textButtonOutline = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Bold,
             fontSize = MaterialTheme.dimensionsFontExtended.textButtonOutlined
+            )
         ),
-        topNavigationTitle = TextStyle(
+        topNavigationTitle = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Bold,
             fontSize = MaterialTheme.dimensionsFontExtended.topNavigation
+            )
         ),
-        bottomNavigationLabel = TextStyle(
+        bottomNavigationLabel = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.SemiBold,
             fontSize = MaterialTheme.dimensionsFontExtended.bottomNavigation
+            )
         ),
-        snackBarMessage = TextStyle(
+        snackBarMessage = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Normal,
             fontSize = MaterialTheme.dimensionsFontExtended.snackBarMessage
+            )
         ),
-        snackBarAction = TextStyle(
+        snackBarAction = OutfitTextSimple(
+            TextStyle(
             fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Bold,
             fontSize = MaterialTheme.dimensionsFontExtended.snackBarMessage
+            )
         ),
     )
 }

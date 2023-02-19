@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 19/02/2023 20:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 19/02/2023 20:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -53,11 +53,11 @@ object BottomNavigation:
                     label = {
                         Text(
                             text = stringResource(id = item.titleResourceId),
-                            style = MaterialTheme.typographyExtended.bottomNavigationLabel,
+                            style = MaterialTheme.typographyExtended.bottomNavigationLabel.text,
                         )
                     },
-                    selectedContentColor = MaterialTheme.colorsCommonExtended.bottomNavigationActive,
-                    unselectedContentColor = MaterialTheme.colorsCommonExtended.bottomNavigationInactive,
+                    selectedContentColor = MaterialTheme.colorsCommonExtended.bottomNavigation.active,
+                    unselectedContentColor = MaterialTheme.colorsCommonExtended.bottomNavigation.inactive,
                     alwaysShowLabel = true,
                     selected = action.navigationController.currentRoute() == item.route,
                     onClick = {

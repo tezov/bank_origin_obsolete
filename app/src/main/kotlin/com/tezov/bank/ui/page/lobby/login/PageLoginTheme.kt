@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 18:23
+ *  Created by Tezov on 19/02/2023 20:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 18:23
+ *  Last modified 19/02/2023 20:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -220,17 +220,14 @@ object PageLoginTheme {
     @Composable
     fun provideStyles() = Style(
         pager = ThemeComponent.providePagerStyle(),
-
         buttonDark = Button.TextFilled.Style(
             outfitFrame = OutfitFrameState(
                 outfitShape = OutfitShapeState(
-                    template = OutfitShape.Template.Rounded,
 //                    size = shapes.button
                     outfitColor = OutfitColorsSimple(
                         active = colors.backgroundButtonDark
                     )
                 ),
-                border = OutfitBorderState.Transparent,
             ),
             outfitText = OutfitTextState(
                 text = typographies.buttonFilled,
@@ -239,20 +236,17 @@ object PageLoginTheme {
                 )
             )
         ),
-
         buttonLight = Button.TextFilled.Style(
             outfitFrame = OutfitFrameState(
                 outfitShape = OutfitShapeState(
-                    template = OutfitShape.Template.Rounded,
 //                    size = shapes.button
                     outfitColor = OutfitColorsSimple(
                         active = colors.backgroundButtonLight
                     )
                 ),
-                border = OutfitBorderState(
-                    template = OutfitBorder.Template.Fill,
+                outfitBorder = OutfitBorderState(
                     size = MaterialTheme.bordersExtended.strokeSmall.width,
-                    colors = OutfitColorsSimple(
+                    outfitColor = OutfitColorsSimple(
                         active = ThemeColors.Common.blueShadow.copy(alpha = 0.5f)
                     )
                 ),
@@ -264,20 +258,14 @@ object PageLoginTheme {
                 )
             )
         ),
-
         buttonOutlined = Button.TextOutlined.Style(
             outfitFrame = OutfitFrameState(
                 outfitShape = OutfitShapeState(
-                    template = OutfitShape.Template.Rounded,
 //                    size = shapes.button
-                    outfitColor = OutfitColorsSimple(
-                        active = colors.backgroundButtonDark
-                    )
                 ),
-                border = OutfitBorderState(
-                    template = OutfitBorder.Template.Fill,
+                outfitBorder = OutfitBorderState(
                     size = MaterialTheme.bordersExtended.strokeBig.width,
-                    colors = OutfitColorsSimple(
+                    outfitColor = OutfitColorsSimple(
                         active = colors.textContent
                     )
                 ),
@@ -289,9 +277,8 @@ object PageLoginTheme {
                 )
             )
         ),
-
         link = Link.Underlined.Style(
-            textStyle = typographies.link,
+            outfitText = typographies.link,
         )
     )
 

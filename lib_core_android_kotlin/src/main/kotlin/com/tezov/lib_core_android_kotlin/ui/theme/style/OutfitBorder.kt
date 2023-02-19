@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 18:23
+ *  Created by Tezov on 19/02/2023 20:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 18:23
+ *  Last modified 19/02/2023 20:50
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,27 +20,25 @@ import androidx.compose.ui.unit.dp
 object OutfitBorder{
 
     enum class Template{
-        Fill,
+        Fill;
+
+        fun get(size: Dp?, color: Color) = size?.let {
+            when(this){
+                Fill -> BorderStroke(size, color)
+            }
+        }
+
     }
 
     object Simple{
 
         open class Style(
-            val template: Template = Default.template,
-            val size: Dp? = Default.size,
-            val color: Color = Default.color,
+            val template: Template = Template.Fill,
+            val size: Dp? = null,
+            val color: Color = Color.Transparent,
         ) {
 
             companion object{
-                val Default = Style(
-                    size = 1.dp,
-                    color = Color.Black,
-                    template = Template.Fill,
-                )
-
-                val Transparent = Style(
-                    size = null,
-                )
 
                 fun Style.copy(
                     template: Template? = null,
@@ -59,11 +57,8 @@ object OutfitBorder{
                 color = style.color,
             )
 
-            fun get() = size?.let {
-                when(template){
-                    Template.Fill -> BorderStroke(size, color)
-                }
-            }
+            fun get() = template.get(size, color)
+            fun getOrDefault() = get() ?: BorderStroke(1.dp, Color.Black)
 
         }
 
@@ -72,49 +67,34 @@ object OutfitBorder{
     object State{
 
         open class Style(
-            val template: Template = Default.template,
-            val size: Dp? = Default.size,
-            val colors: OutfitColorsSimple = Default.colors,
+            val template: Template = Template.Fill,
+            val size: Dp? = null,
+            val outfitColor: OutfitColorsSimple = OutfitColorsSimple(),
         ) {
 
             companion object{
-                val Default = Style(
-                    template =  Template.Fill,
-                    size = 1.dp,
-                    colors = OutfitColorsSimple(
-                        active = Color.Black,
-                        inactive = Color.Black.copy(alpha = 0.25f)
-                    ),
-                )
-
-                val Transparent = Style(
-                    size = null,
-                )
 
                 fun Style.copy(
                     template: Template? = null,
                     size: Dp? = null,
-                    colors: OutfitColorsSimple? = null,
+                    outfitColor: OutfitColorsSimple? = null,
                 ) = Style(
                     template = template ?: this.template,
                     size = size ?: this.size,
-                    colors = colors ?: this.colors,
+                    outfitColor = outfitColor ?: this.outfitColor,
                 )
             }
 
             constructor(style: Style) : this(
                 template = style.template,
                 size = style.size,
-                colors = style.colors,
+                outfitColor = style.outfitColor,
             )
 
-            fun get(enabled:Boolean) = size?.let {
-                when(template){
-                    Template.Fill -> BorderStroke(size, colors.resolve(enabled))
-                }
-            }
-
+            fun get(enabled:Boolean) = template.get(size, outfitColor.resolve(enabled))
+            fun getOrDefault(enabled:Boolean) = get(enabled) ?: BorderStroke(1.dp, Color.Black)
         }
+
 
     }
     
