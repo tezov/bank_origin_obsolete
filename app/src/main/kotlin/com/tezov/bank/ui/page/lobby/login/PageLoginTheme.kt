@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 19/02/2023 01:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 20:13
+ *  Last modified 19/02/2023 01:33
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,6 +29,7 @@ import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val PageLoginTheme.colors: PageLoginTheme.Colors
@@ -140,24 +141,19 @@ object PageLoginTheme {
 
     data class Shapes(
         val button: Shape,
-        val buttonOutlined: Shape,
     )
 
     @Composable
     fun provideShapes() = Shapes(
-        button = MaterialTheme.shapesExtended.roundedCornerNormal,
-        buttonOutlined = MaterialTheme.shapesExtended.roundedCornerBig
+        button = MaterialTheme.shapesExtended.roundedCornerBig,
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
         error("not provided")
     }
-
-
+    
     data class Borders(
         val iconBig: BorderStroke,
-        val buttonLight: BorderStroke,
-        val buttonOutline: BorderStroke,
     )
 
     @Composable
@@ -165,12 +161,6 @@ object PageLoginTheme {
         iconBig = MaterialTheme.bordersExtended.strokeBig.copy(
             brush = SolidColor(colors.textContent)
         ),
-        buttonLight = MaterialTheme.bordersExtended.strokeSmall.copy(
-            brush = SolidColor(ThemeColors.Common.blueShadow.copy(alpha = 0.5f))
-        ),
-        buttonOutline = MaterialTheme.bordersExtended.strokeBig.copy(
-            brush = SolidColor(colors.textContent),
-        )
     )
 
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
@@ -181,7 +171,7 @@ object PageLoginTheme {
         val supra: TextStyle,
         val huge: TextStyle,
         val body: TextStyle,
-        val button: TextStyle,
+        val buttonFilled: TextStyle,
         val buttonOutlined: TextStyle,
         val link: TextStyle,
         val dropDownMenu: TextStyle,
@@ -199,11 +189,8 @@ object PageLoginTheme {
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),
-        button = MaterialTheme.typographyExtended.textButton.copy(
-
-        ),
+        buttonFilled = MaterialTheme.typographyExtended.textButton,
         buttonOutlined = MaterialTheme.typographyExtended.textButtonOutline.copy(
-            color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),
         link = MaterialTheme.typographyExtended.textLink.copy(
@@ -214,7 +201,6 @@ object PageLoginTheme {
             color = colors.textDropDownMenu,
             fontWeight = FontWeight.SemiBold
         )
-
     )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =
@@ -224,31 +210,39 @@ object PageLoginTheme {
 
     data class Style(
         val pager: HorizontalScrollable.Pager.Style,
-        val buttonDark: Button.TextFill.Style,
-        val buttonLight: Button.TextFill.Style,
+        val buttonDark: Button.TextFilled.Style,
+        val buttonLight: Button.TextFilled.Style,
         val buttonOutlined: Button.TextOutlined.Style,
+        val link: Link.Underlined.Style,
     )
 
     @Composable
     fun provideStyles() = Style(
         pager = ThemeComponent.providePagerStyle(),
-        buttonDark = Button.TextFill.Style(
-            shape = PageLoginTheme.shapes.button,
-            backgroundColorActive =  PageLoginTheme.colors.backgroundButtonDark,
-            textStyle = PageLoginTheme.typographies.button,
-            textColorActive = PageLoginTheme.colors.textButtonDark
+        buttonDark = Button.TextFilled.Style(
+            shape = shapes.button,
+            backgroundColorActive =  colors.backgroundButtonDark,
+            textStyle = typographies.buttonFilled,
+            textColorActive = colors.textButtonDark
         ),
-        buttonLight = Button.TextFill.Style(
-            shape = PageLoginTheme.shapes.button,
-            backgroundColorActive =  PageLoginTheme.colors.backgroundButtonLight,
-            textStyle = PageLoginTheme.typographies.button,
-            textColorActive = PageLoginTheme.colors.textButtonLight
+        buttonLight = Button.TextFilled.Style(
+            shape = shapes.button,
+            border = MaterialTheme.bordersExtended.strokeSmall.width,
+            borderColorActive = ThemeColors.Common.blueShadow.copy(alpha = 0.5f),
+            backgroundColorActive =  colors.backgroundButtonLight,
+            textStyle = typographies.buttonFilled,
+            textColorActive = colors.textButtonLight
         ),
         buttonOutlined = Button.TextOutlined.Style(
             border = MaterialTheme.bordersExtended.strokeBig.width,
-            shape = PageLoginTheme.shapes.buttonOutlined,
-            textStyle = PageLoginTheme.typographies.buttonOutlined,
+            shape = shapes.button,
+            borderColorActive = colors.textContent,
+            textStyle = typographies.buttonOutlined,
+            textColorActive = colors.textContent,
         ),
+        link = Link.Underlined.Style(
+            textStyle = typographies.link,
+        )
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

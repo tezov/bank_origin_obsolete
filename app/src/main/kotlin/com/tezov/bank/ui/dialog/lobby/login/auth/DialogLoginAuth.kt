@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 19/02/2023 01:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 20:56
+ *  Last modified 19/02/2023 01:50
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,7 +40,12 @@ import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.LOGIN_LENGTH
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.PASSWORD_LENGTH
+import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
+import com.tezov.bank.ui.page.lobby.login.dimensions
+import com.tezov.bank.ui.page.lobby.login.styles
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -359,27 +364,20 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-            Button(
-                modifier = Modifier
+
+            Button.TextFilled(
+                modifierButton = Modifier
                     .fillMaxWidth(),
+                modifierText = Modifier
+                    .padding(
+                        horizontal = DialogLoginAuthTheme.dimensions.paddingHorizontalButton,
+                        vertical = DialogLoginAuthTheme.dimensions.paddingVerticalButton
+                    ),
+                text = stringResource(id = R.string.dlg_login_auth_btn_connect),
+                style = DialogLoginAuthTheme.styles.button,
+                enabled = credentialValidState,
                 onClick = onClickConnect,
-                shape = DialogLoginAuthTheme.shapes.button,
-                colors = ButtonDefaults.buttonColors(
-                    backgroundColor = DialogLoginAuthTheme.colors.backgroundButtonDark,
-                    disabledBackgroundColor = DialogLoginAuthTheme.colors.backgroundButtonInactive
-                ),
-                enabled = credentialValidState
-            ) {
-                Text(
-                    stringResource(id = R.string.dlg_login_auth_btn_connect),
-                    style = DialogLoginAuthTheme.typographies.button,
-                    modifier = Modifier
-                        .padding(
-                            horizontal = DialogLoginAuthTheme.dimensions.paddingHorizontalButton,
-                            vertical = DialogLoginAuthTheme.dimensions.paddingVerticalButton
-                        )
-                )
-            }
+            )
 
             Row(
                 modifier = Modifier
@@ -387,18 +385,16 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     .padding(top = DialogLoginAuthTheme.dimensions.paddingTopFromLink),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                ClickableText(
-                    text = AnnotatedString(stringResource(id = R.string.dlg_login_auth_link_login_forgotten)),
-                    style = DialogLoginAuthTheme.typographies.link
-                ) {
-                    onClickForgotLogin()
-                }
-                ClickableText(
-                    text = AnnotatedString(stringResource(id = R.string.dlg_login_auth_link_password_forgotten)),
-                    style = DialogLoginAuthTheme.typographies.link
-                ) {
-                    onClickForgotPassword()
-                }
+                Link.Underlined(
+                    text = stringResource(id = R.string.dlg_login_auth_link_login_forgotten),
+                    style = DialogLoginAuthTheme.styles.link,
+                    onClick = onClickForgotLogin,
+                )
+                Link.Underlined(
+                    text = stringResource(id = R.string.dlg_login_auth_link_password_forgotten),
+                    style = DialogLoginAuthTheme.styles.link,
+                    onClick = onClickForgotPassword,
+                )
             }
         }
     }

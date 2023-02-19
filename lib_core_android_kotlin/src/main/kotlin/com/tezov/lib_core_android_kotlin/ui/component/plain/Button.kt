@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/02/2023 14:33
+ *  Created by Tezov on 19/02/2023 01:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/02/2023 14:17
+ *  Last modified 19/02/2023 01:50
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.Dp
 
 object Button {
 
-    object TextFill{
+    object TextFilled{
 
         @Immutable
         open class Style(
@@ -96,34 +96,34 @@ object Button {
         @Composable
         operator fun invoke(
             text:String,
-            onClick: () -> Unit,
             modifierButton: Modifier = Modifier,
             modifierText: Modifier = Modifier,
-            enabled: State<Boolean> = mutableStateOf(true),
+            enabled: Boolean = true,
             interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
             style:Style = Style(),
             contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
+            onClick: () -> Unit,
         ){
             Button(
-                onClick = onClick,
                 modifier = modifierButton,
-                enabled = enabled.value,
+                enabled = enabled,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it,it,it,it,it) },
                 shape = style.shape ?: MaterialTheme.shapes.small,
                 border =  style.border?.let {
-                    BorderStroke(it, if(enabled.value) style.borderColorActive else style.borderColorInactive)
+                    BorderStroke(it, if(enabled) style.borderColorActive else style.borderColorInactive)
                 },
                 colors = ButtonDefaults.buttonColors(
                     backgroundColor = style.backgroundColorActive,
                     disabledBackgroundColor = style.backgroundColorInactive,
                 ),
                 contentPadding = contentPadding,
+                onClick = onClick,
             ) {
                 Text(
                     text,
                     style = style.textStyle ?: TextStyle(),
-                    color = if(enabled.value) style.textColorActive else style.textColorInactive,
+                    color = if(enabled) style.textColorActive else style.textColorInactive,
                     modifier = modifierText
                 )
             }
@@ -193,33 +193,33 @@ object Button {
         @Composable
         operator fun invoke(
             text:String,
-            onClick: () -> Unit,
             modifierButton: Modifier = Modifier,
             modifierText: Modifier = Modifier,
-            enabled: State<Boolean> = mutableStateOf(true),
+            enabled: Boolean = true,
             interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
             style:Style = Style(),
             contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
+            onClick: () -> Unit,
         ){
             OutlinedButton(
-                onClick = onClick,
                 modifier = modifierButton,
-                enabled = enabled.value,
+                enabled = enabled,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it,it,it,it,it) },
                 shape = style.shape ?: MaterialTheme.shapes.small,
                 border = style.border?.let {
-                    BorderStroke(it, if(enabled.value) style.borderColorActive else style.borderColorInactive)
+                    BorderStroke(it, if(enabled) style.borderColorActive else style.borderColorInactive)
                 } ?: ButtonDefaults.outlinedBorder,
                 colors = ButtonDefaults.outlinedButtonColors(
                     backgroundColor = Color.Transparent,
                 ),
                 contentPadding = contentPadding,
+                onClick = onClick,
             ) {
                 Text(
                     text,
                     style = style.textStyle ?: TextStyle(),
-                    color = if(enabled.value) style.textColorActive else style.textColorInactive,
+                    color = if(enabled) style.textColorActive else style.textColorInactive,
                     modifier = modifierText
                 )
             }

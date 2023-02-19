@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 19/02/2023 01:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 21:32
+ *  Last modified 19/02/2023 01:20
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,11 +17,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.ExperimentalComposeUiApi
 
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,15 +27,14 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.*
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
@@ -245,7 +242,6 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-
                         Text(
                             text = nameState.value,
                             style = PageLoginTheme.typographies.supra
@@ -272,7 +268,6 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         Button.TextOutlined(
                             modifierButton = Modifier
-                                .fillMaxWidth()
                                 .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
                             modifierText = Modifier
                                 .padding(
@@ -303,7 +298,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            Button.TextFill(
+            Button.TextFilled(
                 modifierButton = Modifier
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
@@ -312,12 +307,12 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         horizontal = PageLoginTheme.dimensions.paddingButton_h,
                         vertical = PageLoginTheme.dimensions.paddingButton_v
                     ),
-                onClick = onClickConnect,
                 text = stringResource(id = R.string.pg_login_btn_connect),
-                style = PageLoginTheme.styles.buttonDark
+                style = PageLoginTheme.styles.buttonDark,
+                onClick = onClickConnect,
             )
 
-            Button.TextFill(
+            Button.TextFilled(
                 modifierButton = Modifier
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
@@ -326,20 +321,18 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         horizontal = PageLoginTheme.dimensions.paddingButton_h,
                         vertical = PageLoginTheme.dimensions.paddingButton_v
                     ),
-                onClick = onClickSendMoney,
                 text = stringResource(id = R.string.pg_login_btn_send_money),
-                style = PageLoginTheme.styles.buttonLight
+                style = PageLoginTheme.styles.buttonLight,
+                onClick = onClickSendMoney,
             )
 
             Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopFromLinkService))
 
-            ClickableText(
-                text = AnnotatedString(stringResource(id = R.string.pg_login_link_help_and_service)),
-                style = PageLoginTheme.typographies.link
-            ) {
-                onClickHelpAndService()
-            }
-
+            Link.Underlined(
+                text = stringResource(id = R.string.pg_login_link_help_and_service),
+                style = PageLoginTheme.styles.link,
+                onClick = onClickHelpAndService,
+            )
         }
 
     }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 19/02/2023 01:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 20:56
+ *  Last modified 19/02/2023 01:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,9 +23,10 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
-import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
 import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
 
 val DialogLoginAuthTheme.colors: DialogLoginAuthTheme.Colors
@@ -81,7 +82,7 @@ object DialogLoginAuthTheme {
     data class Colors(
         val background: Color,
         val onBackground: Color,
-        val backgroundButtonDark: Color,
+        val backgroundButtonActive: Color,
         val backgroundButtonInactive: Color,
         val textButtonDark: Color,
     )
@@ -90,7 +91,7 @@ object DialogLoginAuthTheme {
     fun provideColors() = Colors(
         background = ThemeColors.Common.blackOverlay,
         onBackground = MaterialTheme.colorsCommonExtended.onPrimaryVariant,
-        backgroundButtonDark = MaterialTheme.colors.primary,
+        backgroundButtonActive = MaterialTheme.colors.primary,
         backgroundButtonInactive = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm,
         textButtonDark = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm,
     )
@@ -180,9 +181,7 @@ object DialogLoginAuthTheme {
         fieldLabel = MaterialTheme.typographyExtended.textFieldValue.copy(
             color = colors.onBackground
         ),
-        button = MaterialTheme.typographyExtended.textButton.copy(
-            color = colors.onBackground
-        ),
+        button = MaterialTheme.typographyExtended.textButton,
         link = MaterialTheme.typographyExtended.textLink.copy(
             color = colors.onBackground,
         )
@@ -196,6 +195,8 @@ object DialogLoginAuthTheme {
 
     data class Style(
         val keyBoardGridCube: KeyBoard.GridCube.Style,
+        val button: Button.TextFilled.Style,
+        val link: Link.Underlined.Style,
     )
 
     @Composable
@@ -209,6 +210,17 @@ object DialogLoginAuthTheme {
             borderInner = MaterialTheme.bordersExtended.strokeBig.copy(
                 brush = SolidColor(colors.onBackground)
             ),
+        ),
+        button = Button.TextFilled.Style(
+            shape = shapes.button,
+            backgroundColorActive = colors.backgroundButtonActive,
+            backgroundColorInactive =  colors.backgroundButtonInactive,
+            textStyle = typographies.button,
+            textColorActive = colors.onBackground,
+            textColorInactive = colors.onBackground,
+        ),
+        link = Link.Underlined.Style(
+            textStyle = typographies.link,
         )
     )
 
