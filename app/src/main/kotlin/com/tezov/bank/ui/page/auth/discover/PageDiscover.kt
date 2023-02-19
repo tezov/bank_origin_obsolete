@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 21:32
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,23 +18,19 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.tezov.bank.R
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.component.leaf.CardButton
+import com.tezov.bank.ui.component.leaf.CarouselCard
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
-import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
-import com.tezov.bank.ui.page.lobby.login.provides
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
 
 object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
 
@@ -62,112 +58,48 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                     .verticalScroll(rememberScrollState())
             ) {
 
-                run {
-                    val data = CardButton.Data(
-                        template = CardButton.Template.Button,
-                        iconInfoResourceId = R.drawable.ic_info_24dp,
-                        tag = "tag",
-                        title = "title",
-                        text = "text",
-                        button = "button"
-                    )
+                state.cardWithButtonData.value?.let {
+                    val cards = ArrayList<@Composable ()->Unit>()
+                    it.forEach { data ->
+                        cards.add {
+                            CarouselCard(
+                                modifier = Modifier.fillMaxSize(),
+                                data = data,
+                                style = PageDiscoverTheme.styles.cardButton
+                            )
+                        }
+                    }
                     HorizontalScrollable.Pager(
                         modifier = Modifier
                             .padding(top = 20.dp, bottom = 20.dp)
                             .fillMaxWidth(),
                         style = PageDiscoverTheme.styles.carousel,
-                        pages = listOf(
-                            {
-                                CardButton(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardButton
-                                )
-                            },
-                            {
-                                CardButton(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardButton
-                                )
-                            },
-                            {
-                                CardButton(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardButton
-                                )
-                            },
-                            {
-                                CardButton(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardButton
-                                )
-                            },
-                            {
-                                CardButton(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardButton
-                                )
-                            }
-                        )
-                    )
+                        pages = cards
+                    ){
+
+                    }
                 }
 
-                run {
-                    val data = CardButton.Data(
-                        template = CardButton.Template.Link,
-                        iconInfoResourceId = R.drawable.ic_info_24dp,
-                        tag = "tag",
-                        title = "title",
-                        text = "text",
-                        button = "link"
-                    )
+                state.cardWithLinkData.value?.let {
+                    val cards = ArrayList<@Composable ()->Unit>()
+                    it.forEach { data ->
+                        cards.add {
+                            CarouselCard(
+                                modifier = Modifier.fillMaxSize(),
+                                data = data,
+                                style = PageDiscoverTheme.styles.cardLink
+                            )
+                        }
+                    }
                     HorizontalScrollable.Pager(
                         modifier = Modifier
                             .padding(top = 20.dp, bottom = 20.dp)
                             .fillMaxWidth(),
                         style = PageDiscoverTheme.styles.carousel,
-                        pages = listOf(
-                            {
-                                CardButton(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardLink
-                                )
-                            },
-                            {
-                                CardButton(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardLink
-                                )
-                            },
-                            {
-                                CardButton(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardLink
-                                )
-                            },
-                            {
-                                CardButton(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardLink
-                                )
-                            },
-                            {
-                                CardButton(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardLink
-                                )
-                            }
-                        )
-                    )
+                        pages = cards
+                    ){
+
+                    }
                 }
 
                 state.offers.value?.let {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 21:32
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,29 +12,19 @@
 
 package com.tezov.bank.ui.page.lobby.help_and_service
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
-import com.tezov.bank.ui.page.lobby.login.colors
-import com.tezov.bank.ui.page.lobby.login.shapes
-import com.tezov.bank.ui.page.lobby.login.typographies
-import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.bank.ui.theme.ThemeComponent
-import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageHelpAndServiceTheme.colors: PageHelpAndServiceTheme.Colors
     @Composable

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 01:55
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 01:52
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,7 +27,7 @@ import com.tezov.bank.ui.theme.ThemeColors
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val DialogLoginAuthTheme.colors: DialogLoginAuthTheme.Colors
     @Composable
@@ -109,8 +109,8 @@ object DialogLoginAuthTheme {
         val iconCloseSize: Dp,
         val iconFieldInfoSize: Dp,
         val iconFieldActionSize: Dp,
-        val paddingHorizontalButton: Dp,
-        val paddingVerticalButton: Dp,
+        val paddingButton_h: Dp,
+        val paddingButton_v: Dp,
     )
 
     @Composable
@@ -123,8 +123,8 @@ object DialogLoginAuthTheme {
         iconCloseSize = MaterialTheme.dimensionsSizeExtended.iconModal,
         iconFieldInfoSize = MaterialTheme.dimensionsSizeExtended.iconFieldInfo,
         iconFieldActionSize = MaterialTheme.dimensionsSizeExtended.iconFieldAction,
-        paddingHorizontalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
-        paddingVerticalButton = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
+        paddingButton_h = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
+        paddingButton_v = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =

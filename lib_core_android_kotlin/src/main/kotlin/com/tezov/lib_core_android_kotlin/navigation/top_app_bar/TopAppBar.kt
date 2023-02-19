@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,8 +16,8 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographyExtended
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action

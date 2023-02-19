@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/02/2023 14:33
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/02/2023 14:17
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,7 +25,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object HorizontalScrollable {
 
@@ -57,8 +57,24 @@ object HorizontalScrollable {
                     padding = PaddingValues(),
                 )
 
+                fun Style.copy(
+                    colorIndicatorActive: Color? = null,
+                    colorIndicatorInactive: Color? = null,
+                    dimensionIndicatorPaddingTop: Dp? = null,
+                    dimensionIndicatorSize: Dp? = null,
+                    dimensionIndicatorSpacing: Dp? = null,
+                    shapeIndicator: Shape? = null,
+                    padding: PaddingValues? = null,
+                ) = Style(
+                    colorIndicatorActive = colorIndicatorActive ?: this.colorIndicatorActive,
+                    colorIndicatorInactive = colorIndicatorInactive ?: this.colorIndicatorInactive,
+                    dimensionIndicatorPaddingTop = dimensionIndicatorPaddingTop ?: this.dimensionIndicatorPaddingTop,
+                    dimensionIndicatorSize = dimensionIndicatorSize ?: this.dimensionIndicatorSize,
+                    dimensionIndicatorSpacing = dimensionIndicatorSpacing ?: this.dimensionIndicatorSpacing,
+                    shapeIndicator = shapeIndicator ?: this.shapeIndicator,
+                    padding = padding ?: this.padding,
+                )
             }
-
 
             constructor(style:Style) : this(
                 colorIndicatorActive = style.colorIndicatorActive,
@@ -70,24 +86,6 @@ object HorizontalScrollable {
                 padding = style.padding,
             )
         }
-
-        fun Style.copy(
-            colorIndicatorActive: Color? = null,
-            colorIndicatorInactive: Color? = null,
-            dimensionIndicatorPaddingTop: Dp? = null,
-            dimensionIndicatorSize: Dp? = null,
-            dimensionIndicatorSpacing: Dp? = null,
-            shapeIndicator: Shape? = null,
-            padding: PaddingValues? = null,
-        ) = Style(
-            colorIndicatorActive = colorIndicatorActive ?: this.colorIndicatorActive,
-            colorIndicatorInactive = colorIndicatorInactive ?: this.colorIndicatorInactive,
-            dimensionIndicatorPaddingTop = dimensionIndicatorPaddingTop ?: this.dimensionIndicatorPaddingTop,
-            dimensionIndicatorSize = dimensionIndicatorSize ?: this.dimensionIndicatorSize,
-            dimensionIndicatorSpacing = dimensionIndicatorSpacing ?: this.dimensionIndicatorSpacing,
-            shapeIndicator = shapeIndicator ?: this.shapeIndicator,
-            padding = padding ?: this.padding,
-        )
 
         @OptIn(ExperimentalPagerApi::class)
         @Composable
@@ -161,6 +159,33 @@ object HorizontalScrollable {
                     borderCard = BorderStroke(1.dp, Color.Black),
                     backgroundCard = Color.Transparent,
                 )
+
+                fun Style.copy(
+                    pagerStyle: Pager.Style? = null,
+                    marginCard: PaddingValues? = null,
+                    shapeCard: Shape? = null,
+                    borderCard: BorderStroke? = null,
+                    backgroundCard: Color? = null,
+                ) = Style(
+                    pagerStyle = pagerStyle ?: this,
+                    marginCard = marginCard ?: this.marginCard,
+                    shapeCard = shapeCard ?: this.shapeCard,
+                    borderCard = borderCard ?: this.borderCard,
+                    backgroundCard = backgroundCard ?: this.backgroundCard,
+                )
+
+                fun Pager.Style.copyAsStyleCarousel(
+                    marginCard: PaddingValues = Style.Default.marginCard,
+                    shapeCard: Shape = Style.Default.shapeCard,
+                    borderCard: BorderStroke = Style.Default.borderCard,
+                    backgroundCard: Color = Style.Default.backgroundCard,
+                ) =  Style(
+                    pagerStyle = this,
+                    marginCard = marginCard,
+                    shapeCard = shapeCard,
+                    borderCard = borderCard,
+                    backgroundCard = backgroundCard,
+                )
             }
 
             constructor(style:Style) : this (
@@ -170,33 +195,6 @@ object HorizontalScrollable {
                 backgroundCard = style.backgroundCard,
             )
         }
-
-        fun Style.copy(
-            pagerStyle: Pager.Style? = null,
-            marginCard: PaddingValues? = null,
-            shapeCard: Shape? = null,
-            borderCard: BorderStroke? = null,
-            backgroundCard: Color? = null,
-        ) = Style(
-            pagerStyle = pagerStyle ?: this,
-            marginCard = marginCard ?: this.marginCard,
-            shapeCard = shapeCard ?: this.shapeCard,
-            borderCard = borderCard ?: this.borderCard,
-            backgroundCard = backgroundCard ?: this.backgroundCard,
-        )
-
-        fun Pager.Style.copyAsStyleCarousel(
-            marginCard: PaddingValues = Style.Default.marginCard,
-            shapeCard: Shape = Style.Default.shapeCard,
-            borderCard: BorderStroke = Style.Default.borderCard,
-            backgroundCard: Color = Style.Default.backgroundCard,
-        ) =  Style(
-            pagerStyle = this,
-            marginCard = marginCard,
-            shapeCard = shapeCard,
-            borderCard = borderCard,
-            backgroundCard = backgroundCard,
-        )
 
         @Composable
         operator fun invoke(

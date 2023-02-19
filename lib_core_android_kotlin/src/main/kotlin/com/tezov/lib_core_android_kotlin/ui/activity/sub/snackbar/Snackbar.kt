@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,10 +22,10 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.Activit
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographyExtended
 
 object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
 

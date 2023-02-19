@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/02/2023 21:15
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/02/2023 20:39
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,7 @@ package com.tezov.bank.ui.theme
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.ThemeDimensionsExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeDimensionsExtended
 
 object ThemeDimensions {
 

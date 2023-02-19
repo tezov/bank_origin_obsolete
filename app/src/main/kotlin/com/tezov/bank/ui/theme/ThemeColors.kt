@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 18:22
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/02/2023 18:02
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,8 +14,7 @@ package com.tezov.bank.ui.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.ui.graphics.Color
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.ThemeColorsExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.ThemeColorsResource
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 
 object ThemeColors {
     object Common {

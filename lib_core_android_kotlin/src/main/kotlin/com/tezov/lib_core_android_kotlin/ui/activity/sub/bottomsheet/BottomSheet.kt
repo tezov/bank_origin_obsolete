@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 19:14
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 19:09
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,20 +15,15 @@ package com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPages
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModals
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPage
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonResource
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonResource
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
 
 object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
 

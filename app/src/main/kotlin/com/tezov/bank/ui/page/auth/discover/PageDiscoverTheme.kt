@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 21:32
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,29 +12,21 @@
 
 package com.tezov.bank.ui.page.auth.discover
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.component.leaf.CardButton
-import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
-import com.tezov.bank.ui.page.lobby.login.colors
-import com.tezov.bank.ui.page.lobby.login.shapes
-import com.tezov.bank.ui.page.lobby.login.typographies
+import com.tezov.bank.ui.component.leaf.CarouselCard
 import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageDiscoverTheme.colors: PageDiscoverTheme.Colors
     @Composable
@@ -65,11 +57,10 @@ object PageDiscoverTheme {
         error("not provided")
     }
 
-
     data class Style(
         val carousel: HorizontalScrollable.Pager.Style,
-        val cardButton: CardButton.Style,
-        val cardLink: CardButton.Style,
+        val cardButton: CarouselCard.Style,
+        val cardLink: CarouselCard.Style,
         val sectionRow: SectionActionRow.Style,
         val sectionCard: SectionActionCard.Style,
     )
@@ -77,8 +68,34 @@ object PageDiscoverTheme {
     @Composable
     fun provideStyles() = Style(
         carousel = ThemeComponent.provideCarouselStyle(),
-        cardButton = CardButton.Style(),
-        cardLink = CardButton.Style(),
+        cardButton = CarouselCard.Style(
+            colorIconInfo =  MaterialTheme.colors.primary,
+            dimensionIconInfo = 92.dp,
+
+            typographyTag = MaterialTheme.typographyExtended.textNormal.copy(
+                color = MaterialTheme.colors.primary
+            ),
+            shapeTag = MaterialTheme.shapesExtended.roundedCornerBig,
+            borderTag = MaterialTheme.bordersExtended.strokeNormal,
+
+            typographyTitle = MaterialTheme.typographyExtended.textTitle.copy(
+                fontWeight = FontWeight.SemiBold
+            ),
+            typographyText = MaterialTheme.typographyExtended.textNormal,
+
+            button = Button.TextFilled.Style(
+                shape = MaterialTheme.shapesExtended.roundedCornerNormal,
+                backgroundColorActive =  MaterialTheme.colors.primary,
+                textStyle = MaterialTheme.typographyExtended.textButton.copy(
+                    color = Color.White,
+                    fontWeight = FontWeight.SemiBold
+                ),
+                textColorActive = Color.White
+            ),
+
+            shape = MaterialTheme.shapesExtended.roundedCornerBig,
+        ),
+        cardLink = CarouselCard.Style(),
         sectionRow = ThemeComponent.provideSectionRowStyle(),
         sectionCard = ThemeComponent.provideSectionCardStyle(),
     )

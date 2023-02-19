@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/02/2023 14:33
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/02/2023 14:17
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,7 +27,7 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.*
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import kotlin.properties.Delegates
 
 object KeyBoard {
@@ -69,6 +69,18 @@ object KeyBoard {
                     borderOuter = BorderStroke(2.dp, Color.White),
                     borderInner = BorderStroke(1.dp, Color.White),
                 )
+
+                fun Style.copy(
+                    colorContent: Color? = null,
+                    colorBackground: Color? = null,
+                    borderOuter: BorderStroke? = null,
+                    borderInner: BorderStroke? = null,
+                ) = Style(
+                    colorContent = colorContent ?: this.colorContent,
+                    colorBackground = colorBackground ?: this.colorBackground,
+                    borderOuter = borderOuter ?: this.borderOuter,
+                    borderInner = borderInner ?: this.borderInner,
+                )
             }
 
             constructor(style: Style) : this(
@@ -78,18 +90,6 @@ object KeyBoard {
                 borderInner = style.borderInner,
             )
         }
-
-        fun Style.copy(
-            colorContent: Color? = null,
-            colorBackground: Color? = null,
-            borderOuter: BorderStroke? = null,
-            borderInner: BorderStroke? = null,
-        ) = Style(
-            colorContent = colorContent ?: this.colorContent,
-            colorBackground = colorBackground ?: this.colorBackground,
-            borderOuter = borderOuter ?: this.borderOuter,
-            borderInner = borderInner ?: this.borderInner,
-        )
 
         interface Cube
         interface Cubes<C : Cube> {

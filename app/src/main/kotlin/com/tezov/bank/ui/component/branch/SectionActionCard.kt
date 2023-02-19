@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/02/2023 14:33
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/02/2023 14:26
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,9 +29,8 @@ import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable.loopOver
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSpacingExtended
-import com.tezov.lib_core_kotlin.util.UtilsNull
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
 
 object SectionActionCard {
 

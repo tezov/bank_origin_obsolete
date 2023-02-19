@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 21:32
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,31 +17,24 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
-import androidx.compose.runtime.ProvidableCompositionLocal
-import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.bank.R
-import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
-import com.tezov.bank.ui.page.lobby.login.typographies
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsPaddingExtended
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 
-object CardButton {
+object CarouselCard {
 
     enum class Template {
         Undefined,
@@ -62,10 +55,7 @@ object CardButton {
         val borderTag: BorderStroke = BorderStroke(1.dp, Color.Black),
         val backgroundTag: Color = Color.Transparent,
 
-        val typographyButton: TextStyle = TextStyle(),
-        val shapeButton: Shape = RoundedCornerShape(12.dp),
-        val borderButton: BorderStroke = BorderStroke(1.dp, Color.Gray),
-        val backgroundButton: Color = Color.Transparent,
+        val button:Button.TextFilled.Style = Button.TextFilled.Style(),
 
         val margin: PaddingValues = PaddingValues(horizontal = 4.dp),
         val shape: Shape = RoundedCornerShape(4.dp),
@@ -113,22 +103,22 @@ object CardButton {
             border = style.border,
             color = style.background,
         ) {
-
             Row(modifier = Modifier.fillMaxWidth()) {
                 Column(
                     modifier = Modifier
                         .weight(1f)
                         .padding(
-                            horizontal = MaterialTheme.dimensionsPaddingExtended.elementNormal_h,
-                            vertical = MaterialTheme.dimensionsPaddingExtended.elementNormal_v
+                            start = MaterialTheme.dimensionsPaddingExtended.elementBig_h,
+                            top = MaterialTheme.dimensionsPaddingExtended.elementBig_v,
+                            bottom = MaterialTheme.dimensionsPaddingExtended.elementBig_v
                         )
                 ) {
                     data.tag?.let {
                         Box(
                             modifier = Modifier
+                                .padding(bottom = MaterialTheme.dimensionsPaddingExtended.textBig_v)
                                 .background(style.backgroundTag)
                                 .clip(style.shapeTag)
-                                .padding(bottom = MaterialTheme.dimensionsPaddingExtended.textBig_v)
                                 .border(style.borderTag, style.shapeTag)
                         ) {
                             Text(
@@ -152,25 +142,17 @@ object CardButton {
                         text = data.text,
                         style = style.typographyText,
                     )
-                    Button(
+
+                    Button.TextFilled(
+                        modifierText = Modifier
+                            .padding(
+                                horizontal = MaterialTheme.dimensionsPaddingExtended.buttonSmall_h,
+                                vertical = MaterialTheme.dimensionsPaddingExtended.buttonSmall_v
+                            ),
+                        text = data.button,
+                        style = style.button,
                         onClick = onClick,
-                        shape = style.shapeButton,
-                        border = style.borderButton,
-                        colors = ButtonDefaults.buttonColors(
-                            backgroundColor = style.backgroundButton
-                        ),
-                        enabled = true
-                    ) {
-                        Text(
-                            data.button,
-                            style = style.typographyButton,
-                            modifier = Modifier
-                                .padding(
-                                    horizontal = MaterialTheme.dimensionsPaddingExtended.buttonSmall_h,
-                                    vertical = MaterialTheme.dimensionsPaddingExtended.buttonSmall_v
-                                )
-                        )
-                    }
+                    )
 
                 }
                 data.iconInfoResourceId?.let {
@@ -184,8 +166,6 @@ object CardButton {
                     )
                 }
             }
-
-
         }
     }
 
@@ -251,17 +231,17 @@ object CardButton {
                     style = style.typographyText,
                 )
 
-                ClickableText(
-                    text = AnnotatedString(data.button),
-                    style = style.typographyButton,
-                    modifier = Modifier
-                        .padding(
-                            horizontal = MaterialTheme.dimensionsPaddingExtended.buttonSmall_h,
-                            vertical = MaterialTheme.dimensionsPaddingExtended.buttonSmall_v
-                        )
-                ) {
-                    onClick()
-                }
+//                ClickableText(
+//                    text = AnnotatedString(data.button),
+//                    style = style.typographyButton,
+//                    modifier = Modifier
+//                        .padding(
+//                            horizontal = MaterialTheme.dimensionsPaddingExtended.buttonSmall_h,
+//                            vertical = MaterialTheme.dimensionsPaddingExtended.buttonSmall_v
+//                        )
+//                ) {
+//                    onClick()
+//                }
 
             }
         }

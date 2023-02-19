@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 01:55
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 01:13
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -41,18 +41,18 @@ object Link {
                 internal val Default = Style(
                     textStyle = null,
                 )
+
+                fun Style.copy(
+                    textStyle: TextStyle? = null,
+                ) = Style(
+                    textStyle = textStyle ?: this.textStyle,
+                )
             }
 
             constructor(style: Style) : this(
                 textStyle = style.textStyle,
             )
         }
-
-        fun Style.copy(
-            textStyle: TextStyle? = null,
-        ) = Style(
-            textStyle = textStyle ?: this.textStyle,
-        )
 
         @Composable
         operator fun invoke(

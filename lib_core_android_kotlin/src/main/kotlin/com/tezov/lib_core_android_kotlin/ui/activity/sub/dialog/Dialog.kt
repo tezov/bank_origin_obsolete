@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 19:14
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 19:10
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,10 +26,10 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.colorsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsElevationExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.bordersExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.shapesExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsElevationExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.bordersExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
 
 @OptIn(ExperimentalComposeUiApi::class)
 object Dialog : ActivitySub<DialogState, DialogAction> {

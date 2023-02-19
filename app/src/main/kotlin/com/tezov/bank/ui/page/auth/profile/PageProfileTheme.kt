@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 19/02/2023 03:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 21:32
+ *  Last modified 19/02/2023 03:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,14 +24,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceTheme
 import com.tezov.bank.ui.theme.ThemeComponent
-import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.bordersExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.dimensionsSizeExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.definition.typographyExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.bordersExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSizeExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographyExtended
 
 val PageProfileTheme.colors: PageProfileTheme.Colors
     @Composable
