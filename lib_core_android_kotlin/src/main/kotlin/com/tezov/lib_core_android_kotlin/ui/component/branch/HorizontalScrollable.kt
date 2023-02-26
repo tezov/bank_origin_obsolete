@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 14:06
+ *  Created by Tezov on 26/02/2023 18:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 13:57
+ *  Last modified 26/02/2023 18:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -145,7 +145,7 @@ object HorizontalScrollable {
                 internal val Default = Style(
                     outfitFrame = OutfitFrameSimple(
                         outfitShape = OutfitShapeSimple(
-                            size = CornerSize(8.dp),
+                            size = OutfitShape.Size(8.dp),
                         ),
                         outfitBorder = OutfitBorderSimple(
                             size = 1.dp,

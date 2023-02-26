@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 16:10
+ *  Created by Tezov on 26/02/2023 18:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 16:10
+ *  Last modified 26/02/2023 18:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,22 +14,20 @@ package com.tezov.bank.ui.component.branch
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable.loopOver
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
 
@@ -41,7 +39,7 @@ object SectionActionCard {
             size = 24.dp,
             tint = Color.Black
         ),
-        val typographyHeader: TextStyle = TextStyle(),
+        val outfitTextHeader: OutfitTextSimple = OutfitTextSimple(),
         val colorBackgroundHeader: Color = Color.Transparent,
         val colorBackgroundBody: Color = Color.Transparent,
         val dimensionPaddingBody_h: Dp = 0.dp,
@@ -87,9 +85,9 @@ object SectionActionCard {
                             description = text,
                         )
                     }
-                    Text(
+                    Text.Simple(
                         text = text,
-                        style = style.typographyHeader
+                        style = style.outfitTextHeader
                     )
                 }
             }

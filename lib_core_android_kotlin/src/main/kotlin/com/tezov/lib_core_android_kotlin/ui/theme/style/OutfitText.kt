@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 18:03
+ *  Created by Tezov on 26/02/2023 18:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 18:03
+ *  Last modified 26/02/2023 18:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,10 +27,10 @@ object OutfitText {
             companion object {
 
                 fun Style.copy(
-                    text: TextStyle? = null,
+                    typo: TextStyle? = null,
                     color: Color? = null,
                 ) = Style(
-                    typo = text ?: this.typo,
+                    typo = typo ?: this.typo,
                     color = color ?: this.color,
                 )
             }
@@ -58,10 +58,10 @@ object OutfitText {
             companion object {
 
                 fun Style.copy(
-                    text: TextStyle? = null,
+                    typo: TextStyle? = null,
                     outfitColors: OutfitColorsSimple? = null,
                 ) = Style(
-                    typo = text ?: this.typo,
+                    typo = typo ?: this.typo,
                     outfitColor = outfitColors ?: this.outfitColor,
                 )
             }

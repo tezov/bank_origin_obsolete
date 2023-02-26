@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 18:09
+ *  Created by Tezov on 26/02/2023 18:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 18:09
+ *  Last modified 26/02/2023 18:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,6 +17,7 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.branch.SectionActionCard
@@ -25,6 +26,11 @@ import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object ThemeComponent {
@@ -32,11 +38,15 @@ object ThemeComponent {
     @Composable
     fun provideSectionRowStyle() = SectionActionRow.Style(
         dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
-        iconStyle = MaterialTheme.colors.primary,
-        dimensionIcon = MaterialTheme.dimensionsSizeExtended.iconInfo,
-        outfitTextHeader = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
-            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated,
-            fontWeight = FontWeight.SemiBold
+        iconStyle = Icon.Simple.Style(
+            size = MaterialTheme.dimensionsSizeExtended.iconInfo,
+            tint = MaterialTheme.colors.primary
+        ),
+        outfitTextHeader = MaterialTheme.typographiesSimpleExtended.textNormal.copy(
+            typo = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+                fontWeight = FontWeight.SemiBold
+            ),
+            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
         ),
         colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
             alpha = 0.14f
@@ -50,57 +60,78 @@ object ThemeComponent {
 
     @Composable
     fun provideActionRowStyle() = ActionRow.Style(
-        colorIconInfo = MaterialTheme.colors.primary,
-        dimensionIconInfo = MaterialTheme.dimensionsSizeExtended.iconInfo,
-        outfitText = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
-            fontWeight = FontWeight.SemiBold
+        iconInfoStyle = Icon.Simple.Style(
+            size = MaterialTheme.dimensionsSizeExtended.iconInfo,
+            tint = MaterialTheme.colors.primary
         ),
-        colorIconAction = MaterialTheme.colors.primary,
-        dimensionIconAction = MaterialTheme.dimensionsSizeExtended.iconAction,
+        iconActionStyle = Icon.Simple.Style(
+            size = MaterialTheme.dimensionsSizeExtended.iconAction,
+            tint = MaterialTheme.colors.primary
+        ),
+        outfitText = MaterialTheme.typographiesSimpleExtended.textNormal.copy(
+            typo = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+                fontWeight = FontWeight.SemiBold
+            ),
+            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
+        )
     )
 
     @Composable
     fun provideSectionCardStyle() = SectionActionCard.Style(
-        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
-        colorIcon = MaterialTheme.colors.primary,
-        dimensionIcon = MaterialTheme.dimensionsSizeExtended.iconInfo,
-        typographyHeader = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
-            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated,
-            fontWeight = FontWeight.SemiBold
+        iconStyle = Icon.Simple.Style(
+            size = MaterialTheme.dimensionsSizeExtended.iconInfo,
+            tint = MaterialTheme.colors.primary
+        ),
+        outfitTextHeader = MaterialTheme.typographiesSimpleExtended.textNormal.copy(
+            typo = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+                fontWeight = FontWeight.SemiBold
+            ),
+            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
         ),
         colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
             alpha = 0.14f
         ),
+        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
         actionCardStyle = provideActionCardStyle()
     )
 
     @Composable
     fun provideActionCardStyle() = ActionCard.Style(
-        shapeCard = MaterialTheme.shapesExtended.roundedCornerNormal.get() ?: RoundedCornerShape(4.dp),
-//        borderCard = MaterialTheme.bordersExtended.strokeNormal.copy(
-//            brush = SolidColor(
-//                MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
-//                    alpha = 0.12f
-//                )
-//            )
-//        ),
-        colorIcon = MaterialTheme.colors.primary,
-        dimensionsIcon = 56.dp,
-        outfitTextTitle = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
-            fontWeight = FontWeight.Bold
+        outfitFrame = OutfitFrameSimple(
+            outfitShape = MaterialTheme.shapesSimpleExtended.roundedCornerNormal,
+            outfitBorder = MaterialTheme.bordersSimpleExtended.strokeNormal.copy(
+                color = MaterialTheme.colorsCommonExtended.backgroundElevated
+            )
         ),
-        outfitTextSubtitle = MaterialTheme.typographiesSimpleExtended.textSubtitle.typo,
-        background = MaterialTheme.colorsCommonExtended.backgroundElevated,
+        iconStyle = Icon.Simple.Style(
+            size = 56.dp,
+            tint = MaterialTheme.colors.primary
+        ),
+        outfitTextTitle = MaterialTheme.typographiesSimpleExtended.textNormal.copy(
+            typo = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+                fontWeight = FontWeight.SemiBold
+            ),
+        ),
+        outfitTextSubtitle = MaterialTheme.typographiesSimpleExtended.textNormal.copy(
+            typo = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+                fontWeight = FontWeight.SemiBold
+            ),
+            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated,
+        ),
     )
 
     @Composable
     fun providePagerStyle() = HorizontalScrollable.Pager.Style(
-        colorIndicatorActive = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm.active,
-        colorIndicatorInactive = MaterialTheme.colorsCommonExtended.onSecondaryVariant,
+        outfitShapeIndicator = OutfitShapeState(
+            template = OutfitShape.Template.Circle,
+            outfitColor = OutfitColorsSimple(
+                active = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm.active,
+                inactive = MaterialTheme.colorsCommonExtended.onSecondaryVariant,
+            )
+        ),
         dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,
         dimensionIndicatorSize = 12.dp,
         dimensionIndicatorSpacing = MaterialTheme.dimensionsSpacingExtended.normal_h,
-        shapeIndicator = CircleShape
     )
 
     @Composable
