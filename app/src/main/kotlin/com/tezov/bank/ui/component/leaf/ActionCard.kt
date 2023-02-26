@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 16:10
+ *  Created by Tezov on 26/02/2023 18:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 16:09
+ *  Last modified 26/02/2023 18:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,28 +12,18 @@
 
 package com.tezov.bank.ui.component.leaf
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
@@ -69,8 +59,8 @@ object ActionCard {
             size = 24.dp,
             tint = Color.Black
         ),
-        val typographyTitle: TextStyle = TextStyle(),
-        val typographySubtitle: TextStyle = TextStyle(),
+        val outfitTextTitle: OutfitTextSimple = OutfitTextSimple(),
+        val outfitTextSubtitle: OutfitTextSimple = OutfitTextSimple(),
     )
 
     data class Data(
@@ -127,15 +117,15 @@ object ActionCard {
                 style.iconStyle.size?.let {
                     Spacer(modifier = Modifier.height(it))
                 }
-                Text(
+                Text.Simple(
                     text = data.title,
-                    style = style.typographyTitle,
+                    style = style.outfitTextTitle,
                     overflow = TextOverflow.Visible
                 )
                 data.subtitle?.let {
-                    Text(
+                    Text.Simple(
                         text = it,
-                        style = style.typographySubtitle,
+                        style = style.outfitTextSubtitle,
                         overflow = TextOverflow.Visible
                     )
                 }
@@ -174,15 +164,15 @@ object ActionCard {
                 resourceId = data.iconResourceId,
                 description = data.title,
             )
-            Text(
+            Text.Simple(
                 text = data.title,
-                style = style.typographyTitle,
+                style = style.outfitTextTitle,
                 overflow = TextOverflow.Visible
             )
             data.subtitle?.let {
-                Text(
+                Text.Simple(
                     text = it,
-                    style = style.typographySubtitle,
+                    style = style.outfitTextSubtitle,
                     overflow = TextOverflow.Visible
                 )
             }
@@ -213,14 +203,14 @@ object ActionCard {
                     .align(Alignment.Bottom)
                     .weight(1f)
             ) {
-                Text(
+                Text.Simple(
                     text = data.title,
-                    style = style.typographyTitle
+                    style = style.outfitTextTitle
                 )
                 data.subtitle?.let {
-                    Text(
+                    Text.Simple(
                         text = it,
-                        style = style.typographySubtitle
+                        style = style.outfitTextSubtitle
                     )
                 }
             }

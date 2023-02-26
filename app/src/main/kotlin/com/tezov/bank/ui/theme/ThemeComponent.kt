@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 16:10
+ *  Created by Tezov on 26/02/2023 18:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 16:09
+ *  Last modified 26/02/2023 18:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -52,7 +52,7 @@ object ThemeComponent {
     fun provideActionRowStyle() = ActionRow.Style(
         colorIconInfo = MaterialTheme.colors.primary,
         dimensionIconInfo = MaterialTheme.dimensionsSizeExtended.iconInfo,
-        typography = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+        outfitText = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
             fontWeight = FontWeight.SemiBold
         ),
         colorIconAction = MaterialTheme.colors.primary,
@@ -86,10 +86,10 @@ object ThemeComponent {
 //        ),
         colorIcon = MaterialTheme.colors.primary,
         dimensionsIcon = 56.dp,
-        typographyTitle = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+        outfitTextTitle = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
             fontWeight = FontWeight.Bold
         ),
-        typographySubtitle = MaterialTheme.typographiesSimpleExtended.textSubtitle.typo,
+        outfitTextSubtitle = MaterialTheme.typographiesSimpleExtended.textSubtitle.typo,
         background = MaterialTheme.colorsCommonExtended.backgroundElevated,
     )
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 16:10
+ *  Created by Tezov on 26/02/2023 18:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 16:09
+ *  Last modified 26/02/2023 18:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,6 @@ package com.tezov.lib_core_android_kotlin.ui.component.plain
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -78,14 +77,15 @@ object Button {
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it,it,it,it,it) },
                 shape = style.outfitFrame.outfitShape.resolveOrDefault(),
                 border =  style.outfitFrame.outfitBorder.resolve(enabled),
-                colors = style.outfitFrame.outfitShape.outfitColor.colorButton(),
+                colors = style.outfitFrame.outfitShape.outfitColor.buttonColorsOrDefault(),
                 contentPadding = contentPadding,
                 onClick = onClick,
             ) {
-                Text(
-                    text,
-                    style = style.outfitText.resolve(enabled),
-                    modifier = modifierText
+                Text.State(
+                    text = text,
+                    style = style.outfitText,
+                    modifier = modifierText,
+                    enabled = enabled,
                 )
             }
         }
@@ -149,14 +149,15 @@ object Button {
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it,it,it,it,it) },
                 shape = style.outfitFrame.outfitShape.resolveOrDefault(),
                 border = style.outfitFrame.outfitBorder.resolve(enabled),
-                colors = style.outfitFrame.outfitShape.outfitColor.colorButton(),
+                colors = style.outfitFrame.outfitShape.outfitColor.buttonColorsOrDefault(),
                 contentPadding = contentPadding,
                 onClick = onClick,
             ) {
-                Text(
-                    text,
-                    style = style.outfitText.resolve(enabled),
-                    modifier = modifierText
+                Text.State(
+                    text = text,
+                    style = style.outfitText,
+                    modifier = modifierText,
+                    enabled = enabled,
                 )
             }
         }

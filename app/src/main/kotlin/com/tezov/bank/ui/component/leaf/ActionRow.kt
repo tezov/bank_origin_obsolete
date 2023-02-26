@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 16:10
+ *  Created by Tezov on 26/02/2023 18:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 16:09
+ *  Last modified 26/02/2023 18:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,20 +15,17 @@ package com.tezov.bank.ui.component.leaf
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
 
@@ -44,7 +41,7 @@ object ActionRow {
             tint = Color.Black,
             size = 24.dp
         ),
-        val typography: TextStyle = TextStyle(),
+        val outfitText: OutfitTextSimple = OutfitTextSimple(),
         val background: Color = Color.Transparent,
     )
 
@@ -79,11 +76,11 @@ object ActionRow {
                 )
                 Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.normal_h))
             }
-            Text(
+            Text.Simple(
                 modifier = Modifier
                     .weight(1f),
                 text = data.title,
-                style = style.typography
+                style = style.outfitText
             )
             Icon.Simple(
                 style = style.iconActionStyle,

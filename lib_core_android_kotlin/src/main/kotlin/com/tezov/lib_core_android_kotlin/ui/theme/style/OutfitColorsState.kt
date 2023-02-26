@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 18:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 19:48
+ *  Last modified 26/02/2023 18:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -11,18 +11,23 @@
  */
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
+import androidx.compose.foundation.background
 import androidx.compose.material.ButtonDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.isSpecified
 
+fun Modifier.background(style: OutfitColorsState.Simple.Style, enabled: Boolean) =
+    style.resolve(enabled).takeIf { it.isSpecified }?.let { background(it) } ?: this
 
 object OutfitColorsState {
 
     object Simple{
 
         open class Style(
-            val active: Color = Color.Transparent,
-            val inactive: Color = Color.Transparent,
+            val active: Color = Color.Unspecified,
+            val inactive: Color = Color.Unspecified,
         ) {
 
             companion object{
@@ -44,10 +49,11 @@ object OutfitColorsState {
             fun resolve(enabled:Boolean) = if(enabled) active else inactive
 
             @Composable
-            fun colorButton() = ButtonDefaults.buttonColors(
+            fun buttonColorsOrDefault() = if(active.isSpecified || inactive.isSpecified) ButtonDefaults.buttonColors(
                 backgroundColor = active,
                 disabledBackgroundColor = inactive,
             )
+            else ButtonDefaults.buttonColors()
 
         }
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 26/02/2023 18:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 12:03
+ *  Last modified 26/02/2023 18:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -11,21 +11,20 @@
  */
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.dp
 
 object OutfitText {
 
-    object Simple{
+    object Simple {
 
         open class Style(
             val typo: TextStyle = TextStyle(),
-            val color: Color = Color.Black,
+            val color: Color = Color.Unspecified,
         ) {
 
-            companion object{
+            companion object {
 
                 fun Style.copy(
                     text: TextStyle? = null,
@@ -41,22 +40,22 @@ object OutfitText {
                 color = style.color,
             )
 
-            fun resolve() = typo.copy(color = color)
+            fun resolve() = if (color.isSpecified) typo.copy(color = color) else typo
         }
 
     }
 
-    object State{
+    object State {
 
         open class Style(
             val typo: TextStyle = TextStyle(),
             val outfitColor: OutfitColorsSimple = OutfitColorsSimple(
-                active = Color.Black,
-                inactive = Color.Black
+                active = Color.Unspecified,
+                inactive = Color.Unspecified
             ),
         ) {
 
-            companion object{
+            companion object {
 
                 fun Style.copy(
                     text: TextStyle? = null,
@@ -72,7 +71,8 @@ object OutfitText {
                 outfitColor = style.outfitColor,
             )
 
-            fun resolve(enabled:Boolean) = typo.copy(color = outfitColor.resolve(enabled))
+            fun resolve(enabled: Boolean) = outfitColor.resolve(enabled).takeIf { it.isSpecified }
+                ?.let { typo.copy(color = it) } ?: typo
 
         }
 
