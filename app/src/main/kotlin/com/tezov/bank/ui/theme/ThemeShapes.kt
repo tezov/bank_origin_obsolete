@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 13:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:30
+ *  Last modified 26/02/2023 13:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,21 +25,24 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeShapesExtended
 object ThemeShapes {
 
     @Composable
-    fun provideShapes() = ThemeShapesExtended.Shapes(
-        roundedCornerHuge = OutfitShapeSimple(
-            size = CornerSize(28.dp)
-        ),
-        roundedCornerBig = OutfitShapeSimple(
-            size = CornerSize(20.dp)
-        ),
-        roundedCornerNormal = OutfitShapeSimple(
-            size = CornerSize(12.dp)
+    fun provideShapes() = ThemeShapesExtended.Shapes.Simple(
+        roundedCornerMicro = OutfitShapeSimple(
+            size = CornerSize(4.dp)
         ),
         roundedCornerSmall = OutfitShapeSimple(
             size = CornerSize(8.dp)
         ),
-        roundedCornerMicro = OutfitShapeSimple(
-            size = CornerSize(4.dp)
+        roundedCornerNormal = OutfitShapeSimple(
+            size = CornerSize(12.dp)
+        ),
+        roundedCornerBig = OutfitShapeSimple(
+            size = CornerSize(20.dp)
+        ),
+        roundedCornerHuge = OutfitShapeSimple(
+            size = CornerSize(28.dp)
+        ),
+        roundedCornerSupra = OutfitShapeSimple(
+            size = CornerSize(40)
         ),
         dialog = OutfitShapeSimple(
             size = CornerSize(8.dp)
@@ -53,7 +56,11 @@ object ThemeShapes {
     )
 
     @Composable
-    fun provideBorders() = ThemeShapesExtended.Borders(
+    fun provideBorders() = ThemeShapesExtended.Borders.Simple(
+        strokeMicro =  OutfitBorderSimple(
+            size = 0.8.dp,
+            color = MaterialTheme.colors.primary
+        ),
         strokeSmall =  OutfitBorderSimple(
             size = 1.dp,
             color = MaterialTheme.colors.primary
