@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 26/02/2023 14:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 12:51
+ *  Last modified 26/02/2023 13:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,16 +12,13 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.branch
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
@@ -48,7 +45,7 @@ object HorizontalScrollable {
             companion object{
                 internal val Default = Style(
                     outfitShapeIndicator = OutfitShapeState(
-                        template = OutfitShape.Template.Circle,
+                        template = OutfitShape.Template.Symmetric,
                         outfitColor = OutfitColorsSimple(active = Color.Black, inactive = Color.Gray),
                     ),
                     dimensionIndicatorSize = 6.dp,

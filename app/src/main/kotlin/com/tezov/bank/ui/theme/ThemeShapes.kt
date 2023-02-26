@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 13:02
+ *  Created by Tezov on 26/02/2023 14:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 13:01
+ *  Last modified 26/02/2023 14:06
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,6 +19,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeShapesExtended
 
@@ -27,31 +28,31 @@ object ThemeShapes {
     @Composable
     fun provideShapes() = ThemeShapesExtended.Shapes.Simple(
         roundedCornerMicro = OutfitShapeSimple(
-            size = CornerSize(4.dp)
+            size = OutfitShape.Size(4.dp)
         ),
         roundedCornerSmall = OutfitShapeSimple(
-            size = CornerSize(8.dp)
+            size = OutfitShape.Size(8.dp)
         ),
         roundedCornerNormal = OutfitShapeSimple(
-            size = CornerSize(12.dp)
+            size = OutfitShape.Size(12.dp)
         ),
         roundedCornerBig = OutfitShapeSimple(
-            size = CornerSize(20.dp)
+            size = OutfitShape.Size(20.dp)
         ),
         roundedCornerHuge = OutfitShapeSimple(
-            size = CornerSize(28.dp)
+            size = OutfitShape.Size(28.dp)
         ),
         roundedCornerSupra = OutfitShapeSimple(
-            size = CornerSize(40)
+            size = OutfitShape.Size(40)
         ),
         dialog = OutfitShapeSimple(
-            size = CornerSize(8.dp)
+            size = OutfitShape.Size(8.dp)
         ),
         snackbar = OutfitShapeSimple(
-            size = CornerSize(12.dp)
+            size = OutfitShape.Size(12.dp)
         ),
         bottomSheet = OutfitShapeSimple(
-//            size = CornerSize(topStart = 10.dp, topEnd = 10.dp) RoundedCornerShape
+            size = OutfitShape.Size(sizeTopStart = 10.dp, sizeTopEnd = 10.dp)
         ),
     )
 
