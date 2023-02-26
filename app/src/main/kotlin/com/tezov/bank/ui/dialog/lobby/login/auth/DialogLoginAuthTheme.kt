@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:30
+ *  Last modified 26/02/2023 12:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -92,8 +92,8 @@ object DialogLoginAuthTheme {
         background = ThemeColors.Common.blackOverlay,
         onBackground = MaterialTheme.colorsCommonExtended.onPrimaryVariant,
         backgroundButtonActive = MaterialTheme.colors.primary,
-        backgroundButtonInactive = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm,
-        textButtonDark = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm,
+        backgroundButtonInactive = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm.inactive,
+        textButtonDark = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm.inactive,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -139,8 +139,8 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        button = MaterialTheme.shapesExtended.roundedCornerNormal,
-        authCard = MaterialTheme.shapesExtended.roundedCornerSmall,
+        button = MaterialTheme.shapesExtended.roundedCornerNormal.getOrDefault(),
+        authCard = MaterialTheme.shapesExtended.roundedCornerSmall.getOrDefault(),
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -153,7 +153,7 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideBorders() = Borders(
-        authCard = MaterialTheme.bordersExtended.strokeNormal.copy(
+        authCard = MaterialTheme.bordersExtended.strokeNormal.getOrDefault().copy(
             brush = SolidColor(colors.onBackground)
         ),
     )
@@ -172,17 +172,17 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographyExtended.textTitle.copy(
+        title = MaterialTheme.typographiesSimpleExtended.textTitle.typo.copy(
             color = colors.onBackground
         ),
-        fieldValue = MaterialTheme.typographyExtended.textFieldValue.copy(
+        fieldValue = MaterialTheme.typographiesSimpleExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        fieldLabel = MaterialTheme.typographyExtended.textFieldValue.copy(
+        fieldLabel = MaterialTheme.typographiesSimpleExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        button = MaterialTheme.typographyExtended.textButton,
-        link = MaterialTheme.typographyExtended.textLink.copy(
+        button = MaterialTheme.typographiesSimpleExtended.textButton.typo,
+        link = MaterialTheme.typographiesSimpleExtended.textLink.typo.copy(
             color = colors.onBackground,
         )
 
@@ -202,12 +202,12 @@ object DialogLoginAuthTheme {
     @Composable
     fun provideStyles() = Style(
         keyBoardGridCube = KeyBoard.GridCube.Style(
-            colorContent = colors.onBackground,
+            colorOnBackground = colors.onBackground,
             colorBackground = Color.Transparent,
-            borderOuter = MaterialTheme.bordersExtended.strokeNormal.copy(
+            outfitBorderOuter = MaterialTheme.bordersExtended.strokeNormal.getOrDefault().copy(
                 brush = SolidColor(colors.onBackground)
             ),
-            borderInner = MaterialTheme.bordersExtended.strokeBig.copy(
+            outfitBorderInner = MaterialTheme.bordersExtended.strokeBig.getOrDefault().copy(
                 brush = SolidColor(colors.onBackground)
             ),
         ),
@@ -220,7 +220,7 @@ object DialogLoginAuthTheme {
 //            textColorInactive = colors.onBackground,
         ),
         link = Link.Underlined.Style(
-            outfitText = typographies.link,
+//            outfitText = typographies.link,
         )
     )
 

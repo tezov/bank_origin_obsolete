@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:50
+ *  Last modified 26/02/2023 12:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -57,8 +57,8 @@ object OutfitBorder{
                 color = style.color,
             )
 
-            fun get() = template.get(size, color)
-            fun getOrDefault() = get() ?: BorderStroke(1.dp, Color.Black)
+            fun resolve() = template.get(size, color)
+            fun resolveOrDefault() = resolve() ?: BorderStroke(1.dp, Color.Black)
 
         }
 
@@ -91,8 +91,8 @@ object OutfitBorder{
                 outfitColor = style.outfitColor,
             )
 
-            fun get(enabled:Boolean) = template.get(size, outfitColor.resolve(enabled))
-            fun getOrDefault(enabled:Boolean) = get(enabled) ?: BorderStroke(1.dp, Color.Black)
+            fun resolve(enabled:Boolean) = template.get(size, outfitColor.resolve(enabled))
+            fun resolveOrDefault(enabled:Boolean) = resolve(enabled) ?: BorderStroke(1.dp, Color.Black)
         }
 
 

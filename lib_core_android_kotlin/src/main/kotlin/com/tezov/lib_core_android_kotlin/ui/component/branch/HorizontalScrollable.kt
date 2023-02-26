@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 26/02/2023 12:51
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,7 @@ package com.tezov.lib_core_android_kotlin.ui.component.branch
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
@@ -25,6 +25,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object HorizontalScrollable {
@@ -37,52 +38,45 @@ object HorizontalScrollable {
 
        @Immutable
         open class Style(
-           val colorIndicatorActive: Color = Default.colorIndicatorActive,
-           val colorIndicatorInactive: Color = Default.colorIndicatorInactive,
+           val outfitShapeIndicator: OutfitShapeState? = Default.outfitShapeIndicator,
            val dimensionIndicatorPaddingTop: Dp = Default.dimensionIndicatorPaddingTop,
            val dimensionIndicatorSize: Dp = Default.dimensionIndicatorSize,
            val dimensionIndicatorSpacing: Dp = Default.dimensionIndicatorSpacing,
-           val shapeIndicator: Shape? = Default.shapeIndicator,
            val padding: PaddingValues = Default.padding,
         ){
 
             companion object{
                 internal val Default = Style(
-                    colorIndicatorActive = Color.Black,
-                    colorIndicatorInactive = Color.Gray,
-                    dimensionIndicatorPaddingTop = 6.dp,
+                    outfitShapeIndicator = OutfitShapeState(
+                        template = OutfitShape.Template.Circle,
+                        outfitColor = OutfitColorsSimple(active = Color.Black, inactive = Color.Gray),
+                    ),
                     dimensionIndicatorSize = 6.dp,
                     dimensionIndicatorSpacing = 6.dp,
-                    shapeIndicator = CircleShape,
+                    dimensionIndicatorPaddingTop = 6.dp,
                     padding = PaddingValues(),
                 )
 
                 fun Style.copy(
-                    colorIndicatorActive: Color? = null,
-                    colorIndicatorInactive: Color? = null,
-                    dimensionIndicatorPaddingTop: Dp? = null,
+                    outfitShapeIndicator: OutfitShapeState? = null,
                     dimensionIndicatorSize: Dp? = null,
                     dimensionIndicatorSpacing: Dp? = null,
-                    shapeIndicator: Shape? = null,
+                    dimensionIndicatorPaddingTop: Dp? = null,
                     padding: PaddingValues? = null,
                 ) = Style(
-                    colorIndicatorActive = colorIndicatorActive ?: this.colorIndicatorActive,
-                    colorIndicatorInactive = colorIndicatorInactive ?: this.colorIndicatorInactive,
-                    dimensionIndicatorPaddingTop = dimensionIndicatorPaddingTop ?: this.dimensionIndicatorPaddingTop,
+                    outfitShapeIndicator = outfitShapeIndicator ?: this.outfitShapeIndicator,
                     dimensionIndicatorSize = dimensionIndicatorSize ?: this.dimensionIndicatorSize,
                     dimensionIndicatorSpacing = dimensionIndicatorSpacing ?: this.dimensionIndicatorSpacing,
-                    shapeIndicator = shapeIndicator ?: this.shapeIndicator,
+                    dimensionIndicatorPaddingTop = dimensionIndicatorPaddingTop ?: this.dimensionIndicatorPaddingTop,
                     padding = padding ?: this.padding,
                 )
             }
 
             constructor(style:Style) : this(
-                colorIndicatorActive = style.colorIndicatorActive,
-                colorIndicatorInactive = style.colorIndicatorInactive,
-                dimensionIndicatorPaddingTop = style.dimensionIndicatorPaddingTop,
+                outfitShapeIndicator = style.outfitShapeIndicator,
                 dimensionIndicatorSize = style.dimensionIndicatorSize,
                 dimensionIndicatorSpacing = style.dimensionIndicatorSpacing,
-                shapeIndicator = style.shapeIndicator,
+                dimensionIndicatorPaddingTop = style.dimensionIndicatorPaddingTop,
                 padding = style.padding,
             )
         }
@@ -101,7 +95,7 @@ object HorizontalScrollable {
                 modifier = modifier,
             ) {
                 val spacingIndicator = remember {
-                    style.shapeIndicator?.let {
+                    style.outfitShapeIndicator?.let {
                         style.dimensionIndicatorPaddingTop + style.dimensionIndicatorSize
                     } ?: 0.dp
                 }
@@ -112,7 +106,7 @@ object HorizontalScrollable {
                 ) { pageIndex ->
                     pages[pageIndex].invoke()
                 }
-                style.shapeIndicator?.let {
+                style.outfitShapeIndicator?.let {
                     HorizontalPagerIndicator(
                         pagerState = pagerState,
                         modifier = Modifier
@@ -120,9 +114,9 @@ object HorizontalScrollable {
                         indicatorWidth = style.dimensionIndicatorSize,
                         indicatorHeight = style.dimensionIndicatorSize,
                         spacing = style.dimensionIndicatorSpacing,
-                        activeColor = style.colorIndicatorActive,
-                        inactiveColor = style.colorIndicatorInactive,
-                        indicatorShape = it
+                        activeColor = it.outfitColor.active,
+                        inactiveColor = it.outfitColor.inactive,
+                        indicatorShape = it.resolveOrDefault()
                     )
                 }
             }
@@ -146,53 +140,47 @@ object HorizontalScrollable {
         @Immutable
         open class Style(
             pagerStyle: Pager.Style = Pager.Style(),
+            val outfitFrame:OutfitFrameSimple = Default.outfitFrame,
             val marginCard: PaddingValues = Default.marginCard,
-            val shapeCard: Shape = Default.shapeCard,
-            val borderCard: BorderStroke = Default.borderCard,
-            val backgroundCard: Color = Default.backgroundCard,
         ):Pager.Style(pagerStyle){
 
             companion object{
                 internal val Default = Style(
+                    outfitFrame = OutfitFrameSimple(
+                        outfitShape = OutfitShapeSimple(
+                            size = CornerSize(8.dp),
+                        ),
+                        outfitBorder = OutfitBorderSimple(
+                            size = 1.dp,
+                            color = Color.Black
+                        ),
+                    ),
                     marginCard = PaddingValues(horizontal = 4.dp),
-                    shapeCard = RoundedCornerShape(8.dp),
-                    borderCard = BorderStroke(1.dp, Color.Black),
-                    backgroundCard = Color.Transparent,
                 )
 
                 fun Style.copy(
                     pagerStyle: Pager.Style? = null,
+                    outfitFrame: OutfitFrameSimple? = null,
                     marginCard: PaddingValues? = null,
-                    shapeCard: Shape? = null,
-                    borderCard: BorderStroke? = null,
-                    backgroundCard: Color? = null,
                 ) = Style(
                     pagerStyle = pagerStyle ?: this,
+                    outfitFrame = outfitFrame ?: this.outfitFrame,
                     marginCard = marginCard ?: this.marginCard,
-                    shapeCard = shapeCard ?: this.shapeCard,
-                    borderCard = borderCard ?: this.borderCard,
-                    backgroundCard = backgroundCard ?: this.backgroundCard,
                 )
 
                 fun Pager.Style.copyAsStyleCarousel(
-                    marginCard: PaddingValues = Style.Default.marginCard,
-                    shapeCard: Shape = Style.Default.shapeCard,
-                    borderCard: BorderStroke = Style.Default.borderCard,
-                    backgroundCard: Color = Style.Default.backgroundCard,
+                    outfitFrame: OutfitFrameSimple = Default.outfitFrame,
+                    marginCard: PaddingValues = Default.marginCard,
                 ) =  Style(
                     pagerStyle = this,
+                    outfitFrame = outfitFrame,
                     marginCard = marginCard,
-                    shapeCard = shapeCard,
-                    borderCard = borderCard,
-                    backgroundCard = backgroundCard,
                 )
             }
 
             constructor(style:Style) : this (
+                outfitFrame = style.outfitFrame,
                 marginCard = style.marginCard,
-                shapeCard = style.shapeCard,
-                borderCard = style.borderCard,
-                backgroundCard = style.backgroundCard,
             )
         }
 
@@ -208,9 +196,9 @@ object HorizontalScrollable {
                 {
                     Surface(
                         modifier = modifier.padding(style.marginCard),
-                        shape = style.shapeCard,
-                        border = style.borderCard,
-                        color = style.backgroundCard,
+                        shape = style.outfitFrame.outfitShape.resolveOrDefault(),
+                        border = style.outfitFrame.outfitBorder.resolve(),
+                        color = style.outfitFrame.outfitShape.color,
                     ) {
                         content()
                     }

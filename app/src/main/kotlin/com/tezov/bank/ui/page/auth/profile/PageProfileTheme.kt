@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 26/02/2023 11:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,7 +28,7 @@ import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.bordersExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSizeExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographyExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesSimpleExtended
 
 val PageProfileTheme.colors: PageProfileTheme.Colors
     @Composable
@@ -110,7 +110,7 @@ object PageProfileTheme {
 
     @Composable
     fun provideBorders() = Borders(
-        iconUser = MaterialTheme.bordersExtended.strokeBig.copy(
+        iconUser = MaterialTheme.bordersExtended.strokeBig.getOrDefault().copy(
             brush = SolidColor(colors.iconUser),
         )
     )
@@ -126,11 +126,11 @@ object PageProfileTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographyExtended.textHuge.copy(
+        title = MaterialTheme.typographiesSimpleExtended.textHuge.typo.copy(
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),
-        normal = MaterialTheme.typographyExtended.textNormal.copy(
+        normal = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),

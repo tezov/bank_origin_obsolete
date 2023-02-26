@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 26/02/2023 11:51
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,31 +17,31 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 
-val MaterialTheme.dimensionsFontExtended: ThemeDimensionsExtended.Fonts
+val MaterialTheme.dimensionsFontExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localFonts.current
 infix fun MaterialTheme.provides(value: ThemeDimensionsExtended.Fonts) = ThemeDimensionsExtended.localFonts provides value
 
-val MaterialTheme.dimensionsPaddingExtended: ThemeDimensionsExtended.Paddings
+val MaterialTheme.dimensionsPaddingExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localPaddings.current
 infix fun MaterialTheme.provides(value:  ThemeDimensionsExtended.Paddings) = ThemeDimensionsExtended.localPaddings provides value
 
-val MaterialTheme.dimensionsSpacingExtended: ThemeDimensionsExtended.Spacings
+val MaterialTheme.dimensionsSpacingExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localSpacings.current
 infix fun MaterialTheme.provides(value:  ThemeDimensionsExtended.Spacings) = ThemeDimensionsExtended.localSpacings provides value
 
-val MaterialTheme.dimensionsElevationExtended: ThemeDimensionsExtended.Elevations
+val MaterialTheme.dimensionsElevationExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localElevations.current
 infix fun MaterialTheme.provides(value:  ThemeDimensionsExtended.Elevations) = ThemeDimensionsExtended.localElevations provides value
 
-val MaterialTheme.dimensionsSizeExtended: ThemeDimensionsExtended.Sizes
+val MaterialTheme.dimensionsSizeExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeDimensionsExtended.localSizes.current
@@ -134,7 +134,10 @@ object ThemeDimensionsExtended{
         val elevationBig: Dp,
         val elevationNormal: Dp,
         val elevationSmall: Dp,
-        )
+        val dialog: Dp,
+        val snackbar: Dp,
+        val bottomSheet: Dp,
+    )
     internal val localElevations: ProvidableCompositionLocal<Elevations> = staticCompositionLocalOf {
         error("not provided")
     }

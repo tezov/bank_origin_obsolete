@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:50
+ *  Last modified 26/02/2023 12:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,15 +17,11 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographyExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
 
@@ -49,14 +45,14 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
                 )
         ) { data ->
             Snackbar(
-                backgroundColor = MaterialTheme.colorsCommonExtended.snackbarBackground,
-                elevation = 0.dp,
-                shape = MaterialTheme.shapesExtended.snackbar.getOrDefault(),
+                backgroundColor = MaterialTheme.shapesSimpleExtended.snackbar.color,
+                elevation = MaterialTheme.dimensionsElevationExtended.snackbar,
+                shape = MaterialTheme.shapesSimpleExtended.snackbar.resolveOrDefault(),
                 content = {
                     Text(
                         text = data.message,
-                        style = MaterialTheme.typographyExtended.snackBarMessage.text,
-                        color = MaterialTheme.colorsCommonExtended.snackbarMessage,
+                        style = MaterialTheme.typographiesSimpleExtended.snackBarMessage.typo,
+                        color = MaterialTheme.typographiesSimpleExtended.snackBarMessage.color,
                     )
                 },
                 action = {
@@ -65,8 +61,8 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
                             onClick = { data.performAction() }) {
                             Text(
                                 text = label,
-                                style = MaterialTheme.typographyExtended.snackBarAction.text,
-                                color = MaterialTheme.colorsCommonExtended.snackbarAction,
+                                style = MaterialTheme.typographiesSimpleExtended.snackBarAction.typo,
+                                color = MaterialTheme.typographiesSimpleExtended.snackBarAction.color,
                             )
                         }
                     }

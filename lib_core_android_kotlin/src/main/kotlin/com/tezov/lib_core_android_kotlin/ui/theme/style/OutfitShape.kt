@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:50
+ *  Last modified 26/02/2023 12:48
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,21 +12,21 @@
 
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
-import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 object OutfitShape{
 
     enum class Template{
-        Rounded;
+        Rounded,
+        Circle;
 
         fun get(size: CornerSize?) = size?.let {
             when(this){
-                Rounded -> RoundedCornerShape(corner = size)
+                Rounded, Circle -> RoundedCornerShape(corner = size)
             }
         }
     }
@@ -34,10 +34,22 @@ object OutfitShape{
     object Simple{
 
         open class Style(
-            val template: Template = Template.Rounded,
-            val size: CornerSize? = null,
+            template: Template = Template.Rounded,
+            size: CornerSize? = null,
             val color: Color = Color.Transparent,
         ) {
+
+            var template: Template =  template
+                private set(value) {
+                    when(value){
+                        Template.Circle -> size = CornerSize(50)
+                        else -> { }
+                    }
+                    field = value
+                }
+
+            var size: CornerSize? =  size
+                private set
 
             companion object{
 
@@ -58,8 +70,8 @@ object OutfitShape{
                 color = style.color,
             )
 
-            fun get() = template.get(size)
-            fun getOrDefault() = get() ?: RoundedCornerShape(8.dp)
+            fun resolve() = template.get(size)
+            fun resolveOrDefault() = resolve() ?: RoundedCornerShape(8.dp)
         }
 
     }
@@ -67,10 +79,22 @@ object OutfitShape{
     object State{
 
         open class Style(
-            val template: Template = Template.Rounded,
-            val size: CornerSize? = null,
+            template: Template = Template.Rounded,
+            size: CornerSize? = null,
             val outfitColor: OutfitColorsSimple = OutfitColorsSimple(),
         ) {
+
+            var template: Template =  template
+                private set(value) {
+                    when(value){
+                        Template.Circle -> size = CornerSize(50)
+                        else -> { }
+                    }
+                    field = value
+                }
+
+            var size: CornerSize? =  size
+                private set
 
             companion object{
 
@@ -91,8 +115,8 @@ object OutfitShape{
                 outfitColor = style.outfitColor,
              )
 
-            fun get() = template.get(size)
-            fun getOrDefault() = get() ?: RoundedCornerShape(8.dp)
+            fun resolve() = template.get(size)
+            fun resolveOrDefault() = resolve() ?: RoundedCornerShape(8.dp)
 
         }
 

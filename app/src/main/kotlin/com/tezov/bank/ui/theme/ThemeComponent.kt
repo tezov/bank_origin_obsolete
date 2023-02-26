@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:35
+ *  Last modified 26/02/2023 11:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.branch.SectionActionCard
@@ -35,7 +34,7 @@ object ThemeComponent {
         dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
         colorIcon = MaterialTheme.colors.primary,
         dimensionIcon = MaterialTheme.dimensionsSizeExtended.iconInfo,
-        typographyHeader = MaterialTheme.typographyExtended.textNormal.text.copy(
+        typographyHeader = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
             color = MaterialTheme.colorsCommonExtended.onBackgroundElevated,
             fontWeight = FontWeight.SemiBold
         ),
@@ -53,7 +52,7 @@ object ThemeComponent {
     fun provideActionRowStyle() = ActionRow.Style(
         colorIconInfo = MaterialTheme.colors.primary,
         dimensionIconInfo = MaterialTheme.dimensionsSizeExtended.iconInfo,
-        typography = MaterialTheme.typographyExtended.textNormal.text.copy(
+        typography = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
             fontWeight = FontWeight.SemiBold
         ),
         colorIconAction = MaterialTheme.colors.primary,
@@ -65,7 +64,7 @@ object ThemeComponent {
         dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
         colorIcon = MaterialTheme.colors.primary,
         dimensionIcon = MaterialTheme.dimensionsSizeExtended.iconInfo,
-        typographyHeader = MaterialTheme.typographyExtended.textNormal.text.copy(
+        typographyHeader = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
             color = MaterialTheme.colorsCommonExtended.onBackgroundElevated,
             fontWeight = FontWeight.SemiBold
         ),
@@ -87,10 +86,10 @@ object ThemeComponent {
 //        ),
         colorIcon = MaterialTheme.colors.primary,
         dimensionsIcon = 56.dp,
-        typographyTitle = MaterialTheme.typographyExtended.textNormal.text.copy(
+        typographyTitle = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
             fontWeight = FontWeight.Bold
         ),
-        typographySubtitle = MaterialTheme.typographyExtended.textSubtitle.text,
+        typographySubtitle = MaterialTheme.typographiesSimpleExtended.textSubtitle.typo,
         background = MaterialTheme.colorsCommonExtended.backgroundElevated,
     )
 

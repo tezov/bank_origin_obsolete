@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:30
+ *  Last modified 26/02/2023 12:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -11,15 +11,17 @@
  */
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 
 object OutfitText {
 
     object Simple{
 
         open class Style(
-            val text: TextStyle = TextStyle(),
+            val typo: TextStyle = TextStyle(),
             val color: Color = Color.Black,
         ) {
 
@@ -29,16 +31,17 @@ object OutfitText {
                     text: TextStyle? = null,
                     color: Color? = null,
                 ) = Style(
-                    text = text ?: this.text,
+                    typo = text ?: this.typo,
                     color = color ?: this.color,
                 )
             }
 
             constructor(style: Style) : this(
-                text = style.text,
+                typo = style.typo,
                 color = style.color,
             )
 
+            fun resolve() = typo.copy(color = color)
         }
 
     }
@@ -46,7 +49,7 @@ object OutfitText {
     object State{
 
         open class Style(
-            val text: TextStyle = TextStyle(),
+            val typo: TextStyle = TextStyle(),
             val outfitColor: OutfitColorsSimple = OutfitColorsSimple(
                 active = Color.Black,
                 inactive = Color.Black
@@ -59,15 +62,17 @@ object OutfitText {
                     text: TextStyle? = null,
                     outfitColors: OutfitColorsSimple? = null,
                 ) = Style(
-                    text = text ?: this.text,
+                    typo = text ?: this.typo,
                     outfitColor = outfitColors ?: this.outfitColor,
                 )
             }
 
             constructor(style: Style) : this(
-                text = style.text,
+                typo = style.typo,
                 outfitColor = style.outfitColor,
             )
+
+            fun resolve(enabled:Boolean) = typo.copy(color = outfitColor.resolve(enabled))
 
         }
 

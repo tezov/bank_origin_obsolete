@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:50
+ *  Last modified 26/02/2023 12:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,10 +26,7 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsElevationExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.bordersExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 @OptIn(ExperimentalComposeUiApi::class)
 object Dialog : ActivitySub<DialogState, DialogAction> {
@@ -58,10 +55,10 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
     @Composable
     fun Card(content: @Composable () -> Unit) {
         Surface(
-            color = MaterialTheme.colorsCommonExtended.backgroundModal,
-            shape = MaterialTheme.shapesExtended.dialog.getOrDefault(),
-            elevation = MaterialTheme.dimensionsElevationExtended.elevationNormal,
-            border = MaterialTheme.bordersExtended.dialog.getOrDefault()
+            color = MaterialTheme.shapesSimpleExtended.dialog.color,
+            shape = MaterialTheme.shapesSimpleExtended.dialog.resolveOrDefault(),
+            elevation = MaterialTheme.dimensionsElevationExtended.dialog,
+            border = MaterialTheme.bordersSimpleExtended.dialog.resolveOrDefault()
         ) {
             val locals = LocalPages.current.last()
             CompositionLocalProvider(

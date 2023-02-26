@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 26/02/2023 11:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,7 +29,7 @@ import com.tezov.bank.ui.theme.ThemeComponent
 import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSizeExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographyExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesSimpleExtended
 
 val PagePaymentTheme.colors: PagePaymentTheme.Colors
     @Composable
@@ -108,7 +108,7 @@ object PagePaymentTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographyExtended.textTitle.copy(
+        title = MaterialTheme.typographiesSimpleExtended.textTitle.typo.copy(
             color = colors.textTitle,
             fontWeight = FontWeight.Bold
         ),

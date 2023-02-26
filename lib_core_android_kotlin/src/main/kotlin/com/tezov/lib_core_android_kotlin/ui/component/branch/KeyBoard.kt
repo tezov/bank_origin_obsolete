@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 26/02/2023 12:30
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,6 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.branch
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -27,6 +26,7 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import kotlin.properties.Delegates
 
@@ -56,38 +56,38 @@ object KeyBoard {
 
         @Immutable
         open class Style(
-            val colorContent: Color = Default.colorContent,
+            val colorOnBackground: Color = Default.colorOnBackground,
             val colorBackground: Color = Default.colorBackground,
-            val borderOuter: BorderStroke = Default.borderOuter,
-            val borderInner: BorderStroke = Default.borderInner,
+            val outfitBorderOuter: OutfitBorderSimple = Default.outfitBorderOuter,
+            val outfitBorderInner: OutfitBorderSimple = Default.outfitBorderInner,
         ) {
 
             companion object{
                 internal val Default = Style(
-                    colorContent = Color.White,
-                    colorBackground = Color.Black,
-                    borderOuter = BorderStroke(2.dp, Color.White),
-                    borderInner = BorderStroke(1.dp, Color.White),
+                    colorOnBackground = Color.Black,
+                    colorBackground = Color.Transparent,
+                    outfitBorderOuter = OutfitBorderSimple(size = 2.dp, color = Color.Black),
+                    outfitBorderInner = OutfitBorderSimple(size = 1.dp, color = Color.Black),
                 )
 
                 fun Style.copy(
                     colorContent: Color? = null,
                     colorBackground: Color? = null,
-                    borderOuter: BorderStroke? = null,
-                    borderInner: BorderStroke? = null,
+                    borderOuter: OutfitBorderSimple? = null,
+                    borderInner: OutfitBorderSimple? = null,
                 ) = Style(
-                    colorContent = colorContent ?: this.colorContent,
+                    colorOnBackground = colorContent ?: this.colorOnBackground,
                     colorBackground = colorBackground ?: this.colorBackground,
-                    borderOuter = borderOuter ?: this.borderOuter,
-                    borderInner = borderInner ?: this.borderInner,
+                    outfitBorderOuter = borderOuter ?: this.outfitBorderOuter,
+                    outfitBorderInner = borderInner ?: this.outfitBorderInner,
                 )
             }
 
             constructor(style: Style) : this(
-                colorContent = style.colorContent,
+                colorOnBackground = style.colorOnBackground,
                 colorBackground = style.colorBackground,
-                borderOuter = style.borderOuter,
-                borderInner = style.borderInner,
+                outfitBorderOuter = style.outfitBorderOuter,
+                outfitBorderInner = style.outfitBorderInner,
             )
         }
 
@@ -168,32 +168,39 @@ object KeyBoard {
                     )
                 }
                 // border outer
-                drawRect(
-                    brush = style.borderOuter.brush,
-                    topLeft = Offset(0f, 0f),
-                    size = Size(size.width, size.height),
-                    style = Stroke(width = style.borderOuter.width.toPx()),
-                )
-                //vertical line
-                for (i in 1 until cubes.rowCount) {
-                    val y = cubeSize * i
-                    drawLine(
-                        start = Offset(x = 0f, y = y),
-                        end = Offset(x = size.width, y = y),
-                        brush = style.borderInner.brush,
-                        strokeWidth = style.borderInner.width.toPx()
+                style.outfitBorderOuter.size?.let {
+                    drawRect(
+                        brush = style.outfitBorderOuter.resolveOrDefault().brush,
+                        topLeft = Offset(0f, 0f),
+                        size = Size(size.width, size.height),
+                        style = Stroke(width = it.toPx()),
                     )
                 }
-                //horizontal line
-                for (i in 1..cubes.columnCount) {
-                    val x = cubeSize * i
-                    drawLine(
-                        start = Offset(x = x, y = 0f),
-                        end = Offset(x = x, y = size.height),
-                        brush = style.borderInner.brush,
-                        strokeWidth = style.borderInner.width.toPx()
-                    )
+
+                style.outfitBorderInner.size?.let {
+                    val brush = style.outfitBorderInner.resolveOrDefault().brush
+                    //vertical line
+                    for (i in 1 until cubes.rowCount) {
+                        val y = cubeSize * i
+                        drawLine(
+                            start = Offset(x = 0f, y = y),
+                            end = Offset(x = size.width, y = y),
+                            brush = brush,
+                            strokeWidth = it.toPx()
+                        )
+                    }
+                    //horizontal line
+                    for (i in 1..cubes.columnCount) {
+                        val x = cubeSize * i
+                        drawLine(
+                            start = Offset(x = x, y = 0f),
+                            end = Offset(x = x, y = size.height),
+                            brush = brush,
+                            strokeWidth = it.toPx()
+                        )
+                    }
                 }
+
                 val overflow = cubes.columnCount * cubes.rowCount
                 //cubes
                 val drawContextSizeSave = drawContext.size
@@ -218,7 +225,7 @@ object KeyBoard {
         object Common {
 
             class CubeChar(char: Char) : Cube {
-                val _char = char.toString()
+                internal val _char = char.toString()
             }
 
             @OptIn(ExperimentalTextApi::class)
@@ -243,7 +250,7 @@ object KeyBoard {
                     textStyle = TextStyle(
                         fontSize = (cubeSize.width * 0.25).toFloat().sp,
                         fontWeight = FontWeight.SemiBold,
-                        color = style.colorContent
+                        color = style.colorOnBackground
                     )
                     textOffset = Offset((cubeSize.width / 3.5).toFloat(), 0f)
                 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:30
+ *  Last modified 26/02/2023 12:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
 
 object Button {
 
@@ -77,16 +76,15 @@ object Button {
                 enabled = enabled,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it,it,it,it,it) },
-                shape = style.outfitFrame.outfitShape.get() ?: MaterialTheme.shapesExtended.roundedCornerNormal.get() ?: MaterialTheme.shapes.medium,
-                border =  style.outfitFrame.outfitBorder.get(enabled),
+                shape = style.outfitFrame.outfitShape.resolveOrDefault(),
+                border =  style.outfitFrame.outfitBorder.resolve(enabled),
                 colors = style.outfitFrame.outfitShape.outfitColor.colorButton(),
                 contentPadding = contentPadding,
                 onClick = onClick,
             ) {
                 Text(
                     text,
-                    style = style.outfitText.text,
-                    color = style.outfitText.outfitColor.resolve(enabled),
+                    style = style.outfitText.resolve(enabled),
                     modifier = modifierText
                 )
             }
@@ -149,16 +147,15 @@ object Button {
                 enabled = enabled,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it,it,it,it,it) },
-                shape = style.outfitFrame.outfitShape.get() ?: MaterialTheme.shapesExtended.roundedCornerNormal.get() ?: MaterialTheme.shapes.medium,
-                border = style.outfitFrame.outfitBorder.get(enabled),
+                shape = style.outfitFrame.outfitShape.resolveOrDefault(),
+                border = style.outfitFrame.outfitBorder.resolve(enabled),
                 colors = style.outfitFrame.outfitShape.outfitColor.colorButton(),
                 contentPadding = contentPadding,
                 onClick = onClick,
             ) {
                 Text(
                     text,
-                    style = style.outfitText.text,
-                    color = style.outfitText.outfitColor.resolve(enabled),
+                    style = style.outfitText.resolve(enabled),
                     modifier = modifierText
                 )
             }

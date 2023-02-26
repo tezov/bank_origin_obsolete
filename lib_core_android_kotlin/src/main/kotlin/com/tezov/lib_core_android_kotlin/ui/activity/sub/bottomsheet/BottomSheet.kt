@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:50
+ *  Last modified 26/02/2023 12:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,7 +23,8 @@ import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonResource
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsElevationExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesSimpleExtended
 
 object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
 
@@ -46,8 +47,9 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
             sheetContent = {
                 Surface(
                     modifier = Modifier.padding(start = 1.dp, end = 1.dp),
-                    shape = MaterialTheme.shapesExtended.bottomSheet.getOrDefault(),
-                    elevation = ModalBottomSheetDefaults.Elevation
+                    shape = MaterialTheme.shapesSimpleExtended.bottomSheet.resolveOrDefault(),
+                    elevation = MaterialTheme.dimensionsElevationExtended.bottomSheet,
+                    color = MaterialTheme.shapesSimpleExtended.bottomSheet.color
                 ) {
                     state.sheetContent()
                 }

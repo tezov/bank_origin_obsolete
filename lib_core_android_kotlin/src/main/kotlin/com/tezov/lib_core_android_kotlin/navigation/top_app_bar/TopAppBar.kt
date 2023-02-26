@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:50
+ *  Last modified 26/02/2023 11:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographyExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesSimpleExtended
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
@@ -47,7 +47,7 @@ object TopAppBar: ActivitySub<TopAppBarState, TopAppBarAction> {
             title = {
                 Text(
                     text = stringResource(id = titleResourceId),
-                    style = MaterialTheme.typographyExtended.topNavigationTitle.text,
+                    style = MaterialTheme.typographiesSimpleExtended.topNavigationTitle.typo,
                     color = MaterialTheme.colorsCommonExtended.topAppBarContentText,
                 )
             },

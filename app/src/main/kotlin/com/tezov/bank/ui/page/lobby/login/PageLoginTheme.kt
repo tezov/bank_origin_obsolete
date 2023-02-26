@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:30
+ *  Last modified 26/02/2023 11:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -91,12 +91,12 @@ object PageLoginTheme {
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.primary,
-        backgroundButtonDark = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm,
+        backgroundButtonDark = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm.active,
         backgroundButtonLight = MaterialTheme.colorsCommonExtended.onSecondaryVariant,
         backgroundDropDownMenu = ThemeColors.Common.whiteDark,
         textContent = MaterialTheme.colorsCommonExtended.onPrimaryVariant,
-        textButtonDark = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm,
-        textButtonLight = MaterialTheme.colorsCommonExtended.onBackgroundButtonCancel,
+        textButtonDark = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm.active,
+        textButtonLight = MaterialTheme.colorsCommonExtended.onBackgroundButtonCancel.active,
         textDropDownMenu = MaterialTheme.colorsCommonExtended.onBackgroundModal,
     )
 
@@ -146,7 +146,7 @@ object PageLoginTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        button = MaterialTheme.shapesExtended.roundedCornerNormal,
+        button = MaterialTheme.shapesExtended.roundedCornerNormal.getOrDefault(),
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -159,7 +159,7 @@ object PageLoginTheme {
 
     @Composable
     fun provideBorders() = Borders(
-        iconBig = MaterialTheme.bordersExtended.strokeBig.copy(
+        iconBig = MaterialTheme.bordersExtended.strokeBig.getOrDefault().copy(
             brush = SolidColor(colors.textContent)
         ),
     )
@@ -180,25 +180,25 @@ object PageLoginTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        supra = MaterialTheme.typographyExtended.textSupra.copy(
+        supra = MaterialTheme.typographiesSimpleExtended.textSupra.typo.copy(
             color = colors.textContent
         ),
-        huge = MaterialTheme.typographyExtended.textHuge.copy(
+        huge = MaterialTheme.typographiesSimpleExtended.textHuge.typo.copy(
             color = colors.textContent
         ),
-        body = MaterialTheme.typographyExtended.textNormal.copy(
+        body = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),
-        buttonFilled = MaterialTheme.typographyExtended.textButton,
-        buttonOutlined = MaterialTheme.typographyExtended.textButtonOutline.copy(
+        buttonFilled = MaterialTheme.typographiesSimpleExtended.textButton.typo,
+        buttonOutlined = MaterialTheme.typographiesSimpleExtended.textButtonOutline.typo.copy(
             fontWeight = FontWeight.Bold
         ),
-        link = MaterialTheme.typographyExtended.textLink.copy(
+        link = MaterialTheme.typographiesSimpleExtended.textLink.typo.copy(
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),
-        dropDownMenu = MaterialTheme.typographyExtended.textNormal.copy(
+        dropDownMenu = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
             color = colors.textDropDownMenu,
             fontWeight = FontWeight.SemiBold
         )
@@ -230,7 +230,7 @@ object PageLoginTheme {
                 ),
             ),
             outfitText = OutfitTextState(
-                text = typographies.buttonFilled,
+                typo = typographies.buttonFilled,
                 outfitColor = OutfitColorsSimple(
                     active = colors.textButtonDark
                 )
@@ -245,14 +245,14 @@ object PageLoginTheme {
                     )
                 ),
                 outfitBorder = OutfitBorderState(
-                    size = MaterialTheme.bordersExtended.strokeSmall.width,
+                    size = MaterialTheme.bordersExtended.strokeSmall.getOrDefault().width,
                     outfitColor = OutfitColorsSimple(
                         active = ThemeColors.Common.blueShadow.copy(alpha = 0.5f)
                     )
                 ),
             ),
             outfitText = OutfitTextState(
-                text = typographies.buttonFilled,
+                typo = typographies.buttonFilled,
                 outfitColor = OutfitColorsSimple(
                     active = colors.textButtonLight
                 )
@@ -264,21 +264,21 @@ object PageLoginTheme {
 //                    size = shapes.button
                 ),
                 outfitBorder = OutfitBorderState(
-                    size = MaterialTheme.bordersExtended.strokeBig.width,
+                    size = MaterialTheme.bordersExtended.strokeBig.getOrDefault().width,
                     outfitColor = OutfitColorsSimple(
                         active = colors.textContent
                     )
                 ),
             ),
             outfitText = OutfitTextState(
-                text = typographies.buttonOutlined,
+                typo = typographies.buttonOutlined,
                 outfitColor = OutfitColorsSimple(
                     active = colors.textContent
                 )
             )
         ),
         link = Link.Underlined.Style(
-            outfitText = typographies.link,
+//            outfitText = typographies.link,
         )
     )
 

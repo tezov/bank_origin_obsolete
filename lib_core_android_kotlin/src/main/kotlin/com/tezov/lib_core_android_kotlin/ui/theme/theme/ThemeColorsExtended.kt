@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 20:50
+ *  Created by Tezov on 26/02/2023 12:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:30
+ *  Last modified 26/02/2023 11:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsSimple
 
-val MaterialTheme.colorsCommonExtended: ThemeColorsExtended.Common
+val MaterialTheme.colorsCommonExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeColorsExtended.localCommon.current
