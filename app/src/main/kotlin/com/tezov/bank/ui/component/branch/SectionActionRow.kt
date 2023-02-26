@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 26/02/2023 16:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 26/02/2023 16:09
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,6 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.leaf.ActionRow
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
 
@@ -35,8 +36,10 @@ object SectionActionRow {
 
     @Immutable
     data class Style(
-        val colorIcon: Color = Color.Black,
-        val dimensionIcon: Dp = 24.dp,
+        val iconStyle: Icon.Simple.Style = Icon.Simple.Style(
+            size = 24.dp,
+            tint = Color.Black
+        ),
         val typographyHeader: TextStyle = TextStyle(),
         val colorBackgroundHeader: Color = Color.Transparent,
         val colorBackgroundBody: Color = Color.Transparent,
@@ -76,13 +79,12 @@ object SectionActionRow {
                 ) {
                     Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.elementBig_h))
                     data.iconResourceId?.let {
-                        Icon(
+                        Icon.Simple(
                             modifier = Modifier
-                                .padding(end = MaterialTheme.dimensionsPaddingExtended.elementNormal_h)
-                                .size(style.dimensionIcon),
-                            painter = painterResource(id = it),
-                            tint = style.colorIcon,
-                            contentDescription = text,
+                                .padding(end = MaterialTheme.dimensionsPaddingExtended.elementNormal_h),
+                            style = style.iconStyle,
+                            resourceId = it,
+                            description = text,
                         )
                     }
                     Text(

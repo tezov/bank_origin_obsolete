@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 14:06
+ *  Created by Tezov on 26/02/2023 16:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 14:06
+ *  Last modified 26/02/2023 15:25
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_kotlin.util.UtilsNull.ifNotNull
 
 object OutfitShape{
 
@@ -35,15 +34,13 @@ object OutfitShape{
     }
 
     data class Size private constructor(val topStart: CornerSize, val topEnd: CornerSize, val bottomStart: CornerSize, val bottomEnd: CornerSize, val isSymmetric:Boolean){
-        constructor(topStart: CornerSize, topEnd: CornerSize, bottomStart: CornerSize, bottomEnd: CornerSize):this(
-            topStart, topEnd, bottomStart, bottomEnd, false
-        )
-        constructor(percentTopStart: Int = 0, percentTopEnd: Int = 0, percentBottomStart: Int = 0, percentBottomEnd: Int = 0):this(
-            CornerSize(percentTopStart), CornerSize(percentTopEnd), CornerSize(percentBottomStart), CornerSize(percentBottomEnd)
-        )
-        constructor(sizeTopStart: Dp = 0.dp, sizeTopEnd: Dp = 0.dp, sizeBottomStart: Dp = 0.dp, sizeBottomEnd: Dp = 0.dp):this(
-            CornerSize(sizeTopStart), CornerSize(sizeTopEnd), CornerSize(sizeBottomStart), CornerSize(sizeBottomEnd)
-        )
+
+        constructor(topStart: CornerSize, topEnd: CornerSize, bottomStart: CornerSize, bottomEnd: CornerSize)
+                :this( topStart, topEnd, bottomStart, bottomEnd, false )
+        constructor(topStart: Int = 0, topEnd: Int = 0, bottomStart: Int = 0, bottomEnd: Int = 0)
+                :this(CornerSize(topStart), CornerSize(topEnd), CornerSize(bottomStart), CornerSize(bottomEnd))
+        constructor(topStart: Dp = 0.dp, topEnd: Dp = 0.dp, bottomStart: Dp = 0.dp, bottomEnd: Dp = 0.dp)
+                :this(CornerSize(topStart), CornerSize(topEnd), CornerSize(bottomStart), CornerSize(bottomEnd))
 
         constructor(size: CornerSize):this(size,size,size,size, true)
         constructor(percent: Int):this(CornerSize(percent))

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 26/02/2023 16:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 12:03
+ *  Last modified 26/02/2023 16:09
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,7 +30,7 @@ object Button {
         open class Style(
             val outfitFrame: OutfitFrameState = OutfitFrameState(
                 outfitShape = OutfitShapeState(
-                    size = CornerSize(8.dp),
+                    size = OutfitShape.Size(8.dp),
                     outfitColor = OutfitColorsSimple(
                         active = Color.Gray,
                         inactive = Color.Gray.copy(alpha = 0.25f),
@@ -69,7 +69,7 @@ object Button {
             interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
             style:Style = Style(),
             contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
-            onClick: () -> Unit,
+            onClick: () -> Unit = {},
         ){
             Button(
                 modifier = modifierButton,
@@ -97,7 +97,7 @@ object Button {
         open class Style(
             val outfitFrame: OutfitFrameState = OutfitFrameState(
                 outfitShape = OutfitShapeState(
-                    size = CornerSize(8.dp),
+                    size = OutfitShape.Size(8.dp),
                     outfitColor = OutfitColorsSimple()
                 ),
                 outfitBorder = OutfitBorderState(
@@ -140,7 +140,7 @@ object Button {
             interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
             style:Style = Style(),
             contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
-            onClick: () -> Unit,
+            onClick: () -> Unit = {},
         ){
             OutlinedButton(
                 modifier = modifierButton,

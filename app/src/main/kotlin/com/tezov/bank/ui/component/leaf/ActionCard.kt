@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 26/02/2023 16:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 26/02/2023 16:09
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,6 +33,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 object ActionCard {
@@ -54,13 +56,21 @@ object ActionCard {
 
     @Immutable
     data class Style(
-        val shapeCard: Shape = RoundedCornerShape(8.dp),
-        val borderCard: BorderStroke = BorderStroke(1.dp, Color.Black),
-        val colorIcon: Color = Color.Black,
-        val dimensionsIcon: Dp = 24.dp,
+        val outfitFrame: OutfitFrameSimple = OutfitFrameSimple(
+            outfitShape = OutfitShapeSimple(
+                size = OutfitShape.Size(8.dp)
+            ),
+            outfitBorder = OutfitBorderSimple(
+                size = 1.dp,
+                color = Color.Black,
+            )
+        ),
+        val iconStyle:Icon.Simple.Style =  Icon.Simple.Style(
+            size = 24.dp,
+            tint = Color.Black
+        ),
         val typographyTitle: TextStyle = TextStyle(),
         val typographySubtitle: TextStyle = TextStyle(),
-        val background: Color = Color.Transparent,
     )
 
     data class Data(
@@ -95,13 +105,12 @@ object ActionCard {
         style: Style,
         modifier: Modifier,
         data: Data,
-        onClick: () -> Unit
+        onClick: () -> Unit = {}
     ) {
         Row(
             modifier = modifier
-                .border(style.borderCard, style.shapeCard)
-                .clip(style.shapeCard)
-                .background(style.background)
+                .border(style.outfitFrame)
+                .background(style.outfitFrame)
                 .clickable {
                     onClick()
                 }
@@ -115,7 +124,9 @@ object ActionCard {
                     .weight(1f)
                     .align(Alignment.CenterVertically)
             ) {
-                Spacer(modifier = Modifier.height(style.dimensionsIcon))
+                style.iconStyle.size?.let {
+                    Spacer(modifier = Modifier.height(it))
+                }
                 Text(
                     text = data.title,
                     style = style.typographyTitle,
@@ -129,12 +140,10 @@ object ActionCard {
                     )
                 }
             }
-            Icon(
-                modifier = Modifier
-                    .size(style.dimensionsIcon),
-                painter = painterResource(id = data.iconResourceId),
-                tint = style.colorIcon,
-                contentDescription = data.title,
+            Icon.Simple(
+                style = style.iconStyle,
+                resourceId = data.iconResourceId,
+                description = data.title,
             )
         }
 
@@ -149,9 +158,8 @@ object ActionCard {
     ) {
         Column(
             modifier = modifier
-                .border(style.borderCard, style.shapeCard)
-                .clip(style.shapeCard)
-                .background(style.background)
+                .border(style.outfitFrame)
+                .background(style.outfitFrame)
                 .clickable {
                     onClick()
                 }
@@ -161,12 +169,10 @@ object ActionCard {
                 ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Icon(
-                modifier = Modifier
-                    .size(style.dimensionsIcon),
-                painter = painterResource(id = data.iconResourceId),
-                tint = style.colorIcon,
-                contentDescription = data.title,
+            Icon.Simple(
+                style = style.iconStyle,
+                resourceId = data.iconResourceId,
+                description = data.title,
             )
             Text(
                 text = data.title,
@@ -194,9 +200,8 @@ object ActionCard {
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .border(style.borderCard, style.shapeCard)
-                .clip(style.shapeCard)
-                .background(style.background)
+                .border(style.outfitFrame)
+                .background(style.outfitFrame)
                 .clickable { onClick() }
                 .padding(
                     vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
@@ -219,13 +224,12 @@ object ActionCard {
                     )
                 }
             }
-            Icon(
+            Icon.Simple(
                 modifier = Modifier
-                    .size(style.dimensionsIcon)
                     .align(Alignment.CenterVertically),
-                painter = painterResource(id = data.iconResourceId),
-                tint = style.colorIcon,
-                contentDescription = data.title,
+                style = style.iconStyle,
+                resourceId = data.iconResourceId,
+                description = data.title,
             )
         }
     }

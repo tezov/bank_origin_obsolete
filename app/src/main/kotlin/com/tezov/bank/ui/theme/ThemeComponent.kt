@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 26/02/2023 16:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 11:36
+ *  Last modified 26/02/2023 16:09
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,7 +32,7 @@ object ThemeComponent {
     @Composable
     fun provideSectionRowStyle() = SectionActionRow.Style(
         dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
-        colorIcon = MaterialTheme.colors.primary,
+        iconStyle = MaterialTheme.colors.primary,
         dimensionIcon = MaterialTheme.dimensionsSizeExtended.iconInfo,
         typographyHeader = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
             color = MaterialTheme.colorsCommonExtended.onBackgroundElevated,

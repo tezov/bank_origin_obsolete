@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 26/02/2023 16:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 26/02/2023 16:09
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,6 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
 
@@ -35,11 +36,15 @@ object ActionRow {
 
     @Immutable
     data class Style(
-        val colorIconInfo: Color = Color.Black,
-        val dimensionIconInfo: Dp = 24.dp,
+        val iconInfoStyle: Icon.Simple.Style = Icon.Simple.Style(
+            tint = Color.Black,
+            size = 24.dp
+        ),
+        val iconActionStyle: Icon.Simple.Style = Icon.Simple.Style(
+            tint = Color.Black,
+            size = 24.dp
+        ),
         val typography: TextStyle = TextStyle(),
-        val colorIconAction: Color = Color.Black,
-        val dimensionIconAction: Dp = 24.dp,
         val background: Color = Color.Transparent,
     )
 
@@ -67,12 +72,10 @@ object ActionRow {
             verticalAlignment = Alignment.CenterVertically
         ) {
             data.iconInfoResourceId?.let {
-                Icon(
-                    modifier = Modifier
-                        .size(style.dimensionIconInfo),
-                    painter = painterResource(id = it),
-                    tint = style.colorIconInfo,
-                    contentDescription = null,
+                Icon.Simple(
+                    style = style.iconInfoStyle,
+                    resourceId = it,
+                    description = null,
                 )
                 Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.normal_h))
             }
@@ -82,12 +85,10 @@ object ActionRow {
                 text = data.title,
                 style = style.typography
             )
-            Icon(
-                modifier = Modifier
-                    .size(style.dimensionIconAction),
-                painter = painterResource(id = data.iconActionResourceId),
-                tint = style.colorIconAction,
-                contentDescription = data.title,
+            Icon.Simple(
+                style = style.iconActionStyle,
+                resourceId = data.iconActionResourceId,
+                description = data.title,
             )
         }
     }

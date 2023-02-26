@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 14:06
+ *  Created by Tezov on 26/02/2023 16:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 14:06
+ *  Last modified 26/02/2023 15:25
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,9 +12,6 @@
 
 package com.tezov.bank.ui.theme
 
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
@@ -52,7 +49,7 @@ object ThemeShapes {
             size = OutfitShape.Size(12.dp)
         ),
         bottomSheet = OutfitShapeSimple(
-            size = OutfitShape.Size(sizeTopStart = 10.dp, sizeTopEnd = 10.dp)
+            size = OutfitShape.Size(topStart = 10.dp, topEnd = 10.dp)
         ),
     )
 

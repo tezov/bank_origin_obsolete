@@ -12,48 +12,58 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.plain
 
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material.Icon
+import androidx.compose.material.LocalContentAlpha
+import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.unit.Dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextState
 
-object Link {
+object Icon {
 
-    object Underlined{
+    object Simple{
 
         open class Style(
-            val outfitText: OutfitTextState = OutfitTextState(),
+            val size: Dp? = null,
+            val tint: Color? = null,
         ){
             companion object{
 
                 fun Style.copy(
-                    outfitText: OutfitTextState? = null,
+                    size: Dp? = null,
+                    tint: Color? = null,
                 ) = Style(
-                    outfitText = outfitText ?: this.outfitText,
+                    size = size ?: this.size,
+                    tint = tint ?: this.tint,
                 )
             }
 
             constructor(style: Style) : this(
-                outfitText = style.outfitText,
+                size = style.size,
+                tint = style.tint,
             )
         }
 
         @Composable
         operator fun invoke(
-            text:String,
             modifier: Modifier = Modifier,
-            enabled: Boolean = true,
             style:Style = Style(),
-            onClick: () -> Unit = {},
+            resourceId:Int,
+            description:String? = null,
         ){
-            ClickableText(
+            style.size?.let { modifier.size(it) }
+            Icon(
                 modifier = modifier,
-                text = AnnotatedString(text),
-                style = style.outfitText.resolve(enabled),
-            ) {
-                onClick()
-            }
+                painter = painterResource(id = resourceId),
+                tint = style.tint ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+                contentDescription = description,
+            )
         }
 
     }
