@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 18:03
+ *  Created by Tezov on 26/02/2023 18:09
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 18:03
+ *  Last modified 26/02/2023 18:09
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,6 +21,7 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
@@ -42,7 +43,7 @@ object ActionRow {
             size = 24.dp
         ),
         val outfitText: OutfitTextSimple = OutfitTextSimple(),
-        val background: Color = Color.Transparent,
+        val background: Color = Color.Unspecified,
     )
 
     data class Data(
@@ -58,11 +59,13 @@ object ActionRow {
         data: Data,
         onClick: () -> Unit = {}
     ) {
+        if(style.background.isSpecified){
+            modifier.background(style.background)
+        }
         Row(
             modifier = modifier
                 .fillMaxWidth()
                 .clickable { onClick() }
-                .background(style.background)
                 .padding(
                     vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
                 ),
