@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 18:59
+ *  Created by Tezov on 26/02/2023 21:19
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 18:59
+ *  Last modified 26/02/2023 21:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,11 +13,8 @@
 package com.tezov.bank.ui.theme
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.branch.SectionActionCard
@@ -27,9 +24,11 @@ import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
-import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.Simple.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
@@ -42,12 +41,12 @@ object ThemeComponent {
             size = MaterialTheme.dimensionsSizeExtended.iconInfo,
             tint = MaterialTheme.colors.primary
         ),
-        outfitTextHeader = MaterialTheme.typographiesSimpleExtended.textNormal.copy(
-            typo = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+        outfitTextHeader = MaterialTheme.typographiesSimpleExtended.textNormal.copy {
+            typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
-            ),
+            )
             color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
-        ),
+        },
         colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
             alpha = 0.14f
         ),
@@ -68,12 +67,12 @@ object ThemeComponent {
             size = MaterialTheme.dimensionsSizeExtended.iconAction,
             tint = MaterialTheme.colors.primary
         ),
-        outfitText = MaterialTheme.typographiesSimpleExtended.textNormal.copy(
-            typo = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+        outfitText = MaterialTheme.typographiesSimpleExtended.textNormal.copy {
+            typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
-            ),
+            )
             color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
-        )
+        }
     )
 
     @Composable
@@ -82,12 +81,12 @@ object ThemeComponent {
             size = MaterialTheme.dimensionsSizeExtended.iconInfo,
             tint = MaterialTheme.colors.primary
         ),
-        outfitTextHeader = MaterialTheme.typographiesSimpleExtended.textNormal.copy(
-            typo = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+        outfitTextHeader = MaterialTheme.typographiesSimpleExtended.textNormal.copy {
+            typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
-            ),
+            )
             color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
-        ),
+        },
         colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
             alpha = 0.14f
         ),
@@ -99,25 +98,25 @@ object ThemeComponent {
     fun provideActionCardStyle() = ActionCard.Style(
         outfitFrame = OutfitFrameSimple(
             outfitShape = MaterialTheme.shapesSimpleExtended.roundedCornerNormal,
-            outfitBorder = MaterialTheme.bordersSimpleExtended.strokeNormal.copy(
+            outfitBorder = MaterialTheme.bordersSimpleExtended.strokeNormal.copy {
                 color = MaterialTheme.colorsCommonExtended.backgroundElevated
-            )
+            }
         ),
         iconStyle = Icon.Simple.Style(
             size = 56.dp,
             tint = MaterialTheme.colors.primary
         ),
-        outfitTextTitle = MaterialTheme.typographiesSimpleExtended.textNormal.copy(
+        outfitTextTitle = MaterialTheme.typographiesSimpleExtended.textNormal.copy {
             typo = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
                 fontWeight = FontWeight.SemiBold
-            ),
-        ),
-        outfitTextSubtitle = MaterialTheme.typographiesSimpleExtended.textNormal.copy(
+            )
+        },
+        outfitTextSubtitle = MaterialTheme.typographiesSimpleExtended.textNormal.copy {
             typo = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
                 fontWeight = FontWeight.SemiBold
-            ),
-            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated,
-        ),
+            )
+            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
+        },
     )
 
     @Composable
@@ -135,8 +134,8 @@ object ThemeComponent {
     )
 
     @Composable
-    fun provideCarouselStyle() = providePagerStyle().copy(
+    fun provideCarouselStyle() = providePagerStyle().copy {
         padding = PaddingValues(horizontal = 26.dp)
-    )
+    }
 
 }

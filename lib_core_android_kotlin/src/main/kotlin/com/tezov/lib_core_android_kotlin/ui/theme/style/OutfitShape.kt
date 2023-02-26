@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 18:03
+ *  Created by Tezov on 26/02/2023 21:19
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 18:03
+ *  Last modified 26/02/2023 21:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,6 +15,7 @@ package com.tezov.lib_core_android_kotlin.ui.theme.style
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.isSpecified
@@ -75,8 +76,7 @@ object OutfitShape {
             topEnd: Dp = 0.dp,
             bottomStart: Dp = 0.dp,
             bottomEnd: Dp = 0.dp
-        )
-                : this(
+        ): this(
             CornerSize(topStart),
             CornerSize(topEnd),
             CornerSize(bottomStart),
@@ -111,15 +111,23 @@ object OutfitShape {
 
             companion object {
 
-                fun Style.copy(
-                    template: Template? = null,
-                    size: Size? = null,
-                    color: Color? = null,
-                ) = Style(
-                    template = template ?: this.template,
-                    size = size ?: this.size,
-                    color = color ?: this.color,
-                )
+                open class Scope internal constructor(style: Style) {
+                    var template = style.template
+                    var size = style.size
+                    var color = style.color
+
+                    internal fun get() = Style(
+                        template = template,
+                        size = size,
+                        color = color,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Scope.()->Unit) = Scope(this).also {
+                    it.scope()
+                }.get()
+
             }
 
             constructor(style: Style) : this(
@@ -165,6 +173,24 @@ object OutfitShape {
                     size = size ?: this.size,
                     outfitColor = outfitColor ?: this.outfitColor,
                 )
+
+                open class Scope internal constructor(style: Style) {
+                    var template = style.template
+                    var size = style.size
+                    var outfitColor = style.outfitColor
+
+                    internal fun get() = Style(
+                        template = template,
+                        size = size,
+                        outfitColor = outfitColor,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Scope.()->Unit) = Scope(this).also {
+                    it.scope()
+                }.get()
+
             }
 
             constructor(style: Style) : this(

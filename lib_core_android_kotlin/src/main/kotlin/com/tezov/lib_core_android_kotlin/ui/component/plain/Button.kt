@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 18:03
+ *  Created by Tezov on 26/02/2023 21:19
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 18:03
+ *  Last modified 26/02/2023 21:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -50,6 +50,24 @@ object Button {
                     outfitText = outfitText ?: this.outfitText,
                     elevation = elevation ?: this.elevation,
                 )
+
+                open class Scope internal constructor(style: Style) {
+                    var outfitFrame = style.outfitFrame
+                    var outfitText = style.outfitText
+                    var elevation = style.elevation
+
+                    internal fun get() = Style(
+                        outfitFrame = outfitFrame,
+                        outfitText = outfitText,
+                        elevation = elevation,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Scope.()->Unit) = Scope(this).also {
+                    it.scope()
+                }.get()
+
             }
 
             constructor(style: Style) : this(
@@ -113,15 +131,23 @@ object Button {
         ){
             companion object{
 
-                fun Style.copy(
-                    outfitFrame: OutfitFrameState? = null,
-                    outfitText: OutfitTextState? = null,
-                    elevation: Dp? = null,
-                ) = Style(
-                    outfitFrame = outfitFrame ?: this.outfitFrame,
-                    outfitText = outfitText ?: this.outfitText,
-                    elevation = elevation ?: this.elevation,
-                )
+                open class Scope internal constructor(style: Style) {
+                    var outfitFrame = style.outfitFrame
+                    var outfitText = style.outfitText
+                    var elevation = style.elevation
+
+                    internal fun get() = Style(
+                        outfitFrame = outfitFrame,
+                        outfitText = outfitText,
+                        elevation = elevation,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Scope.()->Unit) = Scope(this).also {
+                    it.scope()
+                }.get()
+
             }
 
             constructor(style: TextFilled.Style) : this(

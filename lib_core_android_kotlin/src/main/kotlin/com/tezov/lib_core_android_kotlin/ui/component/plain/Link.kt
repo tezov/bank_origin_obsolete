@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 16:10
+ *  Created by Tezov on 26/02/2023 21:19
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 16:09
+ *  Last modified 26/02/2023 21:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,11 +27,19 @@ object Link {
         ){
             companion object{
 
-                fun Style.copy(
-                    outfitText: OutfitTextState? = null,
-                ) = Style(
-                    outfitText = outfitText ?: this.outfitText,
-                )
+                open class Scope internal constructor(style: Style) {
+                    var outfitText = style.outfitText
+
+                    internal fun get() = Style(
+                        outfitText = outfitText,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Scope.()->Unit) = Scope(this).also {
+                    it.scope()
+                }.get()
+
             }
 
             constructor(style: Style) : this(

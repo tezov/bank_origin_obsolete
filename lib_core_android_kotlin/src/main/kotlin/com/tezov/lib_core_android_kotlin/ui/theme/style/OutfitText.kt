@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 18:59
+ *  Created by Tezov on 26/02/2023 21:19
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 18:59
+ *  Last modified 26/02/2023 21:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -11,6 +11,7 @@
  */
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.text.TextStyle
@@ -26,13 +27,22 @@ object OutfitText {
 
             companion object {
 
-                fun Style.copy(
-                    typo: TextStyle? = null,
-                    color: Color? = null,
-                ) = Style(
-                    typo = typo ?: this.typo,
-                    color = color ?: this.color,
-                )
+                open class Scope internal constructor(style:Style) {
+                    var typo = style.typo
+                    var color = style.color
+
+                    internal fun get() = Style(
+                        typo = typo,
+                        color = color,
+                   )
+
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Scope.()->Unit) = Scope(this).also {
+                    it.scope()
+                }.get()
+
             }
 
             constructor(style: Style) : this(
@@ -57,13 +67,21 @@ object OutfitText {
 
             companion object {
 
-                fun Style.copy(
-                    typo: TextStyle? = null,
-                    outfitColors: OutfitColorsSimple? = null,
-                ) = Style(
-                    typo = typo ?: this.typo,
-                    outfitColor = outfitColors ?: this.outfitColor,
-                )
+                open class Scope internal constructor(style: Style) {
+                    var typo = style.typo
+                    var outfitColor = style.outfitColor
+
+                    internal fun get() = Style(
+                        typo = typo,
+                        outfitColor = outfitColor,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Scope.()->Unit) = Scope(this).also {
+                    it.scope()
+                }.get()
+
             }
 
             constructor(style: Style) : this(

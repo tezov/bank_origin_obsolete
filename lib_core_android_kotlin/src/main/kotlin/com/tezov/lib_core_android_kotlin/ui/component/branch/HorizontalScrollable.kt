@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 18:59
+ *  Created by Tezov on 26/02/2023 21:19
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 18:59
+ *  Last modified 26/02/2023 21:19
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,6 @@
 package com.tezov.lib_core_android_kotlin.ui.component.branch
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.Surface
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -29,47 +28,44 @@ object HorizontalScrollable {
 
     object Pager {
 
-        internal val local: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
-            error("not provided")
-        }
-
-       @Immutable
+        @Immutable
         open class Style(
-           val outfitShapeIndicator: OutfitShapeState? = Default.outfitShapeIndicator,
-           val dimensionIndicatorPaddingTop: Dp = Default.dimensionIndicatorPaddingTop,
-           val dimensionIndicatorSize: Dp = Default.dimensionIndicatorSize,
-           val dimensionIndicatorSpacing: Dp = Default.dimensionIndicatorSpacing,
-           val padding: PaddingValues = Default.padding,
-        ){
+            val outfitShapeIndicator: OutfitShapeState? = OutfitShapeState(
+                template = OutfitShape.Template.Symmetric,
+                outfitColor = OutfitColorsSimple(active = Color.Black, inactive = Color.Gray),
+            ),
+            val dimensionIndicatorPaddingTop: Dp = 6.dp,
+            val dimensionIndicatorSize: Dp = 6.dp,
+            val dimensionIndicatorSpacing: Dp = 6.dp,
+            val padding: PaddingValues = PaddingValues(),
+        ) {
 
-            companion object{
-                internal val Default = Style(
-                    outfitShapeIndicator = OutfitShapeState(
-                        template = OutfitShape.Template.Symmetric,
-                        outfitColor = OutfitColorsSimple(active = Color.Black, inactive = Color.Gray),
-                    ),
-                    dimensionIndicatorSize = 6.dp,
-                    dimensionIndicatorSpacing = 6.dp,
-                    dimensionIndicatorPaddingTop = 6.dp,
-                    padding = PaddingValues(),
-                )
+            companion object {
 
-                fun Style.copy(
-                    outfitShapeIndicator: OutfitShapeState? = null,
-                    dimensionIndicatorSize: Dp? = null,
-                    dimensionIndicatorSpacing: Dp? = null,
-                    dimensionIndicatorPaddingTop: Dp? = null,
-                    padding: PaddingValues? = null,
-                ) = Style(
-                    outfitShapeIndicator = outfitShapeIndicator ?: this.outfitShapeIndicator,
-                    dimensionIndicatorSize = dimensionIndicatorSize ?: this.dimensionIndicatorSize,
-                    dimensionIndicatorSpacing = dimensionIndicatorSpacing ?: this.dimensionIndicatorSpacing,
-                    dimensionIndicatorPaddingTop = dimensionIndicatorPaddingTop ?: this.dimensionIndicatorPaddingTop,
-                    padding = padding ?: this.padding,
-                )
+                open class Scope internal constructor(style: Style) {
+                    var outfitShapeIndicator = style.outfitShapeIndicator
+                    var dimensionIndicatorSize = style.dimensionIndicatorSize
+                    var dimensionIndicatorSpacing = style.dimensionIndicatorSpacing
+                    var dimensionIndicatorPaddingTop = style.dimensionIndicatorPaddingTop
+                    var padding = style.padding
+
+                    internal open fun get() = Style(
+                        outfitShapeIndicator = outfitShapeIndicator,
+                        dimensionIndicatorSize = dimensionIndicatorSize,
+                        dimensionIndicatorSpacing = dimensionIndicatorSpacing,
+                        dimensionIndicatorPaddingTop = dimensionIndicatorPaddingTop,
+                        padding = padding,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Scope.() -> Unit) = Scope(this).also {
+                    it.scope()
+                }.get()
+
             }
 
-            constructor(style:Style) : this(
+            constructor(style: Style) : this(
                 outfitShapeIndicator = style.outfitShapeIndicator,
                 dimensionIndicatorSize = style.dimensionIndicatorSize,
                 dimensionIndicatorSpacing = style.dimensionIndicatorSpacing,
@@ -82,7 +78,7 @@ object HorizontalScrollable {
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
-            style:Style,
+            style: Style,
             pageSelected: Int = 0,
             pages: List<@Composable () -> Unit>,
             onPageChange: (pageIndex: Int) -> Unit = {}
@@ -130,52 +126,47 @@ object HorizontalScrollable {
 
     object CarouselCard {
 
-        internal val local: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
-            error("not provided")
-        }
-
         @Immutable
         open class Style(
             pagerStyle: Pager.Style = Pager.Style(),
-            val outfitFrame:OutfitFrameSimple = Default.outfitFrame,
-            val marginCard: PaddingValues = Default.marginCard,
-        ):Pager.Style(pagerStyle){
+            val outfitFrame: OutfitFrameSimple = OutfitFrameSimple(
+                outfitShape = OutfitShapeSimple(
+                    size = OutfitShape.Size(8.dp),
+                ),
+                outfitBorder = OutfitBorderSimple(
+                    size = 1.dp,
+                    color = Color.Black
+                ),
+            ),
+            val marginCard: PaddingValues = PaddingValues(horizontal = 4.dp),
+        ) : Pager.Style(pagerStyle) {
 
-            companion object{
-                internal val Default = Style(
-                    outfitFrame = OutfitFrameSimple(
-                        outfitShape = OutfitShapeSimple(
-                            size = OutfitShape.Size(8.dp),
-                        ),
-                        outfitBorder = OutfitBorderSimple(
-                            size = 1.dp,
-                            color = Color.Black
-                        ),
-                    ),
-                    marginCard = PaddingValues(horizontal = 4.dp),
-                )
+            companion object {
 
-                fun Style.copy(
-                    pagerStyle: Pager.Style? = null,
-                    outfitFrame: OutfitFrameSimple? = null,
-                    marginCard: PaddingValues? = null,
-                ) = Style(
-                    pagerStyle = pagerStyle ?: this,
-                    outfitFrame = outfitFrame ?: this.outfitFrame,
-                    marginCard = marginCard ?: this.marginCard,
-                )
+                open class Scope internal constructor(style: Style) :
+                    Pager.Style.Companion.Scope(style) {
+                    var outfitFrame = style.outfitFrame
+                    var marginCard = style.marginCard
 
-                fun Pager.Style.copyAsStyleCarousel(
-                    outfitFrame: OutfitFrameSimple = Default.outfitFrame,
-                    marginCard: PaddingValues = Default.marginCard,
-                ) =  Style(
-                    pagerStyle = this,
-                    outfitFrame = outfitFrame,
-                    marginCard = marginCard,
-                )
+                    override fun get() = Style(
+                        pagerStyle = super.get(),
+                        outfitFrame = outfitFrame,
+                        marginCard = marginCard,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Scope.() -> Unit) = Scope(this).also {
+                    it.scope()
+                }.get()
+
+                @Composable
+                fun Pager.Style.copyAsStyleCarousel(scope: @Composable Scope.() -> Unit) =
+                    Scope(Style(this)).also { it.scope() }.get()
+
             }
 
-            constructor(style:Style) : this (
+            constructor(style: Style) : this(
                 outfitFrame = style.outfitFrame,
                 marginCard = style.marginCard,
             )
