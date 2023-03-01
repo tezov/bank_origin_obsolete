@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 21:19
+ *  Created by Tezov on 01/03/2023 22:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 21:08
+ *  Last modified 01/03/2023 22:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,11 +21,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 
 fun Modifier.background(style: OutfitShape.Simple.Style) =
     if (style.color.isSpecified) background(style.color) else this
 
-fun Modifier.background(style: OutfitShape.State.Style, enabled: Boolean) = background(style.outfitColor, enabled)
+fun Modifier.background(style: OutfitShape.State.Style, enabled: Boolean) =
+    background(style.outfitColor, enabled)
 
 object OutfitShape {
 
@@ -33,7 +35,6 @@ object OutfitShape {
         Asymmetric,
         Symmetric,
         Circle;
-
         fun get(size: Size? = null) = size?.let {
             when (this) {
                 Asymmetric -> RoundedCornerShape(
@@ -60,11 +61,14 @@ object OutfitShape {
             topEnd: CornerSize,
             bottomStart: CornerSize,
             bottomEnd: CornerSize
-        )
-                : this(topStart, topEnd, bottomStart, bottomEnd, false)
+        ) : this(topStart, topEnd, bottomStart, bottomEnd, false)
 
-        constructor(topStart: Int = 0, topEnd: Int = 0, bottomStart: Int = 0, bottomEnd: Int = 0)
-                : this(
+        constructor(
+            topStart: Int = 0,
+            topEnd: Int = 0,
+            bottomStart: Int = 0,
+            bottomEnd: Int = 0
+        ) : this(
             CornerSize(topStart),
             CornerSize(topEnd),
             CornerSize(bottomStart),
@@ -76,7 +80,7 @@ object OutfitShape {
             topEnd: Dp = 0.dp,
             bottomStart: Dp = 0.dp,
             bottomEnd: Dp = 0.dp
-        ): this(
+        ) : this(
             CornerSize(topStart),
             CornerSize(topEnd),
             CornerSize(bottomStart),
@@ -90,12 +94,11 @@ object OutfitShape {
         val size get() = topStart
     }
 
-    object Simple {
+    object Sketch {
 
         open class Style(
             template: Template = Template.Symmetric,
             size: Size? = null,
-            val color: Color = Color.Unspecified,
         ) {
             var template: Template = template
                 private set(value) {
@@ -114,17 +117,15 @@ object OutfitShape {
                 open class Scope internal constructor(style: Style) {
                     var template = style.template
                     var size = style.size
-                    var color = style.color
 
-                    internal fun get() = Style(
+                    open internal fun get() = Style(
                         template = template,
                         size = size,
-                        color = color,
                     )
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Scope.()->Unit) = Scope(this).also {
+                fun Style.copy(scope: @Composable Scope.() -> Unit = {}) = Scope(this).also {
                     it.scope()
                 }.get()
 
@@ -133,7 +134,6 @@ object OutfitShape {
             constructor(style: Style) : this(
                 template = style.template,
                 size = style.size,
-                color = style.color,
             )
 
             fun resolve(): RoundedCornerShape? = template.get(size)
@@ -142,65 +142,95 @@ object OutfitShape {
 
     }
 
-    object State {
+    object Simple {
 
         open class Style(
-            template: Template = Template.Symmetric,
-            size: Size? = null,
-            val outfitColor: OutfitColorsSimple = OutfitColorsSimple(),
-        ) {
-
-            var template: Template = template
-                private set(value) {
-                    when (value) {
-                        Template.Circle -> size = Size(50)
-                        else -> {}
-                    }
-                    field = value
-                }
-
-            var size: Size? = size
-                private set
+            sketch: Sketch.Style = Sketch.Style(),
+            val color: Color = Color.Unspecified,
+        ):Sketch.Style(sketch) {
 
             companion object {
 
-                fun Style.copy(
-                    template: Template? = null,
-                    size: Size? = null,
-                    outfitColor: OutfitColorsSimple? = null,
-                ) = Style(
-                    template = template ?: this.template,
-                    size = size ?: this.size,
-                    outfitColor = outfitColor ?: this.outfitColor,
-                )
+                open class Scope internal constructor(style: Style): Sketch.Style.Companion.Scope(style) {
+                    var color = style.color
 
-                open class Scope internal constructor(style: Style) {
-                    var template = style.template
-                    var size = style.size
+                    override fun get() = Style(
+                        sketch = super.get(),
+                        color = color,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Scope.() -> Unit = {}) = Scope(this).also {
+                    it.scope()
+                }.get()
+
+                @Composable
+                fun Sketch.Style.copyToSimpleStyle(scope: @Composable Scope.() -> Unit = {}) =
+                    Scope(Style(this)).also { it.scope() }.get()
+
+                @Composable
+                fun State.Style.copyToSimpleStyle(scope: @Composable Scope.() -> Unit = {}) = Scope(
+                    Style(
+                        sketch = this,
+                        color = outfitColor.active
+                    )
+                ).also { it.scope() }.get()
+
+            }
+
+            constructor(style: Style) : this(
+                sketch = style,
+                color = style.color,
+            )
+
+        }
+
+    }
+
+    object State {
+
+        open class Style(
+            sketch: Sketch.Style = Sketch.Style(),
+            val outfitColor: OutfitColorsSimple = OutfitColorsSimple(),
+        ):Sketch.Style(sketch) {
+
+            companion object {
+
+                open class Scope internal constructor(style: Style): Sketch.Style.Companion.Scope(style) {
                     var outfitColor = style.outfitColor
 
-                    internal fun get() = Style(
-                        template = template,
-                        size = size,
+                    override fun get() = Style(
+                        sketch = super.get(),
                         outfitColor = outfitColor,
                     )
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Scope.()->Unit) = Scope(this).also {
+                fun Style.copy(scope: @Composable Scope.() -> Unit = {}) = Scope(this).also {
                     it.scope()
                 }.get()
+
+                @Composable
+                fun Sketch.Style.copyToStateStyle(scope: @Composable Scope.() -> Unit = {}) =
+                    Scope(Style(this)).also { it.scope() }.get()
+
+                @Composable
+                fun Simple.Style.copyToStateStyle(scope: @Composable Scope.() -> Unit = {}) = Scope(
+                    Style(
+                        sketch = this,
+                        outfitColor = OutfitColorsSimple(
+                            active = color
+                        )
+                    )
+                ).also { it.scope() }.get()
 
             }
 
             constructor(style: Style) : this(
-                template = style.template,
-                size = style.size,
+                sketch = style,
                 outfitColor = style.outfitColor,
             )
-
-            fun resolve() = template.get(size)
-            fun resolveOrDefault() = resolve() ?: RoundedCornerShape(8.dp)
 
         }
 

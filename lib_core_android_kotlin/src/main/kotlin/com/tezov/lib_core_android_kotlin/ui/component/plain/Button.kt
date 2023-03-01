@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 21:19
+ *  Created by Tezov on 01/03/2023 22:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 21:08
+ *  Last modified 01/03/2023 22:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,7 +29,9 @@ object Button {
         open class Style(
             val outfitFrame: OutfitFrameState = OutfitFrameState(
                 outfitShape = OutfitShapeState(
-                    size = OutfitShape.Size(8.dp),
+                    sketch = OutfitShapeSketch(
+                        size = OutfitShape.Size(8.dp)
+                    ),
                     outfitColor = OutfitColorsSimple(
                         active = Color.Gray,
                         inactive = Color.Gray.copy(alpha = 0.25f),
@@ -64,7 +66,7 @@ object Button {
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Scope.()->Unit) = Scope(this).also {
+                fun Style.copy(scope: @Composable Scope.()->Unit = {}) = Scope(this).also {
                     it.scope()
                 }.get()
 
@@ -115,8 +117,9 @@ object Button {
         open class Style(
             val outfitFrame: OutfitFrameState = OutfitFrameState(
                 outfitShape = OutfitShapeState(
-                    size = OutfitShape.Size(8.dp),
-                    outfitColor = OutfitColorsSimple()
+                    sketch = OutfitShapeSketch(
+                        size = OutfitShape.Size(8.dp)
+                    ),
                 ),
                 outfitBorder = OutfitBorderState(
                     size = 1.dp,
@@ -144,7 +147,7 @@ object Button {
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Scope.()->Unit) = Scope(this).also {
+                fun Style.copy(scope: @Composable Scope.()->Unit = {}) = Scope(this).also {
                     it.scope()
                 }.get()
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 01/03/2023 22:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 11:36
+ *  Last modified 01/03/2023 22:00
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,6 +31,10 @@ import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollabl
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsState.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.State.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.State.Style.Companion.copyToStateStyle
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageLoginTheme.colors: PageLoginTheme.Colors
@@ -141,18 +145,18 @@ object PageLoginTheme {
         }
 
     data class Shapes(
-        val button: Shape,
+        val button: OutfitShapeState,
     )
 
     @Composable
     fun provideShapes() = Shapes(
-        button = MaterialTheme.shapesExtended.roundedCornerNormal.getOrDefault(),
+        button = MaterialTheme.shapesSimpleExtended.roundedCornerNormal.copyToStateStyle(),
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
         error("not provided")
     }
-    
+
     data class Borders(
         val iconBig: BorderStroke,
     )
@@ -222,8 +226,17 @@ object PageLoginTheme {
         pager = ThemeComponent.providePagerStyle(),
         buttonDark = Button.TextFilled.Style(
             outfitFrame = OutfitFrameState(
+                outfitShape = shapes.button.copy {
+                    outfitColor = outfitColor.copy {
+                        active = colors.backgroundButtonDark
+                    }
+                },
+            ),
+
+
+            outfitFrame = OutfitFrameState(
                 outfitShape = OutfitShapeState(
-//                    size = shapes.button
+                    size = shapes.button,
                     outfitColor = OutfitColorsSimple(
                         active = colors.backgroundButtonDark
                     )
@@ -239,7 +252,7 @@ object PageLoginTheme {
         buttonLight = Button.TextFilled.Style(
             outfitFrame = OutfitFrameState(
                 outfitShape = OutfitShapeState(
-//                    size = shapes.button
+                    size = shapes.button,
                     outfitColor = OutfitColorsSimple(
                         active = colors.backgroundButtonLight
                     )

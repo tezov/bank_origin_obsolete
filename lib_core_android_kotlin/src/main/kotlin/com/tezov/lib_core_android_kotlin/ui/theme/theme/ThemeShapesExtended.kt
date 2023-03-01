@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 01/03/2023 22:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 11:51
+ *  Last modified 01/03/2023 21:56
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,6 +18,7 @@ import androidx.compose.runtime.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeSketch
 
 val MaterialTheme.shapesSimpleExtended
     @Composable
@@ -36,16 +37,16 @@ object ThemeShapesExtended{
     object Shapes{
         @Immutable
         data class Simple(
-            val roundedCornerMicro: OutfitShapeSimple,
-            val roundedCornerSmall: OutfitShapeSimple,
-            val roundedCornerNormal: OutfitShapeSimple,
-            val roundedCornerBig: OutfitShapeSimple,
-            val roundedCornerHuge: OutfitShapeSimple,
-            val roundedCornerSupra: OutfitShapeSimple,
+            val roundedCornerMicro: OutfitShapeSketch,
+            val roundedCornerSmall: OutfitShapeSketch,
+            val roundedCornerNormal: OutfitShapeSketch,
+            val roundedCornerBig: OutfitShapeSketch,
+            val roundedCornerHuge: OutfitShapeSketch,
+            val roundedCornerSupra: OutfitShapeSketch,
 
-            val dialog: OutfitShapeSimple,
-            val snackbar: OutfitShapeSimple,
-            val bottomSheet: OutfitShapeSimple,
+            val dialog: OutfitShapeSketch,
+            val snackbar: OutfitShapeSketch,
+            val bottomSheet: OutfitShapeSketch,
         )
         internal val localShapesSimple: ProvidableCompositionLocal<Simple> = staticCompositionLocalOf {
             error("not provided")

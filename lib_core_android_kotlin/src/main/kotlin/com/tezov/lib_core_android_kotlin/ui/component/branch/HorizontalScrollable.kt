@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 21:19
+ *  Created by Tezov on 01/03/2023 22:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 21:19
+ *  Last modified 01/03/2023 21:56
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,7 +31,9 @@ object HorizontalScrollable {
         @Immutable
         open class Style(
             val outfitShapeIndicator: OutfitShapeState? = OutfitShapeState(
-                template = OutfitShape.Template.Symmetric,
+                sketch = OutfitShapeSketch(
+                    template = OutfitShape.Template.Circle
+                ),
                 outfitColor = OutfitColorsSimple(active = Color.Black, inactive = Color.Gray),
             ),
             val dimensionIndicatorPaddingTop: Dp = 6.dp,
@@ -131,7 +133,9 @@ object HorizontalScrollable {
             pagerStyle: Pager.Style = Pager.Style(),
             val outfitFrame: OutfitFrameSimple = OutfitFrameSimple(
                 outfitShape = OutfitShapeSimple(
-                    size = OutfitShape.Size(8.dp),
+                    sketch = OutfitShapeSketch(
+                        size = OutfitShape.Size(8.dp),
+                    )
                 ),
                 outfitBorder = OutfitBorderSimple(
                     size = 1.dp,
@@ -161,12 +165,13 @@ object HorizontalScrollable {
                 }.get()
 
                 @Composable
-                fun Pager.Style.copyAsStyleCarousel(scope: @Composable Scope.() -> Unit) =
+                fun Pager.Style.copyToCarouselCardStyle(scope: @Composable Scope.() -> Unit) =
                     Scope(Style(this)).also { it.scope() }.get()
 
             }
 
             constructor(style: Style) : this(
+                pagerStyle = style,
                 outfitFrame = style.outfitFrame,
                 marginCard = style.marginCard,
             )
