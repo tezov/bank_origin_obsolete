@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 02/03/2023 21:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 02/03/2023 20:54
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,6 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
-
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
@@ -35,11 +34,13 @@ import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 object PageLogin : Page<PageLoginState, PageLoginAction> {
 
@@ -139,9 +140,10 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             modifier = Modifier.fillMaxWidth(),
             verticalAlignment = Alignment.CenterVertically
         ) {
-
-            Box(modifier = Modifier
-                .weight(1f)) {
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+            ) {
                 Image(
                     modifier = Modifier
                         .size(PageLoginTheme.dimensions.logoSize),
@@ -149,7 +151,6 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     contentDescription = stringResource(id = R.string.pg_login_img_logo)
                 )
             }
-
             Image(
                 modifier = Modifier
                     .size(PageLoginTheme.dimensions.iconBigSize)
@@ -162,9 +163,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 contentScale = ContentScale.Crop,
                 contentDescription = stringResource(id = R.string.pg_login_img_suit_case)
             )
-
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconBig))
-
             IconButton(onClick = {
                 onClickAdd()
             }) {
@@ -179,7 +178,6 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 )
             }
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconMedium))
-
             Box {
                 var expanded by remember { mutableStateOf(false) }
                 val items = stringArrayResource(id = R.array.pg_login_drop_down_menu)
@@ -242,15 +240,16 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(
+                        Text.Simple(
                             text = nameState.value,
                             style = PageLoginTheme.typographies.supra
                         )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
-                        Text(
-                            textAlign = TextAlign.Center,
+                        Text.Simple(
                             text = stringResource(id = R.string.pg_login_pager_0),
-                            style = PageLoginTheme.typographies.body
+                            style = PageLoginTheme.typographies.body.copy {
+                                typo = typo.copy(textAlign = TextAlign.Center)
+                            }
                         )
                     }
                 },
@@ -260,10 +259,11 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text(
-                            textAlign = TextAlign.Center,
+                        Text.Simple(
                             text = stringResource(id = R.string.pg_login_pager_1),
-                            style = PageLoginTheme.typographies.huge
+                            style = PageLoginTheme.typographies.huge.copy {
+                                typo = typo.copy(textAlign = TextAlign.Center)
+                            }
                         )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         Button.TextOutlined(
@@ -278,7 +278,6 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             text = stringResource(id = R.string.pg_login_btn_activate_balance),
                             style = PageLoginTheme.styles.buttonOutlined
                         )
-
                     }
                 }),
             onPageChange = {
@@ -297,7 +296,6 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-
             Button.TextFilled(
                 modifierButton = Modifier
                     .fillMaxWidth()
@@ -311,7 +309,6 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 style = PageLoginTheme.styles.buttonDark,
                 onClick = onClickConnect,
             )
-
             Button.TextFilled(
                 modifierButton = Modifier
                     .fillMaxWidth()
@@ -325,17 +322,13 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 style = PageLoginTheme.styles.buttonLight,
                 onClick = onClickSendMoney,
             )
-
             Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopFromLinkService))
-
             Link.Underlined(
                 text = stringResource(id = R.string.pg_login_link_help_and_service),
                 style = PageLoginTheme.styles.link,
                 onClick = onClickHelpAndService,
             )
         }
-
     }
-
 
 }
