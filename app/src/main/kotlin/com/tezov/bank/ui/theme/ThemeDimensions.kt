@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 16:10
+ *  Created by Tezov on 02/03/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 16:09
+ *  Last modified 02/03/2023 22:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,26 +18,6 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeDimensionsExtended
 
 object ThemeDimensions {
 
-    val dimensionsFontExtended = ThemeDimensionsExtended.Fonts(
-        textTitle = 20.sp,
-        textSubtitle = 15.sp,
-        textHelper = 13.sp,
-        textSupra = 34.sp,
-        textHuge = 26.sp,
-        textBig = 20.sp,
-        textNormal = 16.sp,
-        textSmall = 13.sp,
-        textMicro = 10.sp,
-        textFieldValue = 18.sp,
-        textFieldLabel = 12.sp,
-        textLink = 20.sp,
-        textButton = 18.sp,
-        textButtonOutlined = 16.sp,
-        bottomNavigation = 12.sp,
-        topNavigation = 19.sp,
-        snackBarMessage = 19.sp,
-        snackBarAction = 19.sp,
-    )
     val dimensionsPaddingExtended = ThemeDimensionsExtended.Paddings(
         page_h = 6.dp,
         page_v = 4.dp,

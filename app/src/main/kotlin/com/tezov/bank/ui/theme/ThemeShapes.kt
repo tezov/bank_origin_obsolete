@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 20:30
+ *  Created by Tezov on 02/03/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 20:30
+ *  Last modified 02/03/2023 22:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,14 +40,23 @@ object ThemeShapes {
         roundedCornerSupra = OutfitShapeSketch(
             size = OutfitShape.Size(40)
         ),
-        dialog = OutfitShapeSketch(
-            size = OutfitShape.Size(8.dp)
+        dialog = OutfitShapeSimple(
+            sketch = OutfitShapeSketch(
+                size = OutfitShape.Size(8.dp)
+            ),
+            color =
         ),
-        snackbar = OutfitShapeSketch(
-            size = OutfitShape.Size(12.dp)
+        snackbar = OutfitShapeSimple(
+            sketch = OutfitShapeSketch(
+                size = OutfitShape.Size(12.dp)
+            ),
+            color =
         ),
-        bottomSheet = OutfitShapeSketch(
-            size = OutfitShape.Size(topStart = 10.dp, topEnd = 10.dp)
+        bottomSheet = OutfitShapeSimple(
+            sketch = OutfitShapeSketch(
+                size = OutfitShape.Size(topStart = 10.dp, topEnd = 10.dp)
+            ),
+            color =
         ),
     )
 
@@ -71,14 +80,23 @@ object ThemeShapes {
         strokeSupra =  OutfitBorderSketch(
             size = 5.5.dp,
         ),
-        dialog =  OutfitBorderSketch(
-            size = 2.dp,
+        dialog =  OutfitBorderSimple(
+            sketch = OutfitBorderSketch(
+                size = 2.dp,
+            ),
+            color =
         ),
-        button = OutfitBorderSketch(
-            size = 2.dp,
+        button = OutfitBorderSimple(
+            sketch = OutfitBorderSketch(
+                size = 2.dp,
+            ),
+            color =
         ),
-        buttonOutlined = OutfitBorderSketch(
-            size = 2.dp,
+        buttonOutlined = OutfitBorderSimple(
+            sketch = OutfitBorderSketch(
+                size = 2.dp,
+            ),
+            color =
         ),
     )
 

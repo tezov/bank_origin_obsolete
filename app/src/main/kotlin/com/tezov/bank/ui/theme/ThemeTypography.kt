@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 20:30
+ *  Created by Tezov on 02/03/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 20:30
+ *  Last modified 02/03/2023 22:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,16 +17,39 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.bank.ui.theme.font.fontUbuntu
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSketch
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeDimensionsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeTypographiesExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsFontExtended
 
 object ThemeTypography {
     @Composable
     fun providesTypographies() = androidx.compose.material.Typography()
+
+    val dimensionsFontExtended = ThemeDimensionsExtended.Fonts(
+        textTitle = 20.sp,
+        textSubtitle = 15.sp,
+        textHelper = 13.sp,
+        textSupra = 34.sp,
+        textHuge = 26.sp,
+        textBig = 20.sp,
+        textNormal = 16.sp,
+        textSmall = 13.sp,
+        textMicro = 10.sp,
+        textFieldValue = 18.sp,
+        textFieldLabel = 12.sp,
+        textLink = 20.sp,
+        textButton = 18.sp,
+        textButtonOutlined = 16.sp,
+        bottomNavigation = 12.sp,
+        topNavigation = 19.sp,
+        snackBarMessage = 19.sp,
+        snackBarAction = 19.sp,
+    )
 
     @Composable
     fun providesTypographiesExtended() = ThemeTypographiesExtended.Sketch(
