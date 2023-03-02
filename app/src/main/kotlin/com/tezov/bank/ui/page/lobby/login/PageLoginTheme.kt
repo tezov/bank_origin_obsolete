@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/03/2023 22:00
+ *  Created by Tezov on 02/03/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/03/2023 22:00
+ *  Last modified 02/03/2023 20:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -150,7 +150,7 @@ object PageLoginTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        button = MaterialTheme.shapesSimpleExtended.roundedCornerNormal.copyToStateStyle(),
+        button = MaterialTheme.shapesSketchExtended.roundedCornerNormal.copyToStateStyle(),
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -163,9 +163,7 @@ object PageLoginTheme {
 
     @Composable
     fun provideBorders() = Borders(
-        iconBig = MaterialTheme.bordersExtended.strokeBig.getOrDefault().copy(
-            brush = SolidColor(colors.textContent)
-        ),
+        iconBig = MaterialTheme.bordersSketchExtended.strokeBig.resolveOrDefault(colors.textContent),
     )
 
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {

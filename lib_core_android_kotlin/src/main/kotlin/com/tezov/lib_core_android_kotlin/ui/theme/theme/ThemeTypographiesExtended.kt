@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 02/03/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 11:36
+ *  Last modified 02/03/2023 20:30
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,37 +15,38 @@ package com.tezov.lib_core_android_kotlin.ui.theme.theme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSketch
 
 
-val MaterialTheme.typographiesSimpleExtended
+val MaterialTheme.typographiesSketchExtended
     @Composable
     @ReadOnlyComposable
-    get() = ThemeTypographiesExtended.localSimple.current
-infix fun MaterialTheme.provides(value: ThemeTypographiesExtended.Simple) = ThemeTypographiesExtended.localSimple provides value
+    get() = ThemeTypographiesExtended.localSketch.current
+infix fun MaterialTheme.provides(value: ThemeTypographiesExtended.Sketch) = ThemeTypographiesExtended.localSketch provides value
 
 object ThemeTypographiesExtended{
 
     @Immutable
-    data class Simple(
-        val textTitle: OutfitTextSimple,
-        val textSubtitle: OutfitTextSimple,
-        val textHelper: OutfitTextSimple,
-        val textNormal: OutfitTextSimple,
-        val textSupra: OutfitTextSimple,
-        val textBig: OutfitTextSimple,
-        val textHuge: OutfitTextSimple,
-        val textSmall: OutfitTextSimple,
-        val textFieldValue: OutfitTextSimple,
-        val textFieldLabel: OutfitTextSimple,
-        val textLink: OutfitTextSimple,
-        val textButton: OutfitTextSimple,
-        val textButtonOutline: OutfitTextSimple,
-        val topNavigationTitle: OutfitTextSimple,
-        val bottomNavigationLabel: OutfitTextSimple,
-        val snackBarMessage: OutfitTextSimple,
-        val snackBarAction: OutfitTextSimple,
+    data class Sketch(
+        val textTitle: OutfitTextSketch,
+        val textSubtitle: OutfitTextSketch,
+        val textHelper: OutfitTextSketch,
+        val textNormal: OutfitTextSketch,
+        val textSupra: OutfitTextSketch,
+        val textBig: OutfitTextSketch,
+        val textHuge: OutfitTextSketch,
+        val textSmall: OutfitTextSketch,
+        val textFieldValue: OutfitTextSketch,
+        val textFieldLabel: OutfitTextSketch,
+        val textLink: OutfitTextSketch,
+        val textButton: OutfitTextSketch,
+        val textButtonOutline: OutfitTextSketch,
+        val topNavigationTitle: OutfitTextSketch,
+        val bottomNavigationLabel: OutfitTextSketch,
+        val snackBarMessage: OutfitTextSketch,
+        val snackBarAction: OutfitTextSketch,
     )
-    internal val localSimple: ProvidableCompositionLocal<Simple> = staticCompositionLocalOf {
+    internal val localSketch: ProvidableCompositionLocal<Sketch> = staticCompositionLocalOf {
         error("not provided")
     }
 

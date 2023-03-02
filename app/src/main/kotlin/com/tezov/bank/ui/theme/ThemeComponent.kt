@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 21:19
+ *  Created by Tezov on 02/03/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 21:08
+ *  Last modified 02/03/2023 20:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,12 +24,14 @@ import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.Simple.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeState
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.Simple.Style.Companion.copyToSimpleStyle
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Simple.Style.Companion.copyToSimpleStyle
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.State.Style.Companion.copyToStateStyle
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.Simple.Style.Companion.copyToSimpleStyle
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.Sketch.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object ThemeComponent {
@@ -41,7 +43,7 @@ object ThemeComponent {
             size = MaterialTheme.dimensionsSizeExtended.iconInfo,
             tint = MaterialTheme.colors.primary
         ),
-        outfitTextHeader = MaterialTheme.typographiesSimpleExtended.textNormal.copy {
+        outfitTextHeader = MaterialTheme.typographiesSketchExtended.textNormal.copyToSimpleStyle {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
@@ -67,7 +69,7 @@ object ThemeComponent {
             size = MaterialTheme.dimensionsSizeExtended.iconAction,
             tint = MaterialTheme.colors.primary
         ),
-        outfitText = MaterialTheme.typographiesSimpleExtended.textNormal.copy {
+        outfitText = MaterialTheme.typographiesSketchExtended.textNormal.copyToSimpleStyle {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
@@ -81,7 +83,7 @@ object ThemeComponent {
             size = MaterialTheme.dimensionsSizeExtended.iconInfo,
             tint = MaterialTheme.colors.primary
         ),
-        outfitTextHeader = MaterialTheme.typographiesSimpleExtended.textNormal.copy {
+        outfitTextHeader = MaterialTheme.typographiesSketchExtended.textNormal.copyToSimpleStyle {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
@@ -97,8 +99,8 @@ object ThemeComponent {
     @Composable
     fun provideActionCardStyle() = ActionCard.Style(
         outfitFrame = OutfitFrameSimple(
-            outfitShape = MaterialTheme.shapesSimpleExtended.roundedCornerNormal,
-            outfitBorder = MaterialTheme.bordersSimpleExtended.strokeNormal.copy {
+            outfitShape = MaterialTheme.shapesSketchExtended.roundedCornerNormal.copyToSimpleStyle(),
+            outfitBorder = MaterialTheme.bordersSketchExtended.strokeNormal.copyToSimpleStyle {
                 color = MaterialTheme.colorsCommonExtended.backgroundElevated
             }
         ),
@@ -106,13 +108,13 @@ object ThemeComponent {
             size = 56.dp,
             tint = MaterialTheme.colors.primary
         ),
-        outfitTextTitle = MaterialTheme.typographiesSimpleExtended.textNormal.copy {
-            typo = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+        outfitTextTitle = MaterialTheme.typographiesSketchExtended.textNormal.copyToSimpleStyle {
+            typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
         },
-        outfitTextSubtitle = MaterialTheme.typographiesSimpleExtended.textNormal.copy {
-            typo = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+        outfitTextSubtitle = MaterialTheme.typographiesSketchExtended.textNormal.copyToSimpleStyle {
+            typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
             color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
@@ -122,7 +124,9 @@ object ThemeComponent {
     @Composable
     fun providePagerStyle() = HorizontalScrollable.Pager.Style(
         outfitShapeIndicator = OutfitShapeState(
-            template = OutfitShape.Template.Circle,
+            sketch = OutfitShapeSketch(
+                template = OutfitShape.Template.Circle,
+            ),
             outfitColor = OutfitColorsSimple(
                 active = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm.active,
                 inactive = MaterialTheme.colorsCommonExtended.onSecondaryVariant,

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/03/2023 22:00
+ *  Created by Tezov on 02/03/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/03/2023 22:00
+ *  Last modified 02/03/2023 20:30
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 
 fun Modifier.background(style: OutfitShape.Simple.Style) =
     if (style.color.isSpecified) background(style.color) else this
@@ -114,19 +113,19 @@ object OutfitShape {
 
             companion object {
 
-                open class Scope internal constructor(style: Style) {
+                open class Builder internal constructor(style: Style) {
                     var template = style.template
                     var size = style.size
 
-                    open internal fun get() = Style(
+                    internal open fun get() = Style(
                         template = template,
                         size = size,
                     )
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Scope.() -> Unit = {}) = Scope(this).also {
-                    it.scope()
+                fun Style.copy(builder: @Composable Builder.() -> Unit = {}) = Builder(this).also {
+                    it.builder()
                 }.get()
 
             }
@@ -136,8 +135,8 @@ object OutfitShape {
                 size = style.size,
             )
 
-            fun resolve(): RoundedCornerShape? = template.get(size)
-            fun resolveOrDefault() = resolve() ?: RoundedCornerShape(8.dp)
+            open fun resolve(): RoundedCornerShape? = template.get(size)
+            open fun resolveOrDefault() = resolve() ?: RoundedCornerShape(8.dp)
         }
 
     }
@@ -151,7 +150,7 @@ object OutfitShape {
 
             companion object {
 
-                open class Scope internal constructor(style: Style): Sketch.Style.Companion.Scope(style) {
+                open class Builder internal constructor(style: Style): Sketch.Style.Companion.Builder(style) {
                     var color = style.color
 
                     override fun get() = Style(
@@ -161,16 +160,16 @@ object OutfitShape {
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Scope.() -> Unit = {}) = Scope(this).also {
+                fun Style.copy(scope: @Composable Builder.() -> Unit = {}) = Builder(this).also {
                     it.scope()
                 }.get()
 
                 @Composable
-                fun Sketch.Style.copyToSimpleStyle(scope: @Composable Scope.() -> Unit = {}) =
-                    Scope(Style(this)).also { it.scope() }.get()
+                fun Sketch.Style.copyToSimpleStyle(scope: @Composable Builder.() -> Unit = {}) =
+                    Builder(Style(this)).also { it.scope() }.get()
 
                 @Composable
-                fun State.Style.copyToSimpleStyle(scope: @Composable Scope.() -> Unit = {}) = Scope(
+                fun State.Style.copyToSimpleStyle(scope: @Composable Builder.() -> Unit = {}) = Builder(
                     Style(
                         sketch = this,
                         color = outfitColor.active
@@ -197,7 +196,7 @@ object OutfitShape {
 
             companion object {
 
-                open class Scope internal constructor(style: Style): Sketch.Style.Companion.Scope(style) {
+                open class Builder internal constructor(style: Style): Sketch.Style.Companion.Builder(style) {
                     var outfitColor = style.outfitColor
 
                     override fun get() = Style(
@@ -207,16 +206,16 @@ object OutfitShape {
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Scope.() -> Unit = {}) = Scope(this).also {
+                fun Style.copy(scope: @Composable Builder.() -> Unit = {}) = Builder(this).also {
                     it.scope()
                 }.get()
 
                 @Composable
-                fun Sketch.Style.copyToStateStyle(scope: @Composable Scope.() -> Unit = {}) =
-                    Scope(Style(this)).also { it.scope() }.get()
+                fun Sketch.Style.copyToStateStyle(scope: @Composable Builder.() -> Unit = {}) =
+                    Builder(Style(this)).also { it.scope() }.get()
 
                 @Composable
-                fun Simple.Style.copyToStateStyle(scope: @Composable Scope.() -> Unit = {}) = Scope(
+                fun Simple.Style.copyToStateStyle(scope: @Composable Builder.() -> Unit = {}) = Builder(
                     Style(
                         sketch = this,
                         outfitColor = OutfitColorsSimple(

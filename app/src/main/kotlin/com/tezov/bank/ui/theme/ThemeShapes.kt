@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 16:10
+ *  Created by Tezov on 02/03/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 15:25
+ *  Last modified 02/03/2023 20:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,81 +15,70 @@ package com.tezov.bank.ui.theme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeShapesExtended
 
 object ThemeShapes {
 
     @Composable
-    fun provideShapes() = ThemeShapesExtended.Shapes.Simple(
-        roundedCornerMicro = OutfitShapeSimple(
+    fun provideShapes() = ThemeShapesExtended.Shapes.Sketch(
+        roundedCornerMicro = OutfitShapeSketch(
             size = OutfitShape.Size(4.dp)
         ),
-        roundedCornerSmall = OutfitShapeSimple(
+        roundedCornerSmall = OutfitShapeSketch(
             size = OutfitShape.Size(8.dp)
         ),
-        roundedCornerNormal = OutfitShapeSimple(
+        roundedCornerNormal = OutfitShapeSketch(
             size = OutfitShape.Size(12.dp)
         ),
-        roundedCornerBig = OutfitShapeSimple(
+        roundedCornerBig = OutfitShapeSketch(
             size = OutfitShape.Size(20.dp)
         ),
-        roundedCornerHuge = OutfitShapeSimple(
+        roundedCornerHuge = OutfitShapeSketch(
             size = OutfitShape.Size(28.dp)
         ),
-        roundedCornerSupra = OutfitShapeSimple(
+        roundedCornerSupra = OutfitShapeSketch(
             size = OutfitShape.Size(40)
         ),
-        dialog = OutfitShapeSimple(
+        dialog = OutfitShapeSketch(
             size = OutfitShape.Size(8.dp)
         ),
-        snackbar = OutfitShapeSimple(
+        snackbar = OutfitShapeSketch(
             size = OutfitShape.Size(12.dp)
         ),
-        bottomSheet = OutfitShapeSimple(
+        bottomSheet = OutfitShapeSketch(
             size = OutfitShape.Size(topStart = 10.dp, topEnd = 10.dp)
         ),
     )
 
     @Composable
-    fun provideBorders() = ThemeShapesExtended.Borders.Simple(
-        strokeMicro =  OutfitBorderSimple(
+    fun provideBorders() = ThemeShapesExtended.Borders.Sketch(
+        strokeMicro =  OutfitBorderSketch(
             size = 0.8.dp,
-            color = MaterialTheme.colors.primary
         ),
-        strokeSmall =  OutfitBorderSimple(
+        strokeSmall =  OutfitBorderSketch(
             size = 1.dp,
-            color = MaterialTheme.colors.primary
         ),
-        strokeNormal = OutfitBorderSimple(
+        strokeNormal = OutfitBorderSketch(
             size = 1.5.dp,
-            color = MaterialTheme.colors.primary
         ),
-        strokeBig =  OutfitBorderSimple(
+        strokeBig =  OutfitBorderSketch(
             size = 2.2.dp,
-            color = MaterialTheme.colors.primary
         ),
-        strokeHuge =  OutfitBorderSimple(
+        strokeHuge =  OutfitBorderSketch(
             size = 4.dp,
-            color = MaterialTheme.colors.primary
         ),
-        strokeSupra =  OutfitBorderSimple(
+        strokeSupra =  OutfitBorderSketch(
             size = 5.5.dp,
-            color = MaterialTheme.colors.primary
         ),
-        dialog =  OutfitBorderSimple(
+        dialog =  OutfitBorderSketch(
             size = 2.dp,
-            color = MaterialTheme.colors.primary
         ),
-        button = OutfitBorderSimple(
+        button = OutfitBorderSketch(
             size = 2.dp,
-            color = MaterialTheme.colors.primary
         ),
-        buttonOutlined = OutfitBorderSimple(
+        buttonOutlined = OutfitBorderSketch(
             size = 2.dp,
-            color = MaterialTheme.colors.primary
         ),
     )
 

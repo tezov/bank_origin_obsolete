@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/03/2023 22:00
+ *  Created by Tezov on 02/03/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/03/2023 22:00
+ *  Last modified 02/03/2023 20:30
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,14 +16,18 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-fun Modifier.border(style: OutfitBorder.Simple.Style) = style.resolve()?.let { border(it) } ?: this
+fun Modifier.border(style: OutfitBorder.Sketch.Style, color: Color) =
+    style.resolve(color)?.let { border(it) } ?: this
 
-fun Modifier.border(style: OutfitBorder.State.Style, enabled: Boolean) = style.resolve(enabled)?.let { border(it) } ?: this
+fun Modifier.border(style: OutfitBorder.Simple.Style) =
+    style.resolve()?.let { border(it) } ?: this
+
+fun Modifier.border(style: OutfitBorder.State.Style, enabled: Boolean) =
+    style.resolve(enabled)?.let { border(it) } ?: this
 
 object OutfitBorder {
 
@@ -38,31 +42,28 @@ object OutfitBorder {
 
     }
 
-    object Simple {
+    object Sketch {
 
         open class Style(
             val template: Template = Template.Fill,
             val size: Dp? = null,
-            val color: Color = Color.Unspecified,
         ) {
 
             companion object {
 
-                open class Scope internal constructor(style: Style) {
+                open class Builder internal constructor(style: Style) {
                     var template = style.template
                     var size = style.size
-                    var color = style.color
 
-                    internal fun get() = Style(
+                    internal open fun get() = Style(
                         template = template,
                         size = size,
-                        color = color,
                     )
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Scope.()->Unit = {}) = Scope(this).also {
-                    it.scope()
+                fun Style.copy(builder: @Composable Builder.() -> Unit = {}) = Builder(this).also {
+                    it.builder()
                 }.get()
 
             }
@@ -70,11 +71,59 @@ object OutfitBorder {
             constructor(style: Style) : this(
                 template = style.template,
                 size = style.size,
+            )
+
+            open fun resolve(color:Color) = template.get(size, color)
+            open fun resolveOrDefault(color:Color) = resolve(color) ?: BorderStroke(1.dp, color)
+
+        }
+
+    }
+
+    object Simple {
+
+        open class Style(
+            sketch: Sketch.Style = Sketch.Style(),
+            val color: Color = Color.Unspecified,
+        ):Sketch.Style(sketch) {
+
+            companion object {
+
+                open class Builder internal constructor(style: Style):Sketch.Style.Companion.Builder(style) {
+                    var color = style.color
+
+                    override fun get() = Style(
+                        sketch = super.get(),
+                        color = color,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Builder.() -> Unit = {}) = Builder(this).also {
+                    it.scope()
+                }.get()
+
+                @Composable
+                fun Sketch.Style.copyToSimpleStyle(scope: @Composable Builder.() -> Unit = {}) =
+                    Builder(Style(this)).also { it.scope() }.get()
+
+                @Composable
+                fun State.Style.copyToSimpleStyle(scope: @Composable Builder.() -> Unit = {}) = Builder(
+                    Style(
+                        sketch = this,
+                        color = outfitColor.active
+                    )
+                ).also { it.scope() }.get()
+
+            }
+
+            constructor(style: Style) : this(
+                sketch = style,
                 color = style.color,
             )
 
             fun resolve() = template.get(size, color)
-            fun resolveOrDefault() = resolve() ?: BorderStroke(1.dp, Color.Black)
+            fun resolveOrDefault() = resolve() ?: BorderStroke(1.dp, color)
 
         }
 
@@ -83,44 +132,43 @@ object OutfitBorder {
     object State {
 
         open class Style(
-            val template: Template = Template.Fill,
-            val size: Dp? = null,
+            sketch: Sketch.Style = Sketch.Style(),
             val outfitColor: OutfitColorsSimple = OutfitColorsSimple(),
-        ) {
+        ):Sketch.Style(sketch) {
 
             companion object {
 
-                fun Style.copy(
-                    template: Template? = null,
-                    size: Dp? = null,
-                    outfitColor: OutfitColorsSimple? = null,
-                ) = Style(
-                    template = template ?: this.template,
-                    size = size ?: this.size,
-                    outfitColor = outfitColor ?: this.outfitColor,
-                )
-
-                open class Scope internal constructor(style: Style) {
-                    var template = style.template
-                    var size = style.size
+                open class Builder internal constructor(style: Style):Sketch.Style.Companion.Builder(style) {
                     var outfitColor = style.outfitColor
 
-                    internal fun get() = Style(
-                        template = template,
-                        size = size,
+                    override fun get() = Style(
+                        sketch = super.get(),
                         outfitColor = outfitColor,
                     )
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Scope.()->Unit = {}) = Scope(this).also {
+                fun Style.copy(scope: @Composable Builder.() -> Unit = {}) = Builder(this).also {
                     it.scope()
                 }.get()
+
+                @Composable
+                fun Sketch.Style.copyToStateStyle(scope: @Composable Builder.() -> Unit = {}) =
+                    Builder(Style(this)).also { it.scope() }.get()
+
+                @Composable
+                fun Simple.Style.copyToStateStyle(scope: @Composable Builder.() -> Unit = {}) = Companion.Builder(
+                    Style(
+                        sketch = this,
+                        outfitColor = OutfitColorsSimple(
+                            active = color
+                        )
+                    )
+                ).also { it.scope() }.get()
             }
 
             constructor(style: Style) : this(
-                template = style.template,
-                size = style.size,
+                sketch = style,
                 outfitColor = style.outfitColor,
             )
 
