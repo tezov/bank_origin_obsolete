@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 02/03/2023 21:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 11:36
+ *  Last modified 02/03/2023 21:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,12 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesSimpleExtended
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.navigation.bottom_navigation.BottomNavigationState
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesSketchExtended
 
 object BottomNavigation:
     ActivitySub<BottomNavigationState, BottomNavigationAction> {
@@ -53,11 +53,11 @@ object BottomNavigation:
                     label = {
                         Text(
                             text = stringResource(id = item.titleResourceId),
-                            style = MaterialTheme.typographiesSimpleExtended.bottomNavigationLabel.typo,
+                            style = MaterialTheme.typographiesSketchExtended.bottomNavigationLabel.typo,
                         )
                     },
-                    selectedContentColor = MaterialTheme.colorsCommonExtended.bottomNavigation.active,
-                    unselectedContentColor = MaterialTheme.colorsCommonExtended.bottomNavigation.inactive,
+                    selectedContentColor = MaterialTheme.typographiesSketchExtended.bottomNavigationLabel.outfitColor.active,
+                    unselectedContentColor = MaterialTheme.typographiesSketchExtended.bottomNavigationLabel.outfitColor.inactive,
                     alwaysShowLabel = true,
                     selected = action.navigationController.currentRoute() == item.route,
                     onClick = {

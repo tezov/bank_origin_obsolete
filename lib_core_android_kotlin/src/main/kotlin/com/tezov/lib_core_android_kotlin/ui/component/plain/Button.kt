@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/03/2023 22:00
+ *  Created by Tezov on 02/03/2023 21:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/03/2023 22:00
+ *  Last modified 02/03/2023 21:19
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -53,7 +53,7 @@ object Button {
                     elevation = elevation ?: this.elevation,
                 )
 
-                open class Scope internal constructor(style: Style) {
+                open class Builder internal constructor(style: Style) {
                     var outfitFrame = style.outfitFrame
                     var outfitText = style.outfitText
                     var elevation = style.elevation
@@ -66,8 +66,8 @@ object Button {
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Scope.()->Unit = {}) = Scope(this).also {
-                    it.scope()
+                fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+                    it.builder()
                 }.get()
 
             }
@@ -122,7 +122,9 @@ object Button {
                     ),
                 ),
                 outfitBorder = OutfitBorderState(
-                    size = 1.dp,
+                    sketch = OutfitBorderSketch(
+                        size = 1.dp
+                    ),
                     outfitColor = OutfitColorsSimple(
                         active = Color.Gray,
                         inactive = Color.Gray.copy(alpha = 0.25f),
@@ -134,7 +136,7 @@ object Button {
         ){
             companion object{
 
-                open class Scope internal constructor(style: Style) {
+                open class Builder internal constructor(style: Style) {
                     var outfitFrame = style.outfitFrame
                     var outfitText = style.outfitText
                     var elevation = style.elevation
@@ -147,8 +149,8 @@ object Button {
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Scope.()->Unit = {}) = Scope(this).also {
-                    it.scope()
+                fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+                    it.builder()
                 }.get()
 
             }

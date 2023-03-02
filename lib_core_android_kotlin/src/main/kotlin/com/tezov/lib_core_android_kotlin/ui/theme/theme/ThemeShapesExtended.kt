@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 20:30
+ *  Created by Tezov on 02/03/2023 21:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 20:30
+ *  Last modified 02/03/2023 21:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,9 +40,9 @@ object ThemeShapesExtended{
             val roundedCornerHuge: OutfitShapeSketch,
             val roundedCornerSupra: OutfitShapeSketch,
 
-            val dialog: OutfitShapeSketch,
-            val snackbar: OutfitShapeSketch,
-            val bottomSheet: OutfitShapeSketch,
+            val dialog: OutfitShapeSimple,
+            val snackbar: OutfitShapeSimple,
+            val bottomSheet: OutfitShapeSimple,
         )
         internal val localShapesSketch: ProvidableCompositionLocal<Sketch> = staticCompositionLocalOf {
             error("not provided")
@@ -59,9 +59,10 @@ object ThemeShapesExtended{
             val strokeBig: OutfitBorderSketch,
             val strokeHuge: OutfitBorderSketch,
             val strokeSupra: OutfitBorderSketch,
-            val dialog: OutfitBorderSketch,
-            val button: OutfitBorderSketch,
-            val buttonOutlined: OutfitBorderSketch,
+
+            val dialog: OutfitBorderSimple,
+            val button: OutfitBorderState,
+            val buttonOutlined: OutfitBorderState,
         )
         internal val localBordersSketch: ProvidableCompositionLocal<Sketch> = staticCompositionLocalOf {
             error("not provided")

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 02/03/2023 21:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 11:51
+ *  Last modified 02/03/2023 21:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,12 +16,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
-
-val MaterialTheme.dimensionsFontExtended
-    @Composable
-    @ReadOnlyComposable
-    get() = ThemeDimensionsExtended.localFonts.current
-infix fun MaterialTheme.provides(value: ThemeDimensionsExtended.Fonts) = ThemeDimensionsExtended.localFonts provides value
 
 val MaterialTheme.dimensionsPaddingExtended
     @Composable
@@ -48,30 +42,6 @@ val MaterialTheme.dimensionsSizeExtended
 infix fun MaterialTheme.provides(value:  ThemeDimensionsExtended.Sizes) = ThemeDimensionsExtended.localSizes provides value
 
 object ThemeDimensionsExtended{
-    @Immutable
-    data class Fonts(
-        val textTitle: TextUnit,
-        val textSubtitle: TextUnit,
-        val textHelper: TextUnit,
-        val textSupra: TextUnit,
-        val textHuge: TextUnit,
-        val textBig: TextUnit,
-        val textNormal: TextUnit,
-        val textSmall: TextUnit,
-        val textMicro: TextUnit,
-        val textFieldValue: TextUnit,
-        val textFieldLabel: TextUnit,
-        val textLink: TextUnit,
-        val textButton: TextUnit,
-        val textButtonOutlined: TextUnit,
-        val bottomNavigation: TextUnit,
-        val topNavigation: TextUnit,
-        val snackBarMessage: TextUnit,
-        val snackBarAction: TextUnit,
-    )
-    internal val localFonts: ProvidableCompositionLocal<Fonts> = staticCompositionLocalOf {
-        error("not provided")
-    }
 
     @Immutable
     data class Paddings(
@@ -152,8 +122,7 @@ object ThemeDimensionsExtended{
         val dividerSmall:Dp,
         val dividerNormal:Dp,
         val dividerBig:Dp,
-
-        )
+    )
     internal val localSizes: ProvidableCompositionLocal<Sizes> = staticCompositionLocalOf {
         error("not provided")
     }

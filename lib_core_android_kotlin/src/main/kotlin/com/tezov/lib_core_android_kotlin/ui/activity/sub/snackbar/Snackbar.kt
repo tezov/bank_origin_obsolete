@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 02/03/2023 21:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 12:03
+ *  Last modified 02/03/2023 21:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,10 +17,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.Simple.Style.Companion.copyToSimpleStyle
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
@@ -45,26 +47,28 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
                 )
         ) { data ->
             Snackbar(
-                backgroundColor = MaterialTheme.shapesSimpleExtended.snackbar.color,
+                backgroundColor = MaterialTheme.shapesSketchExtended.snackbar.color,
                 elevation = MaterialTheme.dimensionsElevationExtended.snackbar,
-                shape = MaterialTheme.shapesSimpleExtended.snackbar.resolveOrDefault(),
+                shape = MaterialTheme.shapesSketchExtended.snackbar.resolveOrDefault(),
                 content = {
-                    Text(
+                    Text.Simple(
                         text = data.message,
-                        style = MaterialTheme.typographiesSimpleExtended.snackBarMessage.typo,
-                        color = MaterialTheme.typographiesSimpleExtended.snackBarMessage.color,
+                        style = MaterialTheme.typographiesSketchExtended.snackBarMessage,
                     )
                 },
                 action = {
                     data.actionLabel?.let { label ->
+
+
                         TextButton(
                             onClick = { data.performAction() }) {
-                            Text(
+                            Text.Simple(
                                 text = label,
-                                style = MaterialTheme.typographiesSimpleExtended.snackBarAction.typo,
-                                color = MaterialTheme.typographiesSimpleExtended.snackBarAction.color,
+                                style = MaterialTheme.typographiesSketchExtended.snackBarAction,
                             )
                         }
+
+
                     }
                 }
             )

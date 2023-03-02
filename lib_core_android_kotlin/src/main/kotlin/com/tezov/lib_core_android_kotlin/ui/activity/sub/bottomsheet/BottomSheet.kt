@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 02/03/2023 21:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 12:03
+ *  Last modified 02/03/2023 21:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,9 +22,10 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.Activit
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonResource
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsElevationExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesSimpleExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesSketchExtended
 
 object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
 
@@ -46,10 +47,10 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
             sheetElevation = 0.dp,
             sheetContent = {
                 Surface(
+                    color = MaterialTheme.shapesSketchExtended.bottomSheet.color,
                     modifier = Modifier.padding(start = 1.dp, end = 1.dp),
-                    shape = MaterialTheme.shapesSimpleExtended.bottomSheet.resolveOrDefault(),
+                    shape = MaterialTheme.shapesSketchExtended.bottomSheet.resolveOrDefault(),
                     elevation = MaterialTheme.dimensionsElevationExtended.bottomSheet,
-                    color = MaterialTheme.shapesSimpleExtended.bottomSheet.color
                 ) {
                     state.sheetContent()
                 }

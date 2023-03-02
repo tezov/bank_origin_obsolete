@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 02/03/2023 21:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 11:36
+ *  Last modified 02/03/2023 21:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -52,15 +52,9 @@ object ThemeColorsExtended {
         val onBackgroundButtonCancel: OutfitColorsSimple,
 
         val topAppBarBackground: Color,
-        val topAppBarContentText: Color,
         val topAppBarContentIcon: Color,
 
         val bottomNavigationBackground: Color,
-        val bottomNavigation: OutfitColorsSimple,
-
-        val snackbarBackground: Color,
-        val snackbarMessage: Color,
-        val snackbarAction: Color,
     )
     internal val localCommon:ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
         error("not provided")

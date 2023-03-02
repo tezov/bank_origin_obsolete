@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 21:19
+ *  Created by Tezov on 02/03/2023 21:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 21:08
+ *  Last modified 02/03/2023 21:19
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,8 +26,10 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderSketch
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeSketch
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import kotlin.properties.Delegates
 
@@ -59,13 +61,23 @@ object KeyBoard {
         open class Style(
             val colorOnBackground: Color = Color.Black,
             val colorBackground: Color = Color.Transparent,
-            val outfitBorderOuter: OutfitBorderSimple = OutfitBorderSimple(size = 2.dp, color = Color.Black),
-            val outfitBorderInner: OutfitBorderSimple = OutfitBorderSimple(size = 1.dp, color = Color.Black),
+            val outfitBorderOuter: OutfitBorderSimple = OutfitBorderSimple(
+                sketch = OutfitBorderSketch(
+                    size = 2.dp
+                ),
+                color = Color.Black
+            ),
+            val outfitBorderInner: OutfitBorderSimple = OutfitBorderSimple(
+                sketch = OutfitBorderSketch(
+                    size = 1.dp
+                ),
+                color = Color.Black
+            ),
         ) {
 
-            companion object{
+            companion object {
 
-                open class Scope internal constructor(style: Style) {
+                open class Builder internal constructor(style: Style) {
                     var colorOnBackground = style.colorOnBackground
                     var colorBackground = style.colorBackground
                     var outfitBorderOuter = style.outfitBorderOuter
@@ -80,8 +92,8 @@ object KeyBoard {
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Scope.()->Unit) = Scope(this).also {
-                    it.scope()
+                fun Style.copy(builder: @Composable Builder.() -> Unit) = Builder(this).also {
+                    it.builder()
                 }.get()
 
             }
