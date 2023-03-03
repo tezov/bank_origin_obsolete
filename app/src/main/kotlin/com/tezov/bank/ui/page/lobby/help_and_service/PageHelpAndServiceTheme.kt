@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 11:36
+ *  Last modified 03/03/2023 22:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.theme.ThemeComponent
+import com.tezov.bank.ui.theme.ThemeComponents
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageHelpAndServiceTheme.colors: PageHelpAndServiceTheme.Colors
@@ -98,7 +98,7 @@ object PageHelpAndServiceTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        titleBig = MaterialTheme.typographiesSimpleExtended.textHuge.typo.copy(
+        titleBig = MaterialTheme.typographiesSketchExtended.textHuge.typo.copy(
             color = colors.onBackground,
             fontWeight = FontWeight.Bold
         ),
@@ -118,8 +118,8 @@ object PageHelpAndServiceTheme {
 
     @Composable
     fun provideStyles() = Style(
-        sectionRow = ThemeComponent.provideSectionRowStyle(),
-        sectionCard = ThemeComponent.provideSectionCardStyle(),
+        sectionRow = ThemeComponents.provideSectionRowStyle(),
+        sectionCard = ThemeComponents.provideSectionCardStyle(),
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

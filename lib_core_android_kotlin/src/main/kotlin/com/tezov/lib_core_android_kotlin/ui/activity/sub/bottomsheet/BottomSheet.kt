@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 21:57
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 21:57
+ *  Last modified 03/03/2023 22:28
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,22 +12,55 @@
 
 package com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonResource
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsElevationExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesSketchExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
+
+    open class Style(
+        val outfitShape: OutfitShapeSimple = OutfitShapeSimple(),
+        val padding: PaddingValues = PaddingValues(1.dp, 1.dp),
+        val elevation: Dp = 0.dp,
+    ){
+        companion object{
+
+            open class Builder internal constructor(style: Style) {
+                var shape = style.outfitShape
+                var padding = style.padding
+                var elevation = style.elevation
+
+                internal fun get() = Style(
+                    elevation = elevation,
+                    padding = padding,
+                    outfitShape = shape,
+                )
+            }
+
+            @Composable
+            fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+                it.builder()
+            }.get()
+
+        }
+
+        constructor(style: Style) : this(
+            outfitShape = style.outfitShape,
+            padding = style.padding,
+            elevation = style.elevation,
+        )
+    }
 
     @Composable
     operator fun invoke(content: @Composable () -> Unit) {
@@ -47,10 +80,10 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
             sheetElevation = 0.dp,
             sheetContent = {
                 Surface(
-                    color = MaterialTheme.shapesSketchExtended.bottomSheet.color,
-                    modifier = Modifier.padding(start = 1.dp, end = 1.dp),
-                    shape = MaterialTheme.shapesSketchExtended.bottomSheet.resolveOrDefault(),
-                    elevation = MaterialTheme.dimensionsElevationExtended.bottomSheet,
+                    color = MaterialTheme.componentsExtended.bottomSheet.outfitShape.color,
+                    modifier = Modifier.padding(MaterialTheme.componentsExtended.bottomSheet.padding),
+                    shape = MaterialTheme.componentsExtended.bottomSheet.outfitShape.resolveOrDefault(),
+                    elevation = MaterialTheme.componentsExtended.bottomSheet.elevation,
                 ) {
                     state.sheetContent()
                 }

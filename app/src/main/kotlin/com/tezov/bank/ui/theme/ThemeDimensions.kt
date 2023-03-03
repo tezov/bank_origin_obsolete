@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 22:02
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 22:02
+ *  Last modified 03/03/2023 22:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -49,8 +49,6 @@ object ThemeDimensions {
         blockBig_h = 18.dp,
         blockNormal_h = 10.dp,
         blockSmall_h = 6.dp,
-        bottomNavigation = 4.dp,
-        topNavigation = 4.dp
     )
 
     val dimensionsSpacingExtended = ThemeDimensionsExtended.Spacings(
@@ -70,9 +68,6 @@ object ThemeDimensions {
         elevationBig = 10.dp,
         elevationNormal = 6.dp,
         elevationSmall = 3.dp,
-        dialog = 2.dp,
-        snackbar = 4.dp,
-        bottomSheet = 2.dp,
     )
 
     val dimensionsSizeExtended = ThemeDimensionsExtended.Sizes(

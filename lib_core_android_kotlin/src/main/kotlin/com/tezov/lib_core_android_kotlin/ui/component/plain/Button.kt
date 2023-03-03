@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 21:57
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 21:19
+ *  Last modified 03/03/2023 21:58
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,7 +32,7 @@ object Button {
                     sketch = OutfitShapeSketch(
                         size = OutfitShape.Size(8.dp)
                     ),
-                    outfitColor = OutfitColorsSimple(
+                    outfitColor = OutfitColorsState(
                         active = Color.Gray,
                         inactive = Color.Gray.copy(alpha = 0.25f),
                     )
@@ -42,16 +42,6 @@ object Button {
             val elevation: Dp? = null,
          ){
             companion object{
-
-                fun Style.copy(
-                    outfitFrame: OutfitFrameState? = null,
-                    outfitText: OutfitTextState? = null,
-                    elevation: Dp? = null,
-                ) = Style(
-                    outfitFrame = outfitFrame ?: this.outfitFrame,
-                    outfitText = outfitText ?: this.outfitText,
-                    elevation = elevation ?: this.elevation,
-                )
 
                 open class Builder internal constructor(style: Style) {
                     var outfitFrame = style.outfitFrame
@@ -125,7 +115,7 @@ object Button {
                     sketch = OutfitBorderSketch(
                         size = 1.dp
                     ),
-                    outfitColor = OutfitColorsSimple(
+                    outfitColor = OutfitColorsState(
                         active = Color.Gray,
                         inactive = Color.Gray.copy(alpha = 0.25f),
                     )

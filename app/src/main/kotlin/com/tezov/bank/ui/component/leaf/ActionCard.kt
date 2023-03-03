@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 18:03
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 18:03
+ *  Last modified 03/03/2023 22:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -48,10 +48,10 @@ object ActionCard {
     data class Style(
         val outfitFrame: OutfitFrameSimple = OutfitFrameSimple(
             outfitShape = OutfitShapeSimple(
-                size = OutfitShape.Size(8.dp)
+//                size = OutfitShape.Size(8.dp)
             ),
             outfitBorder = OutfitBorderSimple(
-                size = 1.dp,
+//                size = 1.dp,
                 color = Color.Black,
             )
         ),

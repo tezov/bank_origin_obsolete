@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 20:30
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 20:30
+ *  Last modified 03/03/2023 21:58
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,12 +18,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.isSpecified
 
-fun Modifier.background(style: OutfitColorsState.Simple.Style, enabled: Boolean) =
+fun Modifier.background(style: OutfitColors.State.Style, enabled: Boolean) =
     style.resolve(enabled).takeIf { it.isSpecified }?.let { background(it) } ?: this
 
-object OutfitColorsState {
+object OutfitColors {
 
-    object Simple{
+    object State{
 
         open class Style(
             val active: Color = Color.Unspecified,

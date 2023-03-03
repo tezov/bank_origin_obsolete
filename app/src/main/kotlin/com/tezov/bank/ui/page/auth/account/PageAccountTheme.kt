@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 11:36
+ *  Last modified 03/03/2023 22:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -99,7 +99,7 @@ object PageAccountTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        card = MaterialTheme.shapesExtended.roundedCornerNormal.getOrDefault(),
+        card = MaterialTheme.shapesSketchExtended.roundedCornerNormal.resolveOrDefault(),
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -130,10 +130,10 @@ object PageAccountTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesSimpleExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesSketchExtended.textTitle.typo.copy(
             color = colors.textContent
         ),
-        normal = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+        normal = MaterialTheme.typographiesSketchExtended.textNormal.typo.copy(
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),

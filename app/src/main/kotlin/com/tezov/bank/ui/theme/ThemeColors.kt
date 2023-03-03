@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 22:02
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 22:02
+ *  Last modified 03/03/2023 22:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,7 @@ package com.tezov.bank.ui.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.ui.graphics.Color
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsState
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 
 object ThemeColors {
@@ -69,6 +69,7 @@ object ThemeColors {
         onPrimaryVariant = Common.whiteShiny,
         onSecondaryVariant = Common.blueClear,
 
+        background = Common.blueClear,
         backgroundVariant = Common.blueSea,
         onBackgroundVariant = Common.whiteShiny,
 
@@ -80,49 +81,30 @@ object ThemeColors {
         onBackgroundModal = Common.blueNight,
         onBackgroundModalVariant = Common.blueElegant,
 
-        background = OutfitColorsSimple(
-            active = Common.blueClear,
-            inactive = Common.grayDark
-        ),
-        backgroundButtonConfirm = OutfitColorsSimple(
+        backgroundButtonConfirm = OutfitColorsState(
             active = Common.blueElegant,
             inactive = Common.whiteDark
         ),
-        onBackgroundButtonConfirm = OutfitColorsSimple(
+        onBackgroundButtonConfirm = OutfitColorsState(
             active = Common.whiteShiny,
             inactive = Common.grayDark
         ),
-        backgroundButtonCancel = OutfitColorsSimple(
+        backgroundButtonCancel = OutfitColorsState(
             active = Common.blueShadow,
             inactive = Common.whiteDark
         ),
-        onBackgroundButtonCancel = OutfitColorsSimple(
+        onBackgroundButtonCancel = OutfitColorsState(
             active = Common.blueElegant,
             inactive = Common.grayDark
         ),
-        backgroundButtonProceed = OutfitColorsSimple(
+        backgroundButtonProceed = OutfitColorsState(
             active = Common.whiteShiny,
             inactive = Common.whiteDark
         ),
-        onBackgroundButtonProceed = OutfitColorsSimple(
+        onBackgroundButtonProceed = OutfitColorsState(
             active = Common.blueNight,
             inactive = Common.grayDark
         ),
 
-        topAppBarBackground = colorsLight.primary,
-        topAppBarContentIcon = colorsLight.onPrimary,
-
-        bottomNavigationBackground = Common.whiteShady,
-
-
-        topAppBarContentText = colorsLight.onPrimary,
-        bottomNavigation = OutfitColorsSimple(
-            active = Common.blueSea,
-            inactive = Common.blueSea
-        ),
-
-        snackbarBackground = colorsLight.primaryVariant,
-        snackbarMessage = Common.whiteShiny,
-        snackbarAction = Common.blueFlashy,
     )
 }

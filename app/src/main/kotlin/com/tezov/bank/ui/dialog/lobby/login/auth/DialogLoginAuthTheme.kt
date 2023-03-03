@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 12:30
+ *  Last modified 03/03/2023 22:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -139,8 +139,8 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        button = MaterialTheme.shapesExtended.roundedCornerNormal.getOrDefault(),
-        authCard = MaterialTheme.shapesExtended.roundedCornerSmall.getOrDefault(),
+        button = MaterialTheme.shapesSketchExtended.roundedCornerNormal.resolveOrDefault(),
+        authCard = MaterialTheme.shapesSketchExtended.roundedCornerSmall.resolveOrDefault(),
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -153,9 +153,7 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideBorders() = Borders(
-        authCard = MaterialTheme.bordersExtended.strokeNormal.getOrDefault().copy(
-            brush = SolidColor(colors.onBackground)
-        ),
+        authCard = MaterialTheme.bordersSketchExtended.strokeNormal.resolveOrDefault(colors.onBackground),
     )
 
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
@@ -172,17 +170,17 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesSimpleExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesSketchExtended.textTitle.typo.copy(
             color = colors.onBackground
         ),
-        fieldValue = MaterialTheme.typographiesSimpleExtended.textFieldValue.typo.copy(
+        fieldValue = MaterialTheme.typographiesSketchExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        fieldLabel = MaterialTheme.typographiesSimpleExtended.textFieldValue.typo.copy(
+        fieldLabel = MaterialTheme.typographiesSketchExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        button = MaterialTheme.typographiesSimpleExtended.textButton.typo,
-        link = MaterialTheme.typographiesSimpleExtended.textLink.typo.copy(
+        button = MaterialTheme.typographiesSketchExtended.textButton.typo,
+        link = MaterialTheme.typographiesSketchExtended.textLink.typo.copy(
             color = colors.onBackground,
         )
 
@@ -204,12 +202,12 @@ object DialogLoginAuthTheme {
         keyBoardGridCube = KeyBoard.GridCube.Style(
             colorOnBackground = colors.onBackground,
             colorBackground = Color.Transparent,
-            outfitBorderOuter = MaterialTheme.bordersExtended.strokeNormal.getOrDefault().copy(
-                brush = SolidColor(colors.onBackground)
-            ),
-            outfitBorderInner = MaterialTheme.bordersExtended.strokeBig.getOrDefault().copy(
-                brush = SolidColor(colors.onBackground)
-            ),
+//            outfitBorderOuter = MaterialTheme.bordersSketchExtended.strokeNormal.getOrDefault().copy(
+//                brush = SolidColor(colors.onBackground)
+//            ),
+//            outfitBorderInner = MaterialTheme.bordersExtended.strokeBig.getOrDefault().copy(
+//                brush = SolidColor(colors.onBackground)
+//            ),
         ),
         button = Button.TextFilled.Style(
 //            outfitShape = shapes.button,

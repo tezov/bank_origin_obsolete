@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 21:08
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 21:08
+ *  Last modified 03/03/2023 22:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,19 +19,17 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.theme.ThemeColors
-import com.tezov.bank.ui.theme.ThemeComponent
+import com.tezov.bank.ui.theme.ThemeComponents
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.State.Style.Companion.copyToStateStyle
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsState.Simple.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColors.State.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.State.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.State.Style.Companion.copyToStateStyle
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.Simple.Style.Companion.copyToSimpleStyle
@@ -223,7 +221,7 @@ object PageLoginTheme {
 
     @Composable
     fun provideStyles() = Style(
-        pager = ThemeComponent.providePagerStyle(),
+        pager = ThemeComponents.providePagerStyle(),
         buttonDark = Button.TextFilled.Style(
             outfitFrame = OutfitFrameState(
                 outfitShape = shapes.button.copy {
@@ -233,7 +231,7 @@ object PageLoginTheme {
                 },
             ),
             outfitText = typographies.buttonFilled.copy{
-                outfitColor = OutfitColorsSimple(
+                outfitColor = OutfitColorsState(
                     active = colors.textButtonDark
                 )
             },
@@ -252,7 +250,7 @@ object PageLoginTheme {
                 },
             ),
             outfitText = typographies.buttonFilled.copy{
-                outfitColor = OutfitColorsSimple(
+                outfitColor = OutfitColorsState(
                     active = colors.textButtonLight
                 )
             }
@@ -267,14 +265,14 @@ object PageLoginTheme {
                 },
             ),
             outfitText = typographies.buttonOutlined.copy{
-                outfitColor = OutfitColorsSimple(
+                outfitColor = OutfitColorsState(
                     active = colors.textContent
                 )
             }
         ),
         link = Link.Underlined.Style(
             outfitText = typographies.link.copyToStateStyle{
-                outfitColor = OutfitColorsSimple(
+                outfitColor = OutfitColorsState(
                     active = colors.textContent
                 )
             },

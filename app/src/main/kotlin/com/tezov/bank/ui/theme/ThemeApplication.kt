@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 03/03/2023 22:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import com.tezov.bank.ui.theme.ThemeColors.colorsLight
 import com.tezov.bank.ui.theme.ThemeColors.colorsLightCommonExtended
 import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsElevationExtended
-import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsFontExtended
 import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsPaddingExtended
 import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsSizeExtended
 import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsSpacingExtended
@@ -38,7 +37,6 @@ object ThemeApplication {
                     MaterialTheme provides ThemeColorsResource.Common,
                     MaterialTheme provides colorsLightCommonExtended,
                     //dimensions
-                    MaterialTheme provides dimensionsFontExtended,
                     MaterialTheme provides dimensionsPaddingExtended,
                     MaterialTheme provides dimensionsSpacingExtended,
                     MaterialTheme provides dimensionsElevationExtended,
@@ -51,6 +49,12 @@ object ThemeApplication {
                         MaterialTheme provides ThemeShapes.provideBorders(),
                         //Typography
                         MaterialTheme provides ThemeTypography.providesTypographiesExtended(),
+                    )
+                },
+                child = {
+                    arrayOf(
+                        //components
+                        MaterialTheme provides ThemeComponents.provideComponents(),
                     )
                 },
                 content = content

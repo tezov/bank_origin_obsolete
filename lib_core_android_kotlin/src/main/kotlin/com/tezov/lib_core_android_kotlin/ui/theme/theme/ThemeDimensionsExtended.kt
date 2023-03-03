@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 21:57
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 21:57
+ *  Last modified 03/03/2023 21:58
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -75,8 +75,6 @@ object ThemeDimensionsExtended{
         val blockBig_h: Dp,
         val blockNormal_h: Dp,
         val blockSmall_h: Dp,
-        val bottomNavigation: Dp,
-        val topNavigation: Dp
     )
     internal val localPaddings: ProvidableCompositionLocal<Paddings> = staticCompositionLocalOf {
         error("not provided")
@@ -104,9 +102,6 @@ object ThemeDimensionsExtended{
         val elevationBig: Dp,
         val elevationNormal: Dp,
         val elevationSmall: Dp,
-        val dialog: Dp,
-        val snackbar: Dp,
-        val bottomSheet: Dp,
     )
     internal val localElevations: ProvidableCompositionLocal<Elevations> = staticCompositionLocalOf {
         error("not provided")

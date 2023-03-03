@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 12:51
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 11:36
+ *  Last modified 03/03/2023 22:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.theme.ThemeComponent
+import com.tezov.bank.ui.theme.ThemeComponents
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageHelpTheme.colors: PageHelpTheme.Colors
@@ -73,15 +73,15 @@ object PageHelpTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        titleHuge = MaterialTheme.typographiesSimpleExtended.textHuge.typo.copy(
+        titleHuge = MaterialTheme.typographiesSketchExtended.textHuge.typo.copy(
             color = colors.textTitle,
             fontWeight = FontWeight.Bold
         ),
-        titleBig = MaterialTheme.typographiesSimpleExtended.textBig.typo.copy(
+        titleBig = MaterialTheme.typographiesSketchExtended.textBig.typo.copy(
             color = colors.textTitle,
             fontWeight = FontWeight.SemiBold
         ),
-        normal = MaterialTheme.typographiesSimpleExtended.textNormal.typo.copy(
+        normal = MaterialTheme.typographiesSketchExtended.textNormal.typo.copy(
             color = colors.textNormal
         ),
     )
@@ -98,7 +98,7 @@ object PageHelpTheme {
 
     @Composable
     fun provideStyles() = Style(
-        sectionRow = ThemeComponent.provideSectionRowStyle(),
+        sectionRow = ThemeComponents.provideSectionRowStyle(),
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 21:08
+ *  Created by Tezov on 03/03/2023 22:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 20:54
+ *  Last modified 03/03/2023 22:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -212,10 +212,10 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             },
                             contentPadding = PaddingValues(8.dp, 0.dp)
                         ) {
-                            Text(
-                                text = text,
-                                style = PageLoginTheme.typographies.dropDownMenu
-                            )
+//                            Text(
+//                                text = text,
+//                                style = PageLoginTheme.typographies.dropDownMenu
+//                            )
                         }
                     }
                 }
