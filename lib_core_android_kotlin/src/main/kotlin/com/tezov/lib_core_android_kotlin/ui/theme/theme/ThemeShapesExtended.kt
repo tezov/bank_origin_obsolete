@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 04/03/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 21:58
+ *  Last modified 04/03/2023 13:27
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -39,6 +39,8 @@ object ThemeShapesExtended{
             val roundedCornerBig: OutfitShapeSketch,
             val roundedCornerHuge: OutfitShapeSketch,
             val roundedCornerSupra: OutfitShapeSketch,
+            val button: OutfitShapeState,
+            val buttonOutlined: OutfitShapeState,
         )
         internal val localShapesSketch: ProvidableCompositionLocal<Sketch> = staticCompositionLocalOf {
             error("not provided")

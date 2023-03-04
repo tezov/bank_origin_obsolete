@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 04/03/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:28
+ *  Last modified 04/03/2023 13:46
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -44,63 +44,51 @@ object ThemeComponents {
     fun provideComponents() = ThemeComponentExtended.Sketch(
         topAppBar = TopAppBar.Style(),
         bottomNavigation = BottomNavigation.Style(
-            outfitText  = OutfitTextSketch(
-                TextStyle(
-                    fontFamily = MaterialTheme.fontUbuntu,
-                    fontWeight = FontWeight.SemiBold,
-                    fontSize = 12.sp
-                )
-            ),
+            outfitText  = TextStyle(
+                fontFamily = MaterialTheme.fontUbuntu,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.sp
+            ).outfitTextSketch,
             colorBackground  = ThemeColors.Common.whiteShady,
             outfitColor  = OutfitColorsState(
-                active = ThemeColors.Common.blueSea,
-                inactive = ThemeColors.Common.blueSea
+                active = ThemeColors.Common.blueElegant,
+                inactive = ThemeColors.Common.blueShadow
             ),
         ),
         dialogCard = Dialog.Card.Style(
             elevation = 2.dp,
             outfitFrame = OutfitFrameSimple(
                 outfitBorder = OutfitBorderSimple(
-                    sketch = OutfitBorderSketch(
-                        size = 2.dp,
-                    ),
-//                    color = ,
+                    sketch = 2.outfitBorderSketch,
+                    color = MaterialTheme.colors.primary,
                 ),
                 outfitShape = OutfitShapeSimple(
-                    sketch = OutfitShapeSketch(
-                        size = OutfitShape.Size(8.dp)
-                    )
-//                    color = ,
+                    sketch = 8.outfitShapeSketch,
+                    color = MaterialTheme.colorsCommonExtended.backgroundModal,
                 )
             )
         ),
         bottomSheet = BottomSheet.Style(),
         snackbar = Snackbar.Style(
             outfitTextMessage = OutfitTextSimple(
-                sketch = OutfitTextSketch(
-                    typo = TextStyle(
-                        fontFamily = MaterialTheme.fontUbuntu,
-                        fontWeight = FontWeight.Normal,
-                        fontSize = 19.sp
-                    )
-                ),
-//                color = ,
+                sketch = TextStyle(
+                    fontFamily = MaterialTheme.fontUbuntu,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 19.sp
+                ).outfitTextSketch,
+                color = MaterialTheme.colorsCommonExtended.onBackgroundModal,
             ),
             outfitTextAction = OutfitTextSimple(
-                sketch = OutfitTextSketch(
-                    TextStyle(
-                        fontFamily = MaterialTheme.fontUbuntu,
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 19.sp
-                    )
-                ),
-//                color = ,
+                sketch = TextStyle(
+                    fontFamily = MaterialTheme.fontUbuntu,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 19.sp
+                ).outfitTextSketch,
+                color = MaterialTheme.colorsCommonExtended.onBackgroundModalVariant,
             ),
             outfitShape = OutfitShapeSimple(
-                sketch = OutfitShapeSketch(
-                    size = OutfitShape.Size(12.dp)
-                ),
-//                color = ,
+                sketch = 12.outfitShapeSketch,
+                color = MaterialTheme.colorsCommonExtended.backgroundModal,
             ),
             elevation = 4.dp,
         ),
@@ -198,8 +186,8 @@ object ThemeComponents {
                 template = OutfitShape.Template.Circle,
             ),
             outfitColor = OutfitColorsState(
-                active = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm.active,
-                inactive = MaterialTheme.colorsCommonExtended.onSecondaryVariant,
+                active = MaterialTheme.colorsCommonExtended.onBackgroundElevatedVariant,
+                inactive = MaterialTheme.colorsCommonExtended.background,
             )
         ),
         dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,

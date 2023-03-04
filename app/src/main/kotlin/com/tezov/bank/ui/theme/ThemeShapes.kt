@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 04/03/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:28
+ *  Last modified 04/03/2023 13:46
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,6 @@ package com.tezov.bank.ui.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeShapesExtended
 
@@ -22,61 +21,35 @@ object ThemeShapes {
 
     @Composable
     fun provideShapes() = ThemeShapesExtended.Shapes.Sketch(
-        roundedCornerMicro = OutfitShapeSketch(
-            size = OutfitShape.Size(4.dp)
+        roundedCornerMicro = 4.outfitShapeSketch,
+        roundedCornerSmall = 8.outfitShapeSketch,
+        roundedCornerNormal = 12.outfitShapeSketch,
+        roundedCornerBig = 20.outfitShapeSketch,
+        roundedCornerHuge = 28.outfitShapeSketch,
+        roundedCornerSupra = 40.outfitShapeSketch,
+        button = OutfitShapeState(
+            sketch = 14.outfitShapeSketch,
+            outfitColor = OutfitColorsState(
+                active = MaterialTheme.colors.primary
+            )
         ),
-        roundedCornerSmall = OutfitShapeSketch(
-            size = OutfitShape.Size(8.dp)
-        ),
-        roundedCornerNormal = OutfitShapeSketch(
-            size = OutfitShape.Size(12.dp)
-        ),
-        roundedCornerBig = OutfitShapeSketch(
-            size = OutfitShape.Size(20.dp)
-        ),
-        roundedCornerHuge = OutfitShapeSketch(
-            size = OutfitShape.Size(28.dp)
-        ),
-        roundedCornerSupra = OutfitShapeSketch(
-            size = OutfitShape.Size(40)
-        ),
+        buttonOutlined = 24.outfitShapeState,
     )
 
     @Composable
     fun provideBorders() = ThemeShapesExtended.Borders.Sketch(
-        strokeMicro =  OutfitBorderSketch(
-            size = 0.8.dp,
-        ),
-        strokeSmall =  OutfitBorderSketch(
-            size = 1.dp,
-        ),
-        strokeNormal = OutfitBorderSketch(
-            size = 1.5.dp,
-        ),
-        strokeBig =  OutfitBorderSketch(
-            size = 2.2.dp,
-        ),
-        strokeHuge =  OutfitBorderSketch(
-            size = 4.dp,
-        ),
-        strokeSupra =  OutfitBorderSketch(
-            size = 5.5.dp,
-        ),
-        button = OutfitBorderState(
-            sketch = OutfitBorderSketch(
-                OutfitBorderSketch(
-                    size = 2.dp,
-                )
-            ),
-            outfitColor = OutfitColorsState(),
-        ),
+        strokeMicro =  0.8.outfitBorderSketch,
+        strokeSmall =  1.outfitBorderSketch,
+        strokeNormal = 1.5.outfitBorderSketch,
+        strokeBig =  2.2.outfitBorderSketch,
+        strokeHuge =  4.outfitBorderSketch,
+        strokeSupra =  5.5.outfitBorderSketch,
+        button = OutfitBorderState(),
         buttonOutlined = OutfitBorderState(
-            sketch = OutfitBorderSketch(
-                OutfitBorderSketch(
-                    size = 2.dp,
-                )
+            sketch = 2.outfitBorderSketch,
+            outfitColor = OutfitColorsState(
+                active = MaterialTheme.colors.primary
             ),
-            outfitColor = OutfitColorsState(),
         ),
     )
 

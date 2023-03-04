@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 04/03/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:28
+ *  Last modified 04/03/2023 13:46
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,7 +19,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.theme.font.fontRoboto
+import com.tezov.bank.ui.theme.font.fontUbuntu
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSketch
+import com.tezov.lib_core_android_kotlin.ui.theme.style.outfitTextSketch
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeTypographiesExtended
 
 object ThemeTypography {
@@ -28,104 +30,76 @@ object ThemeTypography {
 
     @Composable
     fun providesTypographiesExtended() = ThemeTypographiesExtended.Sketch(
-        textTitle = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Normal,
-                fontSize = 20.sp
-            )
-        ),
-        textSubtitle = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Normal,
-                fontSize = 15.sp
-            )
-        ),
-        textHelper = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Normal,
-                fontSize = 13.sp
-            )
-        ),
-        textSupra = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Normal,
-                fontSize = 34.sp
-            )
-        ),
-        textHuge = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Bold,
-                fontSize = 26.sp
-            )
-        ),
-        textBig = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Normal,
-                fontSize = 20.sp
-            )
-        ),
-        textNormal = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Normal,
-                fontSize = 16.sp
-            )
-        ),
-        textSmall = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Normal,
-                fontSize = 13.sp
-            )
-        ),
-        textMicro = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Normal,
-                fontSize = 10.sp
-            )
-        ),
-        textFieldValue = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Normal,
-                fontSize = 18.sp
-            )
-        ),
-        textFieldLabel = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 12.sp
-            )
-        ),
-        textLink = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Normal,
-                fontSize = 20.sp,
-                textDecoration = TextDecoration.Underline
-            )
-        ),
-        textButton = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Normal,
-                fontSize = 18.sp
-            )
-        ),
-        textButtonOutline = OutfitTextSketch(
-            TextStyle(
-                fontFamily = MaterialTheme.fontRoboto,
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
-            )
-        ),
+        textTitle = TextStyle(
+            fontFamily = MaterialTheme.fontUbuntu,
+            fontWeight = FontWeight.Normal,
+            fontSize = 20.sp
+        ).outfitTextSketch,
+        textSubtitle = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Normal,
+            fontSize = 15.sp
+        ).outfitTextSketch,
+        textHelper = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Normal,
+            fontSize = 13.sp
+        ).outfitTextSketch,
+        textSupra = TextStyle(
+            fontFamily = MaterialTheme.fontUbuntu,
+            fontWeight = FontWeight.Bold,
+            fontSize = 34.sp
+        ).outfitTextSketch,
+        textHuge = TextStyle(
+            fontFamily = MaterialTheme.fontUbuntu,
+            fontWeight = FontWeight.Bold,
+            fontSize = 26.sp
+        ).outfitTextSketch,
+        textBig = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Normal,
+            fontSize = 20.sp
+        ).outfitTextSketch,
+        textNormal = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp
+        ).outfitTextSketch,
+        textSmall = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Normal,
+            fontSize = 13.sp
+        ).outfitTextSketch,
+        textMicro = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Normal,
+            fontSize = 10.sp
+        ).outfitTextSketch,
+        textFieldValue = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Normal,
+            fontSize = 18.sp
+        ).outfitTextSketch,
+        textFieldLabel = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 12.sp
+        ).outfitTextSketch,
+        textLink = TextStyle(
+            fontFamily = MaterialTheme.fontUbuntu,
+            fontWeight = FontWeight.Normal,
+            fontSize = 20.sp,
+            textDecoration = TextDecoration.Underline
+        ).outfitTextSketch,
+        textButton = TextStyle(
+            fontFamily = MaterialTheme.fontUbuntu,
+            fontWeight = FontWeight.Normal,
+            fontSize = 18.sp
+        ).outfitTextSketch,
+        textButtonOutline = TextStyle(
+            fontFamily = MaterialTheme.fontUbuntu,
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp
+        ).outfitTextSketch,
     )
 }
