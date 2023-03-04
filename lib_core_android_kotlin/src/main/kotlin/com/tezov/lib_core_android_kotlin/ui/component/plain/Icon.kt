@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 21:57
+ *  Created by Tezov on 04/03/2023 21:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 21:19
+ *  Last modified 04/03/2023 21:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,14 +21,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 
 object Icon {
 
     object Simple{
 
         open class Style(
-            val size: Dp? = null,
-            val tint: Color? = null,
+            val size: Dp = 24.dp,
+            val tint: Color = Color.Unspecified,
         ){
             companion object{
 
@@ -62,11 +63,10 @@ object Icon {
             resourceId:Int,
             description:String? = null,
         ){
-            style.size?.let { modifier.size(it) }
             Icon(
-                modifier = modifier,
+                modifier = modifier.size(style.size),
                 painter = painterResource(id = resourceId),
-                tint = style.tint ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+                tint = style.tint,
                 contentDescription = description,
             )
         }

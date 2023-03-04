@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 04/03/2023 21:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 21:58
+ *  Last modified 04/03/2023 21:28
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,6 +22,43 @@ fun Modifier.background(style: OutfitColors.State.Style, enabled: Boolean) =
     style.resolve(enabled).takeIf { it.isSpecified }?.let { background(it) } ?: this
 
 object OutfitColors {
+
+    object Palette{
+
+        open class Style(
+            val default: Color = Color.Unspecified,
+            val light: Color = Color.Unspecified,
+            val accent: Color = Color.Unspecified,
+        ) {
+
+            companion object{
+
+                open class Builder internal constructor(style: Style) {
+                    var default = style.default
+                    var light = style.light
+                    var accent = style.accent
+
+                    internal fun get() = Style(
+                        default = default,
+                        light = light,
+                        accent = accent,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+                    it.builder()
+                }.get()
+            }
+
+            constructor(style: Style) : this(
+                default = style.default,
+                light = style.light,
+                accent = style.accent,
+            )
+        }
+
+    }
 
     object State{
 

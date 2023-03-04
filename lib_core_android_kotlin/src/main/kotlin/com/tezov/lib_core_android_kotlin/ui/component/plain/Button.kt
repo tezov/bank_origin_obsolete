@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 04/03/2023 21:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 21:58
+ *  Last modified 04/03/2023 21:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,9 +29,7 @@ object Button {
         open class Style(
             val outfitFrame: OutfitFrameState = OutfitFrameState(
                 outfitShape = OutfitShapeState(
-                    sketch = OutfitShapeSketch(
-                        size = OutfitShape.Size(8.dp)
-                    ),
+                    sketch = 8.outfitShapeSketch,
                     outfitColor = OutfitColorsState(
                         active = Color.Gray,
                         inactive = Color.Gray.copy(alpha = 0.25f),
@@ -107,14 +105,10 @@ object Button {
         open class Style(
             val outfitFrame: OutfitFrameState = OutfitFrameState(
                 outfitShape = OutfitShapeState(
-                    sketch = OutfitShapeSketch(
-                        size = OutfitShape.Size(8.dp)
-                    ),
+                    sketch = 8.outfitShapeSketch,
                 ),
                 outfitBorder = OutfitBorderState(
-                    sketch = OutfitBorderSketch(
-                        size = 1.dp
-                    ),
+                    sketch = 1.outfitBorderSketch,
                     outfitColor = OutfitColorsState(
                         active = Color.Gray,
                         inactive = Color.Gray.copy(alpha = 0.25f),

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/03/2023 14:12
+ *  Created by Tezov on 04/03/2023 21:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/03/2023 13:55
+ *  Last modified 04/03/2023 21:28
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,6 +17,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 
 //alias
+typealias OutfitColorsPalette = OutfitColors.Palette.Style
 typealias OutfitColorsState = OutfitColors.State.Style
 
 typealias OutfitTextSketch = OutfitText.Sketch.Style
@@ -35,6 +36,9 @@ typealias OutfitFrameSimple = OutfitFrame.Simple.Style
 typealias OutfitFrameState = OutfitFrame.State.Style
 
 //type
+inline val Color.outfitColorsDefault: OutfitColors.Palette.Style get() = OutfitColors.Palette.Style(default = this)
+inline val Color.outfitColorsLight: OutfitColors.Palette.Style get() = OutfitColors.Palette.Style(light = this)
+inline val Color.outfitColorsAccent: OutfitColors.Palette.Style get() = OutfitColors.Palette.Style(accent = this)
 
 inline val Color.outfitColorsActive: OutfitColors.State.Style get() = OutfitColors.State.Style(active = this)
 inline val Color.outfitColorsInactive: OutfitColors.State.Style get() = OutfitColors.State.Style(inactive = this)
