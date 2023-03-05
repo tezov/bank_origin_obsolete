@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 17:17
+ *  Created by Tezov on 05/03/2023 20:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 17:17
+ *  Last modified 05/03/2023 20:33
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,6 @@ package com.tezov.lib_core_android_kotlin.ui.theme.style
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.text.TextStyle
 
 object OutfitText {
@@ -55,7 +54,7 @@ object OutfitText {
 
         open class Style(
             sketch: Sketch.Style = Sketch.Style(),
-            val color: Color = Color.Unspecified,
+            val color: Color? = null,
         ):Sketch.Style(sketch) {
 
             companion object {
@@ -86,7 +85,7 @@ object OutfitText {
                 color = style.color,
             )
 
-            override fun resolve() = if (color.isSpecified) typo.copy(color = color) else typo
+            override fun resolve() = color?.let { typo.copy(color = it) } ?: typo
         }
 
     }
@@ -127,10 +126,12 @@ object OutfitText {
 
         }
 
-        //Dual.Style
-        fun Style<Color, OutfitState.Dual.Style<Color>>.resolve(enabled: Boolean) = outfitState?.resolve(enabled)?.let { typo.copy(color = it) } ?: typo
+        //Dual
+        fun Style<Color, OutfitStateDual<Color>>.resolve(enabled: Boolean) = outfitState?.resolve(enabled)?.let { typo.copy(color = it) } ?: typo
+
+        //Semantic
+        fun Style<Color, OutfitStateSemantic<Color>>.resolve(selector: OutfitState.Semantic.Selector) = outfitState?.resolve(selector)?.let { typo.copy(color = it) } ?: typo
 
     }
-
 
 }

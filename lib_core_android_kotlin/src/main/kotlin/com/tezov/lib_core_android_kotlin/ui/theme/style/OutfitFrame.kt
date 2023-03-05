@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 17:17
+ *  Created by Tezov on 05/03/2023 20:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 17:17
+ *  Last modified 05/03/2023 20:33
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,41 +18,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.State.resolve
-
-fun Modifier.border(style: OutfitFrame.Simple.Style) =
-    style.outfitBorder?.resolve()?.let { border ->
-        style.outfitShape?.resolve()?.let { shape ->
-            border(border, shape).clip(shape)
-        } ?: kotlin.run {
-            border(border)
-        }
-    } ?: this
-
-fun Modifier.background(style: OutfitFrame.Simple.Style) =
-    style.outfitShape?.let { background(it) } ?: this
-
-fun Modifier.border(
-    style: OutfitFrame.State.Style<Color, OutfitState.Dual.Style<Color>>,
-    enabled: Boolean
-) =
-    style.outfitBorder?.resolve(enabled)?.let { border ->
-        style.outfitShape?.resolve()?.let { shape ->
-            border(border, shape).clip(shape)
-        } ?: kotlin.run {
-            border(border)
-        }
-    } ?: this
-
-fun Modifier.background(
-    style: OutfitFrame.State.Style<Color, OutfitState.Dual.Style<Color>>,
-    enabled: Boolean
-) =
-    style.outfitShape?.let { shape: OutfitShape.State.Style<Color, OutfitState.Dual.Style<Color>> ->
-        background(
-            shape,
-            enabled
-        )
-    } ?: this
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Simple.background
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.State.background
 
 object OutfitFrame {
 
@@ -97,6 +64,18 @@ object OutfitFrame {
 
         }
 
+        fun Modifier.border(style: OutfitFrame.Simple.Style) =
+            style.outfitBorder?.resolve()?.let { border ->
+                style.outfitShape?.resolve()?.let { shape ->
+                    border(border, shape).clip(shape)
+                } ?: kotlin.run {
+                    border(border)
+                }
+            } ?: this
+
+        fun Modifier.background(style: OutfitFrame.Simple.Style) =
+            style.outfitShape?.let { background(it) } ?: this
+
     }
 
     object State {
@@ -132,6 +111,26 @@ object OutfitFrame {
             )
 
         }
+
+        //Dual
+        fun Modifier.border(
+            style: Style<Color, OutfitStateDual<Color>>,
+            enabled: Boolean
+        ) = style.outfitBorder?.resolve(enabled)?.let { border ->
+                style.outfitShape?.resolve()?.let { shape ->
+                    border(border, shape).clip(shape)
+                } ?: kotlin.run {
+                    border(border)
+                }
+            } ?: this
+
+        fun Modifier.background(
+            style: Style<Color, OutfitStateDual<Color>>,
+            enabled: Boolean
+        ) = style.outfitShape?.let { shape -> background(shape, enabled) } ?: this
+
+        //Semantic
+        //todo
 
     }
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/03/2023 21:57
+ *  Created by Tezov on 05/03/2023 20:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/03/2023 21:57
+ *  Last modified 05/03/2023 20:09
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,15 +15,23 @@ package com.tezov.lib_core_android_kotlin.ui.component.plain
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextState
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.State.resolve
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateDualColor
 
 object Link {
 
     object Underlined{
 
         open class Style(
-            val outfitText: OutfitTextState = OutfitTextState(),
+            val outfitText: OutfitTextStateDualColor = OutfitTextStateDualColor(
+                outfitState = OutfitStateDual(
+                    active = Color.Black,
+                    inactive = Color.Gray,
+                )
+            ),
         ){
             companion object{
 

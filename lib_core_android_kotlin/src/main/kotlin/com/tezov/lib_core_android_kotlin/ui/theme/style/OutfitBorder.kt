@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 17:17
+ *  Created by Tezov on 05/03/2023 20:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 17:17
+ *  Last modified 05/03/2023 20:16
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,16 +21,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.State.resolve
 
-fun Modifier.border(style: OutfitBorder.Sketch.Style, color: Color) =
-    style.resolve(color)?.let { border(it) } ?: this
-
-fun Modifier.border(style: OutfitBorder.Simple.Style) =
-    style.resolve()?.let { border(it) } ?: this
-
-fun Modifier.border(
-    style: OutfitBorder.State.Style<Color, OutfitState.Dual.Style<Color>>,
-    enabled: Boolean
-) = style.resolve(enabled)?.let { border(it) } ?: this
 
 object OutfitBorder {
 
@@ -80,6 +70,10 @@ object OutfitBorder {
             open fun resolveOrDefault(color: Color) = resolve(color) ?: BorderStroke(1.dp, color)
 
         }
+
+        fun Modifier.border(style: Style, color: Color) =
+            style.resolve(color)?.let { border(it) } ?: this
+
     }
 
     object Simple {
@@ -122,10 +116,12 @@ object OutfitBorder {
 
         }
 
+        fun Modifier.border(style: Style) =
+            style.resolve()?.let { border(it) } ?: this
+
     }
 
     object State {
-
 
         open class Style<T, OT : OutfitState.Style<T>>(
             sketch: Sketch.Style = Sketch.Style(),
@@ -162,12 +158,29 @@ object OutfitBorder {
             )
         }
 
-        //Dual.Style
+        //Dual
         fun Style<Color, OutfitState.Dual.Style<Color>>.resolve(enabled: Boolean) =
             outfitState?.resolve(enabled)?.let { template.get(size, it) }
 
         fun Style<Color, OutfitState.Dual.Style<Color>>.resolveOrDefault(enabled: Boolean) =
             resolve(enabled) ?: BorderStroke(1.dp, Color.Black)
+
+        fun Modifier.border(
+            style: Style<Color, OutfitState.Dual.Style<Color>>,
+            enabled: Boolean
+        ) = style.resolve(enabled)?.let { border(it) } ?: this
+
+        //Semantic
+        fun Style<Color, OutfitState.Semantic.Style<Color>>.resolve(selector: OutfitState.Semantic.Selector) =
+            outfitState?.resolve(selector)?.let { template.get(size, it) }
+
+        fun Style<Color, OutfitState.Semantic.Style<Color>>.resolveOrDefault(selector: OutfitState.Semantic.Selector) =
+            resolve(selector) ?: BorderStroke(1.dp, Color.Black)
+
+        fun Modifier.border(
+            style: Style<Color, OutfitState.Semantic.Style<Color>>,
+            selector: OutfitState.Semantic.Selector
+        ) = style.resolve(selector)?.let { border(it) } ?: this
 
     }
 

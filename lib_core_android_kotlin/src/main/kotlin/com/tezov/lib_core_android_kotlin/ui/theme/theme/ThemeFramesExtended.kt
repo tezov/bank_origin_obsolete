@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 17:17
+ *  Created by Tezov on 05/03/2023 20:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 17:17
+ *  Last modified 05/03/2023 20:09
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -64,8 +64,8 @@ object ThemeFramesExtended{
 
     @Immutable
     data class Frames(
-        val button: OutfitFrameStateColorDual,
-        val buttonOutlined: OutfitFrameStateColorDual,
+        val button: OutfitFrameStateDualColor,
+        val buttonOutlined: OutfitFrameStateDualColor,
     )
     internal val localFrames: ProvidableCompositionLocal<Frames> = staticCompositionLocalOf {
         error("not provided")

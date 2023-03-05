@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 17:17
+ *  Created by Tezov on 05/03/2023 20:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 17:17
+ *  Last modified 05/03/2023 20:33
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,22 +12,16 @@
 
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-
-fun Modifier.background(style: OutfitShape.Simple.Style) =
-    style.color?.let { background(it) } ?: this
-
-fun Modifier.background(style: OutfitShape.State.Style<Color, OutfitState.Dual.Style<Color>>, enabled: Boolean) =
-    style.outfitState?.let { background(it, enabled) } ?: this
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Dual.background
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Semantic.background
 
 object OutfitShape {
 
@@ -180,6 +174,9 @@ object OutfitShape {
 
         }
 
+        fun Modifier.background(style: Style) =
+            style.color?.let { background(it) } ?: this
+
     }
 
     object State {
@@ -218,6 +215,14 @@ object OutfitShape {
             )
 
         }
+
+        //Dual
+        fun Modifier.background(style: Style<Color, OutfitStateDual<Color>>, enabled: Boolean) =
+            style.outfitState?.let { background(it, enabled) } ?: this
+
+        //Semantic
+        fun Modifier.background(style: Style<Color, OutfitStateSemantic<Color>>, selector: OutfitState.Semantic.Selector) =
+            style.outfitState?.let { background(it, selector) } ?: this
 
     }
 

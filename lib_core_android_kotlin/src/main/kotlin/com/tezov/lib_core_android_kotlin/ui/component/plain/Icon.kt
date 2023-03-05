@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 14:03
+ *  Created by Tezov on 05/03/2023 20:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 13:42
+ *  Last modified 05/03/2023 20:09
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,21 +12,14 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.plain
 
-import androidx.compose.foundation.layout.size
 import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.type.primaire.size
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.background
 import com.tezov.lib_core_android_kotlin.ui.theme.style.border
 
 object Icon {

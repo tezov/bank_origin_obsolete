@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 17:17
+ *  Created by Tezov on 05/03/2023 20:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 14:12
+ *  Last modified 05/03/2023 20:09
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,9 +16,9 @@ import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsPalette
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsSemantic
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsState
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorPalette
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorSemantic
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsExtended
 
@@ -51,53 +51,57 @@ object ThemeColors {
     }
 
     val colorsLightExtended = ThemeColorsExtended.Common(
-        primary = OutfitColorsPalette(
+        primary = OutfitColorPalette(
             default = Common.whiteShady,
             accent = Common.blueDark,
         ),
-        onPrimary = OutfitColorsPalette(
+        onPrimary = OutfitColorPalette(
             default = Common.blueSea,
             accent = Common.blueDark,
         ),
-        secondary = OutfitColorsPalette(
+        secondary = OutfitColorPalette(
             default = Common.whiteShady,
             light = Common.whiteDark,
         ),
-        onSecondary = OutfitColorsPalette(
+        onSecondary = OutfitColorPalette(
             default = Common.blueNight,
         ),
-        semantic= OutfitColorsSemantic(
+        semantic= OutfitColorSemantic(
             error = Common.redBlood
         ),
-        onSemantic= OutfitColorsSemantic(
+        onSemantic= OutfitColorSemantic(
             error = Common.whiteDark
         ),
-        background = OutfitColorsPalette(
+        background = OutfitColorPalette(
             default = Common.whiteShiny,
             accent = Common.blueSea,
         ),
-        onBackground = OutfitColorsPalette(
+        onBackground = OutfitColorPalette(
             default = Common.blueElegant,
             accent =  Common.whiteShiny,
         ),
-        backgroundElevated = OutfitColorsPalette(
+        backgroundElevated = OutfitColorPalette(
             default = Common.grayOverlay,
         ),
-        onBackgroundElevated = OutfitColorsPalette(
+        onBackgroundElevated = OutfitColorPalette(
             default = Common.blueNight,
             accent = Common.blueElegant,
         ),
-        backgroundModal = OutfitColorsPalette(
+        backgroundModal = OutfitColorPalette(
             default = Common.whiteShady,
             accent = Common.blueElegant,
         ),
-        onBackgroundModal = OutfitColorsPalette(
+        onBackgroundModal = OutfitColorPalette(
             default = Common.blueNight,
             accent = Common.blueElegant,
         ),
-        backgroundButtonProceed = OutfitColorsState(
-            active = Common.whiteShiny,
-            inactive = Common.whiteDark
+        backgroundButtonProceed = OutfitStateDual(
+            active = OutfitColorPalette(
+                default = Common.whiteShiny
+            ),
+            inactive = OutfitColorPalette(
+                default = Common.whiteDark
+            )
         ),
         onBackgroundButtonProceed = OutfitColorsState(
             active = Common.blueNight,

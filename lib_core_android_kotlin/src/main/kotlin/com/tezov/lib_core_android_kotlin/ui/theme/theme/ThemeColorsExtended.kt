@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 17:17
+ *  Created by Tezov on 05/03/2023 20:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 17:17
+ *  Last modified 05/03/2023 20:33
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,48 +12,53 @@
 
 package com.tezov.lib_core_android_kotlin.ui.theme.theme
 
-import androidx.compose.material.*
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsPalette
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsSemantic
+import androidx.compose.ui.graphics.Color
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateSemantic
 
 val MaterialTheme.colorsExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeColorsExtended.localCommon.current
-infix fun MaterialTheme.provides(value: ThemeColorsExtended.Common) = ThemeColorsExtended.localCommon provides value
+
+infix fun MaterialTheme.provides(value: ThemeColorsExtended.Common) =
+    ThemeColorsExtended.localCommon provides value
 
 object ThemeColorsExtended {
     @Immutable
     data class Common(
-        val primary :OutfitColorsPalette,
-        val onPrimary :OutfitColorsPalette,
+        val primary: OutfitPaletteColor,
+        val onPrimary: OutfitPaletteColor,
 
-        val secondary :OutfitColorsPalette,
-        val onSecondary :OutfitColorsPalette,
+        val secondary: OutfitPaletteColor,
+        val onSecondary: OutfitPaletteColor,
 
-        val semantic :OutfitColorsSemantic,
-        val onSemantic :OutfitColorsSemantic,
+        val semantic: OutfitStateSemantic<Color>,
+        val onSemantic: OutfitStateSemantic<Color>,
 
-        val background :OutfitColorsPalette,
-        val onBackground :OutfitColorsPalette,
+        val background: OutfitPaletteColor,
+        val onBackground: OutfitPaletteColor,
 
-        val backgroundElevated: OutfitColorsPalette,
-        val onBackgroundElevated: OutfitColorsPalette,
+        val backgroundElevated: OutfitPaletteColor,
+        val onBackgroundElevated: OutfitPaletteColor,
 
-        val backgroundModal: OutfitColorsPalette,
-        val onBackgroundModal: OutfitColorsPalette,
+        val backgroundModal: OutfitPaletteColor,
+        val onBackgroundModal: OutfitPaletteColor,
 
-        val backgroundButtonProceed: OutfitColorsPalette,
-        val onBackgroundButtonProceed: OutfitColorsPalette,
+        val backgroundButtonProceed: OutfitStateDual<OutfitPaletteColor>,
+        val onBackgroundButtonProceed: OutfitStateDual<OutfitPaletteColor>,
 
-        val backgroundButtonConfirm: OutfitColorsPalette,
-        val onBackgroundButtonConfirm: OutfitColorsPalette,
+        val backgroundButtonConfirm: OutfitPaletteColor,
+        val onBackgroundButtonConfirm: OutfitPaletteColor,
 
-        val backgroundButtonCancel: OutfitColorsPalette,
-        val onBackgroundButtonCancel: OutfitColorsPalette,
+        val backgroundButtonCancel: OutfitPaletteColor,
+        val onBackgroundButtonCancel: OutfitPaletteColor,
     )
-    internal val localCommon:ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
+
+    internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
         error("not provided")
     }
 
