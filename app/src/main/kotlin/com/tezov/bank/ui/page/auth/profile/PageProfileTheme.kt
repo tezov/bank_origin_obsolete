@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:32
+ *  Last modified 05/03/2023 14:00
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,7 +19,6 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -93,7 +92,7 @@ object PageProfileTheme {
 
     @Composable
     fun provideDimensions() = Dimensions(
-        iconCloseSize = MaterialTheme.dimensionsSizeExtended.iconModal,
+        iconCloseSize = MaterialTheme.dimensionsSizeExtended.iconModal.width,
         iconUserSize = 84.dp,
     )
 
@@ -108,7 +107,7 @@ object PageProfileTheme {
 
     @Composable
     fun provideBorders() = Borders(
-        iconUser = MaterialTheme.bordersSketchExtended.strokeBig.resolveOrDefault(colors.iconUser)
+        iconUser = MaterialTheme.bordersExtended.strokeBig.resolveOrDefault(colors.iconUser)
     )
 
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
@@ -122,11 +121,11 @@ object PageProfileTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesSketchExtended.textHuge.typo.copy(
+        title = MaterialTheme.typographiesExtended.textHuge.typo.copy(
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),
-        normal = MaterialTheme.typographiesSketchExtended.textNormal.typo.copy(
+        normal = MaterialTheme.typographiesExtended.textNormal.typo.copy(
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),

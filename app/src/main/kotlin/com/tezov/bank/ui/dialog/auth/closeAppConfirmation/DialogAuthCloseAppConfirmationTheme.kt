@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:33
+ *  Last modified 04/03/2023 22:50
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -68,14 +68,14 @@ object DialogAuthCloseAppConfirmationTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesSketchExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesExtended.textTitle.typo.copy(
             color = colors.title,
             fontWeight = FontWeight.Bold
         ),
-        text = MaterialTheme.typographiesSketchExtended.textNormal.typo.copy(
+        text = MaterialTheme.typographiesExtended.textNormal.typo.copy(
             color = colors.text
         ),
-        button = MaterialTheme.typographiesSketchExtended.textButton.typo.copy(
+        button = MaterialTheme.typographiesExtended.textButton.typo.copy(
             color = colors.button,
             fontWeight = FontWeight.Bold
         ),

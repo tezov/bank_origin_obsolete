@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:32
+ *  Last modified 05/03/2023 14:00
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,6 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import com.tezov.bank.ui.theme.ThemeColors
@@ -90,10 +89,10 @@ object DialogLoginAuthTheme {
     @Composable
     fun provideColors() = Colors(
         background = ThemeColors.Common.blackOverlay,
-        onBackground = MaterialTheme.colorsCommonExtended.onPrimaryVariant,
+        onBackground = MaterialTheme.colorsExtended.onPrimary.accent,
         backgroundButtonActive = MaterialTheme.colors.primary,
-        backgroundButtonInactive = MaterialTheme.colorsCommonExtended.backgroundButtonConfirm.inactive,
-        textButtonDark = MaterialTheme.colorsCommonExtended.onBackgroundButtonConfirm.inactive,
+        backgroundButtonInactive = MaterialTheme.colorsExtended.backgroundButtonConfirm.inactive,
+        textButtonDark = MaterialTheme.colorsExtended.onBackgroundButtonConfirm.inactive,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -120,9 +119,9 @@ object DialogLoginAuthTheme {
         spacingTopToTitle = MaterialTheme.dimensionsSpacingExtended.big_v,
         spacingTopFromButton = MaterialTheme.dimensionsSpacingExtended.huge_v,
         paddingTopFromLink = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,
-        iconCloseSize = MaterialTheme.dimensionsSizeExtended.iconModal,
-        iconFieldInfoSize = MaterialTheme.dimensionsSizeExtended.iconFieldInfo,
-        iconFieldActionSize = MaterialTheme.dimensionsSizeExtended.iconFieldAction,
+        iconCloseSize = MaterialTheme.dimensionsSizeExtended.iconModal.width,
+        iconFieldInfoSize = MaterialTheme.dimensionsSizeExtended.iconFieldInfo.width,
+        iconFieldActionSize = MaterialTheme.dimensionsSizeExtended.iconFieldAction.width,
         paddingButton_h = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
         paddingButton_v = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
     )
@@ -139,8 +138,8 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        button = MaterialTheme.shapesSketchExtended.roundedCornerNormal.resolveOrDefault(),
-        authCard = MaterialTheme.shapesSketchExtended.roundedCornerSmall.resolveOrDefault(),
+        button = MaterialTheme.shapesExtended.roundedCornerNormal.resolveOrDefault(),
+        authCard = MaterialTheme.shapesExtended.roundedCornerSmall.resolveOrDefault(),
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -153,7 +152,7 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideBorders() = Borders(
-        authCard = MaterialTheme.bordersSketchExtended.strokeNormal.resolveOrDefault(colors.onBackground),
+        authCard = MaterialTheme.bordersExtended.strokeNormal.resolveOrDefault(colors.onBackground),
     )
 
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
@@ -170,17 +169,17 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesSketchExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesExtended.textTitle.typo.copy(
             color = colors.onBackground
         ),
-        fieldValue = MaterialTheme.typographiesSketchExtended.textFieldValue.typo.copy(
+        fieldValue = MaterialTheme.typographiesExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        fieldLabel = MaterialTheme.typographiesSketchExtended.textFieldValue.typo.copy(
+        fieldLabel = MaterialTheme.typographiesExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        button = MaterialTheme.typographiesSketchExtended.textButton.typo,
-        link = MaterialTheme.typographiesSketchExtended.textLink.typo.copy(
+        button = MaterialTheme.typographiesExtended.textButton.typo,
+        link = MaterialTheme.typographiesExtended.textLink.typo.copy(
             color = colors.onBackground,
         )
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 21:58
+ *  Last modified 04/03/2023 22:50
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,18 +17,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesSketchExtended
 
 object TopAppBar: ActivitySub<TopAppBarState, TopAppBarAction> {
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/03/2023 14:12
+ *  Created by Tezov on 05/03/2023 17:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/03/2023 12:46
+ *  Last modified 05/03/2023 17:17
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -23,10 +24,10 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 fun Modifier.background(style: OutfitShape.Simple.Style) =
-    if (style.color.isSpecified) background(style.color) else this
+    style.color?.let { background(it) } ?: this
 
-fun Modifier.background(style: OutfitShape.State.Style, enabled: Boolean) =
-    background(style.outfitColor, enabled)
+fun Modifier.background(style: OutfitShape.State.Style<Color, OutfitState.Dual.Style<Color>>, enabled: Boolean) =
+    style.outfitState?.let { background(it, enabled) } ?: this
 
 object OutfitShape {
 
@@ -146,7 +147,7 @@ object OutfitShape {
 
         open class Style(
             sketch: Sketch.Style = Sketch.Style(),
-            val color: Color = Color.Unspecified,
+            val color: Color? = null,
         ) : Sketch.Style(sketch) {
 
             companion object {
@@ -170,15 +171,6 @@ object OutfitShape {
                 fun Sketch.Style.copyToSimpleStyle(scope: @Composable Builder.() -> Unit = {}) =
                     Builder(Style(this)).also { it.scope() }.get()
 
-                @Composable
-                fun State.Style.copyToSimpleStyle(scope: @Composable Builder.() -> Unit = {}) =
-                    Builder(
-                        Style(
-                            sketch = this,
-                            color = outfitColor.active
-                        )
-                    ).also { it.scope() }.get()
-
             }
 
             constructor(style: Style) : this(
@@ -192,48 +184,37 @@ object OutfitShape {
 
     object State {
 
-        open class Style(
+        open class Style<T, OT : OutfitState.Style<T>>(
             sketch: Sketch.Style = Sketch.Style(),
-            val outfitColor: OutfitColorsState = OutfitColorsState(),
+            val outfitState: OT? = null,
         ) : Sketch.Style(sketch) {
 
             companion object {
 
-                open class Builder internal constructor(style: Style) :
+                open class Builder<T, OT : OutfitState.Style<T>> internal constructor(style: Style<T, OT>) :
                     Sketch.Style.Companion.Builder(style) {
-                    var outfitColor = style.outfitColor
+                    var outfitState = style.outfitState
 
                     override fun get() = Style(
                         sketch = super.get(),
-                        outfitColor = outfitColor,
+                        outfitState = outfitState,
                     )
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Builder.() -> Unit = {}) = Builder(this).also {
+                fun <T, OT : OutfitState.Style<T>> Style<T, OT>.copy(scope: @Composable Builder<T, OT>.() -> Unit = {}) = Builder(this).also {
                     it.scope()
                 }.get()
 
-                @Composable
-                fun Sketch.Style.copyToStateStyle(scope: @Composable Builder.() -> Unit = {}) =
-                    Builder(Style(this)).also { it.scope() }.get()
-
-                @Composable
-                fun Simple.Style.copyToStateStyle(scope: @Composable Builder.() -> Unit = {}) =
-                    Builder(
-                        Style(
-                            sketch = this,
-                            outfitColor = OutfitColorsState(
-                                active = color
-                            )
-                        )
-                    ).also { it.scope() }.get()
+//                @Composable
+//                fun Sketch.Style.copyToStateStyle(scope: @Composable Builder.() -> Unit = {}) =
+//                    Builder(Style(this)).also { it.scope() }.get()
 
             }
 
-            constructor(style: Style) : this(
+            constructor(style: Style<T, OT>) : this(
                 sketch = style,
-                outfitColor = style.outfitColor,
+                outfitState = style.outfitState,
             )
 
         }

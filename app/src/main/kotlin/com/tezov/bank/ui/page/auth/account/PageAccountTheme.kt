@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:32
+ *  Last modified 04/03/2023 22:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -72,7 +72,7 @@ object PageAccountTheme {
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.primary,
-        textContent = MaterialTheme.colorsCommonExtended.onPrimaryVariant,
+        textContent = MaterialTheme.colorsExtended.onPrimary.accent,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -99,7 +99,7 @@ object PageAccountTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        card = MaterialTheme.shapesSketchExtended.roundedCornerNormal.resolveOrDefault(),
+        card = MaterialTheme.shapesExtended.roundedCornerNormal.resolveOrDefault(),
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -130,10 +130,10 @@ object PageAccountTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesSketchExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesExtended.textTitle.typo.copy(
             color = colors.textContent
         ),
-        normal = MaterialTheme.typographiesSketchExtended.textNormal.typo.copy(
+        normal = MaterialTheme.typographiesExtended.textNormal.typo.copy(
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),

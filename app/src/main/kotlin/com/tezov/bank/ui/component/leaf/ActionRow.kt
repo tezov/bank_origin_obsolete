@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/02/2023 18:09
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/02/2023 18:09
+ *  Last modified 05/03/2023 13:50
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,6 +24,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
+import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
@@ -36,11 +37,11 @@ object ActionRow {
     data class Style(
         val iconInfoStyle: Icon.Simple.Style = Icon.Simple.Style(
             tint = Color.Black,
-            size = 24.dp
+            size = SizeDp(24.dp)
         ),
         val iconActionStyle: Icon.Simple.Style = Icon.Simple.Style(
             tint = Color.Black,
-            size = 24.dp
+            size = SizeDp(24.dp)
         ),
         val outfitText: OutfitTextSimple = OutfitTextSimple(),
         val background: Color = Color.Unspecified,

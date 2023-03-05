@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/03/2023 14:12
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/03/2023 13:46
+ *  Last modified 04/03/2023 22:50
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,16 +20,13 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.bank.ui.theme.font.fontUbuntu
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSketch
 import com.tezov.lib_core_android_kotlin.ui.theme.style.outfitTextSketch
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeTypographiesExtended
 
 object ThemeTypography {
-    @Composable
-    fun providesTypographies() = androidx.compose.material.Typography()
 
     @Composable
-    fun providesTypographiesExtended() = ThemeTypographiesExtended.Sketch(
+    fun providesTypographies() = ThemeTypographiesExtended.Common(
         textTitle = TextStyle(
             fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Normal,

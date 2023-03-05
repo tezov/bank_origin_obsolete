@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/03/2023 14:12
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/03/2023 13:46
+ *  Last modified 05/03/2023 13:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,6 +26,7 @@ import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.theme.font.fontUbuntu
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
+import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
@@ -41,7 +42,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 object ThemeComponents {
 
     @Composable
-    fun provideComponents() = ThemeComponentExtended.Sketch(
+    fun provideComponents() = ThemeComponentExtended.Common(
         topAppBar = TopAppBar.Style(),
         bottomNavigation = BottomNavigation.Style(
             outfitText  = TextStyle(
@@ -60,11 +61,11 @@ object ThemeComponents {
             outfitFrame = OutfitFrameSimple(
                 outfitBorder = OutfitBorderSimple(
                     sketch = 2.outfitBorderSketch,
-                    color = MaterialTheme.colors.primary,
+                    color = MaterialTheme.colorsExtended.primary.default,
                 ),
                 outfitShape = OutfitShapeSimple(
                     sketch = 8.outfitShapeSketch,
-                    color = MaterialTheme.colorsCommonExtended.backgroundModal,
+                    color = MaterialTheme.colorsExtended.backgroundModal.default,
                 )
             )
         ),
@@ -76,7 +77,7 @@ object ThemeComponents {
                     fontWeight = FontWeight.Normal,
                     fontSize = 19.sp
                 ).outfitTextSketch,
-                color = MaterialTheme.colorsCommonExtended.onBackgroundModal,
+                color = MaterialTheme.colorsExtended.onBackgroundModal.dark,
             ),
             outfitTextAction = OutfitTextSimple(
                 sketch = TextStyle(
@@ -84,11 +85,11 @@ object ThemeComponents {
                     fontWeight = FontWeight.Bold,
                     fontSize = 19.sp
                 ).outfitTextSketch,
-                color = MaterialTheme.colorsCommonExtended.onBackgroundModalVariant,
+                color = MaterialTheme.colorsExtended.onBackgroundModal.accent,
             ),
             outfitShape = OutfitShapeSimple(
                 sketch = 12.outfitShapeSketch,
-                color = MaterialTheme.colorsCommonExtended.backgroundModal,
+                color = MaterialTheme.colorsExtended.backgroundModal.accent,
             ),
             elevation = 4.dp,
         ),
@@ -99,18 +100,18 @@ object ThemeComponents {
         dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsSizeExtended.iconInfo,
-            tint = MaterialTheme.colors.primary
+            tint = MaterialTheme.colorsExtended.primary.default
         ),
-        outfitTextHeader = MaterialTheme.typographiesSketchExtended.textNormal.copyToSimpleStyle {
+        outfitTextHeader = MaterialTheme.typographiesExtended.textNormal.copyToSimpleStyle {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
-            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
+            color = MaterialTheme.colorsExtended.onBackgroundElevated.default
         },
-        colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
+        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.14f
         ),
-        colorDivider = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
+        colorDivider = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.05f
         ),
         dimensionDivider = MaterialTheme.dimensionsSizeExtended.dividerNormal,
@@ -121,17 +122,17 @@ object ThemeComponents {
     fun provideActionRowStyle() = ActionRow.Style(
         iconInfoStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsSizeExtended.iconInfo,
-            tint = MaterialTheme.colors.primary
+            tint = MaterialTheme.colorsExtended.primary.default
         ),
         iconActionStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsSizeExtended.iconAction,
-            tint = MaterialTheme.colors.primary
+            tint = MaterialTheme.colorsExtended.primary.default
         ),
-        outfitText = MaterialTheme.typographiesSketchExtended.textNormal.copyToSimpleStyle {
+        outfitText = MaterialTheme.typographiesExtended.textNormal.copyToSimpleStyle {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
-            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
+            color = MaterialTheme.colorsExtended.onBackgroundElevated.default
         }
     )
 
@@ -139,15 +140,15 @@ object ThemeComponents {
     fun provideSectionCardStyle() = SectionActionCard.Style(
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsSizeExtended.iconInfo,
-            tint = MaterialTheme.colors.primary
+            tint = MaterialTheme.colorsExtended.primary.default
         ),
-        outfitTextHeader = MaterialTheme.typographiesSketchExtended.textNormal.copyToSimpleStyle {
+        outfitTextHeader = MaterialTheme.typographiesExtended.textNormal.copyToSimpleStyle {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
-            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
+            color = MaterialTheme.colorsExtended.onBackgroundElevated.default
         },
-        colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated.copy(
+        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.14f
         ),
         dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
@@ -157,25 +158,25 @@ object ThemeComponents {
     @Composable
     fun provideActionCardStyle() = ActionCard.Style(
         outfitFrame = OutfitFrameSimple(
-            outfitShape = MaterialTheme.shapesSketchExtended.roundedCornerNormal.copyToSimpleStyle(),
-            outfitBorder = MaterialTheme.bordersSketchExtended.strokeNormal.copyToSimpleStyle {
-                color = MaterialTheme.colorsCommonExtended.backgroundElevated
+            outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal.copyToSimpleStyle(),
+            outfitBorder = MaterialTheme.bordersExtended.strokeNormal.copyToSimpleStyle {
+                color = MaterialTheme.colorsExtended.backgroundElevated.default
             }
         ),
         iconStyle = Icon.Simple.Style(
-            size = 56.dp,
-            tint = MaterialTheme.colors.primary
+            size = SizeDp(56.dp),
+            tint = MaterialTheme.colorsExtended.primary.default
         ),
-        outfitTextTitle = MaterialTheme.typographiesSketchExtended.textNormal.copyToSimpleStyle {
+        outfitTextTitle = MaterialTheme.typographiesExtended.textNormal.copyToSimpleStyle {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
         },
-        outfitTextSubtitle = MaterialTheme.typographiesSketchExtended.textNormal.copyToSimpleStyle {
+        outfitTextSubtitle = MaterialTheme.typographiesExtended.textNormal.copyToSimpleStyle {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
-            color = MaterialTheme.colorsCommonExtended.onBackgroundElevated
+            color = MaterialTheme.colorsExtended.onBackgroundElevated.default
         },
     )
 
@@ -186,8 +187,8 @@ object ThemeComponents {
                 template = OutfitShape.Template.Circle,
             ),
             outfitColor = OutfitColorsState(
-                active = MaterialTheme.colorsCommonExtended.onBackgroundElevatedVariant,
-                inactive = MaterialTheme.colorsCommonExtended.background,
+                active = MaterialTheme.colorsExtended.onBackgroundElevated.default,
+                inactive = MaterialTheme.colorsExtended.background.default,
             )
         ),
         dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,

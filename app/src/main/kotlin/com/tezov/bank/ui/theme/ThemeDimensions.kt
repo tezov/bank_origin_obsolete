@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:28
+ *  Last modified 05/03/2023 13:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,6 +14,7 @@ package com.tezov.bank.ui.theme
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.tezov.lib_core_android_kotlin.type.primaire.sizeDp
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeDimensionsExtended
 
 object ThemeDimensions {
@@ -71,11 +72,11 @@ object ThemeDimensions {
     )
 
     val dimensionsSizeExtended = ThemeDimensionsExtended.Sizes(
-        iconModal = 42.dp,
-        iconInfo = 36.dp,
-        iconAction = 22.dp,
-        iconFieldInfo = 32.dp,
-        iconFieldAction = 22.dp,
+        iconModal = 42.sizeDp,
+        iconInfo = 36.sizeDp,
+        iconAction = 22.sizeDp,
+        iconFieldInfo = 32.sizeDp,
+        iconFieldAction = 22.sizeDp,
         dividerSmall = 0.8.dp,
         dividerNormal = 1.2.dp,
         dividerBig = 2.4.dp,

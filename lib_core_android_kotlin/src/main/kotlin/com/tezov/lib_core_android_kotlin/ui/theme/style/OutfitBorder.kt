@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 17:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 21:58
+ *  Last modified 05/03/2023 17:17
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.State.resolve
 
 fun Modifier.border(style: OutfitBorder.Sketch.Style, color: Color) =
     style.resolve(color)?.let { border(it) } ?: this
@@ -26,8 +27,10 @@ fun Modifier.border(style: OutfitBorder.Sketch.Style, color: Color) =
 fun Modifier.border(style: OutfitBorder.Simple.Style) =
     style.resolve()?.let { border(it) } ?: this
 
-fun Modifier.border(style: OutfitBorder.State.Style, enabled: Boolean) =
-    style.resolve(enabled)?.let { border(it) } ?: this
+fun Modifier.border(
+    style: OutfitBorder.State.Style<Color, OutfitState.Dual.Style<Color>>,
+    enabled: Boolean
+) = style.resolve(enabled)?.let { border(it) } ?: this
 
 object OutfitBorder {
 
@@ -73,23 +76,23 @@ object OutfitBorder {
                 size = style.size,
             )
 
-            open fun resolve(color:Color) = template.get(size, color)
-            open fun resolveOrDefault(color:Color) = resolve(color) ?: BorderStroke(1.dp, color)
+            open fun resolve(color: Color) = template.get(size, color)
+            open fun resolveOrDefault(color: Color) = resolve(color) ?: BorderStroke(1.dp, color)
 
         }
-
     }
 
     object Simple {
 
         open class Style(
             sketch: Sketch.Style = Sketch.Style(),
-            val color: Color = Color.Unspecified,
-        ):Sketch.Style(sketch) {
+            val color: Color? = null,
+        ) : Sketch.Style(sketch) {
 
             companion object {
 
-                open class Builder internal constructor(style: Style):Sketch.Style.Companion.Builder(style) {
+                open class Builder internal constructor(style: Style) :
+                    Sketch.Style.Companion.Builder(style) {
                     var color = style.color
 
                     override fun get() = Style(
@@ -107,14 +110,6 @@ object OutfitBorder {
                 fun Sketch.Style.copyToSimpleStyle(scope: @Composable Builder.() -> Unit = {}) =
                     Builder(Style(this)).also { it.scope() }.get()
 
-                @Composable
-                fun State.Style.copyToSimpleStyle(scope: @Composable Builder.() -> Unit = {}) = Builder(
-                    Style(
-                        sketch = this,
-                        color = outfitColor.active
-                    )
-                ).also { it.scope() }.get()
-
             }
 
             constructor(style: Style) : this(
@@ -122,8 +117,8 @@ object OutfitBorder {
                 color = style.color,
             )
 
-            fun resolve() = template.get(size, color)
-            fun resolveOrDefault() = resolve() ?: BorderStroke(1.dp, color)
+            fun resolve() = template.get(size, color ?: Color.Transparent)
+            fun resolveOrDefault() = resolve() ?: BorderStroke(1.dp, color ?: Color.Transparent)
 
         }
 
@@ -131,52 +126,48 @@ object OutfitBorder {
 
     object State {
 
-        open class Style(
+
+        open class Style<T, OT : OutfitState.Style<T>>(
             sketch: Sketch.Style = Sketch.Style(),
-            val outfitColor: OutfitColorsState = OutfitColorsState(),
-        ):Sketch.Style(sketch) {
+            val outfitState: OT? = null,
+        ) : Sketch.Style(sketch) {
 
             companion object {
 
-                open class Builder internal constructor(style: Style):Sketch.Style.Companion.Builder(style) {
-                    var outfitColor = style.outfitColor
+                open class Builder<T, OT : OutfitState.Style<T>> internal constructor(style: Style<T, OT>) :
+                    Sketch.Style.Companion.Builder(style) {
+                    var outfitState = style.outfitState
 
                     override fun get() = Style(
                         sketch = super.get(),
-                        outfitColor = outfitColor,
+                        outfitState = outfitState,
                     )
                 }
 
                 @Composable
-                fun Style.copy(scope: @Composable Builder.() -> Unit = {}) = Builder(this).also {
-                    it.scope()
-                }.get()
+                fun <T, OT : OutfitState.Style<T>> Style<T, OT>.copy(scope: @Composable Builder<T, OT>.() -> Unit = {}) =
+                    Builder(this).also {
+                        it.scope()
+                    }.get()
 
-                @Composable
-                fun Sketch.Style.copyToStateStyle(scope: @Composable Builder.() -> Unit = {}) =
-                    Builder(Style(this)).also { it.scope() }.get()
+//                @Composable
+//                fun Sketch.Style.copyToStateStyle(scope: @Composable Builder.() -> Unit = {}) =
+//                    Builder(Style(this)).also { it.scope() }.get()
 
-                @Composable
-                fun Simple.Style.copyToStateStyle(scope: @Composable Builder.() -> Unit = {}) = Companion.Builder(
-                    Style(
-                        sketch = this,
-                        outfitColor = OutfitColorsState(
-                            active = color
-                        )
-                    )
-                ).also { it.scope() }.get()
             }
 
-            constructor(style: Style) : this(
+            constructor(style: Style<T, OT>) : this(
                 sketch = style,
-                outfitColor = style.outfitColor,
+                outfitState = style.outfitState,
             )
-
-            fun resolve(enabled: Boolean) = template.get(size, outfitColor.resolve(enabled))
-            fun resolveOrDefault(enabled: Boolean) =
-                resolve(enabled) ?: BorderStroke(1.dp, Color.Black)
         }
 
+        //Dual.Style
+        fun Style<Color, OutfitState.Dual.Style<Color>>.resolve(enabled: Boolean) =
+            outfitState?.resolve(enabled)?.let { template.get(size, it) }
+
+        fun Style<Color, OutfitState.Dual.Style<Color>>.resolveOrDefault(enabled: Boolean) =
+            resolve(enabled) ?: BorderStroke(1.dp, Color.Black)
 
     }
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:32
+ *  Last modified 05/03/2023 14:00
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -69,7 +69,7 @@ object PageHelpAndServiceTheme {
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.background,
-        backgroundElevated = MaterialTheme.colorsCommonExtended.backgroundElevated,
+        backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.accent,
         onBackground = MaterialTheme.colors.onBackground,
         iconClose = MaterialTheme.colors.primary,
     )
@@ -84,7 +84,7 @@ object PageHelpAndServiceTheme {
 
     @Composable
     fun provideDimensions() = Dimensions(
-        iconCloseSize = MaterialTheme.dimensionsSizeExtended.iconModal,
+        iconCloseSize = MaterialTheme.dimensionsSizeExtended.iconModal.width,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -98,7 +98,7 @@ object PageHelpAndServiceTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        titleBig = MaterialTheme.typographiesSketchExtended.textHuge.typo.copy(
+        titleBig = MaterialTheme.typographiesExtended.textHuge.typo.copy(
             color = colors.onBackground,
             fontWeight = FontWeight.Bold
         ),

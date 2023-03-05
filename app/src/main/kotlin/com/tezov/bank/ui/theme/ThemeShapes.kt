@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/03/2023 14:12
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/03/2023 13:46
+ *  Last modified 04/03/2023 22:50
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,12 +15,12 @@ package com.tezov.bank.ui.theme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeShapesExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeFramesExtended
 
 object ThemeShapes {
 
     @Composable
-    fun provideShapes() = ThemeShapesExtended.Shapes.Sketch(
+    fun provideShapes() = ThemeFramesExtended.Shapes(
         roundedCornerMicro = 4.outfitShapeSketch,
         roundedCornerSmall = 8.outfitShapeSketch,
         roundedCornerNormal = 12.outfitShapeSketch,
@@ -37,7 +37,7 @@ object ThemeShapes {
     )
 
     @Composable
-    fun provideBorders() = ThemeShapesExtended.Borders.Sketch(
+    fun provideBorders() = ThemeFramesExtended.Borders(
         strokeMicro =  0.8.outfitBorderSketch,
         strokeSmall =  1.outfitBorderSketch,
         strokeNormal = 1.5.outfitBorderSketch,

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 21:58
+ *  Last modified 05/03/2023 13:51
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,6 +16,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
+import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 
 val MaterialTheme.dimensionsPaddingExtended
     @Composable
@@ -109,11 +110,11 @@ object ThemeDimensionsExtended{
 
     @Immutable
     data class Sizes(
-        val iconModal:Dp,
-        val iconInfo:Dp,
-        val iconAction:Dp,
-        val iconFieldInfo:Dp,
-        val iconFieldAction:Dp,
+        val iconModal:SizeDp,
+        val iconInfo:SizeDp,
+        val iconAction:SizeDp,
+        val iconFieldInfo:SizeDp,
+        val iconFieldAction:SizeDp,
         val dividerSmall:Dp,
         val dividerNormal:Dp,
         val dividerBig:Dp,

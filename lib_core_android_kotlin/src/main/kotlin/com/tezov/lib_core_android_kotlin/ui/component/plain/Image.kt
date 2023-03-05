@@ -12,32 +12,37 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.plain
 
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.isSpecified
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.type.primaire.size
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.background
 import com.tezov.lib_core_android_kotlin.ui.theme.style.border
+import com.tezov.lib_core_kotlin.type.primaire.Size
 
-object Icon {
+object Image {
 
-    object Simple{
+    object Simple {
 
         open class Style(
             val size: SizeDp? = null,
             val tint: Color = Color.Unspecified,
-        ){
-            companion object{
+            val contentScale: ContentScale = ContentScale.Fit,
+        ) {
+            companion object {
 
                 open class Builder internal constructor(style: Style) {
                     var size = style.size
@@ -50,7 +55,7 @@ object Icon {
                 }
 
                 @Composable
-                fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+                fun Style.copy(builder: @Composable Builder.() -> Unit = {}) = Builder(this).also {
                     it.builder()
                 }.get()
 
@@ -65,43 +70,47 @@ object Icon {
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
-            style:Style = Style(),
-            resourceId:Int,
-            description:String? = null,
-        ){
+            style: Style = Style(),
+            resourceId: Int,
+            description: String? = null,
+        ) {
             style.size?.let {
                 modifier.size(it)
             }
-            Icon(
+            Image(
                 modifier = modifier,
                 painter = painterResource(id = resourceId),
-                tint = style.tint,
+                colorFilter = style.tint.takeIf { it.isSpecified }?.let { ColorFilter.tint(it) },
                 contentDescription = description,
+                contentScale = style.contentScale
             )
         }
 
     }
 
-    object Frame{
+    object Frame {
 
         open class Style(
             val size: SizeDp? = null,
             val outfitFrame: OutfitFrameSimple = OutfitFrameSimple(),
-        ){
-            companion object{
+            val contentScale: ContentScale = ContentScale.Fit
+        ) {
+            companion object {
 
                 open class Builder internal constructor(style: Style) {
                     var size = style.size
                     var outfitFrame = style.outfitFrame
+                    var contentScale = style.contentScale
 
                     internal fun get() = Style(
                         size = size,
                         outfitFrame = outfitFrame,
+                        contentScale = contentScale,
                     )
                 }
 
                 @Composable
-                fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+                fun Style.copy(builder: @Composable Builder.() -> Unit = {}) = Builder(this).also {
                     it.builder()
                 }.get()
 
@@ -110,36 +119,31 @@ object Icon {
             constructor(style: Style) : this(
                 size = style.size,
                 outfitFrame = style.outfitFrame,
+                contentScale = style.contentScale,
             )
         }
 
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
-            style:Style = Style(),
-            resourceId:Int,
-            description:String? = null,
-        ){
+            style: Style = Style(),
+            resourceId: Int,
+            description: String? = null,
+        ) {
             style.size?.let {
                 modifier.size(it)
             }
             modifier.border(style.outfitFrame)
-            Icon(
+            Image(
                 modifier = modifier,
                 painter = painterResource(id = resourceId),
-                tint = style.outfitFrame.outfitShape.color,
+                colorFilter = style.outfitFrame.outfitShape.color.takeIf { it.isSpecified }?.let { ColorFilter.tint(it) },
                 contentDescription = description,
+                contentScale = style.contentScale
             )
         }
 
     }
-
-
-
-
-
-
-
 
 
 }

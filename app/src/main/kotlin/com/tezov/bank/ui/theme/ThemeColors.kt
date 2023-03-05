@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 17:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:28
+ *  Last modified 05/03/2023 14:12
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,9 +13,14 @@
 package com.tezov.bank.ui.theme
 
 import androidx.compose.material.Colors
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsPalette
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsSemantic
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsState
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsExtended
 
 object ThemeColors {
     object Common {
@@ -45,42 +50,59 @@ object ThemeColors {
         val grayOverlay = Color(0x063F3F3F)
     }
 
-    val colorsLight = Colors(
-        primary = Common.blueSea,
-        primaryVariant = Common.blueDark,
-        onPrimary = Common.whiteShady,
-
-        secondary = Common.whiteShady,
-        secondaryVariant = Common.whiteDark,
-        onSecondary = Common.blueNight,
-
-        surface = Color.Transparent,
-        onSurface = Common.blueElegant,
-
-        background = Common.whiteShiny,
-        onBackground = Common.blueElegant,
-
-        error = Common.redBlood,
-        onError = Common.whiteDark,
-        isLight = true
-    )
-
-    val colorsLightCommonExtended = ThemeColorsExtended.Common(
-        onPrimaryVariant = Common.whiteShiny,
-        onSecondaryVariant = Common.blueClear,
-
-        background = Common.blueClear,
-        backgroundVariant = Common.blueSea,
-        onBackgroundVariant = Common.whiteShiny,
-
-        backgroundElevated = Common.grayOverlay,
-        onBackgroundElevated = Common.blueNight,
-        onBackgroundElevatedVariant = Common.blueElegant,
-
-        backgroundModal = Common.whiteShady,
-        onBackgroundModal = Common.blueNight,
-        onBackgroundModalVariant = Common.blueElegant,
-
+    val colorsLightExtended = ThemeColorsExtended.Common(
+        primary = OutfitColorsPalette(
+            default = Common.whiteShady,
+            accent = Common.blueDark,
+        ),
+        onPrimary = OutfitColorsPalette(
+            default = Common.blueSea,
+            accent = Common.blueDark,
+        ),
+        secondary = OutfitColorsPalette(
+            default = Common.whiteShady,
+            light = Common.whiteDark,
+        ),
+        onSecondary = OutfitColorsPalette(
+            default = Common.blueNight,
+        ),
+        semantic= OutfitColorsSemantic(
+            error = Common.redBlood
+        ),
+        onSemantic= OutfitColorsSemantic(
+            error = Common.whiteDark
+        ),
+        background = OutfitColorsPalette(
+            default = Common.whiteShiny,
+            accent = Common.blueSea,
+        ),
+        onBackground = OutfitColorsPalette(
+            default = Common.blueElegant,
+            accent =  Common.whiteShiny,
+        ),
+        backgroundElevated = OutfitColorsPalette(
+            default = Common.grayOverlay,
+        ),
+        onBackgroundElevated = OutfitColorsPalette(
+            default = Common.blueNight,
+            accent = Common.blueElegant,
+        ),
+        backgroundModal = OutfitColorsPalette(
+            default = Common.whiteShady,
+            accent = Common.blueElegant,
+        ),
+        onBackgroundModal = OutfitColorsPalette(
+            default = Common.blueNight,
+            accent = Common.blueElegant,
+        ),
+        backgroundButtonProceed = OutfitColorsState(
+            active = Common.whiteShiny,
+            inactive = Common.whiteDark
+        ),
+        onBackgroundButtonProceed = OutfitColorsState(
+            active = Common.blueNight,
+            inactive = Common.grayDark
+        ),
         backgroundButtonConfirm = OutfitColorsState(
             active = Common.blueElegant,
             inactive = Common.whiteDark
@@ -96,15 +118,29 @@ object ThemeColors {
         onBackgroundButtonCancel = OutfitColorsState(
             active = Common.blueElegant,
             inactive = Common.grayDark
-        ),
-        backgroundButtonProceed = OutfitColorsState(
-            active = Common.whiteShiny,
-            inactive = Common.whiteDark
-        ),
-        onBackgroundButtonProceed = OutfitColorsState(
-            active = Common.blueNight,
-            inactive = Common.grayDark
-        ),
-
+        )
     )
+
+    @Composable
+    fun providesColorsLightMaterial() =  Colors(
+        primary = MaterialTheme.colorsExtended.primary.default,
+        primaryVariant = MaterialTheme.colorsExtended.primary.accent,
+        onPrimary = MaterialTheme.colorsExtended.onPrimary.default,
+
+        secondary = MaterialTheme.colorsExtended.secondary.default,
+        secondaryVariant = MaterialTheme.colorsExtended.secondary.accent,
+        onSecondary = MaterialTheme.colorsExtended.onSecondary.default,
+
+        surface = Color.Unspecified,
+        onSurface = MaterialTheme.colorsExtended.onBackground.default,
+
+        background = MaterialTheme.colorsExtended.background.default,
+        onBackground = MaterialTheme.colorsExtended.onBackground.default,
+
+        error = MaterialTheme.colorsExtended.semantic.error,
+        onError = MaterialTheme.colorsExtended.onSemantic.error,
+
+        isLight = true
+    )
+
 }

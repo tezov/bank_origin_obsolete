@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:28
+ *  Last modified 05/03/2023 14:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,18 +12,12 @@
 
 package com.tezov.bank.ui.page.lobby.login
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
@@ -32,9 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
+import com.tezov.lib_core_android_kotlin.ui.component.plain.*
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -104,15 +96,15 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     horizontal = MaterialTheme.dimensionsPaddingExtended.blockBig_v
                 )
         ) {
-            ContentHeader(
-                iconState = state.iconState,
-                onClickAdd = {
-
-                },
-                onClickDropDownMenu = { index ->
-
-                }
-            )
+//            ContentHeader(
+//                iconState = state.iconState,
+//                onClickAdd = {
+//
+//                },
+//                onClickDropDownMenu = { index ->
+//
+//                }
+//            )
             ContentBody(
                 nameState = state.nameState
             )
@@ -141,57 +133,36 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
-                modifier = Modifier
-                    .weight(1f)
+                modifier = Modifier.weight(1f)
             ) {
-                Image(
-                    modifier = Modifier
-                        .size(PageLoginTheme.dimensions.logoSize),
-                    painter = painterResource(id = R.drawable.logo_tezov_bank_inverse),
-                    contentDescription = stringResource(id = R.string.pg_login_img_logo)
+                Image.Simple(
+                    style = PageLoginTheme.styles.logo,
+                    resourceId = R.drawable.logo_tezov_bank_inverse,
+                    description = stringResource(id = R.string.pg_login_img_logo)
                 )
             }
-            Image(
-                modifier = Modifier
-                    .size(PageLoginTheme.dimensions.iconBigSize)
-                    .clip(CircleShape)
-                    .border(
-                        PageLoginTheme.borders.iconBig,
-                        CircleShape
-                    ),
-                painter = painterResource(id = iconState.value),
-                contentScale = ContentScale.Crop,
-                contentDescription = stringResource(id = R.string.pg_login_img_suit_case)
+            Image.Frame(
+                style = PageLoginTheme.styles.iconBig,
+                resourceId = iconState.value,
+                description = stringResource(id = R.string.pg_login_img_suit_case)
             )
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconBig))
-            IconButton(onClick = {
-                onClickAdd()
-            }) {
-                Icon(
-                    modifier = Modifier
-                        .size(PageLoginTheme.dimensions.iconMediumSize)
-                        .clip(CircleShape)
-                        .background(PageLoginTheme.colors.backgroundButtonLight),
-                    painter = painterResource(id = R.drawable.ic_add_24dp),
-                    tint = PageLoginTheme.colors.background,
-                    contentDescription = stringResource(id = R.string.pg_login_icon_add_account)
+            IconButton(onClick = { onClickAdd() }) {
+                Icon.Frame(
+                    resourceId = R.drawable.ic_add_24dp,
+                    style = PageLoginTheme.styles.iconMedium,
+                    description = stringResource(id = R.string.pg_login_icon_add_account)
                 )
             }
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconMedium))
             Box {
                 var expanded by remember { mutableStateOf(false) }
                 val items = stringArrayResource(id = R.array.pg_login_drop_down_menu)
-                IconButton(onClick = {
-                    expanded = true
-                }) {
-                    Icon(
-                        modifier = Modifier
-                            .size(PageLoginTheme.dimensions.iconSmallSize)
-                            .clip(CircleShape)
-                            .background(PageLoginTheme.colors.backgroundButtonDark),
-                        painter = painterResource(id = R.drawable.ic_3dot_v_24dp),
-                        tint = PageLoginTheme.colors.backgroundButtonLight,
-                        contentDescription = stringResource(id = R.string.pg_login_icon_more_action)
+                IconButton(onClick = { expanded = true }) {
+                    Icon.Frame(
+                        style = PageLoginTheme.styles.iconSmall,
+                        resourceId = R.drawable.ic_3dot_v_24dp,
+                        description = stringResource(id = R.string.pg_login_icon_more_action)
                     )
                 }
                 DropdownMenu(
@@ -200,8 +171,8 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     modifier = Modifier
                         .background(PageLoginTheme.colors.backgroundDropDownMenu),
                     offset = DpOffset(
-                        PageLoginTheme.dimensions.iconSmallSize / 2,
-                        -PageLoginTheme.dimensions.iconSmallSize / 5
+                        PageLoginTheme.dimensions.sizeIconSmall.width / 2,
+                        -PageLoginTheme.dimensions.sizeIconSmall.height / 5
                     )
                 ) {
                     items.forEachIndexed { index, text ->
@@ -212,10 +183,10 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             },
                             contentPadding = PaddingValues(8.dp, 0.dp)
                         ) {
-//                            Text(
-//                                text = text,
-//                                style = PageLoginTheme.typographies.dropDownMenu
-//                            )
+                            Text.Simple(
+                                text = text,
+                                style = PageLoginTheme.typographies.dropDownMenu
+                            )
                         }
                     }
                 }

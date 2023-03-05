@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:32
+ *  Last modified 05/03/2023 13:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
@@ -56,7 +57,7 @@ object ActionCard {
             )
         ),
         val iconStyle:Icon.Simple.Style =  Icon.Simple.Style(
-            size = 24.dp,
+            size = SizeDp(24.dp),
             tint = Color.Black
         ),
         val outfitTextTitle: OutfitTextSimple = OutfitTextSimple(),
@@ -115,7 +116,7 @@ object ActionCard {
                     .align(Alignment.CenterVertically)
             ) {
                 style.iconStyle.size?.let {
-                    Spacer(modifier = Modifier.height(it))
+                    Spacer(modifier = Modifier.height(it.height))
                 }
                 Text.Simple(
                     text = data.title,

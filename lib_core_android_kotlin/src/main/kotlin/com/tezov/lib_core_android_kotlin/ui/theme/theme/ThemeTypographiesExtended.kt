@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 05/03/2023 14:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 21:58
+ *  Last modified 04/03/2023 22:50
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,21 +14,19 @@ package com.tezov.lib_core_android_kotlin.ui.theme.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSketch
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextState
 
 
-val MaterialTheme.typographiesSketchExtended
+val MaterialTheme.typographiesExtended
     @Composable
     @ReadOnlyComposable
-    get() = ThemeTypographiesExtended.localSketch.current
-infix fun MaterialTheme.provides(value: ThemeTypographiesExtended.Sketch) = ThemeTypographiesExtended.localSketch provides value
+    get() = ThemeTypographiesExtended.local.current
+infix fun MaterialTheme.provides(value: ThemeTypographiesExtended.Common) = ThemeTypographiesExtended.local provides value
 
 object ThemeTypographiesExtended{
 
     @Immutable
-    data class Sketch(
+    data class Common(
         val textTitle: OutfitTextSketch,
         val textSubtitle: OutfitTextSketch,
         val textHelper: OutfitTextSketch,
@@ -47,7 +45,7 @@ object ThemeTypographiesExtended{
         val textButtonOutline: OutfitTextSketch,
 
     )
-    internal val localSketch: ProvidableCompositionLocal<Sketch> = staticCompositionLocalOf {
+    internal val local: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
         error("not provided")
     }
 
