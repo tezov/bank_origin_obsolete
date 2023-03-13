@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/03/2023 21:14
+ *  Created by Tezov on 13/03/2023 21:48
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/03/2023 21:14
+ *  Last modified 13/03/2023 21:48
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,22 +18,47 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 
 object Button {
 
     object TextFilled {
 
-        open class Style<T, S : OutfitState.Selector, OT : OutfitState.Style<T, S>>(
-            val outfitFrame: OutfitFrameState<T, S, OT>? = null,
-            val outfitText: OutfitTextState<T, S, OT>? = null,
+        open class Style(
+            val outfitFrame: OutfitFrameStateColor = OutfitFrameStateDualColor(
+                outfitShape = OutfitShapeStateDualColor(
+                    sketch = 12.outfitShapeSketch,
+                    outfitState = OutfitStateDual(
+                        active = null,
+                        inactive = null,
+                    )
+                ),
+                outfitBorder = OutfitBorderStateDualColor(
+                    sketch = 2.outfitBorderSketch,
+                    outfitState = OutfitStateDual(
+                        active = null,
+                        inactive = null,
+                    )
+                )
+            ),
+            val outfitText: OutfitTextStateColor = OutfitTextStateDualColor(
+                sketch = OutfitText.Sketch.Style(
+                    typo = TextStyle(),
+                ),
+                outfitState = OutfitStateDual(
+                    active = null,
+                    inactive = null
+                )
+            ),
             val elevation: Dp? = null,
         ) {
             companion object {
 
-                open class Builder<T, S : OutfitState.Selector, OT : OutfitState.Style<T, S>> internal constructor(
-                    style: Style<T, S, OT>
+                open class Builder internal constructor(
+                    style: Style
                 ) {
                     var outfitFrame = style.outfitFrame
                     var outfitText = style.outfitText
@@ -47,15 +72,15 @@ object Button {
                 }
 
                 @Composable
-                fun <T, S : OutfitState.Selector, OT : OutfitState.Style<T, S>> Style<T, S, OT>.copy(
-                    builder: @Composable Builder<T, S, OT>.() -> Unit = {}
+                fun Style.copy(
+                    builder: @Composable Builder.() -> Unit = {}
                 ) = Builder(this).also {
                     it.builder()
                 }.get()
 
             }
 
-            constructor(style: Style<T, S, OT>) : this(
+            constructor(style: Style) : this(
                 outfitFrame = style.outfitFrame,
                 outfitText = style.outfitText,
                 elevation = style.elevation,
@@ -70,7 +95,7 @@ object Button {
             modifierText: Modifier = Modifier,
             selector: OutfitState.Selector,
             interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-            style: Style<Color, OutfitState.Selector, OutfitState.Style<Color, OutfitState.Selector>> = Style(),
+            style: Style = Style(),
             contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
             onClick: () -> Unit = {},
         ) {
@@ -101,19 +126,8 @@ object Button {
     object TextOutlined {
 
         open class Style(
-            val outfitFrame: OutfitFrameState = OutfitFrameState(
-                outfitShape = OutfitShapeState(
-                    sketch = 8.outfitShapeSketch,
-                ),
-                outfitBorder = OutfitBorderState(
-                    sketch = 1.outfitBorderSketch,
-                    outfitColor = OutfitColorsState(
-                        active = Color.Gray,
-                        inactive = Color.Gray.copy(alpha = 0.25f),
-                    )
-                )
-            ),
-            val outfitText: OutfitTextState = OutfitTextState(),
+            val outfitFrame: OutfitFrameStateColor = OutfitFrameState(),
+            val outfitText: OutfitTextStateColor = OutfitTextState(),
             val elevation: Dp? = null,
         ) {
             companion object {
