@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/03/2023 21:37
+ *  Created by Tezov on 13/03/2023 20:43
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/03/2023 21:37
+ *  Last modified 13/03/2023 20:43
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,29 +19,22 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 
 object Button {
 
-    object TextFilled{
+    object TextFilled {
 
-        open class Style(
-            val outfitFrame: OutfitFrameState = OutfitFrameState(
-                outfitShape = OutfitShapeState(
-                    sketch = 8.outfitShapeSketch,
-                    outfitColor = OutfitColorsState(
-                        active = Color.Gray,
-                        inactive = Color.Gray.copy(alpha = 0.25f),
-                    )
-                )
-            ),
-            val outfitText: OutfitTextState = OutfitTextState(),
+        open class Style<T, S : OutfitState.Selector, OT : OutfitState.Style<T, S>>(
+            val outfitFrame: OutfitFrameState<T, S, OT>? = null,
+            val outfitText: OutfitTextState<T, S, OT>? = null,
             val elevation: Dp? = null,
-         ){
-            companion object{
+        ) {
+            companion object {
 
-                open class Builder internal constructor(style: Style) {
+                open class Builder<T, S : OutfitState.Selector, OT : OutfitState.Style<T, S>> internal constructor(
+                    style: Style<T, S, OT>
+                ) {
                     var outfitFrame = style.outfitFrame
                     var outfitText = style.outfitText
                     var elevation = style.elevation
@@ -54,13 +47,15 @@ object Button {
                 }
 
                 @Composable
-                fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+                fun <T, S : OutfitState.Selector, OT : OutfitState.Style<T, S>> Style<T, S, OT>.copy(
+                    builder: @Composable Builder<T, S, OT>.() -> Unit = {}
+                ) = Builder(this).also {
                     it.builder()
                 }.get()
 
             }
 
-            constructor(style: Style) : this(
+            constructor(style: Style<T, S, OT>) : this(
                 outfitFrame = style.outfitFrame,
                 outfitText = style.outfitText,
                 elevation = style.elevation,
@@ -68,24 +63,25 @@ object Button {
         }
 
         @Composable
-        operator fun invoke(
-            text:String,
+        operator fun <T, S : OutfitState.Selector, OT : OutfitState.Style<T, S>> invoke(
+            enabled: Boolean = true,
+            text: String,
             modifierButton: Modifier = Modifier,
             modifierText: Modifier = Modifier,
-            enabled: Boolean = true,
+            selector: S,
             interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-            style:Style = Style(),
+            style: Style<T, S, OT> = Style(),
             contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
             onClick: () -> Unit = {},
-        ){
+        ) {
             Button(
                 modifier = modifierButton,
                 enabled = enabled,
                 interactionSource = interactionSource,
-                elevation = style.elevation?.let { ButtonDefaults.elevation(it,it,it,it,it) },
-                shape = style.outfitFrame.outfitShape.resolveOrDefault(),
-                border =  style.outfitFrame.outfitBorder.resolve(enabled),
-                colors = style.outfitFrame.outfitShape.outfitColor.buttonColorsOrDefault(),
+                elevation = style.elevation?.let { ButtonDefaults.elevation(it, it, it, it, it) },
+                shape = style.outfitFrame?.outfitShape?.resolveOrDefault() ?: MaterialTheme.shapes.small,
+                border = style.outfitFrame?.outfitBorder?.resolve(selector),
+                colors = style.outfitFrame?.outfitShape.outfitColor.buttonColorsOrDefault(),
                 contentPadding = contentPadding,
                 onClick = onClick,
             ) {
@@ -100,7 +96,7 @@ object Button {
 
     }
 
-    object TextOutlined{
+    object TextOutlined {
 
         open class Style(
             val outfitFrame: OutfitFrameState = OutfitFrameState(
@@ -117,8 +113,8 @@ object Button {
             ),
             val outfitText: OutfitTextState = OutfitTextState(),
             val elevation: Dp? = null,
-        ){
-            companion object{
+        ) {
+            companion object {
 
                 open class Builder internal constructor(style: Style) {
                     var outfitFrame = style.outfitFrame
@@ -133,7 +129,7 @@ object Button {
                 }
 
                 @Composable
-                fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+                fun Style.copy(builder: @Composable Builder.() -> Unit = {}) = Builder(this).also {
                     it.builder()
                 }.get()
 
@@ -148,20 +144,20 @@ object Button {
 
         @Composable
         operator fun invoke(
-            text:String,
+            text: String,
             modifierButton: Modifier = Modifier,
             modifierText: Modifier = Modifier,
             enabled: Boolean = true,
             interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-            style:Style = Style(),
+            style: Style = Style(),
             contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
             onClick: () -> Unit = {},
-        ){
+        ) {
             OutlinedButton(
                 modifier = modifierButton,
                 enabled = enabled,
                 interactionSource = interactionSource,
-                elevation = style.elevation?.let { ButtonDefaults.elevation(it,it,it,it,it) },
+                elevation = style.elevation?.let { ButtonDefaults.elevation(it, it, it, it, it) },
                 shape = style.outfitFrame.outfitShape.resolveOrDefault(),
                 border = style.outfitFrame.outfitBorder.resolve(enabled),
                 colors = style.outfitFrame.outfitShape.outfitColor.buttonColorsOrDefault(),

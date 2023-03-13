@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 20:33
+ *  Created by Tezov on 13/03/2023 20:43
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 20:33
+ *  Last modified 13/03/2023 19:51
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,14 +19,23 @@ import androidx.compose.ui.graphics.isSpecified
 
 object OutfitState {
 
-    interface Style<T>
+    interface Selector
+
+    interface Style<T, S:Selector>{
+        fun resolve(selector: S): T?
+    }
 
     object Dual{
+
+        sealed class Selector: OutfitState.Selector{
+            object Enabled : Selector()
+            object Disabled :Selector()
+        }
 
         open class Style<T>(
             val active: T? = null,
             val inactive: T? = null,
-        ):OutfitState.Style<T> {
+        ):OutfitState.Style<T, Selector> {
 
             companion object{
 
@@ -51,18 +60,18 @@ object OutfitState {
                 inactive = style.inactive,
             )
 
-            fun resolve(enabled:Boolean) = if(enabled) active else inactive
+            override fun resolve(selector: Selector) = if(selector is Selector.Enabled) active else inactive
 
         }
 
-        fun Modifier.background(style: Style<Color>, enabled: Boolean) =
-            style.resolve(enabled).takeIf { it?.isSpecified == true }?.let { background(it) } ?: this
+        fun Modifier.background(style: Style<Color>, selector: Selector) =
+            style.resolve(selector).takeIf { it?.isSpecified == true }?.let { background(it) } ?: this
 
     }
 
     object Semantic{
 
-        enum class Selector{
+        enum class Selector: OutfitState.Selector{
             Neutral, Info, Alert,Error, Success
         }
 
@@ -72,7 +81,7 @@ object OutfitState {
             val alert: T? = null,
             val error: T? = null,
             val success: T? = null,
-        ):OutfitState.Style<T> {
+        ):OutfitState.Style<T, Selector> {
 
             companion object{
 
@@ -106,18 +115,17 @@ object OutfitState {
                 success = style.success,
             )
 
-            fun resolve(selector:Selector) = when(selector){
+            override fun resolve(selector: Selector) = when(selector){
                 Selector.Neutral -> neutral
                 Selector.Info -> info
                 Selector.Alert -> alert
                 Selector.Error -> error
                 Selector.Success -> success
             }
-
         }
 
         fun Modifier.background(style: Style<Color>, selector:Selector) =
-            style.resolve(selector).takeIf { it?.isSpecified == true }?.let { background(it) } ?: this
+            style.resolve(selector)?.let { background(it) } ?: this
 
     }
 

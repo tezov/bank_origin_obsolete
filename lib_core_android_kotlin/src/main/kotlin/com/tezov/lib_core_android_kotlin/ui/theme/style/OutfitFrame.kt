@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 20:33
+ *  Created by Tezov on 13/03/2023 20:43
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 20:33
+ *  Last modified 13/03/2023 20:43
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -80,32 +80,32 @@ object OutfitFrame {
 
     object State {
 
-        open class Style<T, OT : OutfitState.Style<T>>(
-            val outfitShape: OutfitShapeState<T, OT>? = null,
-            val outfitBorder: OutfitBorderState<T, OT>? = null,
+        open class Style<T, S:OutfitState.Selector, OT : OutfitState.Style<T, S>>(
+            val outfitShape: OutfitShapeState<T, S, OT>? = null,
+            val outfitBorder: OutfitBorderState<T, S, OT>? = null,
         ) {
 
             companion object {
 
-                open class Builder<T, OT : OutfitState.Style<T>> internal constructor(style: Style<T, OT>) {
+                open class Builder<T, S:OutfitState.Selector, OT : OutfitState.Style<T, S>> internal constructor(style: Style<T, S, OT>) {
                     var outfitShape = style.outfitShape
                     var outfitBorder = style.outfitBorder
 
-                    internal fun get() = Style<T, OT>(
+                    internal fun get() = Style(
                         outfitShape = outfitShape,
                         outfitBorder = outfitBorder,
                     )
                 }
 
                 @Composable
-                fun <T, OT : OutfitState.Style<T>> Style<T, OT>.copy(builder: @Composable Builder<T, OT>.() -> Unit = {}) =
+                fun <T, S:OutfitState.Selector, OT : OutfitState.Style<T, S>> Style<T, S, OT>.copy(builder: @Composable Builder<T, S, OT>.() -> Unit = {}) =
                     Builder(this).also {
                         it.builder()
                     }.get()
 
             }
 
-            constructor(style: Style<T, OT>) : this(
+            constructor(style: Style<T, S, OT>) : this(
                 outfitShape = style.outfitShape,
                 outfitBorder = style.outfitBorder,
             )
@@ -114,9 +114,9 @@ object OutfitFrame {
 
         //Dual
         fun Modifier.border(
-            style: Style<Color, OutfitStateDual<Color>>,
-            enabled: Boolean
-        ) = style.outfitBorder?.resolve(enabled)?.let { border ->
+            style: Style<Color, OutfitStateDualSelector, OutfitStateDual<Color>>,
+            selector: OutfitStateDualSelector
+        ) = style.outfitBorder?.resolve(selector)?.let { border ->
                 style.outfitShape?.resolve()?.let { shape ->
                     border(border, shape).clip(shape)
                 } ?: kotlin.run {
@@ -125,12 +125,26 @@ object OutfitFrame {
             } ?: this
 
         fun Modifier.background(
-            style: Style<Color, OutfitStateDual<Color>>,
-            enabled: Boolean
-        ) = style.outfitShape?.let { shape -> background(shape, enabled) } ?: this
+            style: Style<Color, OutfitStateDualSelector, OutfitStateDual<Color>>,
+            selector: OutfitStateDualSelector
+        ) = style.outfitShape?.let { shape -> background(shape, selector) } ?: this
 
         //Semantic
-        //todo
+        fun Modifier.border(
+            style: Style<Color, OutfitStateSemanticSelector, OutfitStateSemantic<Color>>,
+            selector: OutfitStateSemanticSelector
+        ) = style.outfitBorder?.resolve(selector)?.let { border ->
+            style.outfitShape?.resolve()?.let { shape ->
+                border(border, shape).clip(shape)
+            } ?: kotlin.run {
+                border(border)
+            }
+        } ?: this
+
+        fun Modifier.background(
+            style: Style<Color, OutfitStateSemanticSelector, OutfitStateSemantic<Color>>,
+            selector: OutfitStateSemanticSelector
+        ) = style.outfitShape?.let { shape -> background(shape, selector) } ?: this
 
     }
 

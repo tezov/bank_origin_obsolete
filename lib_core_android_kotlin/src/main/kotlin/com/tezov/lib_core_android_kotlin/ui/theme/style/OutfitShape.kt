@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 20:33
+ *  Created by Tezov on 13/03/2023 20:43
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 20:33
+ *  Last modified 13/03/2023 20:43
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -181,14 +181,14 @@ object OutfitShape {
 
     object State {
 
-        open class Style<T, OT : OutfitState.Style<T>>(
+        open class Style<T, S:OutfitState.Selector, OT : OutfitState.Style<T, S>>(
             sketch: Sketch.Style = Sketch.Style(),
             val outfitState: OT? = null,
         ) : Sketch.Style(sketch) {
 
             companion object {
 
-                open class Builder<T, OT : OutfitState.Style<T>> internal constructor(style: Style<T, OT>) :
+                open class Builder<T, S:OutfitState.Selector, OT : OutfitState.Style<T, S>> internal constructor(style: Style<T, S, OT>) :
                     Sketch.Style.Companion.Builder(style) {
                     var outfitState = style.outfitState
 
@@ -199,7 +199,7 @@ object OutfitShape {
                 }
 
                 @Composable
-                fun <T, OT : OutfitState.Style<T>> Style<T, OT>.copy(scope: @Composable Builder<T, OT>.() -> Unit = {}) = Builder(this).also {
+                fun <T, S:OutfitState.Selector, OT : OutfitState.Style<T, S>> Style<T, S, OT>.copy(scope: @Composable Builder<T, S, OT>.() -> Unit = {}) = Builder(this).also {
                     it.scope()
                 }.get()
 
@@ -209,7 +209,7 @@ object OutfitShape {
 
             }
 
-            constructor(style: Style<T, OT>) : this(
+            constructor(style: Style<T, S, OT>) : this(
                 sketch = style,
                 outfitState = style.outfitState,
             )
@@ -217,11 +217,11 @@ object OutfitShape {
         }
 
         //Dual
-        fun Modifier.background(style: Style<Color, OutfitStateDual<Color>>, enabled: Boolean) =
-            style.outfitState?.let { background(it, enabled) } ?: this
+        fun Modifier.background(style: Style<Color, OutfitStateDualSelector, OutfitStateDual<Color>>, selector: OutfitStateDualSelector) =
+            style.outfitState?.let { background(it, selector) } ?: this
 
         //Semantic
-        fun Modifier.background(style: Style<Color, OutfitStateSemantic<Color>>, selector: OutfitState.Semantic.Selector) =
+        fun Modifier.background(style: Style<Color, OutfitStateSemanticSelector, OutfitStateSemantic<Color>>, selector: OutfitStateSemanticSelector) =
             style.outfitState?.let { background(it, selector) } ?: this
 
     }

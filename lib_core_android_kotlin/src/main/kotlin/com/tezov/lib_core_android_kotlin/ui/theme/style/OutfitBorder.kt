@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 20:33
+ *  Created by Tezov on 13/03/2023 20:43
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 20:16
+ *  Last modified 13/03/2023 20:43
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -123,14 +123,14 @@ object OutfitBorder {
 
     object State {
 
-        open class Style<T, OT : OutfitState.Style<T>>(
+        open class Style<T, S:OutfitState.Selector, OT : OutfitState.Style<T, S>>(
             sketch: Sketch.Style = Sketch.Style(),
             val outfitState: OT? = null,
         ) : Sketch.Style(sketch) {
 
             companion object {
 
-                open class Builder<T, OT : OutfitState.Style<T>> internal constructor(style: Style<T, OT>) :
+                open class Builder<T, S:OutfitState.Selector, OT : OutfitState.Style<T, S>> internal constructor(style: Style<T, S, OT>) :
                     Sketch.Style.Companion.Builder(style) {
                     var outfitState = style.outfitState
 
@@ -141,7 +141,7 @@ object OutfitBorder {
                 }
 
                 @Composable
-                fun <T, OT : OutfitState.Style<T>> Style<T, OT>.copy(scope: @Composable Builder<T, OT>.() -> Unit = {}) =
+                fun <T, S:OutfitState.Selector, OT : OutfitState.Style<T, S>> Style<T, S, OT>.copy(scope: @Composable Builder<T, S, OT>.() -> Unit = {}) =
                     Builder(this).also {
                         it.scope()
                     }.get()
@@ -152,34 +152,34 @@ object OutfitBorder {
 
             }
 
-            constructor(style: Style<T, OT>) : this(
+            constructor(style: Style<T, S, OT>) : this(
                 sketch = style,
                 outfitState = style.outfitState,
             )
         }
 
         //Dual
-        fun Style<Color, OutfitState.Dual.Style<Color>>.resolve(enabled: Boolean) =
-            outfitState?.resolve(enabled)?.let { template.get(size, it) }
-
-        fun Style<Color, OutfitState.Dual.Style<Color>>.resolveOrDefault(enabled: Boolean) =
-            resolve(enabled) ?: BorderStroke(1.dp, Color.Black)
-
-        fun Modifier.border(
-            style: Style<Color, OutfitState.Dual.Style<Color>>,
-            enabled: Boolean
-        ) = style.resolve(enabled)?.let { border(it) } ?: this
-
-        //Semantic
-        fun Style<Color, OutfitState.Semantic.Style<Color>>.resolve(selector: OutfitState.Semantic.Selector) =
+        fun Style<Color, OutfitStateDualSelector, OutfitStateDual<Color>>.resolve(selector: OutfitStateDualSelector) =
             outfitState?.resolve(selector)?.let { template.get(size, it) }
 
-        fun Style<Color, OutfitState.Semantic.Style<Color>>.resolveOrDefault(selector: OutfitState.Semantic.Selector) =
+        fun Style<Color, OutfitStateDualSelector, OutfitStateDual<Color>>.resolveOrDefault(selector: OutfitStateDualSelector) =
             resolve(selector) ?: BorderStroke(1.dp, Color.Black)
 
         fun Modifier.border(
-            style: Style<Color, OutfitState.Semantic.Style<Color>>,
-            selector: OutfitState.Semantic.Selector
+            style: Style<Color, OutfitStateDualSelector, OutfitStateDual<Color>>,
+            selector: OutfitStateDualSelector
+        ) = style.resolve(selector)?.let { border(it) } ?: this
+
+        //Semantic
+        fun Style<Color, OutfitStateSemanticSelector, OutfitStateSemantic<Color>>.resolve(selector: OutfitStateSemanticSelector) =
+            outfitState?.resolve(selector)?.let { template.get(size, it) }
+
+        fun Style<Color, OutfitStateSemanticSelector, OutfitStateSemantic<Color>>.resolveOrDefault(selector: OutfitStateSemanticSelector) =
+            resolve(selector) ?: BorderStroke(1.dp, Color.Black)
+
+        fun Modifier.border(
+            style: Style<Color, OutfitStateSemanticSelector, OutfitStateSemantic<Color>>,
+            selector: OutfitStateSemanticSelector
         ) = style.resolve(selector)?.let { border(it) } ?: this
 
     }
