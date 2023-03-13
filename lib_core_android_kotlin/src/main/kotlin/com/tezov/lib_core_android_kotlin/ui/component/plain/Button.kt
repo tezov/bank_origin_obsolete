@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/03/2023 20:43
+ *  Created by Tezov on 13/03/2023 21:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/03/2023 20:43
+ *  Last modified 13/03/2023 21:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -63,14 +63,14 @@ object Button {
         }
 
         @Composable
-        operator fun <T, S : OutfitState.Selector, OT : OutfitState.Style<T, S>> invoke(
+        operator fun invoke(
             enabled: Boolean = true,
             text: String,
             modifierButton: Modifier = Modifier,
             modifierText: Modifier = Modifier,
-            selector: S,
+            selector: OutfitState.Selector,
             interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-            style: Style<T, S, OT> = Style(),
+            style: Style<Color, OutfitState.Selector, OutfitState.Style<Color, OutfitState.Selector>> = Style(),
             contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
             onClick: () -> Unit = {},
         ) {
@@ -79,9 +79,11 @@ object Button {
                 enabled = enabled,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it, it, it, it, it) },
-                shape = style.outfitFrame?.outfitShape?.resolveOrDefault() ?: MaterialTheme.shapes.small,
+                shape = style.outfitFrame?.outfitShape?.resolve() ?: MaterialTheme.shapes.small,
                 border = style.outfitFrame?.outfitBorder?.resolve(selector),
-                colors = style.outfitFrame?.outfitShape.outfitColor.buttonColorsOrDefault(),
+                colors = style.outfitFrame?.outfitShape?.outfitState?.resolve(selector)?.let {
+                    ButtonDefaults.buttonColors(backgroundColor =  it )
+                } ?: ButtonDefaults.buttonColors(),
                 contentPadding = contentPadding,
                 onClick = onClick,
             ) {

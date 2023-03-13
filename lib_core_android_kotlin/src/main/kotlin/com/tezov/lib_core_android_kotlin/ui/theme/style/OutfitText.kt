@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/03/2023 20:43
+ *  Created by Tezov on 13/03/2023 21:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/03/2023 20:43
+ *  Last modified 13/03/2023 21:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -129,15 +129,14 @@ object OutfitText {
                 outfitState = style.outfitState,
             )
 
+            fun resolve(selector: S) = outfitState?.resolve(selector)?.let {
+                when(it){
+                    is Color ->  typo.copy(color = it)
+                    else -> typo
+                }
+            } ?: typo
+
         }
-
-        //Dual
-        fun Style<Color, OutfitStateDualSelector, OutfitStateDual<Color>>.resolve(selector: OutfitStateDualSelector) =
-            outfitState?.resolve(selector)?.let { typo.copy(color = it) } ?: typo
-
-        //Semantic
-        fun Style<Color, OutfitStateSemanticSelector, OutfitStateSemantic<Color>>.resolve(selector: OutfitStateSemanticSelector) =
-            outfitState?.resolve(selector)?.let { typo.copy(color = it) } ?: typo
 
     }
 

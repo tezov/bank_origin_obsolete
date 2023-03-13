@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/03/2023 20:43
+ *  Created by Tezov on 13/03/2023 21:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/03/2023 19:51
+ *  Last modified 13/03/2023 21:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -125,7 +125,7 @@ object OutfitState {
         }
 
         fun Modifier.background(style: Style<Color>, selector:Selector) =
-            style.resolve(selector)?.let { background(it) } ?: this
+            style.resolve(selector).takeIf { it?.isSpecified == true }?.let { background(it) } ?: this
 
     }
 

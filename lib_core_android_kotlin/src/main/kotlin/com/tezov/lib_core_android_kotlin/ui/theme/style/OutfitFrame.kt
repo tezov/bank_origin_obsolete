@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/03/2023 20:43
+ *  Created by Tezov on 13/03/2023 21:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/03/2023 20:43
+ *  Last modified 13/03/2023 21:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.State.resolve
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Simple.background
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.State.background
 
@@ -64,7 +63,7 @@ object OutfitFrame {
 
         }
 
-        fun Modifier.border(style: OutfitFrame.Simple.Style) =
+        fun Modifier.border(style: Style) =
             style.outfitBorder?.resolve()?.let { border ->
                 style.outfitShape?.resolve()?.let { shape ->
                     border(border, shape).clip(shape)
@@ -73,7 +72,7 @@ object OutfitFrame {
                 }
             } ?: this
 
-        fun Modifier.background(style: OutfitFrame.Simple.Style) =
+        fun Modifier.background(style: Style) =
             style.outfitShape?.let { background(it) } ?: this
 
     }
