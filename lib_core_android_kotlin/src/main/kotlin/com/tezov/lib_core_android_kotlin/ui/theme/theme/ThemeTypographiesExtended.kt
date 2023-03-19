@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 12:48
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 12:48
+ *  Last modified 19/03/2023 14:46
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,7 @@ package com.tezov.lib_core_android_kotlin.ui.theme.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 
 val MaterialTheme.typographiesExtended
     @Composable
@@ -26,22 +26,22 @@ object ThemeTypographiesExtended{
 
     @Immutable
     data class Common(
-        val textTitle: OutfitTextColor,
-        val textSubtitle: OutfitTextColor,
-        val textHelper: OutfitTextColor,
+        val textTitle: OutfitText.StateColor,
+        val textSubtitle: OutfitText.StateColor,
+        val textHelper: OutfitText.StateColor,
 
-        val textNormal: OutfitTextColor,
-        val textSupra: OutfitTextColor,
-        val textBig: OutfitTextColor,
-        val textHuge: OutfitTextColor,
-        val textSmall: OutfitTextColor,
-        val textMicro: OutfitTextColor,
+        val textNormal: OutfitText.StateColor,
+        val textSupra: OutfitText.StateColor,
+        val textBig: OutfitText.StateColor,
+        val textHuge: OutfitText.StateColor,
+        val textSmall: OutfitText.StateColor,
+        val textMicro: OutfitText.StateColor,
 
-        val textFieldValue: OutfitTextColor,
-        val textFieldLabel: OutfitTextColor,
-        val textLink: OutfitTextColor,
-        val textButton: OutfitTextColor,
-        val textButtonOutline: OutfitTextColor,
+        val textFieldValue: OutfitText.StateColor,
+        val textFieldLabel: OutfitText.StateColor,
+        val textLink: OutfitText.StateColor,
+        val textButton: OutfitText.StateColor,
+        val textButtonOutline: OutfitText.StateColor,
     )
 
     internal val local: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {

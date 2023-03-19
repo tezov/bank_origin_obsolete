@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 12:48
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 12:48
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,19 +17,13 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
-typealias OutfitShapeColorStyle<S> = OutfitShape.Color.Style<S>
-typealias OutfitShapeColor = OutfitShapeColorStyle<OutfitState.Dual.Selector>
-typealias OutfitShapeColorDual = OutfitShapeColorStyle<OutfitState.Dual.Selector>
-typealias OutfitShapeColorSemantic = OutfitShapeColorStyle<OutfitState.Semantic.Selector>
-
-fun <S:Any> Modifier.background(
-    style: OutfitShape.Color.Style<S>,
-    selector: S
-) = style.resolve(selector)?.takeIf { it.color != null }?.let { background(it.color!!, it.value) } ?: this
+fun Modifier.background(
+    style: OutfitShape.StateColor,
+    selector: Any
+) = style.resolve(selector)?.takeIf { it.color != null }?.let { background(it.color!!, it.shape) } ?: this
 
 object OutfitShape {
 
@@ -38,8 +32,8 @@ object OutfitShape {
         Symmetric,
         Circle;
 
-        fun get(size: Size? = null, color: androidx.compose.ui.graphics.Color) = size?.let {
-            Shape(when (this) {
+        fun get(size: Size? = null) = size?.let {
+            when (this) {
                 Asymmetric -> RoundedCornerShape(
                     topStart = it.topStart,
                     topEnd = it.topEnd,
@@ -47,8 +41,13 @@ object OutfitShape {
                     bottomEnd = it.bottomEnd
                 )
                 Symmetric, Circle -> RoundedCornerShape(corner = it.size)
-            }, color)
+            }
         }
+
+        fun get(size: Size? = null, color: androidx.compose.ui.graphics.Color) = get(size)?.let {
+            Sketch(it, color)
+        }
+
     }
 
     data class Size constructor(
@@ -97,59 +96,59 @@ object OutfitShape {
         val size get() = topStart
     }
 
-    data class Shape(val value:androidx.compose.ui.graphics.Shape, val color: androidx.compose.ui.graphics.Color? = null)
+    data class Sketch(val shape:androidx.compose.ui.graphics.Shape, val color: androidx.compose.ui.graphics.Color? = null)
 
-    object Color{
+    class StateColor(
+        template: Template = Template.Symmetric,
+        size: Size? = null,
+        val outfitState: OutfitState.Style<androidx.compose.ui.graphics.Color>? = null,
+    ) {
 
-        class Style<in S:Any>(
-            template: Template = Template.Symmetric,
-            size: Size? = null,
-            val outfitState: OutfitState.Style<androidx.compose.ui.graphics.Color,S>? = null,
-        ) {
-
-            var template: Template = template
-                private set(value) {
-                    when (value) {
-                        Template.Circle -> size = Size(50)
-                        else -> {}
-                    }
-                    field = value
+        var template: Template = template
+            private set(value) {
+                when (value) {
+                    Template.Circle -> size = Size(50)
+                    else -> {}
                 }
-
-            var size: Size? = size
-                private set
-
-            companion object {
-
-                open class Builder<S:Any> internal constructor(style: Style<S>) {
-                    var template = style.template
-                    var size = style.size
-                    var outfitState = style.outfitState
-
-                    fun get() = Style(
-                        template = template,
-                        size = size,
-                        outfitState = outfitState,
-                    )
-                }
-
-                @Composable
-                fun <S:Any> Style<S>.copy(scope: @Composable Builder<S>.() -> Unit = {}) = Builder(this).also {
-                    it.scope()
-                }.get()
-
+                field = value
             }
 
-            constructor(style: Style<S>) : this(
-                template = style.template,
-                size = style.size,
-                outfitState = style.outfitState,
-            )
+        var size: Size? = size
+            private set
 
-            fun resolve(selector: S) = outfitState?.resolve(selector, androidx.compose.ui.graphics.Color::class)?.let {
-                template.get(size, it)
+        companion object {
+
+            open class Builder internal constructor(style: StateColor) {
+                var template = style.template
+                var size = style.size
+                var outfitState = style.outfitState
+
+                fun get() = StateColor(
+                    template = template,
+                    size = size,
+                    outfitState = outfitState,
+                )
             }
 
+            @Composable
+            fun StateColor.copy(scope: @Composable Builder.() -> Unit = {}) = Builder(this).also {
+                it.scope()
+            }.get()
+
+        }
+
+        constructor(style: StateColor) : this(
+            template = style.template,
+            size = style.size,
+            outfitState = style.outfitState,
+        )
+
+        fun getShape() = template.get(size)
+
+        fun resolveColor(selector: Any) =  outfitState?.resolve(selector, androidx.compose.ui.graphics.Color::class)
+
+        fun resolve(selector: Any) = outfitState?.resolve(selector, androidx.compose.ui.graphics.Color::class)?.let {
+            template.get(size, it)
         }
 
     }

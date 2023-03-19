@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 12:48
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 12:48
+ *  Last modified 19/03/2023 15:29
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,9 +22,19 @@ typealias OutfitStateSemantic<T> = OutfitState.Semantic.Style<T>
 
 object OutfitState {
 
-    interface Style<out T:Any, in S:Any>{
-        fun resolve(selector: S): T?
-        fun <C : Any> resolve(selector: S, type: KClass<C>): C? = resolve(selector)
+    interface Style<T : Any> {
+        fun selectorType(): KClass<*>
+
+        fun resolve(selector: Any): T?
+
+        fun isSelectorValid(selector: Any) = selector::class == selectorType()
+
+        fun <S : Any> resolve(selector: Any, doResolve: ((selector: S) -> T?)): T? =
+            if (isSelectorValid(selector)) {
+                doResolve(selector as S)
+            } else null
+
+        fun <C : Any> resolve(selector: Any, type: KClass<C>): C? = resolve(selector)
             ?.takeIf { it::class.isInstance(type) || it::class.isSubclassOf(type) }
             ?.let { it as C }
     }
@@ -33,9 +43,9 @@ object OutfitState {
 
         object Selector
 
-        open class Style<out T:Any>(
+        open class Style<T:Any>(
             val value: T? = null,
-        ):OutfitState.Style<T, Selector> {
+        ):OutfitState.Style<T> {
 
             companion object{
 
@@ -57,11 +67,13 @@ object OutfitState {
                 value = style.value,
             )
 
-            override fun resolve(selector: Selector) = value
+            override fun selectorType() = Selector::class
+
+            override fun resolve(selector: Any) = resolve<Selector>(selector) {
+                value
+            }
 
         }
-
-
 
     }
 
@@ -71,10 +83,10 @@ object OutfitState {
             Enabled, Disabled
         }
 
-        open class Style<out T:Any>(
+        open class Style<T:Any>(
             val active: T? = null,
             val inactive: T? = null,
-        ):OutfitState.Style<T, Selector> {
+        ):OutfitState.Style<T> {
 
             companion object{
 
@@ -99,9 +111,13 @@ object OutfitState {
                 inactive = style.inactive,
             )
 
-            override fun resolve(selector: Selector) = when(selector){
-                Selector.Enabled -> active
-                Selector.Disabled -> inactive
+            override fun selectorType() = Selector::class
+
+            override fun resolve(selector: Any) = resolve<Selector>(selector) {
+                when(it){
+                    Selector.Enabled -> active
+                    Selector.Disabled -> inactive
+                }
             }
 
         }
@@ -114,13 +130,13 @@ object OutfitState {
             Neutral, Info, Alert,Error, Success
         }
 
-        open class Style<out T:Any>(
+        open class Style<T:Any>(
             val neutral: T? = null,
             val info: T? = null,
             val alert: T? = null,
             val error: T? = null,
             val success: T? = null,
-        ):OutfitState.Style<T, Selector> {
+        ):OutfitState.Style<T> {
 
             companion object{
 
@@ -154,17 +170,19 @@ object OutfitState {
                 success = style.success,
             )
 
-            override fun resolve(selector: Selector) = when(selector){
-                Selector.Neutral -> neutral
-                Selector.Info -> info
-                Selector.Alert -> alert
-                Selector.Error -> error
-                Selector.Success -> success
+            override fun selectorType() = Selector::class
+
+            override fun resolve(selector: Any) = resolve<Selector>(selector) {
+                when(it){
+                    Selector.Neutral -> neutral
+                    Selector.Info -> info
+                    Selector.Alert -> alert
+                    Selector.Error -> error
+                    Selector.Success -> success
+                }
+
             }
         }
-
-
-
     }
 
 }

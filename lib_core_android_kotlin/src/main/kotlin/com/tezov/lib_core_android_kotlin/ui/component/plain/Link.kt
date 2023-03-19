@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 20:33
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 20:09
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,27 +13,23 @@
 package com.tezov.lib_core_android_kotlin.ui.component.plain
 
 import androidx.compose.foundation.text.ClickableText
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.State.resolve
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateDualColor
+import androidx.compose.ui.text.TextStyle
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 
 object Link {
 
-    object Underlined{
+    object StateColor {
 
         open class Style(
-            val outfitText: OutfitTextStateDualColor = OutfitTextStateDualColor(
-                outfitState = OutfitStateDual(
-                    active = Color.Black,
-                    inactive = Color.Gray,
-                )
-            ),
-        ){
-            companion object{
+            val outfitText: OutfitText.StateColor? = null,
+        ) {
+            companion object {
 
                 open class Builder internal constructor(style: Style) {
                     var outfitText = style.outfitText
@@ -44,9 +40,18 @@ object Link {
                 }
 
                 @Composable
-                fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+                fun Style.copy(builder: @Composable Builder.() -> Unit = {}) = Builder(this).also {
                     it.builder()
                 }.get()
+
+                val Underlined
+                    get() = Style(
+                        outfitText = OutfitText.StateColor(
+                            outfitState = OutfitStateSimple(
+                                value = Color.Black,
+                            )
+                        ),
+                    )
 
             }
 
@@ -57,16 +62,16 @@ object Link {
 
         @Composable
         operator fun invoke(
-            text:String,
             modifier: Modifier = Modifier,
-            enabled: Boolean = true,
-            style:Style = Style(),
+            text: String,
+            style: Style = Style(),
+            selector: Any = OutfitState.Simple.Selector,
             onClick: () -> Unit = {},
-        ){
+        ) {
             ClickableText(
                 modifier = modifier,
                 text = AnnotatedString(text),
-                style = style.outfitText.resolve(enabled),
+                style = style.outfitText?.resolve(selector) ?: TextStyle.Default,
             ) {
                 onClick()
             }

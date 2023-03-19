@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/03/2023 21:37
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/03/2023 21:37
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,8 +26,8 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderSketch
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import kotlin.properties.Delegates
 
@@ -59,17 +59,17 @@ object KeyBoard {
         open class Style(
             val colorBackground: Color = Color.Transparent,
             val colorOnBackground: Color = Color.Black,
-            val outfitBorderOuter: OutfitBorderSimple = OutfitBorderSimple(
-                sketch = OutfitBorderSketch(
-                    size = 2.dp
-                ),
-                color = Color.Black
+            val outfitBorderOuter: OutfitBorder.StateColor = OutfitBorder.StateColor(
+                size = 2.dp,
+                outfitState = OutfitState.Simple.Style(
+                    value = Color.Black
+                )
             ),
-            val outfitBorderInner: OutfitBorderSimple = OutfitBorderSimple(
-                sketch = OutfitBorderSketch(
-                    size = 1.dp
-                ),
-                color = Color.Black
+            val outfitBorderInner: OutfitBorder.StateColor = OutfitBorder.StateColor(
+                size = 1.dp,
+                outfitState = OutfitState.Simple.Style(
+                    value = Color.Black
+                )
             ),
         ) {
 
@@ -181,25 +181,24 @@ object KeyBoard {
                     )
                 }
                 // border outer
-                style.outfitBorderOuter.size?.let {
+                style.outfitBorderOuter.resolve(OutfitState.Simple.Selector)?.let {
                     drawRect(
-                        brush = style.outfitBorderOuter.resolveOrDefault().brush,
+                        brush = it.brush,
                         topLeft = Offset(0f, 0f),
                         size = Size(size.width, size.height),
-                        style = Stroke(width = it.toPx()),
+                        style = Stroke(width = it.width.toPx()),
                     )
-                }
 
-                style.outfitBorderInner.size?.let {
-                    val brush = style.outfitBorderInner.resolveOrDefault().brush
+                }
+                style.outfitBorderInner.resolve(OutfitState.Simple.Selector)?.let {
                     //vertical line
                     for (i in 1 until cubes.rowCount) {
                         val y = cubeSize * i
                         drawLine(
                             start = Offset(x = 0f, y = y),
                             end = Offset(x = size.width, y = y),
-                            brush = brush,
-                            strokeWidth = it.toPx()
+                            brush = it.brush,
+                            strokeWidth = it.width.toPx()
                         )
                     }
                     //horizontal line
@@ -208,8 +207,8 @@ object KeyBoard {
                         drawLine(
                             start = Offset(x = x, y = 0f),
                             end = Offset(x = x, y = size.height),
-                            brush = brush,
-                            strokeWidth = it.toPx()
+                            brush = it.brush,
+                            strokeWidth = it.width.toPx()
                         )
                     }
                 }

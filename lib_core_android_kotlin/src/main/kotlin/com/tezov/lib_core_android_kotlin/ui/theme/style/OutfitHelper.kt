@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 12:48
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 12:48
+ *  Last modified 19/03/2023 14:46
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,8 +22,8 @@ inline val Color.outfitColorInactive: OutfitStateDual<Color> get() = OutfitState
 
 inline val Int.outfitShapeSize: OutfitShape.Size get() = OutfitShape.Size(this)
 
-inline val Int.outfitShapeColor: OutfitShapeColor get() = OutfitShapeColor(size = this.outfitShapeSize)
-inline val Int.outfitBorderColor: OutfitBorderColor get() = OutfitBorderColor(size = this.dp)
-inline val Double.outfitBorderColor: OutfitBorderColor get() = OutfitBorderColor(size = this.dp)
-inline val TextStyle.outfitTextColor: OutfitTextColor get() = OutfitTextColor(typo = this)
+inline val Int.outfitShapeColor: OutfitShape.StateColor get() = OutfitShape.StateColor(size = this.outfitShapeSize)
+inline val Int.outfitBorderColor: OutfitBorder.StateColor get() = OutfitBorder.StateColor(size = this.dp)
+inline val Double.outfitBorderColor: OutfitBorder.StateColor get() = OutfitBorder.StateColor(size = this.dp)
+inline val TextStyle.outfitTextColor: OutfitText.StateColor get() = OutfitText.StateColor(typo = this)
 

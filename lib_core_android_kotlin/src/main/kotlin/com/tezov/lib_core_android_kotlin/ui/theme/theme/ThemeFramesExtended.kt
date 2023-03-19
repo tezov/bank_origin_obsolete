@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 12:48
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 12:48
+ *  Last modified 19/03/2023 14:46
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -38,12 +38,12 @@ object ThemeFramesExtended{
 
     @Immutable
     data class Shapes(
-        val roundedCornerMicro: OutfitShapeColor,
-        val roundedCornerSmall: OutfitShapeColor,
-        val roundedCornerNormal: OutfitShapeColor,
-        val roundedCornerBig: OutfitShapeColor,
-        val roundedCornerHuge: OutfitShapeColor,
-        val roundedCornerSupra: OutfitShapeColor,
+        val roundedCornerMicro: OutfitShape.StateColor,
+        val roundedCornerSmall: OutfitShape.StateColor,
+        val roundedCornerNormal: OutfitShape.StateColor,
+        val roundedCornerBig: OutfitShape.StateColor,
+        val roundedCornerHuge: OutfitShape.StateColor,
+        val roundedCornerSupra: OutfitShape.StateColor,
     )
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
         error("not provided")
@@ -51,12 +51,12 @@ object ThemeFramesExtended{
 
     @Immutable
     data class Borders(
-        val strokeMicro: OutfitBorderColor,
-        val strokeSmall: OutfitBorderColor,
-        val strokeNormal: OutfitBorderColor,
-        val strokeBig: OutfitBorderColor,
-        val strokeHuge: OutfitBorderColor,
-        val strokeSupra: OutfitBorderColor,
+        val strokeMicro: OutfitBorder.StateColor,
+        val strokeSmall: OutfitBorder.StateColor,
+        val strokeNormal: OutfitBorder.StateColor,
+        val strokeBig: OutfitBorder.StateColor,
+        val strokeHuge: OutfitBorder.StateColor,
+        val strokeSupra: OutfitBorder.StateColor,
     )
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
         error("not provided")
@@ -64,8 +64,8 @@ object ThemeFramesExtended{
 
     @Immutable
     data class Frames(
-        val button: OutfitFrameColorDual,
-        val buttonOutlined: OutfitFrameColorDual,
+        val button: OutfitFrame.StateColor,
+        val buttonOutlined: OutfitFrame.StateColor,
     )
     internal val localFrames: ProvidableCompositionLocal<Frames> = staticCompositionLocalOf {
         error("not provided")

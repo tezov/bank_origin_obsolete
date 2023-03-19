@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 14:03
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 14:02
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -141,14 +141,14 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     description = stringResource(id = R.string.pg_login_img_logo)
                 )
             }
-            Image.Frame(
+            Image.StateColor(
                 style = PageLoginTheme.styles.iconBig,
                 resourceId = iconState.value,
                 description = stringResource(id = R.string.pg_login_img_suit_case)
             )
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconBig))
             IconButton(onClick = { onClickAdd() }) {
-                Icon.Frame(
+                Icon.StateColor(
                     resourceId = R.drawable.ic_add_24dp,
                     style = PageLoginTheme.styles.iconMedium,
                     description = stringResource(id = R.string.pg_login_icon_add_account)
@@ -159,7 +159,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 var expanded by remember { mutableStateOf(false) }
                 val items = stringArrayResource(id = R.array.pg_login_drop_down_menu)
                 IconButton(onClick = { expanded = true }) {
-                    Icon.Frame(
+                    Icon.StateColor(
                         style = PageLoginTheme.styles.iconSmall,
                         resourceId = R.drawable.ic_3dot_v_24dp,
                         description = stringResource(id = R.string.pg_login_icon_more_action)
@@ -294,7 +294,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 onClick = onClickSendMoney,
             )
             Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopFromLinkService))
-            Link.Underlined(
+            Link.StateColor(
                 text = stringResource(id = R.string.pg_login_link_help_and_service),
                 style = PageLoginTheme.styles.link,
                 onClick = onClickHelpAndService,

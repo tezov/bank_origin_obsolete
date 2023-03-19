@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 20:33
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 20:09
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,13 +13,16 @@
 package com.tezov.lib_core_android_kotlin.ui.component.plain
 
 import androidx.compose.material.Icon
+import androidx.compose.material.LocalContentAlpha
+import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.type.primaire.size
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.border
 
 object Icon {
@@ -28,7 +31,7 @@ object Icon {
 
         open class Style(
             val size: SizeDp? = null,
-            val tint: Color = Color.Unspecified,
+            val tint: Color? = null,
         ){
             companion object{
 
@@ -68,18 +71,18 @@ object Icon {
             Icon(
                 modifier = modifier,
                 painter = painterResource(id = resourceId),
-                tint = style.tint,
+                tint =  style.tint ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
                 contentDescription = description,
             )
         }
 
     }
 
-    object Frame{
+    object StateColor{
 
         open class Style(
             val size: SizeDp? = null,
-            val outfitFrame: OutfitFrameSimple = OutfitFrameSimple(),
+            val outfitFrame: OutfitFrame.StateColor = OutfitFrame.StateColor(),
         ){
             companion object{
 
@@ -112,27 +115,24 @@ object Icon {
             style:Style = Style(),
             resourceId:Int,
             description:String? = null,
+            selector: Any = OutfitState.Simple.Selector
         ){
             style.size?.let {
                 modifier.size(it)
             }
-            modifier.border(style.outfitFrame)
+            val sketch = style.outfitFrame.outfitShape?.resolve(selector)
+            style.outfitFrame.outfitBorder?.let {
+                modifier.border(it, selector, sketch)
+            }
             Icon(
                 modifier = modifier,
                 painter = painterResource(id = resourceId),
-                tint = style.outfitFrame.outfitShape.color,
+                tint = sketch?.color ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
                 contentDescription = description,
             )
         }
 
     }
-
-
-
-
-
-
-
 
 
 }

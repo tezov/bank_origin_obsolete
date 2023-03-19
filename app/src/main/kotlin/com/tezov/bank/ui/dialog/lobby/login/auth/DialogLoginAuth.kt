@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -380,12 +380,12 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     .padding(top = DialogLoginAuthTheme.dimensions.paddingTopFromLink),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
-                Link.Underlined(
+                Link.StateColor(
                     text = stringResource(id = R.string.dlg_login_auth_link_login_forgotten),
                     style = DialogLoginAuthTheme.styles.link,
                     onClick = onClickForgotLogin,
                 )
-                Link.Underlined(
+                Link.StateColor(
                     text = stringResource(id = R.string.dlg_login_auth_link_password_forgotten),
                     style = DialogLoginAuthTheme.styles.link,
                     onClick = onClickForgotPassword,

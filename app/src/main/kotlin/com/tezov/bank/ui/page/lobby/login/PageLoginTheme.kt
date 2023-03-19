@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 17:17
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 15:57
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -231,11 +231,11 @@ object PageLoginTheme {
         val buttonDark: Button.TextFilled.Style,
         val buttonLight: Button.TextFilled.Style,
         val buttonOutlined: Button.TextOutlined.Style,
-        val link: Link.Underlined.Style,
+        val link: Link.StateColor.Style,
         val logo: Image.Simple.Style,
-        val iconBig: Image.Frame.Style,
-        val iconMedium: Icon.Frame.Style,
-        val iconSmall: Icon.Frame.Style,
+        val iconBig: Image.StateColor.Style,
+        val iconMedium: Icon.StateColor.Style,
+        val iconSmall: Icon.StateColor.Style,
     )
 
     @Composable
@@ -276,14 +276,14 @@ object PageLoginTheme {
                 outfitColor = colors.textContent.outfitColorActive
             }
         ),
-        link = Link.Underlined.Style(
+        link = Link.StateColor.Style(
             outfitText = typographies.link,
         ),
         logo = Image.Simple.Style(
             size = dimensions.sizeLogo,
             contentScale = ContentScale.Crop
         ),
-        iconBig = Image.Frame.Style(
+        iconBig = Image.StateColor.Style(
             size = dimensions.sizeIconBig,
             outfitFrame = OutfitFrameSimple(
                 outfitShape = shapes.icon,
@@ -292,13 +292,13 @@ object PageLoginTheme {
                 }
             )
         ),
-        iconMedium = Icon.Frame.Style(
+        iconMedium = Icon.StateColor.Style(
             size = dimensions.sizeIconMedium,
             outfitFrame = OutfitFrameSimple(
                 outfitShape = shapes.icon,
             )
         ),
-        iconSmall = Icon.Frame.Style(
+        iconSmall = Icon.StateColor.Style(
             size = dimensions.sizeIconSmall,
             outfitFrame = OutfitFrameSimple(
                 outfitShape = shapes.icon,

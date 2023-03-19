@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 12:48
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 12:48
+ *  Last modified 19/03/2023 14:46
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,56 +12,46 @@
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
-
-typealias OutfitTextColorStyle<S> = OutfitText.Color.Style<S>
-typealias OutfitTextColor = OutfitTextColorStyle<OutfitState.Simple.Selector>
-typealias OutfitTextColorDual = OutfitTextColorStyle<OutfitState.Dual.Selector>
-typealias OutfitTextColorSemantic = OutfitTextColorStyle<OutfitState.Semantic.Selector>
 
 object OutfitText {
 
-    object Color {
+    class StateColor(
+        val typo: TextStyle = TextStyle(),
+        val outfitState: OutfitState.Style<androidx.compose.ui.graphics.Color>? = null,
+    ) {
 
-        class Style<in S:Any>(
-            val typo: TextStyle = TextStyle(),
-            val outfitState: OutfitState.Style<androidx.compose.ui.graphics.Color,S>? = null,
-        ) {
+        companion object {
 
-            companion object {
+            open class Builder internal constructor(
+                style: StateColor
+            ) {
+                var typo = style.typo
+                var outfitState = style.outfitState
 
-                open class Builder<S:Any> internal constructor(
-                    style: Style<S>
-                ) {
-                    var typo = style.typo
-                    var outfitState = style.outfitState
-
-                    fun get() = Style(
-                        typo = typo,
-                        outfitState = outfitState,
-                    )
-                }
-
-                @Composable
-                fun <S:Any> Style<S>.copy(
-                    scope: @Composable Builder<S>.() -> Unit = {}
-                ) = Builder(this).also {
-                    it.scope()
-                }.get()
-
+                fun get() = StateColor(
+                    typo = typo,
+                    outfitState = outfitState,
+                )
             }
 
-            constructor(style: Style<S>) : this(
-                typo = style.typo,
-                outfitState = style.outfitState,
-            )
-
-            fun resolve(selector: S) = outfitState?.resolve(selector, androidx.compose.ui.graphics.Color::class)?.let {
-                typo.copy(color = it)
-            } ?: typo
+            @Composable
+            fun StateColor.copy(
+                scope: @Composable Builder.() -> Unit = {}
+            ) = Builder(this).also {
+                it.scope()
+            }.get()
 
         }
+
+        constructor(style: StateColor) : this(
+            typo = style.typo,
+            outfitState = style.outfitState,
+        )
+
+        fun resolve(selector: Any) = outfitState?.resolve(selector, androidx.compose.ui.graphics.Color::class)?.let {
+            typo.copy(color = it)
+        } ?: typo
 
     }
 

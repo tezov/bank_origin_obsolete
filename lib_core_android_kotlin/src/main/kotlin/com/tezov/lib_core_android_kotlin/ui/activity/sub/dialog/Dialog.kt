@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:28
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,6 +16,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -29,8 +30,8 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -60,7 +61,7 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
     object Card{
 
         open class Style(
-            val outfitFrame: OutfitFrameSimple = OutfitFrameSimple(),
+            val outfitFrame: OutfitFrame.StateColor = OutfitFrame.StateColor(),
             val elevation: Dp = 0.dp,
         ){
             companion object{
@@ -93,13 +94,15 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
             content(content)
         }
 
+        //todo all selector possible
         @Composable
         private fun content(content: @Composable () -> Unit) {
             Surface(
-                color = MaterialTheme.componentsExtended.dialogCard.outfitFrame.outfitShape.color,
-                shape = MaterialTheme.componentsExtended.dialogCard.outfitFrame.outfitShape.resolveOrDefault(),
+                color = MaterialTheme.componentsExtended.dialogCard.outfitFrame.outfitShape?.resolveColor(
+                    OutfitState.Simple.Selector) ?: MaterialTheme.colors.surface,
+                shape = MaterialTheme.componentsExtended.bottomSheet.outfitShape.getShape() ?: RectangleShape,
                 elevation = MaterialTheme.componentsExtended.dialogCard.elevation,
-                border = MaterialTheme.componentsExtended.dialogCard.outfitFrame.outfitBorder.resolveOrDefault()
+                border = MaterialTheme.componentsExtended.dialogCard.outfitFrame.outfitBorder?.resolve(OutfitState.Simple.Selector)
             ) {
                 val locals = LocalPages.current.last()
                 CompositionLocalProvider(

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:28
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,16 +24,17 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.Activit
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
 
     open class Style(
-        val outfitTextMessage: OutfitTextSimple = OutfitTextSimple(),
-        val outfitTextAction: OutfitTextSimple = OutfitTextSimple(),
-        val outfitShape: OutfitShapeSimple = OutfitShapeSimple(),
+        val outfitTextMessage: OutfitText.StateColor = OutfitText.StateColor(),
+        val outfitTextAction: OutfitText.StateColor = OutfitText.StateColor(),
+        val outfitShape: OutfitShape.StateColor = OutfitShape.StateColor(),
         val elevation: Dp = 0.dp,
     ){
         companion object{
@@ -66,6 +67,7 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
         content()
     }
 
+    //todo all selector possible
     @Composable
     private fun content() {
         val accessor = AccessorCoreUiActivity().get(this).contextSubMap()
@@ -81,22 +83,25 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
                 )
         ) { data ->
             Snackbar(
-                backgroundColor = MaterialTheme.componentsExtended.snackbar.outfitShape.color,
+                backgroundColor = MaterialTheme.componentsExtended.snackbar.outfitShape.resolveColor(
+                    OutfitState.Simple.Selector) ?: SnackbarDefaults.backgroundColor,
                 elevation = MaterialTheme.componentsExtended.snackbar.elevation,
-                shape = MaterialTheme.componentsExtended.snackbar.outfitShape.resolveOrDefault(),
+                shape = MaterialTheme.componentsExtended.bottomSheet.outfitShape.getShape() ?: MaterialTheme.shapes.small,
                 content = {
-                    Text.Simple(
+                    Text.StateColor(
                         text = data.message,
                         style = MaterialTheme.componentsExtended.snackbar.outfitTextMessage,
+                        selector = OutfitState.Simple.Selector
                     )
                 },
                 action = {
                     data.actionLabel?.let { label ->
                         TextButton(
                             onClick = { data.performAction() }) {
-                            Text.Simple(
+                            Text.StateColor(
                                 text = label,
                                 style = MaterialTheme.componentsExtended.snackbar.outfitTextAction,
+                                selector = OutfitState.Simple.Selector
                             )
                         }
                     }

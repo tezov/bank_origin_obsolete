@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 20:33
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 20:09
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,12 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.type.primaire.size
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.border
 
 object Image {
@@ -31,7 +31,7 @@ object Image {
 
         open class Style(
             val size: SizeDp? = null,
-            val tint: Color = Color.Unspecified,
+            val tint: Color? = null,
             val contentScale: ContentScale = ContentScale.Fit,
         ) {
             companion object {
@@ -72,7 +72,7 @@ object Image {
             Image(
                 modifier = modifier,
                 painter = painterResource(id = resourceId),
-                colorFilter = style.tint.takeIf { it.isSpecified }?.let { ColorFilter.tint(it) },
+                colorFilter = style.tint?.let { ColorFilter.tint(it) },
                 contentDescription = description,
                 contentScale = style.contentScale
             )
@@ -80,11 +80,11 @@ object Image {
 
     }
 
-    object Frame {
+    object StateColor {
 
         open class Style(
             val size: SizeDp? = null,
-            val outfitFrame: OutfitFrameSimple = OutfitFrameSimple(),
+            val outfitFrame: OutfitFrame.StateColor = OutfitFrame.StateColor(),
             val contentScale: ContentScale = ContentScale.Fit
         ) {
             companion object {
@@ -121,15 +121,19 @@ object Image {
             style: Style = Style(),
             resourceId: Int,
             description: String? = null,
+            selector: Any = OutfitState.Simple.Selector
         ) {
             style.size?.let {
                 modifier.size(it)
             }
-            modifier.border(style.outfitFrame)
+            val sketch = style.outfitFrame.outfitShape?.resolve(selector)
+            style.outfitFrame.outfitBorder?.let {
+                modifier.border(it, selector, sketch)
+            }
             Image(
                 modifier = modifier,
                 painter = painterResource(id = resourceId),
-                colorFilter = style.outfitFrame.outfitShape.color.takeIf { it.isSpecified }?.let { ColorFilter.tint(it) },
+                colorFilter = sketch?.color?.let { ColorFilter.tint(it) },
                 contentDescription = description,
                 contentScale = style.contentScale
             )

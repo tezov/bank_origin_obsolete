@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 12:48
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 12:48
+ *  Last modified 19/03/2023 15:29
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,21 +17,15 @@ import androidx.compose.foundation.border
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 
-typealias OutfitBorderColorStyle<S> = OutfitBorder.Color.Style<S>
-typealias OutfitBorderColor = OutfitBorderColorStyle<OutfitState.Simple.Selector>
-typealias OutfitBorderColorDual = OutfitBorderColorStyle<OutfitState.Dual.Selector>
-typealias OutfitBorderColorSemantic = OutfitBorderColorStyle<OutfitState.Semantic.Selector>
-
-fun <S:Any> Modifier.border(
-    style: OutfitBorder.Color.Style<S>,
-    selector: S,
-    shape: OutfitShape.Shape? = null
+fun Modifier.border(
+    style: OutfitBorder.StateColor,
+    selector: Any,
+    sketch: OutfitShape.Sketch? = null
 ) = style.resolve(selector)?.let { border ->
-    shape?.let {
-        border(border, shape.value).clip(shape.value)
+    sketch?.let {
+        border(border, sketch.shape).clip(sketch.shape)
     } ?: kotlin.run {
         border(border)
     }
@@ -50,45 +44,41 @@ object OutfitBorder {
 
     }
 
-    object Color{
+    class StateColor(
+        val template: Template = Template.Fill,
+        val size: Dp? = null,
+        val outfitState: OutfitState.Style<androidx.compose.ui.graphics.Color>? = null,
+    ){
 
-        class Style<in S:Any>(
-            val template: Template = Template.Fill,
-            val size: Dp? = null,
-            val outfitState: OutfitState.Style<androidx.compose.ui.graphics.Color,S>? = null,
-        ){
+        companion object {
 
-            companion object {
+            open class Builder internal constructor(style: StateColor) {
+                var template = style.template
+                var size = style.size
+                var outfitState = style.outfitState
 
-                open class Builder<S:Any> internal constructor(style: Style<S>) {
-                    var template = style.template
-                    var size = style.size
-                    var outfitState = style.outfitState
-
-                    fun get() = Style(
-                        template = template,
-                        size = size,
-                        outfitState = outfitState,
-                    )
-                }
-
-                @Composable
-                fun <S:Any> Style<S>.copy(scope: @Composable Builder<S>.() -> Unit = {}) =
-                    Builder(this).also {
-                        it.scope()
-                    }.get()
+                fun get() = StateColor(
+                    template = template,
+                    size = size,
+                    outfitState = outfitState,
+                )
             }
 
-            constructor(style: Style<S>) : this(
-                template = style.template,
-                size = style.size,
-                outfitState = style.outfitState,
-            )
+            @Composable
+            fun StateColor.copy(scope: @Composable Builder.() -> Unit = {}) =
+                Builder(this).also {
+                    it.scope()
+                }.get()
+        }
 
-            fun resolve(selector: S) = outfitState?.resolve(selector, androidx.compose.ui.graphics.Color::class)?.let {
-                template.get(size, it)
-            }
+        constructor(style: StateColor) : this(
+            template = style.template,
+            size = style.size,
+            outfitState = style.outfitState,
+        )
 
+        fun resolve(selector: Any) = outfitState?.resolve(selector, androidx.compose.ui.graphics.Color::class)?.let {
+            template.get(size, it)
         }
 
     }

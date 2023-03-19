@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 21:58
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,11 +13,13 @@
 package com.tezov.lib_core_android_kotlin.ui.component.branch
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Surface
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
@@ -30,11 +32,9 @@ object HorizontalScrollable {
 
         @Immutable
         open class Style(
-            val outfitShapeIndicator: OutfitShapeState? = OutfitShapeState(
-                sketch = OutfitShapeSketch(
-                    template = OutfitShape.Template.Circle
-                ),
-                outfitColor = OutfitColorsState(active = Color.Black, inactive = Color.Gray),
+            val outfitShapeIndicator: OutfitShape.StateColor? = OutfitShape.StateColor(
+                template = OutfitShape.Template.Circle,
+                outfitState = OutfitStateDual(active = Color.Black, inactive = Color.Gray),
             ),
             val dimensionIndicatorPaddingTop: Dp = 6.dp,
             val dimensionIndicatorSize: Dp = 6.dp,
@@ -109,9 +109,10 @@ object HorizontalScrollable {
                         indicatorWidth = style.dimensionIndicatorSize,
                         indicatorHeight = style.dimensionIndicatorSize,
                         spacing = style.dimensionIndicatorSpacing,
-                        activeColor = it.outfitColor.active,
-                        inactiveColor = it.outfitColor.inactive,
-                        indicatorShape = it.resolveOrDefault()
+                        activeColor = it.resolveColor(OutfitState.Dual.Selector.Enabled) ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+                        inactiveColor = it.resolveColor(OutfitState.Dual.Selector.Disabled) ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current).copy(
+                            ContentAlpha.disabled),
+                        indicatorShape = it.getShape() ?: CircleShape
                     )
                 }
             }
@@ -131,17 +132,15 @@ object HorizontalScrollable {
         @Immutable
         open class Style(
             pagerStyle: Pager.Style = Pager.Style(),
-            val outfitFrame: OutfitFrameSimple = OutfitFrameSimple(
-                outfitShape = OutfitShapeSimple(
-                    sketch = OutfitShapeSketch(
-                        size = OutfitShape.Size(8.dp),
-                    )
+            val outfitFrame: OutfitFrame.StateColor = OutfitFrame.StateColor(
+                outfitShape = OutfitShape.StateColor(
+                    size = 8.outfitShapeSize,
                 ),
-                outfitBorder = OutfitBorderSimple(
-                    sketch = OutfitBorderSketch(
-                        size = 1.dp,
-                    ),
-                    color = Color.Black
+                outfitBorder = OutfitBorder.StateColor(
+                    size = 1.dp,
+                    outfitState = OutfitStateSimple(
+                        value = Color.Black
+                    )
                 ),
             ),
             val marginCard: PaddingValues = PaddingValues(horizontal = 4.dp),
@@ -191,9 +190,9 @@ object HorizontalScrollable {
                 {
                     Surface(
                         modifier = modifier.padding(style.marginCard),
-                        shape = style.outfitFrame.outfitShape.resolveOrDefault(),
-                        border = style.outfitFrame.outfitBorder.resolve(),
-                        color = style.outfitFrame.outfitShape.color,
+                        shape = style.outfitFrame.outfitShape?.getShape() ?: RectangleShape,
+                        border = style.outfitFrame.outfitBorder?.resolve(OutfitState.Simple.Selector),
+                        color = style.outfitFrame.outfitShape?.resolveColor(OutfitState.Simple.Selector) ?: MaterialTheme.colors.surface,
                     ) {
                         content()
                     }

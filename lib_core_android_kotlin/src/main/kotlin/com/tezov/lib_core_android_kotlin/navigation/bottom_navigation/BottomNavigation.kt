@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 21:58
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,17 +22,17 @@ import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.navigation.bottom_navigation.BottomNavigationState
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorsState
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSketch
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsExtended
 
 object BottomNavigation:
     ActivitySub<BottomNavigationState, BottomNavigationAction> {
 
     open class Style(
-        val outfitText: OutfitTextSketch = OutfitTextSketch(),
+        val outfitText: OutfitText.StateColor = OutfitText.StateColor(),
         val colorBackground: Color = Color.Black,
-        val outfitColor: OutfitColorsState = OutfitColorsState(),
+        val outfitColor: OutfitState.Dual.Style<Color> = OutfitState.Dual.Style(),
     ){
         companion object{
 
@@ -91,8 +91,8 @@ object BottomNavigation:
                             style = MaterialTheme.componentsExtended.bottomNavigation.outfitText.typo,
                         )
                     },
-                    selectedContentColor = MaterialTheme.componentsExtended.bottomNavigation.outfitColor.active,
-                    unselectedContentColor =MaterialTheme.componentsExtended.bottomNavigation.outfitColor.inactive,
+                    selectedContentColor = MaterialTheme.componentsExtended.bottomNavigation.outfitColor.active ?: LocalContentColor.current,
+                    unselectedContentColor = MaterialTheme.componentsExtended.bottomNavigation.outfitColor.inactive ?: LocalContentColor.current.copy(alpha = ContentAlpha.medium),
                     alwaysShowLabel = true,
                     selected = action.navigationController.currentRoute() == item.route,
                     onClick = {

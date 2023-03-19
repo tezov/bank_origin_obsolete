@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:28
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,13 +24,14 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.Activit
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
 
     open class Style(
-        val outfitShape: OutfitShapeSimple = OutfitShapeSimple(),
+        val outfitShape: OutfitShape.StateColor = OutfitShape.StateColor(),
         val padding: PaddingValues = PaddingValues(1.dp, 1.dp),
         val elevation: Dp = 0.dp,
     ){
@@ -67,6 +68,7 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
         content(content)
     }
 
+    //todo all selector possible
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
     private fun content(content: @Composable () -> Unit) {
@@ -80,9 +82,9 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
             sheetElevation = 0.dp,
             sheetContent = {
                 Surface(
-                    color = MaterialTheme.componentsExtended.bottomSheet.outfitShape.color,
+                    color = MaterialTheme.componentsExtended.bottomSheet.outfitShape.resolveColor(OutfitState.Simple.Selector) ?: MaterialTheme.colors.surface,
                     modifier = Modifier.padding(MaterialTheme.componentsExtended.bottomSheet.padding),
-                    shape = MaterialTheme.componentsExtended.bottomSheet.outfitShape.resolveOrDefault(),
+                    shape = MaterialTheme.componentsExtended.bottomSheet.outfitShape.getShape() ?: RectangleShape,
                     elevation = MaterialTheme.componentsExtended.bottomSheet.elevation,
                 ) {
                     state.sheetContent()

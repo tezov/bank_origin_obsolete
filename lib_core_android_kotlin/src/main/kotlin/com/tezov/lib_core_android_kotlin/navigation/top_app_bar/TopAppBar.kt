@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 14:03
+ *  Created by Tezov on 19/03/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/03/2023 22:50
+ *  Last modified 19/03/2023 16:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,14 +22,14 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.Activit
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsExtended
 
 object TopAppBar: ActivitySub<TopAppBarState, TopAppBarAction> {
 
 
     open class Style(
-        val outfitText: OutfitTextSimple = OutfitTextSimple(),
+        val outfitText: OutfitText.StateColor = OutfitText.StateColor(),
         val colorBackground: Color = Color.Black,
         val colorIconLeading: Color = Color.Black,
         val colorIconTrailing: Color = Color.Black,
@@ -85,7 +85,7 @@ object TopAppBar: ActivitySub<TopAppBarState, TopAppBarAction> {
 
         TopAppBar(
             title = {
-                Text.Simple(
+                Text.StateColor(
                     text = stringResource(id = titleResourceId),
                     style = MaterialTheme.componentsExtended.topAppBar.outfitText,
                 )
