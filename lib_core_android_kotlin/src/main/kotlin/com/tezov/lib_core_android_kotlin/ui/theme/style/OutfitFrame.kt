@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 17:35
+ *  Created by Tezov on 19/03/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:57
+ *  Last modified 19/03/2023 21:32
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,14 +17,14 @@ import androidx.compose.ui.Modifier
 
 fun Modifier.border(
     style: OutfitFrame.StateColor,
-    selector: Any
+    selector: Any?= null
 ) = style.outfitBorder?.let {
     border(it, selector, style.outfitShape?.resolve(selector))
 } ?: this
 
 fun Modifier.background(
     style: OutfitFrame.StateColor,
-    selector: Any
+    selector: Any?=null
 ) = style.outfitShape?.let { background(it, selector) } ?: this
 
 object OutfitFrame {

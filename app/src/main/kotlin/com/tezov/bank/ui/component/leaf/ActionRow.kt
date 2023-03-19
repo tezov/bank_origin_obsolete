@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 14:03
+ *  Created by Tezov on 19/03/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 13:50
+ *  Last modified 19/03/2023 22:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,7 +27,7 @@ import com.tezov.bank.R
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
 
@@ -43,7 +43,7 @@ object ActionRow {
             tint = Color.Black,
             size = SizeDp(24.dp)
         ),
-        val outfitText: OutfitTextSimple = OutfitTextSimple(),
+        val outfitText: OutfitText.StateColor = OutfitText.StateColor(),
         val background: Color = Color.Unspecified,
     )
 
@@ -56,7 +56,7 @@ object ActionRow {
     @Composable
     operator fun invoke(
         modifier: Modifier = Modifier,
-        style:Style,
+        style: Style,
         data: Data,
         onClick: () -> Unit = {}
     ) {
@@ -80,7 +80,7 @@ object ActionRow {
                 )
                 Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.normal_h))
             }
-            Text.Simple(
+            Text.StateColor(
                 modifier = Modifier
                     .weight(1f),
                 text = data.title,

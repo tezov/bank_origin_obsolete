@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 14:03
+ *  Created by Tezov on 19/03/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 13:51
+ *  Last modified 19/03/2023 22:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,9 +34,9 @@ import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollabl
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.Simple.Style.Companion.copyToSimpleStyle
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Simple.Style.Companion.copyToSimpleStyle
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.Simple.Style.Companion.copyToSimpleStyle
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object ThemeComponents {
@@ -49,47 +49,57 @@ object ThemeComponents {
                 fontFamily = MaterialTheme.fontUbuntu,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 12.sp
-            ).outfitTextSketch,
+            ).outfitTextColor,
             colorBackground  = ThemeColors.Common.whiteShady,
-            outfitColor  = OutfitColorsState(
+            outfitColor  = OutfitStateDual(
                 active = ThemeColors.Common.blueElegant,
                 inactive = ThemeColors.Common.blueShadow
             ),
         ),
         dialogCard = Dialog.Card.Style(
             elevation = 2.dp,
-            outfitFrame = OutfitFrameSimple(
-                outfitBorder = OutfitBorderSimple(
-                    sketch = 2.outfitBorderSketch,
-                    color = MaterialTheme.colorsExtended.primary.default,
+            outfitFrame = OutfitFrame.StateColor(
+                outfitBorder = OutfitBorder.StateColor(
+                    size = 2.dp,
+                    outfitState = OutfitStateSimple(
+                        MaterialTheme.colorsExtended.primary.default,
+                    )
                 ),
-                outfitShape = OutfitShapeSimple(
-                    sketch = 8.outfitShapeSketch,
-                    color = MaterialTheme.colorsExtended.backgroundModal.default,
+                outfitShape = OutfitShape.StateColor(
+                    size = 8.outfitShapeSize,
+                    outfitState = OutfitStateSimple(
+                        MaterialTheme.colorsExtended.backgroundModal.default
+                    )
                 )
             )
         ),
         bottomSheet = BottomSheet.Style(),
         snackbar = Snackbar.Style(
-            outfitTextMessage = OutfitTextSimple(
-                sketch = TextStyle(
+            outfitTextMessage = OutfitText.StateColor(
+                typo = TextStyle(
                     fontFamily = MaterialTheme.fontUbuntu,
                     fontWeight = FontWeight.Normal,
                     fontSize = 19.sp
-                ).outfitTextSketch,
-                color = MaterialTheme.colorsExtended.onBackgroundModal.dark,
+                ),
+                outfitState = OutfitStateSimple(
+                    MaterialTheme.colorsExtended.onBackgroundModal.dark
+                ),
             ),
-            outfitTextAction = OutfitTextSimple(
-                sketch = TextStyle(
+            outfitTextAction = OutfitText.StateColor(
+                typo = TextStyle(
                     fontFamily = MaterialTheme.fontUbuntu,
                     fontWeight = FontWeight.Bold,
                     fontSize = 19.sp
-                ).outfitTextSketch,
-                color = MaterialTheme.colorsExtended.onBackgroundModal.accent,
+                ),
+                outfitState = OutfitStateSimple(
+                    MaterialTheme.colorsExtended.onBackgroundModal.accent
+                ),
             ),
-            outfitShape = OutfitShapeSimple(
-                sketch = 12.outfitShapeSketch,
-                color = MaterialTheme.colorsExtended.backgroundModal.accent,
+            outfitShape = OutfitShape.StateColor(
+                size = 12.outfitShapeSize,
+                outfitState = OutfitStateSimple(
+                    MaterialTheme.colorsExtended.backgroundModal.accent,
+                )
             ),
             elevation = 4.dp,
         ),
@@ -102,11 +112,13 @@ object ThemeComponents {
             size = MaterialTheme.dimensionsSizeExtended.iconInfo,
             tint = MaterialTheme.colorsExtended.primary.default
         ),
-        outfitTextHeader = MaterialTheme.typographiesExtended.textNormal.copyToSimpleStyle {
+        outfitTextHeader = MaterialTheme.typographiesExtended.textNormal.copy {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
-            color = MaterialTheme.colorsExtended.onBackgroundElevated.default
+            outfitState = OutfitStateSimple(
+                MaterialTheme.colorsExtended.onBackgroundElevated.default
+            )
         },
         colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.14f
@@ -128,11 +140,13 @@ object ThemeComponents {
             size = MaterialTheme.dimensionsSizeExtended.iconAction,
             tint = MaterialTheme.colorsExtended.primary.default
         ),
-        outfitText = MaterialTheme.typographiesExtended.textNormal.copyToSimpleStyle {
+        outfitText = MaterialTheme.typographiesExtended.textNormal.copy {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
-            color = MaterialTheme.colorsExtended.onBackgroundElevated.default
+            outfitState = OutfitStateSimple(
+                MaterialTheme.colorsExtended.onBackgroundElevated.default
+            )
         }
     )
 
@@ -142,11 +156,13 @@ object ThemeComponents {
             size = MaterialTheme.dimensionsSizeExtended.iconInfo,
             tint = MaterialTheme.colorsExtended.primary.default
         ),
-        outfitTextHeader = MaterialTheme.typographiesExtended.textNormal.copyToSimpleStyle {
+        outfitTextHeader = MaterialTheme.typographiesExtended.textNormal.copy {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
-            color = MaterialTheme.colorsExtended.onBackgroundElevated.default
+            outfitState = OutfitStateSimple(
+                MaterialTheme.colorsExtended.onBackgroundElevated.default
+            )
         },
         colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.14f
@@ -157,36 +173,38 @@ object ThemeComponents {
 
     @Composable
     fun provideActionCardStyle() = ActionCard.Style(
-        outfitFrame = OutfitFrameSimple(
-            outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal.copyToSimpleStyle(),
-            outfitBorder = MaterialTheme.bordersExtended.strokeNormal.copyToSimpleStyle {
-                color = MaterialTheme.colorsExtended.backgroundElevated.default
+        outfitFrame = OutfitFrame.StateColor(
+            outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal,
+            outfitBorder = MaterialTheme.bordersExtended.strokeNormal.copy {
+                outfitState = OutfitStateSimple(
+                    MaterialTheme.colorsExtended.backgroundElevated.default
+                )
             }
         ),
         iconStyle = Icon.Simple.Style(
             size = SizeDp(56.dp),
             tint = MaterialTheme.colorsExtended.primary.default
         ),
-        outfitTextTitle = MaterialTheme.typographiesExtended.textNormal.copyToSimpleStyle {
+        outfitTextTitle = MaterialTheme.typographiesExtended.textNormal.copy {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
         },
-        outfitTextSubtitle = MaterialTheme.typographiesExtended.textNormal.copyToSimpleStyle {
+        outfitTextSubtitle = MaterialTheme.typographiesExtended.textNormal.copy {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
-            color = MaterialTheme.colorsExtended.onBackgroundElevated.default
+            outfitState = OutfitStateSimple(
+                MaterialTheme.colorsExtended.onBackgroundElevated.default
+            )
         },
     )
 
     @Composable
     fun providePagerStyle() = HorizontalScrollable.Pager.Style(
-        outfitShapeIndicator = OutfitShapeState(
-            sketch = OutfitShapeSketch(
-                template = OutfitShape.Template.Circle,
-            ),
-            outfitColor = OutfitColorsState(
+        outfitShapeIndicator = OutfitShape.StateColor(
+            template = OutfitShape.Template.Circle,
+            outfitState = OutfitStateDual(
                 active = MaterialTheme.colorsExtended.onBackgroundElevated.default,
                 inactive = MaterialTheme.colorsExtended.background.default,
             )

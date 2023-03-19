@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:08
+ *  Created by Tezov on 19/03/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:08
+ *  Last modified 19/03/2023 22:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,7 +31,6 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 object PageLogin : Page<PageLoginState, PageLoginAction> {
@@ -183,7 +182,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             },
                             contentPadding = PaddingValues(8.dp, 0.dp)
                         ) {
-                            Text.Simple(
+                            Text.StateColor(
                                 text = text,
                                 style = PageLoginTheme.typographies.dropDownMenu
                             )
@@ -211,12 +210,12 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text.Simple(
+                        Text.StateColor(
                             text = nameState.value,
                             style = PageLoginTheme.typographies.supra
                         )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
-                        Text.Simple(
+                        Text.StateColor(
                             text = stringResource(id = R.string.pg_login_pager_0),
                             style = PageLoginTheme.typographies.body.copy {
                                 typo = typo.copy(textAlign = TextAlign.Center)
@@ -230,14 +229,14 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text.Simple(
+                        Text.StateColor(
                             text = stringResource(id = R.string.pg_login_pager_1),
                             style = PageLoginTheme.typographies.huge.copy {
                                 typo = typo.copy(textAlign = TextAlign.Center)
                             }
                         )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
-                        Button.TextOutlined(
+                        Button.StateColor(
                             modifierButton = Modifier
                                 .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
                             modifierText = Modifier
@@ -267,7 +266,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             modifier = Modifier.fillMaxWidth(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Button.TextFilled(
+            Button.StateColor(
                 modifierButton = Modifier
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
@@ -280,7 +279,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 style = PageLoginTheme.styles.buttonDark,
                 onClick = onClickConnect,
             )
-            Button.TextFilled(
+            Button.StateColor(
                 modifierButton = Modifier
                     .fillMaxWidth()
                     .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),

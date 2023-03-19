@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 14:03
+ *  Created by Tezov on 19/03/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 13:50
+ *  Last modified 19/03/2023 22:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,7 +28,7 @@ import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
 
@@ -40,13 +40,13 @@ object SectionActionRow {
             size = SizeDp(24.dp),
             tint = Color.Black
         ),
-        val outfitTextHeader: OutfitTextSimple = OutfitTextSimple(),
+        val outfitTextHeader: OutfitText.StateColor = OutfitText.StateColor(),
         val colorBackgroundHeader: Color = Color.Unspecified,
         val colorBackgroundBody: Color = Color.Unspecified,
         val colorDivider: Color = Color.Unspecified,
         val dimensionDivider: Dp = 1.dp,
         val dimensionPaddingBody_h: Dp = 0.dp,
-        val actionRowStyle:ActionRow.Style = ActionRow.Style()
+        val actionRowStyle: ActionRow.Style = ActionRow.Style()
     )
 
     data class Data(
@@ -90,7 +90,7 @@ object SectionActionRow {
                             description = text,
                         )
                     }
-                    Text.Simple(
+                    Text.StateColor(
                         text = text,
                         style = style.outfitTextHeader
                     )

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 12:48
+ *  Created by Tezov on 19/03/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 12:48
+ *  Last modified 19/03/2023 20:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,10 +15,7 @@ package com.tezov.lib_core_android_kotlin.ui.theme.theme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColorDual
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateSemantic
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 
 val MaterialTheme.colorsExtended
     @Composable
@@ -37,8 +34,8 @@ object ThemeColorsExtended {
         val secondary: OutfitPaletteColor,
         val onSecondary: OutfitPaletteColor,
 
-        val semantic: OutfitStateSemantic<Color>,
-        val onSemantic: OutfitStateSemantic<Color>,
+        val semantic: OutfitPaletteColorSemantic,
+        val onSemantic: OutfitPaletteColorSemantic,
 
         val background: OutfitPaletteColor,
         val onBackground: OutfitPaletteColor,
@@ -52,11 +49,11 @@ object ThemeColorsExtended {
         val backgroundButtonProceed: OutfitPaletteColorDual,
         val onBackgroundButtonProceed:OutfitPaletteColorDual,
 
-        val backgroundButtonConfirm: OutfitPaletteColor,
-        val onBackgroundButtonConfirm: OutfitPaletteColor,
+        val backgroundButtonConfirm: OutfitPaletteColorDual,
+        val onBackgroundButtonConfirm: OutfitPaletteColorDual,
 
-        val backgroundButtonCancel: OutfitPaletteColor,
-        val onBackgroundButtonCancel: OutfitPaletteColor,
+        val backgroundButtonCancel: OutfitPaletteColorDual,
+        val onBackgroundButtonCancel: OutfitPaletteColorDual,
     )
 
     internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {

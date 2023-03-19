@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 14:03
+ *  Created by Tezov on 19/03/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 13:51
+ *  Last modified 19/03/2023 22:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -47,21 +47,21 @@ object ActionCard {
 
     @Immutable
     data class Style(
-        val outfitFrame: OutfitFrameSimple = OutfitFrameSimple(
-            outfitShape = OutfitShapeSimple(
+        val outfitFrame: OutfitFrame.StateColor = OutfitFrame.StateColor(
+            outfitShape = OutfitShape.StateColor(
 //                size = OutfitShape.Size(8.dp)
             ),
-            outfitBorder = OutfitBorderSimple(
+            outfitBorder = OutfitBorder.StateColor(
 //                size = 1.dp,
-                color = Color.Black,
+//                color = Color.Black,
             )
         ),
         val iconStyle:Icon.Simple.Style =  Icon.Simple.Style(
             size = SizeDp(24.dp),
             tint = Color.Black
         ),
-        val outfitTextTitle: OutfitTextSimple = OutfitTextSimple(),
-        val outfitTextSubtitle: OutfitTextSimple = OutfitTextSimple(),
+        val outfitTextTitle: OutfitText.StateColor = OutfitText.StateColor(),
+        val outfitTextSubtitle: OutfitText.StateColor = OutfitText.StateColor(),
     )
 
     data class Data(
@@ -74,7 +74,7 @@ object ActionCard {
     @Composable
     operator fun invoke(
         modifier: Modifier = Modifier,
-        style:Style,
+        style: Style,
         data: Data,
         onClick: () -> Unit = {}
     ) {
@@ -118,13 +118,13 @@ object ActionCard {
                 style.iconStyle.size?.let {
                     Spacer(modifier = Modifier.height(it.height))
                 }
-                Text.Simple(
+                Text.StateColor(
                     text = data.title,
                     style = style.outfitTextTitle,
                     overflow = TextOverflow.Visible
                 )
                 data.subtitle?.let {
-                    Text.Simple(
+                    Text.StateColor(
                         text = it,
                         style = style.outfitTextSubtitle,
                         overflow = TextOverflow.Visible
@@ -165,13 +165,13 @@ object ActionCard {
                 resourceId = data.iconResourceId,
                 description = data.title,
             )
-            Text.Simple(
+            Text.StateColor(
                 text = data.title,
                 style = style.outfitTextTitle,
                 overflow = TextOverflow.Visible
             )
             data.subtitle?.let {
-                Text.Simple(
+                Text.StateColor(
                     text = it,
                     style = style.outfitTextSubtitle,
                     overflow = TextOverflow.Visible
@@ -204,12 +204,12 @@ object ActionCard {
                     .align(Alignment.Bottom)
                     .weight(1f)
             ) {
-                Text.Simple(
+                Text.StateColor(
                     text = data.title,
                     style = style.outfitTextTitle
                 )
                 data.subtitle?.let {
-                    Text.Simple(
+                    Text.StateColor(
                         text = it,
                         style = style.outfitTextSubtitle
                     )

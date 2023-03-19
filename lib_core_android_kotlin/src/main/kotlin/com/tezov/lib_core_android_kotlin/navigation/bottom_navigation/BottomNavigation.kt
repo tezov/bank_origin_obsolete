@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:08
+ *  Created by Tezov on 19/03/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:08
+ *  Last modified 19/03/2023 20:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,6 +23,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.navigation.bottom_navigation.BottomNavigationState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsExtended
 
@@ -32,7 +33,7 @@ object BottomNavigation:
     open class Style(
         val outfitText: OutfitText.StateColor = OutfitText.StateColor(),
         val colorBackground: Color = Color.Black,
-        val outfitColor: OutfitState.Dual.Style<Color> = OutfitState.Dual.Style(),
+        val outfitColor: OutfitState.Dual.Style<Color> = OutfitStateDual(),
     ){
         companion object{
 

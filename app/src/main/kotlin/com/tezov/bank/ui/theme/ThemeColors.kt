@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 20:33
+ *  Created by Tezov on 19/03/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 20:09
+ *  Last modified 19/03/2023 20:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,8 +16,8 @@ import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorPalette
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitColorSemantic
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColorSemantic
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsExtended
@@ -51,78 +51,102 @@ object ThemeColors {
     }
 
     val colorsLightExtended = ThemeColorsExtended.Common(
-        primary = OutfitColorPalette(
+        primary = OutfitPaletteColor(
             default = Common.whiteShady,
             accent = Common.blueDark,
         ),
-        onPrimary = OutfitColorPalette(
+        onPrimary = OutfitPaletteColor(
             default = Common.blueSea,
             accent = Common.blueDark,
         ),
-        secondary = OutfitColorPalette(
+        secondary = OutfitPaletteColor(
             default = Common.whiteShady,
             light = Common.whiteDark,
         ),
-        onSecondary = OutfitColorPalette(
+        onSecondary = OutfitPaletteColor(
             default = Common.blueNight,
         ),
-        semantic= OutfitColorSemantic(
-            error = Common.redBlood
+        semantic= OutfitPaletteColorSemantic(
+            error = OutfitPaletteColor(
+                default = Common.redBlood
+            )
         ),
-        onSemantic= OutfitColorSemantic(
-            error = Common.whiteDark
+        onSemantic= OutfitPaletteColorSemantic(
+            error = OutfitPaletteColor(
+                default = Common.whiteDark
+            )
         ),
-        background = OutfitColorPalette(
+        background = OutfitPaletteColor(
             default = Common.whiteShiny,
             accent = Common.blueSea,
         ),
-        onBackground = OutfitColorPalette(
+        onBackground = OutfitPaletteColor(
             default = Common.blueElegant,
             accent =  Common.whiteShiny,
         ),
-        backgroundElevated = OutfitColorPalette(
+        backgroundElevated = OutfitPaletteColor(
             default = Common.grayOverlay,
         ),
-        onBackgroundElevated = OutfitColorPalette(
+        onBackgroundElevated = OutfitPaletteColor(
             default = Common.blueNight,
             accent = Common.blueElegant,
         ),
-        backgroundModal = OutfitColorPalette(
+        backgroundModal = OutfitPaletteColor(
             default = Common.whiteShady,
             accent = Common.blueElegant,
         ),
-        onBackgroundModal = OutfitColorPalette(
+        onBackgroundModal = OutfitPaletteColor(
             default = Common.blueNight,
             accent = Common.blueElegant,
         ),
         backgroundButtonProceed = OutfitStateDual(
-            active = OutfitColorPalette(
+            active = OutfitPaletteColor(
                 default = Common.whiteShiny
             ),
-            inactive = OutfitColorPalette(
+            inactive = OutfitPaletteColor(
                 default = Common.whiteDark
             )
         ),
-        onBackgroundButtonProceed = OutfitColorsState(
-            active = Common.blueNight,
-            inactive = Common.grayDark
+        onBackgroundButtonProceed = OutfitStateDual(
+            active = OutfitPaletteColor(
+                default = Common.blueNight
+            ),
+            inactive = OutfitPaletteColor(
+                default = Common.grayDark
+            )
         ),
-        backgroundButtonConfirm = OutfitColorsState(
-            active = Common.blueElegant,
-            inactive = Common.whiteDark
+        backgroundButtonConfirm = OutfitStateDual(
+            active = OutfitPaletteColor(
+                default = Common.blueElegant
+            ),
+            inactive = OutfitPaletteColor(
+                default = Common.whiteDark
+            )
         ),
-        onBackgroundButtonConfirm = OutfitColorsState(
-            active = Common.whiteShiny,
-            inactive = Common.grayDark
+        onBackgroundButtonConfirm = OutfitStateDual(
+            active = OutfitPaletteColor(
+                default = Common.whiteShiny
+            ),
+            inactive = OutfitPaletteColor(
+                default = Common.grayDark
+            )
         ),
-        backgroundButtonCancel = OutfitColorsState(
-            active = Common.blueShadow,
-            inactive = Common.whiteDark
+        backgroundButtonCancel = OutfitStateDual(
+            active = OutfitPaletteColor(
+                default = Common.blueShadow
+            ),
+            inactive = OutfitPaletteColor(
+                default = Common.whiteDark
+            )
         ),
-        onBackgroundButtonCancel = OutfitColorsState(
-            active = Common.blueElegant,
-            inactive = Common.grayDark
-        )
+        onBackgroundButtonCancel = OutfitStateDual(
+            active = OutfitPaletteColor(
+                default = Common.blueElegant
+            ),
+            inactive = OutfitPaletteColor(
+                default = Common.grayDark
+            )
+        ),
     )
 
     @Composable
@@ -141,8 +165,8 @@ object ThemeColors {
         background = MaterialTheme.colorsExtended.background.default,
         onBackground = MaterialTheme.colorsExtended.onBackground.default,
 
-        error = MaterialTheme.colorsExtended.semantic.error,
-        onError = MaterialTheme.colorsExtended.onSemantic.error,
+        error = MaterialTheme.colorsExtended.semantic.error!!.default,
+        onError = MaterialTheme.colorsExtended.onSemantic.error!!.default,
 
         isLight = true
     )
