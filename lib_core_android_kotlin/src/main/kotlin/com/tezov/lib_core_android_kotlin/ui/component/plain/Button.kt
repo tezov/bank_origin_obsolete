@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:08
+ *  Created by Tezov on 19/03/2023 16:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:08
+ *  Last modified 19/03/2023 16:27
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -124,7 +124,7 @@ object Button {
             style: Style = Style(),
             contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
             enabled: Boolean = true,
-            selector: Any = OutfitState.Dual.Selector.Enabled,
+            selector: Any = style.outfitFrame?.outfitShape?.outfitState?.selectorDefault() ?: OutfitState.Dual.Selector.Enabled,
             onClick: () -> Unit = {},
         ) {
             val sketch = style.outfitFrame?.outfitShape?.resolve(selector)

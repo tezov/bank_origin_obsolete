@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:08
+ *  Created by Tezov on 19/03/2023 16:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:08
+ *  Last modified 19/03/2023 16:27
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -181,7 +181,7 @@ object KeyBoard {
                     )
                 }
                 // border outer
-                style.outfitBorderOuter.resolve(OutfitState.Simple.Selector)?.let {
+                style.outfitBorderOuter.resolve()?.let {
                     drawRect(
                         brush = it.brush,
                         topLeft = Offset(0f, 0f),
@@ -190,7 +190,7 @@ object KeyBoard {
                     )
 
                 }
-                style.outfitBorderInner.resolve(OutfitState.Simple.Selector)?.let {
+                style.outfitBorderInner.resolve()?.let {
                     //vertical line
                     for (i in 1 until cubes.rowCount) {
                         val y = cubeSize * i

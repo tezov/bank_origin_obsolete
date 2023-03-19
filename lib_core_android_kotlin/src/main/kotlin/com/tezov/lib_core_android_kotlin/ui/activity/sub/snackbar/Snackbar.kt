@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:08
+ *  Created by Tezov on 19/03/2023 16:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:08
+ *  Last modified 19/03/2023 16:27
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -83,15 +83,13 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
                 )
         ) { data ->
             Snackbar(
-                backgroundColor = MaterialTheme.componentsExtended.snackbar.outfitShape.resolveColor(
-                    OutfitState.Simple.Selector) ?: SnackbarDefaults.backgroundColor,
+                backgroundColor = MaterialTheme.componentsExtended.snackbar.outfitShape.resolveColor() ?: SnackbarDefaults.backgroundColor,
                 elevation = MaterialTheme.componentsExtended.snackbar.elevation,
                 shape = MaterialTheme.componentsExtended.bottomSheet.outfitShape.getShape() ?: MaterialTheme.shapes.small,
                 content = {
                     Text.StateColor(
                         text = data.message,
-                        style = MaterialTheme.componentsExtended.snackbar.outfitTextMessage,
-                        selector = OutfitState.Simple.Selector
+                        style = MaterialTheme.componentsExtended.snackbar.outfitTextMessage
                     )
                 },
                 action = {
@@ -100,8 +98,7 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
                             onClick = { data.performAction() }) {
                             Text.StateColor(
                                 text = label,
-                                style = MaterialTheme.componentsExtended.snackbar.outfitTextAction,
-                                selector = OutfitState.Simple.Selector
+                                style = MaterialTheme.componentsExtended.snackbar.outfitTextAction
                             )
                         }
                     }

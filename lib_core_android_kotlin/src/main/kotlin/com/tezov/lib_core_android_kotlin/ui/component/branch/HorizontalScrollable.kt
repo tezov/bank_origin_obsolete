@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:08
+ *  Created by Tezov on 19/03/2023 16:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:08
+ *  Last modified 19/03/2023 16:27
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -191,8 +191,8 @@ object HorizontalScrollable {
                     Surface(
                         modifier = modifier.padding(style.marginCard),
                         shape = style.outfitFrame.outfitShape?.getShape() ?: RectangleShape,
-                        border = style.outfitFrame.outfitBorder?.resolve(OutfitState.Simple.Selector),
-                        color = style.outfitFrame.outfitShape?.resolveColor(OutfitState.Simple.Selector) ?: MaterialTheme.colors.surface,
+                        border = style.outfitFrame.outfitBorder?.resolve(),
+                        color = style.outfitFrame.outfitShape?.resolveColor() ?: MaterialTheme.colors.surface,
                     ) {
                         content()
                     }
