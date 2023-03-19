@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/03/2023 21:48
+ *  Created by Tezov on 19/03/2023 12:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/03/2023 21:48
+ *  Last modified 19/03/2023 12:47
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,6 +18,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -27,30 +28,27 @@ object Button {
 
     object TextFilled {
 
-        open class Style(
-            val outfitFrame: OutfitFrameStateColor = OutfitFrameStateDualColor(
-                outfitShape = OutfitShapeStateDualColor(
-                    sketch = 12.outfitShapeSketch,
+        class Style(
+            val outfitFrame: OutfitFrameColorStyle<*> = OutfitFrameColorDual(
+                outfitShape = OutfitShapeColorDual(
+                    size = 12.outfitShapeSize,
                     outfitState = OutfitStateDual(
-                        active = null,
-                        inactive = null,
+                        active = Color.Gray,
+                        inactive = Color.Gray.copy(alpha = 0.25f),
                     )
                 ),
-                outfitBorder = OutfitBorderStateDualColor(
-                    sketch = 2.outfitBorderSketch,
+                outfitBorder = OutfitBorderColorDual(
+                    size = 12.dp,
                     outfitState = OutfitStateDual(
-                        active = null,
-                        inactive = null,
+                        active = Color.Black,
+                        inactive = Color.Black.copy(alpha = 0.65f),
                     )
                 )
             ),
-            val outfitText: OutfitTextStateColor = OutfitTextStateDualColor(
-                sketch = OutfitText.Sketch.Style(
-                    typo = TextStyle(),
-                ),
+            val outfitText: OutfitTextColorStyle<*> = OutfitTextColorDual(
                 outfitState = OutfitStateDual(
-                    active = null,
-                    inactive = null
+                    active = Color.Black,
+                    inactive = Color.Black.copy(alpha = 0.65f)
                 )
             ),
             val elevation: Dp? = null,
@@ -89,24 +87,29 @@ object Button {
 
         @Composable
         operator fun invoke(
-            enabled: Boolean = true,
             text: String,
             modifierButton: Modifier = Modifier,
             modifierText: Modifier = Modifier,
-            selector: OutfitState.Selector,
             interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
             style: Style = Style(),
             contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
+            enabled: Boolean = true,
+            selector: Any,
             onClick: () -> Unit = {},
         ) {
+
+            val selectore = OutfitState.Semantic.Selector.Alert
+            val outfitShape = OutfitShape.Color.Style<OutfitState.Semantic.Selector>()
+            val resolved = outfitShape.resolve(selectore)
+
             Button(
                 modifier = modifierButton,
                 enabled = enabled,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it, it, it, it, it) },
-                shape = style.outfitFrame?.outfitShape?.resolve() ?: MaterialTheme.shapes.small,
-                border = style.outfitFrame?.outfitBorder?.resolve(selector),
-                colors = style.outfitFrame?.outfitShape?.outfitState?.resolve(selector)?.let {
+                shape = style.outfitFrame.outfitShape?.resolve(selector)?.value ?: MaterialTheme.shapes.small,
+                border = style.outfitFrame.outfitBorder?.resolve(selector),
+                colors = style.outfitFrame.outfitShape?.outfitState?.resolve(selector)?.let {
                     ButtonDefaults.buttonColors(backgroundColor =  it )
                 } ?: ButtonDefaults.buttonColors(),
                 contentPadding = contentPadding,
@@ -126,8 +129,24 @@ object Button {
     object TextOutlined {
 
         open class Style(
-            val outfitFrame: OutfitFrameStateColor = OutfitFrameState(),
-            val outfitText: OutfitTextStateColor = OutfitTextState(),
+            val outfitFrame: OutfitFrameStateColor = OutfitFrameStateDualColor(
+                outfitShape = OutfitShapeStateDualColor(
+                    sketch = 12.outfitShapeSketch,
+                ),
+                outfitBorder = OutfitBorderStateDualColor(
+                    sketch = 2.2.outfitBorderSketch,
+                    outfitState = OutfitStateDual(
+                        active = Color.Black,
+                        inactive = Color.Black.copy(alpha = 0.65f),
+                    )
+                )
+            ),
+            val outfitText: OutfitTextStateColor = OutfitTextStateDualColor(
+                outfitState = OutfitStateDual(
+                    active = Color.Black,
+                    inactive = Color.Black.copy(alpha = 0.65f)
+                )
+            ),
             val elevation: Dp? = null,
         ) {
             companion object {
@@ -174,8 +193,8 @@ object Button {
                 enabled = enabled,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it, it, it, it, it) },
-                shape = style.outfitFrame.outfitShape.resolveOrDefault(),
-                border = style.outfitFrame.outfitBorder.resolve(enabled),
+                shape = style.outfitFrame.outfitShape?.resolve() ?: MaterialTheme.shapes.small,
+                border = style.outfitFrame.outfitBorder?.resolve(enabled),
                 colors = style.outfitFrame.outfitShape.outfitColor.buttonColorsOrDefault(),
                 contentPadding = contentPadding,
                 onClick = onClick,

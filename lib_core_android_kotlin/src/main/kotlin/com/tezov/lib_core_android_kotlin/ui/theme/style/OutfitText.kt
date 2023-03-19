@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/03/2023 21:14
+ *  Created by Tezov on 19/03/2023 12:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/03/2023 21:14
+ *  Last modified 19/03/2023 12:47
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,125 +15,50 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 
+typealias OutfitTextColorStyle<S> = OutfitText.Color.Style<S>
+typealias OutfitTextColor = OutfitTextColorStyle<OutfitState.Simple.Selector>
+typealias OutfitTextColorDual = OutfitTextColorStyle<OutfitState.Dual.Selector>
+typealias OutfitTextColorSemantic = OutfitTextColorStyle<OutfitState.Semantic.Selector>
+
 object OutfitText {
 
-    object Sketch {
+    object Color {
 
-        open class Style(
+        class Style<in S:Any>(
             val typo: TextStyle = TextStyle(),
+            val outfitState: OutfitState.Style<androidx.compose.ui.graphics.Color,S>? = null,
         ) {
 
             companion object {
 
-                open class Builder internal constructor(style: Style) {
+                open class Builder<S:Any> internal constructor(
+                    style: Style<S>
+                ) {
                     var typo = style.typo
-
-                    open internal fun get() = Style(
-                        typo = typo,
-                    )
-
-                }
-
-                @Composable
-                fun Style.copy(builder: @Composable Builder.() -> Unit = {}) = Builder(this).also {
-                    it.builder()
-                }.get()
-
-            }
-
-            constructor(style: Style) : this(
-                typo = style.typo,
-            )
-
-            open fun resolve() = typo
-        }
-
-    }
-
-    object Simple {
-
-        open class Style(
-            sketch: Sketch.Style = Sketch.Style(),
-            val color: Color? = null,
-        ) : Sketch.Style(sketch) {
-
-            companion object {
-
-                open class Builder internal constructor(style: Style) :
-                    Sketch.Style.Companion.Builder(style) {
-                    var color = style.color
-
-                    override fun get() = Style(
-                        sketch = super.get(),
-                        color = color,
-                    )
-
-                }
-
-                @Composable
-                fun Style.copy(scope: @Composable Builder.() -> Unit = {}) = Builder(this).also {
-                    it.scope()
-                }.get()
-
-                @Composable
-                fun Sketch.Style.copyToSimpleStyle(scope: @Composable Builder.() -> Unit = {}) =
-                    Builder(Style(this)).also { it.scope() }.get()
-
-            }
-
-            constructor(style: Style) : this(
-                sketch = style,
-                color = style.color,
-            )
-
-            override fun resolve() = color?.let { typo.copy(color = it) } ?: typo
-        }
-
-    }
-
-    object State {
-
-        open class Style<T, S : OutfitState.Selector, OT : OutfitState.Style<T, S>>(
-            sketch: Sketch.Style = Sketch.Style(),
-            val outfitState: OT? = null,
-        ) : Sketch.Style(sketch) {
-
-            companion object {
-
-                open class Builder<T, S : OutfitState.Selector, OT : OutfitState.Style<T, S>> internal constructor(
-                    style: Style<T, S, OT>
-                ) : Sketch.Style.Companion.Builder(style) {
                     var outfitState = style.outfitState
 
-                    override fun get() = Style(
-                        sketch = super.get(),
+                    fun get() = Style(
+                        typo = typo,
                         outfitState = outfitState,
                     )
                 }
 
                 @Composable
-                fun <T, S : OutfitState.Selector, OT : OutfitState.Style<T, S>> Style<T, S, OT>.copy(
-                    scope: @Composable Builder<T, S, OT>.() -> Unit = {}
+                fun <S:Any> Style<S>.copy(
+                    scope: @Composable Builder<S>.() -> Unit = {}
                 ) = Builder(this).also {
                     it.scope()
                 }.get()
 
-//                @Composable
-//                fun Sketch.Style.copyToStateStyle(scope: @Composable Builder.() -> Unit = {}) =
-//                    Builder(State.Style(this)).also { it.scope() }.get()
-
             }
 
-            constructor(style: Style<T, S, OT>) : this(
-                sketch = style,
+            constructor(style: Style<S>) : this(
+                typo = style.typo,
                 outfitState = style.outfitState,
             )
 
-            fun resolve(selector: S) = outfitState?.resolve(selector)?.let {
-                when(it){
-                    is Color ->  typo.copy(color = it)
-                    else -> typo
-                }
+            fun resolve(selector: S) = outfitState?.resolve(selector, androidx.compose.ui.graphics.Color::class)?.let {
+                typo.copy(color = it)
             } ?: typo
 
         }
