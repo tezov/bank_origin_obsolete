@@ -1,6 +1,6 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 12:47
+ *  Created by Tezov on 19/03/2023 12:48
  *  Copyright (c) 2023 . All rights reserved.
  *  Last modified 19/03/2023 12:47
  *  First project bank / bank.lib_core_android_kotlin.main
