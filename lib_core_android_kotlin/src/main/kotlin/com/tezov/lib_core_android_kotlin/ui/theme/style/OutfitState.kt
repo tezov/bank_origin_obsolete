@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:27
+ *  Created by Tezov on 19/03/2023 17:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:27
+ *  Last modified 19/03/2023 17:35
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,27 +27,24 @@ object OutfitState {
 
         fun selectorDefault():Any
 
-        fun isSelectorValid(selector: Any) = selector::class == selectorType()
+        fun resolve(selector: Any?=null): T?
 
-        fun resolve(selector: Any): T?
+        fun isSelectorValid(selector: Any?=null) = selector != null && selector::class == selectorType()
 
-        fun resolve() = resolve(selectorDefault())
+        @Suppress("UNCHECKED_CAST")
+        fun <S : Any> resolve(selector: Any?=null, doResolve: ((selector: S) -> T?)): T?
+            = runCatching { (selector.takeIf { isSelectorValid(it) } ?: selectorDefault()) as S }.getOrNull()?.let(doResolve)
 
-        fun <S : Any> resolve(selector: Any, doResolve: ((selector: S) -> T?)): T? =
-            if (isSelectorValid(selector)) {
-                doResolve(selector as S)
-            } else null
-
-        fun <C : Any> resolve(selector: Any, type: KClass<C>): C? = resolve(selector)
-            ?.takeIf { it::class.isInstance(type) || it::class.isSubclassOf(type) }
-            ?.let { it as C }
+        @Suppress("UNCHECKED_CAST")
+        fun <C : Any> resolve(selector: Any? = null, type: KClass<C>): C?
+            = resolve(selector)?.let { runCatching { it as C }.getOrNull() }
     }
 
     object Simple{
 
         object Selector
 
-        open class Style<T:Any>(
+        class Style<T:Any>(
             val value: T? = null,
         ):OutfitState.Style<T> {
 
@@ -75,7 +72,7 @@ object OutfitState {
 
             override fun selectorDefault() = Selector
 
-            override fun resolve(selector: Any) = resolve<Selector>(selector) {
+            override fun resolve(selector: Any?) = resolve<Selector>(selector) {
                 value
             }
 
@@ -89,7 +86,7 @@ object OutfitState {
             Enabled, Disabled
         }
 
-        open class Style<T:Any>(
+        class Style<T:Any>(
             val active: T? = null,
             val inactive: T? = null,
         ):OutfitState.Style<T> {
@@ -121,7 +118,7 @@ object OutfitState {
 
             override fun selectorDefault() = Selector.Enabled
 
-            override fun resolve(selector: Any) = resolve<Selector>(selector) {
+            override fun resolve(selector: Any?) = resolve<Selector>(selector) {
                 when(it){
                     Selector.Enabled -> active
                     Selector.Disabled -> inactive
@@ -138,7 +135,7 @@ object OutfitState {
             Neutral, Info, Alert,Error, Success
         }
 
-        open class Style<T:Any>(
+        class Style<T:Any>(
             val neutral: T? = null,
             val info: T? = null,
             val alert: T? = null,
@@ -182,7 +179,7 @@ object OutfitState {
 
             override fun selectorDefault() = Selector.Neutral
 
-            override fun resolve(selector: Any) = resolve<Selector>(selector) {
+            override fun resolve(selector: Any?) = resolve<Selector>(selector) {
                 when(it){
                     Selector.Neutral -> neutral
                     Selector.Info -> info

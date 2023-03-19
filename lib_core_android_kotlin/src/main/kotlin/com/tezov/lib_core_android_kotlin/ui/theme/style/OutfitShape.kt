@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:08
+ *  Created by Tezov on 19/03/2023 17:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:08
+ *  Last modified 19/03/2023 17:35
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -145,9 +145,9 @@ object OutfitShape {
 
         fun getShape() = template.get(size)
 
-        fun resolveColor(selector: Any) =  outfitState?.resolve(selector, androidx.compose.ui.graphics.Color::class)
+        fun resolveColor(selector: Any? = null) =  outfitState?.resolve(selector, androidx.compose.ui.graphics.Color::class)
 
-        fun resolve(selector: Any) = outfitState?.resolve(selector, androidx.compose.ui.graphics.Color::class)?.let {
+        fun resolve(selector: Any? = null) = resolveColor(selector)?.let {
             template.get(size, it)
         }
 

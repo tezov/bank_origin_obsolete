@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:27
+ *  Created by Tezov on 19/03/2023 17:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:27
+ *  Last modified 19/03/2023 16:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -124,17 +124,16 @@ object Button {
             style: Style = Style(),
             contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
             enabled: Boolean = true,
-            selector: Any = style.outfitFrame?.outfitShape?.outfitState?.selectorDefault() ?: OutfitState.Dual.Selector.Enabled,
+            selector: Any? = null,
             onClick: () -> Unit = {},
         ) {
-            val sketch = style.outfitFrame?.outfitShape?.resolve(selector)
             Button(
                 modifier = modifierButton,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it, it, it, it, it) },
-                shape = sketch?.shape ?: MaterialTheme.shapes.small,
-                border = style.outfitFrame?.outfitBorder?.resolve(selector),
-                colors = sketch?.color?.let {
+                shape = style.outfitFrame?.getShape() ?: MaterialTheme.shapes.small,
+                border = style.outfitFrame?.resolveBorder(selector),
+                colors = style.outfitFrame?.resolveColor(selector)?.let {
                     ButtonDefaults.buttonColors(
                         backgroundColor = it,
                         disabledBackgroundColor = it,

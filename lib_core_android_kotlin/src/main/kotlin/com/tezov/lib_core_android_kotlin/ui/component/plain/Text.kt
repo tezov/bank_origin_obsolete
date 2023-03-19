@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:27
+ *  Created by Tezov on 19/03/2023 17:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:27
+ *  Last modified 19/03/2023 16:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -36,7 +36,7 @@ object Text {
             maxLines: Int = Int.MAX_VALUE,
             onTextLayout: (TextLayoutResult) -> Unit = {},
             text:AnnotatedString,
-            selector: Any = style?.outfitState?.selectorDefault() ?: OutfitState.Simple.Selector
+            selector: Any? = null
         ){
             Text(
                 modifier = modifier,
@@ -58,7 +58,7 @@ object Text {
             maxLines: Int = Int.MAX_VALUE,
             onTextLayout: (TextLayoutResult) -> Unit = {},
             text:String,
-            selector: Any = style?.outfitState?.selectorDefault() ?: OutfitState.Simple.Selector
+            selector: Any? = null
         ){
             invoke(
                 modifier = modifier,
@@ -81,7 +81,7 @@ object Text {
             maxLines: Int = Int.MAX_VALUE,
             onTextLayout: (TextLayoutResult) -> Unit = {},
             textResourceId:Int,
-            selector: Any = style?.outfitState?.selectorDefault() ?: OutfitState.Simple.Selector
+            selector: Any? = null
         ){
             invoke(
                 modifier = modifier,

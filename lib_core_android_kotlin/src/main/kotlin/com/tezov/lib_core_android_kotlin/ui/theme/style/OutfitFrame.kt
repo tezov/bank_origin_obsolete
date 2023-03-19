@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:08
+ *  Created by Tezov on 19/03/2023 17:35
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 14:46
+ *  Last modified 19/03/2023 16:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -58,6 +58,14 @@ object OutfitFrame {
             outfitShape = style.outfitShape,
             outfitBorder = style.outfitBorder,
         )
+
+        fun getShape() = outfitShape?.getShape()
+
+        fun resolveColor(selector: Any? = null) = outfitShape?.resolveColor(selector)
+
+        fun resolveShape(selector: Any? = null) = outfitShape?.resolve(selector)
+
+        fun resolveBorder(selector: Any? = null) = outfitBorder?.resolve(selector)
 
     }
 
