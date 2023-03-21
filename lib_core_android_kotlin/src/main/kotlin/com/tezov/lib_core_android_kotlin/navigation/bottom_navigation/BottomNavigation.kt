@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 21/03/2023 20:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 20:59
+ *  Last modified 21/03/2023 20:39
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,15 +27,15 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsExtended
 
-object BottomNavigation:
+object BottomNavigation :
     ActivitySub<BottomNavigationState, BottomNavigationAction> {
 
     open class Style(
         val outfitText: OutfitText.StateColor = OutfitText.StateColor(),
         val colorBackground: Color = Color.Black,
         val outfitColor: OutfitState.Dual.Style<Color> = OutfitStateDual(),
-    ){
-        companion object{
+    ) {
+        companion object {
 
             open class Builder internal constructor(style: Style) {
                 var outfitText = style.outfitText
@@ -50,7 +50,7 @@ object BottomNavigation:
             }
 
             @Composable
-            fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+            fun Style.copy(builder: @Composable Builder.() -> Unit = {}) = Builder(this).also {
                 it.builder()
             }.get()
 
@@ -64,14 +64,14 @@ object BottomNavigation:
     }
 
     @Composable
-    operator fun invoke(items:Set<BottomNavigationItemData>) {
+    operator fun invoke(items: Set<BottomNavigationItemData>) {
         content(items)
     }
 
     @Composable
-    private fun content(items:Set<BottomNavigationItemData>) {
+    private fun content(items: Set<BottomNavigationItemData>) {
         val accessor = AccessorCoreUiActivity().get(this).contextSubMap()
-        val action = accessor.with<BottomNavigation,_,_>().action()
+        val action = accessor.with<BottomNavigation, _, _>().action()
 
         BottomNavigation(
             backgroundColor = MaterialTheme.componentsExtended.bottomNavigation.colorBackground,
@@ -80,8 +80,9 @@ object BottomNavigation:
                 BottomNavigationItem(
                     icon = {
                         Icon(
-                            painterResource(id = if(action.navigationController.currentRoute() == item.route)
-                                item.iconActive else item.iconInactive
+                            painterResource(
+                                id = if (action.navigationController.currentRoute() == item.route)
+                                    item.iconActive else item.iconInactive
                             ),
                             contentDescription = stringResource(id = item.titleResourceId)
                         )
@@ -92,8 +93,12 @@ object BottomNavigation:
                             style = MaterialTheme.componentsExtended.bottomNavigation.outfitText.typo,
                         )
                     },
-                    selectedContentColor = MaterialTheme.componentsExtended.bottomNavigation.outfitColor.active ?: LocalContentColor.current,
-                    unselectedContentColor = MaterialTheme.componentsExtended.bottomNavigation.outfitColor.inactive ?: LocalContentColor.current.copy(alpha = ContentAlpha.medium),
+                    selectedContentColor = MaterialTheme.componentsExtended.bottomNavigation.outfitColor.resolve(
+                        OutfitState.Dual.Selector.Enabled
+                    ) ?: LocalContentColor.current,
+                    unselectedContentColor = MaterialTheme.componentsExtended.bottomNavigation.outfitColor.resolve(
+                        OutfitState.Dual.Selector.Disabled
+                    ) ?: LocalContentColor.current.copy(alpha = ContentAlpha.medium),
                     alwaysShowLabel = true,
                     selected = action.navigationController.currentRoute() == item.route,
                     onClick = {

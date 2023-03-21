@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 21/03/2023 20:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 20:33
+ *  Last modified 21/03/2023 20:53
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,7 +28,7 @@ import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable.loopOver
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
 
@@ -40,9 +40,9 @@ object SectionActionCard {
             size = SizeDp(24.dp),
             tint = Color.Black
         ),
-        val outfitTextHeader: OutfitTextSimple = OutfitTextSimple(),
-        val colorBackgroundHeader: Color = Color.Transparent,
-        val colorBackgroundBody: Color = Color.Transparent,
+        val outfitTextHeader: OutfitText.StateColor = OutfitText.StateColor(),
+        val colorBackgroundHeader: Color? = null,
+        val colorBackgroundBody: Color? = null,
         val dimensionPaddingBody_h: Dp = 0.dp,
         val actionCardStyle: ActionCard.Style = ActionCard.Style()
     )
@@ -72,7 +72,11 @@ object SectionActionCard {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(style.colorBackgroundHeader)
+                        .also { modifier ->
+                            style.colorBackgroundHeader?.let {
+                                modifier.background(it)
+                            }
+                        }
                         .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementNormal_v),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -86,7 +90,7 @@ object SectionActionCard {
                             description = text,
                         )
                     }
-                    Text.Simple(
+                    Text.StateColor(
                         text = text,
                         style = style.outfitTextHeader
                     )
@@ -95,7 +99,11 @@ object SectionActionCard {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(style.colorBackgroundBody)
+                    .also { modifier ->
+                        style.colorBackgroundBody?.let {
+                            modifier.background(it)
+                        }
+                    }
                     .padding(
                         vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_h,
                         horizontal = style.dimensionPaddingBody_h

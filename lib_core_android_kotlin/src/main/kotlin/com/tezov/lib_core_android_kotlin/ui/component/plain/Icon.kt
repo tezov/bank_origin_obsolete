@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 17:35
+ *  Created by Tezov on 21/03/2023 20:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:57
+ *  Last modified 21/03/2023 20:39
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -120,8 +120,8 @@ object Icon {
             style.size?.let {
                 modifier.size(it)
             }
-            val sketch = style.outfitFrame.outfitShape?.resolve(selector)
-            style.outfitFrame.outfitBorder?.let {
+            val sketch = style.outfitFrame.outfitShape.resolve(selector)
+            style.outfitFrame.outfitBorder.let {
                 modifier.border(it, selector, sketch)
             }
             Icon(

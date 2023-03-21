@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 21/03/2023 20:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 22:02
+ *  Last modified 21/03/2023 20:53
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -41,9 +41,9 @@ object SectionActionRow {
             tint = Color.Black
         ),
         val outfitTextHeader: OutfitText.StateColor = OutfitText.StateColor(),
-        val colorBackgroundHeader: Color = Color.Unspecified,
-        val colorBackgroundBody: Color = Color.Unspecified,
-        val colorDivider: Color = Color.Unspecified,
+        val colorBackgroundHeader: Color? = null,
+        val colorBackgroundBody: Color? = null,
+        val colorDivider: Color? = null,
         val dimensionDivider: Dp = 1.dp,
         val dimensionPaddingBody_h: Dp = 0.dp,
         val actionRowStyle: ActionRow.Style = ActionRow.Style()
@@ -70,13 +70,14 @@ object SectionActionRow {
                 .fillMaxWidth()
         ) {
             data.title?.let { text ->
-                val modifierheader = Modifier
-                if(style.colorBackgroundHeader.isSpecified){
-                    modifierheader.background(style.colorBackgroundHeader)
-                }
                 Row(
-                    modifier = modifierheader
+                    modifier = Modifier
                         .fillMaxWidth()
+                        .also { modifier ->
+                            style.colorBackgroundBody?.let {
+                                modifier.background(it)
+                            }
+                        }
                         .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementBig_h),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
@@ -96,13 +97,14 @@ object SectionActionRow {
                     )
                 }
             }
-            val modifierBody = Modifier
-            if(style.colorBackgroundBody.isSpecified){
-                modifierBody.background(style.colorBackgroundBody)
-            }
             Column(
-                modifier = modifierBody
+                modifier = Modifier
                     .fillMaxWidth()
+                    .also { modifier ->
+                        style.colorBackgroundBody?.let {
+                            modifier.background(it)
+                        }
+                    }
                     .padding(
                         vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
                         horizontal = style.dimensionPaddingBody_h
@@ -113,7 +115,7 @@ object SectionActionRow {
                     ActionRow(data = row, style = style.actionRowStyle) {
                         onClick(index)
                     }
-                    if (style.dimensionDivider > 0.dp && style.colorDivider.isSpecified && index != data.rows.lastIndex) {
+                    if (style.dimensionDivider > 0.dp && style.colorDivider != null && index != data.rows.lastIndex) {
                         Divider(
                             modifier = Modifier
                                 .fillMaxWidth()

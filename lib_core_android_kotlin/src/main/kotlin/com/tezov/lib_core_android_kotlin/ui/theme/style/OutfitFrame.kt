@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 21/03/2023 20:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 21:32
+ *  Last modified 21/03/2023 20:39
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,20 +18,18 @@ import androidx.compose.ui.Modifier
 fun Modifier.border(
     style: OutfitFrame.StateColor,
     selector: Any?= null
-) = style.outfitBorder?.let {
-    border(it, selector, style.outfitShape?.resolve(selector))
-} ?: this
+) = border(style.outfitBorder, selector, style.outfitShape.resolve(selector))
 
 fun Modifier.background(
     style: OutfitFrame.StateColor,
     selector: Any?=null
-) = style.outfitShape?.let { background(it, selector) } ?: this
+) = background(style.outfitShape, selector)
 
 object OutfitFrame {
 
     class StateColor(
-        val outfitShape: OutfitShape.StateColor? = null,
-        val outfitBorder: OutfitBorder.StateColor? = null,
+        val outfitShape: OutfitShape.StateColor = OutfitShape.StateColor(),
+        val outfitBorder: OutfitBorder.StateColor = OutfitBorder.StateColor(),
     ) {
 
         companion object {
@@ -59,13 +57,13 @@ object OutfitFrame {
             outfitBorder = style.outfitBorder,
         )
 
-        fun getShape() = outfitShape?.getShape()
+        fun getShape() = outfitShape.getShape()
 
-        fun resolveColor(selector: Any? = null) = outfitShape?.resolveColor(selector)
+        fun resolveColor(selector: Any? = null) = outfitShape.resolveColor(selector)
 
-        fun resolveShape(selector: Any? = null) = outfitShape?.resolve(selector)
+        fun resolveShape(selector: Any? = null) = outfitShape.resolve(selector)
 
-        fun resolveBorder(selector: Any? = null) = outfitBorder?.resolve(selector)
+        fun resolveBorder(selector: Any? = null) = outfitBorder.resolve(selector)
 
     }
 

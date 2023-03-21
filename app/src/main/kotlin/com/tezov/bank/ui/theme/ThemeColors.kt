@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 21/03/2023 20:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 20:59
+ *  Last modified 21/03/2023 20:53
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -69,7 +69,7 @@ object ThemeColors {
         semantic= OutfitPaletteColorSemantic(
             error = OutfitPaletteColor(
                 default = Common.redBlood
-            )
+            ),
         ),
         onSemantic= OutfitPaletteColorSemantic(
             error = OutfitPaletteColor(

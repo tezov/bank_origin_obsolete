@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 17:35
+ *  Created by Tezov on 21/03/2023 20:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:57
+ *  Last modified 21/03/2023 20:39
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,8 +30,8 @@ object Button {
     object StateColor{
 
         class Style(
-            val outfitFrame: OutfitFrame.StateColor? = null,
-            val outfitText: OutfitText.StateColor? = null,
+            val outfitFrame: OutfitFrame.StateColor = OutfitFrame.StateColor(),
+            val outfitText: OutfitText.StateColor = OutfitText.StateColor(),
             val elevation: Dp? = null,
         ) {
 
@@ -131,9 +131,9 @@ object Button {
                 modifier = modifierButton,
                 interactionSource = interactionSource,
                 elevation = style.elevation?.let { ButtonDefaults.elevation(it, it, it, it, it) },
-                shape = style.outfitFrame?.getShape() ?: MaterialTheme.shapes.small,
-                border = style.outfitFrame?.resolveBorder(selector),
-                colors = style.outfitFrame?.resolveColor(selector)?.let {
+                shape = style.outfitFrame.getShape() ?: MaterialTheme.shapes.small,
+                border = style.outfitFrame.resolveBorder(selector),
+                colors = style.outfitFrame.resolveColor(selector)?.let {
                     ButtonDefaults.buttonColors(
                         backgroundColor = it,
                         disabledBackgroundColor = it,

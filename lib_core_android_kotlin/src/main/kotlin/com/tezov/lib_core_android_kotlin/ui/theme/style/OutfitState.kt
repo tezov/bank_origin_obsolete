@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 17:35
+ *  Created by Tezov on 21/03/2023 20:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 17:35
+ *  Last modified 21/03/2023 20:39
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,10 +12,11 @@
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
 import androidx.compose.runtime.Composable
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import kotlin.reflect.KClass
-import kotlin.reflect.full.isSubclassOf
 
 //Simple
+typealias OutfitStateEmpty<T> = OutfitState.Empty.Style<T>
 typealias OutfitStateSimple<T> = OutfitState.Simple.Style<T>
 typealias OutfitStateDual<T> = OutfitState.Dual.Style<T>
 typealias OutfitStateSemantic<T> = OutfitState.Semantic.Style<T>
@@ -23,6 +24,26 @@ typealias OutfitStateSemantic<T> = OutfitState.Semantic.Style<T>
 object OutfitState {
 
     interface Style<T : Any> {
+        var nullFallback:(()->T)?
+            get() {
+                refs().firstOrNull()?.let {
+                    kotlin.runCatching { it as? DelegateNullFallBack<T> }.getOrNull()?.fallBackValue?.let {
+                        return it
+                    }
+                }
+                return null
+            }
+            set(value) {
+                nullFallback(value, refs())
+            }
+        fun Style<T>.nullFallback(onNull:(()->T)?, refs:List<T>){
+            refs.forEach {
+                kotlin.runCatching { it as? DelegateNullFallBack<T> }.getOrNull()?.fallBackValue = onNull
+            }
+        }
+
+        fun refs(): List<T>
+
         fun selectorType(): KClass<*>
 
         fun selectorDefault():Any
@@ -40,22 +61,61 @@ object OutfitState {
             = resolve(selector)?.let { runCatching { it as C }.getOrNull() }
     }
 
+    object Empty{
+
+        class Style<T:Any> private constructor():OutfitState.Style<T> {
+
+            companion object{
+
+                private val instance by lazy { Style<Any>() }
+
+                @Suppress("UNCHECKED_CAST")
+                operator fun <T:Any> invoke() = instance as Style<T>
+
+                open class Builder<T:Any> internal constructor(val style: Style<T>) {
+                    internal fun get() = Style<T>()
+                }
+
+                @Composable
+                fun <T:Any> Style<T>.copy(builder: @Composable Builder<T>.()->Unit = {}) = Builder(this).also {
+                    it.builder()
+                }.get()
+            }
+
+            override fun refs() = emptyList<T>()
+
+            override fun selectorType() = Unit::class
+
+            override fun selectorDefault() = Unit
+
+            override fun resolve(selector: Any?) = null
+
+        }
+
+    }
+
     object Simple{
 
         object Selector
 
         class Style<T:Any>(
-            val value: T? = null,
+            value: T? = null,
         ):OutfitState.Style<T> {
+
+            override fun refs() = listOf(value)
+
+            val value: T by DelegateNullFallBack(value)
 
             companion object{
 
-                open class Builder<T:Any> internal constructor(style: Style<T>) {
+                open class Builder<T:Any> internal constructor(val style: Style<T>) {
                     var value = style.value
 
                     internal fun get() = Style(
                         value = value,
-                    )
+                    ).also {
+                        it.nullFallback = style.nullFallback
+                    }
                 }
 
                 @Composable
@@ -66,7 +126,9 @@ object OutfitState {
 
             constructor(style: Style<T>) : this(
                 value = style.value,
-            )
+            ){
+                nullFallback = style.nullFallback
+            }
 
             override fun selectorType() = Selector::class
 
@@ -87,20 +149,27 @@ object OutfitState {
         }
 
         class Style<T:Any>(
-            val active: T? = null,
-            val inactive: T? = null,
+            active: T? = null,
+            inactive: T? = null,
         ):OutfitState.Style<T> {
+
+            override fun refs() = listOf(active, inactive)
+
+            val active: T by DelegateNullFallBack(active)
+            val inactive: T by DelegateNullFallBack(inactive)
 
             companion object{
 
-                open class Builder<T:Any> internal constructor(style: Style<T>) {
+                open class Builder<T:Any> internal constructor(val style: Style<T>) {
                     var active = style.active
                     var inactive = style.inactive
 
                     internal fun get() = Style(
                         active = active,
                         inactive = inactive,
-                    )
+                    ).also {
+                        it.nullFallback = style.nullFallback
+                    }
                 }
 
                 @Composable
@@ -112,7 +181,9 @@ object OutfitState {
             constructor(style: Style<T>) : this(
                 active = style.active,
                 inactive = style.inactive,
-            )
+            ){
+                nullFallback = style.nullFallback
+            }
 
             override fun selectorType() = Selector::class
 
@@ -136,16 +207,24 @@ object OutfitState {
         }
 
         class Style<T:Any>(
-            val neutral: T? = null,
-            val info: T? = null,
-            val alert: T? = null,
-            val error: T? = null,
-            val success: T? = null,
+            neutral: T? = null,
+            info: T? = null,
+            alert: T? = null,
+            error: T? = null,
+            success: T? = null,
         ):OutfitState.Style<T> {
+
+            override fun refs() = listOf(neutral, info, alert, error, success)
+
+            val neutral: T by DelegateNullFallBack(neutral)
+            val info: T by DelegateNullFallBack(info)
+            val alert: T by DelegateNullFallBack(alert)
+            val error: T by DelegateNullFallBack(error)
+            val success: T by DelegateNullFallBack(success)
 
             companion object{
 
-                open class Builder<T:Any> internal constructor(style: Style<T>) {
+                open class Builder<T:Any> internal constructor(val style: Style<T>) {
                     var neutral = style.neutral
                     var info = style.info
                     var alert = style.alert
@@ -158,7 +237,9 @@ object OutfitState {
                         alert = alert,
                         error = error,
                         success = success,
-                    )
+                    ).also {
+                        it.nullFallback = style.nullFallback
+                    }
                 }
 
                 @Composable
@@ -173,7 +254,9 @@ object OutfitState {
                 alert = style.alert,
                 error = style.error,
                 success = style.success,
-            )
+            ){
+                nullFallback = style.nullFallback
+            }
 
             override fun selectorType() = Selector::class
 
@@ -187,7 +270,6 @@ object OutfitState {
                     Selector.Error -> error
                     Selector.Success -> success
                 }
-
             }
         }
     }

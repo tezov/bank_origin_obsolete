@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 21/03/2023 20:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 22:02
+ *  Last modified 21/03/2023 20:53
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -44,7 +44,7 @@ object ActionRow {
             size = SizeDp(24.dp)
         ),
         val outfitText: OutfitText.StateColor = OutfitText.StateColor(),
-        val background: Color = Color.Unspecified,
+        val background: Color? = null,
     )
 
     data class Data(
@@ -60,8 +60,8 @@ object ActionRow {
         data: Data,
         onClick: () -> Unit = {}
     ) {
-        if(style.background.isSpecified){
-            modifier.background(style.background)
+        style.background?.let {
+            modifier.background(it)
         }
         Row(
             modifier = modifier
