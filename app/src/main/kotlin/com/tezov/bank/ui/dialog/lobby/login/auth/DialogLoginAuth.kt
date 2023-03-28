@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:08
+ *  Created by Tezov on 28/03/2023 22:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:08
+ *  Last modified 28/03/2023 22:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -360,19 +360,19 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 .fillMaxWidth()
         ) {
 
-            Button.TextFilled(
-                modifierButton = Modifier
-                    .fillMaxWidth(),
-                modifierText = Modifier
-                    .padding(
-                        horizontal = DialogLoginAuthTheme.dimensions.paddingButton_h,
-                        vertical = DialogLoginAuthTheme.dimensions.paddingButton_v
-                    ),
-                text = stringResource(id = R.string.dlg_login_auth_btn_connect),
-                style = DialogLoginAuthTheme.styles.button,
-                enabled = credentialValidState,
-                onClick = onClickConnect,
-            )
+//            Button.TextFilled(
+//                modifierButton = Modifier
+//                    .fillMaxWidth(),
+//                modifierText = Modifier
+//                    .padding(
+//                        horizontal = DialogLoginAuthTheme.dimensions.paddingButton_h,
+//                        vertical = DialogLoginAuthTheme.dimensions.paddingButton_v
+//                    ),
+//                text = stringResource(id = R.string.dlg_login_auth_btn_connect),
+//                style = DialogLoginAuthTheme.styles.button,
+//                enabled = credentialValidState,
+//                onClick = onClickConnect,
+//            )
 
             Row(
                 modifier = Modifier

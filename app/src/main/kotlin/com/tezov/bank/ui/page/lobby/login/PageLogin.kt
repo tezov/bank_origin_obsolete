@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 28/03/2023 22:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 22:02
+ *  Last modified 28/03/2023 22:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -217,9 +217,9 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         Text.StateColor(
                             text = stringResource(id = R.string.pg_login_pager_0),
-                            style = PageLoginTheme.typographies.body.copy {
-                                typo = typo.copy(textAlign = TextAlign.Center)
-                            }
+//                            style = PageLoginTheme.typographies.body.copy {
+//                                typo = typo.copy(textAlign = TextAlign.Center)
+//                            }
                         )
                     }
                 },
@@ -231,9 +231,9 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     ) {
                         Text.StateColor(
                             text = stringResource(id = R.string.pg_login_pager_1),
-                            style = PageLoginTheme.typographies.huge.copy {
-                                typo = typo.copy(textAlign = TextAlign.Center)
-                            }
+//                            style = PageLoginTheme.typographies.huge.copy {
+//                                typo = typo.copy(textAlign = TextAlign.Center)
+//                            }
                         )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         Button.StateColor(

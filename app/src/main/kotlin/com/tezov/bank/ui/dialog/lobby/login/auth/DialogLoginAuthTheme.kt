@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:08
+ *  Created by Tezov on 28/03/2023 22:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:08
+ *  Last modified 28/03/2023 22:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -91,8 +91,10 @@ object DialogLoginAuthTheme {
         background = ThemeColors.Common.blackOverlay,
         onBackground = MaterialTheme.colorsExtended.onPrimary.accent,
         backgroundButtonActive = MaterialTheme.colors.primary,
-        backgroundButtonInactive = MaterialTheme.colorsExtended.backgroundButtonConfirm.inactive,
-        textButtonDark = MaterialTheme.colorsExtended.onBackgroundButtonConfirm.inactive,
+//        backgroundButtonInactive = MaterialTheme.colorsExtended.backgroundButtonConfirm.inactive,
+        backgroundButtonInactive = TODO(),
+//        textButtonDark = MaterialTheme.colorsExtended.onBackgroundButtonConfirm.inactive,
+        textButtonDark = TODO(),
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -138,8 +140,10 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        button = MaterialTheme.shapesExtended.roundedCornerNormal.resolveOrDefault(),
-        authCard = MaterialTheme.shapesExtended.roundedCornerSmall.resolveOrDefault(),
+//        button = MaterialTheme.shapesExtended.roundedCornerNormal.resolveOrDefault(),
+        button = TODO(),
+//        authCard = MaterialTheme.shapesExtended.roundedCornerSmall.resolveOrDefault(),
+        authCard = TODO(),
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -152,7 +156,8 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideBorders() = Borders(
-        authCard = MaterialTheme.bordersExtended.strokeNormal.resolveOrDefault(colors.onBackground),
+//        authCard = MaterialTheme.bordersExtended.strokeNormal.resolveOrDefault(colors.onBackground),
+        authCard = TODO(),
     )
 
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
@@ -192,7 +197,7 @@ object DialogLoginAuthTheme {
 
     data class Style(
         val keyBoardGridCube: KeyBoard.GridCube.Style,
-        val button: Button.TextFilled.Style,
+        val button: Button.StateColor.Style,
         val link: Link.StateColor.Style,
     )
 
@@ -208,7 +213,7 @@ object DialogLoginAuthTheme {
 //                brush = SolidColor(colors.onBackground)
 //            ),
         ),
-        button = Button.TextFilled.Style(
+        button = Button.StateColor.Style(
 //            outfitShape = shapes.button,
 //            backgroundColorActive = colors.backgroundButtonActive,
 //            backgroundColorInactive =  colors.backgroundButtonInactive,
