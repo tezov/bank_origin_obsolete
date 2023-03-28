@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/03/2023 20:53
+ *  Created by Tezov on 28/03/2023 23:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/03/2023 20:39
+ *  Last modified 28/03/2023 23:24
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,25 +15,25 @@ package com.tezov.lib_core_android_kotlin.ui.component.plain
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.type.primaire.size
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenIfNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.border
 
 object Icon {
 
-    object Simple{
+    object Simple {
 
-        open class Style(
+        class Style(
             val size: SizeDp? = null,
             val tint: Color? = null,
-        ){
-            companion object{
+        ) {
+            companion object {
 
                 open class Builder internal constructor(style: Style) {
                     var size = style.size
@@ -46,7 +46,7 @@ object Icon {
                 }
 
                 @Composable
-                fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+                fun Style.copy(builder: @Composable Builder.() -> Unit = {}) = Builder(this).also {
                     it.builder()
                 }.get()
 
@@ -61,30 +61,28 @@ object Icon {
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
-            style:Style = Style(),
-            resourceId:Int,
-            description:String? = null,
-        ){
-            style.size?.let {
-                modifier.size(it)
-            }
+            style: Style = Style(),
+            resourceId: Int,
+            description: String? = null,
+        ) {
             Icon(
-                modifier = modifier,
+                modifier = modifier.thenIfNotNull(style.size, Modifier::size),
                 painter = painterResource(id = resourceId),
-                tint =  style.tint ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+                tint = style.tint
+                    ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
                 contentDescription = description,
             )
         }
 
     }
 
-    object StateColor{
+    object StateColor {
 
-        open class Style(
+        class Style(
             val size: SizeDp? = null,
             val outfitFrame: OutfitFrame.StateColor = OutfitFrame.StateColor(),
-        ){
-            companion object{
+        ) {
+            companion object {
 
                 open class Builder internal constructor(style: Style) {
                     var size = style.size
@@ -97,7 +95,7 @@ object Icon {
                 }
 
                 @Composable
-                fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+                fun Style.copy(builder: @Composable Builder.() -> Unit = {}) = Builder(this).also {
                     it.builder()
                 }.get()
 
@@ -112,22 +110,21 @@ object Icon {
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
-            style:Style = Style(),
-            resourceId:Int,
-            description:String? = null,
+            style: Style = Style(),
+            resourceId: Int,
+            description: String? = null,
             selector: Any? = null
-        ){
-            style.size?.let {
-                modifier.size(it)
-            }
+        ) {
             val sketch = style.outfitFrame.outfitShape.resolve(selector)
-            style.outfitFrame.outfitBorder.let {
-                modifier.border(it, selector, sketch)
-            }
             Icon(
-                modifier = modifier,
+                modifier = modifier
+                    .thenIfNotNull(style.size, Modifier::size)
+                    .thenIfNotNull(sketch, {
+                        border(style.outfitFrame.outfitBorder, selector, it)
+                    }),
                 painter = painterResource(id = resourceId),
-                tint = sketch?.color ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+                tint = sketch?.color
+                    ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
                 contentDescription = description,
             )
         }

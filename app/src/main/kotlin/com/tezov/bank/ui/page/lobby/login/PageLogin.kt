@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 28/03/2023 22:22
+ *  Created by Tezov on 28/03/2023 23:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 28/03/2023 22:19
+ *  Last modified 28/03/2023 23:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -95,15 +95,15 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     horizontal = MaterialTheme.dimensionsPaddingExtended.blockBig_v
                 )
         ) {
-//            ContentHeader(
-//                iconState = state.iconState,
-//                onClickAdd = {
-//
-//                },
-//                onClickDropDownMenu = { index ->
-//
-//                }
-//            )
+            ContentHeader(
+                iconState = state.iconState,
+                onClickAdd = {
+
+                },
+                onClickDropDownMenu = { index ->
+
+                }
+            )
             ContentBody(
                 nameState = state.nameState
             )

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/03/2023 20:53
+ *  Created by Tezov on 28/03/2023 23:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/03/2023 20:39
+ *  Last modified 28/03/2023 23:24
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,15 +21,15 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.type.primaire.size
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenIfNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.border
 
 object Image {
 
     object Simple {
 
-        open class Style(
+        class Style(
             val size: SizeDp? = null,
             val tint: Color? = null,
             val contentScale: ContentScale = ContentScale.Fit,
@@ -66,11 +66,8 @@ object Image {
             resourceId: Int,
             description: String? = null,
         ) {
-            style.size?.let {
-                modifier.size(it)
-            }
             Image(
-                modifier = modifier,
+                modifier = modifier.thenIfNotNull(style.size, Modifier::size),
                 painter = painterResource(id = resourceId),
                 colorFilter = style.tint?.let { ColorFilter.tint(it) },
                 contentDescription = description,
@@ -82,7 +79,7 @@ object Image {
 
     object StateColor {
 
-        open class Style(
+        class Style(
             val size: SizeDp? = null,
             val outfitFrame: OutfitFrame.StateColor = OutfitFrame.StateColor(),
             val contentScale: ContentScale = ContentScale.Fit
@@ -123,15 +120,13 @@ object Image {
             description: String? = null,
             selector: Any? = null
         ) {
-            style.size?.let {
-                modifier.size(it)
-            }
             val sketch = style.outfitFrame.outfitShape.resolve(selector)
-            style.outfitFrame.outfitBorder.let {
-                modifier.border(it, selector, sketch)
-            }
             Image(
-                modifier = modifier,
+                modifier = modifier
+                    .thenIfNotNull(style.size, Modifier::size)
+                    .thenIfNotNull(sketch, {
+                        border(style.outfitFrame.outfitBorder, selector, it)
+                    }),
                 painter = painterResource(id = resourceId),
                 colorFilter = sketch?.color?.let { ColorFilter.tint(it) },
                 contentDescription = description,
