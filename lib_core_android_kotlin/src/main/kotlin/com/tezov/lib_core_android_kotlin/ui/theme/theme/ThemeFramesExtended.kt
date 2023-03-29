@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:08
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 14:46
+ *  Last modified 29/03/2023 22:26
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,22 +28,16 @@ val MaterialTheme.bordersExtended
     get() = ThemeFramesExtended.localBorders.current
 infix fun MaterialTheme.provides(value: ThemeFramesExtended.Borders) = ThemeFramesExtended.localBorders provides value
 
-val MaterialTheme.framesExtended
-    @Composable
-    @ReadOnlyComposable
-    get() = ThemeFramesExtended.localFrames.current
-infix fun MaterialTheme.provides(value: ThemeFramesExtended.Frames) = ThemeFramesExtended.localFrames provides value
-
 object ThemeFramesExtended{
 
     @Immutable
     data class Shapes(
-        val roundedCornerMicro: OutfitShape.StateColor,
-        val roundedCornerSmall: OutfitShape.StateColor,
-        val roundedCornerNormal: OutfitShape.StateColor,
-        val roundedCornerBig: OutfitShape.StateColor,
-        val roundedCornerHuge: OutfitShape.StateColor,
-        val roundedCornerSupra: OutfitShape.StateColor,
+        val roundedCornerMicro: OutfitShape.StateColor = NoValue("ThemeFramesExtended:Shapes:roundedCornerMicro"),
+        val roundedCornerSmall: OutfitShape.StateColor = NoValue("ThemeFramesExtended:Shapes:roundedCornerSmall"),
+        val roundedCornerNormal: OutfitShape.StateColor = NoValue("ThemeFramesExtended:Shapes:roundedCornerNormal"),
+        val roundedCornerBig: OutfitShape.StateColor = NoValue("ThemeFramesExtended:Shapes:roundedCornerBig"),
+        val roundedCornerHuge: OutfitShape.StateColor = NoValue("ThemeFramesExtended:Shapes:roundedCornerHuge"),
+        val roundedCornerSupra: OutfitShape.StateColor = NoValue("ThemeFramesExtended:Shapes:roundedCornerSupra"),
     )
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
         error("not provided")
@@ -51,23 +45,14 @@ object ThemeFramesExtended{
 
     @Immutable
     data class Borders(
-        val strokeMicro: OutfitBorder.StateColor,
-        val strokeSmall: OutfitBorder.StateColor,
-        val strokeNormal: OutfitBorder.StateColor,
-        val strokeBig: OutfitBorder.StateColor,
-        val strokeHuge: OutfitBorder.StateColor,
-        val strokeSupra: OutfitBorder.StateColor,
+        val strokeMicro: OutfitBorder.StateColor = NoValue("ThemeFramesExtended:Borders:strokeMicro"),
+        val strokeSmall: OutfitBorder.StateColor = NoValue("ThemeFramesExtended:Borders:strokeSmall"),
+        val strokeNormal: OutfitBorder.StateColor = NoValue("ThemeFramesExtended:Borders:strokeNormal"),
+        val strokeBig: OutfitBorder.StateColor = NoValue("ThemeFramesExtended:Borders:strokeBig"),
+        val strokeHuge: OutfitBorder.StateColor = NoValue("ThemeFramesExtended:Borders:strokeHuge"),
+        val strokeSupra: OutfitBorder.StateColor = NoValue("ThemeFramesExtended:Borders:strokeSupra"),
     )
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
-    @Immutable
-    data class Frames(
-        val button: OutfitFrame.StateColor,
-        val buttonOutlined: OutfitFrame.StateColor,
-    )
-    internal val localFrames: ProvidableCompositionLocal<Frames> = staticCompositionLocalOf {
         error("not provided")
     }
 

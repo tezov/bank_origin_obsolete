@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 20:59
+ *  Last modified 29/03/2023 22:26
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,32 +28,23 @@ infix fun MaterialTheme.provides(value: ThemeColorsExtended.Common) =
 object ThemeColorsExtended {
     @Immutable
     data class Common(
-        val primary: OutfitPaletteColor,
-        val onPrimary: OutfitPaletteColor,
+        val primary: OutfitPaletteColor = NoValue("ThemeColorsExtended:Common:primary"),
+        val onPrimary: OutfitPaletteColor = NoValue("ThemeColorsExtended:Common:onPrimary"),
 
-        val secondary: OutfitPaletteColor,
-        val onSecondary: OutfitPaletteColor,
+        val secondary: OutfitPaletteColor = NoValue("ThemeColorsExtended:Common:secondary"),
+        val onSecondary: OutfitPaletteColor = NoValue("ThemeColorsExtended:Common:onSecondary"),
 
-        val semantic: OutfitPaletteColorSemantic,
-        val onSemantic: OutfitPaletteColorSemantic,
+        val semantic: OutfitPaletteColorSemantic = NoValue("ThemeColorsExtended:Common:semantic"),
+        val onSemantic: OutfitPaletteColorSemantic = NoValue("ThemeColorsExtended:Common:onSemantic"),
 
-        val background: OutfitPaletteColor,
-        val onBackground: OutfitPaletteColor,
+        val background: OutfitPaletteColor = NoValue("ThemeColorsExtended:Common:background"),
+        val onBackground: OutfitPaletteColor = NoValue("ThemeColorsExtended:Common:onBackground"),
 
-        val backgroundElevated: OutfitPaletteColor,
-        val onBackgroundElevated: OutfitPaletteColor,
+        val backgroundElevated: OutfitPaletteColor = NoValue("ThemeColorsExtended:Common:backgroundElevated"),
+        val onBackgroundElevated: OutfitPaletteColor = NoValue("ThemeColorsExtended:Common:onBackgroundElevated"),
 
-        val backgroundModal: OutfitPaletteColor,
-        val onBackgroundModal: OutfitPaletteColor,
-
-        val backgroundButtonProceed: OutfitPaletteColorDual,
-        val onBackgroundButtonProceed:OutfitPaletteColorDual,
-
-        val backgroundButtonConfirm: OutfitPaletteColorDual,
-        val onBackgroundButtonConfirm: OutfitPaletteColorDual,
-
-        val backgroundButtonCancel: OutfitPaletteColorDual,
-        val onBackgroundButtonCancel: OutfitPaletteColorDual,
+        val backgroundModal: OutfitPaletteColor = NoValue("ThemeColorsExtended:Common:backgroundModal"),
+        val onBackgroundModal: OutfitPaletteColor = NoValue("ThemeColorsExtended:Common:onBackgroundModal"),
     )
 
     internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 14:03
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 13:51
+ *  Last modified 29/03/2023 22:26
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,6 +17,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.NoValue
 
 val MaterialTheme.dimensionsPaddingExtended
     @Composable
@@ -46,36 +47,36 @@ object ThemeDimensionsExtended{
 
     @Immutable
     data class Paddings(
-        val page_h: Dp,
-        val page_v: Dp,
-        val elementHuge_v: Dp,
-        val elementBig_v: Dp,
-        val elementNormal_v: Dp,
-        val elementSmall_v: Dp,
-        val elementMicro_v: Dp,
-        val elementHuge_h: Dp,
-        val elementBig_h: Dp,
-        val elementNormal_h: Dp,
-        val elementSmall_h: Dp,
-        val elementMicro_h: Dp,
-        val textBig_v: Dp,
-        val textNormal_v: Dp,
-        val textSmall_v: Dp,
-        val textBig_h: Dp,
-        val textNormal_h: Dp,
-        val textSmall_h: Dp,
-        val buttonBig_v: Dp,
-        val buttonNormal_v: Dp,
-        val buttonSmall_v: Dp,
-        val buttonBig_h: Dp,
-        val buttonNormal_h: Dp,
-        val buttonSmall_h: Dp,
-        val blockBig_v: Dp,
-        val blockNormal_v: Dp,
-        val blockSmall_v: Dp,
-        val blockBig_h: Dp,
-        val blockNormal_h: Dp,
-        val blockSmall_h: Dp,
+        val page_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:page_h"),
+        val page_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:page_v"),
+        val elementHuge_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:elementHuge_v"),
+        val elementBig_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:elementBig_v"),
+        val elementNormal_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:elementNormal_v"),
+        val elementSmall_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:elementSmall_v"),
+        val elementMicro_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:elementMicro_v"),
+        val elementHuge_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:elementHuge_h"),
+        val elementBig_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:elementBig_h"),
+        val elementNormal_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:elementNormal_h"),
+        val elementSmall_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:elementSmall_h"),
+        val elementMicro_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:elementMicro_h"),
+        val textBig_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:textBig_v"),
+        val textNormal_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:textNormal_v"),
+        val textSmall_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:textSmall_v"),
+        val textBig_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:textBig_h"),
+        val textNormal_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:textNormal_h"),
+        val textSmall_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:textSmall_h"),
+        val buttonBig_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:buttonBig_v"),
+        val buttonNormal_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:buttonNormal_v"),
+        val buttonSmall_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:buttonSmall_v"),
+        val buttonBig_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:buttonBig_h"),
+        val buttonNormal_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:buttonNormal_h"),
+        val buttonSmall_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:buttonSmall_h"),
+        val blockBig_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:blockBig_v"),
+        val blockNormal_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:blockNormal_v"),
+        val blockSmall_v: Dp = NoValue("ThemeDimensionsExtended:Paddings:blockSmall_v"),
+        val blockBig_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:blockBig_h"),
+        val blockNormal_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:blockNormal_h"),
+        val blockSmall_h: Dp = NoValue("ThemeDimensionsExtended:Paddings:blockSmall_h"),
     )
     internal val localPaddings: ProvidableCompositionLocal<Paddings> = staticCompositionLocalOf {
         error("not provided")
@@ -83,16 +84,16 @@ object ThemeDimensionsExtended{
 
     @Immutable
     data class Spacings(
-        val micro_v:Dp,
-        val small_v:Dp,
-        val normal_v:Dp,
-        val big_v:Dp,
-        val huge_v:Dp,
-        val micro_h:Dp,
-        val small_h:Dp,
-        val normal_h:Dp,
-        val big_h:Dp,
-        val huge_h:Dp,
+        val micro_v:Dp = NoValue("ThemeDimensionsExtended:Spacings:micro_v"),
+        val small_v:Dp = NoValue("ThemeDimensionsExtended:Spacings:small_v"),
+        val normal_v:Dp = NoValue("ThemeDimensionsExtended:Spacings:normal_v"),
+        val big_v:Dp = NoValue("ThemeDimensionsExtended:Spacings:big_v"),
+        val huge_v:Dp = NoValue("ThemeDimensionsExtended:Spacings:huge_v"),
+        val micro_h:Dp = NoValue("ThemeDimensionsExtended:Spacings:micro_h"),
+        val small_h:Dp = NoValue("ThemeDimensionsExtended:Spacings:small_h"),
+        val normal_h:Dp = NoValue("ThemeDimensionsExtended:Spacings:normal_h"),
+        val big_h:Dp = NoValue("ThemeDimensionsExtended:Spacings:big_h"),
+        val huge_h:Dp = NoValue("ThemeDimensionsExtended:Spacings:huge_h"),
     )
     internal val localSpacings: ProvidableCompositionLocal<Spacings> = staticCompositionLocalOf {
         error("not provided")
@@ -100,9 +101,9 @@ object ThemeDimensionsExtended{
 
     @Immutable
     data class Elevations(
-        val elevationBig: Dp,
-        val elevationNormal: Dp,
-        val elevationSmall: Dp,
+        val elevationBig: Dp = NoValue("ThemeDimensionsExtended:Elevations:elevationBig"),
+        val elevationNormal: Dp = NoValue("ThemeDimensionsExtended:Elevations:elevationNormal"),
+        val elevationSmall: Dp = NoValue("ThemeDimensionsExtended:Elevations:elevationSmall"),
     )
     internal val localElevations: ProvidableCompositionLocal<Elevations> = staticCompositionLocalOf {
         error("not provided")
@@ -110,14 +111,14 @@ object ThemeDimensionsExtended{
 
     @Immutable
     data class Sizes(
-        val iconModal:SizeDp,
-        val iconInfo:SizeDp,
-        val iconAction:SizeDp,
-        val iconFieldInfo:SizeDp,
-        val iconFieldAction:SizeDp,
-        val dividerSmall:Dp,
-        val dividerNormal:Dp,
-        val dividerBig:Dp,
+        val iconModal:SizeDp = NoValue("ThemeDimensionsExtended:Sizes:iconModal"),
+        val iconInfo:SizeDp = NoValue("ThemeDimensionsExtended:Sizes:iconInfo"),
+        val iconAction:SizeDp = NoValue("ThemeDimensionsExtended:Sizes:iconAction"),
+        val iconFieldInfo:SizeDp = NoValue("ThemeDimensionsExtended:Sizes:iconFieldInfo"),
+        val iconFieldAction:SizeDp = NoValue("ThemeDimensionsExtended:Sizes:iconFieldAction"),
+        val dividerSmall:Dp = NoValue("ThemeDimensionsExtended:Sizes:dividerSmall"),
+        val dividerNormal:Dp = NoValue("ThemeDimensionsExtended:Sizes:dividerNormal"),
+        val dividerBig:Dp = NoValue("ThemeDimensionsExtended:Sizes:dividerBig"),
     )
     internal val localSizes: ProvidableCompositionLocal<Sizes> = staticCompositionLocalOf {
         error("not provided")

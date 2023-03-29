@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/03/2023 20:53
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/03/2023 20:53
+ *  Last modified 29/03/2023 22:26
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -98,55 +98,7 @@ object ThemeColors {
         onBackgroundModal = OutfitPaletteColor(
             default = Common.blueNight,
             accent = Common.blueElegant,
-        ),
-        backgroundButtonProceed = OutfitStateDual(
-            active = OutfitPaletteColor(
-                default = Common.whiteShiny
-            ),
-            inactive = OutfitPaletteColor(
-                default = Common.whiteDark
-            )
-        ),
-        onBackgroundButtonProceed = OutfitStateDual(
-            active = OutfitPaletteColor(
-                default = Common.blueNight
-            ),
-            inactive = OutfitPaletteColor(
-                default = Common.grayDark
-            )
-        ),
-        backgroundButtonConfirm = OutfitStateDual(
-            active = OutfitPaletteColor(
-                default = Common.blueElegant
-            ),
-            inactive = OutfitPaletteColor(
-                default = Common.whiteDark
-            )
-        ),
-        onBackgroundButtonConfirm = OutfitStateDual(
-            active = OutfitPaletteColor(
-                default = Common.whiteShiny
-            ),
-            inactive = OutfitPaletteColor(
-                default = Common.grayDark
-            )
-        ),
-        backgroundButtonCancel = OutfitStateDual(
-            active = OutfitPaletteColor(
-                default = Common.blueShadow
-            ),
-            inactive = OutfitPaletteColor(
-                default = Common.whiteDark
-            )
-        ),
-        onBackgroundButtonCancel = OutfitStateDual(
-            active = OutfitPaletteColor(
-                default = Common.blueElegant
-            ),
-            inactive = OutfitPaletteColor(
-                default = Common.grayDark
-            )
-        ),
+        )
     )
 
     @Composable

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 28/03/2023 23:25
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 28/03/2023 22:36
+ *  Last modified 29/03/2023 22:26
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,11 +13,15 @@
 package com.tezov.lib_core_android_kotlin.ui.component.plain
 
 import androidx.compose.foundation.text.ClickableText
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
@@ -47,6 +51,9 @@ object Link {
                 val Underlined
                     get() = Style(
                         outfitText = OutfitText.StateColor(
+                            typo = TextStyle(
+                                textDecoration = TextDecoration.Underline
+                            ),
                             outfitState = OutfitStateSimple(
                                 value = Color.Black,
                             )

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 22:02
+ *  Last modified 29/03/2023 22:26
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,8 +15,10 @@ package com.tezov.bank.ui.theme
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.branch.SectionActionCard
@@ -25,14 +27,17 @@ import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.theme.font.fontUbuntu
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
-import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Companion.copy
@@ -42,14 +47,13 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 object ThemeComponents {
 
     @Composable
-    fun provideComponents() = ThemeComponentExtended.Common(
-        topAppBar = TopAppBar.Style(),
+    fun provideComponentsCommon() = ThemeComponentExtended.Common(
         bottomNavigation = BottomNavigation.Style(
             outfitText  = TextStyle(
                 fontFamily = MaterialTheme.fontUbuntu,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 12.sp
-            ).outfitTextColor,
+            ).asOutfitTextColor,
             colorBackground  = ThemeColors.Common.whiteShady,
             outfitColor  = OutfitStateDual(
                 active = ThemeColors.Common.blueElegant,
@@ -61,29 +65,23 @@ object ThemeComponents {
             outfitFrame = OutfitFrame.StateColor(
                 outfitBorder = OutfitBorder.StateColor(
                     size = 2.dp,
-                    outfitState = OutfitStateSimple(
-                        MaterialTheme.colorsExtended.primary.default,
-                    )
+                    outfitState = MaterialTheme.colorsExtended.primary.default.asOutfitColor,
                 ),
                 outfitShape = OutfitShape.StateColor(
-                    size = 8.outfitShapeSize,
-                    outfitState = OutfitStateSimple(
-                        MaterialTheme.colorsExtended.backgroundModal.default
-                    )
+                    size = 8.asOutfitShapeSize,
+                    outfitState = MaterialTheme.colorsExtended.backgroundModal.default.asOutfitColor,
                 )
             )
         ),
         bottomSheet = BottomSheet.Style(),
-        snackbar = Snackbar.Style(
+        snackBar = Snackbar.Style(
             outfitTextMessage = OutfitText.StateColor(
                 typo = TextStyle(
                     fontFamily = MaterialTheme.fontUbuntu,
                     fontWeight = FontWeight.Normal,
                     fontSize = 19.sp
                 ),
-                outfitState = OutfitStateSimple(
-                    MaterialTheme.colorsExtended.onBackgroundModal.dark
-                ),
+                outfitState = MaterialTheme.colorsExtended.onBackgroundModal.dark.asOutfitColor,
             ),
             outfitTextAction = OutfitText.StateColor(
                 typo = TextStyle(
@@ -91,18 +89,104 @@ object ThemeComponents {
                     fontWeight = FontWeight.Bold,
                     fontSize = 19.sp
                 ),
-                outfitState = OutfitStateSimple(
-                    MaterialTheme.colorsExtended.onBackgroundModal.accent
-                ),
+                outfitState = MaterialTheme.colorsExtended.onBackgroundModal.accent.asOutfitColor,
             ),
             outfitShape = OutfitShape.StateColor(
-                size = 12.outfitShapeSize,
-                outfitState = OutfitStateSimple(
-                    MaterialTheme.colorsExtended.backgroundModal.accent,
-                )
+                size = 12.asOutfitShapeSize,
+                outfitState = MaterialTheme.colorsExtended.backgroundModal.accent.asOutfitColor,
             ),
             elevation = 4.dp,
         ),
+    )
+
+//    backgroundButtonProceed = OutfitStateDual(
+//    active = OutfitPaletteColor(
+//    default = Common.whiteShiny
+//    ),
+//    inactive = OutfitPaletteColor(
+//    default = Common.whiteDark
+//    )
+//    ),
+//    onBackgroundButtonProceed = OutfitStateDual(
+//    active = OutfitPaletteColor(
+//    default = Common.blueNight
+//    ),
+//    inactive = OutfitPaletteColor(
+//    default = Common.grayDark
+//    )
+//    ),
+//    backgroundButtonConfirm = OutfitStateDual(
+//    active = OutfitPaletteColor(
+//    default = Common.blueElegant
+//    ),
+//    inactive = OutfitPaletteColor(
+//    default = Common.whiteDark
+//    )
+//    ),
+//    onBackgroundButtonConfirm = OutfitStateDual(
+//    active = OutfitPaletteColor(
+//    default = Common.whiteShiny
+//    ),
+//    inactive = OutfitPaletteColor(
+//    default = Common.grayDark
+//    )
+//    ),
+//    backgroundButtonCancel = OutfitStateDual(
+//    active = OutfitPaletteColor(
+//    default = Common.blueShadow
+//    ),
+//    inactive = OutfitPaletteColor(
+//    default = Common.whiteDark
+//    )
+//    ),
+//    onBackgroundButtonCancel = OutfitStateDual(
+//    active = OutfitPaletteColor(
+//    default = Common.blueElegant
+//    ),
+//    inactive = OutfitPaletteColor(
+//    default = Common.grayDark
+//    )
+//    ),
+
+    @Composable
+    fun provideComponentsButton() = ThemeComponentExtended.Button(
+        confirm = Button.StateColor.Style.TextFilled.copy {
+            outfitFrame = OutfitFrame.StateColor(
+                outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal.copy {
+                    outfitState = OutfitStateDual(
+                        active = MaterialTheme.colorsExtended.primary.default,
+                        inactive = MaterialTheme.colorsExtended.primary.default,
+                    )
+                }
+            )
+            outfitText = OutfitText.StateColor(
+                typo = TextStyle(
+                    fontFamily = MaterialTheme.fontUbuntu,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 18.sp
+                ),
+                outfitState = OutfitStateDual(
+                    active = MaterialTheme.colorsExtended.primary.default,
+                    inactive = MaterialTheme.colorsExtended.primary.default,
+                )
+            )
+        },
+
+    )
+
+    @Composable
+    fun provideComponentsLink() = ThemeComponentExtended.Link(
+        primary = Link.StateColor.Style(
+            outfitText = OutfitText.StateColor(
+                typo = TextStyle(
+                    fontFamily = MaterialTheme.fontUbuntu,
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 20.sp,
+                    textDecoration = TextDecoration.Underline
+                ),
+                outfitState = Color.Black.asOutfitColor,
+            ),
+        )
     )
 
     @Composable

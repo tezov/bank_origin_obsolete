@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 28/03/2023 23:25
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 28/03/2023 23:24
+ *  Last modified 29/03/2023 21:13
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.type.primaire.size
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenIfNotNull
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.then
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
 import com.tezov.lib_core_android_kotlin.ui.theme.style.border
 
@@ -66,7 +66,7 @@ object Icon {
             description: String? = null,
         ) {
             Icon(
-                modifier = modifier.thenIfNotNull(style.size, Modifier::size),
+                modifier = modifier.then(style.size, Modifier::size),
                 painter = painterResource(id = resourceId),
                 tint = style.tint
                     ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
@@ -118,8 +118,8 @@ object Icon {
             val sketch = style.outfitFrame.outfitShape.resolve(selector)
             Icon(
                 modifier = modifier
-                    .thenIfNotNull(style.size, Modifier::size)
-                    .thenIfNotNull(sketch, {
+                    .then(style.size, Modifier::size)
+                    .then(sketch, {
                         border(style.outfitFrame.outfitBorder, selector, it)
                     }),
                 painter = painterResource(id = resourceId),

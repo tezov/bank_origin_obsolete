@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 28/03/2023 23:25
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 28/03/2023 23:20
+ *  Last modified 29/03/2023 21:13
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,7 @@ import androidx.compose.ui.composed
 
 object ExtensionModifier {
 
-    fun Modifier.thenIfTrue(
+    fun Modifier.then(
         condition: Boolean,
         onTrue: Modifier.() -> Modifier,
         onFalse: (Modifier.() -> Modifier)? = null
@@ -34,15 +34,15 @@ object ExtensionModifier {
         }
     }
 
-    fun <T : Any> Modifier.thenIfNotNull(
+    fun <T : Any> Modifier.then(
         condition: T?,
-        onTrue: Modifier.(T) -> Modifier,
-        onFalse: (Modifier.() -> Modifier)? = null
+        onNotNull: Modifier.(T) -> Modifier,
+        onNull: (Modifier.() -> Modifier)? = null
     ): Modifier {
         return if (condition != null) {
-            then(onTrue(condition))
-        } else if (onFalse != null) {
-            then(onFalse())
+            then(onNotNull(condition))
+        } else if (onNull != null) {
+            then(onNull())
         } else {
             this
         }

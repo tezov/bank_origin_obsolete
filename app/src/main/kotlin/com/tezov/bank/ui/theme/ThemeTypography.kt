@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/03/2023 20:53
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/03/2023 20:53
+ *  Last modified 29/03/2023 22:26
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,14 +14,12 @@ package com.tezov.bank.ui.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.bank.ui.theme.font.fontUbuntu
-import com.tezov.lib_core_android_kotlin.ui.theme.style.outfitTextColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.asOutfitTextColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeTypographiesExtended
 
 object ThemeTypography {
@@ -32,72 +30,56 @@ object ThemeTypography {
             fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Normal,
             fontSize = 20.sp
-        ).outfitTextColor,
+        ).asOutfitTextColor,
         textSubtitle = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = 15.sp
-        ).outfitTextColor,
+        ).asOutfitTextColor,
         textHelper = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = 13.sp
-        ).outfitTextColor,
+        ).asOutfitTextColor,
         textSupra = TextStyle(
             fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Bold,
             fontSize = 34.sp
-        ).outfitTextColor,
+        ).asOutfitTextColor,
         textHuge = TextStyle(
             fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Bold,
             fontSize = 26.sp
-        ).outfitTextColor,
+        ).asOutfitTextColor,
         textBig = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = 20.sp
-        ).outfitTextColor,
+        ).asOutfitTextColor,
         textNormal = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = 16.sp
-        ).outfitTextColor,
+        ).asOutfitTextColor,
         textSmall = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = 13.sp
-        ).outfitTextColor,
+        ).asOutfitTextColor,
         textMicro = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = 10.sp
-        ).outfitTextColor,
+        ).asOutfitTextColor,
         textFieldValue = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = 18.sp
-        ).outfitTextColor,
+        ).asOutfitTextColor,
         textFieldLabel = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.SemiBold,
             fontSize = 12.sp
-        ).outfitTextColor,
-        textLink = TextStyle(
-            fontFamily = MaterialTheme.fontUbuntu,
-            fontWeight = FontWeight.Normal,
-            fontSize = 20.sp,
-            textDecoration = TextDecoration.Underline
-        ).outfitTextColor,
-        textButton = TextStyle(
-            fontFamily = MaterialTheme.fontUbuntu,
-            fontWeight = FontWeight.Normal,
-            fontSize = 18.sp
-        ).outfitTextColor,
-        textButtonOutline = TextStyle(
-            fontFamily = MaterialTheme.fontUbuntu,
-            fontWeight = FontWeight.Normal,
-            fontSize = 16.sp
-        ).outfitTextColor,
+        ).asOutfitTextColor,
     )
 }

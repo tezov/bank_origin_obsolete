@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/03/2023 20:53
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/03/2023 20:39
+ *  Last modified 29/03/2023 22:26
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -62,17 +62,10 @@ object Button {
                     get() = Style(
                         outfitFrame = OutfitFrame.StateColor(
                             outfitShape = OutfitShape.StateColor(
-                                size = 12.outfitShapeSize,
+                                size = 12.asOutfitShapeSize,
                                 outfitState = OutfitStateDual(
                                     active = Color.Gray,
                                     inactive = Color.Gray.copy(alpha = 0.25f),
-                                )
-                            ),
-                            outfitBorder = OutfitBorder.StateColor(
-                                size = 12.dp,
-                                outfitState = OutfitStateDual(
-                                    active = Color.Black,
-                                    inactive = Color.Black.copy(alpha = 0.65f),
                                 )
                             )
                         ),
@@ -88,7 +81,7 @@ object Button {
                     get() = Style(
                         outfitFrame = OutfitFrame.StateColor(
                             outfitShape = OutfitShape.StateColor(
-                                size = 12.outfitShapeSize,
+                                size = 12.asOutfitShapeSize,
                             ),
                             outfitBorder = OutfitBorder.StateColor(
                                 size = 2.2.dp,

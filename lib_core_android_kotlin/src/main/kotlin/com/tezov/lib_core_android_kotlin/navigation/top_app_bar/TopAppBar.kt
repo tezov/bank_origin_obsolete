@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:08
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:08
+ *  Last modified 29/03/2023 21:20
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,7 +23,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsCommonExtended
 
 object TopAppBar: ActivitySub<TopAppBarState, TopAppBarAction> {
 
@@ -87,10 +87,10 @@ object TopAppBar: ActivitySub<TopAppBarState, TopAppBarAction> {
             title = {
                 Text.StateColor(
                     text = stringResource(id = titleResourceId),
-                    style = MaterialTheme.componentsExtended.topAppBar.outfitText,
+                    style = MaterialTheme.componentsCommonExtended.topAppBar.outfitText,
                 )
             },
-            backgroundColor = MaterialTheme.componentsExtended.topAppBar.colorBackground,
+            backgroundColor = MaterialTheme.componentsCommonExtended.topAppBar.colorBackground,
             navigationIcon = {
                 leadingItem?.let {
                     IconButton(onClick = {
@@ -99,7 +99,7 @@ object TopAppBar: ActivitySub<TopAppBarState, TopAppBarAction> {
                         Icon(
                             painterResource(id = it.icon),
                             null,
-                            tint = MaterialTheme.componentsExtended.topAppBar.colorIconLeading
+                            tint = MaterialTheme.componentsCommonExtended.topAppBar.colorIconLeading
                         )
                     }
                 }
@@ -113,7 +113,7 @@ object TopAppBar: ActivitySub<TopAppBarState, TopAppBarAction> {
                         Icon(
                             painterResource(id = it.icon),
                             null,
-                            tint = MaterialTheme.componentsExtended.topAppBar.colorIconTrailing
+                            tint = MaterialTheme.componentsCommonExtended.topAppBar.colorIconTrailing
                         )
                     }
                 }

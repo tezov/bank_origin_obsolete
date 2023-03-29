@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/03/2023 20:53
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/03/2023 20:39
+ *  Last modified 29/03/2023 21:20
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,7 +25,7 @@ import com.tezov.lib_core_android_kotlin.ui.navigation.bottom_navigation.BottomN
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsCommonExtended
 
 object BottomNavigation :
     ActivitySub<BottomNavigationState, BottomNavigationAction> {
@@ -74,7 +74,7 @@ object BottomNavigation :
         val action = accessor.with<BottomNavigation, _, _>().action()
 
         BottomNavigation(
-            backgroundColor = MaterialTheme.componentsExtended.bottomNavigation.colorBackground,
+            backgroundColor = MaterialTheme.componentsCommonExtended.bottomNavigation.colorBackground,
         ) {
             items.forEach { item ->
                 BottomNavigationItem(
@@ -90,13 +90,13 @@ object BottomNavigation :
                     label = {
                         Text(
                             text = stringResource(id = item.titleResourceId),
-                            style = MaterialTheme.componentsExtended.bottomNavigation.outfitText.typo,
+                            style = MaterialTheme.componentsCommonExtended.bottomNavigation.outfitText.typo,
                         )
                     },
-                    selectedContentColor = MaterialTheme.componentsExtended.bottomNavigation.outfitColor.resolve(
+                    selectedContentColor = MaterialTheme.componentsCommonExtended.bottomNavigation.outfitColor.resolve(
                         OutfitState.Dual.Selector.Enabled
                     ) ?: LocalContentColor.current,
-                    unselectedContentColor = MaterialTheme.componentsExtended.bottomNavigation.outfitColor.resolve(
+                    unselectedContentColor = MaterialTheme.componentsCommonExtended.bottomNavigation.outfitColor.resolve(
                         OutfitState.Dual.Selector.Disabled
                     ) ?: LocalContentColor.current.copy(alpha = ContentAlpha.medium),
                     alwaysShowLabel = true,

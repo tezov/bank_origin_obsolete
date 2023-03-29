@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:27
+ *  Created by Tezov on 29/03/2023 22:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:27
+ *  Last modified 29/03/2023 22:26
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,7 +25,6 @@ import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
@@ -83,13 +82,13 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
                 )
         ) { data ->
             Snackbar(
-                backgroundColor = MaterialTheme.componentsExtended.snackbar.outfitShape.resolveColor() ?: SnackbarDefaults.backgroundColor,
-                elevation = MaterialTheme.componentsExtended.snackbar.elevation,
-                shape = MaterialTheme.componentsExtended.bottomSheet.outfitShape.getShape() ?: MaterialTheme.shapes.small,
+                backgroundColor = MaterialTheme.componentsCommonExtended.snackBar.outfitShape.resolveColor() ?: SnackbarDefaults.backgroundColor,
+                elevation = MaterialTheme.componentsCommonExtended.snackBar.elevation,
+                shape = MaterialTheme.componentsCommonExtended.bottomSheet.outfitShape.getShape() ?: MaterialTheme.shapes.small,
                 content = {
                     Text.StateColor(
                         text = data.message,
-                        style = MaterialTheme.componentsExtended.snackbar.outfitTextMessage
+                        style = MaterialTheme.componentsCommonExtended.snackBar.outfitTextMessage
                     )
                 },
                 action = {
@@ -98,7 +97,7 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
                             onClick = { data.performAction() }) {
                             Text.StateColor(
                                 text = label,
-                                style = MaterialTheme.componentsExtended.snackbar.outfitTextAction
+                                style = MaterialTheme.componentsCommonExtended.snackBar.outfitTextAction
                             )
                         }
                     }
