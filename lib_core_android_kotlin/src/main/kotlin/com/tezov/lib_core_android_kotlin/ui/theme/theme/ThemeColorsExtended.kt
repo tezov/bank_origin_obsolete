@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 12:47
+ *  Created by Tezov on 01/04/2023 21:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 12:46
+ *  Last modified 01/04/2023 21:02
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,6 @@ package com.tezov.lib_core_android_kotlin.ui.theme.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.ui.graphics.Color
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 
 val MaterialTheme.colorsExtended
@@ -28,15 +27,6 @@ infix fun MaterialTheme.provides(value: ThemeColorsExtended.Common) =
 object ThemeColorsExtended {
     @Immutable
     data class Common(
-        val primary: OutfitPaletteColor,
-        val onPrimary: OutfitPaletteColor,
-
-        val secondary: OutfitPaletteColor,
-        val onSecondary: OutfitPaletteColor,
-
-        val semantic: OutfitPaletteColorSemantic,
-        val onSemantic: OutfitPaletteColorSemantic,
-
         val background: OutfitPaletteColor,
         val onBackground: OutfitPaletteColor,
 
@@ -45,6 +35,19 @@ object ThemeColorsExtended {
 
         val backgroundModal: OutfitPaletteColor,
         val onBackgroundModal: OutfitPaletteColor,
+
+        val primary: OutfitPaletteColor,
+        val onPrimary: OutfitPaletteColor,
+
+        val secondary: OutfitPaletteColor,
+        val onSecondary: OutfitPaletteColor,
+
+        val tertiary: OutfitPaletteColor,
+        val onTertiary: OutfitPaletteColor,
+
+        val semantic: OutfitPaletteColorSemantic,
+        val onSemantic: OutfitPaletteColorSemantic,
+
     )
 
     internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {

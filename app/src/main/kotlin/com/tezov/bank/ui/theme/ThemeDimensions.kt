@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 14:03
+ *  Created by Tezov on 01/04/2023 21:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 13:59
+ *  Last modified 01/04/2023 20:46
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,62 +13,124 @@
 package com.tezov.bank.ui.theme
 
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.type.primaire.sizeDp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeDimensionsExtended
 
 object ThemeDimensions {
 
     val dimensionsPaddingExtended = ThemeDimensionsExtended.Paddings(
-        page_h = 6.dp,
-        page_v = 4.dp,
-        elementHuge_v = 18.dp,
-        elementBig_v = 14.dp,
-        elementNormal_v = 6.dp,
-        elementSmall_v = 4.dp,
-        elementMicro_v = 2.dp,
-        elementHuge_h = 16.dp,
-        elementBig_h = 10.dp,
-        elementNormal_h = 6.dp,
-        elementSmall_h = 2.dp,
-        elementMicro_h = 1.dp,
-        textBig_v = 8.dp,
-        textNormal_v = 4.dp,
-        textSmall_v = 2.dp,
-        textBig_h = 8.dp,
-        textNormal_h = 4.dp,
-        textSmall_h = 2.dp,
-        buttonBig_v = 8.dp,
-        buttonNormal_v = 4.dp,
-        buttonSmall_v = 2.dp,
-        buttonBig_h = 8.dp,
-        buttonNormal_h = 4.dp,
-        buttonSmall_h = 2.dp,
-        blockBig_v = 18.dp,
-        blockNormal_v = 10.dp,
-        blockSmall_v = 6.dp,
-        blockBig_h = 18.dp,
-        blockNormal_h = 10.dp,
-        blockSmall_h = 6.dp,
+        page = OutfitPalette.Direction(
+            vertical = 6.dp,
+            horizontal = 4.dp
+        ),
+        block = OutfitPalette.Direction(
+            vertical = OutfitPalette.Variant(
+                micro = 4.dp,
+                small = 6.dp,
+                normal = 10.dp,
+                big = 12.dp,
+                huge = 14.dp,
+                supra = 18.dp,
+
+                ),
+            horizontal = OutfitPalette.Variant(
+                micro = 4.dp,
+                small = 6.dp,
+                normal = 8.dp,
+                big = 10.dp,
+                huge = 14.dp,
+                supra = 18.dp,
+            ),
+        ),
+        element = OutfitPalette.Direction(
+            vertical = OutfitPalette.Variant(
+                micro = 2.dp,
+                small = 3.dp,
+                normal = 4.dp,
+                big = 6.dp,
+                huge = 14.dp,
+                supra = 18.dp,
+            ),
+            horizontal = OutfitPalette.Variant(
+                micro = 1.dp,
+                small = 2.dp,
+                normal = 3.dp,
+                big = 6.dp,
+                huge = 10.dp,
+                supra = 16.dp,
+            ),
+        ),
+
+        text = OutfitPalette.Direction(
+            vertical = OutfitPalette.Variant(
+                micro = 1.dp,
+                small = 2.dp,
+                normal = 4.dp,
+                big = 6.dp,
+                huge = 8.dp,
+                supra = 10.dp,
+            ),
+            horizontal = OutfitPalette.Variant(
+                micro = 1.dp,
+                small = 2.dp,
+                normal = 4.dp,
+                big = 6.dp,
+                huge = 8.dp,
+                supra = 10.dp,
+            ),
+        ),
     )
 
     val dimensionsSpacingExtended = ThemeDimensionsExtended.Spacings(
-        micro_v = 4.dp,
-        small_v = 8.dp,
-        normal_v = 14.dp,
-        big_v = 22.dp,
-        huge_v = 38.dp,
-        micro_h = 6.dp,
-        small_h = 12.dp,
-        normal_h = 18.dp,
-        big_h = 28.dp,
-        huge_h = 42.dp,
+        element = OutfitPalette.Direction(
+            vertical = OutfitPalette.Variant(
+                micro = 1.dp,
+                small = 2.dp,
+                normal = 4.dp,
+                big = 6.dp,
+                huge = 8.dp,
+                supra = 10.dp,
+            ),
+            horizontal = OutfitPalette.Variant(
+                micro = 1.dp,
+                small = 2.dp,
+                normal = 4.dp,
+                big = 6.dp,
+                huge = 8.dp,
+                supra = 10.dp,
+            ),
+        ),
+        block = OutfitPalette.Direction(
+            vertical = OutfitPalette.Variant(
+                micro = 1.dp,
+                small = 2.dp,
+                normal = 4.dp,
+                big = 6.dp,
+                huge = 8.dp,
+                supra = 10.dp,
+            ),
+            horizontal = OutfitPalette.Variant(
+                micro = 1.dp,
+                small = 2.dp,
+                normal = 4.dp,
+                big = 6.dp,
+                huge = 8.dp,
+                supra = 10.dp,
+            ),
+
+        )
     )
 
     val dimensionsElevationExtended = ThemeDimensionsExtended.Elevations(
-        elevationBig = 10.dp,
-        elevationNormal = 6.dp,
-        elevationSmall = 3.dp,
+        elevation = OutfitPalette.Variant(
+            micro = 1.dp,
+            small = 2.dp,
+            normal = 4.dp,
+            big = 6.dp,
+            huge = 8.dp,
+            supra = 10.dp,
+        ),
     )
 
     val dimensionsSizeExtended = ThemeDimensionsExtended.Sizes(
@@ -77,8 +139,13 @@ object ThemeDimensions {
         iconAction = 22.sizeDp,
         iconFieldInfo = 32.sizeDp,
         iconFieldAction = 22.sizeDp,
-        dividerSmall = 0.8.dp,
-        dividerNormal = 1.2.dp,
-        dividerBig = 2.4.dp,
+        divider = OutfitPalette.Variant(
+            micro = 1.dp,
+            small = 2.dp,
+            normal = 4.dp,
+            big = 6.dp,
+            huge = 8.dp,
+            supra = 10.dp,
+        ),
     )
 }

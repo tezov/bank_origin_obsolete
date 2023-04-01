@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 29/03/2023 22:26
+ *  Created by Tezov on 01/04/2023 21:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 29/03/2023 22:26
+ *  Last modified 01/04/2023 20:46
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,7 +30,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
 
-    open class Style(
+    class Style(
         val outfitTextMessage: OutfitText.StateColor = OutfitText.StateColor(),
         val outfitTextAction: OutfitText.StateColor = OutfitText.StateColor(),
         val outfitShape: OutfitShape.StateColor = OutfitShape.StateColor(),
@@ -77,8 +77,8 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                    horizontal = MaterialTheme.dimensionsPaddingExtended.blockSmall_h,
-                    vertical = MaterialTheme.dimensionsPaddingExtended.blockSmall_v
+                    horizontal = MaterialTheme.dimensionsPaddingExtended.block.horizontal.small,
+                    vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.small
                 )
         ) { data ->
             Snackbar(

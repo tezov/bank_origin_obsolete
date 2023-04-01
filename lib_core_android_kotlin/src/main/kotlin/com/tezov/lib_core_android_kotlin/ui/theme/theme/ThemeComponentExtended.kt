@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 12:47
+ *  Created by Tezov on 01/04/2023 21:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 12:46
+ *  Last modified 01/04/2023 20:46
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,11 +13,14 @@ package com.tezov.lib_core_android_kotlin.ui.theme.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
+import androidx.compose.ui.graphics.Color
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 
 val MaterialTheme.componentsCommonExtended
     @Composable
@@ -56,12 +59,11 @@ object ThemeComponentExtended {
         val confirm: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
         val cancel: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
         val proceed: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
-        val colored: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
-        val outlined: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
         val primary: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
         val secondary: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
         val tertiary: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
     )
+
     internal val localButtons: ProvidableCompositionLocal<Button> = staticCompositionLocalOf {
         error("not provided")
     }
@@ -72,6 +74,7 @@ object ThemeComponentExtended {
         val secondary: com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style,
         val tertiary: com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style,
     )
+
     internal val localLinks: ProvidableCompositionLocal<Link> = staticCompositionLocalOf {
         error("not provided")
     }

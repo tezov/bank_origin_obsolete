@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 29/03/2023 22:26
+ *  Created by Tezov on 01/04/2023 21:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 29/03/2023 21:20
+ *  Last modified 01/04/2023 20:46
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -60,7 +60,7 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
 
     object Card{
 
-        open class Style(
+        class Style(
             val outfitFrame: OutfitFrame.StateColor = OutfitFrame.StateColor(),
             val elevation: Dp = 0.dp,
         ){

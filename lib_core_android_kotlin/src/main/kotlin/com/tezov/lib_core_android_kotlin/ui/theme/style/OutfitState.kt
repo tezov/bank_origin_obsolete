@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/03/2023 20:53
+ *  Created by Tezov on 01/04/2023 21:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/03/2023 20:39
+ *  Last modified 01/04/2023 20:46
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import kotlin.reflect.KClass
 
-//Simple
 typealias OutfitStateEmpty<T> = OutfitState.Empty.Style<T>
 typealias OutfitStateSimple<T> = OutfitState.Simple.Style<T>
 typealias OutfitStateDual<T> = OutfitState.Dual.Style<T>
@@ -72,7 +71,7 @@ object OutfitState {
                 @Suppress("UNCHECKED_CAST")
                 operator fun <T:Any> invoke() = instance as Style<T>
 
-                open class Builder<T:Any> internal constructor(val style: Style<T>) {
+                class Builder<T:Any> internal constructor(val style: Style<T>) {
                     internal fun get() = Style<T>()
                 }
 
@@ -108,7 +107,7 @@ object OutfitState {
 
             companion object{
 
-                open class Builder<T:Any> internal constructor(val style: Style<T>) {
+                class Builder<T:Any> internal constructor(val style: Style<T>) {
                     var value = style.value
 
                     internal fun get() = Style(
@@ -160,7 +159,7 @@ object OutfitState {
 
             companion object{
 
-                open class Builder<T:Any> internal constructor(val style: Style<T>) {
+                class Builder<T:Any> internal constructor(val style: Style<T>) {
                     var active = style.active
                     var inactive = style.inactive
 
@@ -224,7 +223,7 @@ object OutfitState {
 
             companion object{
 
-                open class Builder<T:Any> internal constructor(val style: Style<T>) {
+                class Builder<T:Any> internal constructor(val style: Style<T>) {
                     var neutral = style.neutral
                     var info = style.info
                     var alert = style.alert

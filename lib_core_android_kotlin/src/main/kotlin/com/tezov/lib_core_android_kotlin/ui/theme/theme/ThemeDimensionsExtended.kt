@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 12:47
+ *  Created by Tezov on 01/04/2023 21:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 12:46
+ *  Last modified 01/04/2023 21:02
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,8 +15,8 @@ package com.tezov.lib_core_android_kotlin.ui.theme.theme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 
 val MaterialTheme.dimensionsPaddingExtended
     @Composable
@@ -46,36 +46,9 @@ object ThemeDimensionsExtended{
 
     @Immutable
     data class Paddings(
-        val page_h: Dp,
-        val page_v: Dp,
-        val elementHuge_v: Dp,
-        val elementBig_v: Dp,
-        val elementNormal_v: Dp,
-        val elementSmall_v: Dp,
-        val elementMicro_v: Dp,
-        val elementHuge_h: Dp,
-        val elementBig_h: Dp,
-        val elementNormal_h: Dp,
-        val elementSmall_h: Dp,
-        val elementMicro_h: Dp,
-        val textBig_v: Dp,
-        val textNormal_v: Dp,
-        val textSmall_v: Dp,
-        val textBig_h: Dp,
-        val textNormal_h: Dp,
-        val textSmall_h: Dp,
-        val buttonBig_v: Dp,
-        val buttonNormal_v: Dp,
-        val buttonSmall_v: Dp,
-        val buttonBig_h: Dp,
-        val buttonNormal_h: Dp,
-        val buttonSmall_h: Dp,
-        val blockBig_v: Dp,
-        val blockNormal_v: Dp,
-        val blockSmall_v: Dp,
-        val blockBig_h: Dp,
-        val blockNormal_h: Dp,
-        val blockSmall_h: Dp,
+        val page: OutfitPalette.Direction<Dp>,
+        val block: OutfitPalette.Direction<OutfitPalette.Variant<Dp>>,
+        val element: OutfitPalette.Direction<OutfitPalette.Variant<Dp>>,
     )
     internal val localPaddings: ProvidableCompositionLocal<Paddings> = staticCompositionLocalOf {
         error("not provided")
@@ -83,16 +56,8 @@ object ThemeDimensionsExtended{
 
     @Immutable
     data class Spacings(
-        val micro_v:Dp,
-        val small_v:Dp,
-        val normal_v:Dp,
-        val big_v:Dp,
-        val huge_v:Dp,
-        val micro_h:Dp,
-        val small_h:Dp,
-        val normal_h:Dp,
-        val big_h:Dp,
-        val huge_h:Dp,
+        val block:OutfitPalette.Direction<OutfitPalette.Variant<Dp>>,
+        val element:OutfitPalette.Direction<OutfitPalette.Variant<Dp>>,
     )
     internal val localSpacings: ProvidableCompositionLocal<Spacings> = staticCompositionLocalOf {
         error("not provided")
@@ -100,9 +65,7 @@ object ThemeDimensionsExtended{
 
     @Immutable
     data class Elevations(
-        val elevationBig: Dp,
-        val elevationNormal: Dp,
-        val elevationSmall: Dp,
+        val elevation: OutfitPalette.Variant<Dp>,
     )
     internal val localElevations: ProvidableCompositionLocal<Elevations> = staticCompositionLocalOf {
         error("not provided")
@@ -115,9 +78,7 @@ object ThemeDimensionsExtended{
         val iconAction:SizeDp,
         val iconFieldInfo:SizeDp,
         val iconFieldAction:SizeDp,
-        val dividerSmall:Dp,
-        val dividerNormal:Dp,
-        val dividerBig:Dp,
+        val divider:OutfitPalette.Variant<Dp>,
     )
     internal val localSizes: ProvidableCompositionLocal<Sizes> = staticCompositionLocalOf {
         error("not provided")

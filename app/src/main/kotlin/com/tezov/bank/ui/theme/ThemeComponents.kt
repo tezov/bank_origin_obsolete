@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 12:47
+ *  Created by Tezov on 01/04/2023 21:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 12:39
+ *  Last modified 01/04/2023 20:46
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -105,7 +105,7 @@ object ThemeComponents {
     fun provideComponentsButton() = ThemeComponentExtended.Button(
         confirm = Button.StateColor.Style.TextFilled.copy {
             outfitFrame = OutfitFrame.StateColor(
-                outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal.copy {
+                outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
                         inactive = MaterialTheme.colorsExtended.primary.default,
@@ -126,7 +126,7 @@ object ThemeComponents {
         },
         cancel = Button.StateColor.Style.TextFilled.copy {
             outfitFrame = OutfitFrame.StateColor(
-                outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal.copy {
+                outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
                         inactive = MaterialTheme.colorsExtended.primary.default,
@@ -147,7 +147,7 @@ object ThemeComponents {
         },
         proceed = Button.StateColor.Style.TextFilled.copy {
             outfitFrame = OutfitFrame.StateColor(
-                outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal.copy {
+                outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
                         inactive = MaterialTheme.colorsExtended.primary.default,
@@ -168,7 +168,7 @@ object ThemeComponents {
         },
         primary = Button.StateColor.Style.TextFilled.copy {
             outfitFrame = OutfitFrame.StateColor(
-                outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal.copy {
+                outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
                         inactive = MaterialTheme.colorsExtended.primary.default,
@@ -189,7 +189,7 @@ object ThemeComponents {
         },
         secondary = Button.StateColor.Style.TextFilled.copy {
             outfitFrame = OutfitFrame.StateColor(
-                outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal.copy {
+                outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
                         inactive = MaterialTheme.colorsExtended.primary.default,
@@ -210,49 +210,7 @@ object ThemeComponents {
         },
         tertiary = Button.StateColor.Style.TextFilled.copy {
             outfitFrame = OutfitFrame.StateColor(
-                outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal.copy {
-                    outfitState = OutfitStateDual(
-                        active = MaterialTheme.colorsExtended.primary.default,
-                        inactive = MaterialTheme.colorsExtended.primary.default,
-                    )
-                }
-            )
-            outfitText = OutfitText.StateColor(
-                typo = TextStyle(
-                    fontFamily = MaterialTheme.fontUbuntu,
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 18.sp
-                ),
-                outfitState = OutfitStateDual(
-                    active = MaterialTheme.colorsExtended.primary.default,
-                    inactive = MaterialTheme.colorsExtended.primary.default,
-                )
-            )
-        },
-        colored = Button.StateColor.Style.TextFilled.copy {
-            outfitFrame = OutfitFrame.StateColor(
-                outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal.copy {
-                    outfitState = OutfitStateDual(
-                        active = MaterialTheme.colorsExtended.primary.default,
-                        inactive = MaterialTheme.colorsExtended.primary.default,
-                    )
-                }
-            )
-            outfitText = OutfitText.StateColor(
-                typo = TextStyle(
-                    fontFamily = MaterialTheme.fontUbuntu,
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 18.sp
-                ),
-                outfitState = OutfitStateDual(
-                    active = MaterialTheme.colorsExtended.primary.default,
-                    inactive = MaterialTheme.colorsExtended.primary.default,
-                )
-            )
-        },
-        outlined = Button.StateColor.Style.TextFilled.copy {
-            outfitFrame = OutfitFrame.StateColor(
-                outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal.copy {
+                outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
                         inactive = MaterialTheme.colorsExtended.primary.default,
@@ -312,12 +270,12 @@ object ThemeComponents {
 
     @Composable
     fun provideSectionRowStyle() = SectionActionRow.Style(
-        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
+        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.horizontal,
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsSizeExtended.iconInfo,
             tint = MaterialTheme.colorsExtended.primary.default
         ),
-        outfitTextHeader = MaterialTheme.typographiesExtended.textNormal.copy {
+        outfitTextHeader = MaterialTheme.typographiesExtended.text.normal.copy {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
@@ -331,7 +289,7 @@ object ThemeComponents {
         colorDivider = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.05f
         ),
-        dimensionDivider = MaterialTheme.dimensionsSizeExtended.dividerNormal,
+        dimensionDivider = MaterialTheme.dimensionsSizeExtended.divider.normal,
         actionRowStyle = provideActionRowStyle()
     )
 
@@ -345,7 +303,7 @@ object ThemeComponents {
             size = MaterialTheme.dimensionsSizeExtended.iconAction,
             tint = MaterialTheme.colorsExtended.primary.default
         ),
-        outfitText = MaterialTheme.typographiesExtended.textNormal.copy {
+        outfitText = MaterialTheme.typographiesExtended.text.normal.copy {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
@@ -361,7 +319,7 @@ object ThemeComponents {
             size = MaterialTheme.dimensionsSizeExtended.iconInfo,
             tint = MaterialTheme.colorsExtended.primary.default
         ),
-        outfitTextHeader = MaterialTheme.typographiesExtended.textNormal.copy {
+        outfitTextHeader = MaterialTheme.typographiesExtended.text.normal.copy {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
@@ -372,15 +330,15 @@ object ThemeComponents {
         colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.14f
         ),
-        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page_h,
+        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.horizontal,
         actionCardStyle = provideActionCardStyle()
     )
 
     @Composable
     fun provideActionCardStyle() = ActionCard.Style(
         outfitFrame = OutfitFrame.StateColor(
-            outfitShape = MaterialTheme.shapesExtended.roundedCornerNormal,
-            outfitBorder = MaterialTheme.bordersExtended.strokeNormal.copy {
+            outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal,
+            outfitBorder = MaterialTheme.bordersExtended.stroke.normal.copy {
                 outfitState = OutfitStateSimple(
                     MaterialTheme.colorsExtended.backgroundElevated.default
                 )
@@ -390,12 +348,12 @@ object ThemeComponents {
             size = SizeDp(56.dp),
             tint = MaterialTheme.colorsExtended.primary.default
         ),
-        outfitTextTitle = MaterialTheme.typographiesExtended.textNormal.copy {
+        outfitTextTitle = MaterialTheme.typographiesExtended.text.normal.copy {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
         },
-        outfitTextSubtitle = MaterialTheme.typographiesExtended.textNormal.copy {
+        outfitTextSubtitle = MaterialTheme.typographiesExtended.text.normal.copy {
             typo = typo.copy(
                 fontWeight = FontWeight.SemiBold
             )
@@ -414,9 +372,9 @@ object ThemeComponents {
                 inactive = MaterialTheme.colorsExtended.background.default,
             )
         ),
-        dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,
+        dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.element.vertical.normal,
         dimensionIndicatorSize = 12.dp,
-        dimensionIndicatorSpacing = MaterialTheme.dimensionsSpacingExtended.normal_h,
+        dimensionIndicatorSpacing = MaterialTheme.dimensionsSpacingExtended.element.vertical.normal,
     )
 
     @Composable
