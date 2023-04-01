@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 29/03/2023 22:26
+ *  Created by Tezov on 01/04/2023 12:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 29/03/2023 21:13
+ *  Last modified 01/04/2023 12:32
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -49,7 +49,7 @@ object ExtensionModifier {
     }
 
 
-    inline fun Modifier.clickableDisabled(): Modifier = composed {
+    fun Modifier.clickableDisabled(): Modifier = composed {
         clickable(
             enabled = false,
             indication = null,

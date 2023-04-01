@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 28/03/2023 22:22
+ *  Created by Tezov on 01/04/2023 12:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 28/03/2023 22:19
+ *  Last modified 01/04/2023 12:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -183,8 +183,8 @@ object DialogLoginAuthTheme {
         fieldLabel = MaterialTheme.typographiesExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        button = MaterialTheme.typographiesExtended.textButton.typo,
-        link = MaterialTheme.typographiesExtended.textLink.typo.copy(
+        button = MaterialTheme.typographiesExtended.textNormal.typo,
+        link = MaterialTheme.typographiesExtended.textNormal.typo.copy(
             color = colors.onBackground,
         )
 

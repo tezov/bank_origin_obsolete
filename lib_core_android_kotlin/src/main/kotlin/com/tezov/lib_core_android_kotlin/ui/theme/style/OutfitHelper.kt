@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 29/03/2023 22:26
+ *  Created by Tezov on 01/04/2023 12:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 29/03/2023 22:26
+ *  Last modified 01/04/2023 12:40
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,8 +15,6 @@ package com.tezov.lib_core_android_kotlin.ui.theme.style
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
-
-inline fun NoValue(message:String): Nothing = throw IllegalAccessError(message)
 
 inline val Color.asOutfitColor: OutfitStateSimple<Color> get() = OutfitStateSimple(this)
 inline val Color.asOutfitColorActive: OutfitStateDual<Color> get() = OutfitStateDual(active = this)

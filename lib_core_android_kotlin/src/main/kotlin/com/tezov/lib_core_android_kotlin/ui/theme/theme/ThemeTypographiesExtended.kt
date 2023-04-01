@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 29/03/2023 22:26
+ *  Created by Tezov on 01/04/2023 12:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 29/03/2023 22:26
+ *  Last modified 01/04/2023 12:46
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,6 @@ package com.tezov.lib_core_android_kotlin.ui.theme.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.NoValue
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 
 val MaterialTheme.typographiesExtended
@@ -27,19 +26,19 @@ object ThemeTypographiesExtended{
 
     @Immutable
     data class Common(
-        val textTitle: OutfitText.StateColor = NoValue("ThemeTypographiesExtended:Common:textTitle"),
-        val textSubtitle: OutfitText.StateColor = NoValue("ThemeTypographiesExtended:Common:textSubtitle"),
-        val textHelper: OutfitText.StateColor = NoValue("ThemeTypographiesExtended:Common:textHelper"),
+        val textTitle: OutfitText.StateColor,
+        val textSubtitle: OutfitText.StateColor,
+        val textHelper: OutfitText.StateColor,
 
-        val textNormal: OutfitText.StateColor = NoValue("ThemeTypographiesExtended:Common:textNormal"),
-        val textSupra: OutfitText.StateColor = NoValue("ThemeTypographiesExtended:Common:textSupra"),
-        val textBig: OutfitText.StateColor = NoValue("ThemeTypographiesExtended:Common:textBig"),
-        val textHuge: OutfitText.StateColor = NoValue("ThemeTypographiesExtended:Common:textHuge"),
-        val textSmall: OutfitText.StateColor = NoValue("ThemeTypographiesExtended:Common:textSmall"),
-        val textMicro: OutfitText.StateColor = NoValue("ThemeTypographiesExtended:Common:textMicro"),
+        val textNormal: OutfitText.StateColor,
+        val textSupra: OutfitText.StateColor,
+        val textBig: OutfitText.StateColor,
+        val textHuge: OutfitText.StateColor,
+        val textSmall: OutfitText.StateColor,
+        val textMicro: OutfitText.StateColor,
 
-        val textFieldValue: OutfitText.StateColor = NoValue("ThemeTypographiesExtended:Common:textFieldValue"),
-        val textFieldLabel: OutfitText.StateColor = NoValue("ThemeTypographiesExtended:Common:textFieldLabel"),
+        val textFieldValue: OutfitText.StateColor,
+        val textFieldLabel: OutfitText.StateColor,
     )
 
     internal val local: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
