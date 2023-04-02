@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 20:46
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,11 +17,13 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.graphics.Color as ColorImport
 
 fun Modifier.background(
-    style: OutfitShape.StateColor,
+    style: OutfitShape.StateColor.Style,
     selector: Any? = null
 ) = style.resolve(selector)?.takeIf { it.color != null }?.let { background(it.color!!, it.shape) } ?: this
 
@@ -44,7 +46,7 @@ object OutfitShape {
             }
         }
 
-        fun get(size: Size? = null, color: androidx.compose.ui.graphics.Color) = get(size)?.let {
+        fun get(size: Size? = null, color: ColorImport) = get(size)?.let {
             Sketch(it, color)
         }
 
@@ -96,62 +98,67 @@ object OutfitShape {
         val size get() = topStart
     }
 
-    data class Sketch(val shape:androidx.compose.ui.graphics.Shape, val color: androidx.compose.ui.graphics.Color? = null)
+    data class Sketch(val shape: Shape, val color: ColorImport? = null)
 
-    class StateColor(
-        template: Template = Template.Symmetric,
-        size: Size? = null,
-        val outfitState: OutfitState.Style<androidx.compose.ui.graphics.Color> = OutfitStateEmpty(),
-    ) {
+    object StateColor{
 
-        var template: Template = template
-            private set(value) {
-                when (value) {
-                    Template.Circle -> size = Size(50)
-                    else -> {}
+        class Style(
+            template: Template = Template.Symmetric,
+            size: Size? = null,
+            val outfitState: OutfitState.Style<ColorImport> = OutfitStateEmpty(),
+        ) {
+
+            var template: Template = template
+                private set(value) {
+                    when (value) {
+                        Template.Circle -> size = Size(50)
+                        else -> {}
+                    }
+                    field = value
                 }
-                field = value
+
+            var size: Size? = size
+                private set
+
+            companion object {
+
+                class Builder internal constructor(style: Style) {
+                    var template = style.template
+                    var size = style.size
+                    var outfitState = style.outfitState
+
+                    fun get() = Style(
+                        template = template,
+                        size = size,
+                        outfitState = outfitState,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Builder.() -> Unit = {}) = Builder(this).also {
+                    it.scope()
+                }.get()
+
             }
 
-        var size: Size? = size
-            private set
+            constructor(style: Style) : this(
+                template = style.template,
+                size = style.size,
+                outfitState = style.outfitState,
+            )
 
-        companion object {
+            fun getShape() = template.get(size)
 
-            class Builder internal constructor(style: StateColor) {
-                var template = style.template
-                var size = style.size
-                var outfitState = style.outfitState
+            fun resolveColor(selector: Any? = null) =  outfitState.resolve(selector, ColorImport::class)
 
-                fun get() = StateColor(
-                    template = template,
-                    size = size,
-                    outfitState = outfitState,
-                )
+            fun resolve(selector: Any? = null) = resolveColor(selector)?.let {
+                template.get(size, it)
             }
 
-            @Composable
-            fun StateColor.copy(scope: @Composable Builder.() -> Unit = {}) = Builder(this).also {
-                it.scope()
-            }.get()
-
         }
-
-        constructor(style: StateColor) : this(
-            template = style.template,
-            size = style.size,
-            outfitState = style.outfitState,
-        )
-
-        fun getShape() = template.get(size)
-
-        fun resolveColor(selector: Any? = null) =  outfitState.resolve(selector, androidx.compose.ui.graphics.Color::class)
-
-        fun resolve(selector: Any? = null) = resolveColor(selector)?.let {
-            template.get(size, it)
-        }
-
     }
+
+
 
 
 

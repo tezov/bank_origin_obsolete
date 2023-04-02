@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 28/03/2023 22:22
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/03/2023 20:53
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,6 +16,35 @@ import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
 class DelegateNullFallBack<V>(initialValue: V?) : ReadOnlyProperty<Any?, V> {
+
+    interface Setter<V : Any> {
+        @Suppress("UNCHECKED_CAST")
+        var nullFallback: (() -> V)?
+            get() {
+                refs().firstOrNull()?.let {
+                    kotlin.runCatching { it as? DelegateNullFallBack<V> }
+                        .getOrNull()?.fallBackValue?.let {
+                            return it
+                        }
+                }
+                return null
+            }
+            set(value) {
+                nullFallback(value, refs())
+            }
+
+        @Suppress("UNCHECKED_CAST")
+        fun Setter<V>.nullFallback(onNull: (() -> V)?, refs: List<V>) {
+            refs.forEach {
+                kotlin.runCatching { it as? DelegateNullFallBack<V> }.getOrNull()?.fallBackValue =
+                    onNull
+            }
+        }
+
+        fun refs(): List<V>
+
+    }
+
     private var value = initialValue
     var fallBackValue: (()->V)? = null
 

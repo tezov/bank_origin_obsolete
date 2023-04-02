@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 20:46
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,8 +40,8 @@ import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
@@ -64,12 +64,12 @@ object ThemeComponents {
         ),
         dialogCard = Dialog.Card.Style(
             elevation = 2.dp,
-            outfitFrame = OutfitFrame.StateColor(
-                outfitBorder = OutfitBorder.StateColor(
+            outfitFrame = OutfitFrame.Styl(
+                outfitBorder = OutfitBorder.Style(
                     size = 2.dp,
                     outfitState = MaterialTheme.colorsExtended.primary.default.asOutfitColor,
                 ),
-                outfitShape = OutfitShape.StateColor(
+                outfitShape = OutfitShape.Style(
                     size = 8.asOutfitShapeSize,
                     outfitState = MaterialTheme.colorsExtended.backgroundModal.default.asOutfitColor,
                 )
@@ -93,7 +93,7 @@ object ThemeComponents {
                 ),
                 outfitState = MaterialTheme.colorsExtended.onBackgroundModal.accent.asOutfitColor,
             ),
-            outfitShape = OutfitShape.StateColor(
+            outfitShape = OutfitShape.Style(
                 size = 12.asOutfitShapeSize,
                 outfitState = MaterialTheme.colorsExtended.backgroundModal.accent.asOutfitColor,
             ),
@@ -104,7 +104,7 @@ object ThemeComponents {
     @Composable
     fun provideComponentsButton() = ThemeComponentExtended.Button(
         confirm = Button.StateColor.Style.TextFilled.copy {
-            outfitFrame = OutfitFrame.StateColor(
+            outfitFrame = OutfitFrame.Styl(
                 outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
@@ -125,7 +125,7 @@ object ThemeComponents {
             )
         },
         cancel = Button.StateColor.Style.TextFilled.copy {
-            outfitFrame = OutfitFrame.StateColor(
+            outfitFrame = OutfitFrame.Styl(
                 outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
@@ -146,7 +146,7 @@ object ThemeComponents {
             )
         },
         proceed = Button.StateColor.Style.TextFilled.copy {
-            outfitFrame = OutfitFrame.StateColor(
+            outfitFrame = OutfitFrame.Styl(
                 outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
@@ -167,7 +167,7 @@ object ThemeComponents {
             )
         },
         primary = Button.StateColor.Style.TextFilled.copy {
-            outfitFrame = OutfitFrame.StateColor(
+            outfitFrame = OutfitFrame.Styl(
                 outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
@@ -188,7 +188,7 @@ object ThemeComponents {
             )
         },
         secondary = Button.StateColor.Style.TextFilled.copy {
-            outfitFrame = OutfitFrame.StateColor(
+            outfitFrame = OutfitFrame.Styl(
                 outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
@@ -209,7 +209,7 @@ object ThemeComponents {
             )
         },
         tertiary = Button.StateColor.Style.TextFilled.copy {
-            outfitFrame = OutfitFrame.StateColor(
+            outfitFrame = OutfitFrame.Styl(
                 outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
@@ -336,7 +336,7 @@ object ThemeComponents {
 
     @Composable
     fun provideActionCardStyle() = ActionCard.Style(
-        outfitFrame = OutfitFrame.StateColor(
+        outfitFrame = OutfitFrame.Styl(
             outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal,
             outfitBorder = MaterialTheme.bordersExtended.stroke.normal.copy {
                 outfitState = OutfitStateSimple(
@@ -365,7 +365,7 @@ object ThemeComponents {
 
     @Composable
     fun providePagerStyle() = HorizontalScrollable.Pager.Style(
-        outfitShapeIndicator = OutfitShape.StateColor(
+        outfitShapeIndicator = OutfitShape.Style(
             template = OutfitShape.Template.Circle,
             outfitState = OutfitStateDual(
                 active = MaterialTheme.colorsExtended.onBackgroundElevated.default,

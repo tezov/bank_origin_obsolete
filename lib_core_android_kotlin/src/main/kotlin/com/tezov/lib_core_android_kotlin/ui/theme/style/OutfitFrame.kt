@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 20:46
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,56 +17,67 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 
 fun Modifier.border(
-    style: OutfitFrame.StateColor,
+    style: OutfitFrame.StateColor.Style,
     selector: Any?= null
 ) = border(style.outfitBorder, selector, style.outfitShape.resolve(selector))
 
 fun Modifier.background(
-    style: OutfitFrame.StateColor,
+    style: OutfitFrame.StateColor.Style,
     selector: Any?=null
 ) = background(style.outfitShape, selector)
 
 object OutfitFrame {
 
-    class StateColor(
-        val outfitShape: OutfitShape.StateColor = OutfitShape.StateColor(),
-        val outfitBorder: OutfitBorder.StateColor = OutfitBorder.StateColor(),
-    ) {
+    object StateColor{
 
-        companion object {
+        class Style(
+            val outfitShape: OutfitShape.StateColor.Style = OutfitShape.StateColor.Style(),
+            val outfitBorder: OutfitBorder.StateColor.Style = OutfitBorder.StateColor.Style(),
+        ) {
 
-            class Builder internal constructor(style: StateColor) {
-                var outfitShape = style.outfitShape
-                var outfitBorder = style.outfitBorder
+            companion object {
 
-                internal fun get() = StateColor(
-                    outfitShape = outfitShape,
-                    outfitBorder = outfitBorder,
+                class Nucleus(
+                    val outfitShape:OutfitState.Style<Color>,
+                    val outfitBorder:OutfitState.Style<Color>,
                 )
+
+                class Builder internal constructor(style: Style) {
+                    var outfitShape = style.outfitShape
+                    var outfitBorder = style.outfitBorder
+
+                    internal fun get() = Style(
+                        outfitShape = outfitShape,
+                        outfitBorder = outfitBorder,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(builder: @Composable Builder.() -> Unit = {}) =
+                    Builder(this).also {
+                        it.builder()
+                    }.get()
+
             }
 
-            @Composable
-            fun StateColor.copy(builder: @Composable Builder.() -> Unit = {}) =
-                Builder(this).also {
-                    it.builder()
-                }.get()
+            constructor(style: Style) : this(
+                outfitShape = style.outfitShape,
+                outfitBorder = style.outfitBorder,
+            )
+
+            fun getShape() = outfitShape.getShape()
+
+            fun resolveColor(selector: Any? = null) = outfitShape.resolveColor(selector)
+
+            fun resolveShape(selector: Any? = null) = outfitShape.resolve(selector)
+
+            fun resolveBorder(selector: Any? = null) = outfitBorder.resolve(selector)
 
         }
 
-        constructor(style: StateColor) : this(
-            outfitShape = style.outfitShape,
-            outfitBorder = style.outfitBorder,
-        )
-
-        fun getShape() = outfitShape.getShape()
-
-        fun resolveColor(selector: Any? = null) = outfitShape.resolveColor(selector)
-
-        fun resolveShape(selector: Any? = null) = outfitShape.resolve(selector)
-
-        fun resolveBorder(selector: Any? = null) = outfitBorder.resolve(selector)
-
     }
+
+
 
 }
 

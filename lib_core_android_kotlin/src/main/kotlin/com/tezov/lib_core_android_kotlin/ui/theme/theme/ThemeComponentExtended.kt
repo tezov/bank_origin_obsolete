@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 20:46
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,6 +21,9 @@ import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button as ButtonImport
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link as LinkImport
 
 val MaterialTheme.componentsCommonExtended
     @Composable
@@ -55,14 +58,27 @@ object ThemeComponentExtended {
     }
 
     @Immutable
-    data class Button(
-        val confirm: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
-        val cancel: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
-        val proceed: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
-        val primary: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
-        val secondary: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
-        val tertiary: com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style,
-    )
+    class Button(
+        val primary: ButtonImport.StateColor.Style,
+        secondary: ButtonImport.StateColor.Style? = null,
+        tertiary: ButtonImport.StateColor.Style? = null,
+        confirm: ButtonImport.StateColor.Style? = null,
+        cancel: ButtonImport.StateColor.Style? = null,
+        proceed: ButtonImport.StateColor.Style? = null,
+    ) : DelegateNullFallBack.Setter<ButtonImport.StateColor.Style>{
+
+        val secondary: ButtonImport.StateColor.Style by DelegateNullFallBack(secondary)
+        val tertiary: ButtonImport.StateColor.Style by DelegateNullFallBack(tertiary)
+        val confirm: ButtonImport.StateColor.Style by DelegateNullFallBack(confirm)
+        val cancel: ButtonImport.StateColor.Style by DelegateNullFallBack(cancel)
+        val proceed: ButtonImport.StateColor.Style by DelegateNullFallBack(proceed)
+
+        override fun refs() = listOf(secondary, tertiary, confirm, cancel, proceed)
+
+        init {
+            nullFallback = { primary }
+        }
+    }
 
     internal val localButtons: ProvidableCompositionLocal<Button> = staticCompositionLocalOf {
         error("not provided")
@@ -70,9 +86,9 @@ object ThemeComponentExtended {
 
     @Immutable
     data class Link(
-        val primary: com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style,
-        val secondary: com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style,
-        val tertiary: com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style,
+        val primary: LinkImport.StateColor.Style,
+        val secondary: LinkImport.StateColor.Style,
+        val tertiary: LinkImport.StateColor.Style,
     )
 
     internal val localLinks: ProvidableCompositionLocal<Link> = staticCompositionLocalOf {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 21:02
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,10 @@ package com.tezov.lib_core_android_kotlin.ui.theme.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
+import androidx.compose.ui.graphics.Color
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Companion.Nucleus as ButtonNucleus
 
 val MaterialTheme.colorsExtended
     @Composable
@@ -51,6 +54,20 @@ object ThemeColorsExtended {
     )
 
     internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
+        error("not provided")
+    }
+
+    @Immutable
+    data class Button(
+        val confirm: ButtonNucleus,
+        val cancel: ButtonNucleus,
+        val proceed: ButtonNucleus,
+        val primary: ButtonNucleus,
+        val secondary: ButtonNucleus,
+        val tertiary: ButtonNucleus,
+    )
+
+    internal val localButtons: ProvidableCompositionLocal<Button> = staticCompositionLocalOf {
         error("not provided")
     }
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 12:47
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 12:30
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,9 +33,9 @@ import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Image
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.Styl.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
@@ -140,16 +140,16 @@ object PageLoginTheme {
         }
 
     data class Shapes(
-        val button: OutfitShape.StateColor,
-        val buttonOutlined: OutfitShape.StateColor,
-        val icon: OutfitShape.StateColor,
+        val button: OutfitShape.Style,
+        val buttonOutlined: OutfitShape.Style,
+        val icon: OutfitShape.Style,
     )
 
     @Composable
     fun provideShapes() = Shapes(
         button = MaterialTheme.shapesExtended.roundedCornerNormal,
         buttonOutlined = MaterialTheme.shapesExtended.roundedCornerNormal,
-        icon = OutfitShape.StateColor(
+        icon = OutfitShape.Style(
             template = OutfitShape.Template.Circle
         )
     )
@@ -159,9 +159,9 @@ object PageLoginTheme {
     }
 
     data class Borders(
-        val button: OutfitBorder.StateColor,
-        val buttonOutlined: OutfitBorder.StateColor,
-        val icon: OutfitBorder.StateColor,
+        val button: OutfitBorder.Style,
+        val buttonOutlined: OutfitBorder.Style,
+        val icon: OutfitBorder.Style,
     )
 
     @Composable
@@ -276,7 +276,7 @@ object PageLoginTheme {
         ),
         iconBig = Image.StateColor.Style(
             size = dimensions.sizeIconBig,
-            outfitFrame = OutfitFrame.StateColor(
+            outfitFrame = OutfitFrame.Styl(
                 outfitShape = shapes.icon,
                 outfitBorder = borders.icon.copy {
                     outfitState = OutfitStateSimple(
@@ -287,13 +287,13 @@ object PageLoginTheme {
         ),
         iconMedium = Icon.StateColor.Style(
             size = dimensions.sizeIconMedium,
-            outfitFrame = OutfitFrame.StateColor(
+            outfitFrame = OutfitFrame.Styl(
                 outfitShape = shapes.icon
             )
         ),
         iconSmall = Icon.StateColor.Style(
             size = dimensions.sizeIconSmall,
-            outfitFrame = OutfitFrame.StateColor(
+            outfitFrame = OutfitFrame.Styl(
                 outfitShape = shapes.icon
             )
         ),

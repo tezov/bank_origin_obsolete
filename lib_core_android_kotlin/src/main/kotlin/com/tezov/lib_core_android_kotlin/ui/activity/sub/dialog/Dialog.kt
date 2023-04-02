@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 20:46
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPages
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
@@ -31,7 +30,6 @@ import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 @OptIn(ExperimentalComposeUiApi::class)
@@ -61,7 +59,7 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
     object Card{
 
         class Style(
-            val outfitFrame: OutfitFrame.StateColor = OutfitFrame.StateColor(),
+            val outfitFrame: OutfitFrame.Styl = OutfitFrame.Styl(),
             val elevation: Dp = 0.dp,
         ){
             companion object{

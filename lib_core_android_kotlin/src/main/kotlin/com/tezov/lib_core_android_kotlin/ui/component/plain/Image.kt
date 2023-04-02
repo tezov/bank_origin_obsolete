@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 29/03/2023 22:26
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 29/03/2023 21:13
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -81,7 +81,7 @@ object Image {
 
         class Style(
             val size: SizeDp? = null,
-            val outfitFrame: OutfitFrame.StateColor = OutfitFrame.StateColor(),
+            val outfitFrame: OutfitFrame.Styl = OutfitFrame.Styl(),
             val contentScale: ContentScale = ContentScale.Fit
         ) {
             companion object {

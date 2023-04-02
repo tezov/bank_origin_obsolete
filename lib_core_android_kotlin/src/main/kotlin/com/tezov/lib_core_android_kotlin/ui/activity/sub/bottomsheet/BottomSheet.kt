@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 20:46
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,13 +25,12 @@ import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
 
     class Style(
-        val outfitShape: OutfitShape.StateColor = OutfitShape.StateColor(),
+        val outfitShape: OutfitShape.Style = OutfitShape.Style(),
         val padding: PaddingValues = PaddingValues(1.dp, 1.dp),
         val elevation: Dp = 0.dp,
     ){

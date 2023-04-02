@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 20:46
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,9 +18,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.graphics.Color as ColorImport
 
 fun Modifier.border(
-    style: OutfitBorder.StateColor,
+    style: OutfitBorder.StateColor.Style,
     selector: Any? = null,
     sketch: OutfitShape.Sketch? = null
 ) = style.resolve(selector)?.let { border ->
@@ -36,7 +37,7 @@ object OutfitBorder {
     enum class Template {
         Fill;
 
-        fun get(size: Dp?, color: androidx.compose.ui.graphics.Color) = size?.let {
+        fun get(size: Dp?, color: ColorImport) = size?.let {
             when (this) {
                 Fill -> BorderStroke(size, color)
             }
@@ -44,44 +45,50 @@ object OutfitBorder {
 
     }
 
-    class StateColor(
-        val template: Template = Template.Fill,
-        val size: Dp? = null,
-        val outfitState: OutfitState.Style<androidx.compose.ui.graphics.Color> = OutfitStateEmpty(),
-    ){
+    object StateColor{
 
-        companion object {
+        class Style(
+            val template: Template = Template.Fill,
+            val size: Dp? = null,
+            val outfitState: OutfitState.Style<ColorImport> = OutfitStateEmpty(),
+        ){
 
-            class Builder internal constructor(style: StateColor) {
-                var template = style.template
-                var size = style.size
-                var outfitState = style.outfitState
+            companion object {
 
-                fun get() = StateColor(
-                    template = template,
-                    size = size,
-                    outfitState = outfitState,
-                )
+                class Builder internal constructor(style: Style) {
+                    var template = style.template
+                    var size = style.size
+                    var outfitState = style.outfitState
+
+                    fun get() = Style(
+                        template = template,
+                        size = size,
+                        outfitState = outfitState,
+                    )
+                }
+
+                @Composable
+                fun Style.copy(scope: @Composable Builder.() -> Unit = {}) =
+                    Builder(this).also {
+                        it.scope()
+                    }.get()
             }
 
-            @Composable
-            fun StateColor.copy(scope: @Composable Builder.() -> Unit = {}) =
-                Builder(this).also {
-                    it.scope()
-                }.get()
-        }
+            constructor(style: Style) : this(
+                template = style.template,
+                size = style.size,
+                outfitState = style.outfitState,
+            )
 
-        constructor(style: StateColor) : this(
-            template = style.template,
-            size = style.size,
-            outfitState = style.outfitState,
-        )
+            fun resolve(selector: Any? = null) = outfitState.resolve(selector, ColorImport::class)?.let {
+                template.get(size, it)
+            }
 
-        fun resolve(selector: Any? = null) = outfitState.resolve(selector, androidx.compose.ui.graphics.Color::class)?.let {
-            template.get(size, it)
         }
 
     }
+
+
 
 }
 

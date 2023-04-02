@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 16:27
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/03/2023 16:27
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -59,13 +59,13 @@ object KeyBoard {
         open class Style(
             val colorBackground: Color = Color.Transparent,
             val colorOnBackground: Color = Color.Black,
-            val outfitBorderOuter: OutfitBorder.StateColor = OutfitBorder.StateColor(
+            val outfitBorderOuter: OutfitBorder.Style = OutfitBorder.Style(
                 size = 2.dp,
                 outfitState = OutfitState.Simple.Style(
                     value = Color.Black
                 )
             ),
-            val outfitBorderInner: OutfitBorder.StateColor = OutfitBorder.StateColor(
+            val outfitBorderInner: OutfitBorder.Style = OutfitBorder.Style(
                 size = 1.dp,
                 outfitState = OutfitState.Simple.Style(
                     value = Color.Black

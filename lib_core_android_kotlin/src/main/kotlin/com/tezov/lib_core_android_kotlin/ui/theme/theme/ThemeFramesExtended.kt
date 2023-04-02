@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 20:46
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,6 @@ package com.tezov.lib_core_android_kotlin.ui.theme.theme
 
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
-import androidx.compose.ui.unit.Dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 
 val MaterialTheme.shapesExtended
@@ -33,7 +32,7 @@ object ThemeFramesExtended{
 
     @Immutable
     data class Shapes(
-        val roundedCorner: OutfitPalette.Variant<OutfitShape.StateColor>,
+        val roundedCorner: OutfitPalette.Variant<OutfitShape.StateColor.Style>,
     )
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
         error("not provided")
@@ -41,7 +40,7 @@ object ThemeFramesExtended{
 
     @Immutable
     data class Borders(
-        val stroke: OutfitPalette.Variant<OutfitBorder.StateColor>,
+        val stroke: OutfitPalette.Variant<OutfitBorder.StateColor.Style>,
     )
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
         error("not provided")

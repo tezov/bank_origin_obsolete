@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 20:46
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,7 +33,7 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
     class Style(
         val outfitTextMessage: OutfitText.StateColor = OutfitText.StateColor(),
         val outfitTextAction: OutfitText.StateColor = OutfitText.StateColor(),
-        val outfitShape: OutfitShape.StateColor = OutfitShape.StateColor(),
+        val outfitShape: OutfitShape.Style = OutfitShape.Style(),
         val elevation: Dp = 0.dp,
     ){
         companion object{

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 29/03/2023 22:26
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 29/03/2023 22:26
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,14 +30,19 @@ object Button {
     object StateColor{
 
         class Style(
-            val outfitFrame: OutfitFrame.StateColor = OutfitFrame.StateColor(),
-            val outfitText: OutfitText.StateColor = OutfitText.StateColor(),
+            val outfitFrame: OutfitFrame.StateColor.Style = OutfitFrame.StateColor.Style(),
+            val outfitText: OutfitText.StateColor.Style = OutfitText.StateColor.Style(),
             val elevation: Dp? = null,
         ) {
 
             companion object {
 
-                open class Builder internal constructor(
+                class Nucleus(
+                    val nucleusFrame:OutfitFrame.StateColor.Style.Companion.Nucleus,
+                    val outfitText:OutfitState.Style<Color>,
+                )
+
+                class Builder internal constructor(
                     style: Style
                 ) {
                     var outfitFrame = style.outfitFrame
@@ -60,8 +65,8 @@ object Button {
 
                 val TextFilled
                     get() = Style(
-                        outfitFrame = OutfitFrame.StateColor(
-                            outfitShape = OutfitShape.StateColor(
+                        outfitFrame = OutfitFrame.StateColor.Style(
+                            outfitShape = OutfitShape.StateColor.Style(
                                 size = 12.asOutfitShapeSize,
                                 outfitState = OutfitStateDual(
                                     active = Color.Gray,
@@ -69,7 +74,7 @@ object Button {
                                 )
                             )
                         ),
-                        outfitText = OutfitText.StateColor(
+                        outfitText = OutfitText.StateColor.Style(
                             outfitState = OutfitStateDual(
                                 active = Color.Black,
                                 inactive = Color.Black.copy(alpha = 0.65f)
@@ -79,11 +84,11 @@ object Button {
 
                 val TextOutlined
                     get() = Style(
-                        outfitFrame = OutfitFrame.StateColor(
-                            outfitShape = OutfitShape.StateColor(
+                        outfitFrame = OutfitFrame.StateColor.Style(
+                            outfitShape = OutfitShape.StateColor.Style(
                                 size = 12.asOutfitShapeSize,
                             ),
-                            outfitBorder = OutfitBorder.StateColor(
+                            outfitBorder = OutfitBorder.StateColor.Style(
                                 size = 2.2.dp,
                                 outfitState = OutfitStateDual(
                                     active = Color.Black,
@@ -91,7 +96,7 @@ object Button {
                                 )
                             )
                         ),
-                        outfitText = OutfitText.StateColor(
+                        outfitText = OutfitText.StateColor.Style(
                             outfitState = OutfitStateDual(
                                 active = Color.Black,
                                 inactive = Color.Black.copy(alpha = 0.65f)

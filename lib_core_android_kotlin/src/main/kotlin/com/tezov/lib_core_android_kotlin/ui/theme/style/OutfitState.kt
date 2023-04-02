@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 02/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 20:46
+ *  Last modified 02/04/2023 14:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,26 +22,7 @@ typealias OutfitStateSemantic<T> = OutfitState.Semantic.Style<T>
 
 object OutfitState {
 
-    interface Style<T : Any> {
-        var nullFallback:(()->T)?
-            get() {
-                refs().firstOrNull()?.let {
-                    kotlin.runCatching { it as? DelegateNullFallBack<T> }.getOrNull()?.fallBackValue?.let {
-                        return it
-                    }
-                }
-                return null
-            }
-            set(value) {
-                nullFallback(value, refs())
-            }
-        fun Style<T>.nullFallback(onNull:(()->T)?, refs:List<T>){
-            refs.forEach {
-                kotlin.runCatching { it as? DelegateNullFallBack<T> }.getOrNull()?.fallBackValue = onNull
-            }
-        }
-
-        fun refs(): List<T>
+    interface Style<T : Any>:DelegateNullFallBack.Setter<T> {
 
         fun selectorType(): KClass<*>
 
@@ -66,19 +47,10 @@ object OutfitState {
 
             companion object{
 
-                private val instance by lazy { Style<Any>() }
-
-                @Suppress("UNCHECKED_CAST")
-                operator fun <T:Any> invoke() = instance as Style<T>
-
-                class Builder<T:Any> internal constructor(val style: Style<T>) {
-                    internal fun get() = Style<T>()
-                }
+                operator fun <T:Any> invoke() = Style<T>()
 
                 @Composable
-                fun <T:Any> Style<T>.copy(builder: @Composable Builder<T>.()->Unit = {}) = Builder(this).also {
-                    it.builder()
-                }.get()
+                fun <T:Any> Style<T>.copy() =  this
             }
 
             override fun refs() = emptyList<T>()
