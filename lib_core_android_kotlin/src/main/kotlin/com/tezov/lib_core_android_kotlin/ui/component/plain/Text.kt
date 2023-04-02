@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 02/04/2023 16:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 02/04/2023 16:46
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,6 +21,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
 import androidx.compose.ui.text.style.TextOverflow
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 
 object Text {
 
@@ -29,7 +30,7 @@ object Text {
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
-            style: OutfitText.StateColor.Style? = null,
+            style: OutfitTextStateColor? = null,
             overflow: TextOverflow = TextOverflow.Clip,
             softWrap: Boolean = true,
             maxLines: Int = Int.MAX_VALUE,
@@ -51,7 +52,7 @@ object Text {
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
-            style: OutfitText.StateColor.Style? = null,
+            style: OutfitTextStateColor? = null,
             overflow: TextOverflow = TextOverflow.Clip,
             softWrap: Boolean = true,
             maxLines: Int = Int.MAX_VALUE,
@@ -74,7 +75,7 @@ object Text {
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
-            style: OutfitText.StateColor.Style? = null,
+            style: OutfitTextStateColor? = null,
             overflow: TextOverflow = TextOverflow.Clip,
             softWrap: Boolean = true,
             maxLines: Int = Int.MAX_VALUE,

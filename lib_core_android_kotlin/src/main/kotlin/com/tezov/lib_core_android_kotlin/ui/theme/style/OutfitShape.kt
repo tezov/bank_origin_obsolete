@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 02/04/2023 16:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 02/04/2023 16:09
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,7 +25,10 @@ import androidx.compose.ui.graphics.Color as ColorImport
 fun Modifier.background(
     style: OutfitShape.StateColor.Style,
     selector: Any? = null
-) = style.resolve(selector)?.takeIf { it.color != null }?.let { background(it.color!!, it.shape) } ?: this
+) = style.resolve(selector)?.takeIf { it.color != null }?.let { background(it.color!!, it.shape) }
+    ?: this
+
+typealias OutfitShapeStateColor = OutfitShape.StateColor.Style
 
 object OutfitShape {
 
@@ -100,7 +103,19 @@ object OutfitShape {
 
     data class Sketch(val shape: Shape, val color: ColorImport? = null)
 
-    object StateColor{
+    object StateColor {
+
+        class StyleBuilder internal constructor(style: Style) {
+            var template = style.template
+            var size = style.size
+            var outfitState = style.outfitState
+
+            fun get() = Style(
+                template = template,
+                size = size,
+                outfitState = outfitState,
+            )
+        }
 
         class Style(
             template: Template = Template.Symmetric,
@@ -122,20 +137,8 @@ object OutfitShape {
 
             companion object {
 
-                class Builder internal constructor(style: Style) {
-                    var template = style.template
-                    var size = style.size
-                    var outfitState = style.outfitState
-
-                    fun get() = Style(
-                        template = template,
-                        size = size,
-                        outfitState = outfitState,
-                    )
-                }
-
                 @Composable
-                fun Style.copy(scope: @Composable Builder.() -> Unit = {}) = Builder(this).also {
+                fun Style.copy(scope: @Composable StyleBuilder.() -> Unit = {}) = StyleBuilder(this).also {
                     it.scope()
                 }.get()
 
@@ -149,7 +152,8 @@ object OutfitShape {
 
             fun getShape() = template.get(size)
 
-            fun resolveColor(selector: Any? = null) =  outfitState.resolve(selector, ColorImport::class)
+            fun resolveColor(selector: Any? = null) =
+                outfitState.resolve(selector, ColorImport::class)
 
             fun resolve(selector: Any? = null) = resolveColor(selector)?.let {
                 template.get(size, it)
@@ -157,10 +161,6 @@ object OutfitShape {
 
         }
     }
-
-
-
-
 
 }
 

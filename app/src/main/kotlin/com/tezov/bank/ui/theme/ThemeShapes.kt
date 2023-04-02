@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 02/04/2023 16:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 20:46
+ *  Last modified 02/04/2023 16:46
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,12 +16,12 @@ import androidx.compose.runtime.Composable
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette
 import com.tezov.lib_core_android_kotlin.ui.theme.style.asOutfitBorderColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.asOutfitShapeColor
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeFramesExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeShapesExtended
 
 object ThemeShapes {
 
     @Composable
-    fun provideShapes() = ThemeFramesExtended.Shapes(
+    fun provideShapes() = ThemeShapesExtended.Shapes(
         roundedCorner = OutfitPalette.Variant(
             micro = 4.asOutfitShapeColor,
             small = 8.asOutfitShapeColor,
@@ -33,7 +33,7 @@ object ThemeShapes {
     )
 
     @Composable
-    fun provideBorders() = ThemeFramesExtended.Borders(
+    fun provideBorders() = ThemeShapesExtended.Borders(
         stroke = OutfitPalette.Variant(
             micro = 0.8.asOutfitBorderColor,
             small = 1.asOutfitBorderColor,

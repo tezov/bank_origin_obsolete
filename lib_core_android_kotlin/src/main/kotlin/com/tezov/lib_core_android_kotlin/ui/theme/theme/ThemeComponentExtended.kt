@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 02/04/2023 16:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 02/04/2023 16:09
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -46,13 +46,19 @@ infix fun MaterialTheme.provides(value: ThemeComponentExtended.Link) = ThemeComp
 object ThemeComponentExtended {
 
     @Immutable
-    data class Common(
-        val topAppBar: TopAppBar.Style,
-        val bottomNavigation: BottomNavigation.Style,
-        val dialogCard: Dialog.Card.Style,
-        val bottomSheet: BottomSheet.Style,
-        val snackBar: Snackbar.Style,
-    )
+    class Common(
+        topAppBar: TopAppBar.Style? = null,
+        bottomNavigation: BottomNavigation.Style? = null,
+        dialogCard: Dialog.Card.Style? = null,
+        bottomSheet: BottomSheet.Style? = null,
+        snackBar: Snackbar.Style? = null,
+    ){
+        val topAppBar: TopAppBar.Style by DelegateNullFallBack(topAppBar)
+        val bottomNavigation: BottomNavigation.Style by DelegateNullFallBack(bottomNavigation)
+        val dialogCard: Dialog.Card.Style by DelegateNullFallBack(dialogCard)
+        val bottomSheet: BottomSheet.Style by DelegateNullFallBack(bottomSheet)
+        val snackBar: Snackbar.Style by DelegateNullFallBack(snackBar)
+    }
     internal val localCommons: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
         error("not provided")
     }
@@ -85,11 +91,21 @@ object ThemeComponentExtended {
     }
 
     @Immutable
-    data class Link(
+    class Link(
         val primary: LinkImport.StateColor.Style,
-        val secondary: LinkImport.StateColor.Style,
-        val tertiary: LinkImport.StateColor.Style,
-    )
+        secondary: LinkImport.StateColor.Style? = null,
+        tertiary: LinkImport.StateColor.Style? = null,
+    ) : DelegateNullFallBack.Setter<LinkImport.StateColor.Style>{
+
+        val secondary: LinkImport.StateColor.Style by DelegateNullFallBack(secondary)
+        val tertiary: LinkImport.StateColor.Style by DelegateNullFallBack(tertiary)
+
+        override fun refs() = listOf(secondary, tertiary)
+
+        init {
+            nullFallback = { primary }
+        }
+    }
 
     internal val localLinks: ProvidableCompositionLocal<Link> = staticCompositionLocalOf {
         error("not provided")

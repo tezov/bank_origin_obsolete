@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 02/04/2023 16:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 02/04/2023 16:46
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
@@ -29,44 +30,52 @@ object Button {
 
     object StateColor{
 
+        class StyleBuilder internal constructor(
+            style: Style
+        ) {
+            var outfitFrame = style.outfitFrame
+            var outfitText = style.outfitText
+            var elevation = style.elevation
+
+            internal fun get() = Style(
+                outfitFrame = outfitFrame,
+                outfitText = outfitText,
+                elevation = elevation,
+            )
+        }
+
         class Style(
-            val outfitFrame: OutfitFrame.StateColor.Style = OutfitFrame.StateColor.Style(),
-            val outfitText: OutfitText.StateColor.Style = OutfitText.StateColor.Style(),
+            val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(),
+            val outfitText: OutfitTextStateColor = OutfitTextStateColor(),
             val elevation: Dp? = null,
         ) {
 
-            companion object {
+            object Nucleus{
 
-                class Nucleus(
-                    val nucleusFrame:OutfitFrame.StateColor.Style.Companion.Nucleus,
-                    val outfitText:OutfitState.Style<Color>,
+                class Color(
+                    val nucleusFrame:OutfitFrame.StateColor.Style.Nucleus.Color,
+                    val nucleusText:OutfitState.Style<Color>,
                 )
 
-                class Builder internal constructor(
-                    style: Style
-                ) {
-                    var outfitFrame = style.outfitFrame
-                    var outfitText = style.outfitText
-                    var elevation = style.elevation
+                class Typography(
+                    val nucleusText: TextStyle,
+                )
 
-                    internal fun get() = Style(
-                        outfitFrame = outfitFrame,
-                        outfitText = outfitText,
-                        elevation = elevation,
-                    )
-                }
+            }
+
+            companion object {
 
                 @Composable
                 fun Style.copy(
-                    builder: @Composable Builder.() -> Unit = {}
-                ) = Builder(this).also {
+                    builder: @Composable StyleBuilder.() -> Unit = {}
+                ) = StyleBuilder(this).also {
                     it.builder()
                 }.get()
 
                 val TextFilled
                     get() = Style(
-                        outfitFrame = OutfitFrame.StateColor.Style(
-                            outfitShape = OutfitShape.StateColor.Style(
+                        outfitFrame = OutfitFrameStateColor(
+                            outfitShape = OutfitShapeStateColor(
                                 size = 12.asOutfitShapeSize,
                                 outfitState = OutfitStateDual(
                                     active = Color.Gray,
@@ -74,7 +83,7 @@ object Button {
                                 )
                             )
                         ),
-                        outfitText = OutfitText.StateColor.Style(
+                        outfitText = OutfitTextStateColor(
                             outfitState = OutfitStateDual(
                                 active = Color.Black,
                                 inactive = Color.Black.copy(alpha = 0.65f)
@@ -84,11 +93,11 @@ object Button {
 
                 val TextOutlined
                     get() = Style(
-                        outfitFrame = OutfitFrame.StateColor.Style(
-                            outfitShape = OutfitShape.StateColor.Style(
+                        outfitFrame = OutfitFrameStateColor(
+                            outfitShape = OutfitShapeStateColor(
                                 size = 12.asOutfitShapeSize,
                             ),
-                            outfitBorder = OutfitBorder.StateColor.Style(
+                            outfitBorder = OutfitBorderStateColor(
                                 size = 2.2.dp,
                                 outfitState = OutfitStateDual(
                                     active = Color.Black,
@@ -96,7 +105,7 @@ object Button {
                                 )
                             )
                         ),
-                        outfitText = OutfitText.StateColor.Style(
+                        outfitText = OutfitTextStateColor(
                             outfitState = OutfitStateDual(
                                 active = Color.Black,
                                 inactive = Color.Black.copy(alpha = 0.65f)

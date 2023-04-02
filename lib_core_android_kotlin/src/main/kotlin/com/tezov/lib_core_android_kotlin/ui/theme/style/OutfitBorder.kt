@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 02/04/2023 16:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 02/04/2023 16:09
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,6 +32,8 @@ fun Modifier.border(
     }
 } ?: this
 
+typealias OutfitBorderStateColor = OutfitBorder.StateColor.Style
+
 object OutfitBorder {
 
     enum class Template {
@@ -45,31 +47,31 @@ object OutfitBorder {
 
     }
 
-    object StateColor{
+    object StateColor {
+
+        class StyleBuilder internal constructor(style: Style) {
+            var template = style.template
+            var size = style.size
+            var outfitState = style.outfitState
+
+            fun get() = Style(
+                template = template,
+                size = size,
+                outfitState = outfitState,
+            )
+        }
 
         class Style(
             val template: Template = Template.Fill,
             val size: Dp? = null,
             val outfitState: OutfitState.Style<ColorImport> = OutfitStateEmpty(),
-        ){
+        ) {
 
             companion object {
 
-                class Builder internal constructor(style: Style) {
-                    var template = style.template
-                    var size = style.size
-                    var outfitState = style.outfitState
-
-                    fun get() = Style(
-                        template = template,
-                        size = size,
-                        outfitState = outfitState,
-                    )
-                }
-
                 @Composable
-                fun Style.copy(scope: @Composable Builder.() -> Unit = {}) =
-                    Builder(this).also {
+                fun Style.copy(scope: @Composable StyleBuilder.() -> Unit = {}) =
+                    StyleBuilder(this).also {
                         it.scope()
                     }.get()
             }
@@ -80,14 +82,14 @@ object OutfitBorder {
                 outfitState = style.outfitState,
             )
 
-            fun resolve(selector: Any? = null) = outfitState.resolve(selector, ColorImport::class)?.let {
-                template.get(size, it)
-            }
+            fun resolve(selector: Any? = null) =
+                outfitState.resolve(selector, ColorImport::class)?.let {
+                    template.get(size, it)
+                }
 
         }
 
     }
-
 
 
 }
