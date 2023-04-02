@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 16:46
+ *  Created by Tezov on 02/04/2023 17:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 16:09
+ *  Last modified 02/04/2023 17:18
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,7 +19,7 @@ typealias OutfitPaletteColor = OutfitPalette.Color.Style
 typealias OutfitPaletteColorDual = OutfitStateDual<OutfitPaletteColor>
 typealias OutfitPaletteColorSemantic = OutfitStateSemantic<OutfitPaletteColor>
 
-typealias OutfitPaletteVariant<T> = OutfitPalette.Variant.Style<T>
+typealias OutfitPaletteSize<T> = OutfitPalette.Size.Style<T>
 typealias OutfitPaletteDirection<T> = OutfitPalette.Direction.Style<T>
 
 object OutfitPalette {
@@ -79,7 +79,7 @@ object OutfitPalette {
 
     }
 
-    object Variant{
+    object Size{
 
         class StyleBuilder<T : Any> internal constructor(val style: Style<T>) {
             var micro = style.micro

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 02/04/2023 17:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 02/04/2023 17:18
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -55,7 +55,7 @@ object ThemeComponents {
                 fontFamily = MaterialTheme.fontUbuntu,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 12.sp
-            ).asOutfitTextColor,
+            ).asOutfitText,
             colorBackground  = ThemeColors.Common.whiteShady,
             outfitColor  = OutfitStateDual(
                 active = ThemeColors.Common.blueElegant,

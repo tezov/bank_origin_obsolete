@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 16:46
+ *  Created by Tezov on 02/04/2023 17:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 16:46
+ *  Last modified 02/04/2023 17:18
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -60,6 +60,8 @@ object Button {
                 class Typography(
                     val nucleusText: TextStyle,
                 )
+                inline val TextStyle.asButtonNucleus: Typography get() = Typography(this)
+
 
             }
 

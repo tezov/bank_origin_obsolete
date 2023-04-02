@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 16:46
+ *  Created by Tezov on 02/04/2023 17:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 16:46
+ *  Last modified 02/04/2023 17:18
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,10 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteVariant
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Nucleus.Typography as ButtonNucleus
@@ -54,17 +51,17 @@ infix fun MaterialTheme.provides(value: ThemeTypographiesExtended.Link) =
 object ThemeTypographiesExtended {
 
     class Common(
-        title: OutfitPaletteVariant<OutfitTextStateColor>? = null,
-        body: OutfitPaletteVariant<OutfitTextStateColor>? = null,
-        subtitle: OutfitPaletteVariant<OutfitTextStateColor>? = null,
-        helper: OutfitPaletteVariant<OutfitTextStateColor>? = null,
+        title: OutfitPaletteSize<OutfitTextStateColor>? = null,
+        body: OutfitPaletteSize<OutfitTextStateColor>? = null,
+        subtitle: OutfitPaletteSize<OutfitTextStateColor>? = null,
+        helper: OutfitPaletteSize<OutfitTextStateColor>? = null,
         fieldValue: OutfitTextStateColor? = null,
         fieldLabel: OutfitTextStateColor? = null,
     ) {
-        val title: OutfitPaletteVariant<OutfitTextStateColor> by DelegateNullFallBack(title)
-        val body: OutfitPaletteVariant<OutfitTextStateColor> by DelegateNullFallBack(body)
-        val subtitle: OutfitPaletteVariant<OutfitTextStateColor> by DelegateNullFallBack(subtitle)
-        val helper: OutfitPaletteVariant<OutfitTextStateColor> by DelegateNullFallBack(helper)
+        val title: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(title)
+        val body: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(body)
+        val subtitle: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(subtitle)
+        val helper: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(helper)
         val fieldValue: OutfitTextStateColor by DelegateNullFallBack(fieldValue)
         val fieldLabel: OutfitTextStateColor by DelegateNullFallBack(fieldLabel)
     }

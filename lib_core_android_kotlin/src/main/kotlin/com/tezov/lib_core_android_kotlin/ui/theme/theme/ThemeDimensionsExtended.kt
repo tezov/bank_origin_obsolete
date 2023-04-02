@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 16:46
+ *  Created by Tezov on 02/04/2023 17:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 16:46
+ *  Last modified 02/04/2023 17:18
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -47,9 +47,9 @@ object ThemeDimensionsExtended{
     @Immutable
     data class Paddings(
         val page: OutfitPaletteDirection<Dp>,
-        val block: OutfitPaletteDirection<OutfitPaletteVariant<Dp>>,
-        val element: OutfitPaletteDirection<OutfitPaletteVariant<Dp>>,
-        val button: OutfitPaletteDirection<OutfitPaletteVariant<Dp>>,
+        val block: OutfitPaletteDirection<OutfitPaletteSize<Dp>>,
+        val element: OutfitPaletteDirection<OutfitPaletteSize<Dp>>,
+        val button: OutfitPaletteDirection<OutfitPaletteSize<Dp>>,
     )
     internal val localPaddings: ProvidableCompositionLocal<Paddings> = staticCompositionLocalOf {
         error("not provided")
@@ -57,8 +57,8 @@ object ThemeDimensionsExtended{
 
     @Immutable
     data class Spacings(
-        val block:OutfitPaletteDirection<OutfitPaletteVariant<Dp>>,
-        val element:OutfitPaletteDirection<OutfitPaletteVariant<Dp>>,
+        val block:OutfitPaletteDirection<OutfitPaletteSize<Dp>>,
+        val element:OutfitPaletteDirection<OutfitPaletteSize<Dp>>,
     )
     internal val localSpacings: ProvidableCompositionLocal<Spacings> = staticCompositionLocalOf {
         error("not provided")
@@ -66,7 +66,7 @@ object ThemeDimensionsExtended{
 
     @Immutable
     data class Elevations(
-        val elevation: OutfitPaletteVariant<Dp>,
+        val elevation: OutfitPaletteSize<Dp>,
     )
     internal val localElevations: ProvidableCompositionLocal<Elevations> = staticCompositionLocalOf {
         error("not provided")
@@ -79,7 +79,7 @@ object ThemeDimensionsExtended{
         val iconAction:SizeDp,
         val iconFieldInfo:SizeDp,
         val iconFieldAction:SizeDp,
-        val divider:OutfitPaletteVariant<Dp>,
+        val divider:OutfitPaletteSize<Dp>,
     )
     internal val localSizes: ProvidableCompositionLocal<Sizes> = staticCompositionLocalOf {
         error("not provided")
