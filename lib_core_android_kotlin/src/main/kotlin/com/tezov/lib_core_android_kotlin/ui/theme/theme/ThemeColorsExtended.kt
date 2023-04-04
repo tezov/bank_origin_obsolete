@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 15:07
+ *  Created by Tezov on 04/04/2023 20:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 15:07
+ *  Last modified 04/04/2023 20:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,8 +18,9 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColorSemantic
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Nucleus.Color as ButtonNucleus
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Nucleus.Color as LinkNucleus
@@ -74,21 +75,41 @@ object ThemeColorsExtended {
         semantic: OutfitPaletteColorSemantic? = null,
         onSemantic: OutfitPaletteColorSemantic? = null,
 
-    ){
+        ) {
 
-        val backgroundElevated: OutfitPaletteColor by DelegateNullFallBack(backgroundElevated, background)
-        val onBackgroundElevated: OutfitPaletteColor by DelegateNullFallBack(onBackgroundElevated, onBackground)
+        val backgroundElevated: OutfitPaletteColor by DelegateNullFallBack(
+            backgroundElevated,
+            lazyFallBackValue = { background })
+        val onBackgroundElevated: OutfitPaletteColor by DelegateNullFallBack(
+            onBackgroundElevated,
+            lazyFallBackValue = { onBackground })
 
-        val backgroundModal: OutfitPaletteColor by DelegateNullFallBack(backgroundModal, background)
-        val onBackgroundModal: OutfitPaletteColor by DelegateNullFallBack(onBackgroundModal, onBackground)
+        val backgroundModal: OutfitPaletteColor by DelegateNullFallBack(
+            backgroundModal,
+            lazyFallBackValue = { background })
+        val onBackgroundModal: OutfitPaletteColor by DelegateNullFallBack(
+            onBackgroundModal,
+            lazyFallBackValue = { onBackground })
 
-        val secondary: OutfitPaletteColor by DelegateNullFallBack(secondary, primary)
-        val onSecondary: OutfitPaletteColor by DelegateNullFallBack(onSecondary, onPrimary)
-        val tertiary: OutfitPaletteColor by DelegateNullFallBack(tertiary, primary)
-        val onTertiary: OutfitPaletteColor by DelegateNullFallBack(onTertiary, onPrimary)
+        val secondary: OutfitPaletteColor by DelegateNullFallBack(
+            secondary,
+            lazyFallBackValue = { primary })
+        val onSecondary: OutfitPaletteColor by DelegateNullFallBack(
+            onSecondary,
+            lazyFallBackValue = { onPrimary })
+        val tertiary: OutfitPaletteColor by DelegateNullFallBack(
+            tertiary,
+            lazyFallBackValue = { primary })
+        val onTertiary: OutfitPaletteColor by DelegateNullFallBack(
+            onTertiary,
+            lazyFallBackValue = { onPrimary })
 
-        val semantic: OutfitPaletteColorSemantic by DelegateNullFallBack(semantic, OutfitPaletteColorSemantic(primary))
-        val onSemantic: OutfitPaletteColorSemantic by DelegateNullFallBack(onSemantic, OutfitPaletteColorSemantic(onPrimary))
+        val semantic: OutfitPaletteColorSemantic by DelegateNullFallBack(
+            semantic,
+            lazyFallBackValue = { OutfitPaletteColorSemantic(primary) })
+        val onSemantic: OutfitPaletteColorSemantic by DelegateNullFallBack(
+            onSemantic,
+            lazyFallBackValue = { OutfitPaletteColorSemantic(onPrimary) })
 
     }
 
@@ -112,25 +133,28 @@ object ThemeColorsExtended {
         val cancel: ButtonNucleus by DelegateNullFallBack(cancel)
         val proceed: ButtonNucleus by DelegateNullFallBack(proceed)
 
-        override fun groupFallBackRefs() = listOf(primary, secondary, tertiary, confirm, cancel, proceed)
+        override fun groupFallBackRefs() =
+            listOf(primary, secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            groupFallBackValue = ButtonNucleus(
-                nucleusFrame = FrameNucleus.Color(
-                    nucleusShape = OutfitStateDual(
-                        active = Color.Gray.copy(alpha = 0.5f),
-                        inactive = Color.Gray.copy(alpha = 0.75f)
+            groupLazyFallBackValue = {
+                ButtonNucleus(
+                    nucleusFrame = FrameNucleus.Color(
+                        nucleusShape = OutfitStateDual(
+                            active = Color.Gray.copy(alpha = 0.5f),
+                            inactive = Color.Gray.copy(alpha = 0.75f)
+                        ),
+                        nucleusBorder = OutfitStateDual(
+                            active = Color.Black,
+                            inactive = Color.Black.copy(alpha = 0.5f)
+                        )
                     ),
-                    nucleusBorder = OutfitStateDual(
-                        active = Color.Black,
-                        inactive = Color.Black.copy(alpha = 0.5f)
-                    )
-                ),
-                nucleusText = OutfitStateDual(
+                    nucleusText = OutfitStateDual(
                         active = Color.Black,
                         inactive = Color.Black.copy(alpha = 0.25f)
+                    )
                 )
-            )
+            }
         }
     }
 
@@ -151,12 +175,14 @@ object ThemeColorsExtended {
         override fun groupFallBackRefs() = listOf(primary, secondary, tertiary)
 
         init {
-            groupFallBackValue = LinkNucleus(
-                nucleusText = OutfitStateDual(
+            groupLazyFallBackValue = {
+                LinkNucleus(
+                    nucleusText = OutfitStateDual(
                         active = Color.Black,
                         inactive = Color.Black.copy(alpha = 0.25f)
+                    )
                 )
-            )
+            }
         }
     }
 

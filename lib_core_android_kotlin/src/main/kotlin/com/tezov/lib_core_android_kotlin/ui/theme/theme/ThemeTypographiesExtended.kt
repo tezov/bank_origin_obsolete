@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 15:07
+ *  Created by Tezov on 04/04/2023 20:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 14:37
+ *  Last modified 04/04/2023 20:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -67,34 +67,47 @@ object ThemeTypographiesExtended {
         fieldValue: OutfitTextStateColor? = null,
         fieldLabel: OutfitTextStateColor? = null,
     ) {
-        private val default = TextStyle(
-            color = Color.Black,
-            fontSize = 14.sp
-        )
+        private val default = object : Lazy<TextStyle>{
+
+            lateinit var _value:TextStyle
+
+            override val value: TextStyle
+                get() {
+                    if(!isInitialized()){
+                        _value = TextStyle(
+                            color = Color.Black,
+                            fontSize = 14.sp
+                        )
+                    }
+                    return _value
+                }
+
+            override fun isInitialized() = this::_value.isInitialized
+        }
 
         val title: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(
             title,
-            default.asTextPaletteSizeStateColor
+            lazyFallBackValue = { default.value.asTextPaletteSizeStateColor }
         )
         val body: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(
             body,
-            default.asTextPaletteSizeStateColor
+            lazyFallBackValue = { default.value.asTextPaletteSizeStateColor }
         )
         val subtitle: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(
             subtitle,
-            default.asTextPaletteSizeStateColor
+            lazyFallBackValue = { default.value.asTextPaletteSizeStateColor }
         )
         val helper: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(
             helper,
-            default.asTextPaletteSizeStateColor
+            lazyFallBackValue = { default.value.asTextPaletteSizeStateColor }
         )
         val fieldValue: OutfitTextStateColor by DelegateNullFallBack(
             fieldValue,
-            default.asTextStateColor
+            lazyFallBackValue = { default.value.asTextStateColor }
         )
         val fieldLabel: OutfitTextStateColor by DelegateNullFallBack(
             fieldLabel,
-            default.asTextStateColor
+            lazyFallBackValue = { default.value.asTextStateColor }
         )
     }
 
@@ -122,11 +135,13 @@ object ThemeTypographiesExtended {
             listOf(primary, secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            groupFallBackValue = TextStyle(
-                color = Color.Black,
-                fontWeight = FontWeight.SemiBold,
-                fontSize = 16.sp
-            ).asButtonNucleus
+            groupLazyFallBackValue = {
+                TextStyle(
+                    color = Color.Black,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 16.sp
+                ).asButtonNucleus
+            }
         }
     }
 
@@ -147,12 +162,14 @@ object ThemeTypographiesExtended {
         override fun groupFallBackRefs() = listOf(primary, secondary, tertiary)
 
         init {
-            groupFallBackValue = TextStyle(
-                color = Color.Black,
-                fontSize = 14.sp,
-                fontWeight = FontWeight.SemiBold,
-                textDecoration = TextDecoration.Underline,
-            ).asLinkNucleus
+            groupLazyFallBackValue = {
+                TextStyle(
+                    color = Color.Black,
+                    fontSize = 14.sp,
+                    fontWeight = FontWeight.SemiBold,
+                    textDecoration = TextDecoration.Underline,
+                ).asLinkNucleus
+            }
         }
     }
 

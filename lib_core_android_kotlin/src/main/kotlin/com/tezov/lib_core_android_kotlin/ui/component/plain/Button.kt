@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 15:07
+ *  Created by Tezov on 04/04/2023 20:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 15:07
+ *  Last modified 04/04/2023 20:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,9 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.asSize
 import androidx.compose.ui.graphics.Color as ColorImport
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Nucleus as FrameNucleus
 
@@ -55,15 +53,15 @@ object Button {
             object Nucleus {
 
                 class Color(
-                    val nucleusFrame: FrameNucleus.Color = FrameNucleus.Color(),
-                    val nucleusText: OutfitState.Style<ColorImport> = OutfitStateEmpty(),
+                    val nucleusFrame: FrameNucleus.Color? = null,
+                    val nucleusText: OutfitState.Style<ColorImport>? = null,
                 )
 
                 inline val FrameNucleus.Color.asButtonNucleus get() = Color(nucleusFrame = this)
-                inline val OutfitState.Style<Color>.asButtonNucleus get() = Color(nucleusText = this)
+                inline val OutfitState.Style<ColorImport>.asButtonNucleus get() = Color(nucleusText = this)
 
                 class Typography(
-                    val nucleusText: TextStyle = TextStyle(),
+                    val nucleusText: TextStyle? = null,
                 )
 
                 inline val TextStyle.asButtonNucleus get() = Typography(nucleusText = this)
@@ -112,8 +110,8 @@ object Button {
                         disabledBackgroundColor = it,
                     )
                 } ?: ButtonDefaults.buttonColors(
-                    backgroundColor = Color1.Transparent,
-                    disabledBackgroundColor = Color1.Transparent,
+                    backgroundColor = ColorImport.Transparent,
+                    disabledBackgroundColor = ColorImport.Transparent,
                 ),
                 contentPadding = contentPadding,
                 enabled = enabled,

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 15:07
+ *  Created by Tezov on 04/04/2023 20:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 14:37
+ *  Last modified 04/04/2023 20:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,13 +17,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
-import androidx.compose.ui.graphics.Color
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asShapePaletteSizeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asShapeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 val MaterialTheme.shapesCommonExtended
@@ -49,7 +46,7 @@ object ThemeShapesExtended {
     ) {
         val roundedCorner: OutfitPaletteSize<OutfitShapeStateColor> by DelegateNullFallBack(
             roundedCorner,
-            12.asShapePaletteSizeStateColor
+            lazyFallBackValue = { 12.asShapePaletteSizeStateColor }
         )
     }
 
@@ -73,10 +70,11 @@ object ThemeShapesExtended {
         val cancel: OutfitShapeStateColor by DelegateNullFallBack(cancel)
         val proceed: OutfitShapeStateColor by DelegateNullFallBack(proceed)
 
-        override fun groupFallBackRefs() = listOf(primary, secondary, tertiary, confirm, cancel, proceed)
+        override fun groupFallBackRefs() =
+            listOf(primary, secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            groupFallBackValue = 12.asShapeStateColor
+            groupLazyFallBackValue = { 12.asShapeStateColor }
         }
     }
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 15:07
+ *  Created by Tezov on 04/04/2023 20:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 15:07
+ *  Last modified 04/04/2023 20:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextDecoration
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import androidx.compose.ui.graphics.Color as ColorImport
 
@@ -40,11 +39,13 @@ object Link {
             object Nucleus {
 
                 class Color(
-                    val nucleusText: OutfitState.Style<ColorImport> = OutfitStateEmpty(),
+                    val nucleusText: OutfitState.Style<ColorImport>? = null,
                 )
 
+                inline val OutfitState.Style<ColorImport>.asLinkNucleus get() = Color(nucleusText = this)
+
                 class Typography(
-                    val nucleusText: TextStyle = TextStyle(),
+                    val nucleusText: TextStyle? = null,
                 )
 
                 inline val TextStyle.asLinkNucleus get() = Typography(this)

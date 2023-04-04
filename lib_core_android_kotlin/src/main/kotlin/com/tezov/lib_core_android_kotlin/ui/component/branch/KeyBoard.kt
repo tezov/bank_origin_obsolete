@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 04/04/2023 20:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:15
+ *  Last modified 04/04/2023 20:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,10 +26,8 @@ import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import kotlin.properties.Delegates
 
@@ -57,42 +55,37 @@ object KeyBoard {
 
     object GridCube {
 
-        @Immutable
-        open class Style(
+        class StyleBuilder internal constructor(style: Style) {
+            var colorBackground = style.colorBackground
+            var colorOnBackground = style.colorOnBackground
+            var outfitBorderOuter = style.outfitBorderOuter
+            var outfitBorderInner = style.outfitBorderInner
+
+            internal fun get() = Style(
+                colorBackground = colorBackground,
+                colorOnBackground = colorOnBackground,
+                outfitBorderOuter = outfitBorderOuter,
+                outfitBorderInner = outfitBorderInner,
+            )
+        }
+
+        class Style(
             val colorBackground: Color = Color.Transparent,
             val colorOnBackground: Color = Color.Black,
             val outfitBorderOuter: OutfitBorderStateColor = OutfitBorderStateColor(
                 size = 2.dp,
-                outfitState = OutfitStateSimple(
-                    value = Color.Black
-                )
+                outfitState = Color.Black.asStateSimple
             ),
             val outfitBorderInner: OutfitBorderStateColor = OutfitBorderStateColor(
                 size = 1.dp,
-                outfitState = OutfitStateSimple(
-                    value = Color.Black
-                )
+                outfitState = Color.Black.asStateSimple
             ),
         ) {
 
             companion object {
 
-                open class Builder internal constructor(style: Style) {
-                    var colorBackground = style.colorBackground
-                    var colorOnBackground = style.colorOnBackground
-                    var outfitBorderOuter = style.outfitBorderOuter
-                    var outfitBorderInner = style.outfitBorderInner
-
-                    internal fun get() = Style(
-                        colorBackground = colorBackground,
-                        colorOnBackground = colorOnBackground,
-                        outfitBorderOuter = outfitBorderOuter,
-                        outfitBorderInner = outfitBorderInner,
-                    )
-                }
-
                 @Composable
-                fun Style.copy(builder: @Composable Builder.() -> Unit) = Builder(this).also {
+                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit) = StyleBuilder(this).also {
                     it.builder()
                 }.get()
 

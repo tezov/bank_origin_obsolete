@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 04/04/2023 20:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:15
+ *  Last modified 04/04/2023 20:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,13 +24,30 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asShapeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object HorizontalScrollable {
 
     object Pager {
 
-        @Immutable
+        open class StyleBuilder internal constructor(style: Style) {
+            var outfitShapeIndicator = style.outfitShapeIndicator
+            var dimensionIndicatorSize = style.dimensionIndicatorSize
+            var dimensionIndicatorSpacing = style.dimensionIndicatorSpacing
+            var dimensionIndicatorPaddingTop = style.dimensionIndicatorPaddingTop
+            var padding = style.padding
+
+            internal open fun get() = Style(
+                outfitShapeIndicator = outfitShapeIndicator,
+                dimensionIndicatorSize = dimensionIndicatorSize,
+                dimensionIndicatorSpacing = dimensionIndicatorSpacing,
+                dimensionIndicatorPaddingTop = dimensionIndicatorPaddingTop,
+                padding = padding,
+            )
+        }
+
         open class Style(
             val outfitShapeIndicator: OutfitShapeStateColor? = OutfitShapeStateColor(
                 template = OutfitShape.Template.Circle,
@@ -44,24 +61,8 @@ object HorizontalScrollable {
 
             companion object {
 
-                open class Scope internal constructor(style: Style) {
-                    var outfitShapeIndicator = style.outfitShapeIndicator
-                    var dimensionIndicatorSize = style.dimensionIndicatorSize
-                    var dimensionIndicatorSpacing = style.dimensionIndicatorSpacing
-                    var dimensionIndicatorPaddingTop = style.dimensionIndicatorPaddingTop
-                    var padding = style.padding
-
-                    internal open fun get() = Style(
-                        outfitShapeIndicator = outfitShapeIndicator,
-                        dimensionIndicatorSize = dimensionIndicatorSize,
-                        dimensionIndicatorSpacing = dimensionIndicatorSpacing,
-                        dimensionIndicatorPaddingTop = dimensionIndicatorPaddingTop,
-                        padding = padding,
-                    )
-                }
-
                 @Composable
-                fun Style.copy(scope: @Composable Scope.() -> Unit) = Scope(this).also {
+                fun Style.copy(scope: @Composable StyleBuilder.() -> Unit) = StyleBuilder(this).also {
                     it.scope()
                 }.get()
 
@@ -129,18 +130,26 @@ object HorizontalScrollable {
 
     object CarouselCard {
 
+        open class StyleBuilder internal constructor(style: Style) :
+            Pager.StyleBuilder(style) {
+            var outfitFrame = style.outfitFrame
+            var marginCard = style.marginCard
+
+            override fun get() = Style(
+                pagerStyle = super.get(),
+                outfitFrame = outfitFrame,
+                marginCard = marginCard,
+            )
+        }
+
         @Immutable
         open class Style(
             pagerStyle: Pager.Style = Pager.Style(),
             val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(
-                outfitShape = OutfitShapeStateColor(
-                    size = 8.asOutfitShapeSize,
-                ),
+                outfitShape = 8.asShapeStateColor,
                 outfitBorder = OutfitBorderStateColor(
                     size = 1.dp,
-                    outfitState = OutfitStateSimple(
-                        value = Color.Black
-                    )
+                    outfitState = Color.Black.asStateSimple
                 ),
             ),
             val marginCard: PaddingValues = PaddingValues(horizontal = 4.dp),
@@ -148,26 +157,14 @@ object HorizontalScrollable {
 
             companion object {
 
-                open class Scope internal constructor(style: Style) :
-                    Pager.Style.Companion.Scope(style) {
-                    var outfitFrame = style.outfitFrame
-                    var marginCard = style.marginCard
-
-                    override fun get() = Style(
-                        pagerStyle = super.get(),
-                        outfitFrame = outfitFrame,
-                        marginCard = marginCard,
-                    )
-                }
-
                 @Composable
-                fun Style.copy(scope: @Composable Scope.() -> Unit) = Scope(this).also {
+                fun Style.copy(scope: @Composable StyleBuilder.() -> Unit) = StyleBuilder(this).also {
                     it.scope()
                 }.get()
 
                 @Composable
-                fun Pager.Style.copyToCarouselCardStyle(scope: @Composable Scope.() -> Unit) =
-                    Scope(Style(this)).also { it.scope() }.get()
+                fun Pager.Style.copyToCarouselCardStyle(scope: @Composable StyleBuilder.() -> Unit) =
+                    StyleBuilder(Style(this)).also { it.scope() }.get()
 
             }
 

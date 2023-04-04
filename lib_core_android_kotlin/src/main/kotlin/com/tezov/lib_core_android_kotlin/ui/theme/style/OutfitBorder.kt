@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 15:07
+ *  Created by Tezov on 04/04/2023 20:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 15:07
+ *  Last modified 04/04/2023 20:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,8 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asSize
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asShapePaletteSizeStateColor
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
 fun Modifier.border(
@@ -67,8 +66,13 @@ object OutfitBorder {
         class Style(
             val template: Template = Template.Fill,
             val size: Dp? = null,
-            val outfitState: OutfitState.Style<ColorImport> = OutfitStateEmpty(),
+            outfitState: OutfitState.Style<ColorImport>? = null,
         ) {
+
+            val outfitState: OutfitState.Style<ColorImport> by DelegateNullFallBack(
+                outfitState,
+                lazyFallBackValue = { OutfitStateNull() }
+            )
 
             companion object {
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 15:07
+ *  Created by Tezov on 04/04/2023 20:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 15:07
+ *  Last modified 04/04/2023 20:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,6 +14,7 @@ package com.tezov.lib_core_android_kotlin.ui.theme.style
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
 fun Modifier.border(
@@ -43,15 +44,24 @@ object OutfitFrame {
         }
 
         class Style(
-            val outfitShape: OutfitShapeStateColor = OutfitShapeStateColor(),
-            val outfitBorder: OutfitBorderStateColor = OutfitBorderStateColor(),
+            outfitShape: OutfitShapeStateColor? = null,
+            outfitBorder: OutfitBorderStateColor? = null,
         ) {
+
+            val outfitShape: OutfitShapeStateColor by DelegateNullFallBack(
+                outfitShape,
+                lazyFallBackValue = { OutfitShapeStateColor() }
+            )
+            val outfitBorder: OutfitBorderStateColor by DelegateNullFallBack(
+                outfitBorder,
+                lazyFallBackValue = { OutfitBorderStateColor() }
+            )
 
             object Nucleus {
 
                 class Color(
-                    val nucleusShape: OutfitState.Style<ColorImport> = OutfitStateEmpty(),
-                    val nucleusBorder: OutfitState.Style<ColorImport>  = OutfitStateEmpty(),
+                    val nucleusShape: OutfitState.Style<ColorImport>? = null,
+                    val nucleusBorder: OutfitState.Style<ColorImport>? = null,
                 )
 
             }

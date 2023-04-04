@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 13:51
+ *  Created by Tezov on 04/04/2023 20:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 13:51
+ *  Last modified 04/04/2023 20:57
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -48,7 +48,6 @@ infix fun MaterialTheme.provides(value: ThemeComponentExtended.Links) =
 
 object ThemeComponentExtended {
 
-    @Immutable
     class Common(
         topAppBar: TopAppBar.Style? = null,
         bottomNavigation: BottomNavigation.Style? = null,
@@ -67,9 +66,8 @@ object ThemeComponentExtended {
         error("not provided")
     }
 
-    @Immutable
     class Buttons(
-        primary: ButtonImport.StateColor.Style? = null,
+        val primary: ButtonImport.StateColor.Style,
         secondary: ButtonImport.StateColor.Style? = null,
         tertiary: ButtonImport.StateColor.Style? = null,
         confirm: ButtonImport.StateColor.Style? = null,
@@ -77,7 +75,6 @@ object ThemeComponentExtended {
         proceed: ButtonImport.StateColor.Style? = null,
     ) : DelegateNullFallBack.Group<ButtonImport.StateColor.Style> {
 
-        val primary: ButtonImport.StateColor.Style by DelegateNullFallBack(primary)
         val secondary: ButtonImport.StateColor.Style by DelegateNullFallBack(secondary)
         val tertiary: ButtonImport.StateColor.Style by DelegateNullFallBack(tertiary)
         val confirm: ButtonImport.StateColor.Style by DelegateNullFallBack(confirm)
@@ -88,7 +85,7 @@ object ThemeComponentExtended {
             listOf(primary, secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            groupFallBackValue = ButtonImport.StateColor.Style.TextFilled
+            groupLazyFallBackValue = { primary }
         }
     }
 
@@ -96,21 +93,19 @@ object ThemeComponentExtended {
         error("not provided")
     }
 
-    @Immutable
     class Links(
-        primary: LinkImport.StateColor.Style? = null,
+        val primary: LinkImport.StateColor.Style,
         secondary: LinkImport.StateColor.Style? = null,
         tertiary: LinkImport.StateColor.Style? = null,
     ) : DelegateNullFallBack.Group<LinkImport.StateColor.Style> {
 
-        val primary: LinkImport.StateColor.Style by DelegateNullFallBack(primary)
         val secondary: LinkImport.StateColor.Style by DelegateNullFallBack(secondary)
         val tertiary: LinkImport.StateColor.Style by DelegateNullFallBack(tertiary)
 
         override fun groupFallBackRefs() = listOf(secondary, tertiary)
 
         init {
-            groupFallBackValue = LinkImport.StateColor.Style.Underlined
+            groupLazyFallBackValue = { primary }
         }
     }
 

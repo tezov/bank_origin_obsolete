@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 13:51
+ *  Created by Tezov on 04/04/2023 20:57
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 13:51
+ *  Last modified 04/04/2023 20:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,6 @@
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.text.TextStyle
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_kotlin.extension.ExtensionCollection.firstNotNull
 import androidx.compose.ui.graphics.Color as ColorImport
@@ -26,7 +25,7 @@ typealias OutfitPaletteDirection<T> = OutfitPalette.Direction.Style<T>
 
 object OutfitPalette {
 
-    object Color{
+    object Color {
 
         class StyleBuilder internal constructor(val style: Style) {
             var default = style.default
@@ -56,15 +55,16 @@ object OutfitPalette {
             override fun groupFallBackRefs() = listOf(light, dark, accent)
 
             init {
-                groupFallBackValue = default
+                groupLazyFallBackValue = { default }
             }
 
             companion object {
 
                 @Composable
-                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) = StyleBuilder(this).also {
-                    it.builder()
-                }.get()
+                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) =
+                    StyleBuilder(this).also {
+                        it.builder()
+                    }.get()
 
             }
 
@@ -78,7 +78,7 @@ object OutfitPalette {
 
     }
 
-    object Size{
+    object Size {
 
         class StyleBuilder<T : Any> internal constructor(val style: Style<T>) {
             var micro = style.micro
@@ -117,7 +117,7 @@ object OutfitPalette {
             override fun groupFallBackRefs() = listOf(micro, small, big, huge, supra)
 
             init {
-                groupFallBackValue = normal
+                groupLazyFallBackValue = { normal }
             }
 
             companion object {
@@ -142,7 +142,7 @@ object OutfitPalette {
 
     }
 
-    object Direction{
+    object Direction {
 
         class StyleBuilder<T : Any> internal constructor(val style: Style<T>) {
             var vertical = style.vertical
@@ -165,7 +165,9 @@ object OutfitPalette {
             override fun groupFallBackRefs() = listOf(vertical, horizontal)
 
             init {
-                groupFallBackValue = groupFallBackRefs().firstNotNull() ?: throw UninitializedPropertyAccessException()
+                groupFallBackRefs().firstNotNull()?.let {
+                    groupLazyFallBackValue = { it }
+                }
             }
 
             companion object {
@@ -176,6 +178,11 @@ object OutfitPalette {
                         it.builder()
                     }
             }
+
+            constructor(all: T? = null) : this(
+                vertical = all,
+                horizontal = all,
+            )
 
             constructor(style: Style<T>) : this(
                 vertical = style.vertical,
