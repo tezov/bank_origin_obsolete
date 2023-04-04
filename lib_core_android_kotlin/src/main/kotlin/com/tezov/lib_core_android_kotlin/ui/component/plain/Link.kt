@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 16:46
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 16:46
+ *  Last modified 04/04/2023 11:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,16 +19,13 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 
 object Link {
 
     object StateColor {
 
-        open class StyleBuilder internal constructor(style: Style) {
+        class StyleBuilder internal constructor(style: Style) {
             var outfitText = style.outfitText
 
             internal fun get() = Style(
@@ -40,15 +37,17 @@ object Link {
             val outfitText: OutfitText.StateColor.Style = OutfitTextStateColor(),
         ) {
 
-            object Nucleus{
+            object Nucleus {
 
                 class Color(
-                    val nucleusText:OutfitState.Style<Color>,
+                    val nucleusText: OutfitState.Style<Color> = OutfitStateEmpty(),
                 )
 
                 class Typography(
-                    val nucleusText: TextStyle,
+                    val nucleusText: TextStyle = TextStyle(),
                 )
+
+                inline val TextStyle.asLinkNucleus get() = Typography(this)
 
             }
 
@@ -56,9 +55,10 @@ object Link {
 
 
                 @Composable
-                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) = StyleBuilder(this).also {
-                    it.builder()
-                }.get()
+                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) =
+                    StyleBuilder(this).also {
+                        it.builder()
+                    }.get()
 
                 val Underlined
                     get() = Style(

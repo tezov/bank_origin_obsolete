@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 04/04/2023 11:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,31 +25,33 @@ import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
 
+    class StyleBuilder internal constructor(style: Style) {
+        var outfitShape = style.outfitShape
+        var elevation = style.elevation
+
+        internal fun get() = Style(
+            elevation = elevation,
+            outfitShape = outfitShape,
+        )
+    }
+
     class Style(
-        val outfitTextMessage: OutfitText.StateColor = OutfitText.StateColor(),
-        val outfitTextAction: OutfitText.StateColor = OutfitText.StateColor(),
-        val outfitShape: OutfitShape.Style = OutfitShape.Style(),
+        val outfitTextMessage: OutfitTextStateColor = OutfitTextStateColor(),
+        val outfitTextAction: OutfitTextStateColor = OutfitTextStateColor(),
+        val outfitShape: OutfitShapeStateColor = OutfitShapeStateColor(),
         val elevation: Dp = 0.dp,
     ){
         companion object{
 
-            open class Builder internal constructor(style: Style) {
-                var outfitShape = style.outfitShape
-                var elevation = style.elevation
-
-                internal fun get() = Style(
-                    elevation = elevation,
-                    outfitShape = outfitShape,
-                )
-            }
-
             @Composable
-            fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+            fun Style.copy(builder: @Composable StyleBuilder.()->Unit = {}) = StyleBuilder(this).also {
                 it.builder()
             }.get()
 

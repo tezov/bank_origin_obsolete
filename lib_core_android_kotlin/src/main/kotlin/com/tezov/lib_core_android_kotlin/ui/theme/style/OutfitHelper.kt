@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 17:18
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 17:18
+ *  Last modified 04/04/2023 11:15
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,12 +20,7 @@ inline val Color.asOutfitColor: OutfitStateSimple<Color> get() = OutfitStateSimp
 inline val Color.asOutfitColorActive: OutfitStateDual<Color> get() = OutfitStateDual(active = this)
 inline val Color.asOutfitColorInactive: OutfitStateDual<Color> get() = OutfitStateDual(inactive = this)
 
-inline val TextStyle.asOutfitText: OutfitTextStateColor
-    get() = OutfitText.StateColor.Style(
-        typo = this
-    ).also { it.outfitState.nullFallback = { Color.Black } }
-inline val TextStyle.asOutfitTextPalette: OutfitPaletteSize<OutfitTextStateColor>
-    get() = OutfitPaletteSize(this.asOutfitText)
+
 
 inline val Int.asOutfitShapeSize: OutfitShape.Size get() = OutfitShape.Size(this)
 

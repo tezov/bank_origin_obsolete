@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 04/04/2023 11:36
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,7 +15,7 @@ package com.tezov.lib_core_kotlin.file
 import com.tezov.lib_core_kotlin.file.UtilsStream.closeSilently
 import com.tezov.lib_core_java.type.unit.UnitByte
 import kotlin.Throws
-import com.tezov.lib_core_kotlin.toolbox.ExtensionNull.nullify
+import com.tezov.lib_core_kotlin.extension.ExtensionNull.nullify
 import com.tezov.lib_core_kotlin.type.primaire.Pair
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toLong
 import com.tezov.lib_core_kotlin.type.primitive.LongTo

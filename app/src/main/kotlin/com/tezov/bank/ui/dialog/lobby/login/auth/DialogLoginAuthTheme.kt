@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 12:47
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 12:32
+ *  Last modified 04/04/2023 11:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -89,7 +89,7 @@ object DialogLoginAuthTheme {
     @Composable
     fun provideColors() = Colors(
         background = ThemeColors.Common.blackOverlay,
-        onBackground = MaterialTheme.colorsExtended.onPrimary.accent,
+        onBackground = MaterialTheme.colorsCommonExtended.onPrimary.accent,
         backgroundButtonActive = MaterialTheme.colors.primary,
 //        backgroundButtonInactive = MaterialTheme.colorsExtended.backgroundButtonConfirm.inactive,
         backgroundButtonInactive = TODO(),
@@ -174,17 +174,17 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesTextExtended.textTitle.typo.copy(
             color = colors.onBackground
         ),
-        fieldValue = MaterialTheme.typographiesExtended.textFieldValue.typo.copy(
+        fieldValue = MaterialTheme.typographiesTextExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        fieldLabel = MaterialTheme.typographiesExtended.textFieldValue.typo.copy(
+        fieldLabel = MaterialTheme.typographiesTextExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        button = MaterialTheme.typographiesExtended.textNormal.typo,
-        link = MaterialTheme.typographiesExtended.textNormal.typo.copy(
+        button = MaterialTheme.typographiesTextExtended.textNormal.typo,
+        link = MaterialTheme.typographiesTextExtended.textNormal.typo.copy(
             color = colors.onBackground,
         )
 

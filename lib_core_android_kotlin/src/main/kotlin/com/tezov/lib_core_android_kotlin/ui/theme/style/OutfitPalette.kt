@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 17:18
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 17:18
+ *  Last modified 04/04/2023 11:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,6 +13,7 @@ package com.tezov.lib_core_android_kotlin.ui.theme.style
 
 import androidx.compose.runtime.Composable
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
+import com.tezov.lib_core_kotlin.extension.ExtensionCollection.firstNotNull
 import androidx.compose.ui.graphics.Color as ColorImport
 
 typealias OutfitPaletteColor = OutfitPalette.Color.Style
@@ -172,7 +173,7 @@ object OutfitPalette {
 
             init {
                 nullFallback = {
-                    horizontal ?: (vertical ?: throw UninitializedPropertyAccessException())
+                    refs().firstNotNull() ?: throw UninitializedPropertyAccessException()
                 }
             }
 

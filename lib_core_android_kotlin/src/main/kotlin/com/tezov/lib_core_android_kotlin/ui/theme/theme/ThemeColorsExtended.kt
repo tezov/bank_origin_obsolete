@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 16:46
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 16:46
+ *  Last modified 04/04/2023 11:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,7 +23,7 @@ import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Nucleus.Color as ButtonNucleus
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Nucleus.Color as LinkNucleus
 
-val MaterialTheme.colorsExtended
+val MaterialTheme.colorsCommonExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeColorsExtended.localCommon.current
@@ -36,7 +36,7 @@ val MaterialTheme.colorsButtonExtended
     @ReadOnlyComposable
     get() = ThemeColorsExtended.localButtons.current
 
-infix fun MaterialTheme.provides(value: ThemeColorsExtended.Button) =
+infix fun MaterialTheme.provides(value: ThemeColorsExtended.Buttons) =
     ThemeColorsExtended.localButtons provides value
 
 val MaterialTheme.colorsLinkExtended
@@ -44,7 +44,7 @@ val MaterialTheme.colorsLinkExtended
     @ReadOnlyComposable
     get() = ThemeColorsExtended.localLinks.current
 
-infix fun MaterialTheme.provides(value: ThemeColorsExtended.Link) =
+infix fun MaterialTheme.provides(value: ThemeColorsExtended.Links) =
     ThemeColorsExtended.localLinks provides value
 
 
@@ -78,7 +78,7 @@ object ThemeColorsExtended {
         error("not provided")
     }
 
-    class Button(
+    class Buttons(
         val primary: ButtonNucleus,
         secondary: ButtonNucleus? = null,
         tertiary: ButtonNucleus? = null,
@@ -100,11 +100,11 @@ object ThemeColorsExtended {
         }
     }
 
-    internal val localButtons: ProvidableCompositionLocal<Button> = staticCompositionLocalOf {
+    internal val localButtons: ProvidableCompositionLocal<Buttons> = staticCompositionLocalOf {
         error("not provided")
     }
 
-    class Link(
+    class Links(
         val primary: LinkNucleus,
         secondary: LinkNucleus? = null,
         tertiary: LinkNucleus? = null,
@@ -120,7 +120,7 @@ object ThemeColorsExtended {
         }
     }
 
-    internal val localLinks: ProvidableCompositionLocal<Link> = staticCompositionLocalOf {
+    internal val localLinks: ProvidableCompositionLocal<Links> = staticCompositionLocalOf {
         error("not provided")
     }
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 16:46
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 16:46
+ *  Last modified 04/04/2023 11:15
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,6 +18,15 @@ import androidx.compose.ui.graphics.Color as ColorImport
 typealias OutfitTextStateColor = OutfitText.StateColor.Style
 
 object OutfitText {
+
+    inline val TextStyle.asOutfitText: OutfitTextStateColor
+        get() = StateColor.Style(
+            typo = this
+        ).also { it.outfitState.nullFallback = { androidx.compose.ui.graphics.Color.Black } }
+
+    inline val TextStyle.asOutfitTextPalette: OutfitPaletteSize<OutfitTextStateColor>
+        get() = OutfitPaletteSize(this.asOutfitText)
+
 
     object StateColor {
 
@@ -62,6 +71,5 @@ object OutfitText {
         }
 
     }
-
 
 }

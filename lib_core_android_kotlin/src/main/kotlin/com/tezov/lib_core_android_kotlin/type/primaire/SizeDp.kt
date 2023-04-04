@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 28/03/2023 23:25
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 28/03/2023 22:50
+ *  Last modified 04/04/2023 12:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -41,9 +41,7 @@ class SizeDp constructor(var width: Dp = 0.dp, var height: Dp = 0.dp) {
     constructor(size:Double):this(size.dp, size.dp)
 
     fun swap() {
-        val tmp = width
-        width = height
-        height = tmp
+        height = width.also { width = height }
     }
 
     val ratio get() = if (width.value != 0f) {

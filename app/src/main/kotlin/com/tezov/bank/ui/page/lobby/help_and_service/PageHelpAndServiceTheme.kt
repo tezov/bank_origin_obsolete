@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 14:03
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 14:00
+ *  Last modified 04/04/2023 11:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -69,7 +69,7 @@ object PageHelpAndServiceTheme {
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.background,
-        backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.accent,
+        backgroundElevated = MaterialTheme.colorsCommonExtended.backgroundElevated.accent,
         onBackground = MaterialTheme.colors.onBackground,
         iconClose = MaterialTheme.colors.primary,
     )
@@ -98,7 +98,7 @@ object PageHelpAndServiceTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        titleBig = MaterialTheme.typographiesExtended.textHuge.typo.copy(
+        titleBig = MaterialTheme.typographiesTextExtended.textHuge.typo.copy(
             color = colors.onBackground,
             fontWeight = FontWeight.Bold
         ),

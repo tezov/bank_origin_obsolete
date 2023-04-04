@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 17:18
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 17:18
+ *  Last modified 04/04/2023 11:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,10 +25,11 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Nucleus as FrameNucleus
 
 object Button {
 
-    object StateColor{
+    object StateColor {
 
         class StyleBuilder internal constructor(
             style: Style
@@ -50,18 +51,18 @@ object Button {
             val elevation: Dp? = null,
         ) {
 
-            object Nucleus{
+            object Nucleus {
 
                 class Color(
-                    val nucleusFrame:OutfitFrame.StateColor.Style.Nucleus.Color,
-                    val nucleusText:OutfitState.Style<Color>,
+                    val nucleusFrame: FrameNucleus.Color = FrameNucleus.Color(),
+                    val nucleusText: OutfitState.Style<Color> = OutfitStateEmpty(),
                 )
 
                 class Typography(
-                    val nucleusText: TextStyle,
+                    val nucleusText: TextStyle = TextStyle(),
                 )
-                inline val TextStyle.asButtonNucleus: Typography get() = Typography(this)
 
+                inline val TextStyle.asButtonNucleus get() = Typography(this)
 
             }
 

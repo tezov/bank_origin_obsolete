@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 17:18
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 17:18
+ *  Last modified 04/04/2023 11:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,20 +23,20 @@ import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Nucleus.Typography as ButtonNucleus
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Nucleus.Typography as LinkNucleus
 
-val MaterialTheme.typographiesExtended
+val MaterialTheme.typographiesTextExtended
     @Composable
     @ReadOnlyComposable
-    get() = ThemeTypographiesExtended.localCommon.current
+    get() = ThemeTypographiesExtended.localTexts.current
 
-infix fun MaterialTheme.provides(value: ThemeTypographiesExtended.Common) =
-    ThemeTypographiesExtended.localCommon provides value
+infix fun MaterialTheme.provides(value: ThemeTypographiesExtended.Texts) =
+    ThemeTypographiesExtended.localTexts provides value
 
 val MaterialTheme.typographiesButtonExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeTypographiesExtended.localButtons.current
 
-infix fun MaterialTheme.provides(value: ThemeTypographiesExtended.Button) =
+infix fun MaterialTheme.provides(value: ThemeTypographiesExtended.Buttons) =
     ThemeTypographiesExtended.localButtons provides value
 
 val MaterialTheme.typographiesLinkExtended
@@ -44,13 +44,13 @@ val MaterialTheme.typographiesLinkExtended
     @ReadOnlyComposable
     get() = ThemeTypographiesExtended.localLinks.current
 
-infix fun MaterialTheme.provides(value: ThemeTypographiesExtended.Link) =
+infix fun MaterialTheme.provides(value: ThemeTypographiesExtended.Links) =
     ThemeTypographiesExtended.localLinks provides value
 
 
 object ThemeTypographiesExtended {
 
-    class Common(
+    class Texts(
         title: OutfitPaletteSize<OutfitTextStateColor>? = null,
         body: OutfitPaletteSize<OutfitTextStateColor>? = null,
         subtitle: OutfitPaletteSize<OutfitTextStateColor>? = null,
@@ -66,11 +66,11 @@ object ThemeTypographiesExtended {
         val fieldLabel: OutfitTextStateColor by DelegateNullFallBack(fieldLabel)
     }
 
-    internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
+    internal val localTexts: ProvidableCompositionLocal<Texts> = staticCompositionLocalOf {
         error("not provided")
     }
 
-    class Button(
+    class Buttons(
         val primary: ButtonNucleus,
         secondary: ButtonNucleus? = null,
         tertiary: ButtonNucleus? = null,
@@ -92,11 +92,11 @@ object ThemeTypographiesExtended {
         }
     }
 
-    internal val localButtons: ProvidableCompositionLocal<Button> = staticCompositionLocalOf {
+    internal val localButtons: ProvidableCompositionLocal<Buttons> = staticCompositionLocalOf {
         error("not provided")
     }
 
-    class Link(
+    class Links(
         val primary: LinkNucleus,
         secondary: LinkNucleus? = null,
         tertiary: LinkNucleus? = null,
@@ -112,7 +112,7 @@ object ThemeTypographiesExtended {
         }
     }
 
-    internal val localLinks: ProvidableCompositionLocal<Link> = staticCompositionLocalOf {
+    internal val localLinks: ProvidableCompositionLocal<Links> = staticCompositionLocalOf {
         error("not provided")
     }
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 17:18
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 17:18
+ *  Last modified 04/04/2023 11:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,29 +17,29 @@ import androidx.compose.runtime.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
-val MaterialTheme.bordersExtended
+val MaterialTheme.bordersCommonExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeBordersExtended.localBorders.current
-infix fun MaterialTheme.provides(value: ThemeBordersExtended.Borders) = ThemeBordersExtended.localBorders provides value
+infix fun MaterialTheme.provides(value: ThemeBordersExtended.Common) = ThemeBordersExtended.localBorders provides value
 
 val MaterialTheme.bordersButtonExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeBordersExtended.localButtons.current
-infix fun MaterialTheme.provides(value: ThemeBordersExtended.Button) = ThemeBordersExtended.localButtons provides value
+infix fun MaterialTheme.provides(value: ThemeBordersExtended.Buttons) = ThemeBordersExtended.localButtons provides value
 
 object ThemeBordersExtended{
 
     @Immutable
-    data class Borders(
+    data class Common(
         val stroke: OutfitPaletteSize<OutfitBorderStateColor>,
     )
-    internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
+    internal val localBorders: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
         error("not provided")
     }
 
-    class Button(
+    class Buttons(
         val primary: OutfitBorderStateColor,
         secondary: OutfitBorderStateColor? = null,
         tertiary: OutfitBorderStateColor? = null,
@@ -61,7 +61,7 @@ object ThemeBordersExtended{
         }
     }
 
-    internal val localButtons: ProvidableCompositionLocal<Button> = staticCompositionLocalOf {
+    internal val localButtons: ProvidableCompositionLocal<Buttons> = staticCompositionLocalOf {
         error("not provided")
     }
 

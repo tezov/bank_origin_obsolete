@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 04/04/2023 11:36
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,18 +13,13 @@
 package com.tezov.lib_core_kotlin.util
 
 import com.tezov.lib_core_java.util.Clock
-import com.tezov.lib_core_kotlin.toolbox.ExtensionNull.isNotNullAndNotEmpty
-import com.tezov.lib_core_kotlin.toolbox.ExtensionNull.nullify
+import com.tezov.lib_core_kotlin.extension.ExtensionNull.isNotNullAndNotEmpty
+import com.tezov.lib_core_kotlin.extension.ExtensionNull.nullify
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringBase49
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringHex
 import com.tezov.lib_core_kotlin.type.primitive.FloatTo
 import com.tezov.lib_core_kotlin.type.primitive.IntTo
 import com.tezov.lib_core_kotlin.util.UtilsBytes.random
-import com.tezov.lib_core_kotlin.util.UtilsString
-import kotlin.jvm.JvmOverloads
-import com.tezov.lib_core_kotlin.util.UtilsBytes
-import com.tezov.lib_core_kotlin.util.UtilsString.NUMBER_SEPARATOR
-import org.threeten.bp.LocalDateTime
 import java.lang.StringBuilder
 import java.util.*
 import java.util.regex.Pattern

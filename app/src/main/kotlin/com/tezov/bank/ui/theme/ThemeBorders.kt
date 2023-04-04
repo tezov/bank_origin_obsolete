@@ -14,27 +14,26 @@ package com.tezov.bank.ui.theme
 
 import androidx.compose.runtime.Composable
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
-import com.tezov.lib_core_android_kotlin.ui.theme.style.asOutfitShapeColor
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeShapesExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.style.asOutfitBorderColor
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeBordersExtended
 
-object ThemeShapes {
+object ThemeBorders {
 
     @Composable
-    fun provideShapes() = ThemeShapesExtended.Common(
-        roundedCorner = OutfitPaletteSize(
-            micro = 4.asOutfitShapeColor,
-            small = 8.asOutfitShapeColor,
-            normal = 12.asOutfitShapeColor,
-            big = 20.asOutfitShapeColor,
-            huge = 28.asOutfitShapeColor,
-            supra = 40.asOutfitShapeColor,
-        )
+    fun provideBorders() = ThemeBordersExtended.Common(
+        stroke = OutfitPaletteSize(
+            micro = 0.8.asOutfitBorderColor,
+            small = 1.asOutfitBorderColor,
+            normal = 1.5.asOutfitBorderColor,
+            big = 2.2.asOutfitBorderColor,
+            huge = 4.asOutfitBorderColor,
+            supra = 5.5.asOutfitBorderColor,
+        ),
     )
 
     @Composable
-    fun providesButtons() = ThemeShapesExtended.Buttons(
-        primary = 4.asOutfitShapeColor
+    fun providesButtons() = ThemeBordersExtended.Buttons(
+        primary = 2.asOutfitBorderColor
     )
-
 
 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 04/04/2023 11:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,12 +22,22 @@ import androidx.compose.ui.res.painterResource
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.then
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.border
 
 object Icon {
 
     object Simple {
+
+        class StyleBuilder internal constructor(style: Style) {
+            var size = style.size
+            var tint = style.tint
+
+            internal fun get() = Style(
+                size = size,
+                tint = tint,
+            )
+        }
 
         class Style(
             val size: SizeDp? = null,
@@ -35,18 +45,8 @@ object Icon {
         ) {
             companion object {
 
-                open class Builder internal constructor(style: Style) {
-                    var size = style.size
-                    var tint = style.tint
-
-                    internal fun get() = Style(
-                        size = size,
-                        tint = tint,
-                    )
-                }
-
                 @Composable
-                fun Style.copy(builder: @Composable Builder.() -> Unit = {}) = Builder(this).also {
+                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) = StyleBuilder(this).also {
                     it.builder()
                 }.get()
 
@@ -78,24 +78,24 @@ object Icon {
 
     object StateColor {
 
+        class StyleBuilder internal constructor(style: Style) {
+            var size = style.size
+            var outfitFrame = style.outfitFrame
+
+            internal fun get() = Style(
+                size = size,
+                outfitFrame = outfitFrame,
+            )
+        }
+
         class Style(
             val size: SizeDp? = null,
-            val outfitFrame: OutfitFrame.Styl = OutfitFrame.Styl(),
+            val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(),
         ) {
             companion object {
 
-                open class Builder internal constructor(style: Style) {
-                    var size = style.size
-                    var outfitFrame = style.outfitFrame
-
-                    internal fun get() = Style(
-                        size = size,
-                        outfitFrame = outfitFrame,
-                    )
-                }
-
                 @Composable
-                fun Style.copy(builder: @Composable Builder.() -> Unit = {}) = Builder(this).also {
+                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) = StyleBuilder(this).also {
                     it.builder()
                 }.get()
 

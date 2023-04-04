@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 16:46
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 16:09
+ *  Last modified 04/04/2023 11:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,6 +13,7 @@ package com.tezov.lib_core_android_kotlin.ui.theme.style
 
 import androidx.compose.runtime.Composable
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
+import com.tezov.lib_core_kotlin.extension.ExtensionCollection.firstNotNull
 import kotlin.reflect.KClass
 
 typealias OutfitStateEmpty<T> = OutfitState.Empty.Style<T>
@@ -144,6 +145,12 @@ object OutfitState {
             val active: T by DelegateNullFallBack(active)
             val inactive: T by DelegateNullFallBack(inactive)
 
+            init {
+                nullFallback = {
+                    active ?: (inactive ?: throw UninitializedPropertyAccessException())
+                }
+            }
+
             companion object {
 
                 @Composable
@@ -203,17 +210,23 @@ object OutfitState {
             neutral: T? = null,
             info: T? = null,
             alert: T? = null,
-            error: T? = null,
             success: T? = null,
+            error: T? = null,
         ) : OutfitState.Style<T> {
 
-            override fun refs() = listOf(neutral, info, alert, error, success)
+            override fun refs() = listOf(neutral, info, alert, success, error)
 
             val neutral: T by DelegateNullFallBack(neutral)
             val info: T by DelegateNullFallBack(info)
             val alert: T by DelegateNullFallBack(alert)
             val error: T by DelegateNullFallBack(error)
             val success: T by DelegateNullFallBack(success)
+
+            init {
+                nullFallback = {
+                    refs().firstNotNull() ?: throw UninitializedPropertyAccessException()
+                }
+            }
 
             companion object {
 

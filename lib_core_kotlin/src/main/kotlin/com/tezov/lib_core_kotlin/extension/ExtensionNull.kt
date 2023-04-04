@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 04/04/2023 11:36
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,7 +10,7 @@
  *  *********************************************************************************
  */
 
-package com.tezov.lib_core_kotlin.toolbox
+package com.tezov.lib_core_kotlin.extension
 
 import java.util.*
 
@@ -39,8 +39,5 @@ object ExtensionNull {
     }
     fun CharArray?.isNullOrEmpty() = this?.let { size <= 0 } ?: let { true }
     fun CharArray?.isNotNullAndNotEmpty() = this?.let { size > 0 } ?: let { false }
-
-
-
 
 }

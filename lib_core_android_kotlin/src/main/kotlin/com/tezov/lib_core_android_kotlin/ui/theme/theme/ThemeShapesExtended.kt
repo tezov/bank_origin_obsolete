@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 17:18
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 17:18
+ *  Last modified 04/04/2023 11:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,28 +17,28 @@ import androidx.compose.runtime.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
-val MaterialTheme.shapesExtended
+val MaterialTheme.shapesCommonExtended
     @Composable
     @ReadOnlyComposable
-    get() = ThemeShapesExtended.localShapes.current
-infix fun MaterialTheme.provides(value: ThemeShapesExtended.Shapes) = ThemeShapesExtended.localShapes provides value
+    get() = ThemeShapesExtended.localCommon.current
+infix fun MaterialTheme.provides(value: ThemeShapesExtended.Common) = ThemeShapesExtended.localCommon provides value
 
 val MaterialTheme.shapesButtonExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeShapesExtended.localButtons.current
-infix fun MaterialTheme.provides(value: ThemeShapesExtended.Button) = ThemeShapesExtended.localButtons provides value
+infix fun MaterialTheme.provides(value: ThemeShapesExtended.Buttons) = ThemeShapesExtended.localButtons provides value
 
 object ThemeShapesExtended{
 
-    data class Shapes(
+    data class Common(
         val roundedCorner: OutfitPaletteSize<OutfitShapeStateColor>,
     )
-    internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
+    internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
         error("not provided")
     }
 
-    class Button(
+    class Buttons(
         val primary: OutfitShapeStateColor,
         secondary: OutfitShapeStateColor? = null,
         tertiary: OutfitShapeStateColor? = null,
@@ -60,7 +60,7 @@ object ThemeShapesExtended{
         }
     }
 
-    internal val localButtons: ProvidableCompositionLocal<Button> = staticCompositionLocalOf {
+    internal val localButtons: ProvidableCompositionLocal<Buttons> = staticCompositionLocalOf {
         error("not provided")
     }
 

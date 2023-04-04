@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 04/04/2023 11:15
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,7 +32,7 @@ object HorizontalScrollable {
 
         @Immutable
         open class Style(
-            val outfitShapeIndicator: OutfitShape.Style? = OutfitShape.Style(
+            val outfitShapeIndicator: OutfitShapeStateColor? = OutfitShapeStateColor(
                 template = OutfitShape.Template.Circle,
                 outfitState = OutfitStateDual(active = Color.Black, inactive = Color.Gray),
             ),
@@ -132,11 +132,11 @@ object HorizontalScrollable {
         @Immutable
         open class Style(
             pagerStyle: Pager.Style = Pager.Style(),
-            val outfitFrame: OutfitFrame.Styl = OutfitFrame.Styl(
-                outfitShape = OutfitShape.Style(
+            val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(
+                outfitShape = OutfitShapeStateColor(
                     size = 8.asOutfitShapeSize,
                 ),
-                outfitBorder = OutfitBorder.Style(
+                outfitBorder = OutfitBorderStateColor(
                     size = 1.dp,
                     outfitState = OutfitStateSimple(
                         value = Color.Black

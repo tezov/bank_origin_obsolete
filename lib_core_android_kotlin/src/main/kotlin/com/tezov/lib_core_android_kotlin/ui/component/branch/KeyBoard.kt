@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 04/04/2023 11:15
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,7 +27,9 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import kotlin.properties.Delegates
 
@@ -59,15 +61,15 @@ object KeyBoard {
         open class Style(
             val colorBackground: Color = Color.Transparent,
             val colorOnBackground: Color = Color.Black,
-            val outfitBorderOuter: OutfitBorder.Style = OutfitBorder.Style(
+            val outfitBorderOuter: OutfitBorderStateColor = OutfitBorderStateColor(
                 size = 2.dp,
-                outfitState = OutfitState.Simple.Style(
+                outfitState = OutfitStateSimple(
                     value = Color.Black
                 )
             ),
-            val outfitBorderInner: OutfitBorder.Style = OutfitBorder.Style(
+            val outfitBorderInner: OutfitBorderStateColor = OutfitBorderStateColor(
                 size = 1.dp,
-                outfitState = OutfitState.Simple.Style(
+                outfitState = OutfitStateSimple(
                     value = Color.Black
                 )
             ),

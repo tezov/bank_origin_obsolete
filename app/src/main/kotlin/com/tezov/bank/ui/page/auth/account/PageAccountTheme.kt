@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 28/03/2023 22:22
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 28/03/2023 22:19
+ *  Last modified 04/04/2023 11:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -72,7 +72,7 @@ object PageAccountTheme {
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colors.primary,
-        textContent = MaterialTheme.colorsExtended.onPrimary.accent,
+        textContent = MaterialTheme.colorsCommonExtended.onPrimary.accent,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -131,10 +131,10 @@ object PageAccountTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesTextExtended.textTitle.typo.copy(
             color = colors.textContent
         ),
-        normal = MaterialTheme.typographiesExtended.textNormal.typo.copy(
+        normal = MaterialTheme.typographiesTextExtended.textNormal.typo.copy(
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),

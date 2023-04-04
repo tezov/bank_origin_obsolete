@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 04/04/2023 12:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 04/04/2023 11:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -93,10 +93,10 @@ object PageLoginTheme {
 
     @Composable
     fun provideColors() = Colors(
-        background = MaterialTheme.colorsExtended.background.accent,
+        background = MaterialTheme.colorsCommonExtended.background.accent,
         backgroundDropDownMenu = ThemeColors.Common.whiteDark,
-        textContent = MaterialTheme.colorsExtended.onBackground.accent,
-        textDropDownMenu = MaterialTheme.colorsExtended.onBackgroundModal.default,
+        textContent = MaterialTheme.colorsCommonExtended.onBackground.accent,
+        textDropDownMenu = MaterialTheme.colorsCommonExtended.onBackgroundModal.default,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -147,8 +147,8 @@ object PageLoginTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-        button = MaterialTheme.shapesExtended.roundedCornerNormal,
-        buttonOutlined = MaterialTheme.shapesExtended.roundedCornerNormal,
+        button = MaterialTheme.shapesCommonExtended.roundedCornerNormal,
+        buttonOutlined = MaterialTheme.shapesCommonExtended.roundedCornerNormal,
         icon = OutfitShape.Style(
             template = OutfitShape.Template.Circle
         )
@@ -166,9 +166,9 @@ object PageLoginTheme {
 
     @Composable
     fun provideBorders() = Borders(
-        button = MaterialTheme.bordersExtended.strokeMicro,
-        buttonOutlined = MaterialTheme.bordersExtended.strokeHuge,
-        icon = MaterialTheme.bordersExtended.strokeBig,
+        button = MaterialTheme.bordersCommonExtended.strokeMicro,
+        buttonOutlined = MaterialTheme.bordersCommonExtended.strokeHuge,
+        icon = MaterialTheme.bordersCommonExtended.strokeBig,
     )
 
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
@@ -184,17 +184,17 @@ object PageLoginTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        supra = MaterialTheme.typographiesExtended.textSupra.copy {
+        supra = MaterialTheme.typographiesTextExtended.textSupra.copy {
             outfitState = OutfitStateSimple(
                 colors.textContent
             )
         },
-        huge = MaterialTheme.typographiesExtended.textHuge.copy {
+        huge = MaterialTheme.typographiesTextExtended.textHuge.copy {
             outfitState = OutfitStateSimple(
                 colors.textContent
             )
         },
-        body = MaterialTheme.typographiesExtended.textNormal.copy {
+        body = MaterialTheme.typographiesTextExtended.textNormal.copy {
             outfitState = OutfitStateSimple(
                 colors.textContent
             )
@@ -202,7 +202,7 @@ object PageLoginTheme {
                 fontWeight = FontWeight.Bold
             )
         },
-        dropDownMenu = MaterialTheme.typographiesExtended.textNormal.copy {
+        dropDownMenu = MaterialTheme.typographiesTextExtended.textNormal.copy {
             outfitState = OutfitStateSimple(
                 colors.textDropDownMenu
             )
