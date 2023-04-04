@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 21:02
+ *  Created by Tezov on 04/04/2023 21:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 20:46
+ *  Last modified 04/04/2023 21:22
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,7 +31,7 @@ object BottomNavigation :
     ActivitySub<BottomNavigationState, BottomNavigationAction> {
 
     class Style(
-        val outfitText: OutfitText.StateColor = OutfitText.StateColor(),
+        val outfitText: OutfitText.StateColor.Style = OutfitText.StateColor.Style(),
         val colorBackground: Color = Color.Black,
         val outfitColor: OutfitState.Dual.Style<Color> = OutfitStateDual(),
     ) {

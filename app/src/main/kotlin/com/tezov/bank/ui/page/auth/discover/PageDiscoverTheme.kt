@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/03/2023 22:33
+ *  Created by Tezov on 04/04/2023 21:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/03/2023 22:28
+ *  Last modified 04/04/2023 21:22
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.theme.ThemeComponents
+import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 
 val PageDiscoverTheme.colors: PageDiscoverTheme.Colors
@@ -62,7 +62,7 @@ object PageDiscoverTheme {
 
     @Composable
     fun provideStyles() = Style(
-        carousel = ThemeComponents.provideCarouselStyle(),
+        carousel = ThemeComponentProviders.provideCarouselStyle(),
 //        cardButton = CarouselCard.Style(
 //            colorIconInfo =  MaterialTheme.colors.primary,
 //            dimensionIconInfo = 92.dp,
@@ -91,8 +91,8 @@ object PageDiscoverTheme {
 //            shape = MaterialTheme.shapesExtended.roundedCornerBig,
 //        ),
 //        cardLink = CarouselCard.Style(),
-        sectionRow = ThemeComponents.provideSectionRowStyle(),
-        sectionCard = ThemeComponents.provideSectionCardStyle(),
+        sectionRow = ThemeComponentProviders.provideSectionRowStyle(),
+        sectionCard = ThemeComponentProviders.provideSectionCardStyle(),
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

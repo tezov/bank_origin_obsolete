@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 13:51
+ *  Created by Tezov on 04/04/2023 21:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 13:03
+ *  Last modified 04/04/2023 21:22
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,11 +17,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColorSemantic
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
 
-object ThemeColors {
+object ThemeColorProviders {
+
     object Resource {
         val blueNight = Color(0xFF01252B)
         val blueElegant = Color(0xFF12263F)
@@ -49,7 +49,7 @@ object ThemeColors {
         val grayOverlay = Color(0x063F3F3F)
     }
 
-    val colorsLightExtended = ThemeColorsExtended.Common(
+    fun common() = ThemeColorsExtended.Common(
         background = OutfitPaletteColor(
             default = Resource.whiteShiny,
             accent = Resource.blueSea,
@@ -87,28 +87,11 @@ object ThemeColors {
         ),
         onSecondary = OutfitPaletteColor(
             default = Resource.blueNight,
-        ),
-        tertiary = OutfitPaletteColor(
-            default = Resource.whiteShady,
-            light = Resource.whiteDark,
-        ),
-        onTertiary = OutfitPaletteColor(
-            default = Resource.blueNight,
-        ),
-        semantic= OutfitPaletteColorSemantic(
-            error = OutfitPaletteColor(
-                default = Resource.redBlood
-            ),
-        ),
-        onSemantic= OutfitPaletteColorSemantic(
-            error = OutfitPaletteColor(
-                default = Resource.whiteDark
-            )
-        ),
+        )
     )
 
     @Composable
-    fun providesColorsLightMaterial() =  Colors(
+    fun material() =  Colors(
         primary = MaterialTheme.colorsCommonExtended.primary.default,
         primaryVariant = MaterialTheme.colorsCommonExtended.primary.accent,
         onPrimary = MaterialTheme.colorsCommonExtended.onPrimary.default,

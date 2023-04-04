@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 17:18
+ *  Created by Tezov on 04/04/2023 21:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 17:18
+ *  Last modified 04/04/2023 21:22
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,11 +15,6 @@ package com.tezov.bank.ui.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import com.tezov.bank.ui.theme.ThemeColors.colorsLightExtended
-import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsElevationExtended
-import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsPaddingExtended
-import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsSizeExtended
-import com.tezov.bank.ui.theme.ThemeDimensions.dimensionsSpacingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
 
@@ -29,35 +24,37 @@ object ThemeApplication {
 
         ExtensionCompositionLocal.CompositionLocalProvider(
             ancestor = arrayOf(
-                //colors
                 MaterialTheme provides ThemeColorsResource.Common,
-                MaterialTheme provides colorsLightExtended,
-                //dimensions
-                MaterialTheme provides dimensionsPaddingExtended,
-                MaterialTheme provides dimensionsSpacingExtended,
-                MaterialTheme provides dimensionsElevationExtended,
-                MaterialTheme provides dimensionsSizeExtended,
+                MaterialTheme provides ThemeColorProviders.common(),
+                MaterialTheme provides ThemeColorProviders.buttons(),
+                MaterialTheme provides ThemeColorProviders.links(),
+                MaterialTheme provides ThemeDimensionProviders.paddings(),
+                MaterialTheme provides ThemeDimensionProviders.spacings(),
+                MaterialTheme provides ThemeDimensionProviders.elevations(),
+                MaterialTheme provides ThemeDimensionProviders.sizes(),
             ),
             parent = {
                 arrayOf(
-                    //shapes
-                    MaterialTheme provides ThemeShapes.provideShapes(),
-                    MaterialTheme provides ThemeShapes.provideBorders(),
-                    //Typography
-                    MaterialTheme provides ThemeTypography.providesCommon(),
+                    MaterialTheme provides ThemeTypographyProviders.common(),
+                    MaterialTheme provides ThemeTypographyProviders.buttons(),
+                    MaterialTheme provides ThemeTypographyProviders.links(),
+                    MaterialTheme provides ThemeShapeProviders.common(),
+                    MaterialTheme provides ThemeShapeProviders.buttons(),
+                    MaterialTheme provides ThemeShapeProviders.common(),
+                    MaterialTheme provides ThemeShapeProviders.buttons(),
                 )
             },
             child = {
                 arrayOf(
                     //components
-                    MaterialTheme provides ThemeComponents.provideComponentsCommon(),
-                    MaterialTheme provides ThemeComponents.provideComponentsButton(),
-                    MaterialTheme provides ThemeComponents.provideComponentsLink(),
+                    MaterialTheme provides ThemeComponentProviders.provideComponentsCommon(),
+                    MaterialTheme provides ThemeComponentProviders.provideComponentsButton(),
+                    MaterialTheme provides ThemeComponentProviders.provideComponentsLink(),
                 )
             },
         ){
             MaterialTheme(
-                colors = ThemeColors.providesColorsLightMaterial(),
+                colors = ThemeColorProviders.material(),
                 typography = androidx.compose.material.Typography(),
                 content = content
             )

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 13:51
+ *  Created by Tezov on 04/04/2023 21:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 13:03
+ *  Last modified 04/04/2023 21:22
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import com.tezov.bank.ui.theme.ThemeColors
+import com.tezov.bank.ui.theme.ThemeColorProviders
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val DialogAuthCloseAppConfirmationTheme.colors: DialogAuthCloseAppConfirmationTheme.Colors
@@ -52,7 +52,7 @@ object DialogAuthCloseAppConfirmationTheme {
     fun provideColors() = Colors(
         background = MaterialTheme.colors.background,
         title = MaterialTheme.colors.onBackground,
-        text = ThemeColors.Resource.blueShadow,
+        text = ThemeColorProviders.Resource.blueShadow,
         button = MaterialTheme.colors.primary,
     )
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 04/04/2023 21:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:52
+ *  Last modified 04/04/2023 21:22
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,7 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.theme.ThemeComponents
+import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageHelpAndServiceTheme.colors: PageHelpAndServiceTheme.Colors
@@ -118,8 +118,8 @@ object PageHelpAndServiceTheme {
 
     @Composable
     fun provideStyles() = Style(
-        sectionRow = ThemeComponents.provideSectionRowStyle(),
-        sectionCard = ThemeComponents.provideSectionCardStyle(),
+        sectionRow = ThemeComponentProviders.provideSectionRowStyle(),
+        sectionCard = ThemeComponentProviders.provideSectionCardStyle(),
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
