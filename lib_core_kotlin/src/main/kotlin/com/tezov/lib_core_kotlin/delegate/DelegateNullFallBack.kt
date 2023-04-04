@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 04/04/2023 13:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 04/04/2023 13:03
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,13 +15,13 @@ package com.tezov.lib_core_kotlin.delegate
 import kotlin.properties.ReadOnlyProperty
 import kotlin.reflect.KProperty
 
-class DelegateNullFallBack<V>(initialValue: V?) : ReadOnlyProperty<Any?, V> {
+class DelegateNullFallBack<V>(initialValue: V?, fallBackValue: V? = null) : ReadOnlyProperty<Any?, V> {
 
-    interface Setter<V : Any> {
+    interface Group<V : Any> {
         @Suppress("UNCHECKED_CAST")
-        var nullFallback: (() -> V)?
+        var groupFallBackValue: V?
             get() {
-                refs().firstOrNull()?.let {
+                groupFallBackRefs().firstOrNull()?.let {
                     kotlin.runCatching { it as? DelegateNullFallBack<V> }
                         .getOrNull()?.fallBackValue?.let {
                             return it
@@ -30,25 +30,36 @@ class DelegateNullFallBack<V>(initialValue: V?) : ReadOnlyProperty<Any?, V> {
                 return null
             }
             set(value) {
-                nullFallback(value, refs())
+                setFallbackValue(value, groupFallBackRefs())
             }
 
         @Suppress("UNCHECKED_CAST")
-        fun Setter<V>.nullFallback(onNull: (() -> V)?, refs: List<V>) {
+        fun Group<V>.setFallbackValue(fallBackValue: V?, refs: List<V>) {
             refs.forEach {
-                kotlin.runCatching { it as? DelegateNullFallBack<V> }.getOrNull()?.fallBackValue =
-                    onNull
+                kotlin.runCatching { it as? DelegateNullFallBack<V> }
+                    .getOrNull()?.fallBackValue = fallBackValue
             }
         }
 
-        fun refs(): List<V>
+        fun groupFallBackRefs(): List<V>
 
     }
 
-    private var value = initialValue
-    var fallBackValue: (()->V)? = null
+    private val value = initialValue
+    private var fallBackValue: V? = null
+        set(value) {
+            value ?: kotlin.run {
+                field = value
+            }
+        }
+
+    init {
+        fallBackValue?.let {
+            this.fallBackValue = it
+        }
+    }
 
     override fun getValue(thisRef: Any?, property: KProperty<*>): V {
-        return value ?: fallBackValue?.invoke() ?: throw UninitializedPropertyAccessException()
+        return value ?: (fallBackValue ?: throw UninitializedPropertyAccessException())
     }
 }

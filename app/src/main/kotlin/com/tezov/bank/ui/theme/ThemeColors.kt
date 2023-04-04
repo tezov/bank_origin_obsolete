@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 04/04/2023 13:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:52
+ *  Last modified 04/04/2023 13:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,7 +22,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
 
 object ThemeColors {
-    object Common {
+    object Resource {
         val blueNight = Color(0xFF01252B)
         val blueElegant = Color(0xFF12263F)
         val blueSea = Color(0xFF11BAD5)
@@ -50,54 +50,61 @@ object ThemeColors {
     }
 
     val colorsLightExtended = ThemeColorsExtended.Common(
+        background = OutfitPaletteColor(
+            default = Resource.whiteShiny,
+            accent = Resource.blueSea,
+        ),
+        onBackground = OutfitPaletteColor(
+            default = Resource.blueElegant,
+            accent =  Resource.whiteShiny,
+        ),
+        backgroundElevated = OutfitPaletteColor(
+            default = Resource.grayOverlay,
+        ),
+        onBackgroundElevated = OutfitPaletteColor(
+            default = Resource.blueNight,
+            accent = Resource.blueElegant,
+        ),
+        backgroundModal = OutfitPaletteColor(
+            default = Resource.whiteShady,
+            accent = Resource.blueElegant,
+        ),
+        onBackgroundModal = OutfitPaletteColor(
+            default = Resource.blueNight,
+            accent = Resource.blueElegant,
+        ),
         primary = OutfitPaletteColor(
-            default = Common.whiteShady,
-            accent = Common.blueDark,
+            default = Resource.whiteShady,
+            accent = Resource.blueDark,
         ),
         onPrimary = OutfitPaletteColor(
-            default = Common.blueSea,
-            accent = Common.blueDark,
+            default = Resource.blueSea,
+            accent = Resource.blueDark,
         ),
         secondary = OutfitPaletteColor(
-            default = Common.whiteShady,
-            light = Common.whiteDark,
+            default = Resource.whiteShady,
+            light = Resource.whiteDark,
         ),
         onSecondary = OutfitPaletteColor(
-            default = Common.blueNight,
+            default = Resource.blueNight,
+        ),
+        tertiary = OutfitPaletteColor(
+            default = Resource.whiteShady,
+            light = Resource.whiteDark,
+        ),
+        onTertiary = OutfitPaletteColor(
+            default = Resource.blueNight,
         ),
         semantic= OutfitPaletteColorSemantic(
             error = OutfitPaletteColor(
-                default = Common.redBlood
+                default = Resource.redBlood
             ),
         ),
         onSemantic= OutfitPaletteColorSemantic(
             error = OutfitPaletteColor(
-                default = Common.whiteDark
+                default = Resource.whiteDark
             )
         ),
-        background = OutfitPaletteColor(
-            default = Common.whiteShiny,
-            accent = Common.blueSea,
-        ),
-        onBackground = OutfitPaletteColor(
-            default = Common.blueElegant,
-            accent =  Common.whiteShiny,
-        ),
-        backgroundElevated = OutfitPaletteColor(
-            default = Common.grayOverlay,
-        ),
-        onBackgroundElevated = OutfitPaletteColor(
-            default = Common.blueNight,
-            accent = Common.blueElegant,
-        ),
-        backgroundModal = OutfitPaletteColor(
-            default = Common.whiteShady,
-            accent = Common.blueElegant,
-        ),
-        onBackgroundModal = OutfitPaletteColor(
-            default = Common.blueNight,
-            accent = Common.blueElegant,
-        )
     )
 
     @Composable

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 04/04/2023 13:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:52
+ *  Last modified 04/04/2023 13:51
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,19 +26,25 @@ val MaterialTheme.componentsCommonExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeComponentExtended.localCommons.current
-infix fun MaterialTheme.provides(value: ThemeComponentExtended.Common) = ThemeComponentExtended.localCommons provides value
+
+infix fun MaterialTheme.provides(value: ThemeComponentExtended.Common) =
+    ThemeComponentExtended.localCommons provides value
 
 val MaterialTheme.componentsButtonExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeComponentExtended.localButtons.current
-infix fun MaterialTheme.provides(value: ThemeComponentExtended.Buttons) = ThemeComponentExtended.localButtons provides value
+
+infix fun MaterialTheme.provides(value: ThemeComponentExtended.Buttons) =
+    ThemeComponentExtended.localButtons provides value
 
 val MaterialTheme.componentsLinkExtended
     @Composable
     @ReadOnlyComposable
     get() = ThemeComponentExtended.localLinks.current
-infix fun MaterialTheme.provides(value: ThemeComponentExtended.Links) = ThemeComponentExtended.localLinks provides value
+
+infix fun MaterialTheme.provides(value: ThemeComponentExtended.Links) =
+    ThemeComponentExtended.localLinks provides value
 
 object ThemeComponentExtended {
 
@@ -49,37 +55,40 @@ object ThemeComponentExtended {
         dialogCard: Dialog.Card.Style? = null,
         bottomSheet: BottomSheet.Style? = null,
         snackBar: Snackbar.Style? = null,
-    ){
+    ) {
         val topAppBar: TopAppBar.Style by DelegateNullFallBack(topAppBar)
         val bottomNavigation: BottomNavigation.Style by DelegateNullFallBack(bottomNavigation)
         val dialogCard: Dialog.Card.Style by DelegateNullFallBack(dialogCard)
         val bottomSheet: BottomSheet.Style by DelegateNullFallBack(bottomSheet)
         val snackBar: Snackbar.Style by DelegateNullFallBack(snackBar)
     }
+
     internal val localCommons: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
         error("not provided")
     }
 
     @Immutable
     class Buttons(
-        val primary: ButtonImport.StateColor.Style,
+        primary: ButtonImport.StateColor.Style? = null,
         secondary: ButtonImport.StateColor.Style? = null,
         tertiary: ButtonImport.StateColor.Style? = null,
         confirm: ButtonImport.StateColor.Style? = null,
         cancel: ButtonImport.StateColor.Style? = null,
         proceed: ButtonImport.StateColor.Style? = null,
-    ) : DelegateNullFallBack.Setter<ButtonImport.StateColor.Style>{
+    ) : DelegateNullFallBack.Group<ButtonImport.StateColor.Style> {
 
+        val primary: ButtonImport.StateColor.Style by DelegateNullFallBack(primary)
         val secondary: ButtonImport.StateColor.Style by DelegateNullFallBack(secondary)
         val tertiary: ButtonImport.StateColor.Style by DelegateNullFallBack(tertiary)
         val confirm: ButtonImport.StateColor.Style by DelegateNullFallBack(confirm)
         val cancel: ButtonImport.StateColor.Style by DelegateNullFallBack(cancel)
         val proceed: ButtonImport.StateColor.Style by DelegateNullFallBack(proceed)
 
-        override fun refs() = listOf(secondary, tertiary, confirm, cancel, proceed)
+        override fun groupFallBackRefs() =
+            listOf(primary, secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            nullFallback = { primary }
+            groupFallBackValue = ButtonImport.StateColor.Style.TextFilled
         }
     }
 
@@ -89,18 +98,19 @@ object ThemeComponentExtended {
 
     @Immutable
     class Links(
-        val primary: LinkImport.StateColor.Style,
+        primary: LinkImport.StateColor.Style? = null,
         secondary: LinkImport.StateColor.Style? = null,
         tertiary: LinkImport.StateColor.Style? = null,
-    ) : DelegateNullFallBack.Setter<LinkImport.StateColor.Style>{
+    ) : DelegateNullFallBack.Group<LinkImport.StateColor.Style> {
 
+        val primary: LinkImport.StateColor.Style by DelegateNullFallBack(primary)
         val secondary: LinkImport.StateColor.Style by DelegateNullFallBack(secondary)
         val tertiary: LinkImport.StateColor.Style by DelegateNullFallBack(tertiary)
 
-        override fun refs() = listOf(secondary, tertiary)
+        override fun groupFallBackRefs() = listOf(secondary, tertiary)
 
         init {
-            nullFallback = { primary }
+            groupFallBackValue = LinkImport.StateColor.Style.Underlined
         }
     }
 

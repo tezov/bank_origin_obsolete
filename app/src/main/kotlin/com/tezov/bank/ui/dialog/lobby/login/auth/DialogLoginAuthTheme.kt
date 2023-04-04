@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 04/04/2023 13:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:52
+ *  Last modified 04/04/2023 13:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -88,7 +88,7 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideColors() = Colors(
-        background = ThemeColors.Common.blackOverlay,
+        background = ThemeColors.Resource.blackOverlay,
         onBackground = MaterialTheme.colorsCommonExtended.onPrimary.accent,
         backgroundButtonActive = MaterialTheme.colors.primary,
 //        backgroundButtonInactive = MaterialTheme.colorsExtended.backgroundButtonConfirm.inactive,

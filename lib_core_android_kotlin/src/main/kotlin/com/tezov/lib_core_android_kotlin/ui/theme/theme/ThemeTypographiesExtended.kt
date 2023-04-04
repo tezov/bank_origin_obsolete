@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 04/04/2023 13:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:52
+ *  Last modified 04/04/2023 13:51
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.sp
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Nucleus.asButtonNucleus
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Nucleus.asLinkNucleus
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asPaletteSizeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Nucleus.Typography as ButtonNucleus
@@ -58,12 +66,35 @@ object ThemeTypographiesExtended {
         fieldValue: OutfitTextStateColor? = null,
         fieldLabel: OutfitTextStateColor? = null,
     ) {
-        val title: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(title)
-        val body: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(body)
-        val subtitle: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(subtitle)
-        val helper: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(helper)
-        val fieldValue: OutfitTextStateColor by DelegateNullFallBack(fieldValue)
-        val fieldLabel: OutfitTextStateColor by DelegateNullFallBack(fieldLabel)
+        private val default = TextStyle(
+            color = Color.Black,
+            fontSize = 14.sp
+        )
+
+        val title: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(
+            title,
+            default.asPaletteSizeStateColor
+        )
+        val body: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(
+            body,
+            default.asPaletteSizeStateColor
+        )
+        val subtitle: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(
+            subtitle,
+            default.asPaletteSizeStateColor
+        )
+        val helper: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(
+            helper,
+            default.asPaletteSizeStateColor
+        )
+        val fieldValue: OutfitTextStateColor by DelegateNullFallBack(
+            fieldValue,
+            default.asStateColor
+        )
+        val fieldLabel: OutfitTextStateColor by DelegateNullFallBack(
+            fieldLabel,
+            default.asStateColor
+        )
     }
 
     internal val localTexts: ProvidableCompositionLocal<Texts> = staticCompositionLocalOf {
@@ -71,24 +102,29 @@ object ThemeTypographiesExtended {
     }
 
     class Buttons(
-        val primary: ButtonNucleus,
+        primary: ButtonNucleus? = null,
         secondary: ButtonNucleus? = null,
         tertiary: ButtonNucleus? = null,
         confirm: ButtonNucleus? = null,
         cancel: ButtonNucleus? = null,
         proceed: ButtonNucleus? = null,
-    ) : DelegateNullFallBack.Setter<ButtonNucleus> {
+    ) : DelegateNullFallBack.Group<ButtonNucleus> {
 
+        val primary: ButtonNucleus by DelegateNullFallBack(primary)
         val secondary: ButtonNucleus by DelegateNullFallBack(secondary)
         val tertiary: ButtonNucleus by DelegateNullFallBack(tertiary)
         val confirm: ButtonNucleus by DelegateNullFallBack(confirm)
         val cancel: ButtonNucleus by DelegateNullFallBack(cancel)
         val proceed: ButtonNucleus by DelegateNullFallBack(proceed)
 
-        override fun refs() = listOf(secondary, tertiary, confirm, cancel, proceed)
+        override fun groupFallBackRefs() =
+            listOf(primary, secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            nullFallback = { primary }
+            groupFallBackValue = TextStyle(
+                color = Color.Black,
+                fontSize = 16.sp
+            ).asButtonNucleus
         }
     }
 
@@ -97,18 +133,23 @@ object ThemeTypographiesExtended {
     }
 
     class Links(
-        val primary: LinkNucleus,
+        primary: LinkNucleus? = null,
         secondary: LinkNucleus? = null,
         tertiary: LinkNucleus? = null,
-    ) : DelegateNullFallBack.Setter<LinkNucleus> {
+    ) : DelegateNullFallBack.Group<LinkNucleus> {
 
+        val primary: LinkNucleus by DelegateNullFallBack(primary)
         val secondary: LinkNucleus by DelegateNullFallBack(secondary)
         val tertiary: LinkNucleus by DelegateNullFallBack(tertiary)
 
-        override fun refs() = listOf(secondary, tertiary)
+        override fun groupFallBackRefs() = listOf(primary, secondary, tertiary)
 
         init {
-            nullFallback = { primary }
+            groupFallBackValue = TextStyle(
+                color = Color.Black,
+                fontSize = 16.sp,
+                textDecoration = TextDecoration.Underline,
+            ).asLinkNucleus
         }
     }
 

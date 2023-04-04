@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 04/04/2023 13:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:36
+ *  Last modified 04/04/2023 13:51
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.text.TextStyle
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_kotlin.extension.ExtensionCollection.firstNotNull
 import androidx.compose.ui.graphics.Color as ColorImport
@@ -38,9 +39,7 @@ object OutfitPalette {
                 light = light,
                 dark = dark,
                 accent = accent,
-            ).also {
-                it.nullFallback = style.nullFallback
-            }
+            )
         }
 
         class Style(
@@ -48,16 +47,16 @@ object OutfitPalette {
             light: ColorImport? = null,
             dark: ColorImport? = null,
             accent: ColorImport? = null,
-        ) : DelegateNullFallBack.Setter<ColorImport> {
+        ) : DelegateNullFallBack.Group<ColorImport> {
 
             val light: ColorImport by DelegateNullFallBack(light)
             val dark: ColorImport by DelegateNullFallBack(dark)
             val accent: ColorImport by DelegateNullFallBack(accent)
 
-            override fun refs() = listOf(light, dark, accent)
+            override fun groupFallBackRefs() = listOf(light, dark, accent)
 
             init {
-                nullFallback = { default }
+                groupFallBackValue = default
             }
 
             companion object {
@@ -66,6 +65,7 @@ object OutfitPalette {
                 fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) = StyleBuilder(this).also {
                     it.builder()
                 }.get()
+
             }
 
             constructor(style: Style) : this(
@@ -73,9 +73,7 @@ object OutfitPalette {
                 light = style.light,
                 dark = style.dark,
                 accent = style.accent,
-            ) {
-                nullFallback = style.nullFallback
-            }
+            )
         }
 
     }
@@ -98,9 +96,7 @@ object OutfitPalette {
                 big = big,
                 huge = huge,
                 supra = supra,
-            ).also {
-                it.nullFallback = style.nullFallback
-            }
+            )
         }
 
         class Style<T : Any>(
@@ -110,7 +106,7 @@ object OutfitPalette {
             big: T? = null,
             huge: T? = null,
             supra: T? = null,
-        ) : DelegateNullFallBack.Setter<T> {
+        ) : DelegateNullFallBack.Group<T> {
 
             val micro: T by DelegateNullFallBack(micro)
             val small: T by DelegateNullFallBack(small)
@@ -118,10 +114,10 @@ object OutfitPalette {
             val huge: T by DelegateNullFallBack(huge)
             val supra: T by DelegateNullFallBack(supra)
 
-            override fun refs() = listOf(micro, small, big, huge, supra)
+            override fun groupFallBackRefs() = listOf(micro, small, big, huge, supra)
 
             init {
-                nullFallback = { normal }
+                groupFallBackValue = normal
             }
 
             companion object {
@@ -131,6 +127,7 @@ object OutfitPalette {
                     StyleBuilder(this).also {
                         it.builder()
                     }.get()
+
             }
 
             constructor(style: Style<T>) : this(
@@ -140,9 +137,7 @@ object OutfitPalette {
                 big = style.big,
                 huge = style.huge,
                 supra = style.supra,
-            ) {
-                nullFallback = style.nullFallback
-            }
+            )
         }
 
     }
@@ -156,25 +151,21 @@ object OutfitPalette {
             internal fun get() = Style(
                 vertical = vertical,
                 horizontal = horizontal,
-            ).also {
-                it.nullFallback = style.nullFallback
-            }
+            )
         }
 
         class Style<T : Any>(
             vertical: T? = null,
             horizontal: T? = null,
-        ) : DelegateNullFallBack.Setter<T> {
+        ) : DelegateNullFallBack.Group<T> {
 
             val vertical: T by DelegateNullFallBack(vertical)
             val horizontal: T by DelegateNullFallBack(horizontal)
 
-            override fun refs() = listOf(vertical, horizontal)
+            override fun groupFallBackRefs() = listOf(vertical, horizontal)
 
             init {
-                nullFallback = {
-                    refs().firstNotNull() ?: throw UninitializedPropertyAccessException()
-                }
+                groupFallBackValue = groupFallBackRefs().firstNotNull() ?: throw UninitializedPropertyAccessException()
             }
 
             companion object {
@@ -189,9 +180,7 @@ object OutfitPalette {
             constructor(style: Style<T>) : this(
                 vertical = style.vertical,
                 horizontal = style.horizontal,
-            ) {
-                nullFallback = style.nullFallback
-            }
+            )
         }
 
     }

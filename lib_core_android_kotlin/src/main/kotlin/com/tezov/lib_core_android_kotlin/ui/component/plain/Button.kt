@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 04/04/2023 13:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:59
+ *  Last modified 04/04/2023 13:51
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,6 +25,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.asSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Nucleus as FrameNucleus
 
 object Button {
@@ -58,11 +59,14 @@ object Button {
                     val nucleusText: OutfitState.Style<Color> = OutfitStateEmpty(),
                 )
 
+                inline val FrameNucleus.Color.asButtonNucleus get() = Color(nucleusFrame = this)
+                inline val OutfitState.Style<Color>.asButtonNucleus get() = Color(nucleusText = this)
+
                 class Typography(
                     val nucleusText: TextStyle = TextStyle(),
                 )
 
-                inline val TextStyle.asButtonNucleus get() = Typography(this)
+                inline val TextStyle.asButtonNucleus get() = Typography(nucleusText = this)
 
             }
 
@@ -79,7 +83,7 @@ object Button {
                     get() = Style(
                         outfitFrame = OutfitFrameStateColor(
                             outfitShape = OutfitShapeStateColor(
-                                size = 12.asOutfitShapeSize,
+                                size = 12.asSize,
                                 outfitState = OutfitStateDual(
                                     active = Color.Gray,
                                     inactive = Color.Gray.copy(alpha = 0.25f),
@@ -98,7 +102,7 @@ object Button {
                     get() = Style(
                         outfitFrame = OutfitFrameStateColor(
                             outfitShape = OutfitShapeStateColor(
-                                size = 12.asOutfitShapeSize,
+                                size = 12.asSize,
                             ),
                             outfitBorder = OutfitBorderStateColor(
                                 size = 2.2.dp,

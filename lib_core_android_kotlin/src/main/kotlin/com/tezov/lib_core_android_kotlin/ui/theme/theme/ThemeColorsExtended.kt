@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 04/04/2023 13:51
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:52
+ *  Last modified 04/04/2023 13:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -50,29 +50,45 @@ infix fun MaterialTheme.provides(value: ThemeColorsExtended.Links) =
 
 object ThemeColorsExtended {
 
-    data class Common(
+    class Common(
         val background: OutfitPaletteColor,
         val onBackground: OutfitPaletteColor,
-
-        val backgroundElevated: OutfitPaletteColor,
-        val onBackgroundElevated: OutfitPaletteColor,
-
-        val backgroundModal: OutfitPaletteColor,
-        val onBackgroundModal: OutfitPaletteColor,
 
         val primary: OutfitPaletteColor,
         val onPrimary: OutfitPaletteColor,
 
-        val secondary: OutfitPaletteColor,
-        val onSecondary: OutfitPaletteColor,
+        backgroundElevated: OutfitPaletteColor? = null,
+        onBackgroundElevated: OutfitPaletteColor? = null,
 
-        val tertiary: OutfitPaletteColor,
-        val onTertiary: OutfitPaletteColor,
+        backgroundModal: OutfitPaletteColor? = null,
+        onBackgroundModal: OutfitPaletteColor? = null,
 
-        val semantic: OutfitPaletteColorSemantic,
-        val onSemantic: OutfitPaletteColorSemantic,
+        secondary: OutfitPaletteColor? = null,
+        onSecondary: OutfitPaletteColor? = null,
 
-        )
+        tertiary: OutfitPaletteColor? = null,
+        onTertiary: OutfitPaletteColor? = null,
+
+        semantic: OutfitPaletteColorSemantic? = null,
+        onSemantic: OutfitPaletteColorSemantic? = null,
+
+    ){
+
+        val backgroundElevated: OutfitPaletteColor by DelegateNullFallBack(backgroundElevated, background)
+        val onBackgroundElevated: OutfitPaletteColor by DelegateNullFallBack(onBackgroundElevated, onBackground)
+
+        val backgroundModal: OutfitPaletteColor by DelegateNullFallBack(backgroundModal, background)
+        val onBackgroundModal: OutfitPaletteColor by DelegateNullFallBack(onBackgroundModal, onBackground)
+
+        val secondary: OutfitPaletteColor by DelegateNullFallBack(secondary, primary)
+        val onSecondary: OutfitPaletteColor by DelegateNullFallBack(onSecondary, onPrimary)
+        val tertiary: OutfitPaletteColor by DelegateNullFallBack(tertiary, primary)
+        val onTertiary: OutfitPaletteColor by DelegateNullFallBack(onTertiary, onPrimary)
+
+        val semantic: OutfitPaletteColorSemantic by DelegateNullFallBack(semantic, OutfitPaletteColorSemantic(primary))
+        val onSemantic: OutfitPaletteColorSemantic by DelegateNullFallBack(onSemantic, OutfitPaletteColorSemantic(onPrimary))
+
+    }
 
     internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
         error("not provided")
@@ -85,7 +101,7 @@ object ThemeColorsExtended {
         confirm: ButtonNucleus? = null,
         cancel: ButtonNucleus? = null,
         proceed: ButtonNucleus? = null,
-    ) : DelegateNullFallBack.Setter<ButtonNucleus> {
+    ) : DelegateNullFallBack.Group<ButtonNucleus> {
 
         val secondary: ButtonNucleus by DelegateNullFallBack(secondary)
         val tertiary: ButtonNucleus by DelegateNullFallBack(tertiary)
@@ -93,10 +109,10 @@ object ThemeColorsExtended {
         val cancel: ButtonNucleus by DelegateNullFallBack(cancel)
         val proceed: ButtonNucleus by DelegateNullFallBack(proceed)
 
-        override fun refs() = listOf(secondary, tertiary, confirm, cancel, proceed)
+        override fun groupFallBackRefs() = listOf(secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            nullFallback = { primary }
+            groupFallBackValue = primary
         }
     }
 
@@ -108,15 +124,15 @@ object ThemeColorsExtended {
         val primary: LinkNucleus,
         secondary: LinkNucleus? = null,
         tertiary: LinkNucleus? = null,
-    ) : DelegateNullFallBack.Setter<LinkNucleus> {
+    ) : DelegateNullFallBack.Group<LinkNucleus> {
 
         val secondary: LinkNucleus by DelegateNullFallBack(secondary)
         val tertiary: LinkNucleus by DelegateNullFallBack(tertiary)
 
-        override fun refs() = listOf(secondary, tertiary)
+        override fun groupFallBackRefs() = listOf(secondary, tertiary)
 
         init {
-            nullFallback = { primary }
+            groupFallBackValue = primary
         }
     }
 
