@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 13:51
+ *  Created by Tezov on 04/04/2023 15:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 13:51
+ *  Last modified 04/04/2023 14:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,11 +19,11 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asPaletteSizeStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.asSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asShapePaletteSizeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asShapeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 val MaterialTheme.shapesCommonExtended
@@ -49,10 +49,7 @@ object ThemeShapesExtended {
     ) {
         val roundedCorner: OutfitPaletteSize<OutfitShapeStateColor> by DelegateNullFallBack(
             roundedCorner,
-            OutfitShapeStateColor(
-                size = 12.asSize,
-                outfitState = Color.Gray.asSimple
-            ).asPaletteSizeStateColor
+            12.asShapePaletteSizeStateColor
         )
     }
 
@@ -79,13 +76,7 @@ object ThemeShapesExtended {
         override fun groupFallBackRefs() = listOf(primary, secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            groupFallBackValue = OutfitShapeStateColor(
-                size = 12.asSize,
-                outfitState = OutfitStateDual(
-                    active = Color.Gray,
-                    inactive = Color.Gray.copy(alpha = 0.5f)
-                )
-            )
+            groupFallBackValue = 12.asShapeStateColor
         }
     }
 

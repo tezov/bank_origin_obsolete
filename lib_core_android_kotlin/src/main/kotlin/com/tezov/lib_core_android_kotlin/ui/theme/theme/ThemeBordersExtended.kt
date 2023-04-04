@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 13:51
+ *  Created by Tezov on 04/04/2023 15:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 13:51
+ *  Last modified 04/04/2023 15:07
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,11 +19,10 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.asPaletteSizeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.asBorderPaletteSizeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.asBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 val MaterialTheme.bordersCommonExtended
@@ -49,10 +48,7 @@ object ThemeBordersExtended {
     ) {
         val stroke: OutfitPaletteSize<OutfitBorderStateColor> by DelegateNullFallBack(
             stroke,
-            OutfitBorderStateColor(
-                size = 1.dp,
-                outfitState = Color.Gray.asSimple
-            ).asPaletteSizeStateColor
+            1.asBorderPaletteSizeStateColor
         )
 
     }
@@ -81,13 +77,7 @@ object ThemeBordersExtended {
             listOf(primary, secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            groupFallBackValue = OutfitBorderStateColor(
-                size = 1.dp,
-                outfitState = OutfitStateDual(
-                    active = Color.Black,
-                    inactive = Color.Black.copy(alpha = 0.5f)
-                )
-            )
+            groupFallBackValue = 1.asBorderStateColor
         }
     }
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 13:51
+ *  Created by Tezov on 04/04/2023 15:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 13:03
+ *  Last modified 04/04/2023 15:07
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,11 +17,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColorSemantic
+import androidx.compose.ui.graphics.Color
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Nucleus.Color as ButtonNucleus
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Nucleus.Color as LinkNucleus
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Nucleus as FrameNucleus
 
 val MaterialTheme.colorsCommonExtended
     @Composable
@@ -95,7 +97,7 @@ object ThemeColorsExtended {
     }
 
     class Buttons(
-        val primary: ButtonNucleus,
+        primary: ButtonNucleus? = null,
         secondary: ButtonNucleus? = null,
         tertiary: ButtonNucleus? = null,
         confirm: ButtonNucleus? = null,
@@ -103,16 +105,32 @@ object ThemeColorsExtended {
         proceed: ButtonNucleus? = null,
     ) : DelegateNullFallBack.Group<ButtonNucleus> {
 
+        val primary: ButtonNucleus by DelegateNullFallBack(primary)
         val secondary: ButtonNucleus by DelegateNullFallBack(secondary)
         val tertiary: ButtonNucleus by DelegateNullFallBack(tertiary)
         val confirm: ButtonNucleus by DelegateNullFallBack(confirm)
         val cancel: ButtonNucleus by DelegateNullFallBack(cancel)
         val proceed: ButtonNucleus by DelegateNullFallBack(proceed)
 
-        override fun groupFallBackRefs() = listOf(secondary, tertiary, confirm, cancel, proceed)
+        override fun groupFallBackRefs() = listOf(primary, secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            groupFallBackValue = primary
+            groupFallBackValue = ButtonNucleus(
+                nucleusFrame = FrameNucleus.Color(
+                    nucleusShape = OutfitStateDual(
+                        active = Color.Gray.copy(alpha = 0.5f),
+                        inactive = Color.Gray.copy(alpha = 0.75f)
+                    ),
+                    nucleusBorder = OutfitStateDual(
+                        active = Color.Black,
+                        inactive = Color.Black.copy(alpha = 0.5f)
+                    )
+                ),
+                nucleusText = OutfitStateDual(
+                        active = Color.Black,
+                        inactive = Color.Black.copy(alpha = 0.25f)
+                )
+            )
         }
     }
 
@@ -121,18 +139,24 @@ object ThemeColorsExtended {
     }
 
     class Links(
-        val primary: LinkNucleus,
+        primary: LinkNucleus? = null,
         secondary: LinkNucleus? = null,
         tertiary: LinkNucleus? = null,
     ) : DelegateNullFallBack.Group<LinkNucleus> {
 
+        val primary: LinkNucleus by DelegateNullFallBack(primary)
         val secondary: LinkNucleus by DelegateNullFallBack(secondary)
         val tertiary: LinkNucleus by DelegateNullFallBack(tertiary)
 
-        override fun groupFallBackRefs() = listOf(secondary, tertiary)
+        override fun groupFallBackRefs() = listOf(primary, secondary, tertiary)
 
         init {
-            groupFallBackValue = primary
+            groupFallBackValue = LinkNucleus(
+                nucleusText = OutfitStateDual(
+                        active = Color.Black,
+                        inactive = Color.Black.copy(alpha = 0.25f)
+                )
+            )
         }
     }
 

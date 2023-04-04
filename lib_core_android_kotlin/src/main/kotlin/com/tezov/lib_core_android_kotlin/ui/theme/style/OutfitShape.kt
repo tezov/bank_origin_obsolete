@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 13:51
+ *  Created by Tezov on 04/04/2023 15:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 13:51
+ *  Last modified 04/04/2023 14:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,6 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asSize
 import androidx.compose.ui.graphics.Color as ColorImport
 
 fun Modifier.background(
@@ -55,13 +56,19 @@ object OutfitShape {
 
     }
 
-    data class Size constructor(
+    class Size constructor(
         val topStart: CornerSize,
         val topEnd: CornerSize,
         val bottomStart: CornerSize,
         val bottomEnd: CornerSize,
         val isSymmetric: Boolean
     ) {
+
+        companion object{
+
+            inline val Int.asSize: Size get() = Size(this)
+
+        }
 
         constructor(
             topStart: CornerSize,
@@ -101,7 +108,7 @@ object OutfitShape {
         val size get() = topStart
     }
 
-    inline val Int.asSize: Size get() = Size(this)
+
 
     data class Sketch(val shape: Shape, val color: ColorImport? = null)
 
@@ -144,8 +151,14 @@ object OutfitShape {
                     it.scope()
                 }.get()
 
-                inline val OutfitShapeStateColor.asPaletteSizeStateColor: OutfitPaletteSize<OutfitShapeStateColor>
+                inline val OutfitShapeStateColor.asShapePaletteSizeStateColor: OutfitPaletteSize<OutfitShapeStateColor>
                     get() = OutfitPaletteSize(normal = this)
+
+                inline val Int.asShapePaletteSizeStateColor: OutfitPaletteSize<OutfitShapeStateColor>
+                    get() = this.asShapeStateColor.asShapePaletteSizeStateColor
+
+                inline val Int.asShapeStateColor: OutfitShapeStateColor
+                    get() = OutfitShapeStateColor(size = this.asSize)
 
             }
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 13:51
+ *  Created by Tezov on 04/04/2023 15:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 13:51
+ *  Last modified 04/04/2023 15:07
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,12 +20,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.asSize
+import androidx.compose.ui.graphics.Color as ColorImport
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Nucleus as FrameNucleus
 
 object Button {
@@ -56,7 +56,7 @@ object Button {
 
                 class Color(
                     val nucleusFrame: FrameNucleus.Color = FrameNucleus.Color(),
-                    val nucleusText: OutfitState.Style<Color> = OutfitStateEmpty(),
+                    val nucleusText: OutfitState.Style<ColorImport> = OutfitStateEmpty(),
                 )
 
                 inline val FrameNucleus.Color.asButtonNucleus get() = Color(nucleusFrame = this)
@@ -78,47 +78,6 @@ object Button {
                 ) = StyleBuilder(this).also {
                     it.builder()
                 }.get()
-
-                val TextFilled
-                    get() = Style(
-                        outfitFrame = OutfitFrameStateColor(
-                            outfitShape = OutfitShapeStateColor(
-                                size = 12.asSize,
-                                outfitState = OutfitStateDual(
-                                    active = Color.Gray,
-                                    inactive = Color.Gray.copy(alpha = 0.25f),
-                                )
-                            )
-                        ),
-                        outfitText = OutfitTextStateColor(
-                            outfitState = OutfitStateDual(
-                                active = Color.Black,
-                                inactive = Color.Black.copy(alpha = 0.65f)
-                            )
-                        )
-                    )
-
-                val TextOutlined
-                    get() = Style(
-                        outfitFrame = OutfitFrameStateColor(
-                            outfitShape = OutfitShapeStateColor(
-                                size = 12.asSize,
-                            ),
-                            outfitBorder = OutfitBorderStateColor(
-                                size = 2.2.dp,
-                                outfitState = OutfitStateDual(
-                                    active = Color.Black,
-                                    inactive = Color.Black.copy(alpha = 0.65f),
-                                )
-                            )
-                        ),
-                        outfitText = OutfitTextStateColor(
-                            outfitState = OutfitStateDual(
-                                active = Color.Black,
-                                inactive = Color.Black.copy(alpha = 0.65f)
-                            )
-                        )
-                    )
 
             }
 
@@ -153,8 +112,8 @@ object Button {
                         disabledBackgroundColor = it,
                     )
                 } ?: ButtonDefaults.buttonColors(
-                    backgroundColor = Color.Transparent,
-                    disabledBackgroundColor = Color.Transparent,
+                    backgroundColor = Color1.Transparent,
+                    disabledBackgroundColor = Color1.Transparent,
                 ),
                 contentPadding = contentPadding,
                 enabled = enabled,

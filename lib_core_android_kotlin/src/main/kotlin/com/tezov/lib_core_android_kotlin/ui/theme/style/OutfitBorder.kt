@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 13:51
+ *  Created by Tezov on 04/04/2023 15:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 13:51
+ *  Last modified 04/04/2023 15:07
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,6 +18,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asShapePaletteSizeStateColor
 import androidx.compose.ui.graphics.Color as ColorImport
 
 fun Modifier.border(
@@ -75,8 +78,26 @@ object OutfitBorder {
                         it.scope()
                     }.get()
 
-                inline val OutfitBorderStateColor.asPaletteSizeStateColor: OutfitPaletteSize<OutfitBorderStateColor>
+                inline val OutfitBorderStateColor.asBorderPaletteSizeStateColor: OutfitPaletteSize<OutfitBorderStateColor>
                     get() = OutfitPaletteSize(normal = this)
+
+                inline val Dp.asBorderPaletteSizeStateColor: OutfitPaletteSize<OutfitBorderStateColor>
+                    get() = this.asBorderStateColor.asBorderPaletteSizeStateColor
+
+                inline val Int.asBorderPaletteSizeStateColor: OutfitPaletteSize<OutfitBorderStateColor>
+                get() = this.dp.asBorderPaletteSizeStateColor
+
+                inline val Double.asBorderPaletteSizeStateColor: OutfitPaletteSize<OutfitBorderStateColor>
+                    get() = this.dp.asBorderPaletteSizeStateColor
+
+                inline val Dp.asBorderStateColor: OutfitBorderStateColor
+                    get() = OutfitBorderStateColor(size = this)
+
+                inline val Int.asBorderStateColor: OutfitBorderStateColor
+                    get() = this.dp.asBorderStateColor
+
+                inline val Double.asBorderStateColor: OutfitBorderStateColor
+                    get() = this.dp.asBorderStateColor
             }
 
             constructor(style: Style) : this(

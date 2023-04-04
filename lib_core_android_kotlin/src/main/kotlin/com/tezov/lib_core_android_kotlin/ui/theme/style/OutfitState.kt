@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 13:51
+ *  Created by Tezov on 04/04/2023 15:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 13:51
+ *  Last modified 04/04/2023 14:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -98,8 +98,8 @@ object OutfitState {
                         it.builder()
                     }.get()
 
-                inline val Color.asSimple: OutfitStateSimple<Color> get() = OutfitStateSimple(this)
-                inline val TextStyle.asSimple: OutfitStateSimple<TextStyle> get() = OutfitStateSimple(this)
+                inline val Color.asStateSimple: OutfitStateSimple<Color> get() = OutfitStateSimple(value = this)
+                inline val TextStyle.asStateSimple: OutfitStateSimple<TextStyle> get() = OutfitStateSimple(value = this)
             }
 
             constructor(style: Style<T>) : this(
@@ -155,6 +155,9 @@ object OutfitState {
                     StyleBuilder(this).also {
                         it.builder()
                     }.get()
+
+                inline val Color.asStateDual: OutfitStateDual<Color> get() = OutfitStateDual(active = this)
+                inline val TextStyle.asStateDual: OutfitStateDual<TextStyle> get() = OutfitStateDual(active = this)
             }
 
             constructor(style: Style<T>) : this(
