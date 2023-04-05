@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 20:57
+ *  Created by Tezov on 05/04/2023 23:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 20:37
+ *  Last modified 05/04/2023 23:47
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,8 @@
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_kotlin.extension.ExtensionCollection.firstNotNull
 import androidx.compose.ui.graphics.Color as ColorImport
@@ -65,6 +67,9 @@ object OutfitPalette {
                     StyleBuilder(this).also {
                         it.builder()
                     }.get()
+
+                inline val ColorImport.asPaletteColor: Style
+                    get() = Style(default = this)
 
             }
 
@@ -128,6 +133,15 @@ object OutfitPalette {
                         it.builder()
                     }.get()
 
+                inline val Dp.asPaletteSize: Style<Dp>
+                    get() = Style(normal = this)
+
+                inline val Int.asPaletteSize: Style<Dp>
+                    get() = this.dp.asPaletteSize
+
+                inline val Double.asPaletteSize: Style<Dp>
+                    get() = this.dp.asPaletteSize
+
             }
 
             constructor(style: Style<T>) : this(
@@ -177,6 +191,15 @@ object OutfitPalette {
                     StyleBuilder(this).also {
                         it.builder()
                     }
+
+                inline val Dp.asPaletteDirection: Style<Dp>
+                    get() = Style(all = this)
+
+                inline val Int.asPaletteSize: Style<Dp>
+                    get() = this.dp.asPaletteDirection
+
+                inline val Double.asPaletteSize: Style<Dp>
+                    get() = this.dp.asPaletteDirection
             }
 
             constructor(all: T? = null) : this(

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 21:22
+ *  Created by Tezov on 05/04/2023 23:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 21:22
+ *  Last modified 05/04/2023 23:47
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,6 +14,7 @@ package com.tezov.bank.ui.theme
 
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.sizeDp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Size.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteDirection
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeDimensionsExtended
@@ -47,59 +48,46 @@ object ThemeDimensionProviders {
         element = OutfitPaletteDirection(
             vertical = OutfitPaletteSize(
                 normal = 4.dp,
-                micro = 2.dp,
                 small = 3.dp,
                 big = 6.dp,
                 huge = 14.dp,
-                supra = 18.dp,
             ),
             horizontal = OutfitPaletteSize(
                 normal = 3.dp,
-                micro = 1.dp,
                 small = 2.dp,
                 big = 6.dp,
                 huge = 10.dp,
-                supra = 16.dp,
             ),
         ),
-        button = TODO(),
+        button = OutfitPaletteDirection(
+            vertical = 4.asPaletteSize,
+            horizontal = 8.asPaletteSize,
+        ),
     )
 
     fun spacings() = ThemeDimensionsExtended.Spacings(
         block = OutfitPaletteDirection(
             vertical = OutfitPaletteSize(
-                normal = 4.dp,
-                micro = 1.dp,
-                small = 2.dp,
-                big = 6.dp,
-                huge = 8.dp,
-                supra = 10.dp,
+                normal = 6.dp,
+                small = 4.dp,
+                big = 10.dp,
             ),
             horizontal = OutfitPaletteSize(
                 normal = 4.dp,
-                micro = 1.dp,
                 small = 2.dp,
-                big = 6.dp,
-                huge = 8.dp,
-                supra = 10.dp,
+                big = 8.dp,
             ),
         ),
         element = OutfitPaletteDirection(
             vertical = OutfitPaletteSize(
                 normal = 4.dp,
-                micro = 1.dp,
                 small = 2.dp,
                 big = 6.dp,
-                huge = 8.dp,
-                supra = 10.dp,
             ),
             horizontal = OutfitPaletteSize(
                 normal = 4.dp,
-                micro = 1.dp,
                 small = 2.dp,
                 big = 6.dp,
-                huge = 8.dp,
-                supra = 10.dp,
             ),
         ),
 
@@ -108,11 +96,8 @@ object ThemeDimensionProviders {
     fun elevations() = ThemeDimensionsExtended.Elevations(
         elevation = OutfitPaletteSize(
             normal = 4.dp,
-            micro = 1.dp,
             small = 2.dp,
             big = 6.dp,
-            huge = 8.dp,
-            supra = 10.dp,
         ),
     )
 
@@ -122,13 +107,6 @@ object ThemeDimensionProviders {
         iconAction = 22.sizeDp,
         iconFieldInfo = 32.sizeDp,
         iconFieldAction = 22.sizeDp,
-        divider = OutfitPaletteSize(
-            normal = 4.dp,
-            micro = 1.dp,
-            small = 2.dp,
-            big = 6.dp,
-            huge = 8.dp,
-            supra = 10.dp,
-        ),
+        divider = 1.asPaletteSize,
     )
 }

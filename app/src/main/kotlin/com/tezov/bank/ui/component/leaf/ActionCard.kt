@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 02/04/2023 14:12
+ *  Created by Tezov on 05/04/2023 23:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/04/2023 14:12
+ *  Last modified 05/04/2023 23:47
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,6 +26,9 @@ import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asShapeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 object ActionCard {
@@ -47,21 +50,19 @@ object ActionCard {
 
     @Immutable
     data class Style(
-        val outfitFrame: OutfitFrame.Styl = OutfitFrame.Styl(
-            outfitShape = OutfitShape.Style(
-//                size = OutfitShape.Size(8.dp)
-            ),
-            outfitBorder = OutfitBorder.Style(
-//                size = 1.dp,
-//                color = Color.Black,
+        val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(
+            outfitShape = 8.asShapeStateColor,
+            outfitBorder = OutfitBorderStateColor(
+                size = 1.dp,
+                outfitState = Color.Black.asStateSimple,
             )
         ),
         val iconStyle:Icon.Simple.Style =  Icon.Simple.Style(
             size = SizeDp(24.dp),
             tint = Color.Black
         ),
-        val outfitTextTitle: OutfitText.StateColor = OutfitText.StateColor(),
-        val outfitTextSubtitle: OutfitText.StateColor = OutfitText.StateColor(),
+        val outfitTextTitle: OutfitTextStateColor = OutfitTextStateColor(),
+        val outfitTextSubtitle: OutfitTextStateColor = OutfitTextStateColor(),
     )
 
     data class Data(
@@ -106,8 +107,8 @@ object ActionCard {
                     onClick()
                 }
                 .padding(
-                    vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
-                    horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
+                    vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.normal,
+                    horizontal = MaterialTheme.dimensionsPaddingExtended.block.horizontal.normal
                 )
         ) {
             Column(
@@ -155,8 +156,8 @@ object ActionCard {
                     onClick()
                 }
                 .padding(
-                    vertical = MaterialTheme.dimensionsPaddingExtended.blockBig_v,
-                    horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
+                    vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.big,
+                    horizontal = MaterialTheme.dimensionsPaddingExtended.block.horizontal.normal
                 ),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -195,8 +196,8 @@ object ActionCard {
                 .background(style.outfitFrame)
                 .clickable { onClick() }
                 .padding(
-                    vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
-                    horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h
+                    vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.normal,
+                    horizontal = MaterialTheme.dimensionsPaddingExtended.block.horizontal.normal
                 ),
         ) {
             Column(

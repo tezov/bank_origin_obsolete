@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/03/2023 20:53
+ *  Created by Tezov on 05/04/2023 23:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/03/2023 20:53
+ *  Last modified 05/04/2023 23:47
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,37 +17,35 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.plain.IconSimple
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
 
 object ActionRow {
 
-    @Immutable
-    data class Style(
-        val iconInfoStyle: Icon.Simple.Style = Icon.Simple.Style(
+    class Style(
+        val iconInfoStyle: IconSimple = IconSimple(
             tint = Color.Black,
             size = SizeDp(24.dp)
         ),
-        val iconActionStyle: Icon.Simple.Style = Icon.Simple.Style(
+        val iconActionStyle: IconSimple = IconSimple(
             tint = Color.Black,
             size = SizeDp(24.dp)
         ),
-        val outfitText: OutfitText.StateColor = OutfitText.StateColor(),
+        val outfitText: OutfitTextStateColor? = null,
         val background: Color? = null,
     )
 
-    data class Data(
+    class Data(
         val iconInfoResourceId: Int? = null,
         val title: String,
         val iconActionResourceId: Int = R.drawable.ic_arrow_cut_right_24dp,
@@ -68,7 +66,7 @@ object ActionRow {
                 .fillMaxWidth()
                 .clickable { onClick() }
                 .padding(
-                    vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
+                    vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.normal,
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -78,7 +76,7 @@ object ActionRow {
                     resourceId = it,
                     description = null,
                 )
-                Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.normal_h))
+                Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.element.horizontal.normal))
             }
             Text.StateColor(
                 modifier = Modifier

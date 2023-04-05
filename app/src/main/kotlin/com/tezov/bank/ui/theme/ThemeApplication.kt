@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 21:22
+ *  Created by Tezov on 05/04/2023 23:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 21:22
+ *  Last modified 05/04/2023 23:47
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,8 +40,8 @@ object ThemeApplication {
                     MaterialTheme provides ThemeTypographyProviders.links(),
                     MaterialTheme provides ThemeShapeProviders.common(),
                     MaterialTheme provides ThemeShapeProviders.buttons(),
-                    MaterialTheme provides ThemeShapeProviders.common(),
-                    MaterialTheme provides ThemeShapeProviders.buttons(),
+                    MaterialTheme provides ThemeBorderProviders.common(),
+                    MaterialTheme provides ThemeBorderProviders.buttons(),
                 )
             },
             child = {
