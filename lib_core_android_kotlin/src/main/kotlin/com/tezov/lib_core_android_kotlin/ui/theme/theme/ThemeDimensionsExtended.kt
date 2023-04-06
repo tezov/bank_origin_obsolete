@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 12:56
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 12:56
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,12 +19,21 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
-import com.tezov.lib_core_android_kotlin.type.primaire.sizeDp
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
+import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Direction.Style.Companion.asPaletteDirection
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Size.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteDirection
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
+
+val MaterialTheme.dimensionsCommonExtended
+    @Composable
+    @ReadOnlyComposable
+    get() = ThemeDimensionsExtended.localCommon.current
+
+infix fun MaterialTheme.provides(value: ThemeDimensionsExtended.Common) =
+    ThemeDimensionsExtended.localCommon provides value
 
 val MaterialTheme.dimensionsPaddingExtended
     @Composable
@@ -34,77 +43,85 @@ val MaterialTheme.dimensionsPaddingExtended
 infix fun MaterialTheme.provides(value: ThemeDimensionsExtended.Paddings) =
     ThemeDimensionsExtended.localPaddings provides value
 
-val MaterialTheme.dimensionsSpacingExtended
+val MaterialTheme.dimensionsIconExtended
     @Composable
     @ReadOnlyComposable
-    get() = ThemeDimensionsExtended.localSpacings.current
+    get() = ThemeDimensionsExtended.localIcons.current
 
-infix fun MaterialTheme.provides(value: ThemeDimensionsExtended.Spacings) =
-    ThemeDimensionsExtended.localSpacings provides value
-
-val MaterialTheme.dimensionsSizeExtended
-    @Composable
-    @ReadOnlyComposable
-    get() = ThemeDimensionsExtended.localSizes.current
-
-infix fun MaterialTheme.provides(value: ThemeDimensionsExtended.Sizes) =
-    ThemeDimensionsExtended.localSizes provides value
+infix fun MaterialTheme.provides(value: ThemeDimensionsExtended.Icons) =
+    ThemeDimensionsExtended.localIcons provides value
 
 object ThemeDimensionsExtended {
 
+    class Common(
+        divider: OutfitPaletteSize<Dp>? = null,
+        elevation: OutfitPaletteSize<Dp>? = null,
+    ) {
+        val divider: OutfitPaletteSize<Dp> by DelegateNullFallBack(
+            divider,
+            lazyFallBackValue = { 1.dp.asPaletteSize })
+        val elevation: OutfitPaletteSize<Dp> by DelegateNullFallBack(
+            elevation,
+            lazyFallBackValue = { 2.dp.asPaletteSize })
+    }
+
+    internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
+        error("not provided")
+    }
+
     class Paddings(
-        val page: OutfitPaletteDirection<Dp>,
-        val block: OutfitPaletteDirection<OutfitPaletteSize<Dp>>,
-        val element: OutfitPaletteDirection<OutfitPaletteSize<Dp>>,
-        val button: OutfitPaletteDirection<OutfitPaletteSize<Dp>>,
-    )
+        page: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
+        block: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
+        element: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
+        button: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
+        text: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
+    ) {
+        val page: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
+            page,
+            lazyFallBackValue = { 6.dp.asPaletteSize.asPaletteDirection })
+        val block: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
+            block,
+            lazyFallBackValue = { 8.dp.asPaletteSize.asPaletteDirection })
+        val element: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
+            element,
+            lazyFallBackValue = { 4.dp.asPaletteSize.asPaletteDirection })
+        val button: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
+            button,
+            lazyFallBackValue = { 10.dp.asPaletteSize.asPaletteDirection })
+        val text: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
+            text,
+            lazyFallBackValue = { 2.dp.asPaletteSize.asPaletteDirection })
+    }
 
     internal val localPaddings: ProvidableCompositionLocal<Paddings> = staticCompositionLocalOf {
         error("not provided")
     }
 
-    class Spacings(
-        val elevation: OutfitPaletteSize<Dp>,
-        val block: OutfitPaletteDirection<OutfitPaletteSize<Dp>>,
-        val element: OutfitPaletteDirection<OutfitPaletteSize<Dp>>,
-    )
-
-    internal val localSpacings: ProvidableCompositionLocal<Spacings> = staticCompositionLocalOf {
-        error("not provided")
+    class Icons(
+        modal: OutfitPaletteSize<DpSize>? = null,
+        info: OutfitPaletteSize<DpSize>? = null,
+        action: OutfitPaletteSize<DpSize>? = null,
+        fieldInfo: OutfitPaletteSize<DpSize>? = null,
+        fieldAction: OutfitPaletteSize<DpSize>? = null,
+    ){
+        val modal: OutfitPaletteSize<DpSize> by DelegateNullFallBack(
+            modal,
+            lazyFallBackValue = { 24.dpSize.asPaletteSize })
+        val info: OutfitPaletteSize<DpSize> by DelegateNullFallBack(
+            info,
+            lazyFallBackValue = { 24.dpSize.asPaletteSize })
+        val action: OutfitPaletteSize<DpSize> by DelegateNullFallBack(
+            action,
+            lazyFallBackValue = { 24.dpSize.asPaletteSize })
+        val fieldInfo: OutfitPaletteSize<DpSize> by DelegateNullFallBack(
+            fieldInfo,
+            lazyFallBackValue = { 24.dpSize.asPaletteSize })
+        val fieldAction: OutfitPaletteSize<DpSize> by DelegateNullFallBack(
+            fieldAction,
+            lazyFallBackValue = { 24.dpSize.asPaletteSize })
     }
 
-    class Sizes(
-        divider: OutfitPaletteSize<Dp>,
-        image: OutfitPaletteSize<SizeDp>,
-        iconModal: SizeDp,
-        iconInfo: SizeDp,
-        iconAction: SizeDp,
-        iconFieldInfo: SizeDp,
-        iconFieldAction: SizeDp,
-    ) {
-
-        val divider: OutfitPaletteSize<Dp> by DelegateNullFallBack(
-            divider,
-            lazyFallBackValue = { 1.dp.asPaletteSize })
-        val image: OutfitPaletteSize<SizeDp> by DelegateNullFallBack(
-            image,
-            lazyFallBackValue = { 24.sizeDp.asPaletteSize })
-        val iconModal: SizeDp by DelegateNullFallBack(
-            iconModal,
-            lazyFallBackValue = { 24.sizeDp })
-        val iconAction: SizeDp by DelegateNullFallBack(
-            iconModal,
-            lazyFallBackValue = { 24.sizeDp })
-        val iconFieldInfo: SizeDp by DelegateNullFallBack(
-            iconModal,
-            lazyFallBackValue = { 24.sizeDp })
-        val iconFieldAction: SizeDp by DelegateNullFallBack(
-            iconModal,
-            lazyFallBackValue = { 24.sizeDp })
-
-    }
-
-    internal val localSizes: ProvidableCompositionLocal<Sizes> = staticCompositionLocalOf {
+    internal val localIcons: ProvidableCompositionLocal<Icons> = staticCompositionLocalOf {
         error("not provided")
     }
 

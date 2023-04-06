@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,7 +26,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 
 object DialogAuthCloseAppConfirmation :
     Dialog<DialogAuthCloseAppConfirmationState, DialogAuthCloseAppConfirmationAction> {
@@ -60,12 +60,12 @@ object DialogAuthCloseAppConfirmation :
                     text = "Déconnexion",
                     style = DialogAuthCloseAppConfirmationTheme.typographies.title
                 )
-                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.normal_v))
+                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
                 Text(
                     text = "Etes-vous sûr de vouloir vous déconnecter ?",
                     style = DialogAuthCloseAppConfirmationTheme.typographies.text
                 )
-                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.huge_v))
+                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.huge_v))
                 Row {
                     Spacer(modifier = Modifier.weight(1f))
                     ClickableText(
@@ -74,7 +74,7 @@ object DialogAuthCloseAppConfirmation :
                     ) {
 
                     }
-                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.big_h))
+                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.big_h))
                     ClickableText(
                         text = AnnotatedString("OUI"),
                         style = DialogAuthCloseAppConfirmationTheme.typographies.button

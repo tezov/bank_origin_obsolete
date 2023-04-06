@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,7 +30,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 
 object PagePayment : Page<PagePaymentState, PagePaymentAction> {
 
@@ -118,7 +118,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                         thickness = PagePaymentTheme.dimensions.headerDividerSize,
                     )
                 }
-                Spacer(modifier = Modifier.height((MaterialTheme.dimensionsSpacingExtended.normal_v * (1f - progress))))
+                Spacer(modifier = Modifier.height((MaterialTheme.dimensionsCommonExtended.normal_v * (1f - progress))))
             }
         }
     }

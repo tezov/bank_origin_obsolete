@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 11:00
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 11:00
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,12 +22,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asShapeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
@@ -51,14 +50,14 @@ object ActionCard {
     @Immutable
     data class Style(
         val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(
-            outfitShape = 8.asShapeStateColor,
+            outfitShape = 8.asStateColor,
             outfitBorder = OutfitBorderStateColor(
                 size = 1.dp,
                 outfitState = Color.Black.asStateSimple,
             )
         ),
         val iconStyle:Icon.Simple.Style =  Icon.Simple.Style(
-            size = SizeDp(24.dp),
+            size = DpSize(24.dp),
             tint = Color.Black
         ),
         val outfitTextTitle: OutfitTextStateColor = OutfitTextStateColor(),

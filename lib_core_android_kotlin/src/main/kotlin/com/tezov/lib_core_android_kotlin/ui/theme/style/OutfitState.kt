@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 20:57
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 20:37
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -231,6 +231,9 @@ object OutfitState {
                     StyleBuilder(this).also {
                         it.builder()
                     }.get()
+
+                inline val Color.asStateSemantic: OutfitStateSemantic<Color> get() = OutfitStateSemantic(neutral = this)
+                inline val TextStyle.asStateSemantic: OutfitStateSemantic<TextStyle> get() = OutfitStateSemantic(neutral = this)
             }
 
             constructor(style: Style<T>) : this(

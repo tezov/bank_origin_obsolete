@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 12:56
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 12:56
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,8 +18,8 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.asBorderPaletteSizeStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.asBorderStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.asStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
@@ -47,7 +47,7 @@ object ThemeBordersExtended {
     ) {
         val stroke: OutfitPaletteSize<OutfitBorderStateColor> by DelegateNullFallBack(
             stroke,
-            lazyFallBackValue = { 1.dp.asBorderPaletteSizeStateColor }
+            lazyFallBackValue = { 1.dp.asStateColor.asPaletteSize }
         )
 
     }
@@ -76,7 +76,7 @@ object ThemeBordersExtended {
             listOf(primary, secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            groupLazyFallBackValue = { 1.dp.asBorderStateColor }
+            groupLazyFallBackValue = { 1.dp.asStateColor }
         }
     }
 

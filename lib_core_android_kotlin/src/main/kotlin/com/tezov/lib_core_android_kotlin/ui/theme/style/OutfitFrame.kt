@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 11:00
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 11:00
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,6 +14,7 @@ package com.tezov.lib_core_android_kotlin.ui.theme.style
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
@@ -62,6 +63,10 @@ object OutfitFrame {
                 class Color(
                     val nucleusShape: OutfitState.Style<ColorImport>? = null,
                     val nucleusBorder: OutfitState.Style<ColorImport>? = null,
+                )
+
+                class Dimension(
+                    val nucleusBorder: Dp? = null,
                 )
 
             }

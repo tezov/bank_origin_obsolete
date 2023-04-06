@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/03/2023 20:53
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/03/2023 20:53
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,23 +21,22 @@ import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.isSpecified
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.leaf.ActionRow
-import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 
 object SectionActionRow {
 
     @Immutable
     data class Style(
         val iconStyle: Icon.Simple.Style = Icon.Simple.Style(
-            size = SizeDp(24.dp),
+            size = DpSize(24.dp),
             tint = Color.Black
         ),
         val outfitTextHeader: OutfitText.StateColor = OutfitText.StateColor(),
@@ -109,7 +108,7 @@ object SectionActionRow {
                         vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
                         horizontal = style.dimensionPaddingBody_h
                     ),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsSpacingExtended.small_v),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsCommonExtended.small_v),
             ) {
                 data.rows.forEachIndexed { index, row ->
                     ActionRow(data = row, style = style.actionRowStyle) {

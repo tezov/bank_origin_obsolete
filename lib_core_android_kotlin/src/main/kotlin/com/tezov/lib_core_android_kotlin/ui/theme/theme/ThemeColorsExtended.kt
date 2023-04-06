@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 11:00
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 11:00
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,9 +18,16 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
+import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Color.Style.Companion.asPaletteColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Size.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColorSemantic
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Semantic.Style.Companion.asStateSemantic
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateSemantic
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Nucleus.Color as ButtonNucleus
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Nucleus.Color as LinkNucleus
@@ -114,6 +121,34 @@ object ThemeColorsExtended {
     }
 
     internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
+        error("not provided")
+    }
+
+    class Icons(
+        modal: OutfitPaletteColorSemantic? = null,
+        info: OutfitPaletteColorSemantic? = null,
+        action: OutfitPaletteColorSemantic? = null,
+        fieldInfo: OutfitPaletteColorSemantic? = null,
+        fieldAction: OutfitPaletteColorSemantic? = null,
+    ) : DelegateNullFallBack.Group<OutfitPaletteColorSemantic>{
+
+        val modal: OutfitPaletteColorSemantic by DelegateNullFallBack(modal)
+        val info: OutfitPaletteColorSemantic by DelegateNullFallBack(info)
+        val action: OutfitPaletteColorSemantic by DelegateNullFallBack(action)
+        val fieldInfo: OutfitPaletteColorSemantic by DelegateNullFallBack(fieldInfo)
+        val fieldAction: OutfitPaletteColorSemantic by DelegateNullFallBack(fieldAction)
+
+        override fun groupFallBackRefs() =
+            listOf(modal, info, action, fieldInfo, fieldAction)
+
+        init {
+            groupLazyFallBackValue = {
+                OutfitStateSemantic(Color.Gray.copy(alpha = 0.5f).asPaletteColor)
+            }
+        }
+
+    }
+    internal val localIcons: ProvidableCompositionLocal<Icons> = staticCompositionLocalOf {
         error("not provided")
     }
 

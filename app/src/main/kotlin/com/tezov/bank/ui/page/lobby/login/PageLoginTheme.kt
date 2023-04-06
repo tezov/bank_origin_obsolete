@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 21:22
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 21:22
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,8 +24,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.theme.ThemeColorProviders
 import com.tezov.bank.ui.theme.ThemeComponentProviders
-import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
-import com.tezov.lib_core_android_kotlin.type.primaire.sizeDp
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
+import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Companion.copy
@@ -106,12 +106,12 @@ object PageLoginTheme {
     data class Dimensions(
         val spacingTopToTitle: Dp,
         val spacingTopFromLinkService: Dp,
-        val sizeLogo: SizeDp,
-        val sizeIconBig: SizeDp,
+        val sizeLogo: DpSize,
+        val sizeIconBig: DpSize,
         val paddingStartToIconBig: Dp,
-        val sizeIconMedium: SizeDp,
+        val sizeIconMedium: DpSize,
         val paddingStartToIconMedium: Dp,
-        val sizeIconSmall: SizeDp,
+        val sizeIconSmall: DpSize,
         val paddingButtonOutlined_h: Dp,
         val paddingButtonOutlined_v: Dp,
         val paddingButton_h: Dp,
@@ -122,12 +122,12 @@ object PageLoginTheme {
     fun provideDimensions() = Dimensions(
         spacingTopToTitle = 24.dp,
         spacingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.elementBig_v,
-        sizeLogo = 64.sizeDp,
-        sizeIconBig = 52.sizeDp,
+        sizeLogo = 64.dpSize,
+        sizeIconBig = 52.dpSize,
         paddingStartToIconBig = 28.dp,
-        sizeIconMedium = 38.sizeDp,
+        sizeIconMedium = 38.dpSize,
         paddingStartToIconMedium = 12.dp,
-        sizeIconSmall = 42.sizeDp,
+        sizeIconSmall = 42.dpSize,
         paddingButtonOutlined_h = 32.dp,
         paddingButtonOutlined_v = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
         paddingButton_h = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,

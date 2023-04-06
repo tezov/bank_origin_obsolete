@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 21:22
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 21:22
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,17 +28,14 @@ import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.theme.font.fontUbuntu
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
-import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
@@ -252,7 +249,7 @@ object ThemeComponentProviders {
     fun provideSectionRowStyle() = SectionActionRow.Style(
         dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.horizontal,
         iconStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsSizeExtended.iconInfo,
+            size = MaterialTheme.dimensionsIconExtended.iconInfo,
             tint = MaterialTheme.colorsCommonExtended.primary.default
         ),
 //        outfitTextHeader = MaterialTheme.typographiesTextExtended.text.normal.copy {
@@ -269,18 +266,18 @@ object ThemeComponentProviders {
         colorDivider = MaterialTheme.colorsCommonExtended.backgroundElevated.default.copy(
             alpha = 0.05f
         ),
-        dimensionDivider = MaterialTheme.dimensionsSizeExtended.divider.normal,
+        dimensionDivider = MaterialTheme.dimensionsIconExtended.divider.normal,
         actionRowStyle = provideActionRowStyle()
     )
 
     @Composable
     fun provideActionRowStyle() = ActionRow.Style(
         iconInfoStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsSizeExtended.iconInfo,
+            size = MaterialTheme.dimensionsIconExtended.iconInfo,
             tint = MaterialTheme.colorsCommonExtended.primary.default
         ),
         iconActionStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsSizeExtended.iconAction,
+            size = MaterialTheme.dimensionsIconExtended.iconAction,
             tint = MaterialTheme.colorsCommonExtended.primary.default
         ),
 //        outfitText = MaterialTheme.typographiesTextExtended.text.normal.copy {
@@ -296,7 +293,7 @@ object ThemeComponentProviders {
     @Composable
     fun provideSectionCardStyle() = SectionActionCard.Style(
         iconStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsSizeExtended.iconInfo,
+            size = MaterialTheme.dimensionsIconExtended.iconInfo,
             tint = MaterialTheme.colorsCommonExtended.primary.default
         ),
 //        outfitTextHeader = MaterialTheme.typographiesTextExtended.text.normal.copy {
@@ -323,7 +320,7 @@ object ThemeComponentProviders {
             }
         ),
         iconStyle = Icon.Simple.Style(
-            size = SizeDp(56.dp),
+            size = DpSize(56.dp),
             tint = MaterialTheme.colorsCommonExtended.primary.default
         ),
 //        outfitTextTitle = MaterialTheme.typographiesTextExtended.text.normal.copy {
@@ -352,7 +349,7 @@ object ThemeComponentProviders {
         ),
         dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.element.vertical.normal,
         dimensionIndicatorSize = 12.dp,
-        dimensionIndicatorSpacing = MaterialTheme.dimensionsSpacingExtended.element.vertical.normal,
+        dimensionIndicatorSpacing = MaterialTheme.dimensionsCommonExtended.element.vertical.normal,
     )
 
     @Composable

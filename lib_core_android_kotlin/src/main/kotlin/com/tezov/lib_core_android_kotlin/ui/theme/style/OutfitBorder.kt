@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 12:56
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 12:56
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
@@ -82,13 +81,10 @@ object OutfitBorder {
                         it.scope()
                     }.get()
 
-                inline val OutfitBorderStateColor.asBorderPaletteSizeStateColor: OutfitPaletteSize<OutfitBorderStateColor>
+                inline val OutfitBorderStateColor.asPaletteSize: OutfitPaletteSize<OutfitBorderStateColor>
                     get() = OutfitPaletteSize(normal = this)
 
-                inline val Dp.asBorderPaletteSizeStateColor: OutfitPaletteSize<OutfitBorderStateColor>
-                    get() = this.asBorderStateColor.asBorderPaletteSizeStateColor
-
-                inline val Dp.asBorderStateColor: OutfitBorderStateColor
+                inline val Dp.asStateColor: OutfitBorderStateColor
                     get() = OutfitBorderStateColor(size = this)
 
             }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,7 +34,7 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 
 object PageProfile : Page<PageProfileState, PageProfileAction> {
 
@@ -71,7 +71,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                     .verticalScroll(rememberScrollState())
             ) {
                 contentHeader(state.header)
-                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.normal_v))
+                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
                 state.profils.value?.let {
                     SectionActionRow(data = it, style = PageProfileTheme.styles.sectionRow) {
 
@@ -125,7 +125,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
             }
             Row(modifier = Modifier.fillMaxWidth()) {
                 header.imageResourceId.value?.let {
-                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.normal_v))
+                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.normal_v))
                     Image(
                         modifier = Modifier
                             .size(PageProfileTheme.dimensions.iconUserSize)
@@ -140,7 +140,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                     )
                 }
                 header.name.value?.let {
-                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsSpacingExtended.big_h))
+                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.big_h))
                     Text(
                         modifier = Modifier
                             .align(Alignment.Top),

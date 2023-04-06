@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 12:56
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 12:05
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,7 @@
 package com.tezov.bank.ui.theme
 
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.type.primaire.sizeDp
+import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Size.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteDirection
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
@@ -65,7 +65,7 @@ object ThemeDimensionProviders {
         ),
     )
 
-    fun spacings() = ThemeDimensionsExtended.Spacings(
+    fun spacings() = ThemeDimensionsExtended.Common(
         block = OutfitPaletteDirection(
             vertical = OutfitPaletteSize(
                 normal = 6.dp,
@@ -101,12 +101,12 @@ object ThemeDimensionProviders {
         ),
     )
 
-    fun sizes() = ThemeDimensionsExtended.Sizes(
-        iconModal = 42.sizeDp,
-        iconInfo = 36.sizeDp,
-        iconAction = 22.sizeDp,
-        iconFieldInfo = 32.sizeDp,
-        iconFieldAction = 22.sizeDp,
+    fun sizes() = ThemeDimensionsExtended.Icons(
+        modal = 42.dpSize,
+        info = 36.dpSize,
+        action = 22.dpSize,
+        fieldInfo = 32.dpSize,
+        fieldAction = 22.dpSize,
         divider = 1.asPaletteSize,
     )
 }

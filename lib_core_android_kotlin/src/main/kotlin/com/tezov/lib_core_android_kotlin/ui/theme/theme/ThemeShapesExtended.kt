@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 20:57
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 20:37
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,8 +18,8 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asShapePaletteSizeStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asShapeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asPaletteSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
@@ -46,7 +46,7 @@ object ThemeShapesExtended {
     ) {
         val roundedCorner: OutfitPaletteSize<OutfitShapeStateColor> by DelegateNullFallBack(
             roundedCorner,
-            lazyFallBackValue = { 12.asShapePaletteSizeStateColor }
+            lazyFallBackValue = { 12.asStateColor.asPaletteSize }
         )
     }
 
@@ -74,7 +74,7 @@ object ThemeShapesExtended {
             listOf(primary, secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            groupLazyFallBackValue = { 12.asShapeStateColor }
+            groupLazyFallBackValue = { 12.asStateColor }
         }
     }
 

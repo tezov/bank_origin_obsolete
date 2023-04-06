@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 11:00
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 11:00
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,7 +19,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.then
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
@@ -40,7 +40,7 @@ object Image {
         }
 
         class Style(
-            val size: SizeDp? = null,
+            val size: DpSize? = null,
             val tint: Color? = null,
             val contentScale: ContentScale = ContentScale.Fit,
         ) {
@@ -92,7 +92,7 @@ object Image {
         }
 
         class Style(
-            val size: SizeDp? = null,
+            val size: DpSize? = null,
             val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(),
             val contentScale: ContentScale = ContentScale.Fit
         ) {

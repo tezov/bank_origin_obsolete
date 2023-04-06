@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 21:22
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 21:22
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,7 +28,7 @@ import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSizeExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsIconExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesTextExtended
 
 val PagePaymentTheme.colors: PagePaymentTheme.Colors
@@ -93,7 +93,7 @@ object PagePaymentTheme {
     fun provideDimensions() = Dimensions(
         textTitleMin = 24.sp,
         textTitleMax = 48.sp,
-        headerDividerSize = MaterialTheme.dimensionsSizeExtended.dividerSmall,
+        headerDividerSize = MaterialTheme.dimensionsIconExtended.dividerSmall,
         headerHeight = ColumnCollapsibleHeader.Properties(48.dp, 150.dp)
     )
 

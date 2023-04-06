@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 11:00
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 11:00
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,13 +17,14 @@ import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.then
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.border
+import androidx.compose.ui.graphics.Color as ColorImport
 
 object Icon {
 
@@ -40,8 +41,8 @@ object Icon {
         }
 
         class Style(
-            val size: SizeDp? = null,
-            val tint: Color? = null,
+            val size: DpSize? = null,
+            val tint: ColorImport? = null,
         ) {
             companion object {
 
@@ -89,9 +90,18 @@ object Icon {
         }
 
         class Style(
-            val size: SizeDp? = null,
+            val size: DpSize? = null,
             val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(),
         ) {
+            object Nucleus {
+
+                class Color(
+                    val nucleusShape: OutfitState.Style<ColorImport>? = null,
+                    val nucleusBorder: OutfitState.Style<ColorImport>? = null,
+                )
+
+            }
+
             companion object {
 
                 @Composable

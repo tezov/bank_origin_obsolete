@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 12:00
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_kotlin.type.primaire.Scale
 
-fun Modifier.size(size: SizeDp):Modifier {
+fun Modifier.size(size: DpSize):Modifier {
     return if(size.width != 0.dp && size.height != 0.dp){
         width(size.width).height(size.height)
     }
@@ -31,10 +31,10 @@ fun Modifier.size(size: SizeDp):Modifier {
     }
 }
 
-inline val Int.sizeDp: SizeDp get() = SizeDp(this)
-inline val Double.sizeDp: SizeDp get() = SizeDp(this)
+inline val Int.dpSize: DpSize get() = DpSize(this)
+inline val Double.dpSize: DpSize get() = DpSize(this)
 
-class SizeDp constructor(var width: Dp = 0.dp, var height: Dp = 0.dp) {
+class DpSize constructor(var width: Dp = 0.dp, var height: Dp = 0.dp) {
 
     constructor(size:Dp):this(size, size)
     constructor(size:Int):this(size.dp, size.dp)

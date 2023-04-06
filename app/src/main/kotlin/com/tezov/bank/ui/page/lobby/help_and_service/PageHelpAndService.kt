@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/02/2023 03:45
+ *  Created by Tezov on 06/04/2023 23:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 03:45
+ *  Last modified 06/04/2023 23:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,7 +30,7 @@ import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsSpacingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
@@ -92,7 +92,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
                         }
                     }
-                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.normal_v))
+                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
                     state.contacts.value?.let {
                         SectionActionRow(data = it, style = PageHelpAndServiceTheme.styles.sectionRow){
 
@@ -122,7 +122,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 text = it,
                 style = PageHelpAndServiceTheme.typographies.titleBig
             )
-            Spacer(modifier = Modifier.height(MaterialTheme.dimensionsSpacingExtended.normal_v))
+            Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
         }
     }
 
