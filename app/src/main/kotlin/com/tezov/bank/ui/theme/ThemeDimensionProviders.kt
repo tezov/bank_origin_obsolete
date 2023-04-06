@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 11:00
+ *  Created by Tezov on 06/04/2023 12:56
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 11:00
+ *  Last modified 06/04/2023 12:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -94,7 +94,7 @@ object ThemeDimensionProviders {
         )
 
     fun elevations() = ThemeDimensionsExtended.Elevations(
-        elevation = OutfitPaletteSize(
+        palette = OutfitPaletteSize(
             normal = 4.dp,
             small = 2.dp,
             big = 6.dp,

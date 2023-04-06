@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 11:00
+ *  Created by Tezov on 06/04/2023 12:56
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 11:00
+ *  Last modified 06/04/2023 12:56
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,6 +14,8 @@ package com.tezov.lib_core_android_kotlin.ui.theme.style
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.lib_core_android_kotlin.type.primaire.SizeDp
+import com.tezov.lib_core_android_kotlin.type.primaire.sizeDp
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_kotlin.extension.ExtensionCollection.firstNotNull
 import androidx.compose.ui.graphics.Color as ColorImport
@@ -136,11 +138,8 @@ object OutfitPalette {
                 inline val Dp.asPaletteSize: Style<Dp>
                     get() = Style(normal = this)
 
-                inline val Int.asPaletteSize: Style<Dp>
-                    get() = this.dp.asPaletteSize
-
-                inline val Double.asPaletteSize: Style<Dp>
-                    get() = this.dp.asPaletteSize
+                inline val SizeDp.asPaletteSize: Style<SizeDp>
+                    get() = Style(normal = this)
 
             }
 

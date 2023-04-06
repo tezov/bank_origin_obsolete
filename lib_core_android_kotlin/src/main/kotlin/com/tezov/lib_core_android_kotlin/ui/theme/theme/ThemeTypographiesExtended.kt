@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 11:00
+ *  Created by Tezov on 06/04/2023 12:56
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 11:00
+ *  Last modified 06/04/2023 12:56
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -67,47 +67,35 @@ object ThemeTypographiesExtended {
         fieldValue: OutfitTextStateColor? = null,
         fieldLabel: OutfitTextStateColor? = null,
     ) {
-        private val default = object : Lazy<TextStyle>{
-
-            lateinit var _value:TextStyle
-
-            override val value: TextStyle
-                get() {
-                    if(!isInitialized()){
-                        _value = TextStyle(
-                            color = Color.Black,
-                            fontSize = 14.sp
-                        )
-                    }
-                    return _value
-                }
-
-            override fun isInitialized() = this::_value.isInitialized
+        private val default:TextStyle by lazy {
+            TextStyle(
+                color = Color.Black,
+                fontSize = 14.sp
+            )
         }
-
         val title: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(
             title,
-            lazyFallBackValue = { default.value.asTextPaletteSizeStateColor }
+            lazyFallBackValue = { default.asTextPaletteSizeStateColor }
         )
         val body: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(
             body,
-            lazyFallBackValue = { default.value.asTextPaletteSizeStateColor }
+            lazyFallBackValue = { default.asTextPaletteSizeStateColor }
         )
         val subtitle: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(
             subtitle,
-            lazyFallBackValue = { default.value.asTextPaletteSizeStateColor }
+            lazyFallBackValue = { default.asTextPaletteSizeStateColor }
         )
         val helper: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(
             helper,
-            lazyFallBackValue = { default.value.asTextPaletteSizeStateColor }
+            lazyFallBackValue = { default.asTextPaletteSizeStateColor }
         )
         val fieldValue: OutfitTextStateColor by DelegateNullFallBack(
             fieldValue,
-            lazyFallBackValue = { default.value.asTextStateColor }
+            lazyFallBackValue = { default.asTextStateColor }
         )
         val fieldLabel: OutfitTextStateColor by DelegateNullFallBack(
             fieldLabel,
-            lazyFallBackValue = { default.value.asTextStateColor }
+            lazyFallBackValue = { default.asTextStateColor }
         )
     }
 

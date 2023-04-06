@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 20:57
+ *  Created by Tezov on 06/04/2023 12:56
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 20:37
+ *  Last modified 06/04/2023 12:56
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.asBorderPaletteSizeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.asBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
@@ -46,7 +47,7 @@ object ThemeBordersExtended {
     ) {
         val stroke: OutfitPaletteSize<OutfitBorderStateColor> by DelegateNullFallBack(
             stroke,
-            lazyFallBackValue = { 1.asBorderPaletteSizeStateColor }
+            lazyFallBackValue = { 1.dp.asBorderPaletteSizeStateColor }
         )
 
     }
@@ -75,7 +76,7 @@ object ThemeBordersExtended {
             listOf(primary, secondary, tertiary, confirm, cancel, proceed)
 
         init {
-            groupLazyFallBackValue = { 1.asBorderStateColor }
+            groupLazyFallBackValue = { 1.dp.asBorderStateColor }
         }
     }
 
