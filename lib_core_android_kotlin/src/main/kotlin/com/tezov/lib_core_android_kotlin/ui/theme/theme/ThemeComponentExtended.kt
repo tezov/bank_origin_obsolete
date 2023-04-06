@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/04/2023 23:47
+ *  Created by Tezov on 06/04/2023 11:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/04/2023 23:47
+ *  Last modified 06/04/2023 11:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,8 +18,6 @@ import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
-import com.tezov.lib_core_android_kotlin.ui.component.plain.ButtonStateColor
-import com.tezov.lib_core_android_kotlin.ui.component.plain.LinkStateColor
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button as ButtonImport
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link as LinkImport
@@ -69,19 +67,19 @@ object ThemeComponentExtended {
     }
 
     class Buttons(
-        val primary: ButtonStateColor,
-        secondary: ButtonStateColor? = null,
-        tertiary: ButtonStateColor? = null,
-        confirm: ButtonStateColor? = null,
-        cancel: ButtonStateColor? = null,
-        proceed: ButtonStateColor? = null,
-    ) : DelegateNullFallBack.Group<ButtonStateColor> {
+        val primary: ButtonImport.StateColor.Style,
+        secondary: ButtonImport.StateColor.Style? = null,
+        tertiary: ButtonImport.StateColor.Style? = null,
+        confirm: ButtonImport.StateColor.Style? = null,
+        cancel: ButtonImport.StateColor.Style? = null,
+        proceed: ButtonImport.StateColor.Style? = null,
+    ) : DelegateNullFallBack.Group<ButtonImport.StateColor.Style> {
 
-        val secondary: ButtonStateColor by DelegateNullFallBack(secondary)
-        val tertiary: ButtonStateColor by DelegateNullFallBack(tertiary)
-        val confirm: ButtonStateColor by DelegateNullFallBack(confirm)
-        val cancel: ButtonStateColor by DelegateNullFallBack(cancel)
-        val proceed: ButtonStateColor by DelegateNullFallBack(proceed)
+        val secondary: ButtonImport.StateColor.Style by DelegateNullFallBack(secondary)
+        val tertiary: ButtonImport.StateColor.Style by DelegateNullFallBack(tertiary)
+        val confirm: ButtonImport.StateColor.Style by DelegateNullFallBack(confirm)
+        val cancel: ButtonImport.StateColor.Style by DelegateNullFallBack(cancel)
+        val proceed: ButtonImport.StateColor.Style by DelegateNullFallBack(proceed)
 
         override fun groupFallBackRefs() =
             listOf(primary, secondary, tertiary, confirm, cancel, proceed)
@@ -96,13 +94,13 @@ object ThemeComponentExtended {
     }
 
     class Links(
-        val primary: LinkStateColor,
-        secondary: LinkStateColor? = null,
-        tertiary: LinkStateColor? = null,
-    ) : DelegateNullFallBack.Group<LinkStateColor> {
+        val primary: LinkImport.StateColor.Style,
+        secondary: LinkImport.StateColor.Style? = null,
+        tertiary: LinkImport.StateColor.Style? = null,
+    ) : DelegateNullFallBack.Group<LinkImport.StateColor.Style> {
 
-        val secondary: LinkStateColor by DelegateNullFallBack(secondary)
-        val tertiary: LinkStateColor by DelegateNullFallBack(tertiary)
+        val secondary: LinkImport.StateColor.Style by DelegateNullFallBack(secondary)
+        val tertiary: LinkImport.StateColor.Style by DelegateNullFallBack(tertiary)
 
         override fun groupFallBackRefs() = listOf(secondary, tertiary)
 

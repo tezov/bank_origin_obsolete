@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/04/2023 23:47
+ *  Created by Tezov on 06/04/2023 11:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/04/2023 23:47
+ *  Last modified 06/04/2023 11:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,14 +23,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Nucleus.asButtonNucleus
-import com.tezov.lib_core_android_kotlin.ui.component.plain.ButtonStateColorNucleusTypography
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Nucleus.asLinkNucleus
-import com.tezov.lib_core_android_kotlin.ui.component.plain.LinkStateColorNucleusTypography
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asTextPaletteSizeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Nucleus.Typography as ButtonNucleus
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Nucleus.Typography as LinkNucleus
 
 val MaterialTheme.typographiesTextExtended
     @Composable
@@ -116,20 +116,20 @@ object ThemeTypographiesExtended {
     }
 
     class Buttons(
-        primary: ButtonStateColorNucleusTypography? = null,
-        secondary: ButtonStateColorNucleusTypography? = null,
-        tertiary: ButtonStateColorNucleusTypography? = null,
-        confirm: ButtonStateColorNucleusTypography? = null,
-        cancel: ButtonStateColorNucleusTypography? = null,
-        proceed: ButtonStateColorNucleusTypography? = null,
-    ) : DelegateNullFallBack.Group<ButtonStateColorNucleusTypography> {
+        primary: ButtonNucleus? = null,
+        secondary: ButtonNucleus? = null,
+        tertiary: ButtonNucleus? = null,
+        confirm: ButtonNucleus? = null,
+        cancel: ButtonNucleus? = null,
+        proceed: ButtonNucleus? = null,
+    ) : DelegateNullFallBack.Group<ButtonNucleus> {
 
-        val primary: ButtonStateColorNucleusTypography by DelegateNullFallBack(primary)
-        val secondary: ButtonStateColorNucleusTypography by DelegateNullFallBack(secondary)
-        val tertiary: ButtonStateColorNucleusTypography by DelegateNullFallBack(tertiary)
-        val confirm: ButtonStateColorNucleusTypography by DelegateNullFallBack(confirm)
-        val cancel: ButtonStateColorNucleusTypography by DelegateNullFallBack(cancel)
-        val proceed: ButtonStateColorNucleusTypography by DelegateNullFallBack(proceed)
+        val primary: ButtonNucleus by DelegateNullFallBack(primary)
+        val secondary: ButtonNucleus by DelegateNullFallBack(secondary)
+        val tertiary: ButtonNucleus by DelegateNullFallBack(tertiary)
+        val confirm: ButtonNucleus by DelegateNullFallBack(confirm)
+        val cancel: ButtonNucleus by DelegateNullFallBack(cancel)
+        val proceed: ButtonNucleus by DelegateNullFallBack(proceed)
 
         override fun groupFallBackRefs() =
             listOf(primary, secondary, tertiary, confirm, cancel, proceed)
@@ -150,14 +150,14 @@ object ThemeTypographiesExtended {
     }
 
     class Links(
-        primary: LinkStateColorNucleusTypography? = null,
-        secondary: LinkStateColorNucleusTypography? = null,
-        tertiary: LinkStateColorNucleusTypography? = null,
-    ) : DelegateNullFallBack.Group<LinkStateColorNucleusTypography> {
+        primary: LinkNucleus? = null,
+        secondary: LinkNucleus? = null,
+        tertiary: LinkNucleus? = null,
+    ) : DelegateNullFallBack.Group<LinkNucleus> {
 
-        val primary: LinkStateColorNucleusTypography by DelegateNullFallBack(primary)
-        val secondary: LinkStateColorNucleusTypography by DelegateNullFallBack(secondary)
-        val tertiary: LinkStateColorNucleusTypography by DelegateNullFallBack(tertiary)
+        val primary: LinkNucleus by DelegateNullFallBack(primary)
+        val secondary: LinkNucleus by DelegateNullFallBack(secondary)
+        val tertiary: LinkNucleus by DelegateNullFallBack(tertiary)
 
         override fun groupFallBackRefs() = listOf(primary, secondary, tertiary)
 

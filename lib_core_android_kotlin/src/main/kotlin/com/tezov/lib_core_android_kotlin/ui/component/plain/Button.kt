@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/04/2023 23:47
+ *  Created by Tezov on 06/04/2023 11:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/04/2023 23:47
+ *  Last modified 06/04/2023 11:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,10 +25,6 @@ import androidx.compose.ui.unit.Dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import androidx.compose.ui.graphics.Color as ColorImport
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Nucleus as FrameNucleus
-
-typealias ButtonStateColor = Button.StateColor.Style
-typealias ButtonStateColorNucleusColor = Button.StateColor.Style.Nucleus.Color
-typealias ButtonStateColorNucleusTypography = Button.StateColor.Style.Nucleus.Typography
 
 object Button {
 
@@ -57,7 +53,7 @@ object Button {
             object Nucleus {
 
                 class Color(
-                    val nucleusFrame: OutfitFrameStateColorNucleusColor? = null,
+                    val nucleusFrame: FrameNucleus.Color? = null,
                     val nucleusText: OutfitState.Style<ColorImport>? = null,
                 )
 
