@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 14:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 13:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -174,17 +174,17 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesTextExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesCommonExtended.textTitle.typo.copy(
             color = colors.onBackground
         ),
-        fieldValue = MaterialTheme.typographiesTextExtended.textFieldValue.typo.copy(
+        fieldValue = MaterialTheme.typographiesCommonExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        fieldLabel = MaterialTheme.typographiesTextExtended.textFieldValue.typo.copy(
+        fieldLabel = MaterialTheme.typographiesCommonExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        button = MaterialTheme.typographiesTextExtended.textNormal.typo,
-        link = MaterialTheme.typographiesTextExtended.textNormal.typo.copy(
+        button = MaterialTheme.typographiesCommonExtended.textNormal.typo,
+        link = MaterialTheme.typographiesCommonExtended.textNormal.typo.copy(
             color = colors.onBackground,
         )
 

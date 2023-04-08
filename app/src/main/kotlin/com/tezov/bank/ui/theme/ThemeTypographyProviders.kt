@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 21:22
+ *  Created by Tezov on 08/04/2023 14:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 21:22
+ *  Last modified 08/04/2023 13:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,32 +19,30 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.bank.ui.theme.font.fontUbuntu
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Nucleus.asButtonNucleus
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Nucleus.asLinkNucleus
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asTextPaletteSizeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeTypographiesExtended
 
 object ThemeTypographyProviders {
 
     @Composable
-    fun common() = ThemeTypographiesExtended.Texts(
+    fun common() = ThemeTypographiesExtended.Common(
         title = TextStyle(
             fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Normal,
             fontSize = 20.sp
-        ).asTextPaletteSizeStateColor,
+        ).asTextStateColor.asPaletteSize,
         subtitle = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = 15.sp
-        ).asTextPaletteSizeStateColor,
+        ).asTextStateColor.asPaletteSize,
         helper = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = 13.sp
-        ).asTextPaletteSizeStateColor,
-        fieldValue = TextStyle(
+        ).asTextStateColor.asPaletteSize,
+        input = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = 18.sp
@@ -62,7 +60,7 @@ object ThemeTypographyProviders {
             fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Normal,
             fontSize = 20.sp
-        ).asButtonNucleus
+        ).asTextStateColor
     )
 
     @Composable
@@ -71,6 +69,6 @@ object ThemeTypographyProviders {
             fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Normal,
             fontSize = 20.sp
-        ).asLinkNucleus
+        ).asTextStateColor
     )
 }

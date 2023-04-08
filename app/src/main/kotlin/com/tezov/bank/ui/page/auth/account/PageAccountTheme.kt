@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 08/04/2023 14:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:52
+ *  Last modified 08/04/2023 13:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -131,10 +131,10 @@ object PageAccountTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesTextExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesCommonExtended.textTitle.typo.copy(
             color = colors.textContent
         ),
-        normal = MaterialTheme.typographiesTextExtended.textNormal.typo.copy(
+        normal = MaterialTheme.typographiesCommonExtended.textNormal.typo.copy(
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),

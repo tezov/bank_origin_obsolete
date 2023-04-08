@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 14:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 13:44
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,12 +31,14 @@ object OutfitPalette {
 
         class StyleBuilder internal constructor(val style: Style) {
             var default = style.default
+            var fade = style.fade
             var light = style.light
             var dark = style.dark
             var accent = style.accent
 
             internal fun get() = Style(
                 default = default,
+                fade = fade,
                 light = light,
                 dark = dark,
                 accent = accent,
@@ -45,16 +47,18 @@ object OutfitPalette {
 
         class Style(
             val default: ColorImport,
+            fade: ColorImport? = null,
             light: ColorImport? = null,
             dark: ColorImport? = null,
             accent: ColorImport? = null,
         ) : DelegateNullFallBack.Group<ColorImport> {
 
+            val fade: ColorImport by DelegateNullFallBack(fade)
             val light: ColorImport by DelegateNullFallBack(light)
             val dark: ColorImport by DelegateNullFallBack(dark)
             val accent: ColorImport by DelegateNullFallBack(accent)
 
-            override fun groupFallBackRefs() = listOf(light, dark, accent)
+            override fun groupFallBackRefs() = listOf(fade, light, dark, accent)
 
             init {
                 groupLazyFallBackValue = { default }
@@ -75,6 +79,7 @@ object OutfitPalette {
 
             constructor(style: Style) : this(
                 default = style.default,
+                fade = style.fade,
                 light = style.light,
                 dark = style.dark,
                 accent = style.accent,

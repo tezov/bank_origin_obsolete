@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 21:22
+ *  Created by Tezov on 08/04/2023 14:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 21:22
+ *  Last modified 08/04/2023 14:31
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,6 +27,20 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsCommonExtended
 
 object TopAppBar: ActivitySub<TopAppBarState, TopAppBarAction> {
 
+    class StyleBuilder internal constructor(style: Style) {
+        var outfitText = style.outfitText
+        var colorBackground = style.colorBackground
+        var colorIconLeading = style.colorIconLeading
+        var colorIconTrailing = style.colorIconTrailing
+
+        internal fun get() = Style(
+            outfitText = outfitText,
+            colorBackground = colorBackground,
+            colorIconLeading = colorIconLeading,
+            colorIconTrailing = colorIconTrailing,
+        )
+    }
+
     class Style(
         val outfitText: OutfitText.StateColor.Style = OutfitText.StateColor.Style(),
         val colorBackground: Color = Color.Black,
@@ -35,22 +49,8 @@ object TopAppBar: ActivitySub<TopAppBarState, TopAppBarAction> {
     ){
         companion object{
 
-            open class Builder internal constructor(style: Style) {
-                var outfitText = style.outfitText
-                var colorBackground = style.colorBackground
-                var colorIconLeading = style.colorIconLeading
-                var colorIconTrailing = style.colorIconTrailing
-
-                internal fun get() = Style(
-                    outfitText = outfitText,
-                    colorBackground = colorBackground,
-                    colorIconLeading = colorIconLeading,
-                    colorIconTrailing = colorIconTrailing,
-                )
-            }
-
             @Composable
-            fun Style.copy(builder: @Composable Builder.()->Unit = {}) = Builder(this).also {
+            fun Style.copy(builder: @Composable StyleBuilder.()->Unit = {}) = StyleBuilder(this).also {
                 it.builder()
             }.get()
 

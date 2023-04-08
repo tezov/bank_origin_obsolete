@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 14:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 14:31
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -79,13 +79,19 @@ object ThemeDimensionsExtended {
         val page: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
             page,
             lazyFallBackValue = { 6.dp.asPaletteSize.asPaletteDirection })
-        val block: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
+        val cluster: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
             block,
             lazyFallBackValue = { 8.dp.asPaletteSize.asPaletteDirection })
-        val element: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
+        val block: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
+            block,
+            lazyFallBackValue = { 6.dp.asPaletteSize.asPaletteDirection })
+        val chunk: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
             element,
             lazyFallBackValue = { 4.dp.asPaletteSize.asPaletteDirection })
         val button: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
+            button,
+            lazyFallBackValue = { 10.dp.asPaletteSize.asPaletteDirection })
+        val icon: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
             button,
             lazyFallBackValue = { 10.dp.asPaletteSize.asPaletteDirection })
         val text: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 14:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 07/04/2023 20:54
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -57,19 +57,6 @@ object OutfitFrame {
                 outfitBorder,
                 lazyFallBackValue = { OutfitBorderStateColor() }
             )
-
-            object Nucleus {
-
-                class Color(
-                    val nucleusShape: OutfitState.Style<ColorImport>? = null,
-                    val nucleusBorder: OutfitState.Style<ColorImport>? = null,
-                )
-
-                class Dimension(
-                    val nucleusBorder: Dp? = null,
-                )
-
-            }
 
             companion object {
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 14:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 13:44
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,7 +19,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
@@ -35,19 +34,16 @@ typealias OutfitShapeStateColor = OutfitShape.StateColor.Style
 object OutfitShape {
 
     enum class Template {
-        Asymmetric,
-        Symmetric,
-        Circle;
+        Rounded;
 
         fun get(size: Size? = null) = size?.let {
             when (this) {
-                Asymmetric -> RoundedCornerShape(
-                    topStart = it.topStart,
-                    topEnd = it.topEnd,
-                    bottomStart = it.bottomStart,
-                    bottomEnd = it.bottomEnd
+                Rounded -> RoundedCornerShape(
+                    topStart = it.topStart ?: CornerSize(0),
+                    topEnd = it.topEnd ?: CornerSize(0),
+                    bottomStart = it.bottomStart ?: CornerSize(0),
+                    bottomEnd = it.bottomEnd ?: CornerSize(0)
                 )
-                Symmetric, Circle -> RoundedCornerShape(corner = it.size)
             }
         }
 
@@ -57,59 +53,50 @@ object OutfitShape {
 
     }
 
-    class Size constructor(
-        val topStart: CornerSize,
-        val topEnd: CornerSize,
-        val bottomStart: CornerSize,
-        val bottomEnd: CornerSize,
-        val isSymmetric: Boolean
+    class Size private constructor(
+        val topStart: CornerSize? = null,
+        val topEnd: CornerSize? = null,
+        val bottomStart: CornerSize? = null,
+        val bottomEnd: CornerSize? = null,
     ) {
 
-        companion object{
+        companion object {
 
             inline val Int.asShapeSize: Size get() = Size(this)
+
+            inline val Dp.asShapeSize: Size get() = Size(this)
 
         }
 
         constructor(
-            topStart: CornerSize,
-            topEnd: CornerSize,
-            bottomStart: CornerSize,
-            bottomEnd: CornerSize
-        ) : this(topStart, topEnd, bottomStart, bottomEnd, false)
-
-        constructor(
-            topStart: Int = 0,
-            topEnd: Int = 0,
-            bottomStart: Int = 0,
-            bottomEnd: Int = 0
+            topStart: Int? = null,
+            topEnd: Int? = null,
+            bottomStart: Int? = null,
+            bottomEnd: Int? = null
         ) : this(
-            CornerSize(topStart),
-            CornerSize(topEnd),
-            CornerSize(bottomStart),
-            CornerSize(bottomEnd)
+            topStart?.let { CornerSize(it) },
+            topEnd?.let { CornerSize(it) },
+            bottomStart?.let { CornerSize(it) },
+            bottomEnd?.let { CornerSize(it) },
         )
 
         constructor(
-            topStart: Dp = 0.dp,
-            topEnd: Dp = 0.dp,
-            bottomStart: Dp = 0.dp,
-            bottomEnd: Dp = 0.dp
+            topStart: Dp? = null,
+            topEnd: Dp? = null,
+            bottomStart: Dp? = null,
+            bottomEnd: Dp? = null
         ) : this(
-            CornerSize(topStart),
-            CornerSize(topEnd),
-            CornerSize(bottomStart),
-            CornerSize(bottomEnd)
+            topStart?.let { CornerSize(it) },
+            topEnd?.let { CornerSize(it) },
+            bottomStart?.let { CornerSize(it) },
+            bottomEnd?.let { CornerSize(it) },
         )
 
-        constructor(size: CornerSize) : this(size, size, size, size, true)
+        constructor(size: CornerSize) : this(size, size, size, size)
         constructor(percent: Int) : this(CornerSize(percent))
         constructor(size: Dp) : this(CornerSize(size))
 
-        val size get() = topStart
     }
-
-
 
     data class Sketch(val shape: Shape, val color: ColorImport? = null)
 
@@ -128,8 +115,8 @@ object OutfitShape {
         }
 
         class Style(
-            template: Template = Template.Symmetric,
-            size: Size? = null,
+            val template: Template = Template.Rounded,
+            val size: Size? = null,
             outfitState: OutfitState.Style<ColorImport>? = null,
         ) {
 
@@ -138,28 +125,19 @@ object OutfitShape {
                 lazyFallBackValue = { OutfitStateNull() }
             )
 
-            var size: Size? = size
-                private set
-
-            //todo check if ok else do inside init
-            var template: Template = template
-                private set(value) {
-                    when (value) {
-                        Template.Circle -> size = Size(50)
-                        else -> {}
-                    }
-                    field = value
-                }
-
             companion object {
 
                 @Composable
-                fun Style.copy(scope: @Composable StyleBuilder.() -> Unit = {}) = StyleBuilder(this).also {
-                    it.scope()
-                }.get()
+                fun Style.copy(scope: @Composable StyleBuilder.() -> Unit = {}) =
+                    StyleBuilder(this).also {
+                        it.scope()
+                    }.get()
 
                 inline val OutfitShapeStateColor.asPaletteSize: OutfitPaletteSize<OutfitShapeStateColor>
                     get() = OutfitPaletteSize(normal = this)
+
+                inline val Dp.asStateColor: OutfitShapeStateColor
+                    get() = OutfitShapeStateColor(size = this.asShapeSize)
 
                 inline val Int.asStateColor: OutfitShapeStateColor
                     get() = OutfitShapeStateColor(size = this.asShapeSize)

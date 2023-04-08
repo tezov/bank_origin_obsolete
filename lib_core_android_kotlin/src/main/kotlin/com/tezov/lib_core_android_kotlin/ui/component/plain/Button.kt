@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 11:00
+ *  Created by Tezov on 08/04/2023 14:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 11:00
+ *  Last modified 07/04/2023 20:58
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,11 +20,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import androidx.compose.ui.graphics.Color as ColorImport
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Nucleus as FrameNucleus
 
 object Button {
 
@@ -49,24 +47,6 @@ object Button {
             val outfitText: OutfitTextStateColor = OutfitTextStateColor(),
             val elevation: Dp? = null,
         ) {
-
-            object Nucleus {
-
-                class Color(
-                    val nucleusFrame: FrameNucleus.Color? = null,
-                    val nucleusText: OutfitState.Style<ColorImport>? = null,
-                )
-
-                inline val FrameNucleus.Color.asButtonNucleus get() = Color(nucleusFrame = this)
-                inline val OutfitState.Style<ColorImport>.asButtonNucleus get() = Color(nucleusText = this)
-
-                class Typography(
-                    val nucleusText: TextStyle? = null,
-                )
-
-                inline val TextStyle.asButtonNucleus get() = Typography(nucleusText = this)
-
-            }
 
             companion object {
 

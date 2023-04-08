@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 14:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 14:15
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,22 +32,35 @@ val MaterialTheme.bordersCommonExtended
 infix fun MaterialTheme.provides(value: ThemeBordersExtended.Common) =
     ThemeBordersExtended.localBorders provides value
 
-val MaterialTheme.bordersButtonExtended
-    @Composable
-    @ReadOnlyComposable
-    get() = ThemeBordersExtended.localButtons.current
-
-infix fun MaterialTheme.provides(value: ThemeBordersExtended.Buttons) =
-    ThemeBordersExtended.localButtons provides value
-
 object ThemeBordersExtended {
 
     class Common(
-        stroke: OutfitPaletteSize<OutfitBorderStateColor>? = null,
+        cluster: OutfitPaletteSize<OutfitBorderStateColor>? = null,
+        block: OutfitPaletteSize<OutfitBorderStateColor>? = null,
+        chunk: OutfitPaletteSize<OutfitBorderStateColor>? = null,
+        button: OutfitPaletteSize<OutfitBorderStateColor>? = null,
+        icon: OutfitPaletteSize<OutfitBorderStateColor>? = null,
     ) {
-        val stroke: OutfitPaletteSize<OutfitBorderStateColor> by DelegateNullFallBack(
-            stroke,
+
+        val cluster: OutfitPaletteSize<OutfitBorderStateColor> by DelegateNullFallBack(
+            cluster,
+            lazyFallBackValue = { 1.2.dp.asStateColor.asPaletteSize }
+        )
+        val block: OutfitPaletteSize<OutfitBorderStateColor> by DelegateNullFallBack(
+            block,
             lazyFallBackValue = { 1.dp.asStateColor.asPaletteSize }
+        )
+        val chunk: OutfitPaletteSize<OutfitBorderStateColor> by DelegateNullFallBack(
+            chunk,
+            lazyFallBackValue = { 0.8.dp.asStateColor.asPaletteSize }
+        )
+        val button: OutfitPaletteSize<OutfitBorderStateColor> by DelegateNullFallBack(
+            button,
+            lazyFallBackValue = { 1.5.dp.asStateColor.asPaletteSize }
+        )
+        val icon: OutfitPaletteSize<OutfitBorderStateColor> by DelegateNullFallBack(
+            icon,
+            lazyFallBackValue = { 2.2.dp.asStateColor.asPaletteSize }
         )
 
     }
@@ -56,32 +69,5 @@ object ThemeBordersExtended {
         error("not provided")
     }
 
-    class Buttons(
-        primary: OutfitBorderStateColor? = null,
-        secondary: OutfitBorderStateColor? = null,
-        tertiary: OutfitBorderStateColor? = null,
-        confirm: OutfitBorderStateColor? = null,
-        cancel: OutfitBorderStateColor? = null,
-        proceed: OutfitBorderStateColor? = null,
-    ) : DelegateNullFallBack.Group<OutfitBorderStateColor> {
-
-        val primary: OutfitBorderStateColor by DelegateNullFallBack(primary)
-        val secondary: OutfitBorderStateColor by DelegateNullFallBack(secondary)
-        val tertiary: OutfitBorderStateColor by DelegateNullFallBack(tertiary)
-        val confirm: OutfitBorderStateColor by DelegateNullFallBack(confirm)
-        val cancel: OutfitBorderStateColor by DelegateNullFallBack(cancel)
-        val proceed: OutfitBorderStateColor by DelegateNullFallBack(proceed)
-
-        override fun groupFallBackRefs() =
-            listOf(primary, secondary, tertiary, confirm, cancel, proceed)
-
-        init {
-            groupLazyFallBackValue = { 1.dp.asStateColor }
-        }
-    }
-
-    internal val localButtons: ProvidableCompositionLocal<Buttons> = staticCompositionLocalOf {
-        error("not provided")
-    }
 
 }
