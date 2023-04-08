@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 08/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:29
+ *  Last modified 08/04/2023 21:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -24,8 +25,12 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.Activit
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
 
@@ -42,10 +47,22 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
     }
 
     class Style(
-        val outfitShape: OutfitShapeStateColor = OutfitShapeStateColor(),
-        val padding: PaddingValues = PaddingValues(1.dp, 1.dp),
-        val elevation: Dp = 0.dp,
+        outfitShape: OutfitShapeStateColor? = null,
+        padding: PaddingValues? = null,
+        val elevation: Dp = 2.dp,
     ){
+        val outfitShape: OutfitShapeStateColor by DelegateNullFallBack(
+            outfitShape,
+            lazyFallBackValue = {
+                OutfitShapeStateColor(
+                    outfitState =  Color.Gray.copy(alpha = 0.25f).asStateSimple,
+                    size = OutfitShape.Size(topStart = 12.dp, topEnd = 12.dp)
+                )
+            })
+        val padding: PaddingValues by DelegateNullFallBack(
+            padding,
+            lazyFallBackValue = { PaddingValues(1.dp, 1.dp) })
+
         companion object{
 
             @Composable

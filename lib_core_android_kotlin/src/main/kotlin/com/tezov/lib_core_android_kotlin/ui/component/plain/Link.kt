@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 14:32
+ *  Created by Tezov on 08/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/04/2023 20:54
+ *  Last modified 08/04/2023 21:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
-import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.sp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
 object Link {
@@ -33,8 +38,21 @@ object Link {
         }
 
         class Style(
-            val outfitText: OutfitText.StateColor.Style = OutfitTextStateColor(),
+            outfitText: OutfitText.StateColor.Style? = null,
         ) {
+
+            val outfitText: OutfitTextStateColor by DelegateNullFallBack(
+                outfitText,
+                lazyFallBackValue = {
+                    OutfitTextStateColor(
+                        outfitState = ColorImport.Black.asStateSimple,
+                        typo = TextStyle(
+                            color = ColorImport.Black,
+                            fontSize = 14.sp,
+                            textDecoration = TextDecoration.Underline
+                        )
+                    )
+                })
 
             companion object {
 

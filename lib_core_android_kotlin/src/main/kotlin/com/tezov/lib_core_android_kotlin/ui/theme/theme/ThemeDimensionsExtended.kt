@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 08/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:06
+ *  Last modified 08/04/2023 21:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -56,13 +56,16 @@ object ThemeDimensionsExtended {
     class Common(
         divider: OutfitPaletteSize<Dp>? = null,
         elevation: OutfitPaletteSize<Dp>? = null,
-    ) {
-        val divider: OutfitPaletteSize<Dp> by DelegateNullFallBack(
-            divider,
-            lazyFallBackValue = { 1.dp.asPaletteSize })
-        val elevation: OutfitPaletteSize<Dp> by DelegateNullFallBack(
-            elevation,
-            lazyFallBackValue = { 2.dp.asPaletteSize })
+    ) : DelegateNullFallBack.Group<OutfitPaletteSize<Dp>> {
+
+        val divider: OutfitPaletteSize<Dp> by DelegateNullFallBack(divider)
+        val elevation: OutfitPaletteSize<Dp> by DelegateNullFallBack(elevation)
+
+        override fun groupFallBackRefs() = listOf(divider, elevation)
+
+        init {
+            groupLazyFallBackValue = { 2.dp.asPaletteSize }
+        }
     }
 
     internal val localCommon: ProvidableCompositionLocal<Common> = staticCompositionLocalOf {
@@ -77,28 +80,21 @@ object ThemeDimensionsExtended {
         button: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
         icon: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
         text: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
-    ) {
-        val page: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
-            page,
-            lazyFallBackValue = { 6.dp.asPaletteSize.asPaletteDirection })
-        val cluster: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
-            cluster,
-            lazyFallBackValue = { 8.dp.asPaletteSize.asPaletteDirection })
-        val block: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
-            block,
-            lazyFallBackValue = { 6.dp.asPaletteSize.asPaletteDirection })
-        val chunk: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
-            chunk,
-            lazyFallBackValue = { 4.dp.asPaletteSize.asPaletteDirection })
-        val button: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
-            button,
-            lazyFallBackValue = { 10.dp.asPaletteSize.asPaletteDirection })
-        val icon: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
-            icon,
-            lazyFallBackValue = { 10.dp.asPaletteSize.asPaletteDirection })
-        val text: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(
-            text,
-            lazyFallBackValue = { 2.dp.asPaletteSize.asPaletteDirection })
+    ) : DelegateNullFallBack.Group<OutfitPaletteDirection<OutfitPaletteSize<Dp>>> {
+
+        val page: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(page)
+        val cluster: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(cluster)
+        val block: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(block)
+        val chunk: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(chunk)
+        val button: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(button)
+        val icon: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(icon)
+        val text: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(text)
+
+        override fun groupFallBackRefs() = listOf(page, cluster, block, chunk, button, icon, text)
+
+        init {
+            groupLazyFallBackValue = { 6.dp.asPaletteSize.asPaletteDirection }
+        }
     }
 
     internal val localPaddings: ProvidableCompositionLocal<Paddings> = staticCompositionLocalOf {
@@ -111,22 +107,19 @@ object ThemeDimensionsExtended {
         action: OutfitPaletteSize<DpSize>? = null,
         fieldInfo: OutfitPaletteSize<DpSize>? = null,
         fieldAction: OutfitPaletteSize<DpSize>? = null,
-    ){
-        val modal: OutfitPaletteSize<DpSize> by DelegateNullFallBack(
-            modal,
-            lazyFallBackValue = { 24.dpSize.asPaletteSize })
-        val info: OutfitPaletteSize<DpSize> by DelegateNullFallBack(
-            info,
-            lazyFallBackValue = { 24.dpSize.asPaletteSize })
-        val action: OutfitPaletteSize<DpSize> by DelegateNullFallBack(
-            action,
-            lazyFallBackValue = { 24.dpSize.asPaletteSize })
-        val fieldInfo: OutfitPaletteSize<DpSize> by DelegateNullFallBack(
-            fieldInfo,
-            lazyFallBackValue = { 24.dpSize.asPaletteSize })
-        val fieldAction: OutfitPaletteSize<DpSize> by DelegateNullFallBack(
-            fieldAction,
-            lazyFallBackValue = { 24.dpSize.asPaletteSize })
+    ) : DelegateNullFallBack.Group<OutfitPaletteSize<DpSize>> {
+
+        val modal: OutfitPaletteSize<DpSize> by DelegateNullFallBack(modal)
+        val info: OutfitPaletteSize<DpSize> by DelegateNullFallBack(info)
+        val action: OutfitPaletteSize<DpSize> by DelegateNullFallBack(action)
+        val fieldInfo: OutfitPaletteSize<DpSize> by DelegateNullFallBack(fieldInfo)
+        val fieldAction: OutfitPaletteSize<DpSize> by DelegateNullFallBack(fieldAction)
+
+        override fun groupFallBackRefs() = listOf(modal, info, action, fieldInfo, fieldAction)
+
+        init {
+            groupLazyFallBackValue = { 24.dpSize.asPaletteSize }
+        }
     }
 
     internal val localIcons: ProvidableCompositionLocal<Icons> = staticCompositionLocalOf {

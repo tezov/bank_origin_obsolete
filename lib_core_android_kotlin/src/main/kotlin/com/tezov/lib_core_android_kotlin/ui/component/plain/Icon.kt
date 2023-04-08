@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 08/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:18
+ *  Last modified 08/04/2023 21:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,15 +18,18 @@ import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
+import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.size
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.then
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.border
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
 object Icon {
@@ -44,15 +47,24 @@ object Icon {
         }
 
         class Style(
-            val size: DpSize? = null,
-            val tint: ColorImport? = null,
+            size: DpSize? = null,
+            tint: ColorImport? = null,
         ) {
+
+            val size: DpSize by DelegateNullFallBack(size, lazyFallBackValue = {
+                24.dpSize
+            })
+            val tint: ColorImport by DelegateNullFallBack(tint, lazyFallBackValue = {
+                ColorImport.Black
+            })
+
             companion object {
 
                 @Composable
-                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) = StyleBuilder(this).also {
-                    it.builder()
-                }.get()
+                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) =
+                    StyleBuilder(this).also {
+                        it.builder()
+                    }.get()
 
             }
 
@@ -72,8 +84,7 @@ object Icon {
             Icon(
                 modifier = modifier.thenOnNotNull(style.size, Modifier::size),
                 painter = painterResource(id = resourceId),
-                tint = style.tint
-                    ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+                tint = style.tint,
                 contentDescription = description,
             )
         }
@@ -93,16 +104,35 @@ object Icon {
         }
 
         class Style(
-            val size: DpSize? = null,
-            val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(),
+            size: DpSize? = null,
+            outfitFrame: OutfitFrameStateColor? = null,
         ) {
+
+            val size: DpSize by DelegateNullFallBack(size, lazyFallBackValue = {
+                24.dpSize
+            })
+            val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack(
+                outfitFrame,
+                lazyFallBackValue = {
+                    OutfitFrameStateColor(
+                        outfitBorder = OutfitBorderStateColor(
+                            outfitState = ColorImport.Black.asStateSimple,
+                            size = 2.dp
+                        ),
+                        outfitShape = OutfitShapeStateColor(
+                            outfitState = ColorImport.Gray.copy(alpha = 0.25f).asStateSimple,
+                            size = 50.asShapeSize
+                        )
+                    )
+                })
 
             companion object {
 
                 @Composable
-                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) = StyleBuilder(this).also {
-                    it.builder()
-                }.get()
+                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) =
+                    StyleBuilder(this).also {
+                        it.builder()
+                    }.get()
 
             }
 

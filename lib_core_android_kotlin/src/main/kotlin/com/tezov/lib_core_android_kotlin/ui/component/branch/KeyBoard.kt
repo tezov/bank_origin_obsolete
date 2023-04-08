@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 20:57
+ *  Created by Tezov on 08/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 20:57
+ *  Last modified 08/04/2023 21:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import kotlin.properties.Delegates
 
 object KeyBoard {
@@ -72,22 +73,34 @@ object KeyBoard {
         class Style(
             val colorBackground: Color = Color.Transparent,
             val colorOnBackground: Color = Color.Black,
-            val outfitBorderOuter: OutfitBorderStateColor = OutfitBorderStateColor(
-                size = 2.dp,
-                outfitState = Color.Black.asStateSimple
-            ),
-            val outfitBorderInner: OutfitBorderStateColor = OutfitBorderStateColor(
-                size = 1.dp,
-                outfitState = Color.Black.asStateSimple
-            ),
+            outfitBorderOuter: OutfitBorderStateColor? = null,
+            outfitBorderInner: OutfitBorderStateColor? = null,
         ) {
+
+            val outfitBorderOuter: OutfitBorderStateColor by DelegateNullFallBack(
+                outfitBorderOuter,
+                lazyFallBackValue = {
+                    OutfitBorderStateColor(
+                        size = 2.dp,
+                        outfitState = Color.Black.asStateSimple
+                    )
+                })
+            val outfitBorderInner: OutfitBorderStateColor by DelegateNullFallBack(
+                outfitBorderInner,
+                lazyFallBackValue = {
+                    OutfitBorderStateColor(
+                        size = 1.dp,
+                        outfitState = Color.Black.asStateSimple
+                    )
+                })
 
             companion object {
 
                 @Composable
-                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit) = StyleBuilder(this).also {
-                    it.builder()
-                }.get()
+                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit) =
+                    StyleBuilder(this).also {
+                        it.builder()
+                    }.get()
 
             }
 

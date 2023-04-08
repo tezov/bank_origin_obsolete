@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 14:32
+ *  Created by Tezov on 08/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 14:31
+ *  Last modified 08/04/2023 21:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,9 +24,11 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object HorizontalScrollable {
 
@@ -49,21 +51,32 @@ object HorizontalScrollable {
         }
 
         open class Style(
-            val outfitShapeIndicator: OutfitShapeStateColor? = OutfitShapeStateColor(
-                outfitState = OutfitStateDual(active = Color.Black, inactive = Color.Gray),
-            ),
+            outfitShapeIndicator: OutfitShapeStateColor? = null,
             val dimensionIndicatorPaddingTop: Dp = 6.dp,
             val dimensionIndicatorSize: Dp = 6.dp,
             val dimensionIndicatorSpacing: Dp = 6.dp,
-            val padding: PaddingValues = PaddingValues(),
+            padding: PaddingValues? = null,
         ) {
+
+            val outfitShapeIndicator: OutfitShapeStateColor by DelegateNullFallBack(
+                outfitShapeIndicator,
+                lazyFallBackValue = {
+                    OutfitShapeStateColor(
+                        outfitState = OutfitStateDual(active = Color.Black, inactive = Color.Gray),
+                        size = 6.dp.asShapeSize
+                    )
+                })
+            val padding: PaddingValues by DelegateNullFallBack(
+                padding,
+                lazyFallBackValue = { PaddingValues() })
 
             companion object {
 
                 @Composable
-                fun Style.copy(scope: @Composable StyleBuilder.() -> Unit) = StyleBuilder(this).also {
-                    it.scope()
-                }.get()
+                fun Style.copy(scope: @Composable StyleBuilder.() -> Unit) =
+                    StyleBuilder(this).also {
+                        it.scope()
+                    }.get()
 
             }
 
@@ -109,9 +122,13 @@ object HorizontalScrollable {
                         indicatorWidth = style.dimensionIndicatorSize,
                         indicatorHeight = style.dimensionIndicatorSize,
                         spacing = style.dimensionIndicatorSpacing,
-                        activeColor = it.resolveColor(OutfitState.Dual.Selector.Enabled) ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
-                        inactiveColor = it.resolveColor(OutfitState.Dual.Selector.Disabled) ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current).copy(
-                            ContentAlpha.disabled),
+                        activeColor = it.resolveColor(OutfitState.Dual.Selector.Enabled)
+                            ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+                        inactiveColor = it.resolveColor(OutfitState.Dual.Selector.Disabled)
+                            ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
+                                .copy(
+                                    ContentAlpha.disabled
+                                ),
                         indicatorShape = it.getShape() ?: CircleShape
                     )
                 }
@@ -157,9 +174,10 @@ object HorizontalScrollable {
             companion object {
 
                 @Composable
-                fun Style.copy(scope: @Composable StyleBuilder.() -> Unit) = StyleBuilder(this).also {
-                    it.scope()
-                }.get()
+                fun Style.copy(scope: @Composable StyleBuilder.() -> Unit) =
+                    StyleBuilder(this).also {
+                        it.scope()
+                    }.get()
 
                 @Composable
                 fun Pager.Style.copyToCarouselCardStyle(scope: @Composable StyleBuilder.() -> Unit) =

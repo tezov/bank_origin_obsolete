@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 08/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:18
+ *  Last modified 08/04/2023 21:06
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -113,9 +113,7 @@ object ActionCard {
                     .weight(1f)
                     .align(Alignment.CenterVertically)
             ) {
-                style.iconStyle.size?.let {
-                    Spacer(modifier = Modifier.height(it.height))
-                }
+                Spacer(modifier = Modifier.height(style.iconStyle.size.height))
                 Text.StateColor(
                     text = data.title,
                     style = style.outfitTextTitle,

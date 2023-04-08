@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 14:32
+ *  Created by Tezov on 08/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/04/2023 20:58
+ *  Last modified 08/04/2023 21:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,8 +20,14 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
 object Button {
@@ -43,10 +49,37 @@ object Button {
         }
 
         class Style(
-            val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(),
-            val outfitText: OutfitTextStateColor = OutfitTextStateColor(),
+            outfitFrame: OutfitFrameStateColor? = null,
+            outfitText: OutfitTextStateColor? = null,
             val elevation: Dp? = null,
         ) {
+
+            val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack(
+                outfitFrame,
+                lazyFallBackValue = {
+                    OutfitFrameStateColor(
+                        outfitBorder = OutfitBorderStateColor(
+                            outfitState = ColorImport.Black.asStateSimple,
+                            size = 1.dp
+                        ),
+                        outfitShape = OutfitShapeStateColor(
+                            outfitState = ColorImport.Gray.copy(alpha = 0.25f).asStateSimple,
+                            size = 12.dp.asShapeSize
+                        )
+                    )
+                })
+            val outfitText: OutfitTextStateColor by DelegateNullFallBack(
+                outfitText,
+                lazyFallBackValue = {
+                    OutfitTextStateColor(
+                        outfitState = ColorImport.Black.asStateSimple,
+                        typo = TextStyle(
+                            color = ColorImport.Black,
+                            fontSize = 14.sp
+                        )
+                    )
+                })
+
 
             companion object {
 

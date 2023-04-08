@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 08/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:38
+ *  Last modified 08/04/2023 21:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,17 +12,15 @@
 package com.tezov.lib_core_android_kotlin.ui.theme.theme
 
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.*
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.Dp
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ProvidableCompositionLocal
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
-import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button as ButtonImport
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link as LinkImport

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 08/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:52
+ *  Last modified 08/04/2023 21:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,6 +16,7 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -29,8 +30,13 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 @OptIn(ExperimentalComposeUiApi::class)
 object Dialog : ActivitySub<DialogState, DialogAction> {
@@ -69,9 +75,25 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
         }
 
         class Style(
-            val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(),
-            val elevation: Dp = 0.dp,
+            outfitFrame: OutfitFrameStateColor? = null,
+            val elevation: Dp = 2.dp,
         ){
+
+            val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack(
+                outfitFrame,
+                lazyFallBackValue = {
+                    OutfitFrameStateColor(
+                        outfitBorder = OutfitBorderStateColor(
+                            outfitState = Color.Black.asStateSimple,
+                            size = 1.dp
+                        ),
+                        outfitShape = OutfitShapeStateColor(
+                            outfitState = Color.Gray.copy(alpha = 0.25f).asStateSimple,
+                            size = 12.dp.asShapeSize
+                        )
+                    )
+                })
+
             companion object{
 
                 @Composable

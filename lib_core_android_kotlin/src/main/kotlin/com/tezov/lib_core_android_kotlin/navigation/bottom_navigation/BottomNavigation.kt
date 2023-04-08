@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 14:32
+ *  Created by Tezov on 08/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 14:31
+ *  Last modified 08/04/2023 21:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,15 +17,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.navigation.bottom_navigation.BottomNavigationState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsCommonExtended
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object BottomNavigation :
     ActivitySub<BottomNavigationState, BottomNavigationAction> {
@@ -43,16 +47,35 @@ object BottomNavigation :
     }
 
     class Style(
-        val outfitText: OutfitText.StateColor.Style = OutfitText.StateColor.Style(),
-        val colorBackground: Color = Color.Black,
-        val outfitColor: OutfitState.Dual.Style<Color> = OutfitStateDual(),
+        outfitText: OutfitTextStateColor? = null,
+        val colorBackground: Color = Color.Gray.copy(alpha = 0.25f),
+        outfitColor: OutfitStateDual<Color>? = null,
     ) {
+
+        val outfitText: OutfitTextStateColor by DelegateNullFallBack(
+            outfitText,
+            lazyFallBackValue = {
+                OutfitTextStateColor(
+                    outfitState = Color.Black.asStateSimple,
+                    typo = TextStyle(
+                        color = Color.Black,
+                        fontSize = 14.sp
+                    )
+                )
+            })
+        val outfitColor: OutfitStateDual<Color> by DelegateNullFallBack(
+            outfitColor,
+            lazyFallBackValue = {
+                OutfitStateDual(active = Color.Black, inactive = Color.Gray)
+            })
+
         companion object {
 
             @Composable
-            fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) = StyleBuilder(this).also {
-                it.builder()
-            }.get()
+            fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) =
+                StyleBuilder(this).also {
+                    it.builder()
+                }.get()
 
         }
 
