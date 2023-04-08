@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 21:07
+ *  Created by Tezov on 08/04/2023 22:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 21:05
+ *  Last modified 08/04/2023 21:40
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -73,27 +73,27 @@ object ThemeDimensionsExtended {
     }
 
     class Paddings(
-        page: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
-        cluster: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
-        block: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
-        chunk: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
-        button: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
-        icon: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
-        text: OutfitPaletteDirection<OutfitPaletteSize<Dp>>? = null,
-    ) : DelegateNullFallBack.Group<OutfitPaletteDirection<OutfitPaletteSize<Dp>>> {
+        page: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
+        cluster: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
+        block: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
+        chunk: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
+        button: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
+        icon: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
+        text: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
+    ) : DelegateNullFallBack.Group<OutfitPaletteSize<OutfitPaletteDirection<Dp>>> {
 
-        val page: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(page)
-        val cluster: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(cluster)
-        val block: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(block)
-        val chunk: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(chunk)
-        val button: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(button)
-        val icon: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(icon)
-        val text: OutfitPaletteDirection<OutfitPaletteSize<Dp>> by DelegateNullFallBack(text)
+        val page: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(page)
+        val cluster: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(cluster)
+        val block: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(block)
+        val chunk: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(chunk)
+        val button: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(button)
+        val icon: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(icon)
+        val text: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(text)
 
         override fun groupFallBackRefs() = listOf(page, cluster, block, chunk, button, icon, text)
 
         init {
-            groupLazyFallBackValue = { 6.dp.asPaletteSize.asPaletteDirection }
+            groupLazyFallBackValue = { 6.dp.asPaletteDirection.asPaletteSize }
         }
     }
 

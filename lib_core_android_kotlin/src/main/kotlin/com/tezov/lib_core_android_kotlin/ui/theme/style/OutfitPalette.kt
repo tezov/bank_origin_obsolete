@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 08/04/2023 22:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:06
+ *  Last modified 08/04/2023 22:31
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -11,7 +11,11 @@
  */
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
@@ -24,6 +28,11 @@ typealias OutfitPaletteColorSemantic = OutfitStateSemantic<OutfitPaletteColor>
 
 typealias OutfitPaletteSize<T> = OutfitPalette.Size.Style<T>
 typealias OutfitPaletteDirection<T> = OutfitPalette.Direction.Style<T>
+
+
+fun Modifier.padding(
+    padding : OutfitPalette.Direction.Style<Dp>
+) = this.padding(vertical = padding.vertical, horizontal = padding.horizontal)
 
 object OutfitPalette {
 
@@ -147,6 +156,9 @@ object OutfitPalette {
                     get() = Style(normal = this)
 
                 inline val DpSize.asPaletteSize: Style<DpSize>
+                    get() = Style(normal = this)
+
+                inline val <T:Any> OutfitPaletteDirection<T>.asPaletteSize: Style<OutfitPaletteDirection<T>>
                     get() = Style(normal = this)
 
             }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 08/04/2023 22:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:38
+ *  Last modified 08/04/2023 22:35
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,7 +18,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.branch.SectionActionCard
@@ -27,9 +26,7 @@ import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.theme.font.fontUbuntu
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
-import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
-import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
@@ -49,7 +46,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 object ThemeComponentProviders {
 
     @Composable
-    fun provideComponentsCommon() = ThemeComponentExtended.Common(
+    fun common() = ThemeComponentExtended.Common(
         bottomNavigation = BottomNavigation.Style(
             outfitText  = TextStyle(
                 fontFamily = MaterialTheme.fontUbuntu,
@@ -101,7 +98,7 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun provideComponentsButton() = ThemeComponentExtended.Buttons(
+    fun buttons() = ThemeComponentExtended.Buttons(
         primary = Button.StateColor.Style(
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = MaterialTheme.shapesExtended.button.normal.copy {
@@ -254,7 +251,7 @@ object ThemeComponentProviders {
 //        }
 
     @Composable
-    fun provideComponentsLink() = ThemeComponentExtended.Links(
+    fun link() = ThemeComponentExtended.Links(
         primary = Link.StateColor.Style(
             outfitText = MaterialTheme.typographiesExtended.link.normal.copy {
                 outfitState = Color.Black.asStateSimple
@@ -264,7 +261,7 @@ object ThemeComponentProviders {
 
     @Composable
     fun provideSectionRowStyle() = SectionActionRow.Style(
-        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.horizontal.normal,
+        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.default
@@ -324,7 +321,7 @@ object ThemeComponentProviders {
         colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.14f
         ),
-        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.horizontal.normal,
+        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
         actionCardStyle = provideActionCardStyle()
     )
 
@@ -363,9 +360,9 @@ object ThemeComponentProviders {
                 inactive = MaterialTheme.colorsExtended.background.default,
             )
         ),
-        dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
+        dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
         dimensionIndicatorSize = 12.dp,
-        dimensionIndicatorSpacing = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
+        dimensionIndicatorSpacing = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
     )
 
     @Composable

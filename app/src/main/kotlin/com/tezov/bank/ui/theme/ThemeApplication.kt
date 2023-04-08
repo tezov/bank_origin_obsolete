@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 08/04/2023 22:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:29
+ *  Last modified 08/04/2023 21:40
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,7 +25,6 @@ object ThemeApplication {
         ExtensionCompositionLocal.CompositionLocalProvider(
             ancestor = arrayOf(
                 MaterialTheme provides ThemeColorProviders.common(),
-                MaterialTheme provides ThemeDimensionProviders.paddings(),
                 MaterialTheme provides ThemeDimensionProviders.common(),
                 MaterialTheme provides ThemeDimensionProviders.paddings(),
                 MaterialTheme provides ThemeDimensionProviders.icons(),
@@ -35,8 +34,13 @@ object ThemeApplication {
             ),
             parent = {
                 arrayOf(
-                    MaterialTheme provides ThemeComponentProviders.provideComponentsCommon(),
+                    MaterialTheme provides ThemeComponentProviders.common(),
+                    MaterialTheme provides ThemeComponentProviders.buttons(),
+                    MaterialTheme provides ThemeComponentProviders.link(),
                 )
+            },
+            child = {
+                arrayOf()
             },
         ){
             MaterialTheme(

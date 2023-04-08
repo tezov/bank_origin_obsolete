@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 21:07
+ *  Created by Tezov on 08/04/2023 22:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 21:05
+ *  Last modified 08/04/2023 22:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -58,9 +58,10 @@ object ThemeTypographiesExtended {
         val input: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(input)
         val label: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(label)
         val caption: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(caption)
+        val menu: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(caption)
 
         override fun groupFallBackRefs() =
-            listOf(title, body, subtitle, helper, button, link, input, label, caption)
+            listOf(title, body, subtitle, helper, button, link, input, label, caption, menu)
 
         init {
             groupLazyFallBackValue = {

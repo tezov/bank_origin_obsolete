@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 08/04/2023 22:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:53
+ *  Last modified 08/04/2023 22:35
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -116,16 +116,16 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideDimensions() = Dimensions(
-        paddingKeyboard_v = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
-        paddingKeyboard_h = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
-        spacingTopToTitle = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
-        spacingTopFromButton = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
-        paddingTopFromLink = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
+        paddingKeyboard_v = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
+        paddingKeyboard_h = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
+        spacingTopToTitle = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
+        spacingTopFromButton = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
+        paddingTopFromLink = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
         iconCloseSize = MaterialTheme.dimensionsIconExtended.modal.normal.width,
         iconFieldInfoSize = MaterialTheme.dimensionsIconExtended.modal.normal.width,
         iconFieldActionSize = MaterialTheme.dimensionsIconExtended.modal.normal.width,
-        paddingButton_h = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
-        paddingButton_v = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
+        paddingButton_h = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
+        paddingButton_v = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =

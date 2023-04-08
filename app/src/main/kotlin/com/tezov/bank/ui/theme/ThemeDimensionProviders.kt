@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 08/04/2023 22:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:06
+ *  Last modified 08/04/2023 22:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,6 +14,7 @@ package com.tezov.bank.ui.theme
 
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Direction.Style.Companion.asPaletteDirection
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Size.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteDirection
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
@@ -36,68 +37,74 @@ object ThemeDimensionProviders {
 
     fun paddings() = ThemeDimensionsExtended.Paddings(
         page = OutfitPaletteDirection(
-            vertical = 6.dp.asPaletteSize,
-            horizontal = 4.dp.asPaletteSize
+            vertical = 6.dp,
+            horizontal = 4.dp
+        ).asPaletteSize,
+        cluster = OutfitPaletteSize(
+            normal = OutfitPaletteDirection(
+                vertical = 10.dp,
+                horizontal = 8.dp
+            ),
+            small = OutfitPaletteDirection(
+                vertical = 6.dp,
+                horizontal = 6.dp
+            ),
+            big = OutfitPaletteDirection(
+                vertical = 12.dp,
+                horizontal = 10.dp
+            )
         ),
-        cluster = OutfitPaletteDirection(
-            vertical = OutfitPaletteSize(
-                normal = 10.dp,
-                small = 6.dp,
-                big = 12.dp,
+        block = OutfitPaletteSize(
+            normal = OutfitPaletteDirection(
+                vertical = 8.dp,
+                horizontal = 8.dp
             ),
-            horizontal = OutfitPaletteSize(
-                normal = 8.dp,
-                small = 6.dp,
-                big = 10.dp,
+            small = OutfitPaletteDirection(
+                vertical = 6.dp,
+                horizontal = 6.dp
             ),
+            big = OutfitPaletteDirection(
+                vertical = 10.dp,
+                horizontal = 10.dp
+            )
         ),
-        block = OutfitPaletteDirection(
-            vertical = OutfitPaletteSize(
-                normal = 8.dp,
-                small = 6.dp,
-                big = 10.dp,
+        chunk = OutfitPaletteSize(
+            normal = OutfitPaletteDirection(
+                vertical = 4.dp,
+                horizontal = 3.dp
             ),
-            horizontal = OutfitPaletteSize(
-                normal = 8.dp,
-                small = 6.dp,
-                big = 12.dp,
+            small = OutfitPaletteDirection(
+                vertical = 3.dp,
+                horizontal = 2.dp
             ),
-        ),
-        chunk = OutfitPaletteDirection(
-            vertical = OutfitPaletteSize(
-                normal = 4.dp,
-                small = 3.dp,
-                big = 5.dp,
-            ),
-            horizontal = OutfitPaletteSize(
-                normal = 3.dp,
-                small = 2.dp,
-                big = 4.dp,
-            ),
+            big = OutfitPaletteDirection(
+                vertical = 5.dp,
+                horizontal = 4.dp
+            )
         ),
         button = OutfitPaletteDirection(
-            vertical = 6.dp.asPaletteSize,
-            horizontal = 10.dp.asPaletteSize,
-        ),
-        text = OutfitPaletteDirection(
-            vertical = OutfitPaletteSize(
-                normal = 4.dp,
-                small = 2.dp,
-                big = 6.dp,
+            vertical = 6.dp,
+            horizontal = 10.dp,
+        ).asPaletteSize,
+        text = OutfitPaletteSize(
+            normal = OutfitPaletteDirection(
+                vertical = 4.dp,
+                horizontal = 6.dp
             ),
-            horizontal = OutfitPaletteSize(
-                normal = 6.dp,
-                small = 3.dp,
-                big = 9.dp,
+            small = OutfitPaletteDirection(
+                vertical = 2.dp,
+                horizontal = 3.dp
             ),
+            big = OutfitPaletteDirection(
+                vertical = 6.dp,
+                horizontal = 9.dp
+            )
         ),
-        icon = OutfitPaletteDirection(
-            all = OutfitPaletteSize(
-                normal = 32.dp,
-                small = 24.dp,
-                big = 48.dp,
-            ),
-        ),
+        icon = OutfitPaletteSize(
+            normal = 32.dp.asPaletteDirection,
+            small = 24.dp.asPaletteDirection,
+            big = 48.dp.asPaletteDirection
+        )
     )
 
     fun icons() = ThemeDimensionsExtended.Icons(

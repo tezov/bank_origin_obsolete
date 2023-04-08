@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 08/04/2023 22:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:38
+ *  Last modified 08/04/2023 22:31
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,6 +31,8 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 object PageLogin : Page<PageLoginState, PageLoginAction> {
@@ -90,10 +92,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 .fillMaxSize()
                 .background(PageLoginTheme.colors.background)
                 .padding(innerPadding)
-                .padding(
-                    vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.big,
-                    horizontal = MaterialTheme.dimensionsPaddingExtended.block.horizontal.big
-                )
+                .padding(MaterialTheme.dimensionsPaddingExtended.page.big)
         ) {
             ContentHeader(
                 iconState = state.iconState,
@@ -182,10 +181,10 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             },
                             contentPadding = PaddingValues(8.dp, 0.dp)
                         ) {
-//                            Text.StateColor(
-//                                text = text,
-//                                style = PageLoginTheme.typographies.dropDownMenu
-//                            )
+                            Text.StateColor(
+                                text = text,
+                                style = PageLoginTheme.typographies.dropDownMenu
+                            )
                         }
                     }
                 }
@@ -210,16 +209,16 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-//                        Text.StateColor(
-//                            text = nameState.value,
-//                            style = PageLoginTheme.typographies.supra
-//                        )
+                        Text.StateColor(
+                            text = nameState.value,
+                            style = PageLoginTheme.typographies.supra
+                        )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         Text.StateColor(
                             text = stringResource(id = R.string.pg_login_pager_0),
-//                            style = PageLoginTheme.typographies.body.copy {
-//                                typo = typo.copy(textAlign = TextAlign.Center)
-//                            }
+                            style = PageLoginTheme.typographies.body.copy {
+                                typo = typo.copy(textAlign = TextAlign.Center)
+                            }
                         )
                     }
                 },
@@ -231,19 +230,16 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     ) {
                         Text.StateColor(
                             text = stringResource(id = R.string.pg_login_pager_1),
-//                            style = PageLoginTheme.typographies.huge.copy {
-//                                typo = typo.copy(textAlign = TextAlign.Center)
-//                            }
+                            style = PageLoginTheme.typographies.huge.copy {
+                                typo = typo.copy(textAlign = TextAlign.Center)
+                            }
                         )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         Button.StateColor(
                             modifierButton = Modifier
-                                .padding(top = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.big),
+                                .padding(top = MaterialTheme.dimensionsPaddingExtended.chunk.big.vertical),
                             modifierText = Modifier
-                                .padding(
-                                    horizontal = PageLoginTheme.dimensions.paddingButtonOutlined_h,
-                                    vertical = PageLoginTheme.dimensions.paddingButtonOutlined_v
-                                ),
+                                .padding(MaterialTheme.dimensionsPaddingExtended.text.big),
                             onClick = { },
                             text = stringResource(id = R.string.pg_login_btn_activate_balance),
                             style = PageLoginTheme.styles.buttonOutlined
@@ -269,12 +265,9 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Button.StateColor(
                 modifierButton = Modifier
                     .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.big),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.chunk.big.vertical),
                 modifierText = Modifier
-                    .padding(
-                        horizontal = PageLoginTheme.dimensions.paddingButton_h,
-                        vertical = PageLoginTheme.dimensions.paddingButton_v
-                    ),
+                    .padding(MaterialTheme.dimensionsPaddingExtended.text.big),
                 text = stringResource(id = R.string.pg_login_btn_connect),
                 style = PageLoginTheme.styles.buttonDark,
                 onClick = onClickConnect,
@@ -282,12 +275,9 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Button.StateColor(
                 modifierButton = Modifier
                     .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.block.vertical.big),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.chunk.big.vertical),
                 modifierText = Modifier
-                    .padding(
-                        horizontal = PageLoginTheme.dimensions.paddingButton_h,
-                        vertical = PageLoginTheme.dimensions.paddingButton_v
-                    ),
+                    .padding(MaterialTheme.dimensionsPaddingExtended.text.big),
                 text = stringResource(id = R.string.pg_login_btn_send_money),
                 style = PageLoginTheme.styles.buttonLight,
                 onClick = onClickSendMoney,

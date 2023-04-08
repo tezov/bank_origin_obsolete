@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 21:07
+ *  Created by Tezov on 08/04/2023 22:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 21:05
+ *  Last modified 08/04/2023 22:31
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,6 +31,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
@@ -116,10 +117,7 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
             hostState = state.hostState,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(
-                    horizontal = MaterialTheme.dimensionsPaddingExtended.block.horizontal.small,
-                    vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.small
-                )
+                .padding(MaterialTheme.dimensionsPaddingExtended.block.small)
         ) { data ->
             Snackbar(
                 backgroundColor = MaterialTheme.componentsCommonExtended.snackBar.outfitShape.resolveColor()

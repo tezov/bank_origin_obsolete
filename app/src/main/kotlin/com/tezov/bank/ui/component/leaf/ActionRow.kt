@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 08/04/2023 22:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:18
+ *  Last modified 08/04/2023 22:35
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -67,7 +67,7 @@ object ActionRow {
                 }
                 .clickable { onClick() }
                 .padding(
-                    vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.normal,
+                    vertical = MaterialTheme.dimensionsPaddingExtended.block.normal.vertical,
                 ),
             verticalAlignment = Alignment.CenterVertically
         ) {
@@ -77,7 +77,7 @@ object ActionRow {
                     resourceId = it,
                     description = null,
                 )
-                Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.icon.horizontal.normal))
+                Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.icon.normal.horizontal))
             }
             Text.StateColor(
                 modifier = Modifier
