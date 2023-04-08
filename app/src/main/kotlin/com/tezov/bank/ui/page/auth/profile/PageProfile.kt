@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 19:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -71,7 +71,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                     .verticalScroll(rememberScrollState())
             ) {
                 contentHeader(state.header)
-                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
+//                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
                 state.profils.value?.let {
                     SectionActionRow(data = it, style = PageProfileTheme.styles.sectionRow) {
 
@@ -125,7 +125,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
             }
             Row(modifier = Modifier.fillMaxWidth()) {
                 header.imageResourceId.value?.let {
-                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.normal_v))
+//                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.normal_v))
                     Image(
                         modifier = Modifier
                             .size(PageProfileTheme.dimensions.iconUserSize)
@@ -140,7 +140,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                     )
                 }
                 header.name.value?.let {
-                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.big_h))
+//                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.big_h))
                     Text(
                         modifier = Modifier
                             .align(Alignment.Top),

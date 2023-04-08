@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 14:32
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/04/2023 20:54
+ *  Last modified 08/04/2023 19:18
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,6 +22,7 @@ import androidx.compose.ui.text.TextStyle
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.then
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
@@ -69,7 +70,7 @@ object Icon {
             description: String? = null,
         ) {
             Icon(
-                modifier = modifier.then(style.size, Modifier::size),
+                modifier = modifier.thenOnNotNull(style.size, Modifier::size),
                 painter = painterResource(id = resourceId),
                 tint = style.tint
                     ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
@@ -122,10 +123,10 @@ object Icon {
             val sketch = style.outfitFrame.outfitShape.resolve(selector)
             Icon(
                 modifier = modifier
-                    .then(style.size, Modifier::size)
-                    .then(sketch, {
+                    .thenOnNotNull(style.size, Modifier::size)
+                    .thenOnNotNull(sketch) {
                         border(style.outfitFrame.outfitBorder, selector, it)
-                    }),
+                    },
                 painter = painterResource(id = resourceId),
                 tint = sketch?.color
                     ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),

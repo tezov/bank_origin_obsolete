@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:29
+ *  Last modified 08/04/2023 19:53
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -116,16 +116,16 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideDimensions() = Dimensions(
-        paddingKeyboard_v = MaterialTheme.dimensionsPaddingExtended.elementMicro_v,
-        paddingKeyboard_h = MaterialTheme.dimensionsPaddingExtended.elementMicro_h,
-        spacingTopToTitle = MaterialTheme.dimensionsCommonExtended.big_v,
-        spacingTopFromButton = MaterialTheme.dimensionsCommonExtended.huge_v,
-        paddingTopFromLink = MaterialTheme.dimensionsPaddingExtended.elementNormal_v,
-        iconCloseSize = MaterialTheme.dimensionsIconExtended.iconModal.width,
-        iconFieldInfoSize = MaterialTheme.dimensionsIconExtended.iconFieldInfo.width,
-        iconFieldActionSize = MaterialTheme.dimensionsIconExtended.iconFieldAction.width,
-        paddingButton_h = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
-        paddingButton_v = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
+        paddingKeyboard_v = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
+        paddingKeyboard_h = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
+        spacingTopToTitle = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
+        spacingTopFromButton = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
+        paddingTopFromLink = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
+        iconCloseSize = MaterialTheme.dimensionsIconExtended.modal.normal.width,
+        iconFieldInfoSize = MaterialTheme.dimensionsIconExtended.modal.normal.width,
+        iconFieldActionSize = MaterialTheme.dimensionsIconExtended.modal.normal.width,
+        paddingButton_h = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
+        paddingButton_v = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -174,17 +174,17 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesExtended.title.normal.typo.copy(
             color = colors.onBackground
         ),
-        fieldValue = MaterialTheme.typographiesExtended.textFieldValue.typo.copy(
+        fieldValue = MaterialTheme.typographiesExtended.title.normal.typo.copy(
             color = colors.onBackground
         ),
-        fieldLabel = MaterialTheme.typographiesExtended.textFieldValue.typo.copy(
+        fieldLabel = MaterialTheme.typographiesExtended.title.normal.typo.copy(
             color = colors.onBackground
         ),
-        button = MaterialTheme.typographiesExtended.textNormal.typo,
-        link = MaterialTheme.typographiesExtended.textNormal.typo.copy(
+        button = MaterialTheme.typographiesExtended.title.normal.typo,
+        link = MaterialTheme.typographiesExtended.title.normal.typo.copy(
             color = colors.onBackground,
         )
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 19:18
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,6 +27,7 @@ import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
@@ -39,7 +40,7 @@ object SectionActionRow {
             size = DpSize(24.dp),
             tint = Color.Black
         ),
-        val outfitTextHeader: OutfitText.StateColor = OutfitText.StateColor(),
+        val outfitTextHeader: OutfitText.StateColor.Style = OutfitText.StateColor.Style(),
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
         val colorDivider: Color? = null,
@@ -72,19 +73,17 @@ object SectionActionRow {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .also { modifier ->
-                            style.colorBackgroundBody?.let {
-                                modifier.background(it)
-                            }
+                        .thenOnNotNull(style.colorBackgroundBody){
+                            modifier.background(it)
                         }
-                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementBig_h),
+                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.big),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.elementBig_h))
+                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.chunk.horizontal.big))
                     data.iconResourceId?.let {
                         Icon.Simple(
                             modifier = Modifier
-                                .padding(end = MaterialTheme.dimensionsPaddingExtended.elementNormal_h),
+                                .padding(end = MaterialTheme.dimensionsPaddingExtended.chunk.horizontal.normal),
                             style = style.iconStyle,
                             resourceId = it,
                             description = text,
@@ -105,10 +104,10 @@ object SectionActionRow {
                         }
                     }
                     .padding(
-                        vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
+                        vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.normal,
                         horizontal = style.dimensionPaddingBody_h
                     ),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsCommonExtended.small_v),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal),
             ) {
                 data.rows.forEachIndexed { index, row ->
                     ActionRow(data = row, style = style.actionRowStyle) {
@@ -118,7 +117,7 @@ object SectionActionRow {
                         Divider(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(start = MaterialTheme.dimensionsPaddingExtended.blockBig_h),
+                                .padding(start = MaterialTheme.dimensionsPaddingExtended.chunk.horizontal.big),
                             color = style.colorDivider,
                             thickness = style.dimensionDivider,
                         )

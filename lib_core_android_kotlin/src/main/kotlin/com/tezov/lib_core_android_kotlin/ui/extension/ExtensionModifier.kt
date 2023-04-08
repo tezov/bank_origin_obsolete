@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 01/04/2023 12:47
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 01/04/2023 12:32
+ *  Last modified 08/04/2023 19:38
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,19 +34,25 @@ object ExtensionModifier {
         }
     }
 
+    fun <T : Any> Modifier.thenOnNotNull(
+        condition: T?,
+        block: Modifier.(T) -> Modifier
+    ) = then(condition, onNotNull = block)
+
+    fun <T : Any> Modifier.thenOnNull(
+        condition: T?,
+        block: Modifier.() -> Modifier
+    ) = then(condition, onNull = block)
+
     fun <T : Any> Modifier.then(
         condition: T?,
-        onNotNull: Modifier.(T) -> Modifier,
+        onNotNull: (Modifier.(T) -> Modifier)? = null,
         onNull: (Modifier.() -> Modifier)? = null
-    ): Modifier {
-        return if (condition != null) {
-            then(onNotNull(condition))
-        } else if (onNull != null) {
-            then(onNull())
-        } else {
-            this
-        }
-    }
+    ) = (condition?.let {
+        onNotNull?.let { then(it(condition)) }
+    } ?: run {
+        onNull?.let { then(it()) }
+    }) ?: this
 
 
     fun Modifier.clickableDisabled(): Modifier = composed {

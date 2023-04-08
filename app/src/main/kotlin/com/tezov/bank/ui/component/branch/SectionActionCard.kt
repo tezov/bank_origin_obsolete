@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 19:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,7 +40,7 @@ object SectionActionCard {
             size = DpSize(24.dp),
             tint = Color.Black
         ),
-        val outfitTextHeader: OutfitText.StateColor = OutfitText.StateColor(),
+        val outfitTextHeader: OutfitText.StateColor.Style = OutfitText.StateColor.Style(),
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
         val dimensionPaddingBody_h: Dp = 0.dp,
@@ -77,14 +77,14 @@ object SectionActionCard {
                                 modifier.background(it)
                             }
                         }
-                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.elementNormal_v),
+                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.elementNormal_h))
+                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.chunk.horizontal.normal))
                     data.iconResourceId?.let {
                         Icon.Simple(
                             modifier = Modifier
-                                .padding(end = MaterialTheme.dimensionsPaddingExtended.elementBig_h),
+                                .padding(end = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.big),
                             style = style.iconStyle,
                             resourceId = it,
                             description = text,
@@ -105,10 +105,10 @@ object SectionActionCard {
                         }
                     }
                     .padding(
-                        vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_h,
+                        vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.normal,
                         horizontal = style.dimensionPaddingBody_h
                     ),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsCommonExtended.small_v),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal),
             ) {
                 data.cards.loopOver {
                     val first = next
@@ -181,7 +181,7 @@ object SectionActionCard {
             modifier = Modifier
                 .height(IntrinsicSize.Max)
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsCommonExtended.small_v),
+            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal),
         ) {
             ActionCard(
                 modifier = Modifier

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 19:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -99,17 +99,17 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                 modifier = Modifier.height(progressDp),
                 verticalArrangement = Arrangement.Bottom
             ) {
-                Text(
-                    modifier = Modifier
-                        .padding(
-                            horizontal = MaterialTheme.dimensionsPaddingExtended.page_h + (MaterialTheme.dimensionsPaddingExtended.elementHuge_h * progress),
-                            vertical = MaterialTheme.dimensionsPaddingExtended.textBig_v
-                        ),
-                    text = it,
-                    style = PagePaymentTheme.typographies.title.copy(
-                        fontSize = (PagePaymentTheme.dimensions.textTitleMin.value + ((PagePaymentTheme.dimensions.textTitleMax.value - PagePaymentTheme.dimensions.textTitleMin.value) * progress)).sp
-                    )
-                )
+//                Text(
+//                    modifier = Modifier
+//                        .padding(
+//                            horizontal = MaterialTheme.dimensionsPaddingExtended.page_h + (MaterialTheme.dimensionsPaddingExtended.elementHuge_h * progress),
+//                            vertical = MaterialTheme.dimensionsPaddingExtended.textBig_v
+//                        ),
+//                    text = it,
+//                    style = PagePaymentTheme.typographies.title.copy(
+//                        fontSize = (PagePaymentTheme.dimensions.textTitleMin.value + ((PagePaymentTheme.dimensions.textTitleMax.value - PagePaymentTheme.dimensions.textTitleMin.value) * progress)).sp
+//                    )
+//                )
                 if (progress < 0.05f) {
                     Divider(
                         modifier = Modifier
@@ -118,7 +118,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                         thickness = PagePaymentTheme.dimensions.headerDividerSize,
                     )
                 }
-                Spacer(modifier = Modifier.height((MaterialTheme.dimensionsCommonExtended.normal_v * (1f - progress))))
+//                Spacer(modifier = Modifier.height((MaterialTheme.dimensionsCommonExtended.normal_v * (1f - progress))))
             }
         }
     }

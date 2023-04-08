@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:32
+ *  Last modified 08/04/2023 19:38
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,13 +34,16 @@ import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asTextStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object ThemeComponentProviders {
@@ -99,7 +102,30 @@ object ThemeComponentProviders {
 
     @Composable
     fun provideComponentsButton() = ThemeComponentExtended.Buttons(
-        primary = TODO()
+        primary = Button.StateColor.Style(
+            outfitFrame = OutfitFrameStateColor(
+                outfitShape = MaterialTheme.shapesExtended.button.normal.copy {
+                    outfitState = OutfitStateDual(
+                        active = MaterialTheme.colorsExtended.primary.default,
+                        inactive = MaterialTheme.colorsPalette.grayOverlay,
+                    )
+                },
+                outfitBorder = OutfitBorderStateColor(
+                    outfitState = OutfitStateDual(
+                        active = MaterialTheme.colorsExtended.primary.dark,
+                        inactive = MaterialTheme.colorsPalette.grayDark,
+                    )
+                )
+            ),
+            outfitText = MaterialTheme.typographiesExtended.button.normal.copy{
+                outfitState = OutfitStateDual(
+                    active = MaterialTheme.colorsExtended.onPrimary.default,
+                    inactive = MaterialTheme.colorsPalette.grayDark,
+                )
+            }
+        )
+    )
+
 //        confirm = Button.StateColor.Style.TextFilled.copy {
 //            outfitFrame = OutfitFrame.Styl(
 //                outfitShape = MaterialTheme.shapesCommonExtended.roundedCorner.normal.copy {
@@ -226,28 +252,21 @@ object ThemeComponentProviders {
 //                )
 //            )
 //        }
-    )
 
     @Composable
     fun provideComponentsLink() = ThemeComponentExtended.Links(
         primary = Link.StateColor.Style(
-            outfitText = OutfitTextStateColor(
-                typo = TextStyle(
-                    fontFamily = MaterialTheme.fontUbuntu,
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 20.sp,
-                    textDecoration = TextDecoration.Underline
-                ),
-                outfitState = Color.Black.asStateSimple,
-            ),
-        ),
+            outfitText = MaterialTheme.typographiesExtended.link.normal.copy {
+                outfitState = Color.Black.asStateSimple
+            }
+        )
     )
 
     @Composable
     fun provideSectionRowStyle() = SectionActionRow.Style(
-        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.horizontal,
+        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.horizontal.normal,
         iconStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsIconExtended.iconInfo,
+            size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.default
         ),
 //        outfitTextHeader = MaterialTheme.typographiesTextExtended.text.normal.copy {
@@ -264,18 +283,18 @@ object ThemeComponentProviders {
         colorDivider = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.05f
         ),
-        dimensionDivider = MaterialTheme.dimensionsIconExtended.divider.normal,
+        dimensionDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
         actionRowStyle = provideActionRowStyle()
     )
 
     @Composable
     fun provideActionRowStyle() = ActionRow.Style(
         iconInfoStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsIconExtended.iconInfo,
+            size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.default
         ),
         iconActionStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsIconExtended.iconAction,
+            size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.default
         ),
 //        outfitText = MaterialTheme.typographiesTextExtended.text.normal.copy {
@@ -291,7 +310,7 @@ object ThemeComponentProviders {
     @Composable
     fun provideSectionCardStyle() = SectionActionCard.Style(
         iconStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsIconExtended.iconInfo,
+            size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.default
         ),
 //        outfitTextHeader = MaterialTheme.typographiesTextExtended.text.normal.copy {
@@ -305,15 +324,15 @@ object ThemeComponentProviders {
         colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.14f
         ),
-        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.horizontal,
+        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.horizontal.normal,
         actionCardStyle = provideActionCardStyle()
     )
 
     @Composable
     fun provideActionCardStyle() = ActionCard.Style(
         outfitFrame = OutfitFrameStateColor(
-            outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal,
-            outfitBorder = MaterialTheme.bordersExtended.stroke.normal.copy {
+            outfitShape = MaterialTheme.shapesExtended.chunk.normal,
+            outfitBorder = MaterialTheme.bordersExtended.chunk.normal.copy {
                 outfitState = MaterialTheme.colorsExtended.backgroundElevated.default.asStateSimple
             }
         ),
@@ -339,15 +358,14 @@ object ThemeComponentProviders {
     @Composable
     fun providePagerStyle() = HorizontalScrollable.Pager.Style(
         outfitShapeIndicator = OutfitShapeStateColor(
-            template = OutfitShape.Template.Circle,
             outfitState = OutfitStateDual(
                 active = MaterialTheme.colorsExtended.onBackgroundElevated.default,
                 inactive = MaterialTheme.colorsExtended.background.default,
             )
         ),
-        dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.element.vertical.normal,
+        dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
         dimensionIndicatorSize = 12.dp,
-        dimensionIndicatorSpacing = MaterialTheme.dimensionsCommonExtended.element.vertical.normal,
+        dimensionIndicatorSpacing = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.normal,
     )
 
     @Composable

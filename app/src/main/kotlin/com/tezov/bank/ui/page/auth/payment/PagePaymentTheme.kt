@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:29
+ *  Last modified 08/04/2023 19:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,6 +28,7 @@ import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsIconExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesExtended
 
@@ -93,7 +94,7 @@ object PagePaymentTheme {
     fun provideDimensions() = Dimensions(
         textTitleMin = 24.sp,
         textTitleMax = 48.sp,
-        headerDividerSize = MaterialTheme.dimensionsIconExtended.dividerSmall,
+        headerDividerSize = MaterialTheme.dimensionsCommonExtended.divider.normal,
         headerHeight = ColumnCollapsibleHeader.Properties(48.dp, 150.dp)
     )
 
@@ -108,7 +109,7 @@ object PagePaymentTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesExtended.title.normal.typo.copy(
             color = colors.textTitle,
             fontWeight = FontWeight.Bold
         ),

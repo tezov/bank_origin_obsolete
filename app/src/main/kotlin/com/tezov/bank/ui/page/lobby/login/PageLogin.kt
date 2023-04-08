@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 28/03/2023 23:25
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 28/03/2023 23:24
+ *  Last modified 08/04/2023 19:38
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -91,8 +91,8 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 .background(PageLoginTheme.colors.background)
                 .padding(innerPadding)
                 .padding(
-                    vertical = MaterialTheme.dimensionsPaddingExtended.blockBig_v,
-                    horizontal = MaterialTheme.dimensionsPaddingExtended.blockBig_v
+                    vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.big,
+                    horizontal = MaterialTheme.dimensionsPaddingExtended.block.horizontal.big
                 )
         ) {
             ContentHeader(
@@ -182,10 +182,10 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                             },
                             contentPadding = PaddingValues(8.dp, 0.dp)
                         ) {
-                            Text.StateColor(
-                                text = text,
-                                style = PageLoginTheme.typographies.dropDownMenu
-                            )
+//                            Text.StateColor(
+//                                text = text,
+//                                style = PageLoginTheme.typographies.dropDownMenu
+//                            )
                         }
                     }
                 }
@@ -210,10 +210,10 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-                        Text.StateColor(
-                            text = nameState.value,
-                            style = PageLoginTheme.typographies.supra
-                        )
+//                        Text.StateColor(
+//                            text = nameState.value,
+//                            style = PageLoginTheme.typographies.supra
+//                        )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         Text.StateColor(
                             text = stringResource(id = R.string.pg_login_pager_0),
@@ -238,7 +238,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         Button.StateColor(
                             modifierButton = Modifier
-                                .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
+                                .padding(top = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.big),
                             modifierText = Modifier
                                 .padding(
                                     horizontal = PageLoginTheme.dimensions.paddingButtonOutlined_h,
@@ -269,7 +269,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Button.StateColor(
                 modifierButton = Modifier
                     .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.big),
                 modifierText = Modifier
                     .padding(
                         horizontal = PageLoginTheme.dimensions.paddingButton_h,
@@ -282,7 +282,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Button.StateColor(
                 modifierButton = Modifier
                     .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.elementBig_v),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.block.vertical.big),
                 modifierText = Modifier
                     .padding(
                         horizontal = PageLoginTheme.dimensions.paddingButton_h,

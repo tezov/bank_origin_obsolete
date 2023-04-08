@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:29
+ *  Last modified 08/04/2023 19:53
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -89,10 +89,11 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
-                        .padding(
-                            horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h,
-                            vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
-                        ),
+//                        .padding(
+//                            horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h,
+//                            vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
+//                        )
+                    ,
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -169,11 +170,11 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
+//                        .padding(bottom = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                 ) {
                     Icon(
                         modifier = Modifier
-                            .padding(MaterialTheme.dimensionsPaddingExtended.elementMicro_h)
+//                            .padding(MaterialTheme.dimensionsPaddingExtended.elementMicro_h)
                             .size(DialogLoginAuthTheme.dimensions.iconFieldInfoSize)
                             .align(Alignment.CenterVertically),
                         painter = painterResource(id = R.drawable.ic_person_24dp),
@@ -244,14 +245,14 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
+//                        .padding(bottom = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                 ) {
                     CompositionLocalProvider(
                         LocalTextInputService provides null
                     ) {
                         Icon(
                             modifier = Modifier
-                                .padding(MaterialTheme.dimensionsPaddingExtended.elementMicro_h)
+//                                .padding(MaterialTheme.dimensionsPaddingExtended.elementMicro_h)
                                 .size(DialogLoginAuthTheme.dimensions.iconFieldInfoSize)
                                 .align(Alignment.CenterVertically),
                             painter = painterResource(id = R.drawable.ic_lock_24dp),
@@ -315,7 +316,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 KeyBoard.GridCubeDigitsTwoRowShuffled(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
+//                        .padding(MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                         .alpha(
                             when (focusManagement.isPasswordHasFocus()) {
                                 true -> 1.0f

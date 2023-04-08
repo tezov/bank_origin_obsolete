@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:29
+ *  Last modified 08/04/2023 19:44
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,10 +33,11 @@ import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Image
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.Styl.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Size.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageLoginTheme.colors: PageLoginTheme.Colors
@@ -121,7 +122,7 @@ object PageLoginTheme {
     @Composable
     fun provideDimensions() = Dimensions(
         spacingTopToTitle = 24.dp,
-        spacingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.elementBig_v,
+        spacingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.chunk.vertical.big,
         sizeLogo = 64.dpSize,
         sizeIconBig = 52.dpSize,
         paddingStartToIconBig = 28.dp,
@@ -129,9 +130,9 @@ object PageLoginTheme {
         paddingStartToIconMedium = 12.dp,
         sizeIconSmall = 42.dpSize,
         paddingButtonOutlined_h = 32.dp,
-        paddingButtonOutlined_v = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
-        paddingButton_h = MaterialTheme.dimensionsPaddingExtended.buttonNormal_h,
-        paddingButton_v = MaterialTheme.dimensionsPaddingExtended.buttonNormal_v,
+        paddingButtonOutlined_v = MaterialTheme.dimensionsPaddingExtended.button.vertical.normal,
+        paddingButton_h = MaterialTheme.dimensionsPaddingExtended.button.vertical.normal,
+        paddingButton_v = MaterialTheme.dimensionsPaddingExtended.button.vertical.normal,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -140,18 +141,16 @@ object PageLoginTheme {
         }
 
     data class Shapes(
-        val button: OutfitShape.Style,
-        val buttonOutlined: OutfitShape.Style,
-        val icon: OutfitShape.Style,
+        val button: OutfitShape.StateColor.Style,
+        val buttonOutlined: OutfitShape.StateColor.Style,
+        val icon: OutfitShape.StateColor.Style,
     )
 
     @Composable
     fun provideShapes() = Shapes(
-        button = MaterialTheme.shapesExtended.roundedCornerNormal,
-        buttonOutlined = MaterialTheme.shapesExtended.roundedCornerNormal,
-        icon = OutfitShape.Style(
-            template = OutfitShape.Template.Circle
-        )
+        button = MaterialTheme.shapesExtended.button.normal,
+        buttonOutlined = MaterialTheme.shapesExtended.button.normal,
+        icon = OutfitShape.StateColor.Style()
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
@@ -159,16 +158,16 @@ object PageLoginTheme {
     }
 
     data class Borders(
-        val button: OutfitBorder.Style,
-        val buttonOutlined: OutfitBorder.Style,
-        val icon: OutfitBorder.Style,
+        val button: OutfitBorder.StateColor.Style,
+        val buttonOutlined: OutfitBorder.StateColor.Style,
+        val icon: OutfitBorder.StateColor.Style,
     )
 
     @Composable
     fun provideBorders() = Borders(
-        button = MaterialTheme.bordersExtended.strokeMicro,
-        buttonOutlined = MaterialTheme.bordersExtended.strokeHuge,
-        icon = MaterialTheme.bordersExtended.strokeBig,
+        button = MaterialTheme.bordersExtended.chunk.normal,
+        buttonOutlined = MaterialTheme.bordersExtended.chunk.normal,
+        icon = MaterialTheme.bordersExtended.chunk.normal,
     )
 
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
@@ -176,25 +175,25 @@ object PageLoginTheme {
     }
 
     data class Typographies(
-        val supra: OutfitText.StateColor,
-        val huge: OutfitText.StateColor,
-        val body: OutfitText.StateColor,
-        val dropDownMenu: OutfitText.StateColor,
+        val supra: OutfitText.StateColor.Style,
+        val huge: OutfitText.StateColor.Style,
+        val body: OutfitText.StateColor.Style,
+        val dropDownMenu: OutfitText.StateColor.Style,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        supra = MaterialTheme.typographiesExtended.textSupra.copy {
+        supra = MaterialTheme.typographiesExtended.title.supra.copy {
             outfitState = OutfitStateSimple(
                 colors.textContent
             )
         },
-        huge = MaterialTheme.typographiesExtended.textHuge.copy {
+        huge = MaterialTheme.typographiesExtended.title.supra.copy {
             outfitState = OutfitStateSimple(
                 colors.textContent
             )
         },
-        body = MaterialTheme.typographiesExtended.textNormal.copy {
+        body = MaterialTheme.typographiesExtended.title.supra.copy {
             outfitState = OutfitStateSimple(
                 colors.textContent
             )
@@ -202,7 +201,7 @@ object PageLoginTheme {
                 fontWeight = FontWeight.Bold
             )
         },
-        dropDownMenu = MaterialTheme.typographiesExtended.textNormal.copy {
+        dropDownMenu = MaterialTheme.typographiesExtended.title.supra.copy {
             outfitState = OutfitStateSimple(
                 colors.textDropDownMenu
             )
@@ -230,7 +229,7 @@ object PageLoginTheme {
     @Composable
     fun provideStyles() = Style(
         pager = ThemeComponentProviders.providePagerStyle(),
-        buttonDark = Button.StateColor.Style.TextFilled.copy {
+        buttonDark = MaterialTheme.componentsButtonExtended.primary.copy {
             outfitFrame = outfitFrame.copy {
                 outfitShape = shapes.button.copy {
 //                    outfitState = colors.backgroundButtonDark.asOutfitColorActive
@@ -240,7 +239,7 @@ object PageLoginTheme {
 //                outfitState = colors.textButtonDark.asOutfitColorActive
             }
         },
-        buttonLight = Button.StateColor.Style.TextFilled.copy {
+        buttonLight = MaterialTheme.componentsButtonExtended.primary.copy {
             outfitFrame = outfitFrame.copy {
                 outfitShape = shapes.button.copy {
 //                    outfitState = colors.backgroundButtonLight.asOutfitColorActive
@@ -254,16 +253,16 @@ object PageLoginTheme {
 
             }
         },
-        buttonOutlined = Button.StateColor.Style.TextOutlined.copy {
+        buttonOutlined = MaterialTheme.componentsButtonExtended.primary.copy {
             outfitFrame = outfitFrame.copy {
                 outfitShape = shapes.buttonOutlined
                 outfitBorder = borders.buttonOutlined.copy {
-                    outfitState = colors.textContent.asOutfitColorActive
+//                    outfitState = colors.textContent.asOutfitColorActive
                 }
             }
             outfitText = outfitText.copy {
                 typo = typo.copy(fontWeight = FontWeight.SemiBold)
-                outfitState = colors.textContent.asOutfitColorActive
+//                outfitState = colors.textContent.asOutfitColorActive
 
             }
         },
@@ -276,7 +275,7 @@ object PageLoginTheme {
         ),
         iconBig = Image.StateColor.Style(
             size = dimensions.sizeIconBig,
-            outfitFrame = OutfitFrame.Styl(
+            outfitFrame = OutfitFrameStateColor(
                 outfitShape = shapes.icon,
                 outfitBorder = borders.icon.copy {
                     outfitState = OutfitStateSimple(
@@ -287,13 +286,13 @@ object PageLoginTheme {
         ),
         iconMedium = Icon.StateColor.Style(
             size = dimensions.sizeIconMedium,
-            outfitFrame = OutfitFrame.Styl(
+            outfitFrame = OutfitFrameStateColor(
                 outfitShape = shapes.icon
             )
         ),
         iconSmall = Icon.StateColor.Style(
             size = dimensions.sizeIconSmall,
-            outfitFrame = OutfitFrame.Styl(
+            outfitFrame = OutfitFrameStateColor(
                 outfitShape = shapes.icon
             )
         ),

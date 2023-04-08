@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 19:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -101,7 +101,7 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.page_h)
+//                .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.page_h)
         ) {
             header.headline.value?.let {
                 Text(
@@ -111,7 +111,7 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
                 Spacer(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(MaterialTheme.dimensionsCommonExtended.huge_v)
+//                        .height(MaterialTheme.dimensionsCommonExtended.huge_v)
                 )
             }
             header.title.value?.let {
@@ -122,7 +122,7 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
                 Spacer(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(MaterialTheme.dimensionsCommonExtended.normal_v)
+//                        .height(MaterialTheme.dimensionsCommonExtended.normal_v)
                 )
             }
             header.text.value?.let {
@@ -133,7 +133,7 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
                 Spacer(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(MaterialTheme.dimensionsCommonExtended.huge_v)
+//                        .height(MaterialTheme.dimensionsCommonExtended.huge_v)
                 )
             }
         }

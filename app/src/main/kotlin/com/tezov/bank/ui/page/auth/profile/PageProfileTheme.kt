@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:29
+ *  Last modified 08/04/2023 19:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -92,7 +92,7 @@ object PageProfileTheme {
 
     @Composable
     fun provideDimensions() = Dimensions(
-        iconCloseSize = MaterialTheme.dimensionsIconExtended.iconModal.width,
+        iconCloseSize = MaterialTheme.dimensionsIconExtended.modal.normal.width,
         iconUserSize = 84.dp,
     )
 
@@ -122,11 +122,11 @@ object PageProfileTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesExtended.textHuge.typo.copy(
+        title = MaterialTheme.typographiesExtended.title.normal.typo.copy(
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),
-        normal = MaterialTheme.typographiesExtended.textNormal.typo.copy(
+        normal = MaterialTheme.typographiesExtended.title.normal.typo.copy(
             color = colors.textContent,
             fontWeight = FontWeight.Bold
         ),

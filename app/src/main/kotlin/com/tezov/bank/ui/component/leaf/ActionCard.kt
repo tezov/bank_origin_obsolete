@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 19:18
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -102,9 +102,7 @@ object ActionCard {
             modifier = modifier
                 .border(style.outfitFrame)
                 .background(style.outfitFrame)
-                .clickable {
-                    onClick()
-                }
+                .clickable { onClick() }
                 .padding(
                     vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.normal,
                     horizontal = MaterialTheme.dimensionsPaddingExtended.block.horizontal.normal

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 19:18
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,8 +24,9 @@ import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.plain.IconSimple
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.then
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
@@ -33,11 +34,11 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 object ActionRow {
 
     class Style(
-        val iconInfoStyle: IconSimple = IconSimple(
+        val iconInfoStyle: Icon.Simple.Style =  Icon.Simple.Style(
             tint = Color.Black,
             size = DpSize(24.dp)
         ),
-        val iconActionStyle: IconSimple = IconSimple(
+        val iconActionStyle:  Icon.Simple.Style =  Icon.Simple.Style(
             tint = Color.Black,
             size = DpSize(24.dp)
         ),
@@ -58,12 +59,12 @@ object ActionRow {
         data: Data,
         onClick: () -> Unit = {}
     ) {
-        style.background?.let {
-            modifier.background(it)
-        }
-        Row(
+          Row(
             modifier = modifier
                 .fillMaxWidth()
+                .thenOnNotNull(style.background) {
+                    background(it)
+                }
                 .clickable { onClick() }
                 .padding(
                     vertical = MaterialTheme.dimensionsPaddingExtended.block.vertical.normal,
@@ -76,7 +77,7 @@ object ActionRow {
                     resourceId = it,
                     description = null,
                 )
-                Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.element.horizontal.normal))
+                Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.icon.horizontal.normal))
             }
             Text.StateColor(
                 modifier = Modifier

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 19:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 19:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -92,7 +92,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
                         }
                     }
-                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
+//                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
                     state.contacts.value?.let {
                         SectionActionRow(data = it, style = PageHelpAndServiceTheme.styles.sectionRow){
 
@@ -117,12 +117,12 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
         header.headline.value?.let{
             Text(
                 modifier = Modifier.padding(
-                    horizontal = MaterialTheme.dimensionsPaddingExtended.page_h
+//                    horizontal = MaterialTheme.dimensionsPaddingExtended.page_h
                 ),
                 text = it,
                 style = PageHelpAndServiceTheme.typographies.titleBig
             )
-            Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
+//            Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
         }
     }
 
