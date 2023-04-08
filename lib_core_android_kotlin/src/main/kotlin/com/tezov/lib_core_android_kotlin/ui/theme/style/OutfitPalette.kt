@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 14:32
+ *  Created by Tezov on 08/04/2023 15:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 13:44
+ *  Last modified 08/04/2023 15:06
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,6 +34,7 @@ object OutfitPalette {
             var fade = style.fade
             var light = style.light
             var dark = style.dark
+            var shady = style.shady
             var accent = style.accent
 
             internal fun get() = Style(
@@ -41,6 +42,7 @@ object OutfitPalette {
                 fade = fade,
                 light = light,
                 dark = dark,
+                shady = shady,
                 accent = accent,
             )
         }
@@ -50,15 +52,17 @@ object OutfitPalette {
             fade: ColorImport? = null,
             light: ColorImport? = null,
             dark: ColorImport? = null,
+            shady: ColorImport? = null,
             accent: ColorImport? = null,
         ) : DelegateNullFallBack.Group<ColorImport> {
 
             val fade: ColorImport by DelegateNullFallBack(fade)
             val light: ColorImport by DelegateNullFallBack(light)
             val dark: ColorImport by DelegateNullFallBack(dark)
+            val shady: ColorImport by DelegateNullFallBack(shady)
             val accent: ColorImport by DelegateNullFallBack(accent)
 
-            override fun groupFallBackRefs() = listOf(fade, light, dark, accent)
+            override fun groupFallBackRefs() = listOf(fade, light, dark, shady, accent)
 
             init {
                 groupLazyFallBackValue = { default }
@@ -82,6 +86,7 @@ object OutfitPalette {
                 fade = style.fade,
                 light = style.light,
                 dark = style.dark,
+                shady = style.shady,
                 accent = style.accent,
             )
         }

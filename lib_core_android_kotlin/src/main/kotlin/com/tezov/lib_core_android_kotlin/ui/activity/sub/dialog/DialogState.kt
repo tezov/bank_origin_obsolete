@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 08/04/2023 15:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:52
+ *  Last modified 08/04/2023 15:29
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySubState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonResource
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsResource
 
 class DialogState private constructor(
     private val showState: MutableState<Boolean>,
@@ -46,7 +46,7 @@ class DialogState private constructor(
     internal fun EmptyContent(){
         Box(
             Modifier
-                .background(MaterialTheme.colorsCommonResource.transparent)
+                .background(MaterialTheme.colorsResource.transparent)
                 .fillMaxWidth()
                 .height(1.dp)
         )

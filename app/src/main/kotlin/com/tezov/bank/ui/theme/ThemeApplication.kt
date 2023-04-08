@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 11:00
+ *  Created by Tezov on 08/04/2023 15:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 11:00
+ *  Last modified 08/04/2023 15:29
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,37 +24,23 @@ object ThemeApplication {
 
         ExtensionCompositionLocal.CompositionLocalProvider(
             ancestor = arrayOf(
-                MaterialTheme provides ThemeColorsResource.Common,
                 MaterialTheme provides ThemeColorProviders.common(),
-                MaterialTheme provides ThemeColorProviders.buttons(),
-                MaterialTheme provides ThemeColorProviders.links(),
                 MaterialTheme provides ThemeDimensionProviders.paddings(),
-                MaterialTheme provides ThemeDimensionProviders.spacings(),
-                MaterialTheme provides ThemeDimensionProviders.elevations(),
-                MaterialTheme provides ThemeDimensionProviders.sizes(),
+                MaterialTheme provides ThemeDimensionProviders.common(),
+                MaterialTheme provides ThemeDimensionProviders.paddings(),
+                MaterialTheme provides ThemeDimensionProviders.icons(),
+                MaterialTheme provides ThemeTypographyProviders.common(),
+                MaterialTheme provides ThemeShapeProviders.common(),
+                MaterialTheme provides ThemeBorderProviders.common(),
             ),
             parent = {
                 arrayOf(
-                    MaterialTheme provides ThemeTypographyProviders.common(),
-                    MaterialTheme provides ThemeTypographyProviders.buttons(),
-                    MaterialTheme provides ThemeTypographyProviders.links(),
-                    MaterialTheme provides ThemeShapeProviders.common(),
-                    MaterialTheme provides ThemeShapeProviders.buttons(),
-                    MaterialTheme provides ThemeBorderProviders.common(),
-                    MaterialTheme provides ThemeBorderProviders.buttons(),
-                )
-            },
-            child = {
-                arrayOf(
-                    //components
                     MaterialTheme provides ThemeComponentProviders.provideComponentsCommon(),
-                    MaterialTheme provides ThemeComponentProviders.provideComponentsButton(),
-                    MaterialTheme provides ThemeComponentProviders.provideComponentsLink(),
                 )
             },
         ){
             MaterialTheme(
-                colors = ThemeColorProviders.material(),
+                colors = ThemeColorsExtended.materialLight(),
                 typography = androidx.compose.material.Typography(),
                 content = content
             )

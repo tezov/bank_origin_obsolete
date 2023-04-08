@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 14:32
+ *  Created by Tezov on 08/04/2023 15:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 13:01
+ *  Last modified 08/04/2023 15:29
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,9 +27,9 @@ import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsIconExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesExtended
 
 val PagePaymentTheme.colors: PagePaymentTheme.Colors
     @Composable
@@ -73,7 +73,7 @@ object PagePaymentTheme {
     fun provideColors() = Colors(
         background = MaterialTheme.colors.background,
         textTitle = MaterialTheme.colors.primaryVariant,
-        headerDivider = MaterialTheme.colorsCommonExtended.backgroundElevated.accent.copy(
+        headerDivider = MaterialTheme.colorsExtended.backgroundElevated.accent.copy(
             alpha = 0.05f
         ),
     )
@@ -108,7 +108,7 @@ object PagePaymentTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesCommonExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesExtended.textTitle.typo.copy(
             color = colors.textTitle,
             fontWeight = FontWeight.Bold
         ),

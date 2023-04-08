@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 14:32
+ *  Created by Tezov on 08/04/2023 15:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 13:01
+ *  Last modified 08/04/2023 15:29
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -88,8 +88,8 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideColors() = Colors(
-        background = ThemeColorProviders.Resource.blackOverlay,
-        onBackground = MaterialTheme.colorsCommonExtended.onPrimary.accent,
+        background = ThemeColorProviders.Palette.blackOverlay,
+        onBackground = MaterialTheme.colorsExtended.onPrimary.accent,
         backgroundButtonActive = MaterialTheme.colors.primary,
 //        backgroundButtonInactive = MaterialTheme.colorsExtended.backgroundButtonConfirm.inactive,
         backgroundButtonInactive = TODO(),
@@ -174,17 +174,17 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesCommonExtended.textTitle.typo.copy(
+        title = MaterialTheme.typographiesExtended.textTitle.typo.copy(
             color = colors.onBackground
         ),
-        fieldValue = MaterialTheme.typographiesCommonExtended.textFieldValue.typo.copy(
+        fieldValue = MaterialTheme.typographiesExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        fieldLabel = MaterialTheme.typographiesCommonExtended.textFieldValue.typo.copy(
+        fieldLabel = MaterialTheme.typographiesExtended.textFieldValue.typo.copy(
             color = colors.onBackground
         ),
-        button = MaterialTheme.typographiesCommonExtended.textNormal.typo,
-        link = MaterialTheme.typographiesCommonExtended.textNormal.typo.copy(
+        button = MaterialTheme.typographiesExtended.textNormal.typo,
+        link = MaterialTheme.typographiesExtended.textNormal.typo.copy(
             color = colors.onBackground,
         )
 

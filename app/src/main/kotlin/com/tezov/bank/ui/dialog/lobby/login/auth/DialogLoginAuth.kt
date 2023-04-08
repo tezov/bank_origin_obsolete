@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 28/03/2023 22:22
+ *  Created by Tezov on 08/04/2023 15:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 28/03/2023 22:19
+ *  Last modified 08/04/2023 15:29
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -39,7 +39,6 @@ import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.LOGIN_LENGTH
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.PASSWORD_LENGTH
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
@@ -134,8 +133,8 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         password: MutableState<String>,
     ) {
         val textSelectionDisableColors = TextSelectionColors(
-            handleColor = MaterialTheme.colorsCommonResource.transparent,
-            backgroundColor = MaterialTheme.colorsCommonResource.transparent
+            handleColor = MaterialTheme.colorsResource.transparent,
+            backgroundColor = MaterialTheme.colorsResource.transparent
         )
         val textSelectionDisableToolbar = object : TextToolbar {
             override val status: TextToolbarStatus = TextToolbarStatus.Hidden
@@ -206,7 +205,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         },
                         singleLine = true,
                         colors = TextFieldDefaults.textFieldColors(
-                            backgroundColor = MaterialTheme.colorsCommonResource.transparent
+                            backgroundColor = MaterialTheme.colorsResource.transparent
                         ),
                         textStyle = DialogLoginAuthTheme.typographies.fieldValue,
                         keyboardOptions = KeyboardOptions(
@@ -280,8 +279,8 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                             onValueChange = {},
                             singleLine = true,
                             colors = TextFieldDefaults.textFieldColors(
-                                backgroundColor = MaterialTheme.colorsCommonResource.transparent,
-                                cursorColor = MaterialTheme.colorsCommonResource.transparent
+                                backgroundColor = MaterialTheme.colorsResource.transparent,
+                                cursorColor = MaterialTheme.colorsResource.transparent
                             ),
                             visualTransformation = PasswordVisualTransformation(),
                             textStyle = DialogLoginAuthTheme.typographies.fieldValue,

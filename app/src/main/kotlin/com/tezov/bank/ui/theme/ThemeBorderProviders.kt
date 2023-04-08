@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 15:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 15:06
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,25 +13,30 @@
 package com.tezov.bank.ui.theme
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.asPaletteSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeBordersExtended
 
 object ThemeBorderProviders {
 
-    @Composable
     fun common() = ThemeBordersExtended.Common(
-        stroke = OutfitPaletteSize(
-            normal = 1.5.asBorderStateColor,
-            micro = 0.8.asBorderStateColor,
-            small = 1.asBorderStateColor,
-            big = 2.2.asBorderStateColor,
-            huge = 4.asBorderStateColor,
+        cluster = 1.2.dp.asStateColor.asPaletteSize,
+        block = 1.dp.asStateColor.asPaletteSize,
+        chunk = 0.8.dp.asStateColor.asPaletteSize,
+        button = OutfitPaletteSize(
+            normal = 1.dp.asStateColor,
+            small = 0.8.dp.asStateColor,
+            big = 1.4.dp.asStateColor,
+        ),
+        icon = OutfitPaletteSize(
+            normal = 2.dp.asStateColor,
+            big = 3.5.dp.asStateColor,
+            huge = 6.dp.asStateColor,
         ),
     )
 
-    @Composable
-    fun buttons() = ThemeBordersExtended.Buttons(
-        primary = 2.asBorderStateColor
-    )
+
 
 }

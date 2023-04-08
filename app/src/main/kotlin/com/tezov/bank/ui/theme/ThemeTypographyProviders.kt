@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 14:32
+ *  Created by Tezov on 08/04/2023 15:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 13:01
+ *  Last modified 08/04/2023 14:40
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,45 +30,48 @@ object ThemeTypographyProviders {
         title = TextStyle(
             fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Normal,
-            fontSize = 20.sp
+            fontSize = 22.sp
+        ).asTextStateColor.asPaletteSize,
+        body = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp
         ).asTextStateColor.asPaletteSize,
         subtitle = TextStyle(
-            fontFamily = MaterialTheme.fontRoboto,
+            fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Normal,
-            fontSize = 15.sp
+            fontSize = 14.sp
         ).asTextStateColor.asPaletteSize,
         helper = TextStyle(
-            fontFamily = MaterialTheme.fontRoboto,
+            fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.Normal,
             fontSize = 13.sp
+        ).asTextStateColor.asPaletteSize,
+        button = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Normal,
+            fontSize = 18.sp
+        ).asTextStateColor.asPaletteSize,
+        link = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Normal,
+            fontSize = 16.sp
         ).asTextStateColor.asPaletteSize,
         input = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
             fontSize = 18.sp
-        ).asTextStateColor,
-        fieldLabel = TextStyle(
-            fontFamily = MaterialTheme.fontRoboto,
+        ).asTextStateColor.asPaletteSize,
+        label = TextStyle(
+            fontFamily = MaterialTheme.fontUbuntu,
             fontWeight = FontWeight.SemiBold,
             fontSize = 12.sp
-        ).asTextStateColor,
+        ).asTextStateColor.asPaletteSize,
+        caption = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.SemiBold,
+            fontSize = 14.sp
+        ).asTextStateColor.asPaletteSize,
     )
 
-    @Composable
-    fun buttons() = ThemeTypographiesExtended.Buttons(
-        primary = TextStyle(
-            fontFamily = MaterialTheme.fontUbuntu,
-            fontWeight = FontWeight.Normal,
-            fontSize = 20.sp
-        ).asTextStateColor
-    )
-
-    @Composable
-    fun links() = ThemeTypographiesExtended.Links(
-        primary = TextStyle(
-            fontFamily = MaterialTheme.fontUbuntu,
-            fontWeight = FontWeight.Normal,
-            fontSize = 20.sp
-        ).asTextStateColor
-    )
 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 15:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 15:29
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,17 +12,22 @@
 
 package com.tezov.bank.ui.theme
 
-import androidx.compose.material.Colors
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsCommonExtended
+
+val MaterialTheme.colorsPalette
+    @Composable
+    @ReadOnlyComposable
+    get() = ThemeColorProviders.localPalette.current
 
 object ThemeColorProviders {
 
-    object Resource {
+    object Palette {
         val blueNight = Color(0xFF01252B)
         val blueElegant = Color(0xFF12263F)
         val blueSea = Color(0xFF11BAD5)
@@ -49,77 +54,27 @@ object ThemeColorProviders {
         val grayOverlay = Color(0x063F3F3F)
     }
 
+    internal val localPalette = staticCompositionLocalOf { Palette }
+
     fun common() = ThemeColorsExtended.Common(
         background = OutfitPaletteColor(
-            default = Resource.whiteShiny,
-            accent = Resource.blueSea,
+            default = Palette.whiteShiny,
+            accent = Palette.blueSea,
         ),
         onBackground = OutfitPaletteColor(
-            default = Resource.blueElegant,
-            accent =  Resource.whiteShiny,
-        ),
-        backgroundElevated = OutfitPaletteColor(
-            default = Resource.grayOverlay,
-        ),
-        onBackgroundElevated = OutfitPaletteColor(
-            default = Resource.blueNight,
-            accent = Resource.blueElegant,
-        ),
-        backgroundModal = OutfitPaletteColor(
-            default = Resource.whiteShady,
-            accent = Resource.blueElegant,
-        ),
-        onBackgroundModal = OutfitPaletteColor(
-            default = Resource.blueNight,
-            accent = Resource.blueElegant,
+            default = Palette.blueElegant,
+            accent =  Palette.whiteShiny,
         ),
         primary = OutfitPaletteColor(
-            default = Resource.whiteShady,
-            accent = Resource.blueDark,
+            default = Palette.whiteShady,
+            accent = Palette.blueDark,
         ),
         onPrimary = OutfitPaletteColor(
-            default = Resource.blueSea,
-            accent = Resource.blueDark,
+            default = Palette.blueSea,
+            accent = Palette.blueDark,
         ),
-        secondary = OutfitPaletteColor(
-            default = Resource.whiteShady,
-            light = Resource.whiteDark,
-        ),
-        onSecondary = OutfitPaletteColor(
-            default = Resource.blueNight,
-        )
     )
 
-    @Composable
-    fun buttons() = ThemeColorsExtended.Buttons(
 
-    )
-
-    @Composable
-    fun links() = ThemeColorsExtended.Links(
-
-    )
-
-    @Composable
-    fun material() =  Colors(
-        primary = MaterialTheme.colorsCommonExtended.primary.default,
-        primaryVariant = MaterialTheme.colorsCommonExtended.primary.accent,
-        onPrimary = MaterialTheme.colorsCommonExtended.onPrimary.default,
-
-        secondary = MaterialTheme.colorsCommonExtended.secondary.default,
-        secondaryVariant = MaterialTheme.colorsCommonExtended.secondary.accent,
-        onSecondary = MaterialTheme.colorsCommonExtended.onSecondary.default,
-
-        surface = Color.Unspecified,
-        onSurface = MaterialTheme.colorsCommonExtended.onBackground.default,
-
-        background = MaterialTheme.colorsCommonExtended.background.default,
-        onBackground = MaterialTheme.colorsCommonExtended.onBackground.default,
-
-        error = MaterialTheme.colorsCommonExtended.semantic.error!!.default,
-        onError = MaterialTheme.colorsCommonExtended.onSemantic.error!!.default,
-
-        isLight = true
-    )
 
 }

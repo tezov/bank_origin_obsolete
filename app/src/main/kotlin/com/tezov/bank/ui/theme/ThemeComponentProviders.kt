@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 08/04/2023 15:32
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 08/04/2023 15:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -47,17 +47,16 @@ object ThemeComponentProviders {
 
     @Composable
     fun provideComponentsCommon() = ThemeComponentExtended.Common(
-        topAppBar = TopAppBar.Style(),
         bottomNavigation = BottomNavigation.Style(
             outfitText  = TextStyle(
                 fontFamily = MaterialTheme.fontUbuntu,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 12.sp
             ).asTextStateColor,
-            colorBackground  = ThemeColorProviders.Resource.whiteShady,
+            colorBackground  = MaterialTheme.colorsPalette.whiteShady,
             outfitColor  = OutfitStateDual(
-                active = ThemeColorProviders.Resource.blueElegant,
-                inactive = ThemeColorProviders.Resource.blueShadow
+                active = MaterialTheme.colorsPalette.blueElegant,
+                inactive = MaterialTheme.colorsPalette.blueShadow
             ),
         ),
         dialogCard = Dialog.Card.Style(
@@ -65,15 +64,14 @@ object ThemeComponentProviders {
             outfitFrame = OutfitFrameStateColor(
                 outfitBorder = OutfitBorderStateColor(
                     size = 2.dp,
-                    outfitState = MaterialTheme.colorsCommonExtended.primary.default.asStateSimple,
+                    outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple,
                 ),
                 outfitShape = OutfitShapeStateColor(
                     size = 8.asShapeSize,
-                    outfitState = MaterialTheme.colorsCommonExtended.backgroundModal.default.asStateSimple,
+                    outfitState = MaterialTheme.colorsExtended.backgroundModal.default.asStateSimple,
                 )
             )
         ),
-        bottomSheet = BottomSheet.Style(),
         snackBar = Snackbar.Style(
             outfitTextMessage = OutfitTextStateColor(
                 typo = TextStyle(
@@ -81,7 +79,7 @@ object ThemeComponentProviders {
                     fontWeight = FontWeight.Normal,
                     fontSize = 19.sp
                 ),
-                outfitState = MaterialTheme.colorsCommonExtended.onBackgroundModal.dark.asStateSimple,
+                outfitState = MaterialTheme.colorsExtended.onBackgroundModal.dark.asStateSimple,
             ),
             outfitTextAction = OutfitTextStateColor(
                 typo = TextStyle(
@@ -89,11 +87,11 @@ object ThemeComponentProviders {
                     fontWeight = FontWeight.Bold,
                     fontSize = 19.sp
                 ),
-                outfitState = MaterialTheme.colorsCommonExtended.onBackgroundModal.accent.asStateSimple,
+                outfitState = MaterialTheme.colorsExtended.onBackgroundModal.accent.asStateSimple,
             ),
             outfitShape = OutfitShapeStateColor(
                 size = 12.asShapeSize,
-                outfitState = MaterialTheme.colorsCommonExtended.backgroundModal.accent.asStateSimple,
+                outfitState = MaterialTheme.colorsExtended.backgroundModal.accent.asStateSimple,
             ),
             elevation = 4.dp,
         ),
@@ -250,7 +248,7 @@ object ThemeComponentProviders {
         dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.horizontal,
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.iconInfo,
-            tint = MaterialTheme.colorsCommonExtended.primary.default
+            tint = MaterialTheme.colorsExtended.primary.default
         ),
 //        outfitTextHeader = MaterialTheme.typographiesTextExtended.text.normal.copy {
 //            typo = typo.copy(
@@ -260,10 +258,10 @@ object ThemeComponentProviders {
 //                MaterialTheme.colorsCommonExtended.onBackgroundElevated.default
 //            )
 //        },
-        colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated.default.copy(
+        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.14f
         ),
-        colorDivider = MaterialTheme.colorsCommonExtended.backgroundElevated.default.copy(
+        colorDivider = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.05f
         ),
         dimensionDivider = MaterialTheme.dimensionsIconExtended.divider.normal,
@@ -274,11 +272,11 @@ object ThemeComponentProviders {
     fun provideActionRowStyle() = ActionRow.Style(
         iconInfoStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.iconInfo,
-            tint = MaterialTheme.colorsCommonExtended.primary.default
+            tint = MaterialTheme.colorsExtended.primary.default
         ),
         iconActionStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.iconAction,
-            tint = MaterialTheme.colorsCommonExtended.primary.default
+            tint = MaterialTheme.colorsExtended.primary.default
         ),
 //        outfitText = MaterialTheme.typographiesTextExtended.text.normal.copy {
 //            typo = typo.copy(
@@ -294,7 +292,7 @@ object ThemeComponentProviders {
     fun provideSectionCardStyle() = SectionActionCard.Style(
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.iconInfo,
-            tint = MaterialTheme.colorsCommonExtended.primary.default
+            tint = MaterialTheme.colorsExtended.primary.default
         ),
 //        outfitTextHeader = MaterialTheme.typographiesTextExtended.text.normal.copy {
 //            typo = typo.copy(
@@ -304,7 +302,7 @@ object ThemeComponentProviders {
 //                MaterialTheme.colorsCommonExtended.onBackgroundElevated.default
 //            )
 //        },
-        colorBackgroundHeader = MaterialTheme.colorsCommonExtended.backgroundElevated.default.copy(
+        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
             alpha = 0.14f
         ),
         dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.horizontal,
@@ -314,14 +312,14 @@ object ThemeComponentProviders {
     @Composable
     fun provideActionCardStyle() = ActionCard.Style(
         outfitFrame = OutfitFrameStateColor(
-            outfitShape = MaterialTheme.shapesCommonExtended.roundedCorner.normal,
-            outfitBorder = MaterialTheme.bordersCommonExtended.stroke.normal.copy {
-                outfitState = MaterialTheme.colorsCommonExtended.backgroundElevated.default.asStateSimple
+            outfitShape = MaterialTheme.shapesExtended.roundedCorner.normal,
+            outfitBorder = MaterialTheme.bordersExtended.stroke.normal.copy {
+                outfitState = MaterialTheme.colorsExtended.backgroundElevated.default.asStateSimple
             }
         ),
         iconStyle = Icon.Simple.Style(
             size = DpSize(56.dp),
-            tint = MaterialTheme.colorsCommonExtended.primary.default
+            tint = MaterialTheme.colorsExtended.primary.default
         ),
 //        outfitTextTitle = MaterialTheme.typographiesTextExtended.text.normal.copy {
 //            typo = typo.copy(
@@ -343,8 +341,8 @@ object ThemeComponentProviders {
         outfitShapeIndicator = OutfitShapeStateColor(
             template = OutfitShape.Template.Circle,
             outfitState = OutfitStateDual(
-                active = MaterialTheme.colorsCommonExtended.onBackgroundElevated.default,
-                inactive = MaterialTheme.colorsCommonExtended.background.default,
+                active = MaterialTheme.colorsExtended.onBackgroundElevated.default,
+                inactive = MaterialTheme.colorsExtended.background.default,
             )
         ),
         dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.element.vertical.normal,
