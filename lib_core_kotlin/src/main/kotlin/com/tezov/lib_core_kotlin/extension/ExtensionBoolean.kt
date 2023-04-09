@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 18:42
+ *  Created by Tezov on 09/04/2023 20:20
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 18:09
+ *  Last modified 09/04/2023 20:20
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -11,9 +11,6 @@
  */
 
 package com.tezov.lib_core_kotlin.extension
-
-import com.tezov.lib_core_kotlin.extension.ExtensionBoolean.isTrue
-import com.tezov.lib_core_kotlin.extension.ExtensionBoolean.isTrueOrNull
 
 object ExtensionBoolean {
 

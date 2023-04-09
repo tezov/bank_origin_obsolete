@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 18:42
+ *  Created by Tezov on 09/04/2023 20:20
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 18:39
+ *  Last modified 09/04/2023 20:20
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,12 +12,10 @@
 
 package com.tezov.lib_core_android_kotlin.ui.di.module
 
-import android.os.Looper
-import android.util.Log
+
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.rememberCoroutineScope
-import com.tezov.lib_core_android_kotlin.navigation.NavigationController
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigationAction
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
@@ -40,6 +38,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ComposableHolder
 import com.tezov.lib_core_android_kotlin.ui.navigation.bottom_navigation.BottomNavigationState
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineScope
 import javax.inject.Inject
 
 
@@ -121,6 +120,7 @@ object ModuleCoreUiActivity {
     object State {
 
         class CoroutineScope : ComposableHolder<kotlinx.coroutines.CoroutineScope>() {
+
             @androidx.compose.runtime.Composable
             override fun create() = rememberCoroutineScope()
         }
@@ -262,11 +262,6 @@ object ModuleCoreUiActivity {
         class NavigationController @Inject constructor(
             private val snackbarAction: SnackbarAction
         ) : ComposableHolder<com.tezov.lib_core_android_kotlin.navigation.NavigationController>() {
-
-            @androidx.compose.runtime.Composable
-            override fun get(): com.tezov.lib_core_android_kotlin.navigation.NavigationController {
-                return super.get()
-            }
 
             @androidx.compose.runtime.Composable
             override fun create() =
