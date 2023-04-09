@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 09/04/2023 22:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:53
+ *  Last modified 09/04/2023 22:25
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -38,13 +38,16 @@ import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.LOGIN_LENGTH
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.PASSWORD_LENGTH
+import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 
 object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
 
@@ -57,12 +60,9 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         ExtensionCompositionLocal.CompositionLocalProvider(
             ancestor = arrayOf(
                 DialogLoginAuthTheme provides DialogLoginAuthTheme.provideColors(),
-                DialogLoginAuthTheme provides DialogLoginAuthTheme.provideDimensions(),
             ),
             parent = {
                 arrayOf(
-                    DialogLoginAuthTheme provides DialogLoginAuthTheme.provideShapes(),
-                    DialogLoginAuthTheme provides DialogLoginAuthTheme.provideBorders(),
                     DialogLoginAuthTheme provides DialogLoginAuthTheme.provideTypographies(),
                 )
             },
@@ -76,11 +76,12 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 modifier = Modifier
                     .fillMaxSize()
                     .background(DialogLoginAuthTheme.colors.background)
+                    .padding(MaterialTheme.dimensionsPaddingExtended.page.big)
             ) {
                 IconButton(
                     onClick = { action.hide() }) {
                     Icon(
-                        modifier = Modifier.size(DialogLoginAuthTheme.dimensions.iconCloseSize),
+                        modifier = Modifier.size(MaterialTheme.dimensionsIconExtended.modal.normal),
                         painter = painterResource(id = R.drawable.ic_close_24dp),
                         contentDescription = stringResource(id = R.string.dlg_login_auth_icon_close),
                         tint = DialogLoginAuthTheme.colors.onBackground,
@@ -88,19 +89,14 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 }
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
-//                        .padding(
-//                            horizontal = MaterialTheme.dimensionsPaddingExtended.blockNormal_h,
-//                            vertical = MaterialTheme.dimensionsPaddingExtended.blockNormal_v,
-//                        )
-                    ,
+                        .fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     ContentHeader()
-                    Spacer(modifier = Modifier.height(DialogLoginAuthTheme.dimensions.spacingTopToTitle))
+                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.normal.vertical))
                     ContentBody(state.loginState, state.passwordState)
-                    Spacer(modifier = Modifier.height(DialogLoginAuthTheme.dimensions.spacingTopFromButton))
+                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.normal.vertical))
                     ContentFooter(
                         credentialValidState = state.credentialValidState,
                         onClickConnect = {
@@ -164,18 +160,14 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .border(DialogLoginAuthTheme.borders.authCard)
-
             ) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-//                        .padding(bottom = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                 ) {
                     Icon(
                         modifier = Modifier
-//                            .padding(MaterialTheme.dimensionsPaddingExtended.elementMicro_h)
-                            .size(DialogLoginAuthTheme.dimensions.iconFieldInfoSize)
+                            .size(MaterialTheme.dimensionsIconExtended.fieldInfo.normal)
                             .align(Alignment.CenterVertically),
                         painter = painterResource(id = R.drawable.ic_person_24dp),
                         tint = DialogLoginAuthTheme.colors.onBackground,
@@ -228,7 +220,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                             }) {
                                 Icon(
                                     modifier = Modifier
-                                        .size(DialogLoginAuthTheme.dimensions.iconFieldActionSize)
+                                        .size(MaterialTheme.dimensionsIconExtended.fieldAction.normal)
                                         .align(Alignment.CenterVertically),
                                     painter = when (login.value.isEmpty()) {
                                         false -> painterResource(id = R.drawable.ic_cancel_round_24dp)
@@ -245,15 +237,13 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-//                        .padding(bottom = MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                 ) {
                     CompositionLocalProvider(
                         LocalTextInputService provides null
                     ) {
                         Icon(
                             modifier = Modifier
-//                                .padding(MaterialTheme.dimensionsPaddingExtended.elementMicro_h)
-                                .size(DialogLoginAuthTheme.dimensions.iconFieldInfoSize)
+                                .size(MaterialTheme.dimensionsIconExtended.fieldInfo.normal)
                                 .align(Alignment.CenterVertically),
                             painter = painterResource(id = R.drawable.ic_lock_24dp),
                             tint = DialogLoginAuthTheme.colors.onBackground,
@@ -298,7 +288,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                                 }) {
                                     Icon(
                                         modifier = Modifier
-                                            .size(DialogLoginAuthTheme.dimensions.iconFieldActionSize)
+                                            .size(MaterialTheme.dimensionsIconExtended.fieldAction.normal)
                                             .align(Alignment.CenterVertically),
                                         painter = when (password.value.isEmpty()) {
                                             false -> painterResource(id = R.drawable.ic_backspace_24dp)
@@ -316,7 +306,6 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 KeyBoard.GridCubeDigitsTwoRowShuffled(
                     modifier = Modifier
                         .fillMaxWidth()
-//                        .padding(MaterialTheme.dimensionsPaddingExtended.elementNormal_v)
                         .alpha(
                             when (focusManagement.isPasswordHasFocus()) {
                                 true -> 1.0f
@@ -360,24 +349,21 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 .fillMaxWidth()
         ) {
 
-//            Button.TextFilled(
-//                modifierButton = Modifier
-//                    .fillMaxWidth(),
-//                modifierText = Modifier
-//                    .padding(
-//                        horizontal = DialogLoginAuthTheme.dimensions.paddingButton_h,
-//                        vertical = DialogLoginAuthTheme.dimensions.paddingButton_v
-//                    ),
-//                text = stringResource(id = R.string.dlg_login_auth_btn_connect),
-//                style = DialogLoginAuthTheme.styles.button,
-//                enabled = credentialValidState,
-//                onClick = onClickConnect,
-//            )
+            Button.StateColor(
+                modifierButton = Modifier
+                    .fillMaxWidth(),
+                modifierText = Modifier
+                    .padding(MaterialTheme.dimensionsPaddingExtended.text.big),
+                text = stringResource(id = R.string.dlg_login_auth_btn_connect),
+                style = DialogLoginAuthTheme.styles.button,
+                enabled = credentialValidState,
+                onClick = onClickConnect,
+            )
 
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = DialogLoginAuthTheme.dimensions.paddingTopFromLink),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Link.StateColor(

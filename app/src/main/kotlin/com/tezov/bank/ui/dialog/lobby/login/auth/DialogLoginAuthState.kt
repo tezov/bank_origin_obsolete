@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 09/04/2023 22:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:37
+ *  Last modified 09/04/2023 22:18
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,8 +26,8 @@ class DialogLoginAuthState private constructor(
 
         @Composable
         fun create(
-            loginState:MutableState<String> = mutableStateOf("12345678"),
-            passwordState:MutableState<String> = mutableStateOf("123456"),
+            loginState:MutableState<String> = mutableStateOf(""),
+            passwordState:MutableState<String> = mutableStateOf(""),
         ) = DialogLoginAuthState(
             loginState = loginState,
             passwordState = passwordState,

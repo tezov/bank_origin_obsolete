@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 22:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 22:35
+ *  Last modified 09/04/2023 22:29
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,10 +22,20 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
+import com.tezov.bank.ui.page.lobby.login.colors
 import com.tezov.bank.ui.theme.ThemeColorProviders
+import com.tezov.bank.ui.theme.colorsPalette
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val DialogLoginAuthTheme.colors: DialogLoginAuthTheme.Colors
@@ -36,30 +46,6 @@ val DialogLoginAuthTheme.colors: DialogLoginAuthTheme.Colors
 infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Colors) =
     localColors provides value
 
-val DialogLoginAuthTheme.dimensions: DialogLoginAuthTheme.Dimensions
-    @Composable
-    @ReadOnlyComposable
-    get() = localDimensions.current
-
-infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Dimensions) =
-    localDimensions provides value
-
-val DialogLoginAuthTheme.shapes: DialogLoginAuthTheme.Shapes
-    @Composable
-    @ReadOnlyComposable
-    get() = localShapes.current
-
-infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Shapes) =
-    localShapes provides value
-
-val DialogLoginAuthTheme.borders: DialogLoginAuthTheme.Borders
-    @Composable
-    @ReadOnlyComposable
-    get() = localBorders.current
-
-infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Borders) =
-    localBorders provides value
-
 val DialogLoginAuthTheme.typographies: DialogLoginAuthTheme.Typographies
     @Composable
     @ReadOnlyComposable
@@ -67,7 +53,6 @@ val DialogLoginAuthTheme.typographies: DialogLoginAuthTheme.Typographies
 
 infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Typographies) =
     localTypographies provides value
-
 
 val DialogLoginAuthTheme.styles: DialogLoginAuthTheme.Style
     @Composable
@@ -81,86 +66,21 @@ object DialogLoginAuthTheme {
     data class Colors(
         val background: Color,
         val onBackground: Color,
-        val backgroundButtonActive: Color,
-        val backgroundButtonInactive: Color,
-        val textButtonDark: Color,
+        val dark: Color,
+        val light: Color,
+        val fade: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
         background = ThemeColorProviders.Palette.blackOverlay,
         onBackground = MaterialTheme.colorsExtended.onPrimary.accent,
-        backgroundButtonActive = MaterialTheme.colors.primary,
-//        backgroundButtonInactive = MaterialTheme.colorsExtended.backgroundButtonConfirm.inactive,
-        backgroundButtonInactive = TODO(),
-//        textButtonDark = MaterialTheme.colorsExtended.onBackgroundButtonConfirm.inactive,
-        textButtonDark = TODO(),
+        dark = MaterialTheme.colorsExtended.primary.fade,
+        light = MaterialTheme.colorsExtended.primary.accent,
+        fade = MaterialTheme.colorsPalette.grayLight,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
-    data class Dimensions(
-        val paddingKeyboard_v: Dp,
-        val paddingKeyboard_h: Dp,
-        val spacingTopToTitle: Dp,
-        val spacingTopFromButton: Dp,
-        val paddingTopFromLink: Dp,
-        val iconCloseSize: Dp,
-        val iconFieldInfoSize: Dp,
-        val iconFieldActionSize: Dp,
-        val paddingButton_h: Dp,
-        val paddingButton_v: Dp,
-    )
-
-    @Composable
-    fun provideDimensions() = Dimensions(
-        paddingKeyboard_v = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
-        paddingKeyboard_h = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
-        spacingTopToTitle = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
-        spacingTopFromButton = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
-        paddingTopFromLink = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
-        iconCloseSize = MaterialTheme.dimensionsIconExtended.modal.normal.width,
-        iconFieldInfoSize = MaterialTheme.dimensionsIconExtended.modal.normal.width,
-        iconFieldActionSize = MaterialTheme.dimensionsIconExtended.modal.normal.width,
-        paddingButton_h = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
-        paddingButton_v = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
-    )
-
-    internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
-        staticCompositionLocalOf {
-            error("not provided")
-        }
-
-    data class Shapes(
-        val button: Shape,
-        val authCard: Shape,
-    )
-
-    @Composable
-    fun provideShapes() = Shapes(
-//        button = MaterialTheme.shapesExtended.roundedCornerNormal.resolveOrDefault(),
-        button = TODO(),
-//        authCard = MaterialTheme.shapesExtended.roundedCornerSmall.resolveOrDefault(),
-        authCard = TODO(),
-    )
-
-    internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
-    data class Borders(
-        val authCard: BorderStroke,
-    )
-
-    @Composable
-    fun provideBorders() = Borders(
-//        authCard = MaterialTheme.bordersExtended.strokeNormal.resolveOrDefault(colors.onBackground),
-        authCard = TODO(),
-    )
-
-    internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
         error("not provided")
     }
 
@@ -168,8 +88,6 @@ object DialogLoginAuthTheme {
         val title: TextStyle,
         val fieldValue: TextStyle,
         val fieldLabel: TextStyle,
-        val button: TextStyle,
-        val link: TextStyle,
     )
 
     @Composable
@@ -177,17 +95,12 @@ object DialogLoginAuthTheme {
         title = MaterialTheme.typographiesExtended.title.normal.typo.copy(
             color = colors.onBackground
         ),
-        fieldValue = MaterialTheme.typographiesExtended.title.normal.typo.copy(
+        fieldValue = MaterialTheme.typographiesExtended.input.normal.typo.copy(
             color = colors.onBackground
         ),
-        fieldLabel = MaterialTheme.typographiesExtended.title.normal.typo.copy(
+        fieldLabel = MaterialTheme.typographiesExtended.label.normal.typo.copy(
             color = colors.onBackground
-        ),
-        button = MaterialTheme.typographiesExtended.title.normal.typo,
-        link = MaterialTheme.typographiesExtended.title.normal.typo.copy(
-            color = colors.onBackground,
         )
-
     )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =
@@ -205,25 +118,31 @@ object DialogLoginAuthTheme {
     fun provideStyles() = Style(
         keyBoardGridCube = KeyBoard.GridCube.Style(
             colorOnBackground = colors.onBackground,
-            colorBackground = Color.Transparent,
-//            outfitBorderOuter = MaterialTheme.bordersSketchExtended.strokeNormal.getOrDefault().copy(
-//                brush = SolidColor(colors.onBackground)
-//            ),
-//            outfitBorderInner = MaterialTheme.bordersExtended.strokeBig.getOrDefault().copy(
-//                brush = SolidColor(colors.onBackground)
-//            ),
+            outfitBorderOuter = MaterialTheme.bordersExtended.block.normal.copy {
+                outfitState = colors.onBackground.asStateSimple
+            },
+            outfitBorderInner = MaterialTheme.bordersExtended.block.small.copy {
+                outfitState = colors.onBackground.asStateSimple
+            },
         ),
-        button = Button.StateColor.Style(
-//            outfitShape = shapes.button,
-//            backgroundColorActive = colors.backgroundButtonActive,
-//            backgroundColorInactive =  colors.backgroundButtonInactive,
-//            textStyle = typographies.button,
-//            textColorActive = colors.onBackground,
-//            textColorInactive = colors.onBackground,
-        ),
-        link = Link.StateColor.Style(
-//            outfitText = typographies.link,
-        )
+        button = MaterialTheme.componentsButtonExtended.primary.copy {
+            outfitFrame = outfitFrame.copy {
+                outfitShape = outfitShape.copy {
+                    outfitState = OutfitStateDual(
+                        active = colors.light,
+                        inactive = colors.dark
+                    )
+                }
+            }
+            outfitText = outfitText.copy {
+                outfitState = colors.onBackground.asStateSimple
+            }
+        },
+        link = MaterialTheme.componentsLinkExtended.secondary.copy {
+            outfitText = outfitText.copy {
+                outfitState = colors.onBackground.asStateSimple
+            }
+        }
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

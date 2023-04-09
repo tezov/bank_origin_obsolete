@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 21:33
+ *  Created by Tezov on 09/04/2023 22:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 21:25
+ *  Last modified 09/04/2023 22:54
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -91,11 +91,11 @@ object ThemeComponentProviders {
                     fontWeight = FontWeight.Bold,
                     fontSize = 19.sp
                 ),
-                outfitState = MaterialTheme.colorsExtended.onBackgroundModal.accent.asStateSimple,
+                outfitState = MaterialTheme.colorsExtended.onBackgroundModal.dark.asStateSimple,
             ),
             outfitShape = OutfitShapeStateColor(
-                size = 12.asShapeSize,
-                outfitState = MaterialTheme.colorsExtended.backgroundModal.accent.asStateSimple,
+                size = 8.dp.asShapeSize,
+                outfitState = MaterialTheme.colorsExtended.backgroundModal.default.asStateSimple,
             ),
             elevation = 4.dp,
         ),
@@ -161,6 +161,14 @@ object ThemeComponentProviders {
     fun link() = ThemeComponentExtended.Links(
         primary = Link.StateColor.Style(
             outfitText = MaterialTheme.typographiesExtended.link.normal.copy {
+                outfitState = OutfitStateDual(
+                    active = MaterialTheme.colorsExtended.primary.default,
+                    inactive = MaterialTheme.colorsPalette.grayLight,
+                )
+            }
+        ),
+        secondary = Link.StateColor.Style(
+            outfitText = MaterialTheme.typographiesExtended.link.small.copy {
                 outfitState = OutfitStateDual(
                     active = MaterialTheme.colorsExtended.primary.default,
                     inactive = MaterialTheme.colorsPalette.grayLight,
