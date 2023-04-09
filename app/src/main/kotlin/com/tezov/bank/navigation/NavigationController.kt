@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/03/2023 14:12
+ *  Created by Tezov on 09/04/2023 18:42
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/03/2023 13:47
+ *  Last modified 09/04/2023 18:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,6 +18,7 @@ import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavi
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarAction
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.DialogAction
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageAction
+import kotlin.math.log
 
 class NavigationController(
     val navigationController: com.tezov.lib_core_android_kotlin.navigation.NavigationController
@@ -25,12 +26,12 @@ class NavigationController(
     companion object{
         sealed class Route(value:String):RouteManager.Route(value) {
 
-            //outside auth
+            //lobby
             object Splash : Route("splash")
             object Login : Route("login")
             object HelpAndService : Route("help_and_service")
 
-            //inside auth
+            //auth
             object Account : Route("account")
             object Discover : Route("discover")
             object Payment : Route("payment")
