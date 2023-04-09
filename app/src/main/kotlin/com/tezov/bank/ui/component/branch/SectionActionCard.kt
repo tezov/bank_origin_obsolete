@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 09/04/2023 21:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 09/04/2023 20:55
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -38,7 +38,7 @@ object SectionActionCard {
         val outfitTextHeader: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
-        val dimensionPaddingBody_h: Dp = 0.dp,
+        val dimensionPaddingBody: Dp = 0.dp,
         actionCardStyle: ActionCard.Style? = null
     ) {
 
@@ -117,7 +117,7 @@ object SectionActionCard {
                     }
                     .padding(
                         vertical = MaterialTheme.dimensionsPaddingExtended.block.normal.vertical,
-                        horizontal = style.dimensionPaddingBody_h
+                        horizontal = style.dimensionPaddingBody
                     ),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical),
             ) {

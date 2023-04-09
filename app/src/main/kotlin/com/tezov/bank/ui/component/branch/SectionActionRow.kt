@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 09/04/2023 21:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 09/04/2023 20:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,7 +40,7 @@ object SectionActionRow {
         val colorBackgroundBody: Color? = null,
         val colorDivider: Color? = null,
         val dimensionDivider: Dp = 1.dp,
-        val dimensionPaddingBody_h: Dp = 0.dp,
+        val dimensionPaddingBody: Dp = 0.dp,
         actionRowStyle: ActionRow.Style? = null
     ) {
 
@@ -116,7 +116,7 @@ object SectionActionRow {
                     }
                     .padding(
                         vertical = MaterialTheme.dimensionsPaddingExtended.block.normal.vertical,
-                        horizontal = style.dimensionPaddingBody_h
+                        horizontal = style.dimensionPaddingBody
                     ),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical),
             ) {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 17:41
+ *  Created by Tezov on 09/04/2023 21:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 17:40
+ *  Last modified 09/04/2023 21:25
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -116,7 +116,11 @@ object ThemeDimensionProviders {
 
     fun icons() = ThemeDimensionsExtended.Icons(
         modal = 42.dpSize.asPaletteSize,
-        info = 36.dpSize.asPaletteSize,
+        info = OutfitPaletteSize(
+            normal = 28.dpSize,
+            small = 20.dpSize,
+            big = 36.dpSize,
+        ),
         action = 22.dpSize.asPaletteSize,
         fieldInfo = 32.dpSize.asPaletteSize,
         fieldAction = 22.dpSize.asPaletteSize,

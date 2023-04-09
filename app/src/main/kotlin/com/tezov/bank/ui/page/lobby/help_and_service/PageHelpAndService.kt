@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 09/04/2023 21:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:49
+ *  Last modified 09/04/2023 21:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,12 +27,14 @@ import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
 
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
+import com.tezov.bank.ui.theme.ThemeComponentProviders
+import com.tezov.lib_core_android_kotlin.type.primaire.size
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceAction> {
 
@@ -41,69 +43,50 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
         val accessor = AccessorAppUiPage().get(requester = this).contextHelpAndService()
         val state = accessor.state()
         val action = accessor.action()
-        ExtensionCompositionLocal.CompositionLocalProvider(
-            ancestor = arrayOf(
-                PageHelpAndServiceTheme provides PageHelpAndServiceTheme.provideColors(),
-                PageHelpAndServiceTheme provides PageHelpAndServiceTheme.provideDimensions(),
-            ),
-            parent = {
-                arrayOf(
-                    PageHelpAndServiceTheme provides PageHelpAndServiceTheme.provideTypographies(),
-                )
-            },
-            child = {
-                arrayOf(
-                    PageHelpAndServiceTheme provides PageHelpAndServiceTheme.provideStyles(),
-                )
-            }
+        Column(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(innerPadding)
+                .background(MaterialTheme.colorsExtended.background.default)
         ) {
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+            ) {
+                IconButton(
+                    modifier = Modifier
+                        .align(Alignment.TopStart),
+                    onClick = { action.close() }) {
+                    Icon(
+                        modifier = Modifier.size(MaterialTheme.dimensionsIconExtended.modal.normal),
+                        painter = painterResource(id = R.drawable.ic_close_24dp),
+                        contentDescription = stringResource(id = R.string.pg_h_and_s_icon_close),
+                        tint = MaterialTheme.colorsExtended.primary.accent,
+                    )
+                }
+            }
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(innerPadding)
-                    .background(PageHelpAndServiceTheme.colors.background)
+                    .verticalScroll(rememberScrollState())
             ) {
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .background(PageHelpAndServiceTheme.colors.backgroundElevated)
-                ) {
-                    IconButton(
-                        modifier = Modifier
-                            .align(Alignment.TopStart),
-                        onClick = { action.close() }) {
-                        Icon(
-                            modifier = Modifier.size(PageHelpAndServiceTheme.dimensions.iconCloseSize),
-                            painter = painterResource(id = R.drawable.ic_close_24dp),
-                            contentDescription = stringResource(id = R.string.pg_h_and_s_icon_close),
-                            tint = PageHelpAndServiceTheme.colors.iconClose,
-                        )
+                contentHeader(state.header)
+                state.helpAndServices.value?.let {
+                    SectionActionCard(data = it, style = ThemeComponentProviders.provideSectionCardStyle()){
+
+
                     }
                 }
-                Column(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .verticalScroll(rememberScrollState())
-                ) {
-                    contentHeader(state.header)
-                    state.helpAndServices.value?.let {
-                        SectionActionCard(data = it, style = PageHelpAndServiceTheme.styles.sectionCard){
+                state.contacts.value?.let {
+                    SectionActionRow(data = it, style = ThemeComponentProviders.provideSectionRowStyle()){
 
 
-                        }
                     }
-//                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
-                    state.contacts.value?.let {
-                        SectionActionRow(data = it, style = PageHelpAndServiceTheme.styles.sectionRow){
+                }
+                state.notices.value?.let {
+                    SectionActionRow(data = it, style = ThemeComponentProviders.provideSectionRowStyle()){
 
 
-                        }
-                    }
-                    state.notices.value?.let {
-                        SectionActionRow(data = it, style = PageHelpAndServiceTheme.styles.sectionRow){
-
-
-                        }
                     }
                 }
             }
@@ -115,14 +98,10 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
         header: PageHelpAndServiceState.Header
     ) {
         header.headline.value?.let{
-            Text(
-                modifier = Modifier.padding(
-//                    horizontal = MaterialTheme.dimensionsPaddingExtended.page_h
-                ),
+            Text.StateColor(
                 text = it,
-                style = PageHelpAndServiceTheme.typographies.titleBig
+                style = MaterialTheme.typographiesExtended.title.supra
             )
-//            Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
         }
     }
 

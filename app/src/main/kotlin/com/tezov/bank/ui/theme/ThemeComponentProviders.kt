@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 17:41
+ *  Created by Tezov on 09/04/2023 21:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 17:34
+ *  Last modified 09/04/2023 21:25
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.bank.ui.theme
 
+import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -170,25 +171,15 @@ object ThemeComponentProviders {
 
     @Composable
     fun provideSectionRowStyle() = SectionActionRow.Style(
-        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.default
         ),
-//        outfitTextHeader = MaterialTheme.typographiesTextExtended.text.normal.copy {
-//            typo = typo.copy(
-//                fontWeight = FontWeight.SemiBold
-//            )
-//            outfitState = OutfitStateSimple(
-//                MaterialTheme.colorsCommonExtended.onBackgroundElevated.default
-//            )
-//        },
-        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
-            alpha = 0.14f
-        ),
-        colorDivider = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
-            alpha = 0.05f
-        ),
+        outfitTextHeader = MaterialTheme.typographiesExtended.title.small.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+        },
+        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default,
+        colorDivider = MaterialTheme.colorsPalette.grayLightOverlay,
         dimensionDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
         actionRowStyle = provideActionRowStyle()
     )
@@ -197,68 +188,51 @@ object ThemeComponentProviders {
     fun provideActionRowStyle() = ActionRow.Style(
         iconInfoStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
-            tint = MaterialTheme.colorsExtended.primary.default
+            tint = MaterialTheme.colorsExtended.primary.accent
         ),
         iconActionStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsIconExtended.info.normal,
-            tint = MaterialTheme.colorsExtended.primary.default
+            size = MaterialTheme.dimensionsIconExtended.info.small,
+            tint = MaterialTheme.colorsExtended.primary.accent
         ),
-//        outfitText = MaterialTheme.typographiesTextExtended.text.normal.copy {
-//            typo = typo.copy(
-//                fontWeight = FontWeight.SemiBold
-//            )
-//            outfitState = OutfitStateSimple(
-//                MaterialTheme.colorsCommonExtended.onBackgroundElevated.default
-//            )
-//        }
+        outfitText = MaterialTheme.typographiesExtended.body.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+        },
     )
 
     @Composable
     fun provideSectionCardStyle() = SectionActionCard.Style(
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
-            tint = MaterialTheme.colorsExtended.primary.default
+            tint = MaterialTheme.colorsExtended.primary.accent
         ),
-//        outfitTextHeader = MaterialTheme.typographiesTextExtended.text.normal.copy {
-//            typo = typo.copy(
-//                fontWeight = FontWeight.SemiBold
-//            )
-//            outfitState = OutfitStateSimple(
-//                MaterialTheme.colorsCommonExtended.onBackgroundElevated.default
-//            )
-//        },
-        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default.copy(
-            alpha = 0.14f
-        ),
-        dimensionPaddingBody_h = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
+        outfitTextHeader = MaterialTheme.typographiesExtended.body.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+        },
+        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default,
         actionCardStyle = provideActionCardStyle()
     )
 
     @Composable
     fun provideActionCardStyle() = ActionCard.Style(
         outfitFrame = OutfitFrameStateColor(
-            outfitShape = MaterialTheme.shapesExtended.chunk.normal,
-            outfitBorder = MaterialTheme.bordersExtended.chunk.normal.copy {
+            outfitShape = MaterialTheme.shapesExtended.element.normal,
+            outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
                 outfitState = MaterialTheme.colorsExtended.backgroundElevated.default.asStateSimple
             }
         ),
         iconStyle = Icon.Simple.Style(
-            size = DpSize(56.dp),
-            tint = MaterialTheme.colorsExtended.primary.default
+            size = MaterialTheme.dimensionsIconExtended.info.big,
+            tint = MaterialTheme.colorsExtended.primary.accent
         ),
-//        outfitTextTitle = MaterialTheme.typographiesTextExtended.text.normal.copy {
-//            typo = typo.copy(
-//                fontWeight = FontWeight.SemiBold
-//            )
-//        },
-//        outfitTextSubtitle = MaterialTheme.typographiesTextExtended.text.normal.copy {
-//            typo = typo.copy(
-//                fontWeight = FontWeight.SemiBold
-//            )
-//            outfitState = OutfitStateSimple(
-//                MaterialTheme.colorsCommonExtended.onBackgroundElevated.default
-//            )
-//        },
+        outfitTextTitle = MaterialTheme.typographiesExtended.title.small.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+            typo = typo.copy(
+                fontWeight = FontWeight.SemiBold
+            )
+        },
+        outfitTextSubtitle = MaterialTheme.typographiesExtended.body.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.fade.asStateSimple
+        }
     )
 
     @Composable

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 09/04/2023 21:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 14:25
+ *  Last modified 09/04/2023 21:11
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,6 +24,7 @@ object ThemeBorderProviders {
     fun common() = ThemeBordersExtended.Common(
         cluster = 1.2.dp.asStateColor.asPaletteSize,
         block = 1.dp.asStateColor.asPaletteSize,
+        element = 1.dp.asStateColor.asPaletteSize,
         chunk = 0.8.dp.asStateColor.asPaletteSize,
         button = OutfitPaletteSize(
             normal = 0.8.dp.asStateColor,

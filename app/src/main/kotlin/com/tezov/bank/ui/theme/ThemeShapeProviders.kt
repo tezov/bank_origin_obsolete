@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 09/04/2023 21:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:10
+ *  Last modified 09/04/2023 21:16
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,6 +30,9 @@ object ThemeShapeProviders {
             normal = 10.dp.asStateColor,
             small = 6.dp.asStateColor,
             big = 14.dp.asStateColor,
+        ),
+        element = OutfitPaletteSize(
+            normal = 12.dp.asStateColor,
         ),
         chunk = OutfitPaletteSize(
             normal = 8.dp.asStateColor,
