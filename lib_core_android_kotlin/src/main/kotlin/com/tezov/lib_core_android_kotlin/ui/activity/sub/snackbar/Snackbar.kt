@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 22:31
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,6 @@
 package com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar
 
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -53,9 +52,9 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
         outfitShape: OutfitShapeStateColor? = null,
         val elevation: Dp = 2.dp,
     ) {
-        val outfitTextMessage: OutfitTextStateColor by DelegateNullFallBack(
+        val outfitTextMessage: OutfitTextStateColor by DelegateNullFallBack.Ref(
             outfitTextMessage,
-            lazyFallBackValue = {
+            fallBackValue = {
                 OutfitTextStateColor(
                     outfitState = Color.Black.asStateSimple,
                     typo = TextStyle(
@@ -64,9 +63,9 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
                     )
                 )
             })
-        val outfitTextAction: OutfitTextStateColor by DelegateNullFallBack(
+        val outfitTextAction: OutfitTextStateColor by DelegateNullFallBack.Ref(
             outfitTextAction,
-            lazyFallBackValue = {
+            fallBackValue = {
                 OutfitTextStateColor(
                     outfitState = Color.Black.asStateSimple,
                     typo = TextStyle(
@@ -77,9 +76,9 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
             })
 
 
-        val outfitShape: OutfitShapeStateColor by DelegateNullFallBack(
+        val outfitShape: OutfitShapeStateColor by DelegateNullFallBack.Ref(
             outfitShape,
-            lazyFallBackValue = {
+            fallBackValue = {
                 OutfitShapeStateColor(
                     outfitState = Color.Gray.copy(alpha = 0.25f).asStateSimple,
                     size = OutfitShape.Size(topStart = 12.dp, topEnd = 12.dp)

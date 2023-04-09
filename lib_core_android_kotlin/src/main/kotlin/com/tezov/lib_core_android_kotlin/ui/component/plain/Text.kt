@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 21:07
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 21:05
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,10 +16,13 @@ import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextLayoutResult
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 
 object Text {
@@ -40,7 +43,12 @@ object Text {
             Text(
                 modifier = modifier,
                 text = text,
-                style = style?.resolve(selector) ?: LocalTextStyle.current,
+                style = style?.resolve(selector) ?: kotlin.run {
+                   TextStyle(
+                       color = Color.Black,
+                       fontSize = 14.sp,
+                   )
+                },
                 overflow = overflow,
                 softWrap = softWrap,
                 maxLines = maxLines,

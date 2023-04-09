@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 21:07
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 21:05
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,7 +28,6 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
@@ -51,17 +50,17 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
         padding: PaddingValues? = null,
         val elevation: Dp = 2.dp,
     ){
-        val outfitShape: OutfitShapeStateColor by DelegateNullFallBack(
+        val outfitShape: OutfitShapeStateColor by DelegateNullFallBack.Ref(
             outfitShape,
-            lazyFallBackValue = {
+            fallBackValue = {
                 OutfitShapeStateColor(
                     outfitState =  Color.Gray.copy(alpha = 0.25f).asStateSimple,
                     size = OutfitShape.Size(topStart = 12.dp, topEnd = 12.dp)
                 )
             })
-        val padding: PaddingValues by DelegateNullFallBack(
+        val padding: PaddingValues by DelegateNullFallBack.Ref(
             padding,
-            lazyFallBackValue = { PaddingValues(1.dp, 1.dp) })
+            fallBackValue = { PaddingValues(1.dp, 1.dp) })
 
         companion object{
 

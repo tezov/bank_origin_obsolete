@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 22:03
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,7 +26,6 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.St
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
-
 val MaterialTheme.typographiesExtended
     @Composable
     @ReadOnlyComposable
@@ -47,24 +46,22 @@ object ThemeTypographiesExtended {
         input: OutfitPaletteSize<OutfitTextStateColor>? = null,
         label: OutfitPaletteSize<OutfitTextStateColor>? = null,
         caption: OutfitPaletteSize<OutfitTextStateColor>? = null,
-    ) : DelegateNullFallBack.Group<OutfitPaletteSize<OutfitTextStateColor>> {
+    ) {
 
-        val title: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(title)
-        val body: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(body)
-        val subtitle: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(subtitle)
-        val helper: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(helper)
-        val button: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(button)
-        val link: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(link)
-        val input: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(input)
-        val label: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(label)
-        val caption: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(caption)
-        val menu: OutfitPaletteSize<OutfitTextStateColor> by DelegateNullFallBack(caption)
-
-        override fun groupFallBackRefs() =
-            listOf(title, body, subtitle, helper, button, link, input, label, caption, menu)
+        private val delegates = DelegateNullFallBack.Group<OutfitPaletteSize<OutfitTextStateColor>>()
+        val title: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(title)
+        val body: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(body)
+        val subtitle: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(subtitle)
+        val helper: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(helper)
+        val button: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(button)
+        val link: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(link)
+        val input: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(input)
+        val label: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(label)
+        val caption: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(caption)
+        val menu: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(caption)
 
         init {
-            groupLazyFallBackValue = {
+            delegates.fallBackValue = {
                 TextStyle(
                     color = Color.Black,
                     fontSize = 14.sp

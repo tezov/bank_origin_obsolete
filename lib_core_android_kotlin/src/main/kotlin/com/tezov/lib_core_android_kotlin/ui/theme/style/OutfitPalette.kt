@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 22:31
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -11,15 +11,12 @@
  */
 package com.tezov.lib_core_android_kotlin.ui.theme.style
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
-import com.tezov.lib_core_kotlin.extension.ExtensionCollection.firstNotNull
 import androidx.compose.ui.graphics.Color as ColorImport
 
 typealias OutfitPaletteColor = OutfitPalette.Color.Style
@@ -63,18 +60,17 @@ object OutfitPalette {
             dark: ColorImport? = null,
             shady: ColorImport? = null,
             accent: ColorImport? = null,
-        ) : DelegateNullFallBack.Group<ColorImport> {
+        ) {
 
-            val fade: ColorImport by DelegateNullFallBack(fade)
-            val light: ColorImport by DelegateNullFallBack(light)
-            val dark: ColorImport by DelegateNullFallBack(dark)
-            val shady: ColorImport by DelegateNullFallBack(shady)
-            val accent: ColorImport by DelegateNullFallBack(accent)
-
-            override fun groupFallBackRefs() = listOf(fade, light, dark, shady, accent)
+            private val delegates = DelegateNullFallBack.Group<ColorImport>()
+            val fade: ColorImport by delegates.ref(fade)
+            val light: ColorImport by delegates.ref(light)
+            val dark: ColorImport by delegates.ref(dark)
+            val shady: ColorImport by delegates.ref(shady)
+            val accent: ColorImport by delegates.ref(accent)
 
             init {
-                groupLazyFallBackValue = { default }
+                delegates.fallBackValue = { default }
             }
 
             companion object {
@@ -130,18 +126,17 @@ object OutfitPalette {
             big: T? = null,
             huge: T? = null,
             supra: T? = null,
-        ) : DelegateNullFallBack.Group<T> {
+        ) {
 
-            val micro: T by DelegateNullFallBack(micro)
-            val small: T by DelegateNullFallBack(small)
-            val big: T by DelegateNullFallBack(big)
-            val huge: T by DelegateNullFallBack(huge)
-            val supra: T by DelegateNullFallBack(supra)
-
-            override fun groupFallBackRefs() = listOf(micro, small, big, huge, supra)
+            private val delegates = DelegateNullFallBack.Group<T>()
+            val micro: T by delegates.ref(micro)
+            val small: T by delegates.ref(small)
+            val big: T by delegates.ref(big)
+            val huge: T by delegates.ref(huge)
+            val supra: T by delegates.ref(supra)
 
             init {
-                groupLazyFallBackValue = { normal }
+                delegates.fallBackValue = { normal }
             }
 
             companion object {
@@ -190,17 +185,13 @@ object OutfitPalette {
         class Style<T : Any>(
             vertical: T? = null,
             horizontal: T? = null,
-        ) : DelegateNullFallBack.Group<T> {
-
-            val vertical: T by DelegateNullFallBack(vertical)
-            val horizontal: T by DelegateNullFallBack(horizontal)
-
-            override fun groupFallBackRefs() = listOf(vertical, horizontal)
+        )   {
+            private val delegates = DelegateNullFallBack.Group<T>()
+            val vertical: T by delegates.ref(vertical)
+            val horizontal: T by delegates.ref(horizontal)
 
             init {
-                groupFallBackRefs().firstNotNull()?.let {
-                    groupLazyFallBackValue = { it }
-                }
+                delegates.fallBackValue = delegates.firstNotNull()?.fallBackValue
             }
 
             companion object {

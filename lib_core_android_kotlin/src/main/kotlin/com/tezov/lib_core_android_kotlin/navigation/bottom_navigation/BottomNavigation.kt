@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 21:07
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 21:05
+ *  Last modified 09/04/2023 13:38
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -52,9 +52,9 @@ object BottomNavigation :
         outfitColor: OutfitStateDual<Color>? = null,
     ) {
 
-        val outfitText: OutfitTextStateColor by DelegateNullFallBack(
+        val outfitText: OutfitTextStateColor by DelegateNullFallBack.Ref(
             outfitText,
-            lazyFallBackValue = {
+            fallBackValue = {
                 OutfitTextStateColor(
                     outfitState = Color.Black.asStateSimple,
                     typo = TextStyle(
@@ -63,9 +63,9 @@ object BottomNavigation :
                     )
                 )
             })
-        val outfitColor: OutfitStateDual<Color> by DelegateNullFallBack(
+        val outfitColor: OutfitStateDual<Color> by DelegateNullFallBack.Ref(
             outfitColor,
-            lazyFallBackValue = {
+            fallBackValue = {
                 OutfitStateDual(active = Color.Black, inactive = Color.Gray)
             })
 

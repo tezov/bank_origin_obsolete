@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -39,13 +39,13 @@ object OutfitText {
             outfitState: OutfitState.Style<ColorImport>? = null,
         ) {
 
-            val typo: TextStyle by DelegateNullFallBack(
+            val typo: TextStyle by DelegateNullFallBack.Ref(
                 typo,
-                lazyFallBackValue = { TextStyle() }
+                fallBackValue = { TextStyle() }
             )
-            val outfitState: OutfitState.Style<ColorImport> by DelegateNullFallBack(
+            val outfitState: OutfitState.Style<ColorImport> by DelegateNullFallBack.Ref(
                 outfitState,
-                lazyFallBackValue = { OutfitStateNull() }
+                fallBackValue = { OutfitStateNull() }
             )
 
             companion object {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 21:40
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Direction.Style.Companion.asPaletteDirection
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Size.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteDirection
@@ -56,15 +57,14 @@ object ThemeDimensionsExtended {
     class Common(
         divider: OutfitPaletteSize<Dp>? = null,
         elevation: OutfitPaletteSize<Dp>? = null,
-    ) : DelegateNullFallBack.Group<OutfitPaletteSize<Dp>> {
+    ) {
 
-        val divider: OutfitPaletteSize<Dp> by DelegateNullFallBack(divider)
-        val elevation: OutfitPaletteSize<Dp> by DelegateNullFallBack(elevation)
-
-        override fun groupFallBackRefs() = listOf(divider, elevation)
+        private val delegates = DelegateNullFallBack.Group<OutfitPaletteSize<Dp>>()
+        val divider: OutfitPaletteSize<Dp> by delegates.ref(divider)
+        val elevation: OutfitPaletteSize<Dp> by delegates.ref(elevation)
 
         init {
-            groupLazyFallBackValue = { 2.dp.asPaletteSize }
+            delegates.fallBackValue = { 2.dp.asPaletteSize }
         }
     }
 
@@ -80,20 +80,19 @@ object ThemeDimensionsExtended {
         button: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
         icon: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
         text: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
-    ) : DelegateNullFallBack.Group<OutfitPaletteSize<OutfitPaletteDirection<Dp>>> {
+    ) {
 
-        val page: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(page)
-        val cluster: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(cluster)
-        val block: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(block)
-        val chunk: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(chunk)
-        val button: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(button)
-        val icon: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(icon)
-        val text: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by DelegateNullFallBack(text)
-
-        override fun groupFallBackRefs() = listOf(page, cluster, block, chunk, button, icon, text)
+        private val delegates = DelegateNullFallBack.Group<OutfitPaletteSize<OutfitPaletteDirection<Dp>>>()
+        val page: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(page)
+        val cluster: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(cluster)
+        val block: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(block)
+        val chunk: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(chunk)
+        val button: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(button)
+        val icon: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(icon)
+        val text: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(text)
 
         init {
-            groupLazyFallBackValue = { 6.dp.asPaletteDirection.asPaletteSize }
+            delegates.fallBackValue = { 6.dp.asPaletteDirection.asPaletteSize }
         }
     }
 
@@ -107,18 +106,17 @@ object ThemeDimensionsExtended {
         action: OutfitPaletteSize<DpSize>? = null,
         fieldInfo: OutfitPaletteSize<DpSize>? = null,
         fieldAction: OutfitPaletteSize<DpSize>? = null,
-    ) : DelegateNullFallBack.Group<OutfitPaletteSize<DpSize>> {
+    ){
 
-        val modal: OutfitPaletteSize<DpSize> by DelegateNullFallBack(modal)
-        val info: OutfitPaletteSize<DpSize> by DelegateNullFallBack(info)
-        val action: OutfitPaletteSize<DpSize> by DelegateNullFallBack(action)
-        val fieldInfo: OutfitPaletteSize<DpSize> by DelegateNullFallBack(fieldInfo)
-        val fieldAction: OutfitPaletteSize<DpSize> by DelegateNullFallBack(fieldAction)
-
-        override fun groupFallBackRefs() = listOf(modal, info, action, fieldInfo, fieldAction)
+        private val delegates = DelegateNullFallBack.Group<OutfitPaletteSize<DpSize>>()
+        val modal: OutfitPaletteSize<DpSize> by delegates.ref(modal)
+        val info: OutfitPaletteSize<DpSize> by delegates.ref(info)
+        val action: OutfitPaletteSize<DpSize> by delegates.ref(action)
+        val fieldInfo: OutfitPaletteSize<DpSize> by delegates.ref(fieldInfo)
+        val fieldAction: OutfitPaletteSize<DpSize> by delegates.ref(fieldAction)
 
         init {
-            groupLazyFallBackValue = { 24.dpSize.asPaletteSize }
+            delegates.fallBackValue = { 24.dpSize.asPaletteSize }
         }
     }
 

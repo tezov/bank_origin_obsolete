@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 22:35
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,7 +16,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -29,6 +28,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object ActionCard {
 
@@ -42,27 +42,40 @@ object ActionCard {
         val isUndefined get() = this == Undefined
         val isDefined get() = this != Undefined
 
-        companion object{
+        companion object {
             val InlineDefault get() = IconEnd
         }
     }
 
-    @Immutable
-    data class Style(
-        val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(
-            outfitShape = 8.asStateColor,
-            outfitBorder = OutfitBorderStateColor(
-                size = 1.dp,
-                outfitState = Color.Black.asStateSimple,
-            )
-        ),
-        val iconStyle:Icon.Simple.Style =  Icon.Simple.Style(
-            size = DpSize(24.dp),
-            tint = Color.Black
-        ),
-        val outfitTextTitle: OutfitTextStateColor = OutfitTextStateColor(),
-        val outfitTextSubtitle: OutfitTextStateColor = OutfitTextStateColor(),
-    )
+    class Style(
+        outfitFrame: OutfitFrameStateColor? = null,
+        iconStyle: Icon.Simple.Style? = null,
+        val outfitTextTitle: OutfitTextStateColor? = null,
+        val outfitTextSubtitle: OutfitTextStateColor? = null,
+    ) {
+        val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
+            outfitFrame,
+            fallBackValue = {
+                OutfitFrameStateColor(
+                    outfitShape = 8.asStateColor,
+                    outfitBorder = OutfitBorderStateColor(
+                        size = 1.dp,
+                        outfitState = Color.Black.asStateSimple,
+                    )
+                )
+            }
+        )
+
+        val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            iconStyle,
+            fallBackValue = {
+                Icon.Simple.Style(
+                    tint = Color.Black,
+                    size = DpSize(24.dp)
+                )
+            }
+        )
+    }
 
     data class Data(
         var template: Template = Template.Undefined,
@@ -110,7 +123,9 @@ object ActionCard {
                     .weight(1f)
                     .align(Alignment.CenterVertically)
             ) {
-                Spacer(modifier = Modifier.height(style.iconStyle.size.height))
+                style.iconStyle.size?.height?.let {
+                    Spacer(modifier = Modifier.height(it))
+                }
                 Text.StateColor(
                     text = data.title,
                     style = style.outfitTextTitle,

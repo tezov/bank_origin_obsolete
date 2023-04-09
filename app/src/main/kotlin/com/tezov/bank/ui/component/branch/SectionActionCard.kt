@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 22:35
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,7 +16,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,22 +29,34 @@ import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable.loopOver
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object SectionActionCard {
 
-    @Immutable
-    data class Style(
-        val iconStyle: Icon.Simple.Style = Icon.Simple.Style(
-            size = DpSize(24.dp),
-            tint = Color.Black
-        ),
-        val outfitTextHeader: OutfitText.StateColor.Style = OutfitText.StateColor.Style(),
+    class Style(
+        iconStyle: Icon.Simple.Style? = null,
+        val outfitTextHeader: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
         val dimensionPaddingBody_h: Dp = 0.dp,
-        val actionCardStyle: ActionCard.Style = ActionCard.Style()
-    )
+        actionCardStyle: ActionCard.Style? = null
+    ) {
+
+        val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            iconStyle,
+            fallBackValue = {
+                Icon.Simple.Style(
+                    tint = Color.Black,
+                    size = DpSize(24.dp)
+                )
+            }
+        )
+        val actionCardStyle: ActionCard.Style by DelegateNullFallBack.Ref(
+            actionCardStyle,
+            fallBackValue = { ActionCard.Style() }
+        )
+
+    }
 
     data class Data(
         val iconResourceId: Int? = null,
@@ -57,7 +68,7 @@ object SectionActionCard {
     @Composable
     operator fun invoke(
         modifier: Modifier = Modifier,
-        style:Style,
+        style: Style,
         data: Data,
         onClick: (Int) -> Unit = {}
     ) {
@@ -114,14 +125,14 @@ object SectionActionCard {
                     val first = next
                     val second = next
                     // set default section template
-                    if(data.template.isDefined){
+                    if (data.template.isDefined) {
                         first?.let {
-                            if(first.data.template.isUndefined){
+                            if (first.data.template.isUndefined) {
                                 first.data.template = data.template
                             }
                         }
                         second?.let {
-                            if(second.data.template.isUndefined){
+                            if (second.data.template.isUndefined) {
                                 second.data.template = data.template
                             }
                         }
@@ -140,12 +151,10 @@ object SectionActionCard {
                         if (hasReachEnd && isStackEmpty) {
                             done()
                         }
-                    }
-                    else if (first != null) {
+                    } else if (first != null) {
                         ContentRowUno(style.actionCardStyle, first, onClick)
                         done()
-                    }
-                    else {
+                    } else {
                         done()
                     }
                 }

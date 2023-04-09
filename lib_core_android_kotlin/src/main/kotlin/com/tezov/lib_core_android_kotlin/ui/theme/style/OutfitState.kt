@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 14:32
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 00:00
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_kotlin.extension.ExtensionCollection.firstNotNull
-import com.tezov.lib_core_kotlin.type.collection.ListEntry
 import java.time.format.TextStyle
 import kotlin.reflect.KClass
 
@@ -26,7 +25,7 @@ typealias OutfitStateSemantic<T> = OutfitState.Semantic.Style<T>
 
 object OutfitState {
 
-    interface Style<T : Any> : DelegateNullFallBack.Group<T> {
+    interface Style<T : Any> {
 
         fun selectorType(): KClass<*>
 
@@ -59,8 +58,6 @@ object OutfitState {
 
             }
 
-            override fun groupFallBackRefs() = emptyList<T>()
-
             override fun selectorType() = Unit::class
 
             override fun selectorDefault() = Unit
@@ -86,8 +83,6 @@ object OutfitState {
         class Style<T : Any>(
             val value: T,
         ) : OutfitState.Style<T> {
-
-            override fun groupFallBackRefs() = listOf(value)
 
             companion object {
 
@@ -138,15 +133,12 @@ object OutfitState {
             inactive: T? = null,
         ) : OutfitState.Style<T> {
 
-            override fun groupFallBackRefs() = listOf(active, inactive)
-
-            val active: T by DelegateNullFallBack(active)
-            val inactive: T by DelegateNullFallBack(inactive)
+            private val delegates = DelegateNullFallBack.Group<T>()
+            val active: T by delegates.ref(active)
+            val inactive: T by delegates.ref(inactive)
 
             init {
-                groupFallBackRefs().firstNotNull()?.let {
-                    groupLazyFallBackValue = { it }
-                }
+                delegates.fallBackValue = delegates.firstNotNull()?.fallBackValue
             }
 
             companion object {
@@ -211,18 +203,15 @@ object OutfitState {
             error: T? = null,
         ) : OutfitState.Style<T> {
 
-            override fun groupFallBackRefs() = listOf(neutral, info, alert, success, error)
-
-            val neutral: T by DelegateNullFallBack(neutral)
-            val info: T by DelegateNullFallBack(info)
-            val alert: T by DelegateNullFallBack(alert)
-            val error: T by DelegateNullFallBack(error)
-            val success: T by DelegateNullFallBack(success)
+            private val delegates = DelegateNullFallBack.Group<T>()
+            val neutral: T by delegates.ref(neutral)
+            val info: T by delegates.ref(info)
+            val alert: T by delegates.ref(alert)
+            val error: T by delegates.ref(error)
+            val success: T by delegates.ref(success)
 
             init {
-                groupFallBackRefs().firstNotNull()?.let {
-                    groupLazyFallBackValue = { it }
-                }
+                delegates.fallBackValue = delegates.firstNotNull()?.fallBackValue
             }
 
             companion object {

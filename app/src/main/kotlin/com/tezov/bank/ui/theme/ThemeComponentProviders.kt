@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 22:35
+ *  Last modified 09/04/2023 13:43
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,7 +26,9 @@ import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.theme.font.fontUbuntu
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
+import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
+import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
@@ -47,6 +49,7 @@ object ThemeComponentProviders {
 
     @Composable
     fun common() = ThemeComponentExtended.Common(
+        topAppBar = TopAppBar.Style(),
         bottomNavigation = BottomNavigation.Style(
             outfitText  = TextStyle(
                 fontFamily = MaterialTheme.fontUbuntu,
@@ -72,6 +75,7 @@ object ThemeComponentProviders {
                 )
             )
         ),
+        bottomSheet = BottomSheet.Style(),
         snackBar = Snackbar.Style(
             outfitTextMessage = OutfitTextStateColor(
                 typo = TextStyle(

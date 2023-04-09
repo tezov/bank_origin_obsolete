@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:29
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -86,43 +86,43 @@ object ThemeColorsExtended {
 
         ) {
 
-        val ribbon: OutfitPaletteColor by DelegateNullFallBack(
+        val ribbon: OutfitPaletteColor by DelegateNullFallBack.Ref(
             ribbon,
-            lazyFallBackValue = { primary })
+            fallBackValue = { primary })
 
-        val backgroundElevated: OutfitPaletteColor by DelegateNullFallBack(
+        val backgroundElevated: OutfitPaletteColor by DelegateNullFallBack.Ref(
             backgroundElevated,
-            lazyFallBackValue = { background })
-        val onBackgroundElevated: OutfitPaletteColor by DelegateNullFallBack(
+            fallBackValue = { background })
+        val onBackgroundElevated: OutfitPaletteColor by DelegateNullFallBack.Ref(
             onBackgroundElevated,
-            lazyFallBackValue = { onBackground })
+            fallBackValue = { onBackground })
 
-        val backgroundModal: OutfitPaletteColor by DelegateNullFallBack(
+        val backgroundModal: OutfitPaletteColor by DelegateNullFallBack.Ref(
             backgroundModal,
-            lazyFallBackValue = { background })
-        val onBackgroundModal: OutfitPaletteColor by DelegateNullFallBack(
+            fallBackValue = { background })
+        val onBackgroundModal: OutfitPaletteColor by DelegateNullFallBack.Ref(
             onBackgroundModal,
-            lazyFallBackValue = { onBackground })
+            fallBackValue = { onBackground })
 
-        val secondary: OutfitPaletteColor by DelegateNullFallBack(
+        val secondary: OutfitPaletteColor by DelegateNullFallBack.Ref(
             secondary,
-            lazyFallBackValue = { primary })
-        val onSecondary: OutfitPaletteColor by DelegateNullFallBack(
+            fallBackValue = { primary })
+        val onSecondary: OutfitPaletteColor by DelegateNullFallBack.Ref(
             onSecondary,
-            lazyFallBackValue = { onPrimary })
-        val tertiary: OutfitPaletteColor by DelegateNullFallBack(
+            fallBackValue = { onPrimary })
+        val tertiary: OutfitPaletteColor by DelegateNullFallBack.Ref(
             tertiary,
-            lazyFallBackValue = { primary })
-        val onTertiary: OutfitPaletteColor by DelegateNullFallBack(
+            fallBackValue = { primary })
+        val onTertiary: OutfitPaletteColor by DelegateNullFallBack.Ref(
             onTertiary,
-            lazyFallBackValue = { onPrimary })
+            fallBackValue = { onPrimary })
 
-        val semantic: OutfitPaletteColorSemantic by DelegateNullFallBack(
+        val semantic: OutfitPaletteColorSemantic by DelegateNullFallBack.Ref(
             semantic,
-            lazyFallBackValue = { OutfitPaletteColorSemantic(primary) })
-        val onSemantic: OutfitPaletteColorSemantic by DelegateNullFallBack(
+            fallBackValue = { OutfitPaletteColorSemantic(primary) })
+        val onSemantic: OutfitPaletteColorSemantic by DelegateNullFallBack.Ref(
             onSemantic,
-            lazyFallBackValue = { OutfitPaletteColorSemantic(onPrimary) })
+            fallBackValue = { OutfitPaletteColorSemantic(onPrimary) })
 
     }
 

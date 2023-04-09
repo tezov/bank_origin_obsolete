@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 21:07
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 21:05
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -52,23 +52,32 @@ object HorizontalScrollable {
 
         open class Style(
             outfitShapeIndicator: OutfitShapeStateColor? = null,
-            val dimensionIndicatorPaddingTop: Dp = 6.dp,
-            val dimensionIndicatorSize: Dp = 6.dp,
-            val dimensionIndicatorSpacing: Dp = 6.dp,
+            dimensionIndicatorPaddingTop: Dp? = null,
+            dimensionIndicatorSize: Dp? = null,
+            dimensionIndicatorSpacing: Dp? = null,
             padding: PaddingValues? = null,
         ) {
 
-            val outfitShapeIndicator: OutfitShapeStateColor by DelegateNullFallBack(
+            val outfitShapeIndicator: OutfitShapeStateColor by DelegateNullFallBack.Ref(
                 outfitShapeIndicator,
-                lazyFallBackValue = {
+                fallBackValue = {
                     OutfitShapeStateColor(
                         outfitState = OutfitStateDual(active = Color.Black, inactive = Color.Gray),
                         size = 6.dp.asShapeSize
                     )
                 })
-            val padding: PaddingValues by DelegateNullFallBack(
+            val dimensionIndicatorPaddingTop: Dp by DelegateNullFallBack.Ref(
+                dimensionIndicatorPaddingTop,
+                fallBackValue = { 6.dp })
+            val dimensionIndicatorSize: Dp by DelegateNullFallBack.Ref(
+                dimensionIndicatorSize,
+                fallBackValue = { 6.dp })
+            val dimensionIndicatorSpacing: Dp by DelegateNullFallBack.Ref(
+                dimensionIndicatorSpacing,
+                fallBackValue = { 6.dp })
+            val padding: PaddingValues by DelegateNullFallBack.Ref(
                 padding,
-                lazyFallBackValue = { PaddingValues() })
+                fallBackValue = { PaddingValues() })
 
             companion object {
 
@@ -80,12 +89,12 @@ object HorizontalScrollable {
 
             }
 
-            constructor(style: Style) : this(
-                outfitShapeIndicator = style.outfitShapeIndicator,
-                dimensionIndicatorSize = style.dimensionIndicatorSize,
-                dimensionIndicatorSpacing = style.dimensionIndicatorSpacing,
-                dimensionIndicatorPaddingTop = style.dimensionIndicatorPaddingTop,
-                padding = style.padding,
+            constructor(style: Style?) : this(
+                outfitShapeIndicator = style?.outfitShapeIndicator,
+                dimensionIndicatorSize = style?.dimensionIndicatorSize,
+                dimensionIndicatorSpacing = style?.dimensionIndicatorSpacing,
+                dimensionIndicatorPaddingTop = style?.dimensionIndicatorPaddingTop,
+                padding = style?.padding,
             )
         }
 
@@ -146,8 +155,7 @@ object HorizontalScrollable {
 
     object CarouselCard {
 
-        open class StyleBuilder internal constructor(style: Style) :
-            Pager.StyleBuilder(style) {
+        class StyleBuilder internal constructor(style: Style) : Pager.StyleBuilder(style) {
             var outfitFrame = style.outfitFrame
             var marginCard = style.marginCard
 
@@ -158,18 +166,28 @@ object HorizontalScrollable {
             )
         }
 
-        @Immutable
-        open class Style(
-            pagerStyle: Pager.Style = Pager.Style(),
-            val outfitFrame: OutfitFrameStateColor = OutfitFrameStateColor(
-                outfitShape = 8.asStateColor,
-                outfitBorder = OutfitBorderStateColor(
-                    size = 1.dp,
-                    outfitState = Color.Black.asStateSimple
-                ),
-            ),
-            val marginCard: PaddingValues = PaddingValues(horizontal = 4.dp),
+        class Style(
+            pagerStyle: Pager.Style? = null,
+            outfitFrame: OutfitFrameStateColor? = null,
+            marginCard: PaddingValues = PaddingValues(horizontal = 4.dp),
         ) : Pager.Style(pagerStyle) {
+
+            val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
+                outfitFrame,
+                fallBackValue = {
+                    OutfitFrameStateColor(
+                        outfitShape = 8.asStateColor,
+                        outfitBorder = OutfitBorderStateColor(
+                            size = 1.dp,
+                            outfitState = Color.Black.asStateSimple
+                        ),
+                    )
+                }
+            )
+            val marginCard: PaddingValues by DelegateNullFallBack.Ref(
+                marginCard,
+                fallBackValue = { PaddingValues(horizontal = 4.dp) }
+            )
 
             companion object {
 

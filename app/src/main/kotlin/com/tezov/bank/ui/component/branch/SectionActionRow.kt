@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 22:35
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,24 +29,36 @@ import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object SectionActionRow {
 
-    @Immutable
-    data class Style(
-        val iconStyle: Icon.Simple.Style = Icon.Simple.Style(
-            size = DpSize(24.dp),
-            tint = Color.Black
-        ),
-        val outfitTextHeader: OutfitText.StateColor.Style = OutfitText.StateColor.Style(),
+    class Style(
+        iconStyle: Icon.Simple.Style? = null,
+        val outfitTextHeader: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
         val colorDivider: Color? = null,
         val dimensionDivider: Dp = 1.dp,
         val dimensionPaddingBody_h: Dp = 0.dp,
-        val actionRowStyle: ActionRow.Style = ActionRow.Style()
-    )
+        actionRowStyle: ActionRow.Style? = null
+    ) {
+
+        val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            iconStyle,
+            fallBackValue = {
+                Icon.Simple.Style(
+                    tint = Color.Black,
+                    size = DpSize(24.dp)
+                )
+            }
+        )
+        val actionRowStyle: ActionRow.Style by DelegateNullFallBack.Ref(
+            actionRowStyle,
+            fallBackValue = { ActionRow.Style() }
+        )
+
+    }
 
     data class Data(
         val iconResourceId: Int? = null,
@@ -58,7 +69,7 @@ object SectionActionRow {
     @Composable
     operator fun invoke(
         modifier: Modifier = Modifier,
-        style:Style,
+        style: Style,
         data: Data,
         onClick: (Int) -> Unit = {}
     ) {
@@ -73,7 +84,7 @@ object SectionActionRow {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .thenOnNotNull(style.colorBackgroundBody){
+                        .thenOnNotNull(style.colorBackgroundHeader) {
                             modifier.background(it)
                         }
                         .padding(vertical = MaterialTheme.dimensionsPaddingExtended.chunk.big.vertical),

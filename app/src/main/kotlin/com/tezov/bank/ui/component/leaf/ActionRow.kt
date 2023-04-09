@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 13:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 22:35
+ *  Last modified 09/04/2023 13:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,26 +25,39 @@ import com.tezov.bank.R
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.then
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object ActionRow {
 
     class Style(
-        val iconInfoStyle: Icon.Simple.Style =  Icon.Simple.Style(
-            tint = Color.Black,
-            size = DpSize(24.dp)
-        ),
-        val iconActionStyle:  Icon.Simple.Style =  Icon.Simple.Style(
-            tint = Color.Black,
-            size = DpSize(24.dp)
-        ),
+        iconInfoStyle: Icon.Simple.Style? = null,
+        iconActionStyle: Icon.Simple.Style? = null,
         val outfitText: OutfitTextStateColor? = null,
         val background: Color? = null,
-    )
+    ) {
+        val iconInfoStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            iconInfoStyle,
+            fallBackValue = {
+                Icon.Simple.Style(
+                    tint = Color.Black,
+                    size = DpSize(24.dp)
+                )
+            }
+        )
+        val iconActionStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            iconActionStyle,
+            fallBackValue = {
+                Icon.Simple.Style(
+                    tint = Color.Black,
+                    size = DpSize(24.dp)
+                )
+            }
+        )
+    }
 
     class Data(
         val iconInfoResourceId: Int? = null,
@@ -59,7 +72,7 @@ object ActionRow {
         data: Data,
         onClick: () -> Unit = {}
     ) {
-          Row(
+        Row(
             modifier = modifier
                 .fillMaxWidth()
                 .thenOnNotNull(style.background) {
