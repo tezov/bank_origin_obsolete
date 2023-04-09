@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 21:33
+ *  Created by Tezov on 10/04/2023 00:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 20:55
+ *  Last modified 10/04/2023 00:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,6 +33,26 @@ import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object SectionActionCard {
 
+    class StyleBuilder internal constructor(
+        style: Style
+    ) {
+        var iconStyle = style.iconStyle
+        var outfitTextHeader = style.outfitTextHeader
+        var colorBackgroundHeader = style.colorBackgroundHeader
+        var colorBackgroundBody = style.colorBackgroundBody
+        var dimensionPaddingBody = style.dimensionPaddingBody
+        var actionCardStyle = style.actionCardStyle
+
+        fun get() = Style(
+            iconStyle = iconStyle,
+            outfitTextHeader = outfitTextHeader,
+            colorBackgroundHeader = colorBackgroundHeader,
+            colorBackgroundBody = colorBackgroundBody,
+            dimensionPaddingBody = dimensionPaddingBody,
+            actionCardStyle = actionCardStyle,
+        )
+    }
+
     class Style(
         iconStyle: Icon.Simple.Style? = null,
         val outfitTextHeader: OutfitText.StateColor.Style? = null,
@@ -54,6 +74,26 @@ object SectionActionCard {
         val actionCardStyle: ActionCard.Style by DelegateNullFallBack.Ref(
             actionCardStyle,
             fallBackValue = { ActionCard.Style() }
+        )
+
+        companion object {
+
+            @Composable
+            fun Style.copy(
+                scope: @Composable StyleBuilder.() -> Unit = {}
+            ) = StyleBuilder(this).also {
+                it.scope()
+            }.get()
+
+        }
+
+        constructor(style: Style) : this(
+            iconStyle = style.iconStyle,
+            outfitTextHeader = style.outfitTextHeader,
+            colorBackgroundHeader = style.colorBackgroundHeader,
+            colorBackgroundBody = style.colorBackgroundBody,
+            dimensionPaddingBody = style.dimensionPaddingBody,
+            actionCardStyle = style.actionCardStyle,
         )
 
     }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 10/04/2023 00:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 10/04/2023 00:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -47,6 +47,22 @@ object ActionCard {
         }
     }
 
+    class StyleBuilder internal constructor(
+        style: Style
+    ) {
+        var outfitFrame = style.outfitFrame
+        var iconStyle = style.iconStyle
+        var outfitTextTitle = style.outfitTextTitle
+        var outfitTextSubtitle = style.outfitTextSubtitle
+
+        fun get() = Style(
+            outfitFrame = outfitFrame,
+            iconStyle = iconStyle,
+            outfitTextTitle = outfitTextTitle,
+            outfitTextSubtitle = outfitTextSubtitle,
+        )
+    }
+
     class Style(
         outfitFrame: OutfitFrameStateColor? = null,
         iconStyle: Icon.Simple.Style? = null,
@@ -74,6 +90,24 @@ object ActionCard {
                     size = DpSize(24.dp)
                 )
             }
+        )
+
+        companion object {
+
+            @Composable
+            fun Style.copy(
+                scope: @Composable StyleBuilder.() -> Unit = {}
+            ) = StyleBuilder(this).also {
+                it.scope()
+            }.get()
+
+        }
+
+        constructor(style: Style) : this(
+            outfitFrame = style.outfitFrame,
+            iconStyle = style.iconStyle,
+            outfitTextTitle = style.outfitTextTitle,
+            outfitTextSubtitle = style.outfitTextSubtitle,
         )
     }
 

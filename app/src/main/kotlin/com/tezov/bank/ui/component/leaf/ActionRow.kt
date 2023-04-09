@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 10/04/2023 00:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:07
+ *  Last modified 10/04/2023 00:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
+import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
@@ -32,6 +33,22 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtende
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object ActionRow {
+
+    class StyleBuilder internal constructor(
+        style: Style
+    ) {
+        var iconInfoStyle = style.iconInfoStyle
+        var iconActionStyle = style.iconActionStyle
+        var outfitText = style.outfitText
+        var background = style.background
+
+        fun get() = Style(
+            iconInfoStyle = iconInfoStyle,
+            iconActionStyle = iconActionStyle,
+            outfitText = outfitText,
+            background = background,
+        )
+    }
 
     class Style(
         iconInfoStyle: Icon.Simple.Style? = null,
@@ -57,6 +74,25 @@ object ActionRow {
                 )
             }
         )
+
+        companion object {
+
+            @Composable
+            fun Style.copy(
+                scope: @Composable StyleBuilder.() -> Unit = {}
+            ) = StyleBuilder(this).also {
+                it.scope()
+            }.get()
+
+        }
+
+        constructor(style: Style) : this(
+            iconInfoStyle = style.iconInfoStyle,
+            iconActionStyle = style.iconActionStyle,
+            outfitText = style.outfitText,
+            background = style.background,
+        )
+
     }
 
     class Data(

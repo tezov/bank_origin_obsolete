@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 21:33
+ *  Created by Tezov on 10/04/2023 00:50
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 20:39
+ *  Last modified 10/04/2023 00:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,6 +33,31 @@ import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object SectionActionRow {
 
+
+    class StyleBuilder internal constructor(
+        style: Style
+    ) {
+        var iconStyle = style.iconStyle
+        var outfitTextHeader = style.outfitTextHeader
+        var colorBackgroundHeader = style.colorBackgroundHeader
+        var colorBackgroundBody = style.colorBackgroundBody
+        var colorDivider = style.colorDivider
+        var dimensionDivider = style.dimensionDivider
+        var dimensionPaddingBody = style.dimensionPaddingBody
+        var actionRowStyle = style.actionRowStyle
+
+        fun get() = Style(
+            iconStyle = iconStyle,
+            outfitTextHeader = outfitTextHeader,
+            colorBackgroundHeader = colorBackgroundHeader,
+            colorBackgroundBody = colorBackgroundBody,
+            colorDivider = colorDivider,
+            dimensionDivider = dimensionDivider,
+            dimensionPaddingBody = dimensionPaddingBody,
+            actionRowStyle = actionRowStyle,
+        )
+    }
+
     class Style(
         iconStyle: Icon.Simple.Style? = null,
         val outfitTextHeader: OutfitText.StateColor.Style? = null,
@@ -56,6 +81,28 @@ object SectionActionRow {
         val actionRowStyle: ActionRow.Style by DelegateNullFallBack.Ref(
             actionRowStyle,
             fallBackValue = { ActionRow.Style() }
+        )
+
+        companion object {
+
+            @Composable
+            fun Style.copy(
+                scope: @Composable StyleBuilder.() -> Unit = {}
+            ) = StyleBuilder(this).also {
+                it.scope()
+            }.get()
+
+        }
+
+        constructor(style: Style) : this(
+            iconStyle = style.iconStyle,
+            outfitTextHeader = style.outfitTextHeader,
+            colorBackgroundHeader = style.colorBackgroundHeader,
+            colorBackgroundBody = style.colorBackgroundBody,
+            colorDivider = style.colorDivider,
+            dimensionDivider = style.dimensionDivider,
+            dimensionPaddingBody = style.dimensionPaddingBody,
+            actionRowStyle = style.actionRowStyle,
         )
 
     }
