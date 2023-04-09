@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 09/04/2023 15:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 09/04/2023 14:35
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -37,36 +37,40 @@ object OutfitPalette {
 
         class StyleBuilder internal constructor(val style: Style) {
             var default = style.default
-            var fade = style.fade
-            var light = style.light
             var dark = style.dark
+            var fade = style.fade
             var shady = style.shady
+            var light = style.light
+            var shiny = style.shiny
             var accent = style.accent
 
             internal fun get() = Style(
                 default = default,
-                fade = fade,
-                light = light,
                 dark = dark,
+                fade = fade,
                 shady = shady,
+                light = light,
+                shiny = shiny,
                 accent = accent,
             )
         }
 
         class Style(
             val default: ColorImport,
-            fade: ColorImport? = null,
-            light: ColorImport? = null,
             dark: ColorImport? = null,
+            fade: ColorImport? = null,
             shady: ColorImport? = null,
+            light: ColorImport? = null,
+            shiny: ColorImport? = null,
             accent: ColorImport? = null,
         ) {
 
             private val delegates = DelegateNullFallBack.Group<ColorImport>()
-            val fade: ColorImport by delegates.ref(fade)
-            val light: ColorImport by delegates.ref(light)
             val dark: ColorImport by delegates.ref(dark)
+            val fade: ColorImport by delegates.ref(fade)
             val shady: ColorImport by delegates.ref(shady)
+            val shiny: ColorImport by delegates.ref(shiny)
+            val light: ColorImport by delegates.ref(light)
             val accent: ColorImport by delegates.ref(accent)
 
             init {
@@ -88,10 +92,11 @@ object OutfitPalette {
 
             constructor(style: Style) : this(
                 default = style.default,
-                fade = style.fade,
-                light = style.light,
                 dark = style.dark,
                 shady = style.shady,
+                fade = style.fade,
+                light = style.light,
+                shiny = style.shiny,
                 accent = style.accent,
             )
         }

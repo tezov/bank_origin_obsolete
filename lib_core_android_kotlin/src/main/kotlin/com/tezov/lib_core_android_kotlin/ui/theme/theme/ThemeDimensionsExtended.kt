@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 09/04/2023 15:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 09/04/2023 15:06
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -76,9 +76,9 @@ object ThemeDimensionsExtended {
         page: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
         cluster: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
         block: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
+        element: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
         chunk: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
         button: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
-        icon: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
         text: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
     ) {
 
@@ -86,9 +86,9 @@ object ThemeDimensionsExtended {
         val page: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(page)
         val cluster: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(cluster)
         val block: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(block)
+        val element: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(element)
         val chunk: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(chunk)
         val button: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(button)
-        val icon: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(icon)
         val text: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(text)
 
         init {

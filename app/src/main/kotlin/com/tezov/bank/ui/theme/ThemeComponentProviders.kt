@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 09/04/2023 15:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:43
+ *  Last modified 09/04/2023 15:33
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,7 +15,6 @@ package com.tezov.bank.ui.theme
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -108,157 +107,63 @@ object ThemeComponentProviders {
                 outfitShape = MaterialTheme.shapesExtended.button.normal.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
-                        inactive = MaterialTheme.colorsPalette.grayOverlay,
+                        inactive = MaterialTheme.colorsExtended.primary.fade,
                     )
-                },
-                outfitBorder = OutfitBorderStateColor(
-                    outfitState = OutfitStateDual(
-                        active = MaterialTheme.colorsExtended.primary.dark,
-                        inactive = MaterialTheme.colorsPalette.grayDark,
-                    )
-                )
+                }
             ),
             outfitText = MaterialTheme.typographiesExtended.button.normal.copy{
                 outfitState = OutfitStateDual(
                     active = MaterialTheme.colorsExtended.onPrimary.default,
-                    inactive = MaterialTheme.colorsPalette.grayDark,
+                    inactive = MaterialTheme.colorsExtended.onPrimary.fade,
+                )
+            }
+        ),
+        secondary = Button.StateColor.Style(
+            outfitFrame = OutfitFrameStateColor(
+                outfitShape = MaterialTheme.shapesExtended.button.normal.copy {
+                    outfitState = OutfitStateDual(
+                        active = MaterialTheme.colorsExtended.primary.shiny,
+                        inactive = MaterialTheme.colorsExtended.primary.fade,
+                    )
+                },
+                outfitBorder = MaterialTheme.bordersExtended.button.normal.copy {
+                    outfitState = MaterialTheme.colorsExtended.primary.fade.asStateSimple
+                }
+            ),
+            outfitText = MaterialTheme.typographiesExtended.button.normal.copy{
+                outfitState = OutfitStateDual(
+                    active = MaterialTheme.colorsExtended.onPrimary.default,
+                    inactive = MaterialTheme.colorsExtended.onPrimary.fade,
+                )
+            }
+        ),
+        tertiary = Button.StateColor.Style(
+            outfitFrame = OutfitFrameStateColor(
+                outfitShape = MaterialTheme.shapesExtended.button.normal,
+                outfitBorder =MaterialTheme.bordersExtended.button.big.copy {
+                    outfitState = OutfitStateDual(
+                        active = MaterialTheme.colorsExtended.primary.default,
+                        inactive = MaterialTheme.colorsPalette.grayLight,
+                    )
+                }
+            ),
+            outfitText = MaterialTheme.typographiesExtended.button.big.copy{
+                outfitState = OutfitStateDual(
+                    active = MaterialTheme.colorsExtended.onPrimary.default,
+                    inactive = MaterialTheme.colorsPalette.grayBlack,
                 )
             }
         )
     )
 
-//        confirm = Button.StateColor.Style.TextFilled.copy {
-//            outfitFrame = OutfitFrame.Styl(
-//                outfitShape = MaterialTheme.shapesCommonExtended.roundedCorner.normal.copy {
-//                    outfitState = OutfitStateDual(
-//                        active = MaterialTheme.colorsCommonExtended.primary.default,
-//                        inactive = MaterialTheme.colorsCommonExtended.primary.default,
-//                    )
-//                }
-//            )
-//            outfitText = OutfitText.StateColor(
-//                typo = TextStyle(
-//                    fontFamily = MaterialTheme.fontUbuntu,
-//                    fontWeight = FontWeight.Normal,
-//                    fontSize = 18.sp
-//                ),
-//                outfitState = OutfitStateDual(
-//                    active = MaterialTheme.colorsCommonExtended.primary.default,
-//                    inactive = MaterialTheme.colorsCommonExtended.primary.default,
-//                )
-//            )
-//        },
-//        cancel = Button.StateColor.Style.TextFilled.copy {
-//            outfitFrame = OutfitFrame.Styl(
-//                outfitShape = MaterialTheme.shapesCommonExtended.roundedCorner.normal.copy {
-//                    outfitState = OutfitStateDual(
-//                        active = MaterialTheme.colorsCommonExtended.primary.default,
-//                        inactive = MaterialTheme.colorsCommonExtended.primary.default,
-//                    )
-//                }
-//            )
-//            outfitText = OutfitText.StateColor(
-//                typo = TextStyle(
-//                    fontFamily = MaterialTheme.fontUbuntu,
-//                    fontWeight = FontWeight.Normal,
-//                    fontSize = 18.sp
-//                ),
-//                outfitState = OutfitStateDual(
-//                    active = MaterialTheme.colorsCommonExtended.primary.default,
-//                    inactive = MaterialTheme.colorsCommonExtended.primary.default,
-//                )
-//            )
-//        },
-//        proceed = Button.StateColor.Style.TextFilled.copy {
-//            outfitFrame = OutfitFrame.Styl(
-//                outfitShape = MaterialTheme.shapesCommonExtended.roundedCorner.normal.copy {
-//                    outfitState = OutfitStateDual(
-//                        active = MaterialTheme.colorsCommonExtended.primary.default,
-//                        inactive = MaterialTheme.colorsCommonExtended.primary.default,
-//                    )
-//                }
-//            )
-//            outfitText = OutfitText.StateColor(
-//                typo = TextStyle(
-//                    fontFamily = MaterialTheme.fontUbuntu,
-//                    fontWeight = FontWeight.Normal,
-//                    fontSize = 18.sp
-//                ),
-//                outfitState = OutfitStateDual(
-//                    active = MaterialTheme.colorsCommonExtended.primary.default,
-//                    inactive = MaterialTheme.colorsCommonExtended.primary.default,
-//                )
-//            )
-//        },
-//        primary = Button.StateColor.Style.TextFilled.copy {
-//            outfitFrame = OutfitFrame.Styl(
-//                outfitShape = MaterialTheme.shapesCommonExtended.roundedCorner.normal.copy {
-//                    outfitState = OutfitStateDual(
-//                        active = MaterialTheme.colorsCommonExtended.primary.default,
-//                        inactive = MaterialTheme.colorsCommonExtended.primary.default,
-//                    )
-//                }
-//            )
-//            outfitText = OutfitText.StateColor(
-//                typo = TextStyle(
-//                    fontFamily = MaterialTheme.fontUbuntu,
-//                    fontWeight = FontWeight.Normal,
-//                    fontSize = 18.sp
-//                ),
-//                outfitState = OutfitStateDual(
-//                    active = MaterialTheme.colorsCommonExtended.primary.default,
-//                    inactive = MaterialTheme.colorsCommonExtended.primary.default,
-//                )
-//            )
-//        },
-//        secondary = Button.StateColor.Style.TextFilled.copy {
-//            outfitFrame = OutfitFrame.Styl(
-//                outfitShape = MaterialTheme.shapesCommonExtended.roundedCorner.normal.copy {
-//                    outfitState = OutfitStateDual(
-//                        active = MaterialTheme.colorsCommonExtended.primary.default,
-//                        inactive = MaterialTheme.colorsCommonExtended.primary.default,
-//                    )
-//                }
-//            )
-//            outfitText = OutfitText.StateColor(
-//                typo = TextStyle(
-//                    fontFamily = MaterialTheme.fontUbuntu,
-//                    fontWeight = FontWeight.Normal,
-//                    fontSize = 18.sp
-//                ),
-//                outfitState = OutfitStateDual(
-//                    active = MaterialTheme.colorsCommonExtended.primary.default,
-//                    inactive = MaterialTheme.colorsCommonExtended.primary.default,
-//                )
-//            )
-//        },
-//        tertiary = Button.StateColor.Style.TextFilled.copy {
-//            outfitFrame = OutfitFrame.Styl(
-//                outfitShape = MaterialTheme.shapesCommonExtended.roundedCorner.normal.copy {
-//                    outfitState = OutfitStateDual(
-//                        active = MaterialTheme.colorsCommonExtended.primary.default,
-//                        inactive = MaterialTheme.colorsCommonExtended.primary.default,
-//                    )
-//                }
-//            )
-//            outfitText = OutfitText.StateColor(
-//                typo = TextStyle(
-//                    fontFamily = MaterialTheme.fontUbuntu,
-//                    fontWeight = FontWeight.Normal,
-//                    fontSize = 18.sp
-//                ),
-//                outfitState = OutfitStateDual(
-//                    active = MaterialTheme.colorsCommonExtended.primary.default,
-//                    inactive = MaterialTheme.colorsCommonExtended.primary.default,
-//                )
-//            )
-//        }
-
     @Composable
     fun link() = ThemeComponentExtended.Links(
         primary = Link.StateColor.Style(
             outfitText = MaterialTheme.typographiesExtended.link.normal.copy {
-                outfitState = Color.Black.asStateSimple
+                outfitState = OutfitStateDual(
+                    active = MaterialTheme.colorsExtended.primary.default,
+                    inactive = MaterialTheme.colorsPalette.grayLight,
+                )
             }
         )
     )
@@ -357,20 +262,20 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun providePagerStyle() = HorizontalScrollable.Pager.Style(
+    fun pagerStyle() = HorizontalScrollable.Pager.Style(
         outfitShapeIndicator = OutfitShapeStateColor(
             outfitState = OutfitStateDual(
                 active = MaterialTheme.colorsExtended.onBackgroundElevated.default,
                 inactive = MaterialTheme.colorsExtended.background.default,
             )
         ),
-        dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
+        dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
         dimensionIndicatorSize = 12.dp,
-        dimensionIndicatorSpacing = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical,
+        dimensionIndicatorSpacing = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal,
     )
 
     @Composable
-    fun provideCarouselStyle() = providePagerStyle().copy {
+    fun provideCarouselStyle() = pagerStyle().copy {
         padding = PaddingValues(horizontal = 26.dp)
     }
 

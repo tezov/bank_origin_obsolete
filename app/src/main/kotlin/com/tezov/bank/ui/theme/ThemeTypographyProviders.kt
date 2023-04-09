@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 09/04/2023 15:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 14:40
+ *  Last modified 09/04/2023 15:12
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,9 +16,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.bank.ui.theme.font.fontUbuntu
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeTypographiesExtended
@@ -47,15 +49,25 @@ object ThemeTypographyProviders {
             fontWeight = FontWeight.Normal,
             fontSize = 13.sp
         ).asTextStateColor.asPaletteSize,
-        button = TextStyle(
-            fontFamily = MaterialTheme.fontRoboto,
-            fontWeight = FontWeight.Normal,
-            fontSize = 18.sp
-        ).asTextStateColor.asPaletteSize,
+        button = OutfitPaletteSize(
+            normal = TextStyle(
+                fontFamily = MaterialTheme.fontRoboto,
+                fontWeight = FontWeight.Normal,
+                fontSize = 18.sp
+            ).asTextStateColor,
+            big = TextStyle(
+                fontFamily = MaterialTheme.fontRoboto,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 20.sp
+            ).asTextStateColor,
+        )
+
+        ,
         link = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
-            fontSize = 16.sp
+            fontSize = 16.sp,
+            textDecoration = TextDecoration.Underline
         ).asTextStateColor.asPaletteSize,
         input = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 09/04/2023 15:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 09/04/2023 15:07
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -90,7 +90,7 @@ object ActionRow {
                     resourceId = it,
                     description = null,
                 )
-                Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.icon.normal.horizontal))
+                Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal))
             }
             Text.StateColor(
                 modifier = Modifier

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 15:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 22:31
+ *  Last modified 09/04/2023 15:31
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
@@ -35,7 +34,6 @@ import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Styl
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Size.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
@@ -92,6 +90,7 @@ object PageLoginTheme {
         val backgroundDropDownMenu: Color,
         val onBackgroundDropDownMenu: Color,
         val dark: Color,
+        val light: Color,
         val fade: Color,
     )
 
@@ -101,7 +100,8 @@ object PageLoginTheme {
         onBackground = MaterialTheme.colorsExtended.onBackground.accent,
         backgroundDropDownMenu = MaterialTheme.colorsExtended.backgroundModal.default,
         onBackgroundDropDownMenu = MaterialTheme.colorsExtended.onBackgroundModal.default,
-        dark = MaterialTheme.colorsExtended.primary.dark,
+        dark = MaterialTheme.colorsExtended.primary.default,
+        light = MaterialTheme.colorsExtended.primary.shiny.copy(alpha = 0.25f),
         fade = MaterialTheme.colorsExtended.primary.fade,
     )
 
@@ -122,13 +122,13 @@ object PageLoginTheme {
 
     @Composable
     fun provideDimensions() = Dimensions(
-        spacingTopToTitle = 24.dp,
-        spacingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.chunk.big.vertical,
+        spacingTopToTitle = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical,
+        spacingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.element.supra.vertical,
         sizeLogo = 64.dpSize,
         sizeIconBig = 52.dpSize,
-        paddingStartToIconBig = 28.dp,
+        paddingStartToIconBig = MaterialTheme.dimensionsPaddingExtended.element.huge.horizontal,
         sizeIconMedium = 38.dpSize,
-        paddingStartToIconMedium = 12.dp,
+        paddingStartToIconMedium = MaterialTheme.dimensionsPaddingExtended.element.big.horizontal,
         sizeIconSmall = 42.dpSize,
     )
 
@@ -178,13 +178,12 @@ object PageLoginTheme {
         huge = MaterialTheme.typographiesExtended.title.huge.copy {
             outfitState = colors.onBackground.asStateSimple
         },
-        body = MaterialTheme.typographiesExtended.body.normal.copy {
+        body = MaterialTheme.typographiesExtended.body.small.copy {
             outfitState = colors.onBackground.asStateSimple
-            typo = typo.copy(fontWeight = FontWeight.Bold)
+            typo = typo.copy(fontWeight = FontWeight.SemiBold)
         },
         dropDownMenu = MaterialTheme.typographiesExtended.menu.normal.copy {
             outfitState = colors.onBackgroundDropDownMenu.asStateSimple
-            typo = typo.copy(fontWeight = FontWeight.SemiBold)
         }
     )
 
@@ -207,7 +206,7 @@ object PageLoginTheme {
 
     @Composable
     fun provideStyles() = Style(
-        pager = ThemeComponentProviders.providePagerStyle(),
+        pager = ThemeComponentProviders.pagerStyle(),
         buttonDark = MaterialTheme.componentsButtonExtended.primary.copy {
             outfitFrame = outfitFrame.copy {
                 outfitShape = outfitShape.copy {
@@ -253,26 +252,30 @@ object PageLoginTheme {
         ),
         iconBig = Image.StateColor.Style(
             size = dimensions.sizeIconBig,
-//            outfitFrame = OutfitFrameStateColor(
-//                outfitShape = shapes.icon,
-//                outfitBorder = borders.icon.copy {
-//                    outfitState = OutfitStateSimple(
-//                        Color.Black
-//                    )
-//                }
-//            )
+            outfitFrame = OutfitFrameStateColor(
+                outfitShape = shapes.icon,
+                outfitBorder = borders.icon.copy{
+                    outfitState = colors.dark.asStateSimple
+                }
+            )
         ),
         iconMedium = Icon.StateColor.Style(
             size = dimensions.sizeIconMedium,
-//            outfitFrame = OutfitFrameStateColor(
-//                outfitShape = shapes.icon
-//            )
+            outfitFrame = OutfitFrameStateColor(
+                outfitShape = shapes.icon,
+                outfitBorder = borders.icon.copy{
+                    outfitState = colors.dark.asStateSimple
+                }
+            )
         ),
         iconSmall = Icon.StateColor.Style(
             size = dimensions.sizeIconSmall,
-//            outfitFrame = OutfitFrameStateColor(
-//                outfitShape = shapes.icon
-//            )
+            outfitFrame = OutfitFrameStateColor(
+                outfitShape = shapes.icon,
+                outfitBorder = borders.icon.copy{
+                    outfitState = colors.dark.asStateSimple
+                }
+            )
         ),
     )
 

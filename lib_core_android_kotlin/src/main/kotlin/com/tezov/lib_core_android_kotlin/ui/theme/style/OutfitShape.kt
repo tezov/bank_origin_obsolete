@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 09/04/2023 15:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 09/04/2023 15:25
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -47,7 +47,7 @@ object OutfitShape {
             }
         }
 
-        fun get(size: Size? = null, color: ColorImport) = get(size)?.let {
+        fun get(size: Size? = null, color: ColorImport? = null) = get(size)?.let {
             Sketch(it, color)
         }
 
@@ -155,9 +155,7 @@ object OutfitShape {
             fun resolveColor(selector: Any? = null) =
                 outfitState.resolve(selector, ColorImport::class)
 
-            fun resolve(selector: Any? = null) = resolveColor(selector)?.let {
-                template.get(size, it)
-            }
+            fun resolve(selector: Any? = null) = template.get(size, resolveColor(selector))
 
         }
     }

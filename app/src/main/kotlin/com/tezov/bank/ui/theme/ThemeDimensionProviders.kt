@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 15:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 22:03
+ *  Last modified 09/04/2023 15:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -36,36 +36,48 @@ object ThemeDimensionProviders {
     )
 
     fun paddings() = ThemeDimensionsExtended.Paddings(
-        page = OutfitPaletteDirection(
-            vertical = 6.dp,
-            horizontal = 4.dp
-        ).asPaletteSize,
+        page = OutfitPaletteSize(
+            normal = OutfitPaletteDirection(
+                vertical = 6.dp,
+                horizontal = 8.dp
+            ),
+            big = OutfitPaletteDirection(
+                vertical = 10.dp,
+                horizontal = 14.dp
+            ),
+            huge = OutfitPaletteDirection(
+                vertical = 16.dp,
+                horizontal = 20.dp
+            )
+        ),
         cluster = OutfitPaletteSize(
             normal = OutfitPaletteDirection(
                 vertical = 10.dp,
                 horizontal = 8.dp
             ),
-            small = OutfitPaletteDirection(
-                vertical = 6.dp,
-                horizontal = 6.dp
-            ),
-            big = OutfitPaletteDirection(
-                vertical = 12.dp,
-                horizontal = 10.dp
-            )
         ),
         block = OutfitPaletteSize(
             normal = OutfitPaletteDirection(
                 vertical = 8.dp,
                 horizontal = 8.dp
             ),
-            small = OutfitPaletteDirection(
-                vertical = 6.dp,
-                horizontal = 6.dp
+        ),
+        element = OutfitPaletteSize(
+            normal = OutfitPaletteDirection(
+                vertical = 8.dp,
+                horizontal = 8.dp
             ),
             big = OutfitPaletteDirection(
-                vertical = 10.dp,
+                vertical = 16.dp,
                 horizontal = 10.dp
+            ),
+            huge = OutfitPaletteDirection(
+                vertical = 24.dp,
+                horizontal = 16.dp
+            ),
+            supra = OutfitPaletteDirection(
+                vertical = 48.dp,
+                horizontal = 24.dp
             )
         ),
         chunk = OutfitPaletteSize(
@@ -99,11 +111,6 @@ object ThemeDimensionProviders {
                 vertical = 6.dp,
                 horizontal = 9.dp
             )
-        ),
-        icon = OutfitPaletteSize(
-            normal = 32.dp.asPaletteDirection,
-            small = 24.dp.asPaletteDirection,
-            big = 48.dp.asPaletteDirection
         )
     )
 

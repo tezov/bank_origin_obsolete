@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 22:36
+ *  Created by Tezov on 09/04/2023 15:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 22:31
+ *  Last modified 09/04/2023 15:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -92,7 +92,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 .fillMaxSize()
                 .background(PageLoginTheme.colors.background)
                 .padding(innerPadding)
-                .padding(MaterialTheme.dimensionsPaddingExtended.page.big)
+                .padding(MaterialTheme.dimensionsPaddingExtended.page.huge)
         ) {
             ContentHeader(
                 iconState = state.iconState,

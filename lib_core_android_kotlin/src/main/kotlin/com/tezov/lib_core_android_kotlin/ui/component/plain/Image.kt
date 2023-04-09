@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 09/04/2023 15:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 09/04/2023 15:25
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -48,13 +48,9 @@ object Image {
 
         class Style(
             val size: DpSize? = null,
-            tint: Color? = null,
+            val tint: Color? = null,
             val contentScale: ContentScale = ContentScale.Fit,
         ) {
-
-            val tint: Color by DelegateNullFallBack.Ref(tint, fallBackValue = {
-                Color.Black
-            })
 
             companion object {
 
