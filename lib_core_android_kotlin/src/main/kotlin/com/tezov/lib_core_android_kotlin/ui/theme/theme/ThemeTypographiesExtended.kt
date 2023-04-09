@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 09/04/2023 17:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 09/04/2023 17:30
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -46,6 +46,7 @@ object ThemeTypographiesExtended {
         input: OutfitPaletteSize<OutfitTextStateColor>? = null,
         label: OutfitPaletteSize<OutfitTextStateColor>? = null,
         caption: OutfitPaletteSize<OutfitTextStateColor>? = null,
+        menu: OutfitPaletteSize<OutfitTextStateColor>? = null,
     ) {
 
         private val delegates = DelegateNullFallBack.Group<OutfitPaletteSize<OutfitTextStateColor>>()
@@ -58,7 +59,7 @@ object ThemeTypographiesExtended {
         val input: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(input)
         val label: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(label)
         val caption: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(caption)
-        val menu: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(caption)
+        val menu: OutfitPaletteSize<OutfitTextStateColor> by delegates.ref(menu)
 
         init {
             delegates.fallBackValue = {

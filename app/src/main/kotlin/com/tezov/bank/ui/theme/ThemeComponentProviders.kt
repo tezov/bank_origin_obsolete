@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 09/04/2023 17:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:33
+ *  Last modified 09/04/2023 17:34
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -265,12 +265,12 @@ object ThemeComponentProviders {
     fun pagerStyle() = HorizontalScrollable.Pager.Style(
         outfitShapeIndicator = OutfitShapeStateColor(
             outfitState = OutfitStateDual(
-                active = MaterialTheme.colorsExtended.onBackgroundElevated.default,
-                inactive = MaterialTheme.colorsExtended.background.default,
+                active = MaterialTheme.colorsExtended.primary.default,
+                inactive = MaterialTheme.colorsExtended.primary.default.copy(alpha = 0.5f),
             )
         ),
         dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
-        dimensionIndicatorSize = 12.dp,
+        dimensionIndicatorSize = 8.dp,
         dimensionIndicatorSpacing = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal,
     )
 

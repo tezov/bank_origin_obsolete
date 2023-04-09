@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 09/04/2023 17:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:36
+ *  Last modified 09/04/2023 17:40
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -58,13 +58,13 @@ object ThemeDimensionProviders {
         ),
         block = OutfitPaletteSize(
             normal = OutfitPaletteDirection(
-                vertical = 8.dp,
+                vertical = 14.dp,
                 horizontal = 8.dp
             ),
         ),
         element = OutfitPaletteSize(
             normal = OutfitPaletteDirection(
-                vertical = 8.dp,
+                vertical = 6.dp,
                 horizontal = 8.dp
             ),
             big = OutfitPaletteDirection(

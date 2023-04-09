@@ -1,8 +1,8 @@
 <!--
   ~  *********************************************************************************
-  ~  Created by Tezov on 09/02/2023 19:39
+  ~  Created by Tezov on 09/04/2023 17:41
   ~  Copyright (c) 2023 . All rights reserved.
-  ~  Last modified 09/02/2023 18:49
+  ~  Last modified 09/04/2023 17:33
   ~  First project bank / bank.app.main
   ~  This file is private and it is not allowed to use it, copy it or modified it
   ~  without the permission granted by the owner Tezov. For any request request,
@@ -29,7 +29,7 @@
     <string name="pg_login_btn_connect">Accéder à mes comptes</string>
     <string name="pg_login_btn_send_money">Envoyer de l\'argent avec paylib</string>
     <string name="pg_login_btn_activate_balance">Activer le solde</string>
-    <string name="pg_login_link_help_and_service">Aide et Services</string>
+    <string name="pg_login_link_help_and_service">Aide &amp; Services</string>
     <string name="pg_login_img_logo">image logo banque</string>
     <string name="pg_login_img_suit_case">icon utilisateur</string>
     <string name="pg_login_icon_add_account">icon ajouter un compte</string>

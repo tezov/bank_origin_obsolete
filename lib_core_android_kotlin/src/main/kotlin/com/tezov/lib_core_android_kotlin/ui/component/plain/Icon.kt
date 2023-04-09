@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 09/04/2023 17:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 09/04/2023 17:21
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.plain
 
+import androidx.compose.foundation.background
 import androidx.compose.material.Icon
 import androidx.compose.material.LocalContentAlpha
 import androidx.compose.material.LocalContentColor
@@ -23,12 +24,9 @@ import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.border
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
@@ -92,18 +90,25 @@ object Icon {
 
         class StyleBuilder internal constructor(style: Style) {
             var size = style.size
+            var tint = style.tint
             var outfitFrame = style.outfitFrame
 
             internal fun get() = Style(
                 size = size,
+                tint = tint,
                 outfitFrame = outfitFrame,
             )
         }
 
         class Style(
             val size: DpSize? = null,
+            tint: ColorImport? = null,
             outfitFrame: OutfitFrameStateColor? = null,
         ) {
+
+            val tint: ColorImport by DelegateNullFallBack.Ref(tint, fallBackValue = {
+                ColorImport.Black
+            })
 
             val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
                 outfitFrame,
@@ -132,6 +137,7 @@ object Icon {
 
             constructor(style: Style) : this(
                 size = style.size,
+                tint = style.tint,
                 outfitFrame = style.outfitFrame,
             )
         }
@@ -144,16 +150,15 @@ object Icon {
             description: String? = null,
             selector: Any? = null
         ) {
-            val sketch = style.outfitFrame.outfitShape.resolve(selector)
+
             Icon(
                 modifier = modifier
                     .thenOnNotNull(style.size, Modifier::size)
-                    .thenOnNotNull(sketch) {
-                        border(style.outfitFrame.outfitBorder, selector, it)
+                    .thenOnNotNull(style.outfitFrame) {
+                        border(it, selector).background(it, selector)
                     },
                 painter = painterResource(id = resourceId),
-                tint = sketch?.color
-                    ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+                tint = style.tint,
                 contentDescription = description,
             )
         }

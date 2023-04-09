@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 09/04/2023 17:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:36
+ *  Last modified 09/04/2023 17:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -236,8 +236,6 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         )
                         Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopToTitle))
                         Button.StateColor(
-                            modifierButton = Modifier
-                                .padding(top = MaterialTheme.dimensionsPaddingExtended.chunk.big.vertical),
                             modifierText = Modifier
                                 .padding(MaterialTheme.dimensionsPaddingExtended.text.big),
                             onClick = { },
@@ -265,7 +263,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Button.StateColor(
                 modifierButton = Modifier
                     .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.chunk.big.vertical),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.block.normal.vertical),
                 modifierText = Modifier
                     .padding(MaterialTheme.dimensionsPaddingExtended.text.big),
                 text = stringResource(id = R.string.pg_login_btn_connect),
@@ -275,7 +273,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             Button.StateColor(
                 modifierButton = Modifier
                     .fillMaxWidth()
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.chunk.big.vertical),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
                 modifierText = Modifier
                     .padding(MaterialTheme.dimensionsPaddingExtended.text.big),
                 text = stringResource(id = R.string.pg_login_btn_send_money),

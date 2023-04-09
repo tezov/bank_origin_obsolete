@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 09/04/2023 17:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:31
+ *  Last modified 09/04/2023 17:23
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,9 +22,11 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import com.tezov.bank.ui.theme.ThemeComponentProviders
+import com.tezov.bank.ui.theme.colorsPalette
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
+import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
@@ -101,8 +103,8 @@ object PageLoginTheme {
         backgroundDropDownMenu = MaterialTheme.colorsExtended.backgroundModal.default,
         onBackgroundDropDownMenu = MaterialTheme.colorsExtended.onBackgroundModal.default,
         dark = MaterialTheme.colorsExtended.primary.default,
-        light = MaterialTheme.colorsExtended.primary.shiny.copy(alpha = 0.25f),
-        fade = MaterialTheme.colorsExtended.primary.fade,
+        light = MaterialTheme.colorsExtended.primary.shiny.copy(alpha = 0.65f),
+        fade = MaterialTheme.colorsPalette.grayLightOverlay,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -124,12 +126,12 @@ object PageLoginTheme {
     fun provideDimensions() = Dimensions(
         spacingTopToTitle = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical,
         spacingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.element.supra.vertical,
-        sizeLogo = 64.dpSize,
-        sizeIconBig = 52.dpSize,
-        paddingStartToIconBig = MaterialTheme.dimensionsPaddingExtended.element.huge.horizontal,
-        sizeIconMedium = 38.dpSize,
-        paddingStartToIconMedium = MaterialTheme.dimensionsPaddingExtended.element.big.horizontal,
-        sizeIconSmall = 42.dpSize,
+        sizeLogo = 58.dpSize,
+        sizeIconBig = 48.dpSize,
+        paddingStartToIconBig = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal,
+        sizeIconMedium = 32.dpSize,
+        paddingStartToIconMedium = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal,
+        sizeIconSmall = 38.dpSize,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -178,9 +180,8 @@ object PageLoginTheme {
         huge = MaterialTheme.typographiesExtended.title.huge.copy {
             outfitState = colors.onBackground.asStateSimple
         },
-        body = MaterialTheme.typographiesExtended.body.small.copy {
+        body = MaterialTheme.typographiesExtended.helper.small.copy {
             outfitState = colors.onBackground.asStateSimple
-            typo = typo.copy(fontWeight = FontWeight.SemiBold)
         },
         dropDownMenu = MaterialTheme.typographiesExtended.menu.normal.copy {
             outfitState = colors.onBackgroundDropDownMenu.asStateSimple
@@ -206,7 +207,14 @@ object PageLoginTheme {
 
     @Composable
     fun provideStyles() = Style(
-        pager = ThemeComponentProviders.pagerStyle(),
+        pager = ThemeComponentProviders.pagerStyle().copy {
+            outfitShapeIndicator = OutfitShapeStateColor(
+                outfitState = OutfitStateDual(
+                    active = colors.dark,
+                    inactive = colors.dark.copy(alpha = 0.60f),
+                )
+            )
+        },
         buttonDark = MaterialTheme.componentsButtonExtended.primary.copy {
             outfitFrame = outfitFrame.copy {
                 outfitShape = outfitShape.copy {
@@ -243,7 +251,7 @@ object PageLoginTheme {
         },
         link = MaterialTheme.componentsLinkExtended.primary.copy{
             outfitText = outfitText.copy {
-                outfitState = colors.dark.asStateSimple
+                outfitState = colors.onBackground.asStateSimple
             }
         },
         logo = Image.Simple.Style(
@@ -255,24 +263,24 @@ object PageLoginTheme {
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = shapes.icon,
                 outfitBorder = borders.icon.copy{
-                    outfitState = colors.dark.asStateSimple
+                    outfitState = colors.light.asStateSimple
                 }
             )
         ),
         iconMedium = Icon.StateColor.Style(
             size = dimensions.sizeIconMedium,
+            tint = colors.background,
             outfitFrame = OutfitFrameStateColor(
-                outfitShape = shapes.icon,
-                outfitBorder = borders.icon.copy{
-                    outfitState = colors.dark.asStateSimple
+                outfitShape = shapes.icon.copy{
+                    outfitState = colors.onBackground.asStateSimple
                 }
             )
         ),
         iconSmall = Icon.StateColor.Style(
             size = dimensions.sizeIconSmall,
+            tint = colors.onBackground,
             outfitFrame = OutfitFrameStateColor(
-                outfitShape = shapes.icon,
-                outfitBorder = borders.icon.copy{
+                outfitShape = shapes.icon.copy{
                     outfitState = colors.dark.asStateSimple
                 }
             )

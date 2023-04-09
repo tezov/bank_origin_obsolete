@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 09/04/2023 17:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:12
+ *  Last modified 09/04/2023 17:34
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,11 +29,23 @@ object ThemeTypographyProviders {
 
     @Composable
     fun common() = ThemeTypographiesExtended.Common(
-        title = TextStyle(
-            fontFamily = MaterialTheme.fontUbuntu,
-            fontWeight = FontWeight.Normal,
-            fontSize = 22.sp
-        ).asTextStateColor.asPaletteSize,
+        title = OutfitPaletteSize(
+            normal = TextStyle(
+                fontFamily = MaterialTheme.fontUbuntu,
+                fontWeight = FontWeight.Normal,
+                fontSize = 16.sp
+            ).asTextStateColor,
+            huge = TextStyle(
+                fontFamily = MaterialTheme.fontUbuntu,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 20.sp
+            ).asTextStateColor,
+            supra = TextStyle(
+                fontFamily = MaterialTheme.fontUbuntu,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 24.sp
+            ).asTextStateColor
+        ),
         body = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.Normal,
@@ -44,11 +56,18 @@ object ThemeTypographyProviders {
             fontWeight = FontWeight.Normal,
             fontSize = 14.sp
         ).asTextStateColor.asPaletteSize,
-        helper = TextStyle(
-            fontFamily = MaterialTheme.fontUbuntu,
-            fontWeight = FontWeight.Normal,
-            fontSize = 13.sp
-        ).asTextStateColor.asPaletteSize,
+        helper = OutfitPaletteSize(
+            normal = TextStyle(
+                fontFamily = MaterialTheme.fontUbuntu,
+                fontWeight = FontWeight.Normal,
+                fontSize = 13.sp
+            ).asTextStateColor,
+            small = TextStyle(
+                fontFamily = MaterialTheme.fontUbuntu,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.sp
+            ).asTextStateColor,
+        ),
         button = OutfitPaletteSize(
             normal = TextStyle(
                 fontFamily = MaterialTheme.fontRoboto,
@@ -58,14 +77,12 @@ object ThemeTypographyProviders {
             big = TextStyle(
                 fontFamily = MaterialTheme.fontRoboto,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 20.sp
+                fontSize = 17.sp
             ).asTextStateColor,
-        )
-
-        ,
+        ),
         link = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
-            fontWeight = FontWeight.Normal,
+            fontWeight = FontWeight.SemiBold,
             fontSize = 16.sp,
             textDecoration = TextDecoration.Underline
         ).asTextStateColor.asPaletteSize,
@@ -82,6 +99,11 @@ object ThemeTypographyProviders {
         caption = TextStyle(
             fontFamily = MaterialTheme.fontRoboto,
             fontWeight = FontWeight.SemiBold,
+            fontSize = 14.sp
+        ).asTextStateColor.asPaletteSize,
+        menu = TextStyle(
+            fontFamily = MaterialTheme.fontRoboto,
+            fontWeight = FontWeight.Normal,
             fontSize = 14.sp
         ).asTextStateColor.asPaletteSize,
     )
