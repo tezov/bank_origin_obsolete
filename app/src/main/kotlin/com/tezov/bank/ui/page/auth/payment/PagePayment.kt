@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:49
+ *  Last modified 10/04/2023 13:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,8 +15,6 @@ package com.tezov.bank.ui.page.auth.payment
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
@@ -25,12 +23,12 @@ import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 
 object PagePayment : Page<PagePaymentState, PagePaymentAction> {
 
@@ -60,7 +58,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                     .fillMaxSize()
                     .background(PagePaymentTheme.colors.background)
                     .padding(innerPadding),
-                properties = PagePaymentTheme.dimensions.headerHeight,
+                properties = PagePaymentTheme.dimensions.heightHeader,
                 header = { progress, progressDp ->
                     contentHeader(
                         state.header,
@@ -99,23 +97,25 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                 modifier = Modifier.height(progressDp),
                 verticalArrangement = Arrangement.Bottom
             ) {
-//                Text(
+                Text.StateColor(
 //                    modifier = Modifier
 //                        .padding(
 //                            horizontal = MaterialTheme.dimensionsPaddingExtended.page_h + (MaterialTheme.dimensionsPaddingExtended.elementHuge_h * progress),
 //                            vertical = MaterialTheme.dimensionsPaddingExtended.textBig_v
 //                        ),
-//                    text = it,
-//                    style = PagePaymentTheme.typographies.title.copy(
-//                        fontSize = (PagePaymentTheme.dimensions.textTitleMin.value + ((PagePaymentTheme.dimensions.textTitleMax.value - PagePaymentTheme.dimensions.textTitleMin.value) * progress)).sp
-//                    )
-//                )
+                    text = it,
+                    style = PagePaymentTheme.typographies.titleHuge.copy {
+                        typo = typo.copy(
+                            fontSize = (PagePaymentTheme.dimensions.sizeTitleMin.value + ((PagePaymentTheme.dimensions.sizeTitleMax.value - PagePaymentTheme.dimensions.sizeTitleMin.value) * progress)).sp
+                        )
+                    }
+                )
                 if (progress < 0.05f) {
                     Divider(
                         modifier = Modifier
                             .fillMaxWidth(),
-                        color = PagePaymentTheme.colors.headerDivider,
-                        thickness = PagePaymentTheme.dimensions.headerDividerSize,
+                        color = PagePaymentTheme.colors.fade,
+                        thickness = PagePaymentTheme.dimensions.heightHeaderDivider,
                     )
                 }
 //                Spacer(modifier = Modifier.height((MaterialTheme.dimensionsCommonExtended.normal_v * (1f - progress))))

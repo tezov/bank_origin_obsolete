@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 00:50
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 00:46
+ *  Last modified 10/04/2023 12:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,17 +27,12 @@ import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
 
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
-import com.tezov.bank.ui.page.lobby.login.PageLogin
-import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
-import com.tezov.bank.ui.page.lobby.login.provides
-import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
-import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceAction> {
@@ -80,7 +75,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                             modifier = Modifier.size(MaterialTheme.dimensionsIconExtended.modal.normal),
                             painter = painterResource(id = R.drawable.ic_close_24dp),
                             contentDescription = stringResource(id = R.string.pg_h_and_s_icon_close),
-                            tint = PageHelpAndServiceTheme.colors.onBackgroundAccent,
+                            tint = PageHelpAndServiceTheme.colors.accent,
                         )
                     }
                 }
@@ -119,7 +114,6 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     ) {
         header.headline.value?.let{
             Text.StateColor(
-                modifier  = Modifier.padding(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal),
                 text = it,
                 style = MaterialTheme.typographiesExtended.title.supra
             )

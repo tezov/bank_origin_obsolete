@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 13/02/2023 21:35
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 13/02/2023 19:45
+ *  Last modified 10/04/2023 13:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -35,7 +35,6 @@ import kotlin.math.sign
 
 object ColumnCollapsibleHeader {
 
-    @Immutable
     data class Properties(
         val min: Dp = 0.dp,
         val max: Dp = 0.dp,

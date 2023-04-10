@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 22:55
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 22:54
+ *  Last modified 10/04/2023 13:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -181,13 +181,13 @@ object ThemeComponentProviders {
     fun provideSectionRowStyle() = SectionActionRow.Style(
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
-            tint = MaterialTheme.colorsExtended.primary.default
+            tint = MaterialTheme.colorsExtended.primary.accent
         ),
-        outfitTextHeader = MaterialTheme.typographiesExtended.title.small.copy {
-            outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+        outfitTextHeader = MaterialTheme.typographiesExtended.title.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
         },
         colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default,
-        colorDivider = MaterialTheme.colorsPalette.grayLightOverlay,
+        colorDivider = MaterialTheme.colorsExtended.primary.decor,
         dimensionDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
         actionRowStyle = provideActionRowStyle()
     )
@@ -213,8 +213,8 @@ object ThemeComponentProviders {
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
-        outfitTextHeader = MaterialTheme.typographiesExtended.body.normal.copy {
-            outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+        outfitTextHeader = MaterialTheme.typographiesExtended.title.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
         },
         colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default,
         actionCardStyle = provideActionCardStyle()
@@ -224,9 +224,7 @@ object ThemeComponentProviders {
     fun provideActionCardStyle() = ActionCard.Style(
         outfitFrame = OutfitFrameStateColor(
             outfitShape = MaterialTheme.shapesExtended.element.normal,
-            outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
-                outfitState = MaterialTheme.colorsExtended.backgroundElevated.default.asStateSimple
-            }
+            outfitBorder = MaterialTheme.bordersExtended.element.normal
         ),
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.big,
@@ -239,7 +237,7 @@ object ThemeComponentProviders {
             )
         },
         outfitTextSubtitle = MaterialTheme.typographiesExtended.body.normal.copy {
-            outfitState = MaterialTheme.colorsExtended.primary.fade.asStateSimple
+            outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
         }
     )
 

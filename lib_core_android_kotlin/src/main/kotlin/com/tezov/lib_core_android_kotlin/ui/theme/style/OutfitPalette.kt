@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 14:35
+ *  Last modified 10/04/2023 12:19
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -43,6 +43,7 @@ object OutfitPalette {
             var light = style.light
             var shiny = style.shiny
             var accent = style.accent
+            var decor = style.decor
 
             internal fun get() = Style(
                 default = default,
@@ -52,6 +53,7 @@ object OutfitPalette {
                 light = light,
                 shiny = shiny,
                 accent = accent,
+                decor = decor,
             )
         }
 
@@ -63,6 +65,7 @@ object OutfitPalette {
             light: ColorImport? = null,
             shiny: ColorImport? = null,
             accent: ColorImport? = null,
+            decor: ColorImport? = null,
         ) {
 
             private val delegates = DelegateNullFallBack.Group<ColorImport>()
@@ -72,6 +75,7 @@ object OutfitPalette {
             val shiny: ColorImport by delegates.ref(shiny)
             val light: ColorImport by delegates.ref(light)
             val accent: ColorImport by delegates.ref(accent)
+            val decor: ColorImport by delegates.ref(decor)
 
             init {
                 delegates.fallBackValue = { default }
@@ -98,6 +102,7 @@ object OutfitPalette {
                 light = style.light,
                 shiny = style.shiny,
                 accent = style.accent,
+                decor = style.decor,
             )
         }
 

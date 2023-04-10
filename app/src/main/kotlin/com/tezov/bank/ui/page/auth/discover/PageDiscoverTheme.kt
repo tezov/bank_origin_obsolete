@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 21:22
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 21:22
+ *  Last modified 10/04/2023 13:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,9 +19,22 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import com.tezov.bank.ui.component.branch.SectionActionCard
+import com.tezov.bank.ui.component.branch.SectionActionCard.Style.Companion.copy
 import com.tezov.bank.ui.component.branch.SectionActionRow
+import com.tezov.bank.ui.component.branch.SectionActionRow.Style.Companion.copy
+import com.tezov.bank.ui.component.leaf.ActionCard.Style.Companion.copy
+import com.tezov.bank.ui.component.leaf.ActionRow.Style.Companion.copy
+import com.tezov.bank.ui.page.lobby.help_and_service.colors
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 val PageDiscoverTheme.colors: PageDiscoverTheme.Colors
     @Composable
@@ -41,11 +54,23 @@ object PageDiscoverTheme {
 
     data class Colors(
         val background: Color,
+        val backgroundElevated: Color,
+        val accent: Color,
+        val primary: Color,
+        val neutral: Color,
+        val decor: Color,
+        val fade: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
-        background = MaterialTheme.colors.background,
+        background = MaterialTheme.colorsExtended.background.default,
+        backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.default,
+        accent = MaterialTheme.colorsExtended.primary.accent,
+        primary = MaterialTheme.colorsExtended.primary.default,
+        neutral = MaterialTheme.colorsExtended.primary.shady,
+        decor = MaterialTheme.colorsExtended.backgroundElevated.decor,
+        fade = MaterialTheme.colorsExtended.primary.fade,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -91,8 +116,32 @@ object PageDiscoverTheme {
 //            shape = MaterialTheme.shapesExtended.roundedCornerBig,
 //        ),
 //        cardLink = CarouselCard.Style(),
-        sectionRow = ThemeComponentProviders.provideSectionRowStyle(),
-        sectionCard = ThemeComponentProviders.provideSectionCardStyle(),
+
+        sectionRow = ThemeComponentProviders.provideSectionRowStyle().copy {
+            dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            colorDivider = colors.fade
+            actionRowStyle = actionRowStyle.copy{
+                iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
+                iconActionStyle = iconActionStyle.copy { tint = colors.accent }
+                outfitText = outfitText?.copy {
+                    outfitState = colors.primary.asStateSimple
+                }
+            }
+        },
+        sectionCard = ThemeComponentProviders.provideSectionCardStyle().copy {
+            dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            actionCardStyle = actionCardStyle.copy{
+                iconStyle = iconStyle.copy { tint = colors.accent }
+                outfitTextTitle = outfitTextTitle?.copy {
+                    outfitState = colors.primary.asStateSimple
+                }
+                outfitFrame = outfitFrame.copy{
+                    outfitShape = outfitShape.copy {
+                        outfitState = colors.decor.asStateSimple
+                    }
+                }
+            }
+        },
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

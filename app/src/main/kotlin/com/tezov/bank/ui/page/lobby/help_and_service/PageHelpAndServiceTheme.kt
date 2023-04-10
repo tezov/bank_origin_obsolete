@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 00:50
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 00:45
+ *  Last modified 10/04/2023 13:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,8 +18,6 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionCard.Style.Companion.copy
 import com.tezov.bank.ui.component.branch.SectionActionRow
@@ -32,6 +30,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageHelpAndServiceTheme.colors: PageHelpAndServiceTheme.Colors
@@ -62,21 +61,23 @@ object PageHelpAndServiceTheme {
 
     data class Colors(
         val background: Color,
-        val onBackgroundAccent: Color,
-        val onBackgroundPrimary: Color,
         val backgroundElevated: Color,
-        val onBackgroundElevated: Color,
+        val accent: Color,
+        val primary: Color,
+        val neutral: Color,
+        val decor: Color,
         val fade: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colorsExtended.background.default,
-        onBackgroundAccent = MaterialTheme.colorsExtended.primary.accent,
-        onBackgroundPrimary = MaterialTheme.colorsExtended.onBackground.default,
         backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.default,
-        onBackgroundElevated = MaterialTheme.colorsExtended.onBackgroundElevated.default,
-        fade = MaterialTheme.colorsExtended.backgroundElevated.default,
+        accent = MaterialTheme.colorsExtended.primary.accent,
+        primary = MaterialTheme.colorsExtended.primary.default,
+        neutral = MaterialTheme.colorsExtended.primary.shady,
+        decor = MaterialTheme.colorsExtended.backgroundElevated.decor,
+        fade = MaterialTheme.colorsExtended.primary.fade,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -84,15 +85,14 @@ object PageHelpAndServiceTheme {
     }
 
     data class Typographies(
-        val titleBig: TextStyle,
+        val titleHuge: OutfitTextStateColor,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        titleBig = MaterialTheme.typographiesExtended.title.normal.typo.copy(
-            color = colors.onBackgroundPrimary,
-            fontWeight = FontWeight.Bold
-        ),
+        titleHuge = MaterialTheme.typographiesExtended.title.huge.copy {
+            outfitState = colors.primary.asStateSimple
+        },
     )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =
@@ -110,43 +110,32 @@ object PageHelpAndServiceTheme {
     fun provideStyles() = Style(
         sectionRow = ThemeComponentProviders.provideSectionRowStyle().copy {
             dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-            iconStyle = iconStyle.copy {
-                tint = colors.onBackgroundPrimary
-            }
             outfitTextHeader = outfitTextHeader?.copy {
-                outfitState = colors.onBackgroundPrimary.asStateSimple
+                outfitState = colors.neutral.asStateSimple
             }
             colorDivider = colors.fade
             actionRowStyle = actionRowStyle.copy{
-                iconInfoStyle = iconInfoStyle.copy {
-                    tint = colors.onBackgroundAccent
-                }
-                iconActionStyle = iconActionStyle.copy {
-                    tint = colors.onBackgroundAccent
-                }
+                iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
+                iconActionStyle = iconActionStyle.copy { tint = colors.accent }
                 outfitText = outfitText?.copy {
-                    outfitState = colors.onBackgroundPrimary.asStateSimple
+                    outfitState = colors.primary.asStateSimple
                 }
             }
         },
         sectionCard = ThemeComponentProviders.provideSectionCardStyle().copy {
             dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-            iconStyle = iconStyle.copy {
-                tint = colors.onBackgroundPrimary
-            }
+            iconStyle = iconStyle.copy { tint = colors.primary }
             outfitTextHeader = outfitTextHeader?.copy {
-                outfitState = colors.onBackgroundPrimary.asStateSimple
+                outfitState = colors.neutral.asStateSimple
             }
             actionCardStyle = actionCardStyle.copy{
-                iconStyle = iconStyle.copy {
-                    tint = colors.onBackgroundAccent
-                }
+                iconStyle = iconStyle.copy { tint = colors.accent }
                 outfitTextTitle = outfitTextTitle?.copy {
-                    outfitState = colors.onBackgroundPrimary.asStateSimple
+                    outfitState = colors.primary.asStateSimple
                 }
                 outfitFrame = outfitFrame.copy{
                     outfitBorder = outfitBorder.copy {
-                        outfitState = colors.fade.asStateSimple
+                        outfitState = colors.decor.asStateSimple
                     }
                 }
             }

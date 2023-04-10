@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:49
+ *  Last modified 10/04/2023 13:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,19 +12,29 @@
 
 package com.tezov.bank.ui.page.auth.profile
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.branch.SectionActionRow
+import com.tezov.bank.ui.component.branch.SectionActionRow.Style.Companion.copy
+import com.tezov.bank.ui.component.leaf.ActionRow.Style.Companion.copy
 import com.tezov.bank.ui.theme.ThemeComponentProviders
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
+import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Image
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageProfileTheme.colors: PageProfileTheme.Colors
@@ -41,6 +51,14 @@ val PageProfileTheme.dimensions: PageProfileTheme.Dimensions
 
 infix fun PageProfileTheme.provides(value: PageProfileTheme.Dimensions) =
     localDimensions provides value
+
+val PageProfileTheme.shapes: PageProfileTheme.Shapes
+    @Composable
+    @ReadOnlyComposable
+    get() = localShapes.current
+
+infix fun PageProfileTheme.provides(value: PageProfileTheme.Shapes) = localShapes provides value
+
 
 val PageProfileTheme.borders: PageProfileTheme.Borders
     @Composable
@@ -68,17 +86,25 @@ object PageProfileTheme {
 
     data class Colors(
         val background: Color,
-        val textContent: Color,
-        val iconUser: Color,
-        val iconLogout: Color,
+        val backgroundElevated: Color,
+        val accent: Color,
+        val primary: Color,
+        val neutral: Color,
+        val decor: Color,
+        val fade: Color,
+        val dark: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
-        background = MaterialTheme.colors.background,
-        textContent = MaterialTheme.colors.primaryVariant,
-        iconUser = MaterialTheme.colors.primary,
-        iconLogout = MaterialTheme.colors.primary,
+        background = MaterialTheme.colorsExtended.background.default,
+        backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.default,
+        accent = MaterialTheme.colorsExtended.primary.accent,
+        primary = MaterialTheme.colorsExtended.primary.default,
+        neutral = MaterialTheme.colorsExtended.primary.shady,
+        decor = MaterialTheme.colorsExtended.primary.shiny.copy(alpha = 0.65f),
+        fade = MaterialTheme.colorsExtended.primary.fade,
+        dark = MaterialTheme.colorsExtended.primary.dark,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -86,14 +112,12 @@ object PageProfileTheme {
     }
 
     data class Dimensions(
-        val iconCloseSize: Dp,
-        val iconUserSize: Dp,
+        val sizeIconUser: DpSize,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
-        iconCloseSize = MaterialTheme.dimensionsIconExtended.modal.normal.width,
-        iconUserSize = 84.dp,
+        sizeIconUser = 84.dpSize,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -101,14 +125,26 @@ object PageProfileTheme {
             error("not provided")
         }
 
+    data class Shapes(
+        val icon: OutfitShapeStateColor,
+    )
+
+    @Composable
+    fun provideShapes() = Shapes(
+        icon = MaterialTheme.shapesExtended.icon.normal
+    )
+
+    internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
+        error("not provided")
+    }
+
     data class Borders(
-        val iconUser: BorderStroke,
+        val icon: OutfitBorderStateColor,
     )
 
     @Composable
     fun provideBorders() = Borders(
-//        iconUser = MaterialTheme.bordersExtended.strokeBig.resolveOrDefault(colors.iconUser)
-        iconUser = TODO()
+        icon = MaterialTheme.bordersExtended.icon.normal,
     )
 
     internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
@@ -116,20 +152,18 @@ object PageProfileTheme {
     }
 
     data class Typographies(
-        val title: TextStyle,
-        val normal: TextStyle,
+        val title: OutfitTextStateColor,
+        val body: OutfitTextStateColor,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesExtended.title.normal.typo.copy(
-            color = colors.textContent,
-            fontWeight = FontWeight.Bold
-        ),
-        normal = MaterialTheme.typographiesExtended.title.normal.typo.copy(
-            color = colors.textContent,
-            fontWeight = FontWeight.Bold
-        ),
+        title = MaterialTheme.typographiesExtended.title.big.copy {
+            outfitState = colors.primary.asStateSimple
+        },
+        body = MaterialTheme.typographiesExtended.body.normal.copy {
+            outfitState = colors.dark.asStateSimple
+        },
 
     )
 
@@ -140,13 +174,46 @@ object PageProfileTheme {
 
 
     data class Style(
+        val iconLogOut: Icon.StateColor.Style,
+        val iconUser: Image.StateColor.Style,
         val sectionRow: SectionActionRow.Style,
 
         )
 
     @Composable
     fun provideStyles() = Style(
-        sectionRow = ThemeComponentProviders.provideSectionRowStyle(),
+        iconLogOut = Icon.StateColor.Style(
+            size = MaterialTheme.dimensionsIconExtended.modal.big,
+            tint = colors.background,
+            outfitFrame = OutfitFrameStateColor(
+                outfitShape = shapes.icon.copy{
+                    outfitState = colors.primary.asStateSimple
+                }
+            )
+        ),
+        iconUser = Image.StateColor.Style(
+            size = dimensions.sizeIconUser,
+            outfitFrame = OutfitFrameStateColor(
+                outfitShape = shapes.icon,
+                outfitBorder = borders.icon.copy{
+                    outfitState = colors.decor.asStateSimple
+                }
+            )
+        ),
+        sectionRow = ThemeComponentProviders.provideSectionRowStyle().copy {
+            dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            outfitTextHeader = outfitTextHeader?.copy {
+                outfitState = colors.neutral.asStateSimple
+            }
+            colorDivider = colors.fade
+            actionRowStyle = actionRowStyle.copy{
+                iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
+                iconActionStyle = iconActionStyle.copy { tint = colors.accent }
+                outfitText = outfitText?.copy {
+                    outfitState = colors.primary.asStateSimple
+                }
+            }
+        },
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

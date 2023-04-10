@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:49
+ *  Last modified 10/04/2023 13:53
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -99,8 +99,7 @@ object PageAccountTheme {
 
     @Composable
     fun provideShapes() = Shapes(
-//        card = MaterialTheme.shapesExtended.roundedCornerNormal.resolveOrDefault(),
-        card = TODO(),
+        card = MaterialTheme.shapesExtended.element.normal.getShape() ?: MaterialTheme.shapes.small,
     )
 
     internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {

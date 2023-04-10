@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 00:50
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 00:39
+ *  Last modified 10/04/2023 13:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,6 +27,7 @@ import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable.loopOver
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
@@ -123,10 +124,8 @@ object SectionActionCard {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .also { modifier ->
-                            style.colorBackgroundHeader?.let {
-                                modifier.background(it)
-                            }
+                        .thenOnNotNull(style.colorBackgroundHeader){
+                            background(it)
                         }
                         .padding(vertical = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical),
                     verticalAlignment = Alignment.CenterVertically

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:49
+ *  Last modified 10/04/2023 13:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,11 +29,16 @@ import com.tezov.bank.R
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
+import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
+import com.tezov.bank.ui.page.lobby.login.styles
+import com.tezov.lib_core_android_kotlin.type.primaire.size
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Image
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 
 object PageProfile : Page<PageProfileState, PageProfileAction> {
 
@@ -52,6 +56,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
             ),
             parent = {
                 arrayOf(
+                    PageProfileTheme provides PageProfileTheme.provideShapes(),
                     PageProfileTheme provides PageProfileTheme.provideBorders(),
                     PageProfileTheme provides PageProfileTheme.provideTypographies(),
                 )
@@ -71,7 +76,6 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                     .verticalScroll(rememberScrollState())
             ) {
                 contentHeader(state.header)
-//                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
                 state.profils.value?.let {
                     SectionActionRow(data = it, style = PageProfileTheme.styles.sectionRow) {
 
@@ -116,34 +120,23 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                 onClick = {
 
                 }) {
-                Icon(
-                    modifier = Modifier.size(PageProfileTheme.dimensions.iconCloseSize),
-                    painter = painterResource(id = R.drawable.ic_logout_24dp),
-                    contentDescription = stringResource(id = R.string.pg_profile_icon_close),
-                    tint = PageProfileTheme.colors.iconLogout
+                Icon.StateColor(
+                    style = PageProfileTheme.styles.iconLogOut,
+                    resourceId =  R.drawable.ic_logout_24dp,
+                    description = stringResource(id = R.string.pg_profile_icon_close),
                 )
             }
             Row(modifier = Modifier.fillMaxWidth()) {
                 header.imageResourceId.value?.let {
-//                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.normal_v))
-                    Image(
-                        modifier = Modifier
-                            .size(PageProfileTheme.dimensions.iconUserSize)
-                            .clip(CircleShape)
-                            .border(
-                                PageProfileTheme.borders.iconUser,
-                                CircleShape
-                            ),
-                        painter = painterResource(id = it),
-                        contentScale = ContentScale.Crop,
-                        contentDescription = stringResource(id = R.string.pg_profile_icon_use)
+                    Image.StateColor(
+                        style = PageProfileTheme.styles.iconUser,
+                        resourceId = it,
+                        description = stringResource(id = R.string.pg_profile_icon_use)
                     )
                 }
                 header.name.value?.let {
-//                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.big_h))
-                    Text(
-                        modifier = Modifier
-                            .align(Alignment.Top),
+                    Text.StateColor(
+                        modifier = Modifier.align(Alignment.Top),
                         text = it,
                         style = PageProfileTheme.typographies.title
                     )

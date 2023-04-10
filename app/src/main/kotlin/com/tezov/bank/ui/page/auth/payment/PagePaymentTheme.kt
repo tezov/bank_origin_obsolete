@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:49
+ *  Last modified 10/04/2023 13:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,18 +18,25 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.branch.SectionActionCard
+import com.tezov.bank.ui.component.branch.SectionActionCard.Style.Companion.copy
+import com.tezov.bank.ui.component.leaf.ActionCard.Style.Companion.copy
 import com.tezov.bank.ui.theme.ThemeComponentProviders
+import com.tezov.bank.ui.theme.colorsPalette
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsIconExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesExtended
 
 val PagePaymentTheme.colors: PagePaymentTheme.Colors
@@ -66,17 +73,19 @@ object PagePaymentTheme {
 
     data class Colors(
         val background: Color,
-        val textTitle: Color,
-        val headerDivider: Color,
+        val backgroundElevated: Color,
+        val accent: Color,
+        val primary: Color,
+        val fade: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
-        background = MaterialTheme.colors.background,
-        textTitle = MaterialTheme.colors.primaryVariant,
-        headerDivider = MaterialTheme.colorsExtended.backgroundElevated.accent.copy(
-            alpha = 0.05f
-        ),
+        background = MaterialTheme.colorsExtended.background.default,
+        backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.default,
+        accent = MaterialTheme.colorsExtended.primary.accent,
+        primary = MaterialTheme.colorsExtended.primary.default,
+        fade = MaterialTheme.colorsPalette.grayLight,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -84,18 +93,18 @@ object PagePaymentTheme {
     }
 
     data class Dimensions(
-        val textTitleMin: TextUnit,
-        val textTitleMax: TextUnit,
-        val headerDividerSize: Dp,
-        val headerHeight: ColumnCollapsibleHeader.Properties,
+        val sizeTitleMin: TextUnit,
+        val sizeTitleMax: TextUnit,
+        val heightHeaderDivider: Dp,
+        val heightHeader: ColumnCollapsibleHeader.Properties,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
-        textTitleMin = 24.sp,
-        textTitleMax = 48.sp,
-        headerDividerSize = MaterialTheme.dimensionsCommonExtended.divider.normal,
-        headerHeight = ColumnCollapsibleHeader.Properties(48.dp, 150.dp)
+        sizeTitleMin = 24.sp,
+        sizeTitleMax = 48.sp,
+        heightHeaderDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
+        heightHeader = ColumnCollapsibleHeader.Properties(48.dp, 150.dp)
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -104,15 +113,14 @@ object PagePaymentTheme {
         }
 
     data class Typographies(
-        val title: TextStyle,
+        val titleHuge: OutfitTextStateColor,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesExtended.title.normal.typo.copy(
-            color = colors.textTitle,
-            fontWeight = FontWeight.Bold
-        ),
+        titleHuge = MaterialTheme.typographiesExtended.title.huge.copy {
+            outfitState = colors.primary.asStateSimple
+        },
     )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =
@@ -127,7 +135,27 @@ object PagePaymentTheme {
 
     @Composable
     fun provideStyles() = Style(
-        sectionCard = ThemeComponentProviders.provideSectionCardStyle(),
+        sectionCard = ThemeComponentProviders.provideSectionCardStyle().copy {
+            dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            iconStyle = iconStyle.copy { tint = colors.primary }
+            outfitTextHeader = outfitTextHeader?.copy {
+                outfitState = colors.primary.asStateSimple
+            }
+            actionCardStyle = actionCardStyle.copy{
+                iconStyle = iconStyle.copy { tint = colors.accent }
+                outfitTextTitle = outfitTextTitle?.copy {
+                    outfitState = colors.primary.asStateSimple
+                }
+                outfitTextSubtitle = outfitTextSubtitle?.copy {
+                    outfitState = colors.fade.asStateSimple
+                }
+                outfitFrame = outfitFrame.copy{
+                    outfitShape = outfitShape.copy {
+                        outfitState = colors.backgroundElevated.asStateSimple
+                    }
+                }
+            }
+        }
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

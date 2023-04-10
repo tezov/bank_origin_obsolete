@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:49
+ *  Last modified 10/04/2023 13:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -105,13 +105,12 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
 
                     }
                 }
-//                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.big_v))
-//                state.tips.value?.let {
-//                    SectionActionRow(data = it, style = PageDiscoverTheme.styles.sectionRow) {
-//
-//
-//                    }
-//                }
+                state.tips.value?.let {
+                    SectionActionRow(data = it, style = PageDiscoverTheme.styles.sectionRow) {
+
+
+                    }
+                }
             }
         }
     }

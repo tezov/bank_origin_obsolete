@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 10/04/2023 13:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:49
+ *  Last modified 10/04/2023 12:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,10 +18,15 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import com.tezov.bank.ui.component.branch.SectionActionRow
+import com.tezov.bank.ui.component.branch.SectionActionRow.Style.Companion.copy
+import com.tezov.bank.ui.component.leaf.ActionRow.Style.Companion.copy
+import com.tezov.bank.ui.page.lobby.help_and_service.colors
 import com.tezov.bank.ui.theme.ThemeComponentProviders
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageHelpTheme.colors: PageHelpTheme.Colors
@@ -50,15 +55,21 @@ object PageHelpTheme {
 
     data class Colors(
         val background: Color,
-        val textTitle: Color,
-        val textNormal: Color,
+        val backgroundElevated: Color,
+        val accent: Color,
+        val primary: Color,
+        val decor: Color,
+        val fade: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
-        background = MaterialTheme.colors.background,
-        textTitle = MaterialTheme.colors.primaryVariant,
-        textNormal = MaterialTheme.colors.onSecondary,
+        background = MaterialTheme.colorsExtended.background.default,
+        backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.default,
+        accent = MaterialTheme.colorsExtended.primary.accent,
+        primary = MaterialTheme.colorsExtended.primary.default,
+        decor = MaterialTheme.colorsExtended.backgroundElevated.decor,
+        fade = MaterialTheme.colorsExtended.primary.fade,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -66,24 +77,26 @@ object PageHelpTheme {
     }
 
     data class Typographies(
-        val titleHuge: TextStyle,
-        val titleBig: TextStyle,
-        val normal: TextStyle,
+        val titleHuge: OutfitTextStateColor,
+        val titleBig: OutfitTextStateColor,
+        val titleNormal: OutfitTextStateColor,
+        val bodyNormal: OutfitTextStateColor,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        titleHuge = MaterialTheme.typographiesExtended.title.normal.typo.copy(
-            color = colors.textTitle,
-            fontWeight = FontWeight.Bold
-        ),
-        titleBig = MaterialTheme.typographiesExtended.title.normal.typo.copy(
-            color = colors.textTitle,
-            fontWeight = FontWeight.SemiBold
-        ),
-        normal = MaterialTheme.typographiesExtended.title.normal.typo.copy(
-            color = colors.textNormal
-        ),
+        titleHuge = MaterialTheme.typographiesExtended.title.huge.copy {
+            outfitState = colors.primary.asStateSimple
+        },
+        titleBig = MaterialTheme.typographiesExtended.title.big.copy {
+            outfitState = colors.primary.asStateSimple
+        },
+        titleNormal = MaterialTheme.typographiesExtended.title.normal.copy {
+            outfitState = colors.primary.asStateSimple
+        },
+        bodyNormal = MaterialTheme.typographiesExtended.body.normal.copy {
+            outfitState = colors.primary.asStateSimple
+        },
     )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =
@@ -93,12 +106,25 @@ object PageHelpTheme {
 
     data class Style(
         val sectionRow: SectionActionRow.Style,
-
-        )
+    )
 
     @Composable
     fun provideStyles() = Style(
-        sectionRow = ThemeComponentProviders.provideSectionRowStyle(),
+        sectionRow = ThemeComponentProviders.provideSectionRowStyle().copy {
+            dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            iconStyle = iconStyle.copy { tint = colors.accent }
+            outfitTextHeader = outfitTextHeader?.copy {
+                outfitState = colors.primary.asStateSimple
+            }
+            colorDivider = colors.fade
+            actionRowStyle = actionRowStyle.copy{
+                iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
+                iconActionStyle = iconActionStyle.copy { tint = colors.accent }
+                outfitText = outfitText?.copy {
+                    outfitState = colors.primary.asStateSimple
+                }
+            }
+        },
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
