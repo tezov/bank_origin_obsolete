@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 12/04/2023 21:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 19/02/2023 20:50
+ *  Last modified 12/04/2023 21:06
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,77 +13,73 @@
 package com.tezov.bank.ui.page.auth.discover
 
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.snapshots.SnapshotStateList
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
+import com.tezov.bank.ui.component.leaf.CarouselCard
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageDiscoverState private constructor(
-//    val cardWithButtonData: MutableState<List<CarouselCard.Data>?>,
-//    val cardWithLinkData: MutableState<List<CarouselCard.Data>?>,
+    val cardWithButtonData: MutableState<List<CarouselCard.Data>?>,
+    val cardWithLinkData: MutableState<List<CarouselCard.Data>?>,
     val offers: MutableState<SectionActionCard.Data?>,
     val tips: MutableState<SectionActionRow.Data?>,
 ) : PageState {
 
     companion object {
         fun create(
-//            cardWithButtonData: MutableState<List<CarouselCard.Data>?> = mutableStateOf(null),
-//            cardWithLinkData: MutableState<List<CarouselCard.Data>?> = mutableStateOf(null),
+            cardWithButtonData: MutableState<List<CarouselCard.Data>?> = mutableStateOf(null),
+            cardWithLinkData: MutableState<List<CarouselCard.Data>?> = mutableStateOf(null),
             offers: MutableState<SectionActionCard.Data?> = mutableStateOf(null),
             tips: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
         ) = PageDiscoverState(
-//            cardWithButtonData = cardWithButtonData,
-//            cardWithLinkData = cardWithLinkData,
+            cardWithButtonData = cardWithButtonData,
+            cardWithLinkData = cardWithLinkData,
             offers = offers,
             tips = tips,
         )
     }
 
     init {
-//        cardWithButtonData.value =  listOf(
-//            CarouselCard.Data(
-//                tag = "100 euros offerts",
-//                title = "Parrainez un proche...",
-//                text = "Jusqu'au 9 février, c'est 100€ pour vous et 80€ pour vos filleuls à chaque parrainage validé.",
-//                button = "Parrainer",
-//                iconInfoResourceId = R.drawable.ic_call_24dp
-//            ),
-//            CarouselCard.Data(
-//                title = "Roulez vert !",
-//                text = "Grâce au Prêt Véhicule Vert, financez l'achat de votre véhicule peu polluant.",
-//                button = "Découvrir",
-//                iconInfoResourceId = R.drawable.ic_call_24dp
-//            ),
-//        )
-//
-//        cardWithLinkData.value = listOf(
-//            CarouselCard.Data(
-//                template = CarouselCard.Template.Link,
-//                title = "Envie de vous faire plaisir en vacances ?",
-//                text = "Avec les 2 cartes Visa Hello Prime et les 2 cartes virtuelles de l'offre Hello Prime Duo, réglez vos hôtel et cocktails !",
-//                button = "En savoir plus",
-//                iconInfoResourceId = R.drawable.ic_call_24dp
-//            ),
-//            CarouselCard.Data(
-//                template = CarouselCard.Template.Link,
-//                title = "Vous voulez vous lancer en bourse ?",
-//                text = "Profitez de l'espace complet dédié à la Bourse dans notre appli.",
-//                button = "En savoir plus",
-//                iconInfoResourceId = R.drawable.ic_call_24dp
-//            ),
-//            CarouselCard.Data(
-//                template = CarouselCard.Template.Link,
-//                title = "Envie de donner du sens à votre épargne ?",
-//                text = "L'Assurance Vie Hello! permet d'investir de manière responsable dans des fonds ISR.",
-//                button = "En savoir plus",
-//                iconInfoResourceId = R.drawable.ic_call_24dp
-//            ),
-//        )
+        cardWithButtonData.value =  listOf(
+            CarouselCard.Data(
+                tag = "100 euros offerts",
+                title = "Parrainez un proche...",
+                body = "Jusqu'au 9 février, c'est 100€ pour vous et 80€ pour vos filleuls à chaque parrainage validé.",
+                action = "Parrainer",
+                iconInfoResourceId = R.drawable.ic_call_24dp
+            ),
+            CarouselCard.Data(
+                title = "Roulez vert !",
+                body = "Grâce au Prêt Véhicule Vert, financez l'achat de votre véhicule peu polluant.",
+                action = "Découvrir",
+                iconInfoResourceId = R.drawable.ic_call_24dp
+            ),
+        )
+
+        cardWithLinkData.value = listOf(
+            CarouselCard.Data(
+                title = "Envie de vous faire plaisir en vacances ?",
+                body = "Avec les 2 cartes Visa Hello Prime et les 2 cartes virtuelles de l'offre Hello Prime Duo, réglez vos hôtel et cocktails !",
+                action = "En savoir plus",
+                iconInfoResourceId = R.drawable.ic_call_24dp
+            ),
+            CarouselCard.Data(
+                title = "Vous voulez vous lancer en bourse ?",
+                body = "Profitez de l'espace complet dédié à la Bourse dans notre appli.",
+                action = "En savoir plus",
+                iconInfoResourceId = R.drawable.ic_call_24dp
+            ),
+            CarouselCard.Data(
+                title = "Envie de donner du sens à votre épargne ?",
+                body = "L'Assurance Vie Hello! permet d'investir de manière responsable dans des fonds ISR.",
+                action = "En savoir plus",
+                iconInfoResourceId = R.drawable.ic_call_24dp
+            ),
+        )
 
         offers.value = SectionActionCard.Data(
             title = "Toute l'offre Hello bank!",

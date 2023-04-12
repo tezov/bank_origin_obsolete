@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 12/04/2023 21:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:25
+ *  Last modified 11/04/2023 21:41
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
@@ -141,6 +142,16 @@ object OutfitShape {
 
                 inline val Int.asStateColor: OutfitShapeStateColor
                     get() = OutfitShapeStateColor(size = this.asShapeSize)
+
+                inline val OutfitStateSimple<ColorImport>.asStateColor: OutfitShapeStateColor
+                    get() = OutfitShapeStateColor(size = 0.dp.asShapeSize, outfitState = this)
+
+                inline val OutfitStateDual<ColorImport>.asStateColor: OutfitShapeStateColor
+                    get() = OutfitShapeStateColor(size = 0.dp.asShapeSize, outfitState = this)
+
+                inline val OutfitStateSemantic<ColorImport>.asStateColor: OutfitShapeStateColor
+                    get() = OutfitShapeStateColor(size = 0.dp.asShapeSize, outfitState = this)
+
 
             }
 

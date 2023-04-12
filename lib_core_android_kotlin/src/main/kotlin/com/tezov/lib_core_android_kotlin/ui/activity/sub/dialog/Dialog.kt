@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 12/04/2023 21:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:30
+ *  Last modified 11/04/2023 21:41
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -119,7 +119,7 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
         private fun content(content: @Composable () -> Unit) {
             Surface(
                 color = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.resolveColorShape() ?: MaterialTheme.colors.surface,
-                shape = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.getShape() ?: RectangleShape,
+                shape = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.getShape() ?: MaterialTheme.shapes.small,
                 elevation = MaterialTheme.componentsCommonExtended.dialogCard.elevation,
                 border = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.resolveBorder()
             ) {
