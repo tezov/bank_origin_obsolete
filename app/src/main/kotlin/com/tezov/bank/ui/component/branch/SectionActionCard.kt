@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 13:55
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 13:51
+ *  Last modified 14/04/2023 21:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -126,21 +126,21 @@ object SectionActionCard {
                         .fillMaxWidth()
                         .thenOnNotNull(style.colorBackgroundHeader){
                             background(it)
-                        }
-                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical),
+                        },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.chunk.normal.horizontal))
+                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.element.small.horizontal))
                     data.iconResourceId?.let {
                         Icon.Simple(
                             modifier = Modifier
-                                .padding(end = MaterialTheme.dimensionsPaddingExtended.chunk.big.vertical),
+                                .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                             style = style.iconStyle,
                             resourceId = it,
                             description = text,
                         )
                     }
                     Text.StateColor(
+                        modifier = Modifier.padding(vertical = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
                         text = text,
                         style = style.outfitTextHeader
                     )
@@ -149,16 +149,12 @@ object SectionActionCard {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .also { modifier ->
-                        style.colorBackgroundBody?.let {
-                            modifier.background(it)
-                        }
-                    }
-                    .padding(
-                        vertical = MaterialTheme.dimensionsPaddingExtended.block.normal.vertical,
+                    .thenOnNotNull(style.colorBackgroundBody){
+                        background(it)
+                    }.padding(
                         horizontal = style.dimensionPaddingBody
                     ),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.block.big.vertical),
             ) {
                 data.cards.loopOver {
                     val first = next
@@ -229,7 +225,7 @@ object SectionActionCard {
             modifier = Modifier
                 .height(IntrinsicSize.Max)
                 .fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical),
+            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.block.big.vertical),
         ) {
             ActionCard(
                 modifier = Modifier

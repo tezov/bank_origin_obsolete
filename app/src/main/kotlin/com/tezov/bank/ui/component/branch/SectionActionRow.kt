@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 00:50
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 00:14
+ *  Last modified 14/04/2023 20:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -133,21 +133,21 @@ object SectionActionRow {
                         .fillMaxWidth()
                         .thenOnNotNull(style.colorBackgroundHeader) {
                             modifier.background(it)
-                        }
-                        .padding(vertical = MaterialTheme.dimensionsPaddingExtended.chunk.big.vertical),
+                        },
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.chunk.big.horizontal))
+                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.element.small.horizontal))
                     data.iconResourceId?.let {
                         Icon.Simple(
                             modifier = Modifier
-                                .padding(end = MaterialTheme.dimensionsPaddingExtended.chunk.normal.horizontal),
+                                .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                             style = style.iconStyle,
                             resourceId = it,
                             description = text,
                         )
                     }
                     Text.StateColor(
+                        modifier = Modifier.padding(vertical = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
                         text = text,
                         style = style.outfitTextHeader
                     )
@@ -156,26 +156,26 @@ object SectionActionRow {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .also { modifier ->
-                        style.colorBackgroundBody?.let {
-                            modifier.background(it)
-                        }
-                    }
-                    .padding(
-                        vertical = MaterialTheme.dimensionsPaddingExtended.block.normal.vertical,
-                        horizontal = style.dimensionPaddingBody
-                    ),
-                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.chunk.normal.vertical),
+                    .thenOnNotNull(style.colorBackgroundBody) {
+                        background(it)
+                    },
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
             ) {
                 data.rows.forEachIndexed { index, row ->
-                    ActionRow(data = row, style = style.actionRowStyle) {
+                    ActionRow(
+                        modifier = Modifier
+                            .padding(
+                                horizontal = style.dimensionPaddingBody
+                            ),
+                        data = row, style = style.actionRowStyle
+                    ) {
                         onClick(index)
                     }
                     if (style.dimensionDivider > 0.dp && style.colorDivider != null && index != data.rows.lastIndex) {
                         Divider(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(start = MaterialTheme.dimensionsPaddingExtended.chunk.big.horizontal),
+                                .padding(start = style.dimensionPaddingBody + MaterialTheme.dimensionsPaddingExtended.element.big.horizontal),
                             color = style.colorDivider,
                             thickness = style.dimensionDivider,
                         )

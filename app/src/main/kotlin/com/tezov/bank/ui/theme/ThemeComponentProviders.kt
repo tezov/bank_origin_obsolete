@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 13:55
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 13:32
+ *  Last modified 14/04/2023 22:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,6 @@
 
 package com.tezov.bank.ui.theme
 
-import android.util.Log
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -24,10 +23,10 @@ import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
-import com.tezov.bank.ui.theme.font.fontUbuntu
+import com.tezov.bank.ui.theme.font.fontIbm
+import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
-import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
@@ -52,9 +51,9 @@ object ThemeComponentProviders {
         topAppBar = TopAppBar.Style(),
         bottomNavigation = BottomNavigation.Style(
             outfitText  = TextStyle(
-                fontFamily = MaterialTheme.fontUbuntu,
+                fontFamily = MaterialTheme.fontRoboto,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 12.sp
+                fontSize = 12.5.sp
             ).asTextStateColor,
             colorBackground  = MaterialTheme.colorsPalette.whiteShady,
             outfitColor  = OutfitStateDual(
@@ -66,7 +65,7 @@ object ThemeComponentProviders {
             elevation = 2.dp,
             outfitFrame = OutfitFrameStateColor(
                 outfitBorder = OutfitBorderStateColor(
-                    size = 2.dp,
+                    size = 1.2.dp,
                     outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple,
                 ),
                 outfitShape = OutfitShapeStateColor(
@@ -79,17 +78,17 @@ object ThemeComponentProviders {
         snackBar = Snackbar.Style(
             outfitTextMessage = OutfitTextStateColor(
                 typo = TextStyle(
-                    fontFamily = MaterialTheme.fontUbuntu,
-                    fontWeight = FontWeight.Normal,
-                    fontSize = 19.sp
+                    fontFamily = MaterialTheme.fontIbm,
+                    fontWeight = FontWeight.SemiBold,
+                    fontSize = 14.sp
                 ),
                 outfitState = MaterialTheme.colorsExtended.onBackgroundModal.dark.asStateSimple,
             ),
             outfitTextAction = OutfitTextStateColor(
                 typo = TextStyle(
-                    fontFamily = MaterialTheme.fontUbuntu,
+                    fontFamily = MaterialTheme.fontIbm,
                     fontWeight = FontWeight.Bold,
-                    fontSize = 19.sp
+                    fontSize = 14.sp
                 ),
                 outfitState = MaterialTheme.colorsExtended.onBackgroundModal.dark.asStateSimple,
             ),
@@ -168,6 +167,14 @@ object ThemeComponentProviders {
             }
         ),
         secondary = Link.StateColor.Style(
+            outfitText = MaterialTheme.typographiesExtended.link.big.copy {
+                outfitState = OutfitStateDual(
+                    active = MaterialTheme.colorsExtended.primary.default,
+                    inactive = MaterialTheme.colorsPalette.grayLight,
+                )
+            }
+        ),
+        tertiary = Link.StateColor.Style(
             outfitText = MaterialTheme.typographiesExtended.link.small.copy {
                 outfitState = OutfitStateDual(
                     active = MaterialTheme.colorsExtended.primary.default,
@@ -227,13 +234,13 @@ object ThemeComponentProviders {
             outfitBorder = MaterialTheme.bordersExtended.element.normal
         ),
         iconStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsIconExtended.info.big,
+            size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
-        outfitTextTitle = MaterialTheme.typographiesExtended.title.small.copy {
+        outfitTextTitle = MaterialTheme.typographiesExtended.title.big.copy {
             outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
             typo = typo.copy(
-                fontWeight = FontWeight.SemiBold
+                fontWeight = FontWeight.Bold
             )
         },
         outfitTextSubtitle = MaterialTheme.typographiesExtended.body.normal.copy {
@@ -245,8 +252,8 @@ object ThemeComponentProviders {
     fun pagerStyle() = HorizontalScrollable.Pager.Style(
         outfitShapeIndicator = OutfitShapeStateColor(
             outfitState = OutfitStateDual(
-                active = MaterialTheme.colorsExtended.primary.default,
-                inactive = MaterialTheme.colorsExtended.primary.default.copy(alpha = 0.5f),
+                active = MaterialTheme.colorsExtended.primary.accent,
+                inactive = MaterialTheme.colorsExtended.primary.default.copy(alpha = 0.6f),
             )
         ),
         dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,

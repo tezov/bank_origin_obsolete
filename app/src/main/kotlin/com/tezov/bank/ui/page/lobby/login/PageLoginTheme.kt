@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 17:41
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 17:23
+ *  Last modified 14/04/2023 22:41
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -104,7 +104,7 @@ object PageLoginTheme {
         onBackgroundDropDownMenu = MaterialTheme.colorsExtended.onBackgroundModal.default,
         dark = MaterialTheme.colorsExtended.primary.default,
         light = MaterialTheme.colorsExtended.primary.shiny.copy(alpha = 0.65f),
-        fade = MaterialTheme.colorsPalette.grayLightOverlay,
+        fade = MaterialTheme.colorsExtended.primary.fade.copy(alpha = 0.35f),
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -179,8 +179,11 @@ object PageLoginTheme {
         },
         huge = MaterialTheme.typographiesExtended.title.huge.copy {
             outfitState = colors.onBackground.asStateSimple
+            typo = typo.copy(
+                fontWeight = FontWeight.Bold
+            )
         },
-        body = MaterialTheme.typographiesExtended.helper.small.copy {
+        body = MaterialTheme.typographiesExtended.helper.big.copy {
             outfitState = colors.onBackground.asStateSimple
         },
         dropDownMenu = MaterialTheme.typographiesExtended.menu.normal.copy {
@@ -211,7 +214,7 @@ object PageLoginTheme {
             outfitShapeIndicator = OutfitShapeStateColor(
                 outfitState = OutfitStateDual(
                     active = colors.dark,
-                    inactive = colors.dark.copy(alpha = 0.60f),
+                    inactive = colors.dark.copy(alpha = 0.45f),
                 )
             )
         },
@@ -249,7 +252,7 @@ object PageLoginTheme {
                 outfitState = colors.onBackground.asStateSimple
             }
         },
-        link = MaterialTheme.componentsLinkExtended.primary.copy{
+        link = MaterialTheme.componentsLinkExtended.secondary.copy{
             outfitText = outfitText.copy {
                 outfitState = colors.onBackground.asStateSimple
             }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 13:55
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 13:39
+ *  Last modified 14/04/2023 20:06
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,6 +30,8 @@ import com.tezov.lib_core_android_kotlin.ui.component.plain.Image
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asFrameStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -183,13 +185,11 @@ object PageProfileTheme {
     @Composable
     fun provideStyles() = Style(
         iconLogOut = Icon.StateColor.Style(
-            size = MaterialTheme.dimensionsIconExtended.modal.big,
+            size = MaterialTheme.dimensionsIconExtended.modal.normal,
             tint = colors.background,
-            outfitFrame = OutfitFrameStateColor(
-                outfitShape = shapes.icon.copy{
-                    outfitState = colors.primary.asStateSimple
-                }
-            )
+            outfitFrame = shapes.icon.copy{
+                outfitState = colors.primary.asStateSimple
+            }.asFrameStateColor
         ),
         iconUser = Image.StateColor.Style(
             size = dimensions.sizeIconUser,

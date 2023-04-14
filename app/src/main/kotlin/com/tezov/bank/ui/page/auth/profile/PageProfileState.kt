@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/02/2023 19:39
+ *  Last modified 14/04/2023 20:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -59,7 +59,7 @@ class PageProfileState private constructor(
     init {
 
         header.apply {
-            name.value = "M.Zollver"
+            name.value = "M. Zollver"
             imageResourceId.value = R.drawable.img_suitcase_blue
         }
 

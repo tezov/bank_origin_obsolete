@@ -2,7 +2,7 @@
  *  *********************************************************************************
  *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 19:35
+ *  Last modified 14/04/2023 19:41
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,26 +22,24 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import com.tezov.bank.R
 
-val MaterialTheme.fontRoboto: FontFamily
+val MaterialTheme.fontIbm: FontFamily
     @Composable
     @ReadOnlyComposable
-    get() = FontRoboto.local.current.value
+    get() = FontIbm.local.current.value
 
-object FontRoboto {
+object FontIbm{
     val local = compositionLocalOf {
         lazy {
             FontFamily(
-                Font(R.font.roboto_thin, weight = FontWeight.Light, style = FontStyle.Normal),
-                Font(R.font.roboto_thin_italic, weight = FontWeight.Light, style = FontStyle.Italic),
-                Font(R.font.roboto_light, weight = FontWeight.Normal, style = FontStyle.Normal),
-                Font(R.font.roboto_light_italic, weight = FontWeight.Normal, style = FontStyle.Italic),
-                Font(R.font.roboto_regular, weight = FontWeight.SemiBold, style = FontStyle.Normal),
-                Font(R.font.roboto_italic, weight = FontWeight.SemiBold, style = FontStyle.Italic),
-                Font(R.font.roboto_bold, weight = FontWeight.Bold, style = FontStyle.Normal),
-                Font(R.font.roboto_bold_italic, weight = FontWeight.Bold, style = FontStyle.Italic),
+                Font(R.font.ibm_thin, weight = FontWeight.Light, style = FontStyle.Normal),
+                Font(R.font.ibm_thin_italic, weight = FontWeight.Light, style = FontStyle.Italic),
+                Font(R.font.ibm_light, weight = FontWeight.Normal, style = FontStyle.Normal),
+                Font(R.font.ibm_light_italic, weight = FontWeight.Normal, style = FontStyle.Italic),
+                Font(R.font.ibm_regular, weight = FontWeight.SemiBold, style = FontStyle.Normal),
+                Font(R.font.ibm_italic, weight = FontWeight.SemiBold, style = FontStyle.Italic),
+                Font(R.font.ibm_semibold, weight = FontWeight.Bold, style = FontStyle.Normal),
+                Font(R.font.ibm_semibold_italic, weight = FontWeight.Bold, style = FontStyle.Italic),
             )
         }
     }
 }
-
-

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 21:33
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 21:25
+ *  Last modified 14/04/2023 22:20
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,9 +24,9 @@ object ThemeDimensionProviders {
 
     fun common() = ThemeDimensionsExtended.Common(
         elevation = OutfitPaletteSize(
-            normal = 4.dp,
-            small = 2.dp,
-            big = 6.dp,
+            normal = 2.dp,
+            small = 1.5.dp,
+            big = 3.5.dp,
         ),
         divider = OutfitPaletteSize(
             normal = 1.dp,
@@ -38,17 +38,9 @@ object ThemeDimensionProviders {
     fun paddings() = ThemeDimensionsExtended.Paddings(
         page = OutfitPaletteSize(
             normal = OutfitPaletteDirection(
-                vertical = 6.dp,
-                horizontal = 8.dp
+                vertical = 8.dp,
+                horizontal = 10.dp
             ),
-            big = OutfitPaletteDirection(
-                vertical = 10.dp,
-                horizontal = 14.dp
-            ),
-            huge = OutfitPaletteDirection(
-                vertical = 16.dp,
-                horizontal = 20.dp
-            )
         ),
         cluster = OutfitPaletteSize(
             normal = OutfitPaletteDirection(
@@ -58,40 +50,44 @@ object ThemeDimensionProviders {
         ),
         block = OutfitPaletteSize(
             normal = OutfitPaletteDirection(
-                vertical = 14.dp,
-                horizontal = 8.dp
-            ),
-        ),
-        element = OutfitPaletteSize(
-            normal = OutfitPaletteDirection(
-                vertical = 6.dp,
-                horizontal = 8.dp
+                vertical = 10.dp,
+                horizontal = 6.dp
             ),
             big = OutfitPaletteDirection(
                 vertical = 16.dp,
                 horizontal = 10.dp
             ),
             huge = OutfitPaletteDirection(
-                vertical = 24.dp,
-                horizontal = 16.dp
+                vertical = 22.dp,
+                horizontal = 14.dp
+            ),
+        ),
+        element = OutfitPaletteSize(
+            small = OutfitPaletteDirection(
+                vertical = 3.dp,
+                horizontal = 4.dp
+            ),
+            normal = OutfitPaletteDirection(
+                vertical = 6.dp,
+                horizontal = 8.dp
+            ),
+            big = OutfitPaletteDirection(
+                vertical = 12.dp,
+                horizontal = 14.dp
+            ),
+            huge = OutfitPaletteDirection(
+                vertical = 18.dp,
+                horizontal = 24.dp
             ),
             supra = OutfitPaletteDirection(
-                vertical = 48.dp,
-                horizontal = 24.dp
+                vertical = 24.dp,
+                horizontal = 30.dp
             )
         ),
         chunk = OutfitPaletteSize(
             normal = OutfitPaletteDirection(
                 vertical = 4.dp,
                 horizontal = 3.dp
-            ),
-            small = OutfitPaletteDirection(
-                vertical = 3.dp,
-                horizontal = 2.dp
-            ),
-            big = OutfitPaletteDirection(
-                vertical = 5.dp,
-                horizontal = 4.dp
             )
         ),
         button = OutfitPaletteDirection(
@@ -117,9 +113,10 @@ object ThemeDimensionProviders {
     fun icons() = ThemeDimensionsExtended.Icons(
         modal = 42.dpSize.asPaletteSize,
         info = OutfitPaletteSize(
-            normal = 28.dpSize,
-            small = 20.dpSize,
-            big = 36.dpSize,
+            normal = 36.dpSize,
+            small = 28.dpSize,
+            big = 54.dpSize,
+            huge = 86.dpSize,
         ),
         action = 22.dpSize.asPaletteSize,
         fieldInfo = 32.dpSize.asPaletteSize,

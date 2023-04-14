@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 13:55
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 12:36
+ *  Last modified 14/04/2023 20:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,6 @@ import androidx.compose.ui.graphics.Color
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.component.branch.SectionActionRow.Style.Companion.copy
 import com.tezov.bank.ui.component.leaf.ActionRow.Style.Companion.copy
-import com.tezov.bank.ui.page.lobby.help_and_service.colors
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -77,24 +76,24 @@ object PageHelpTheme {
     }
 
     data class Typographies(
-        val titleHuge: OutfitTextStateColor,
-        val titleBig: OutfitTextStateColor,
-        val titleNormal: OutfitTextStateColor,
-        val bodyNormal: OutfitTextStateColor,
+        val headline: OutfitTextStateColor,
+        val subHeadline: OutfitTextStateColor,
+        val title: OutfitTextStateColor,
+        val body: OutfitTextStateColor,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        titleHuge = MaterialTheme.typographiesExtended.title.huge.copy {
+        headline = MaterialTheme.typographiesExtended.title.supra.copy {
             outfitState = colors.primary.asStateSimple
         },
-        titleBig = MaterialTheme.typographiesExtended.title.big.copy {
+        subHeadline = MaterialTheme.typographiesExtended.title.huge.copy {
             outfitState = colors.primary.asStateSimple
         },
-        titleNormal = MaterialTheme.typographiesExtended.title.normal.copy {
+        title = MaterialTheme.typographiesExtended.title.normal.copy {
             outfitState = colors.primary.asStateSimple
         },
-        bodyNormal = MaterialTheme.typographiesExtended.body.normal.copy {
+        body = MaterialTheme.typographiesExtended.body.normal.copy {
             outfitState = colors.primary.asStateSimple
         },
     )

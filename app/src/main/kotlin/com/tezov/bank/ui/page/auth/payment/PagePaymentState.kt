@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/02/2023 14:33
+ *  Last modified 14/04/2023 21:23
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -57,19 +57,19 @@ class PagePaymentState private constructor(
             template = ActionCard.Template.IconTopEnd,
             cards = listOf(
                 ActionCard.Data(
-                    title = "Partager mon RIB",
+                    title = "Partager\nmon RIB",
                     iconResourceId = R.drawable.img_rib_share
                 ),
                 ActionCard.Data(
-                    title = "Faire un virement",
+                    title = "Faire\nun virement",
                     iconResourceId = R.drawable.img_transfer_money
                 ),
                 ActionCard.Data(
-                    title = "Gérer mes chèques",
+                    title = "Gérer\nmes chèques",
                     iconResourceId = R.drawable.img_cheque_manage
                 ),
                 ActionCard.Data(
-                    title = "Gérer mes cartes",
+                    title = "Gérer\nmes cartes",
                     iconResourceId = R.drawable.img_card_manage
                 ),
             )

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 13:55
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 13:32
+ *  Last modified 14/04/2023 21:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,10 +34,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.S
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PagePaymentTheme.colors: PagePaymentTheme.Colors
     @Composable
@@ -85,7 +82,7 @@ object PagePaymentTheme {
         backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.default,
         accent = MaterialTheme.colorsExtended.primary.accent,
         primary = MaterialTheme.colorsExtended.primary.default,
-        fade = MaterialTheme.colorsPalette.grayLight,
+        fade = MaterialTheme.colorsExtended.primary.fade,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -93,18 +90,18 @@ object PagePaymentTheme {
     }
 
     data class Dimensions(
-        val sizeTitleMin: TextUnit,
-        val sizeTitleMax: TextUnit,
+        val sizeHeadLineMin: TextUnit,
+        val sizeHeadlineMax: TextUnit,
         val heightHeaderDivider: Dp,
         val heightHeader: ColumnCollapsibleHeader.Properties,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
-        sizeTitleMin = 24.sp,
-        sizeTitleMax = 48.sp,
+        sizeHeadLineMin = 24.sp,
+        sizeHeadlineMax = 54.sp,
         heightHeaderDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
-        heightHeader = ColumnCollapsibleHeader.Properties(48.dp, 150.dp)
+        heightHeader = ColumnCollapsibleHeader.Properties(60.dp, 152.dp)
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -113,12 +110,12 @@ object PagePaymentTheme {
         }
 
     data class Typographies(
-        val titleHuge: OutfitTextStateColor,
+        val headline: OutfitTextStateColor,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        titleHuge = MaterialTheme.typographiesExtended.title.huge.copy {
+        headline = MaterialTheme.typographiesExtended.title.supra.copy {
             outfitState = colors.primary.asStateSimple
         },
     )
@@ -142,7 +139,10 @@ object PagePaymentTheme {
                 outfitState = colors.primary.asStateSimple
             }
             actionCardStyle = actionCardStyle.copy{
-                iconStyle = iconStyle.copy { tint = colors.accent }
+                iconStyle = iconStyle.copy {
+                    tint = colors.accent
+                    size = MaterialTheme.dimensionsIconExtended.info.huge
+                }
                 outfitTextTitle = outfitTextTitle?.copy {
                     outfitState = colors.primary.asStateSimple
                 }
