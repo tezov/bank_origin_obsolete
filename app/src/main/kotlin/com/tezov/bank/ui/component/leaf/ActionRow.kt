@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 00:50
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 00:39
+ *  Last modified 14/04/2023 20:22
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,12 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
@@ -114,10 +112,7 @@ object ActionRow {
                 .thenOnNotNull(style.background) {
                     background(it)
                 }
-                .clickable { onClick() }
-                .padding(
-                    vertical = MaterialTheme.dimensionsPaddingExtended.block.normal.vertical,
-                ),
+                .clickable { onClick() },
             verticalAlignment = Alignment.CenterVertically
         ) {
             data.iconInfoResourceId?.let {
@@ -130,7 +125,10 @@ object ActionRow {
             }
             Text.StateColor(
                 modifier = Modifier
-                    .weight(1f),
+                    .weight(1f)
+                    .padding(
+                        vertical = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical,
+                    ),
                 text = data.title,
                 style = style.outfitText
             )

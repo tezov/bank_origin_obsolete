@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 13:55
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 12:39
+ *  Last modified 14/04/2023 22:17
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,19 +20,24 @@ import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
 
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.type.primaire.size
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Shadow
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceAction> {
@@ -63,13 +68,13 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                     .padding(innerPadding)
                     .background(MaterialTheme.colorsExtended.background.default)
             ) {
-                Box(
+                Column(
                     modifier = Modifier
                         .fillMaxWidth()
                 ) {
                     IconButton(
                         modifier = Modifier
-                            .align(Alignment.TopStart),
+                            .align(Alignment.Start),
                         onClick = { action.close() }) {
                         Icon(
                             modifier = Modifier.size(MaterialTheme.dimensionsIconExtended.modal.normal),
@@ -78,7 +83,9 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                             tint = PageHelpAndServiceTheme.colors.accent,
                         )
                     }
+                    Shadow.Bottom(elevation = MaterialTheme.dimensionsCommonExtended.elevation.normal)
                 }
+
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -91,6 +98,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
                         }
                     }
+                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
                     state.contacts.value?.let {
                         SectionActionRow(data = it, style = PageHelpAndServiceTheme.styles.sectionRow){
 
@@ -103,6 +111,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
                         }
                     }
+                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
                 }
             }
         }
@@ -114,6 +123,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     ) {
         header.headline.value?.let{
             Text.StateColor(
+                modifier = Modifier.padding(MaterialTheme.dimensionsPaddingExtended.page.normal),
                 text = it,
                 style = MaterialTheme.typographiesExtended.title.supra
             )

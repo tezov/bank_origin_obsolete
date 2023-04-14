@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 22:55
+ *  Created by Tezov on 15/04/2023 11:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 22:29
+ *  Last modified 15/04/2023 11:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,30 +12,27 @@
 
 package com.tezov.bank.ui.dialog.lobby.login.auth
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.Dp
-import com.tezov.bank.ui.page.lobby.login.colors
-import com.tezov.bank.ui.theme.ThemeColorProviders
-import com.tezov.bank.ui.theme.colorsPalette
+import androidx.compose.ui.text.style.TextAlign
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val DialogLoginAuthTheme.colors: DialogLoginAuthTheme.Colors
@@ -59,7 +56,8 @@ val DialogLoginAuthTheme.styles: DialogLoginAuthTheme.Style
     @ReadOnlyComposable
     get() = localStyles.current
 
-infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Style) = localStyles provides value
+infix fun DialogLoginAuthTheme.provides(value: DialogLoginAuthTheme.Style) =
+    localStyles provides value
 
 object DialogLoginAuthTheme {
 
@@ -73,11 +71,11 @@ object DialogLoginAuthTheme {
 
     @Composable
     fun provideColors() = Colors(
-        background = ThemeColorProviders.Palette.blackOverlay,
-        onBackground = MaterialTheme.colorsExtended.onPrimary.accent,
-        dark = MaterialTheme.colorsExtended.primary.fade,
+        background = MaterialTheme.colorsExtended.background.dark,
+        onBackground = MaterialTheme.colorsExtended.onBackground.dark,
+        dark = MaterialTheme.colorsExtended.primary.default,
         light = MaterialTheme.colorsExtended.primary.accent,
-        fade = MaterialTheme.colorsPalette.grayLight,
+        fade = MaterialTheme.colorsExtended.primary.fade,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -85,22 +83,23 @@ object DialogLoginAuthTheme {
     }
 
     data class Typographies(
-        val title: TextStyle,
-        val fieldValue: TextStyle,
-        val fieldLabel: TextStyle,
+        val title: OutfitTextStateColor,
+        val input: OutfitTextStateColor,
+        val label: OutfitTextStateColor,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesExtended.title.normal.typo.copy(
-            color = colors.onBackground
-        ),
-        fieldValue = MaterialTheme.typographiesExtended.input.normal.typo.copy(
-            color = colors.onBackground
-        ),
-        fieldLabel = MaterialTheme.typographiesExtended.label.normal.typo.copy(
-            color = colors.onBackground
-        )
+        title = MaterialTheme.typographiesExtended.title.big.copy {
+            outfitState = colors.onBackground.asStateSimple
+            typo = typo.copy(textAlign = TextAlign.Center)
+        },
+        input = MaterialTheme.typographiesExtended.input.normal.copy {
+            outfitState = colors.onBackground.asStateSimple
+        },
+        label = MaterialTheme.typographiesExtended.label.normal.copy {
+            outfitState = colors.onBackground.asStateSimple
+        }
     )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =
@@ -118,9 +117,16 @@ object DialogLoginAuthTheme {
     fun provideStyles() = Style(
         keyBoardGridCube = KeyBoard.GridCube.Style(
             colorOnBackground = colors.onBackground,
-            outfitBorderOuter = MaterialTheme.bordersExtended.block.normal.copy {
-                outfitState = colors.onBackground.asStateSimple
-            },
+            outfitFrameOuter = OutfitFrameStateColor(
+                outfitBorder = MaterialTheme.bordersExtended.block.small.copy {
+                    outfitState = colors.onBackground.asStateSimple
+                },
+                outfitShape = MaterialTheme.shapesExtended.block.small.copy{
+                    size?.firstNotNull?.let {
+                        size = OutfitShape.Size(bottomStart = it, bottomEnd = it)
+                    }
+                }
+            ),
             outfitBorderInner = MaterialTheme.bordersExtended.block.small.copy {
                 outfitState = colors.onBackground.asStateSimple
             },
@@ -138,7 +144,7 @@ object DialogLoginAuthTheme {
                 outfitState = colors.onBackground.asStateSimple
             }
         },
-        link = MaterialTheme.componentsLinkExtended.secondary.copy {
+        link = MaterialTheme.componentsLinkExtended.primary.copy {
             outfitText = outfitText.copy {
                 outfitState = colors.onBackground.asStateSimple
             }

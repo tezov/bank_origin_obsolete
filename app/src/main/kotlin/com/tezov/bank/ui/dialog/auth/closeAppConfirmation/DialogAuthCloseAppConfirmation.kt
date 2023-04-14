@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 19:53
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 19:53
+ *  Last modified 14/04/2023 22:41
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,6 +21,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
+import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
+import com.tezov.bank.ui.page.lobby.login.provides
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -45,6 +48,11 @@ object DialogAuthCloseAppConfirmation :
                 arrayOf(
                     DialogAuthCloseAppConfirmationTheme provides DialogAuthCloseAppConfirmationTheme.provideTypographies(),
                 )
+            },
+            child = {
+                arrayOf(
+                    DialogAuthCloseAppConfirmationTheme provides DialogAuthCloseAppConfirmationTheme.provideStyles()
+                )
             }
         ) {
             Column(
@@ -56,33 +64,33 @@ object DialogAuthCloseAppConfirmation :
 //                        horizontal = MaterialTheme.dimensionsPaddingExtended.blockBig_h
 //                    )
             ) {
-                Text(
+                Text.StateColor(
                     text = "Déconnexion",
                     style = DialogAuthCloseAppConfirmationTheme.typographies.title
                 )
 //                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
-                Text(
+                Text.StateColor(
                     text = "Etes-vous sûr de vouloir vous déconnecter ?",
-                    style = DialogAuthCloseAppConfirmationTheme.typographies.text
+                    style = DialogAuthCloseAppConfirmationTheme.typographies.body
                 )
 //                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.huge_v))
-                Row {
-                    Spacer(modifier = Modifier.weight(1f))
-                    ClickableText(
-                        text = AnnotatedString("NON"),
-                        style = DialogAuthCloseAppConfirmationTheme.typographies.button
-                    ) {
-
-                    }
-//                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.big_h))
-                    ClickableText(
-                        text = AnnotatedString("OUI"),
-                        style = DialogAuthCloseAppConfirmationTheme.typographies.button
-                    ) {
-
-                    }
-
-                }
+//                Row {
+//                    Spacer(modifier = Modifier.weight(1f))
+//                    ClickableText(
+//                        text = AnnotatedString("NON"),
+//                        style = DialogAuthCloseAppConfirmationTheme.typographies.button
+//                    ) {
+//
+//                    }
+////                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.big_h))
+//                    ClickableText(
+//                        text = AnnotatedString("OUI"),
+//                        style = DialogAuthCloseAppConfirmationTheme.typographies.button
+//                    ) {
+//
+//                    }
+//
+//                }
             }
         }
     }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 13:55
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 12:39
+ *  Last modified 14/04/2023 20:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,7 +16,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Text
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.tezov.bank.ui.component.branch.SectionActionRow
@@ -27,6 +27,8 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 object PageHelp : Page<PageHelpState, PageHelpAction> {
 
@@ -99,23 +101,30 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(
+                top = MaterialTheme.dimensionsPaddingExtended.page.normal.vertical,
+                start = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
+                end = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
+                bottom = MaterialTheme.dimensionsPaddingExtended.block.huge.vertical)
         ) {
             header.headline.value?.let {
                 Text.StateColor(
                     text = it,
-                    style = PageHelpTheme.typographies.titleHuge
+                    style = PageHelpTheme.typographies.headline
                 )
             }
             header.title.value?.let {
                 Text.StateColor(
+                    modifier = Modifier.padding(top = MaterialTheme.dimensionsPaddingExtended.block.huge.vertical),
                     text = it,
-                    style = PageHelpTheme.typographies.titleNormal
+                    style = PageHelpTheme.typographies.subHeadline
                 )
             }
             header.text.value?.let {
                 Text.StateColor(
+                    modifier = Modifier.padding(top = MaterialTheme.dimensionsPaddingExtended.block.normal.vertical),
                     text = it,
-                    style = PageHelpTheme.typographies.bodyNormal
+                    style = PageHelpTheme.typographies.body
                 )
             }
         }

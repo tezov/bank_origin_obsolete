@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 16:03
+ *  Created by Tezov on 15/04/2023 11:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 15:22
+ *  Last modified 15/04/2023 11:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,10 +12,12 @@
 
 package com.tezov.lib_core_android_kotlin.ui.extension
 
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.Dp
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionDensity.toPx
 
 object ExtensionDensity {
 
@@ -27,5 +29,8 @@ object ExtensionDensity {
 
     val Float.toDp @Composable get() = this.toDp(LocalDensity.current.density)
     fun Float.toDp(density:Float) = Dp((this / density))
+
+    @Composable fun CornerSize.toPx(size: Size) = this.toPx(size, LocalDensity.current)
+    fun CornerSize.toPx(size: Size, density:Density) = this.toPx(size, density)
 
 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 22:55
+ *  Created by Tezov on 15/04/2023 11:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 22:25
+ *  Last modified 15/04/2023 11:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,6 @@
 package com.tezov.bank.ui.dialog.lobby.login.auth
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -27,13 +26,15 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.platform.*
+import androidx.compose.ui.platform.LocalTextInputService
+import androidx.compose.ui.platform.LocalTextToolbar
+import androidx.compose.ui.platform.TextToolbar
+import androidx.compose.ui.platform.TextToolbarStatus
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.LOGIN_LENGTH
@@ -42,12 +43,16 @@ import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.border
 import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
 
@@ -94,9 +99,9 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     ContentHeader()
-                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.normal.vertical))
+                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
                     ContentBody(state.loginState, state.passwordState)
-                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.normal.vertical))
+                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
                     ContentFooter(
                         credentialValidState = state.credentialValidState,
                         onClickConnect = {
@@ -116,9 +121,8 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
 
     @Composable
     private fun ContentHeader() {
-        Text(
-            text = stringResource(id = R.string.dlg_login_auth_enter_password),
-            textAlign = TextAlign.Center,
+        Text.StateColor(
+            text = R.string.dlg_login_auth_enter_password,
             style = DialogLoginAuthTheme.typographies.title
         )
     }
@@ -160,6 +164,9 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
+                    .border(MaterialTheme.bordersExtended.block.normal.copy {
+                        outfitState = DialogLoginAuthTheme.colors.onBackground.asStateSimple
+                    }, MaterialTheme.shapesExtended.block.small)
             ) {
                 Row(
                     modifier = Modifier
@@ -185,9 +192,9 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                             },
                         value = login.value,
                         label = {
-                            Text(
-                                text = stringResource(id = R.string.dlg_login_auth_fld_label_login),
-                                style = DialogLoginAuthTheme.typographies.fieldLabel
+                            Text.StateColor(
+                                text = R.string.dlg_login_auth_fld_label_login,
+                                style = DialogLoginAuthTheme.typographies.label
                             )
                         },
                         onValueChange = {
@@ -200,7 +207,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         colors = TextFieldDefaults.textFieldColors(
                             backgroundColor = MaterialTheme.colorsResource.transparent
                         ),
-                        textStyle = DialogLoginAuthTheme.typographies.fieldValue,
+                        textStyle = DialogLoginAuthTheme.typographies.input.resolve(),
                         keyboardOptions = KeyboardOptions(
                             keyboardType = KeyboardType.NumberPassword,
                             imeAction = if (password.value.length < PASSWORD_LENGTH) ImeAction.Next else ImeAction.Done
@@ -233,7 +240,12 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                         }
                     )
                 }
-
+                Divider(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(MaterialTheme.dimensionsCommonExtended.divider.normal),
+                    color = DialogLoginAuthTheme.colors.fade
+                )
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -262,9 +274,9 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                                 },
                             value = password.value,
                             label = {
-                                Text(
-                                    text = stringResource(id = R.string.dlg_login_auth_fld_label_password),
-                                    style = DialogLoginAuthTheme.typographies.fieldLabel
+                                Text.StateColor(
+                                    text = R.string.dlg_login_auth_fld_label_password,
+                                    style = DialogLoginAuthTheme.typographies.label
                                 )
                             },
                             onValueChange = {},
@@ -274,7 +286,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                                 cursorColor = MaterialTheme.colorsResource.transparent
                             ),
                             visualTransformation = PasswordVisualTransformation(),
-                            textStyle = DialogLoginAuthTheme.typographies.fieldValue,
+                            textStyle = DialogLoginAuthTheme.typographies.input.resolve(),
                             keyboardOptions = KeyboardOptions(
                                 keyboardType = KeyboardType.NumberPassword,
                             ),
@@ -324,11 +336,11 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
             LaunchedEffect(Unit) {
                 if (login.value.length < LOGIN_LENGTH) {
                     focusManagement.requestLoginFocus()
-                } else if(password.value.length < PASSWORD_LENGTH){
+                } else if (password.value.length < PASSWORD_LENGTH) {
                     focusManagement.requestPasswordFocus()
                 }
             }
-            DisposableEffect(Unit){
+            DisposableEffect(Unit) {
                 onDispose {
                     focusManagement.hideKeyBoard()
                 }

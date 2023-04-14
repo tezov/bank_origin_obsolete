@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 02/02/2023 22:16
+ *  Last modified 14/04/2023 20:44
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -64,7 +64,7 @@ class PageHelpState private constructor(
         header.apply {
             headline.value = "Assistance"
             title.value = "En quoi pouvons-nous vous aider?"
-            text.value = "Trouvez une réponse rapide en sélectionnant la thméatique qui correspoond à votre besoin."
+            text.value = "Trouvez une réponse rapide en sélectionnant la thématique qui correspoond à votre besoin."
         }
 
         emergencies.value = SectionActionRow.Data(

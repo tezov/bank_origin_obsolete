@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 13:55
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 13:39
+ *  Last modified 14/04/2023 20:10
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,6 +17,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -39,6 +40,9 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 object PageProfile : Page<PageProfileState, PageProfileAction> {
 
@@ -108,10 +112,10 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
     private fun contentHeader(
         header: PageProfileState.Header
     ) {
-
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(MaterialTheme.dimensionsPaddingExtended.page.big)
         ) {
             IconButton(
                 modifier = Modifier
@@ -136,7 +140,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                 }
                 header.name.value?.let {
                     Text.StateColor(
-                        modifier = Modifier.align(Alignment.Top),
+                        modifier = Modifier.align(Alignment.Top).padding(start = MaterialTheme.dimensionsPaddingExtended.element.huge.horizontal),
                         text = it,
                         style = PageProfileTheme.typographies.title
                     )

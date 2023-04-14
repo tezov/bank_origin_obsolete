@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 21:33
+ *  Created by Tezov on 15/04/2023 11:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 21:16
+ *  Last modified 15/04/2023 10:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,11 +21,6 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeShapesExtended
 object ThemeShapeProviders {
 
     fun common() = ThemeShapesExtended.Common(
-        cluster = OutfitPaletteSize(
-            normal = 6.dp.asStateColor,
-            small = 4.dp.asStateColor,
-            big = 8.dp.asStateColor,
-        ),
         block = OutfitPaletteSize(
             normal = 10.dp.asStateColor,
             small = 6.dp.asStateColor,
@@ -33,11 +28,6 @@ object ThemeShapeProviders {
         ),
         element = OutfitPaletteSize(
             normal = 12.dp.asStateColor,
-        ),
-        chunk = OutfitPaletteSize(
-            normal = 8.dp.asStateColor,
-            small = 6.dp.asStateColor,
-            big = 10.dp.asStateColor,
         ),
         button = OutfitPaletteSize(
             normal = 24.dp.asStateColor,

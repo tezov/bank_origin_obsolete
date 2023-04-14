@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 13:55
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 13:32
+ *  Last modified 14/04/2023 21:41
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -129,7 +129,10 @@ object PageHelpAndServiceTheme {
                 outfitState = colors.neutral.asStateSimple
             }
             actionCardStyle = actionCardStyle.copy{
-                iconStyle = iconStyle.copy { tint = colors.accent }
+                iconStyle = iconStyle.copy {
+                    tint = colors.accent
+                    size = MaterialTheme.dimensionsIconExtended.info.big
+                }
                 outfitTextTitle = outfitTextTitle?.copy {
                     outfitState = colors.primary.asStateSimple
                 }

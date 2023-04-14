@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 15/04/2023 11:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:29
+ *  Last modified 15/04/2023 10:07
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,6 +29,18 @@ fun Modifier.border(
     return sketch?.let {
         border(border, sketch.shape).clip(sketch.shape)
     } ?: kotlin.run {
+        border(border)
+    }
+} ?: this
+
+fun Modifier.border(
+    styleBorder: OutfitBorder.StateColor.Style,
+    styleShape: OutfitShape.StateColor.Style,
+    selector: Any? = null,
+) = styleBorder.resolve(selector)?.let { border ->
+    styleShape.resolve(selector)?.let { shape ->
+        border(border, shape.shape)
+    } ?: run {
         border(border)
     }
 } ?: this

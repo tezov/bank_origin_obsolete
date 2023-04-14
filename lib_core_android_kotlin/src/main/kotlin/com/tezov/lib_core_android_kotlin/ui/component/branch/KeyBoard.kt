@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 15/04/2023 11:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 15/04/2023 11:20
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,17 +16,19 @@ import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.geometry.*
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Path
 import androidx.compose.ui.graphics.drawscope.*
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
@@ -59,13 +61,13 @@ object KeyBoard {
         class StyleBuilder internal constructor(style: Style) {
             var colorBackground = style.colorBackground
             var colorOnBackground = style.colorOnBackground
-            var outfitBorderOuter = style.outfitBorderOuter
+            var outfitFrameOuter = style.outfitFrameOuter
             var outfitBorderInner = style.outfitBorderInner
 
             internal fun get() = Style(
                 colorBackground = colorBackground,
                 colorOnBackground = colorOnBackground,
-                outfitBorderOuter = outfitBorderOuter,
+                outfitFrameOuter = outfitFrameOuter,
                 outfitBorderInner = outfitBorderInner,
             )
         }
@@ -73,16 +75,17 @@ object KeyBoard {
         class Style(
             val colorBackground: Color = Color.Transparent,
             val colorOnBackground: Color = Color.Black,
-            outfitBorderOuter: OutfitBorderStateColor? = null,
+            outfitFrameOuter: OutfitFrameStateColor? = null,
             outfitBorderInner: OutfitBorderStateColor? = null,
         ) {
-
-            val outfitBorderOuter: OutfitBorderStateColor by DelegateNullFallBack.Ref(
-                outfitBorderOuter,
+            val outfitFrameOuter: OutfitFrameStateColor by DelegateNullFallBack.Ref(
+                outfitFrameOuter,
                 fallBackValue = {
-                    OutfitBorderStateColor(
-                        size = 2.dp,
-                        outfitState = Color.Black.asStateSimple
+                    OutfitFrameStateColor(
+                        outfitBorder = OutfitBorderStateColor(
+                            size = 2.dp,
+                            outfitState = Color.Black.asStateSimple
+                        )
                     )
                 })
             val outfitBorderInner: OutfitBorderStateColor by DelegateNullFallBack.Ref(
@@ -107,7 +110,7 @@ object KeyBoard {
             constructor(style: Style) : this(
                 colorBackground = style.colorBackground,
                 colorOnBackground = style.colorOnBackground,
-                outfitBorderOuter = style.outfitBorderOuter,
+                outfitFrameOuter = style.outfitFrameOuter,
                 outfitBorderInner = style.outfitBorderInner,
             )
         }
@@ -177,6 +180,7 @@ object KeyBoard {
         @Composable
         private fun <P : Cubes<C>, C : Cube> Modifier.onDraw(style: Style, cubes: P): Modifier {
             cubes.beforeDraw(style = style)
+            val density = LocalDensity.current
             return drawBehind {
                 val cubeSize = size.width / cubes.columnCount
                 //background
@@ -189,14 +193,44 @@ object KeyBoard {
                     )
                 }
                 // border outer
-                style.outfitBorderOuter.resolve()?.let {
-                    drawRect(
-                        brush = it.brush,
-                        topLeft = Offset(0f, 0f),
-                        size = Size(size.width, size.height),
-                        style = Stroke(width = it.width.toPx()),
-                    )
-
+                style.outfitFrameOuter.resolveBorder()?.let { border ->
+                    style.outfitFrameOuter.outfitShape.size?.let { cornerSize ->
+                        val size = Size(size.width, size.height)
+                        val path = Path().apply {
+                            addRoundRect(
+                                RoundRect(
+                                    rect = Rect(
+                                        offset = Offset.Zero,
+                                        size = size,
+                                    ),
+                                    topLeft = cornerSize.topStart?.let {
+                                        val px = it.toPx(size, density)
+                                        CornerRadius(px,px)
+                                    } ?: CornerRadius.Zero,
+                                    topRight = cornerSize.topEnd?.let {
+                                        val px = it.toPx(size, density)
+                                        CornerRadius(px,px)
+                                    } ?: CornerRadius.Zero,
+                                    bottomLeft = cornerSize.bottomStart?.let {
+                                        val px = it.toPx(size, density)
+                                        CornerRadius(px,px)
+                                    } ?: CornerRadius.Zero,
+                                    bottomRight = cornerSize.bottomEnd?.let {
+                                        val px = it.toPx(size, density)
+                                        CornerRadius(px,px)
+                                    } ?: CornerRadius.Zero
+                                )
+                            )
+                        }
+                        drawPath(path, color = Color.Red)
+                    } ?: run{
+                        drawRect(
+                            brush = border.brush,
+                            topLeft = Offset(0f, 0f),
+                            size = Size(size.width, size.height),
+                            style = Stroke(width = border.width.toPx()),
+                        )
+                    }
                 }
                 style.outfitBorderInner.resolve()?.let {
                     //vertical line

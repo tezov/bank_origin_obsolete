@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 00:50
+ *  Created by Tezov on 14/04/2023 22:46
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 00:39
+ *  Last modified 14/04/2023 21:35
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.bank.ui.component.leaf
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -22,6 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
+import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
@@ -145,39 +147,31 @@ object ActionCard {
         data: Data,
         onClick: () -> Unit = {}
     ) {
-        Row(
+        Column(
             modifier = modifier
                 .border(style.outfitFrame)
                 .background(style.outfitFrame)
                 .clickable { onClick() }
-                .padding(MaterialTheme.dimensionsPaddingExtended.block.normal)
+                .padding(MaterialTheme.dimensionsPaddingExtended.element.normal)
         ) {
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                    .align(Alignment.CenterVertically)
-            ) {
-                style.iconStyle.size?.height?.let {
-                    Spacer(modifier = Modifier.height(it))
-                }
-                Text.StateColor(
-                    text = data.title,
-                    style = style.outfitTextTitle,
-                    overflow = TextOverflow.Visible
-                )
-                data.subtitle?.let {
-                    Text.StateColor(
-                        text = it,
-                        style = style.outfitTextSubtitle,
-                        overflow = TextOverflow.Visible
-                    )
-                }
-            }
             Icon.Simple(
+                modifier = Modifier.align(Alignment.End),
                 style = style.iconStyle,
                 resourceId = data.iconResourceId,
                 description = data.title,
             )
+            Text.StateColor(
+                text = data.title,
+                style = style.outfitTextTitle,
+                overflow = TextOverflow.Visible
+            )
+            data.subtitle?.let {
+                Text.StateColor(
+                    text = it,
+                    style = style.outfitTextSubtitle,
+                    overflow = TextOverflow.Visible
+                )
+            }
         }
 
     }
@@ -236,12 +230,12 @@ object ActionCard {
                 .border(style.outfitFrame)
                 .background(style.outfitFrame)
                 .clickable { onClick() }
-                .padding(MaterialTheme.dimensionsPaddingExtended.block.normal),
+                .padding(MaterialTheme.dimensionsPaddingExtended.element.normal),
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Column(
                 modifier = Modifier
-                    .align(Alignment.Bottom)
-                    .weight(1f)
+                    .weight(1f),
             ) {
                 Text.StateColor(
                     text = data.title,
@@ -255,8 +249,6 @@ object ActionCard {
                 }
             }
             Icon.Simple(
-                modifier = Modifier
-                    .align(Alignment.CenterVertically),
                 style = style.iconStyle,
                 resourceId = data.iconResourceId,
                 description = data.title,

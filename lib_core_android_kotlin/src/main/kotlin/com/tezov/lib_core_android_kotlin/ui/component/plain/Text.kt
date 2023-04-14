@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 15/04/2023 11:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 15/04/2023 09:44
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,6 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.plain
 
-import androidx.compose.material.LocalTextStyle
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -87,7 +86,7 @@ object Text {
             softWrap: Boolean = true,
             maxLines: Int = Int.MAX_VALUE,
             onTextLayout: (TextLayoutResult) -> Unit = {},
-            textResourceId: Int,
+            text: Int,
             selector: Any? = null
         ) {
             invoke(
@@ -97,7 +96,7 @@ object Text {
                 softWrap = softWrap,
                 maxLines = maxLines,
                 onTextLayout = onTextLayout,
-                text = stringResource(id = textResourceId),
+                text = stringResource(id = text),
                 selector = selector,
             )
         }
