@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 15/04/2023 21:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 15/04/2023 20:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,7 +26,10 @@ object ThemeBorderProviders {
             normal = 1.dp.asStateColor,
             small = 0.7.dp.asStateColor,
         ),
-        element = 0.9.dp.asStateColor.asPaletteSize,
+        element = OutfitPaletteSize(
+            normal = 0.9.dp.asStateColor,
+            big = 1.1.dp.asStateColor
+        ),
         chunk = 0.8.dp.asStateColor.asPaletteSize,
         button = OutfitPaletteSize(
             normal = 0.8.dp.asStateColor,

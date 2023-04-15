@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 15/04/2023 21:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 19:22
+ *  Last modified 15/04/2023 19:42
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -81,27 +81,28 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                     }
                 }
 
-                state.cardWithLinkData.value?.let {
-                    val cards = ArrayList<@Composable () -> Unit>()
-                    it.forEach { data ->
-                        cards.add {
-                            CarouselCard(
-                                modifier = Modifier.fillMaxSize(),
-                                data = data,
-                                style = PageDiscoverTheme.styles.cardLink
-                            )
-                        }
-                    }
-                    HorizontalScrollable.Pager(
-                        modifier = Modifier
-                            .padding(top = 20.dp, bottom = 20.dp)
-                            .fillMaxWidth(),
-                        style = PageDiscoverTheme.styles.carousel,
-                        pages = cards
-                    ) {
+//                state.cardWithLinkData.value?.let {
+//                    val cards = ArrayList<@Composable () -> Unit>()
+//                    it.forEach { data ->
+//                        cards.add {
+//                            CarouselCard(
+//                                modifier = Modifier.fillMaxSize(),
+//                                data = data,
+//                                style = PageDiscoverTheme.styles.cardLink
+//                            )
+//                        }
+//                    }
+//                    HorizontalScrollable.Pager(
+//                        modifier = Modifier
+//                            .padding(top = 20.dp, bottom = 20.dp)
+//                            .fillMaxWidth(),
+//                        style = PageDiscoverTheme.styles.carousel,
+//                        pages = cards
+//                    ) {
+//
+//                    }
+//                }
 
-                    }
-                }
                 state.offers.value?.let {
                     SectionActionCard(data = it, style = PageDiscoverTheme.styles.sectionCard) {
 

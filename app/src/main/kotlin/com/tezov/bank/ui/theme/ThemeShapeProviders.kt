@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 15/04/2023 21:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 15/04/2023 20:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,10 +27,11 @@ object ThemeShapeProviders {
         ),
         element = OutfitPaletteSize(
             normal = 12.dp.asStateColor,
+            big = 18.dp.asStateColor,
         ),
         button = OutfitPaletteSize(
             normal = 24.dp.asStateColor,
-            small = 16.dp.asStateColor,
+            small = 12.dp.asStateColor,
         ),
         icon = OutfitPaletteSize(
             normal = 50.asStateColor

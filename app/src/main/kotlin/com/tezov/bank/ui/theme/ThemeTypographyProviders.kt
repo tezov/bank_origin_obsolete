@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 15/04/2023 21:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 19:07
+ *  Last modified 15/04/2023 20:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.theme.font.fontIbm
 import com.tezov.bank.ui.theme.font.fontIndie
@@ -87,6 +88,7 @@ object ThemeTypographyProviders {
             small = TextStyle(
                 fontFamily = MaterialTheme.fontRoboto,
                 fontWeight = FontWeight.SemiBold,
+                letterSpacing = 0.7.sp,
                 fontSize = 16.sp
             ).asTextStateColor,
             big = TextStyle(
@@ -114,11 +116,18 @@ object ThemeTypographyProviders {
             fontWeight = FontWeight.Normal,
             fontSize = 18.sp
         ).asTextStateColor.asPaletteSize,
-        label = TextStyle(
-            fontFamily = MaterialTheme.fontRoboto,
-            fontWeight = FontWeight.SemiBold,
-            fontSize = 12.sp
-        ).asTextStateColor.asPaletteSize,
+        label = OutfitPaletteSize(
+            normal = TextStyle(
+                fontFamily = MaterialTheme.fontRoboto,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.sp
+            ).asTextStateColor,
+            big = TextStyle(
+                fontFamily = MaterialTheme.fontRoboto,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 14.sp
+            ).asTextStateColor
+        ),
         caption = TextStyle(
             fontFamily = MaterialTheme.fontIbm,
             fontWeight = FontWeight.Normal,

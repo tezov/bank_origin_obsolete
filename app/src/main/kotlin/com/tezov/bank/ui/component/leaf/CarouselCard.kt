@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/04/2023 21:15
+ *  Created by Tezov on 15/04/2023 21:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/04/2023 21:06
+ *  Last modified 15/04/2023 21:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.bank.ui.component.leaf
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -28,6 +29,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button as ButtonImport
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link as LinkImport
@@ -79,7 +81,7 @@ object CarouselCard {
                     OutfitFrameStateColor(
                         outfitShape = 4.asStateColor,
                         outfitBorder = OutfitBorderStateColor(
-                            size = 1.dp,
+                            size = 2.dp,
                             outfitState = Color.Black.asStateSimple,
                         )
                     )
@@ -97,6 +99,7 @@ object CarouselCard {
                     var outfitTextTag = style.outfitTextTag
                     var outfitTextTitle = style.outfitTextTitle
                     var outfitTextBody = style.outfitTextBody
+                    var outfitFrameTag = style.outfitFrameTag
 
 
                     internal open fun get() = Base(
@@ -106,6 +109,7 @@ object CarouselCard {
                         outfitTextTag = outfitTextTag,
                         outfitTextTitle = outfitTextTitle,
                         outfitTextBody = outfitTextBody,
+                        outfitFrameTag = outfitFrameTag,
                     )
                 }
 
@@ -125,6 +129,7 @@ object CarouselCard {
                 outfitTextTag = style?.outfitTextTag,
                 outfitTextTitle = style?.outfitTextTitle,
                 outfitTextBody = style?.outfitTextBody,
+                outfitFrameTag = style?.outfitFrameTag,
             )
 
         }
@@ -173,7 +178,6 @@ object CarouselCard {
             )
 
         }
-
 
         class Link(
             baseStyle: Base? = null,
@@ -257,32 +261,33 @@ object CarouselCard {
         onClick: () -> Unit
     ) {
         Surface(
+            modifier = modifier,
             color = style.outfitFrame.resolveColorShape() ?: MaterialTheme.colors.surface,
             shape = style.outfitFrame.getShape() ?: MaterialTheme.shapes.small,
-            elevation = MaterialTheme.dimensionsCommonExtended.elevation.normal,
             border = style.outfitFrame.resolveBorder()
         ) {
             Row(modifier = Modifier.fillMaxWidth()) {
                 Column(
                     modifier = Modifier
-                        .weight(1f)
                         .padding(
-//                            start = MaterialTheme.dimensionsPaddingExtended.elementBig_h,
-//                            top = MaterialTheme.dimensionsPaddingExtended.elementBig_v,
-//                            bottom = MaterialTheme.dimensionsPaddingExtended.elementBig_v
+                            top = MaterialTheme.dimensionsPaddingExtended.block.big.vertical,
+                            start = MaterialTheme.dimensionsPaddingExtended.block.big.horizontal,
+                            end = MaterialTheme.dimensionsPaddingExtended.block.big.horizontal,
+                            bottom = MaterialTheme.dimensionsPaddingExtended.block.normal.vertical,
                         )
+                        .weight(1f)
                 ) {
                     data.tag?.let {
-                        Box(
+                        Column(
                             modifier = Modifier
-//                                .padding(bottom = MaterialTheme.dimensionsPaddingExtended.textBig_v)
-                                .background(style.outfitFrameTag)
+                                .padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical)
                                 .border(style.outfitFrameTag)
+                                .background(style.outfitFrameTag)
                         ) {
                             Text.StateColor(
                                 modifier = Modifier.padding(
-//                                    vertical = MaterialTheme.dimensionsPaddingExtended.textSmall_v,
-//                                    horizontal = MaterialTheme.dimensionsPaddingExtended.textBig_h
+                                    vertical = MaterialTheme.dimensionsPaddingExtended.element.small.vertical,
+                                    horizontal = MaterialTheme.dimensionsPaddingExtended.element.big.horizontal
                                 ),
                                 text = it,
                                 style = style.outfitTextTag,
@@ -290,33 +295,25 @@ object CarouselCard {
                         }
                     }
                     Text.StateColor(
-//                        modifier = modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.textBig_v),
+                        modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
                         text = data.title,
                         style = style.outfitTextTitle,
                         overflow = TextOverflow.Ellipsis
                     )
                     Text.StateColor(
-//                        modifier = modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.textBig_v),
+                        modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
                         text = data.body,
                         style = style.outfitTextBody,
                     )
-
                     ButtonImport.StateColor(
-                        modifierText = Modifier
-                            .padding(
-//                                horizontal = MaterialTheme.dimensionsPaddingExtended.buttonSmall_h,
-//                                vertical = MaterialTheme.dimensionsPaddingExtended.buttonSmall_v
-                            ),
                         text = data.action,
                         style = style.action,
                         onClick = onClick,
                     )
-
                 }
                 data.iconInfoResourceId?.let {
                     Icon.Simple(
-                        modifier = Modifier
-                            .align(Alignment.Top),
+                        modifier = Modifier.align(Alignment.Top),
                         resourceId = it,
                         description = null,
                         style = style.iconInfoStyle

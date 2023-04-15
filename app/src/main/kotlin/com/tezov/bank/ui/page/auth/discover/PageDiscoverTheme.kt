@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 15/04/2023 21:03
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 19:22
+ *  Last modified 15/04/2023 21:00
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,6 +32,7 @@ import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
@@ -92,11 +93,13 @@ object PageDiscoverTheme {
     }
 
     data class Dimensions(
+        val sizeIconCard: DpSize,
         val spacingTopSectionRowToBottomSectionCard: DpSize,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
+        sizeIconCard = 64.dpSize,
         spacingTopSectionRowToBottomSectionCard = 64.dpSize,
     )
 
@@ -119,35 +122,42 @@ object PageDiscoverTheme {
         cardButton = CarouselCard.Style.Button(
             baseStyle = CarouselCard.Style.Base(
                 outfitFrame = OutfitFrameStateColor(
-                    outfitShape = MaterialTheme.shapesExtended.element.normal.copy {
-
-
-                    },
                     outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
                         outfitState = colors.decor.asStateSimple
-                    }
+                    },
+                    outfitShape = MaterialTheme.shapesExtended.element.big,
                 ),
                 iconInfoStyle = Icon.Simple.Style(
-                    size = MaterialTheme.dimensionsIconExtended.info.normal,
-                    tint = colors.accent
+                    size = dimensions.sizeIconCard,
+                    tint = colors.accent.copy(alpha = 0.5f)
                 ),
-                outfitTextTitle = MaterialTheme.typographiesExtended.title.normal.copy {
+                outfitTextTitle = MaterialTheme.typographiesExtended.title.big.copy {
+                    outfitState = colors.primary.asStateSimple
+                    typo = typo.copy(fontWeight = FontWeight.Bold)
+                },
+                outfitTextBody = MaterialTheme.typographiesExtended.body.normal.copy {
                     outfitState = colors.primary.asStateSimple
                 },
-                outfitTextBody = MaterialTheme.typographiesExtended.title.normal.copy {
-                    outfitState = colors.primary.asStateSimple
-                },
-                outfitTextTag = MaterialTheme.typographiesExtended.title.normal.copy {
-                    outfitState = colors.primary.asStateSimple
+                outfitTextTag = MaterialTheme.typographiesExtended.label.big.copy {
+                    outfitState = colors.accent.asStateSimple
                 },
                 outfitFrameTag = OutfitFrameStateColor(
-                    outfitShape = MaterialTheme.shapesExtended.chunk.normal,
-                    outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
-                        outfitState = colors.decor.asStateSimple
+                    outfitShape = MaterialTheme.shapesExtended.element.big,
+                    outfitBorder = MaterialTheme.bordersExtended.element.big.copy {
+                        outfitState = colors.accent.asStateSimple
                     }
                 ),
             ),
-            action = MaterialTheme.componentsButtonExtended.primary
+            action = MaterialTheme.componentsButtonExtended.primary.copy{
+                outfitFrame = outfitFrame.copy{
+                    outfitShape = MaterialTheme.shapesExtended.button.small.copy{
+                        outfitState = colors.accent.asStateSimple
+                    }
+                }
+                outfitText = MaterialTheme.typographiesExtended.button.small.copy {
+                    outfitState = colors.background.asStateSimple
+                }
+            }
         ),
         cardLink = CarouselCard.Style.Link(
             baseStyle = CarouselCard.Style.Base(
@@ -212,7 +222,7 @@ object PageDiscoverTheme {
                 }
                 outfitFrame = outfitFrame.copy {
                     outfitShape = outfitShape.copy {
-                        outfitState = colors.decor.asStateSimple
+                        outfitState = colors.backgroundElevated.asStateSimple
                     }
                 }
             }
