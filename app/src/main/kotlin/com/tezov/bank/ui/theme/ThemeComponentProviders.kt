@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 22:02
+ *  Created by Tezov on 15/04/2023 23:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 21:20
+ *  Last modified 15/04/2023 23:11
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -195,7 +195,7 @@ object ThemeComponentProviders {
         },
         colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default,
         colorDivider = MaterialTheme.colorsExtended.primary.decor,
-        dimensionDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
+        sizeDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
         actionRowStyle = provideActionRowStyle()
     )
 
@@ -258,14 +258,15 @@ object ThemeComponentProviders {
                 inactive = MaterialTheme.colorsExtended.primary.default.copy(alpha = 0.6f),
             )
         ),
-        dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
-        dimensionIndicatorSize = 12.dp,
-        dimensionIndicatorSpacing = MaterialTheme.dimensionsPaddingExtended.element.big.horizontal,
+        paddingTopIndicator = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
+        sizeIndicator = 12.dp,
+        spacingIndicator = MaterialTheme.dimensionsPaddingExtended.element.big.horizontal,
     )
 
     @Composable
     fun provideCarouselStyle() = pagerStyle().copy {
-        padding = PaddingValues(horizontal = 26.dp)
+        paddingContent = PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
+        spacingItem = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
     }
 
 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 15/04/2023 23:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 15/04/2023 23:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -63,7 +63,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                     .fillMaxSize()
                     .background(PagePaymentTheme.colors.background)
                     .padding(innerPadding),
-                properties = PagePaymentTheme.dimensions.heightHeader,
+                properties = PagePaymentTheme.dimensions.headerProperties,
                 header = { progress, progressDp ->
                     contentHeader(
                         state.header,
@@ -117,7 +117,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                     text = it,
                     style = PagePaymentTheme.typographies.headline.copy {
                         typo = typo.copy(
-                            fontSize = (PagePaymentTheme.dimensions.sizeHeadLineMin.value + ((PagePaymentTheme.dimensions.sizeHeadlineMax.value - PagePaymentTheme.dimensions.sizeHeadLineMin.value) * progress)).sp
+                            fontSize = (PagePaymentTheme.dimensions.headLineMin.value + ((PagePaymentTheme.dimensions.headlineMax.value - PagePaymentTheme.dimensions.headLineMin.value) * progress)).sp
                         )
                     }
                 )
@@ -127,7 +127,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                             .fillMaxWidth()
                             .alpha((DIVIDER_HEADER_VISIBILITY_START - progress) / DIVIDER_HEADER_VISIBILITY_START),
                         color = PagePaymentTheme.colors.fade,
-                        thickness = PagePaymentTheme.dimensions.heightHeaderDivider,
+                        thickness = PagePaymentTheme.dimensions.headerDivider,
                     )
                 }
                 Spacer(modifier = Modifier.height((MaterialTheme.dimensionsPaddingExtended.element.normal.vertical * (1f - progress))))

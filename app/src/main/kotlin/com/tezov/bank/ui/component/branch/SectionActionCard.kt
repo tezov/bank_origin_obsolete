@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 15/04/2023 23:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 19:02
+ *  Last modified 15/04/2023 23:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -41,7 +41,7 @@ object SectionActionCard {
         var outfitTextHeader = style.outfitTextHeader
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
-        var dimensionPaddingBody = style.dimensionPaddingBody
+        var paddingBody = style.paddingBody
         var actionCardStyle = style.actionCardStyle
 
         fun get() = Style(
@@ -49,7 +49,7 @@ object SectionActionCard {
             outfitTextHeader = outfitTextHeader,
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
-            dimensionPaddingBody = dimensionPaddingBody,
+            paddingBody = paddingBody,
             actionCardStyle = actionCardStyle,
         )
     }
@@ -59,7 +59,7 @@ object SectionActionCard {
         val outfitTextHeader: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
-        val dimensionPaddingBody: Dp = 0.dp,
+        val paddingBody: Dp = 0.dp,
         actionCardStyle: ActionCard.Style? = null
     ) {
 
@@ -93,14 +93,14 @@ object SectionActionCard {
             outfitTextHeader = style.outfitTextHeader,
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
-            dimensionPaddingBody = style.dimensionPaddingBody,
+            paddingBody = style.paddingBody,
             actionCardStyle = style.actionCardStyle,
         )
 
     }
 
     data class Data(
-        val iconResourceId: Int? = null,
+        val iconId: Int? = null,
         val title: String? = null,
         var template: ActionCard.Template = ActionCard.Template.Undefined,
         val cards: List<ActionCard.Data>
@@ -132,7 +132,7 @@ object SectionActionCard {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.element.small.horizontal))
-                    data.iconResourceId?.let {
+                    data.iconId?.let {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
@@ -158,7 +158,7 @@ object SectionActionCard {
                         background(it)
                     }
                     .padding(
-                        horizontal = style.dimensionPaddingBody
+                        horizontal = style.paddingBody
                     ),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.block.big.vertical),
             ) {

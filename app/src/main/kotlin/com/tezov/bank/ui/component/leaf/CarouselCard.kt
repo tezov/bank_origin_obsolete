@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 22:02
+ *  Created by Tezov on 15/04/2023 23:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 21:15
+ *  Last modified 15/04/2023 23:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -261,14 +261,13 @@ object CarouselCard {
         onClick: () -> Unit
     ) {
         Surface(
-            modifier = modifier,
             color = style.outfitFrame.resolveColorShape() ?: MaterialTheme.colors.surface,
             shape = style.outfitFrame.getShape() ?: MaterialTheme.shapes.small,
             border = style.outfitFrame.resolveBorder()
         ) {
-            Row(modifier = Modifier.fillMaxWidth()) {
+            Row {
                 Column(
-                    modifier = Modifier
+                    modifier = modifier
                         .padding(
                             top = MaterialTheme.dimensionsPaddingExtended.block.big.vertical,
                             start = MaterialTheme.dimensionsPaddingExtended.block.big.horizontal,
@@ -331,14 +330,12 @@ object CarouselCard {
         onClick: () -> Unit
     ) {
         Surface(
-            modifier = modifier,
             color = style.outfitFrame.resolveColorShape() ?: MaterialTheme.colors.surface,
             shape = style.outfitFrame.getShape() ?: MaterialTheme.shapes.small,
             border = style.outfitFrame.resolveBorder()
         ) {
             Column(
-                modifier = Modifier
-                    .fillMaxWidth()
+                modifier = modifier
                     .padding(MaterialTheme.dimensionsPaddingExtended.block.big)
             ) {
                 data.tag?.let {
@@ -358,7 +355,7 @@ object CarouselCard {
                         )
                     }
                 }
-                Row(modifier = Modifier.fillMaxWidth()) {
+                Row {
                     data.iconInfoResourceId?.let {
                         Icon.Simple(
                             modifier = Modifier.padding(end = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal),

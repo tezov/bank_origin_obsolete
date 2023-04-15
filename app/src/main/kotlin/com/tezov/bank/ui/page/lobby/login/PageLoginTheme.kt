@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 15/04/2023 23:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 15/04/2023 23:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -113,24 +113,24 @@ object PageLoginTheme {
     data class Dimensions(
         val spacingTopToTitle: Dp,
         val spacingTopFromLinkService: Dp,
-        val sizeLogo: DpSize,
-        val sizeIconBig: DpSize,
+        val logo: DpSize,
+        val iconBig: DpSize,
         val paddingStartToIconBig: Dp,
-        val sizeIconMedium: DpSize,
+        val iconMedium: DpSize,
         val paddingStartToIconMedium: Dp,
-        val sizeIconSmall: DpSize,
+        val iconSmall: DpSize,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
         spacingTopToTitle = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical,
         spacingTopFromLinkService = MaterialTheme.dimensionsPaddingExtended.element.supra.vertical,
-        sizeLogo = 58.dpSize,
-        sizeIconBig = 48.dpSize,
+        logo = 58.dpSize,
+        iconBig = 48.dpSize,
         paddingStartToIconBig = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal,
-        sizeIconMedium = 32.dpSize,
+        iconMedium = 32.dpSize,
         paddingStartToIconMedium = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal,
-        sizeIconSmall = 38.dpSize,
+        iconSmall = 38.dpSize,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -257,11 +257,11 @@ object PageLoginTheme {
             }
         },
         logo = Image.Simple.Style(
-            size = dimensions.sizeLogo,
+            size = dimensions.logo,
             contentScale = ContentScale.Crop
         ),
         iconBig = Image.StateColor.Style(
-            size = dimensions.sizeIconBig,
+            size = dimensions.iconBig,
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = shapes.icon,
                 outfitBorder = borders.icon.copy {
@@ -270,7 +270,7 @@ object PageLoginTheme {
             )
         ),
         iconMedium = Icon.StateColor.Style(
-            size = dimensions.sizeIconMedium,
+            size = dimensions.iconMedium,
             tint = colors.background,
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = shapes.icon.copy {
@@ -279,7 +279,7 @@ object PageLoginTheme {
             )
         ),
         iconSmall = Icon.StateColor.Style(
-            size = dimensions.sizeIconSmall,
+            size = dimensions.iconSmall,
             tint = colors.onBackground,
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = shapes.icon.copy {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 23:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 20:28
+ *  Last modified 15/04/2023 23:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -42,8 +42,8 @@ object SectionActionRow {
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
         var colorDivider = style.colorDivider
-        var dimensionDivider = style.dimensionDivider
-        var dimensionPaddingBody = style.dimensionPaddingBody
+        var sizeDivider = style.sizeDivider
+        var paddingBody = style.paddingBody
         var actionRowStyle = style.actionRowStyle
 
         fun get() = Style(
@@ -52,8 +52,8 @@ object SectionActionRow {
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
             colorDivider = colorDivider,
-            dimensionDivider = dimensionDivider,
-            dimensionPaddingBody = dimensionPaddingBody,
+            sizeDivider = sizeDivider,
+            paddingBody = paddingBody,
             actionRowStyle = actionRowStyle,
         )
     }
@@ -64,8 +64,8 @@ object SectionActionRow {
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
         val colorDivider: Color? = null,
-        val dimensionDivider: Dp = 1.dp,
-        val dimensionPaddingBody: Dp = 0.dp,
+        val sizeDivider: Dp = 1.dp,
+        val paddingBody: Dp = 0.dp,
         actionRowStyle: ActionRow.Style? = null
     ) {
 
@@ -100,15 +100,15 @@ object SectionActionRow {
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
             colorDivider = style.colorDivider,
-            dimensionDivider = style.dimensionDivider,
-            dimensionPaddingBody = style.dimensionPaddingBody,
+            sizeDivider = style.sizeDivider,
+            paddingBody = style.paddingBody,
             actionRowStyle = style.actionRowStyle,
         )
 
     }
 
     data class Data(
-        val iconResourceId: Int? = null,
+        val iconId: Int? = null,
         val title: String? = null,
         val rows: List<ActionRow.Data>
     )
@@ -137,7 +137,7 @@ object SectionActionRow {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.element.small.horizontal))
-                    data.iconResourceId?.let {
+                    data.iconId?.let {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
@@ -165,19 +165,19 @@ object SectionActionRow {
                     ActionRow(
                         modifier = Modifier
                             .padding(
-                                horizontal = style.dimensionPaddingBody
+                                horizontal = style.paddingBody
                             ),
                         data = row, style = style.actionRowStyle
                     ) {
                         onClick(index)
                     }
-                    if (style.dimensionDivider > 0.dp && style.colorDivider != null && index != data.rows.lastIndex) {
+                    if (style.sizeDivider > 0.dp && style.colorDivider != null && index != data.rows.lastIndex) {
                         Divider(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(start = style.dimensionPaddingBody + MaterialTheme.dimensionsPaddingExtended.element.big.horizontal),
+                                .padding(start = style.paddingBody + MaterialTheme.dimensionsPaddingExtended.element.big.horizontal),
                             color = style.colorDivider,
-                            thickness = style.dimensionDivider,
+                            thickness = style.sizeDivider,
                         )
                     }
                 }

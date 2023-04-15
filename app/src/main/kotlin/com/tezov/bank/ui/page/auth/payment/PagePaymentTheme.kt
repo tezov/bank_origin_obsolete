@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 15/04/2023 23:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 15/04/2023 23:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -89,18 +89,18 @@ object PagePaymentTheme {
     }
 
     data class Dimensions(
-        val sizeHeadLineMin: TextUnit,
-        val sizeHeadlineMax: TextUnit,
-        val heightHeaderDivider: Dp,
-        val heightHeader: ColumnCollapsibleHeader.Properties,
+        val headLineMin: TextUnit,
+        val headlineMax: TextUnit,
+        val headerDivider: Dp,
+        val headerProperties: ColumnCollapsibleHeader.Properties,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
-        sizeHeadLineMin = 24.sp,
-        sizeHeadlineMax = 54.sp,
-        heightHeaderDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
-        heightHeader = ColumnCollapsibleHeader.Properties(76.dp, 152.dp)
+        headLineMin = 24.sp,
+        headlineMax = 54.sp,
+        headerDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
+        headerProperties = ColumnCollapsibleHeader.Properties(76.dp, 152.dp)
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -132,7 +132,7 @@ object PagePaymentTheme {
     @Composable
     fun provideStyles() = Style(
         sectionCard = ThemeComponentProviders.provideSectionCardStyle().copy {
-            dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             iconStyle = iconStyle.copy { tint = colors.primary }
             outfitTextHeader = outfitTextHeader?.copy {
                 outfitState = colors.primary.asStateSimple

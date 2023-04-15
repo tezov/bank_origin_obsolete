@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 22:02
+ *  Created by Tezov on 15/04/2023 23:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 21:57
+ *  Last modified 15/04/2023 23:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,7 +19,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.component.leaf.CarouselCard
@@ -70,7 +69,7 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                     modifier = Modifier
                         .fillMaxWidth()
                         .background(PageDiscoverTheme.colors.accent)
-                        .height(PageDiscoverTheme.dimensions.sizeHeader),
+                        .height(PageDiscoverTheme.dimensions.header),
                 )
                 Column(
                     modifier = Modifier
@@ -82,41 +81,38 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                         it.forEach { data ->
                             cards.add {
                                 CarouselCard(
+                                    modifier = Modifier.fillMaxSize(),
                                     data = data,
                                     style = PageDiscoverTheme.styles.cardButton
                                 )
                             }
                         }
                         HorizontalScrollable.Pager(
-                            modifier = Modifier
-                                .padding(top = 20.dp, bottom = 20.dp)
-                                .fillMaxWidth(),
                             style = PageDiscoverTheme.styles.carousel,
                             pages = cards
                         ) {
 
                         }
                     }
-                    state.cardWithLinkData.value?.let {
-                        val cards = ArrayList<@Composable () -> Unit>()
-                        it.forEach { data ->
-                            cards.add {
-                                CarouselCard(
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardLink
-                                )
-                            }
-                        }
-                        HorizontalScrollable.Pager(
-                            modifier = Modifier
-                                .padding(top = 20.dp, bottom = 20.dp)
-                                .fillMaxWidth(),
-                            style = PageDiscoverTheme.styles.carousel,
-                            pages = cards
-                        ) {
-
-                        }
-                    }
+//                    state.cardWithLinkData.value?.let {
+//                        val cards = ArrayList<@Composable () -> Unit>()
+//                        it.forEach { data ->
+//                            cards.add {
+//                                CarouselCard(
+//                                    data = data,
+//                                    style = PageDiscoverTheme.styles.cardLink
+//                                )
+//                            }
+//                        }
+//                        HorizontalScrollable.Pager(
+//                            modifier = Modifier
+//                                .fillMaxWidth(),
+//                            style = PageDiscoverTheme.styles.carousel,
+//                            pages = cards
+//                        ) {
+//
+//                        }
+//                    }
                     state.offers.value?.let {
                         SectionActionCard(data = it, style = PageDiscoverTheme.styles.sectionCard) {
 

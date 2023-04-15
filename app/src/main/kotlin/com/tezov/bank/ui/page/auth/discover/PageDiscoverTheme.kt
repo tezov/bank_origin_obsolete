@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 22:02
+ *  Created by Tezov on 15/04/2023 23:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 21:58
+ *  Last modified 15/04/2023 23:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,10 +28,6 @@ import com.tezov.bank.ui.component.branch.SectionActionRow.Style.Companion.copy
 import com.tezov.bank.ui.component.leaf.ActionCard.Style.Companion.copy
 import com.tezov.bank.ui.component.leaf.ActionRow.Style.Companion.copy
 import com.tezov.bank.ui.component.leaf.CarouselCard
-import com.tezov.bank.ui.page.auth.help.PageHelpTheme
-import com.tezov.bank.ui.page.auth.help.colors
-import com.tezov.bank.ui.page.auth.payment.colors
-import com.tezov.bank.ui.page.auth.profile.PageProfileTheme
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
@@ -124,15 +120,15 @@ object PageDiscoverTheme {
         }
 
     data class Dimensions(
-        val sizeHeader: Dp,
-        val sizeIconCard: DpSize,
+        val header: Dp,
+        val iconCard: DpSize,
         val spacingTopSectionRowToBottomSectionCard: Dp,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
-        sizeHeader = 192.dp,
-        sizeIconCard = 64.dpSize,
+        header = 192.dp,
+        iconCard = 64.dpSize,
         spacingTopSectionRowToBottomSectionCard = 64.dp,
     )
 
@@ -152,7 +148,7 @@ object PageDiscoverTheme {
     @Composable
     fun provideStyles() = Style(
         carousel = ThemeComponentProviders.provideCarouselStyle().copy {
-            dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical
+            paddingTopIndicator = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical
         },
         cardButton = CarouselCard.Style.Button(
             baseStyle = CarouselCard.Style.Base(
@@ -165,7 +161,7 @@ object PageDiscoverTheme {
                     },
                 ),
                 iconInfoStyle = Icon.Simple.Style(
-                    size = dimensions.sizeIconCard,
+                    size = dimensions.iconCard,
                     tint = colors.accent.copy(alpha = 0.5f)
                 ),
                 outfitTextTitle = MaterialTheme.typographiesExtended.title.big.copy {
@@ -228,7 +224,7 @@ object PageDiscoverTheme {
             }
         ),
         sectionRow = ThemeComponentProviders.provideSectionRowStyle().copy {
-            dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             outfitTextHeader = MaterialTheme.typographiesExtended.title.huge.copy {
                 outfitState = colors.primary.asStateSimple
                 typo = typo.copy(
@@ -246,7 +242,7 @@ object PageDiscoverTheme {
             }
         },
         sectionCard = ThemeComponentProviders.provideSectionCardStyle().copy {
-            dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             actionCardStyle = actionCardStyle.copy {
                 iconStyle = iconStyle.copy {
                     tint = colors.accent
