@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 21:03
+ *  Created by Tezov on 15/04/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 21:02
+ *  Last modified 15/04/2023 21:15
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -331,31 +331,29 @@ object CarouselCard {
         onClick: () -> Unit
     ) {
         Surface(
+            modifier = modifier,
             color = style.outfitFrame.resolveColorShape() ?: MaterialTheme.colors.surface,
             shape = style.outfitFrame.getShape() ?: MaterialTheme.shapes.small,
-            elevation = MaterialTheme.dimensionsCommonExtended.elevation.normal,
             border = style.outfitFrame.resolveBorder()
         ) {
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(
-//                        horizontal = MaterialTheme.dimensionsPaddingExtended.elementNormal_h,
-//                        vertical = MaterialTheme.dimensionsPaddingExtended.elementNormal_v
-                    )
+                    .padding(MaterialTheme.dimensionsPaddingExtended.block.big)
             ) {
                 data.tag?.let {
-                    Box(
+                    Column(
                         modifier = Modifier
-                            .background(style.outfitFrameTag)
+                            .padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical)
                             .border(style.outfitFrameTag)
+                            .background(style.outfitFrameTag)
                     ) {
                         Text.StateColor(
                             modifier = Modifier.padding(
-//                                vertical = MaterialTheme.dimensionsPaddingExtended.textSmall_v,
-//                                horizontal = MaterialTheme.dimensionsPaddingExtended.textBig_h
+                                vertical = MaterialTheme.dimensionsPaddingExtended.element.small.vertical,
+                                horizontal = MaterialTheme.dimensionsPaddingExtended.element.big.horizontal
                             ),
-                            text = data.title,
+                            text = it,
                             style = style.outfitTextTag,
                         )
                     }
@@ -363,31 +361,25 @@ object CarouselCard {
                 Row(modifier = Modifier.fillMaxWidth()) {
                     data.iconInfoResourceId?.let {
                         Icon.Simple(
-                            modifier = Modifier
-                                .align(Alignment.Top),
+                            modifier = Modifier.padding(end = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal),
                             resourceId = it,
                             description = null,
                             style = style.iconInfoStyle
                         )
                     }
                     Text.StateColor(
-//                        modifier = modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.textBig_v),
+                        modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
                         text = data.title,
                         style = style.outfitTextTitle,
+                        overflow = TextOverflow.Ellipsis
                     )
                 }
                 Text.StateColor(
-//                    modifier = modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.textBig_v),
+                    modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
                     text = data.body,
                     style = style.outfitTextBody,
                 )
-
                 LinkImport.StateColor(
-//                    modifier = Modifier
-//                        .padding(
-//                            horizontal = MaterialTheme.dimensionsPaddingExtended.buttonSmall_h,
-//                            vertical = MaterialTheme.dimensionsPaddingExtended.buttonSmall_v
-//                        )
                     text = data.action,
                     style = style.action,
                     onClick = onClick

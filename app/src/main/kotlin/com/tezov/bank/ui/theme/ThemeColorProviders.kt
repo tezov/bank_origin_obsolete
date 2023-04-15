@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 21:03
+ *  Created by Tezov on 15/04/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 20:12
+ *  Last modified 15/04/2023 22:00
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -73,7 +73,7 @@ object ThemeColorProviders {
         primary = OutfitPaletteColor(
             default = Palette.blueDark,
             accent = Palette.blueSea,
-            fade = Palette.grayLightOverlay,
+            fade = Palette.grayLight,
             shiny = Palette.blueShiny,
             shady = Palette.blueShady,
         ),

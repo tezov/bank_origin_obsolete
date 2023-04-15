@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 15/04/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 19:28
+ *  Last modified 15/04/2023 21:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,9 +20,11 @@ import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.component.leaf.CarouselCard
+import com.tezov.bank.ui.page.auth.help.PageHelpState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageDiscoverState private constructor(
+    val header: Header,
     val cardWithButtonData: MutableState<List<CarouselCard.Data>?>,
     val cardWithLinkData: MutableState<List<CarouselCard.Data>?>,
     val offers: MutableState<SectionActionCard.Data?>,
@@ -31,11 +33,13 @@ class PageDiscoverState private constructor(
 
     companion object {
         fun create(
+            header: Header = Header.empty(),
             cardWithButtonData: MutableState<List<CarouselCard.Data>?> = mutableStateOf(null),
             cardWithLinkData: MutableState<List<CarouselCard.Data>?> = mutableStateOf(null),
             offers: MutableState<SectionActionCard.Data?> = mutableStateOf(null),
             tips: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
         ) = PageDiscoverState(
+            header = header,
             cardWithButtonData = cardWithButtonData,
             cardWithLinkData = cardWithLinkData,
             offers = offers,
@@ -43,7 +47,21 @@ class PageDiscoverState private constructor(
         )
     }
 
+    data class Header(
+        val headline: MutableState<String?>,
+    ) {
+        companion object {
+            fun empty() = Header(
+                mutableStateOf(null),
+            )
+        }
+    }
+
     init {
+        header.apply {
+            headline.value = "Découvrir"
+        }
+
         cardWithButtonData.value = listOf(
             CarouselCard.Data(
                 tag = "100 euros offerts",

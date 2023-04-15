@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 21:03
+ *  Created by Tezov on 15/04/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 21:00
+ *  Last modified 15/04/2023 21:58
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,6 +19,8 @@ import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionCard.Style.Companion.copy
 import com.tezov.bank.ui.component.branch.SectionActionRow
@@ -26,21 +28,26 @@ import com.tezov.bank.ui.component.branch.SectionActionRow.Style.Companion.copy
 import com.tezov.bank.ui.component.leaf.ActionCard.Style.Companion.copy
 import com.tezov.bank.ui.component.leaf.ActionRow.Style.Companion.copy
 import com.tezov.bank.ui.component.leaf.CarouselCard
+import com.tezov.bank.ui.page.auth.help.PageHelpTheme
+import com.tezov.bank.ui.page.auth.help.colors
 import com.tezov.bank.ui.page.auth.payment.colors
 import com.tezov.bank.ui.page.auth.profile.PageProfileTheme
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
+import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageDiscoverTheme.colors: PageDiscoverTheme.Colors
@@ -49,6 +56,14 @@ val PageDiscoverTheme.colors: PageDiscoverTheme.Colors
     get() = localColors.current
 
 infix fun PageDiscoverTheme.provides(value: PageDiscoverTheme.Colors) = localColors provides value
+
+val PageDiscoverTheme.typographies: PageDiscoverTheme.Typographies
+    @Composable
+    @ReadOnlyComposable
+    get() = localTypographies.current
+
+infix fun PageDiscoverTheme.provides(value: PageDiscoverTheme.Typographies) =
+    localTypographies provides value
 
 val PageDiscoverTheme.dimensions: PageDiscoverTheme.Dimensions
     @Composable
@@ -92,15 +107,33 @@ object PageDiscoverTheme {
         error("not provided")
     }
 
+    data class Typographies(
+        val headline: OutfitTextStateColor,
+    )
+
+    @Composable
+    fun provideTypographies() = Typographies(
+        headline = MaterialTheme.typographiesExtended.title.supra.copy {
+            outfitState = colors.primary.asStateSimple
+        },
+    )
+
+    internal val localTypographies: ProvidableCompositionLocal<Typographies> =
+        staticCompositionLocalOf {
+            error("not provided")
+        }
+
     data class Dimensions(
+        val sizeHeader: Dp,
         val sizeIconCard: DpSize,
-        val spacingTopSectionRowToBottomSectionCard: DpSize,
+        val spacingTopSectionRowToBottomSectionCard: Dp,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
+        sizeHeader = 192.dp,
         sizeIconCard = 64.dpSize,
-        spacingTopSectionRowToBottomSectionCard = 64.dpSize,
+        spacingTopSectionRowToBottomSectionCard = 64.dp,
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -118,14 +151,18 @@ object PageDiscoverTheme {
 
     @Composable
     fun provideStyles() = Style(
-        carousel = ThemeComponentProviders.provideCarouselStyle(),
+        carousel = ThemeComponentProviders.provideCarouselStyle().copy {
+            dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical
+        },
         cardButton = CarouselCard.Style.Button(
             baseStyle = CarouselCard.Style.Base(
                 outfitFrame = OutfitFrameStateColor(
                     outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
                         outfitState = colors.decor.asStateSimple
                     },
-                    outfitShape = MaterialTheme.shapesExtended.element.big,
+                    outfitShape = MaterialTheme.shapesExtended.element.big.copy{
+                        outfitState = colors.background.asStateSimple
+                    },
                 ),
                 iconInfoStyle = Icon.Simple.Style(
                     size = dimensions.sizeIconCard,
@@ -162,35 +199,33 @@ object PageDiscoverTheme {
         cardLink = CarouselCard.Style.Link(
             baseStyle = CarouselCard.Style.Base(
                 outfitFrame = OutfitFrameStateColor(
-                    outfitShape = MaterialTheme.shapesExtended.element.normal.copy {
-
-
+                    outfitShape = MaterialTheme.shapesExtended.element.big.copy {
+                        outfitState = colors.backgroundElevated.asStateSimple
                     },
-                    outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
-                        outfitState = colors.decor.asStateSimple
-                    }
                 ),
                 iconInfoStyle = Icon.Simple.Style(
                     size = MaterialTheme.dimensionsIconExtended.info.normal,
                     tint = colors.accent
                 ),
-                outfitTextTitle = MaterialTheme.typographiesExtended.title.normal.copy {
+                outfitTextTitle = MaterialTheme.typographiesExtended.title.big.copy {
                     outfitState = colors.primary.asStateSimple
+                    typo = typo.copy(fontWeight = FontWeight.Bold)
                 },
-                outfitTextBody = MaterialTheme.typographiesExtended.title.normal.copy {
-                    outfitState = colors.primary.asStateSimple
-                },
-                outfitTextTag = MaterialTheme.typographiesExtended.title.normal.copy {
+                outfitTextBody = MaterialTheme.typographiesExtended.body.normal.copy {
                     outfitState = colors.primary.asStateSimple
                 },
                 outfitFrameTag = OutfitFrameStateColor(
-                    outfitShape = MaterialTheme.shapesExtended.chunk.normal,
-                    outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
-                        outfitState = colors.decor.asStateSimple
+                    outfitShape = MaterialTheme.shapesExtended.element.big,
+                    outfitBorder = MaterialTheme.bordersExtended.element.big.copy {
+                        outfitState = colors.accent.asStateSimple
                     }
                 ),
             ),
-            action = MaterialTheme.componentsLinkExtended.primary
+            action = MaterialTheme.componentsLinkExtended.primary.copy{
+                outfitText = outfitText.copy{
+                    outfitState = colors.accent.asStateSimple
+                }
+            }
         ),
         sectionRow = ThemeComponentProviders.provideSectionRowStyle().copy {
             dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 15/04/2023 22:02
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 19:09
+ *  Last modified 15/04/2023 21:20
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -259,8 +259,8 @@ object ThemeComponentProviders {
             )
         ),
         dimensionIndicatorPaddingTop = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
-        dimensionIndicatorSize = 8.dp,
-        dimensionIndicatorSpacing = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal,
+        dimensionIndicatorSize = 12.dp,
+        dimensionIndicatorSpacing = MaterialTheme.dimensionsPaddingExtended.element.big.horizontal,
     )
 
     @Composable
