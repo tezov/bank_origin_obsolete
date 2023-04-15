@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,6 @@
 package com.tezov.bank.ui.page.lobby.help_and_service
 
 import com.tezov.lib_core_android_kotlin.navigation.NavigationController
-import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageAction
 
 class PageHelpAndServiceAction private constructor(
@@ -24,9 +23,9 @@ class PageHelpAndServiceAction private constructor(
         fun create(
             navigationController: NavigationController,
         ) = PageHelpAndServiceAction(
-                navigationController = navigationController
+            navigationController = navigationController
 
-            )
+        )
     }
 
     fun close() {

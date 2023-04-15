@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,8 +23,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
-import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
+import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -49,12 +49,12 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
         outfitShape: OutfitShapeStateColor? = null,
         padding: PaddingValues? = null,
         val elevation: Dp = 2.dp,
-    ){
+    ) {
         val outfitShape: OutfitShapeStateColor by DelegateNullFallBack.Ref(
             outfitShape,
             fallBackValue = {
                 OutfitShapeStateColor(
-                    outfitState =  Color.Gray.copy(alpha = 0.25f).asStateSimple,
+                    outfitState = Color.Gray.copy(alpha = 0.25f).asStateSimple,
                     size = OutfitShape.Size(topStart = 12.dp, topEnd = 12.dp)
                 )
             })
@@ -62,12 +62,13 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
             padding,
             fallBackValue = { PaddingValues(1.dp, 1.dp) })
 
-        companion object{
+        companion object {
 
             @Composable
-            fun Style.copy(builder: @Composable StyleBuilder.()->Unit = {}) = StyleBuilder(this).also {
-                it.builder()
-            }.get()
+            fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) =
+                StyleBuilder(this).also {
+                    it.builder()
+                }.get()
 
         }
 
@@ -88,7 +89,7 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
     @Composable
     private fun content(content: @Composable () -> Unit) {
         val accessor = AccessorCoreUiActivity().get(this).contextSubMap()
-        val state = accessor.with<BottomSheet,_,_>().state()
+        val state = accessor.with<BottomSheet, _, _>().state()
         ModalBottomSheetLayout(
             sheetContentColor = MaterialTheme.colorsResource.transparent,
             sheetBackgroundColor = MaterialTheme.colorsResource.transparent,
@@ -97,9 +98,11 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
             sheetElevation = 0.dp,
             sheetContent = {
                 Surface(
-                    color = MaterialTheme.componentsCommonExtended.bottomSheet.outfitShape.resolveColor() ?: MaterialTheme.colors.surface,
+                    color = MaterialTheme.componentsCommonExtended.bottomSheet.outfitShape.resolveColor()
+                        ?: MaterialTheme.colors.surface,
                     modifier = Modifier.padding(MaterialTheme.componentsCommonExtended.bottomSheet.padding),
-                    shape = MaterialTheme.componentsCommonExtended.bottomSheet.outfitShape.getShape() ?: RectangleShape,
+                    shape = MaterialTheme.componentsCommonExtended.bottomSheet.outfitShape.getShape()
+                        ?: RectangleShape,
                     elevation = MaterialTheme.componentsCommonExtended.bottomSheet.elevation,
                 ) {
                     state.sheetContent()

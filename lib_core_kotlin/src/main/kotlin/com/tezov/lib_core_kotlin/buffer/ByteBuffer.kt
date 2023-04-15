@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,12 +14,12 @@ package com.tezov.lib_core_kotlin.buffer
 
 import com.tezov.lib_core_kotlin.type.primitive.*
 import com.tezov.lib_core_kotlin.type.primitive.BooleanTo.toByte
-import com.tezov.lib_core_kotlin.util.UtilsBytes
 import com.tezov.lib_core_kotlin.type.primitive.ByteTo.toBoolean
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toCharArray
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringChar
 import com.tezov.lib_core_kotlin.type.primitive.CharsTo.toUByteArray
 import com.tezov.lib_core_kotlin.type.primitive.string.StringCharTo.toUByteArrayChar
+import com.tezov.lib_core_kotlin.util.UtilsBytes
 import java.nio.Buffer
 import java.util.*
 
@@ -32,7 +32,7 @@ open class ByteBuffer protected constructor(val buffer: java.nio.ByteBuffer) {
 
         fun FLAG_SIZE() = ByteTo.BYTES
         fun FLAG_SIZE(length: Int) = FLAG_SIZE() * length
-        fun BYTES_SIZE(length: Int)= BYTE_LENGTH_OFFSET + length
+        fun BYTES_SIZE(length: Int) = BYTE_LENGTH_OFFSET + length
         fun BYTES_SIZE(bytes: UByteArray?) = BYTES_SIZE(bytes?.size ?: 0)
 
         fun BYTE_SIZE() = ByteTo.BYTES + ByteTo.BYTES
@@ -47,8 +47,8 @@ open class ByteBuffer protected constructor(val buffer: java.nio.ByteBuffer) {
 
         fun INT_SIZE() = ByteTo.BYTES + IntTo.BYTES
         fun INT_SIZE(length: Int) = INT_SIZE() * length
-        fun LONG_SIZE() =  ByteTo.BYTES + LongTo.BYTES
-        fun LONG_SIZE(length: Int) =  LONG_SIZE() * length
+        fun LONG_SIZE() = ByteTo.BYTES + LongTo.BYTES
+        fun LONG_SIZE(length: Int) = LONG_SIZE() * length
         fun FLOAT_SIZE() = ByteTo.BYTES + FloatTo.BYTES
         fun FLOAT_SIZE(length: Int) = FLOAT_SIZE() * length
         fun DOUBLE_SIZE() = ByteTo.BYTES + DoubleTo.BYTES
@@ -56,13 +56,15 @@ open class ByteBuffer protected constructor(val buffer: java.nio.ByteBuffer) {
         fun BOOLEAN_SIZE() = ByteTo.BYTES + ByteTo.BYTES
         fun BOOLEAN_SIZE(length: Int) = BOOLEAN_SIZE() * length
 
-        fun wrapPacked(bytes: UByteArray, offset: Int, length: Int) = ByteBufferPacker.unpackData(bytes)?.let {
-            wrap(it).apply {
-                position = offset
-                limit = length
-            }.slice
-        }
-        fun wrapPacked(bytes: UByteArray) =  ByteBufferPacker.unpackData(bytes)?.let {
+        fun wrapPacked(bytes: UByteArray, offset: Int, length: Int) =
+            ByteBufferPacker.unpackData(bytes)?.let {
+                wrap(it).apply {
+                    position = offset
+                    limit = length
+                }.slice
+            }
+
+        fun wrapPacked(bytes: UByteArray) = ByteBufferPacker.unpackData(bytes)?.let {
             ByteBuffer(it)
         }
 
@@ -70,9 +72,10 @@ open class ByteBuffer protected constructor(val buffer: java.nio.ByteBuffer) {
             position = offset
             limit = length
         }.slice
+
         fun wrap(bytes: UByteArray) = ByteBuffer(bytes)
 
-        fun wrap(buffer: Buffer) = buffer.takeIf { it.hasArray()}?.let {
+        fun wrap(buffer: Buffer) = buffer.takeIf { it.hasArray() }?.let {
             (it.array() as? ByteArray)?.let {
                 wrap(it.asUByteArray()).apply {
                     position = buffer.arrayOffset()
@@ -82,6 +85,7 @@ open class ByteBuffer protected constructor(val buffer: java.nio.ByteBuffer) {
                 }
             }
         }
+
         fun wrap(byteBuffer: java.nio.ByteBuffer) = ByteBuffer(byteBuffer)
         fun obtain(length: Int) = wrap(UtilsBytes.obtain(length))
     }
@@ -92,12 +96,13 @@ open class ByteBuffer protected constructor(val buffer: java.nio.ByteBuffer) {
             buffer.put(flag.toByte())
         }
 
-    val peekLength:Int get() {
-        val position = buffer.position()
-        val length = buffer.int
-        buffer.position(position)
-        return length
-    }
+    val peekLength: Int
+        get() {
+            val position = buffer.position()
+            val length = buffer.int
+            buffer.position(position)
+            return length
+        }
 
     private fun putWithSize(bytes: UByteArray?) {
         bytes.takeIf { it != null && it.isNotEmpty() }?.let {
@@ -107,6 +112,7 @@ open class ByteBuffer protected constructor(val buffer: java.nio.ByteBuffer) {
             buffer.putInt(0)
         }
     }
+
     private fun getWithSize(): UByteArray? {
         val length = buffer.int
         if (length == 0) {
@@ -127,12 +133,12 @@ open class ByteBuffer protected constructor(val buffer: java.nio.ByteBuffer) {
             putWithSize(data)
         }
     open var byte
-        get() = takeIf{ nullFlag == false }?.let { buffer.get().toUByte() }
+        get() = takeIf { nullFlag == false }?.let { buffer.get().toUByte() }
         set(data) {
             data?.let {
                 nullFlag = false
                 buffer.put(it.toByte())
-            }?:let {
+            } ?: let {
                 nullFlag = true
             }
         }
@@ -150,56 +156,56 @@ open class ByteBuffer protected constructor(val buffer: java.nio.ByteBuffer) {
         }
 
     open var int
-        get() = takeIf{ nullFlag == false }?.let { buffer.int }
+        get() = takeIf { nullFlag == false }?.let { buffer.int }
         set(data) {
             data?.let {
                 nullFlag = false
                 buffer.putInt(it)
-            }?:let {
+            } ?: let {
                 nullFlag = true
             }
         }
 
     open var long
-        get() = takeIf{ nullFlag == false }?.let { buffer.long }
+        get() = takeIf { nullFlag == false }?.let { buffer.long }
         set(data) {
             data?.let {
                 nullFlag = false
                 buffer.putLong(it)
-            }?:let {
+            } ?: let {
                 nullFlag = true
             }
         }
 
     open var float
-        get() = takeIf{ nullFlag == false }?.let { buffer.float }
+        get() = takeIf { nullFlag == false }?.let { buffer.float }
         set(data) {
             data?.let {
                 nullFlag = false
                 buffer.putFloat(it)
-            }?:let {
+            } ?: let {
                 nullFlag = true
             }
         }
 
     open var double
-        get() = takeIf{ nullFlag == false }?.let { buffer.double }
+        get() = takeIf { nullFlag == false }?.let { buffer.double }
         set(data) {
             data?.let {
                 nullFlag = false
                 buffer.putDouble(it)
-            }?:let {
+            } ?: let {
                 nullFlag = true
             }
         }
 
     open var boolean
-        get() = takeIf{ nullFlag == false }?.let { buffer.get().toBoolean() }
+        get() = takeIf { nullFlag == false }?.let { buffer.get().toBoolean() }
         set(data) {
             data?.let {
                 nullFlag = false
                 buffer.put(it.toByte())
-            }?:let {
+            } ?: let {
                 nullFlag = true
             }
         }
@@ -207,25 +213,29 @@ open class ByteBuffer protected constructor(val buffer: java.nio.ByteBuffer) {
     open fun writeToBuffer(b: UByte) {
         buffer.put(b.toByte())
     }
+
     open fun writeToBuffer(bytes: UByteArray) {
         buffer.put(bytes.asByteArray())
     }
+
     fun readFromBuffer(): UByte {
         return buffer.get().toUByte()
     }
+
     fun readFromBuffer(count: Int): UByteArray {
-        val _position  = position
+        val _position = position
         val bytes = Arrays.copyOfRange(byteArray, _position, _position + count)
         position = _position + count
         return bytes.asUByteArray()
     }
 
 
-    val count get() = if (buffer.hasArray()) {
-        buffer.limit() - buffer.arrayOffset()
-    } else {
-        buffer.limit()
-    }
+    val count
+        get() = if (buffer.hasArray()) {
+            buffer.limit() - buffer.arrayOffset()
+        } else {
+            buffer.limit()
+        }
 
     val capacity get() = buffer.capacity()
     val remaining get() = buffer.remaining()
@@ -243,12 +253,14 @@ open class ByteBuffer protected constructor(val buffer: java.nio.ByteBuffer) {
             buffer.limit(value)
         }
 
-    val rewind:Unit get() {
-        buffer.rewind()
-    }
-    val clear:Unit get() {
-        buffer.clear()
-    }
+    val rewind: Unit
+        get() {
+            buffer.rewind()
+        }
+    val clear: Unit
+        get() {
+            buffer.clear()
+        }
 
     open val uByteArray get() = byteArray.asUByteArray()
     open val byteArray get() = buffer.array()

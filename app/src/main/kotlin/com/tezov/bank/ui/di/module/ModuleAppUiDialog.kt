@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/02/2023 21:11
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/02/2023 20:22
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,13 +13,10 @@
 package com.tezov.bank.ui.di.module
 
 
-import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthAction
-import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState
-import com.tezov.lib_core_android_kotlin.ui.di.helper.ComposableHolder
-import com.tezov.lib_core_android_kotlin.ui.di.module.ModuleCoreUiActivity
-import com.tezov.lib_core_android_kotlin.ui.di.annotation.qualifier.QualifierCoroutineScopeMain
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeAppUiDialog
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentContextLazy
+import com.tezov.lib_core_android_kotlin.ui.di.helper.ComposableHolder
+import com.tezov.lib_core_android_kotlin.ui.di.module.ModuleCoreUiActivity
 import dagger.Module
 import dagger.Provides
 import javax.inject.Inject
@@ -27,7 +24,7 @@ import javax.inject.Inject
 interface ModuleAppUiDialog {
 
     @Module
-    class MapperContext{
+    class MapperContext {
 
         @ScopeAppUiDialog
         @Provides

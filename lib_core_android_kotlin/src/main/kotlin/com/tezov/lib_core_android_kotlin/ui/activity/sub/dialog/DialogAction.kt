@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:52
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 class DialogAction private constructor(
     val coroutineScope: CoroutineScope,
     val state: DialogState
-): ActivitySubAction<DialogState> {
+) : ActivitySubAction<DialogState> {
 
     companion object {
         @Composable
@@ -45,7 +45,7 @@ class DialogAction private constructor(
     }
 
     fun showOnCardWithOverlay(content: @Composable () -> Unit) {
-        show{ Dialog.Card(content) }
+        show { Dialog.Card(content) }
     }
 
 

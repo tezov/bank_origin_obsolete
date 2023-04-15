@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,7 +15,6 @@ package com.tezov.lib_core_kotlin.buffer
 import com.tezov.lib_core_kotlin.file.UtilsStream
 import com.tezov.lib_core_kotlin.type.primitive.BooleanTo.toUByte
 import com.tezov.lib_core_kotlin.type.primitive.BooleanTo.toUByteArray
-import kotlin.Throws
 import com.tezov.lib_core_kotlin.type.primitive.CharsTo.toUByteArray
 import com.tezov.lib_core_kotlin.type.primitive.DoubleTo.toUByteArray
 import com.tezov.lib_core_kotlin.type.primitive.FloatTo.toUByteArray
@@ -53,12 +52,14 @@ open class ByteBufferOutput private constructor(length: Int) : OutputStream() {
             writeBytes(INT0_AS_UBYTES)
         }
     }
+
     private fun writeBytes(bytes: UByteArray) {
         try {
             bos.write(bytes.asByteArray())
         } catch (e: Throwable) {
         }
     }
+
     private fun writeByte(bytes: UByte) {
         try {
             bos.write(byteArrayOf(bytes.toByte()))
@@ -66,84 +67,84 @@ open class ByteBufferOutput private constructor(length: Int) : OutputStream() {
         }
     }
 
-    var nullFlag:Boolean
+    var nullFlag: Boolean
         get() = throw IllegalAccessError()
-        set(flag){
+        set(flag) {
             writeByte(flag.toUByte())
         }
 
-    var bytes:UByteArray?
+    var bytes: UByteArray?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             putWithSize(data)
         }
-    var byte:UByte?
+    var byte: UByte?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             data?.let {
                 nullFlag = false
                 writeByte(it)
-            }?:let {
+            } ?: let {
                 nullFlag = true
             }
         }
-    var chars:CharArray?
+    var chars: CharArray?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             putWithSize(data.toUByteArray())
         }
-    var string:String?
+    var string: String?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             putWithSize(data.toUByteArrayChar())
         }
-    var int:Int?
+    var int: Int?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             data?.let {
                 nullFlag = false
                 writeBytes(data.toUByteArray())
-            }?:let {
+            } ?: let {
                 nullFlag = true
             }
         }
-    var float:Float?
+    var float: Float?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             data?.let {
                 nullFlag = false
                 writeBytes(data.toUByteArray())
-            }?:let {
+            } ?: let {
                 nullFlag = true
             }
         }
-    var double:Double?
+    var double: Double?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             data?.let {
                 nullFlag = false
                 writeBytes(data.toUByteArray())
-            }?:let {
+            } ?: let {
                 nullFlag = true
             }
         }
-    var long:Long?
+    var long: Long?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             data?.let {
                 nullFlag = false
                 writeBytes(data.toUByteArray())
-            }?:let {
+            } ?: let {
                 nullFlag = true
             }
         }
-    var boolean:Boolean?
+    var boolean: Boolean?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             data?.let {
                 nullFlag = false
                 writeBytes(data.toUByteArray())
-            }?:let {
+            } ?: let {
                 nullFlag = true
             }
         }
@@ -151,36 +152,41 @@ open class ByteBufferOutput private constructor(length: Int) : OutputStream() {
     open fun writeToBuffer(b: UByte) {
         writeByte(b)
     }
+
     open fun writeToBuffer(bytes: UByteArray) {
         writeBytes(bytes)
     }
 
-    val length get() =  bos.size()
+    val length get() = bos.size()
 
-    val uByteArray get() =  byteArray.asUByteArray()
-    val byteArray get() =  bos.toByteArray()
+    val uByteArray get() = byteArray.asUByteArray()
+    val byteArray get() = bos.toByteArray()
 
-    val byteArrayPacked get() =  uByteArrayPacked?.asByteArray()
-    val uByteArrayPacked get() =  ByteBufferPacker.packData(uByteArray)
+    val byteArrayPacked get() = uByteArrayPacked?.asByteArray()
+    val uByteArrayPacked get() = ByteBufferPacker.packData(uByteArray)
 
-    val clear:Unit get() = bos.reset()
+    val clear: Unit get() = bos.reset()
 
     @Throws(IOException::class)
     override fun write(b: ByteArray) {
         bos.write(b)
     }
+
     @Throws(IOException::class)
     override fun write(b: ByteArray, off: Int, len: Int) {
         bos.write(b, off, len)
     }
+
     @Throws(IOException::class)
     override fun flush() {
         bos.flush()
     }
+
     @Throws(IOException::class)
     override fun write(b: Int) {
         bos.write(b)
     }
+
     override fun close() {
         UtilsStream.closeSilently(bos)
     }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/02/2023 21:11
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/02/2023 20:09
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,20 +17,26 @@ import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppConf
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppConfirmationState
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthAction
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState
-import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiDialog
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeAppUiDialog
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentContextLazy
+import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiDialog
 import dagger.Component
 
 object ComponentAppUiDialog {
 
     @ScopeAppUiDialog
-    @Component(dependencies = [ComponentCoreUiDialog.EntryPoint::class, ComponentAppUiPage.EntryPoint::class], modules = [ModuleAppUiDialog.MapperContext::class])
+    @Component(
+        dependencies = [ComponentCoreUiDialog.EntryPoint::class, ComponentAppUiPage.EntryPoint::class],
+        modules = [ModuleAppUiDialog.MapperContext::class]
+    )
     interface EntryPoint {
 
         @Component.Factory
-        interface Factory{
-            fun create(componentCore: ComponentCoreUiDialog.EntryPoint, componentAppPage: ComponentAppUiPage.EntryPoint): EntryPoint
+        interface Factory {
+            fun create(
+                componentCore: ComponentCoreUiDialog.EntryPoint,
+                componentAppPage: ComponentAppUiPage.EntryPoint
+            ): EntryPoint
         }
 
         fun contextLoginAuth(): ComponentContextLazy<DialogLoginAuthState, DialogLoginAuthAction>

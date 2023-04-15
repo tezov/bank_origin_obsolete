@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 20:06
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,7 +31,6 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asFrameStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -167,7 +166,7 @@ object PageProfileTheme {
             outfitState = colors.dark.asStateSimple
         },
 
-    )
+        )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =
         staticCompositionLocalOf {
@@ -187,7 +186,7 @@ object PageProfileTheme {
         iconLogOut = Icon.StateColor.Style(
             size = MaterialTheme.dimensionsIconExtended.modal.normal,
             tint = colors.background,
-            outfitFrame = shapes.icon.copy{
+            outfitFrame = shapes.icon.copy {
                 outfitState = colors.primary.asStateSimple
             }.asFrameStateColor
         ),
@@ -195,7 +194,7 @@ object PageProfileTheme {
             size = dimensions.sizeIconUser,
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = shapes.icon,
-                outfitBorder = borders.icon.copy{
+                outfitBorder = borders.icon.copy {
                     outfitState = colors.decor.asStateSimple
                 }
             )
@@ -206,7 +205,7 @@ object PageProfileTheme {
                 outfitState = colors.neutral.asStateSimple
             }
             colorDivider = colors.fade
-            actionRowStyle = actionRowStyle.copy{
+            actionRowStyle = actionRowStyle.copy {
                 iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
                 iconActionStyle = iconActionStyle.copy { tint = colors.accent }
                 outfitText = outfitText?.copy {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 22:41
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,7 +22,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import com.tezov.bank.ui.theme.ThemeComponentProviders
-import com.tezov.bank.ui.theme.colorsPalette
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
@@ -252,7 +251,7 @@ object PageLoginTheme {
                 outfitState = colors.onBackground.asStateSimple
             }
         },
-        link = MaterialTheme.componentsLinkExtended.secondary.copy{
+        link = MaterialTheme.componentsLinkExtended.secondary.copy {
             outfitText = outfitText.copy {
                 outfitState = colors.onBackground.asStateSimple
             }
@@ -265,7 +264,7 @@ object PageLoginTheme {
             size = dimensions.sizeIconBig,
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = shapes.icon,
-                outfitBorder = borders.icon.copy{
+                outfitBorder = borders.icon.copy {
                     outfitState = colors.light.asStateSimple
                 }
             )
@@ -274,7 +273,7 @@ object PageLoginTheme {
             size = dimensions.sizeIconMedium,
             tint = colors.background,
             outfitFrame = OutfitFrameStateColor(
-                outfitShape = shapes.icon.copy{
+                outfitShape = shapes.icon.copy {
                     outfitState = colors.onBackground.asStateSimple
                 }
             )
@@ -283,7 +282,7 @@ object PageLoginTheme {
             size = dimensions.sizeIconSmall,
             tint = colors.onBackground,
             outfitFrame = OutfitFrameStateColor(
-                outfitShape = shapes.icon.copy{
+                outfitShape = shapes.icon.copy {
                     outfitState = colors.dark.asStateSimple
                 }
             )

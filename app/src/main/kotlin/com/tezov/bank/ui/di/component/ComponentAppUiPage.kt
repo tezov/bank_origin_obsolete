@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/02/2023 21:11
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/02/2023 20:19
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,10 +15,6 @@ package com.tezov.bank.ui.di.component
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
 import com.tezov.bank.ui.di.module.ModuleAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
-import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceAction
-import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceState
-import com.tezov.bank.ui.page.lobby.login.PageLoginAction
-import com.tezov.bank.ui.page.lobby.login.PageLoginState
 import com.tezov.bank.ui.page.auth.account.PageAccountAction
 import com.tezov.bank.ui.page.auth.account.PageAccountState
 import com.tezov.bank.ui.page.auth.discover.PageDiscoverAction
@@ -29,17 +25,27 @@ import com.tezov.bank.ui.page.auth.payment.PagePaymentAction
 import com.tezov.bank.ui.page.auth.payment.PagePaymentState
 import com.tezov.bank.ui.page.auth.profile.PageProfileAction
 import com.tezov.bank.ui.page.auth.profile.PageProfileState
+import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceAction
+import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceState
+import com.tezov.bank.ui.page.lobby.login.PageLoginAction
+import com.tezov.bank.ui.page.lobby.login.PageLoginState
 import com.tezov.bank.ui.page.lobby.splash.PageSplashAction
 import com.tezov.bank.ui.page.lobby.splash.PageSplashState
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeAppUiPage
-import com.tezov.lib_core_android_kotlin.ui.di.component.*
+import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentContextLazy
+import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiActivity
+import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiPage
+import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentLazy
 import dagger.Component
 
 object ComponentAppUiPage {
 
     @ScopeAppUiPage
-    @Component(dependencies = [ComponentCoreUiPage.EntryPoint::class, ComponentAppUiActivity.EntryPoint::class], modules = [ModuleAppUiPage.MapperContext::class])
-    interface EntryPoint: ComponentCoreUiActivity.Exposer  {
+    @Component(
+        dependencies = [ComponentCoreUiPage.EntryPoint::class, ComponentAppUiActivity.EntryPoint::class],
+        modules = [ModuleAppUiPage.MapperContext::class]
+    )
+    interface EntryPoint : ComponentCoreUiActivity.Exposer {
 
         @Component.Factory
         interface Factory {
@@ -48,6 +54,7 @@ object ComponentAppUiPage {
                 componentAppActivity: ComponentAppUiActivity.EntryPoint
             ): EntryPoint
         }
+
         fun accessorDialog(): AccessorAppUiDialog
 
         fun contextSplash(): ComponentContextLazy<PageSplashState, PageSplashAction>

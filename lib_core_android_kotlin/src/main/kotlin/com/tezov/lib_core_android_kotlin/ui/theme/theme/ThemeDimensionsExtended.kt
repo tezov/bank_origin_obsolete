@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:06
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Direction.Style.Companion.asPaletteDirection
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Size.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteDirection
@@ -82,7 +81,8 @@ object ThemeDimensionsExtended {
         text: OutfitPaletteSize<OutfitPaletteDirection<Dp>>? = null,
     ) {
 
-        private val delegates = DelegateNullFallBack.Group<OutfitPaletteSize<OutfitPaletteDirection<Dp>>>()
+        private val delegates =
+            DelegateNullFallBack.Group<OutfitPaletteSize<OutfitPaletteDirection<Dp>>>()
         val page: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(page)
         val cluster: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(cluster)
         val block: OutfitPaletteSize<OutfitPaletteDirection<Dp>> by delegates.ref(block)
@@ -106,7 +106,7 @@ object ThemeDimensionsExtended {
         action: OutfitPaletteSize<DpSize>? = null,
         fieldInfo: OutfitPaletteSize<DpSize>? = null,
         fieldAction: OutfitPaletteSize<DpSize>? = null,
-    ){
+    ) {
 
         private val delegates = DelegateNullFallBack.Group<OutfitPaletteSize<DpSize>>()
         val modal: OutfitPaletteSize<DpSize> by delegates.ref(modal)

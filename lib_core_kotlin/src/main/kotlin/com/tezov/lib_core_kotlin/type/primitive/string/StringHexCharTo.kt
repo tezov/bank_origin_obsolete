@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,14 +13,8 @@
 package com.tezov.lib_core_kotlin.type.primitive.string
 
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.complement
-import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toBoolean
-import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toDouble
-import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toFloat
-import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toInt
-import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toLong
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringChar
 import java.nio.charset.StandardCharsets
-import kotlin.experimental.and
 
 @OptIn(ExperimentalUnsignedTypes::class)
 object StringHexCharTo {
@@ -53,6 +47,7 @@ object StringHexCharTo {
         }
         return data
     }
+
     fun decode(b: UByteArray): String {
         val hexChars = UByteArray(b.size * 2)
         for (j in b.indices) {
@@ -62,6 +57,7 @@ object StringHexCharTo {
         }
         return String(hexChars.toByteArray(), StandardCharsets.ISO_8859_1)
     }
+
     fun decode(b: UByte): String {
         val hexChars = UByteArray(2)
         val v: Int = (b and 0xFFU).toInt()

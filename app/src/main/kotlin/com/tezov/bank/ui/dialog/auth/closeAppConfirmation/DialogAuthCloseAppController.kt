@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/02/2023 21:11
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/02/2023 20:23
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,14 +30,14 @@ class DialogAuthCloseAppController private constructor(
             dialogAction: DialogAction
         ) = DialogAuthCloseAppController(
             navigationController = navigationController,
-                dialogAction = dialogAction
-            )
+            dialogAction = dialogAction
+        )
 
         @Composable
-        fun handleOnBackPressed():Boolean{
+        fun handleOnBackPressed(): Boolean {
             val accessor = AccessorAppUiPage().get(requester = this).controllerDialogAuthCloseApp()
             val ref = accessor.ref()
-            if(ref.navigationController.isLastRoute()){
+            if (ref.navigationController.isLastRoute()) {
                 ref.show()
                 return true
             }

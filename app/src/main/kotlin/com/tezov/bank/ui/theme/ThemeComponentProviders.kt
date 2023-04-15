@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 22:32
+ *  Last modified 15/04/2023 19:09
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -50,13 +50,13 @@ object ThemeComponentProviders {
     fun common() = ThemeComponentExtended.Common(
         topAppBar = TopAppBar.Style(),
         bottomNavigation = BottomNavigation.Style(
-            outfitText  = TextStyle(
+            outfitText = TextStyle(
                 fontFamily = MaterialTheme.fontRoboto,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 12.5.sp
             ).asTextStateColor,
-            colorBackground  = MaterialTheme.colorsPalette.whiteShady,
-            outfitColor  = OutfitStateDual(
+            colorBackground = MaterialTheme.colorsPalette.whiteShady,
+            outfitColor = OutfitStateDual(
                 active = MaterialTheme.colorsPalette.blueElegant,
                 inactive = MaterialTheme.colorsPalette.blueShadow
             ),
@@ -111,7 +111,7 @@ object ThemeComponentProviders {
                     )
                 }
             ),
-            outfitText = MaterialTheme.typographiesExtended.button.normal.copy{
+            outfitText = MaterialTheme.typographiesExtended.button.normal.copy {
                 outfitState = OutfitStateDual(
                     active = MaterialTheme.colorsExtended.onPrimary.default,
                     inactive = MaterialTheme.colorsExtended.onPrimary.fade,
@@ -130,7 +130,7 @@ object ThemeComponentProviders {
                     outfitState = MaterialTheme.colorsExtended.primary.fade.asStateSimple
                 }
             ),
-            outfitText = MaterialTheme.typographiesExtended.button.normal.copy{
+            outfitText = MaterialTheme.typographiesExtended.button.normal.copy {
                 outfitState = OutfitStateDual(
                     active = MaterialTheme.colorsExtended.onPrimary.default,
                     inactive = MaterialTheme.colorsExtended.onPrimary.fade,
@@ -140,14 +140,14 @@ object ThemeComponentProviders {
         tertiary = Button.StateColor.Style(
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = MaterialTheme.shapesExtended.button.normal,
-                outfitBorder =MaterialTheme.bordersExtended.button.big.copy {
+                outfitBorder = MaterialTheme.bordersExtended.button.big.copy {
                     outfitState = OutfitStateDual(
                         active = MaterialTheme.colorsExtended.primary.default,
                         inactive = MaterialTheme.colorsPalette.grayLight,
                     )
                 }
             ),
-            outfitText = MaterialTheme.typographiesExtended.button.big.copy{
+            outfitText = MaterialTheme.typographiesExtended.button.big.copy {
                 outfitState = OutfitStateDual(
                     active = MaterialTheme.colorsExtended.onPrimary.default,
                     inactive = MaterialTheme.colorsPalette.grayBlack,
@@ -220,10 +220,12 @@ object ThemeComponentProviders {
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
-        outfitTextHeader = MaterialTheme.typographiesExtended.title.normal.copy {
+        outfitTextHeader = MaterialTheme.typographiesExtended.title.huge.copy {
             outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
+            typo = typo.copy(
+                fontWeight = FontWeight.Bold
+            )
         },
-        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default,
         actionCardStyle = provideActionCardStyle()
     )
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,8 @@ import com.tezov.bank.ui.activity.MainActivityState
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.di.module.ModuleAppUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeAppUiActivity
-import com.tezov.lib_core_android_kotlin.ui.di.component.*
+import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentContextLazy
+import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiActivity
 import dagger.Component
 
 object ComponentAppUiActivity {
@@ -30,7 +31,7 @@ object ComponentAppUiActivity {
     interface EntryPoint : ComponentCoreUiActivity.Exposer, Exposer {
 
         @Component.Factory
-        interface Factory{
+        interface Factory {
             fun create(
                 componentCoreActivity: ComponentCoreUiActivity.EntryPoint,
             ): EntryPoint

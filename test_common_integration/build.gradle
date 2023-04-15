@@ -19,7 +19,7 @@ android {
         consumerProguardFiles "consumer-rules.pro"
     }
     packagingOptions {
-        resources{
+        resources {
             excludes.add('META-INF/DEPENDENCIES')
             excludes.add('META-INF/LICENSE')
             excludes.add('META-INF/LICENSE.txt')
@@ -81,7 +81,7 @@ dependencies {
     api dependencies_test.core_integration.truth
     api dependencies_test.core_integration.espresso_core
     api(dependencies_test.core_integration.espresso_contrib) {
-        exclude group :"org.checkerframework", module : "checker"
+        exclude group: "org.checkerframework", module: "checker"
     }
 
     api dependencies_test.core_integration.uiautomator

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,11 +13,11 @@
 package com.tezov.lib_core_android_kotlin.ui.di.accessor
 
 import androidx.compose.runtime.Composable
-import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiPage
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiDialog
+import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiPage
 import com.tezov.lib_core_android_kotlin.ui.di.component.DaggerComponentCoreUiDialog_EntryPoint
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import javax.inject.Inject
 import kotlin.reflect.KClass
 
@@ -25,9 +25,10 @@ import kotlin.reflect.KClass
 class AccessorCoreUiPage @Inject protected constructor() :
     AccessorBase<ComponentCoreUiPage.EntryPoint, KClass<out Dialog<*, *>>, ComponentCoreUiDialog.EntryPoint>() {
 
-    companion object{
+    companion object {
         @Composable
         operator fun invoke() = AccessorCoreUiActivity().get(this).accessorPage()
+
         @Composable
         operator fun invoke(requester: Any) = AccessorCoreUiActivity().get(requester).accessorPage()
     }
@@ -45,11 +46,11 @@ class AccessorCoreUiPage @Inject protected constructor() :
         DaggerComponentCoreUiDialog_EntryPoint.factory().create(this.get(this))
 
     @Composable
-    override fun getChild(requester: Any, type: KClass<out Dialog<*, *>>) = throw Exception("use getChild(requester: Any) instead")
+    override fun getChild(requester: Any, type: KClass<out Dialog<*, *>>) =
+        throw Exception("use getChild(requester: Any) instead")
 
     @Composable
     fun getChild(requester: Any) = super.getChild(requester, Dialog::class)
-
 
 
 }

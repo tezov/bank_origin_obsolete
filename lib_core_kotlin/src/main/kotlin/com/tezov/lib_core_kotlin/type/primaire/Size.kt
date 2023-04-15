@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/03/2023 14:03
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/03/2023 12:46
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,11 +19,12 @@ class Size constructor(var width: Int = 0, var height: Int = 0) {
         height = tmp
     }
 
-    val ratio get() = if (width != 0) {
-        height.toFloat() / width.toFloat()
-    } else {
-        Float.NaN
-    }
+    val ratio
+        get() = if (width != 0) {
+            height.toFloat() / width.toFloat()
+        } else {
+            Float.NaN
+        }
 
     fun scaleTo(s: Scale) {
         width = (width * s.w).toInt()

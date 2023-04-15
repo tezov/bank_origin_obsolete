@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.unitTest
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,12 +13,7 @@
 package com.tezov.lib_core_kotlin.buffer
 
 import com.google.common.truth.Truth
-import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toCharArray
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringChar
-import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringHex
-import com.tezov.lib_core_kotlin.type.primitive.CharsTo.toUByteArray
-import org.junit.Assert.*
-
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -30,7 +25,7 @@ import kotlin.random.nextUBytes
 
 class ByteBufferTest {
 
-    companion object{
+    companion object {
         const val LOOP = 50
     }
 
@@ -43,8 +38,8 @@ class ByteBufferTest {
     }
 
     @Test
-    fun canWriteAndReadInt(){
-        for(i in 0..LOOP){
+    fun canWriteAndReadInt() {
+        for (i in 0..LOOP) {
             val result = Random.nextInt()
             val length = ByteBuffer.INT_SIZE()
             val byteBufferInput = ByteBuffer.obtain(length)
@@ -53,9 +48,10 @@ class ByteBufferTest {
             Truth.assertWithMessage("failed after $i").that(byteBufferOutput.int).isEqualTo(result)
         }
     }
+
     @Test
-    fun canWriteAndReadLong(){
-        for(i in 0..LOOP){
+    fun canWriteAndReadLong() {
+        for (i in 0..LOOP) {
             val result = Random.nextLong()
             val length = ByteBuffer.LONG_SIZE()
             val byteBufferInput = ByteBuffer.obtain(length)
@@ -64,43 +60,49 @@ class ByteBufferTest {
             Truth.assertWithMessage("failed after $i").that(byteBufferOutput.long).isEqualTo(result)
         }
     }
+
     @Test
-    fun canWriteAndReadFloat(){
-        for(i in 0..LOOP){
+    fun canWriteAndReadFloat() {
+        for (i in 0..LOOP) {
             val result = Random.nextFloat()
             val length = ByteBuffer.FLOAT_SIZE()
             val byteBufferInput = ByteBuffer.obtain(length)
             byteBufferInput.float = result
             val byteBufferOutput = ByteBuffer.wrap(byteBufferInput.uByteArray)
-            Truth.assertWithMessage("failed after $i").that(byteBufferOutput.float).isEqualTo(result)
+            Truth.assertWithMessage("failed after $i").that(byteBufferOutput.float)
+                .isEqualTo(result)
         }
     }
+
     @Test
-    fun canWriteAndReadDouble(){
-        for(i in 0..LOOP){
+    fun canWriteAndReadDouble() {
+        for (i in 0..LOOP) {
             val result = Random.nextDouble()
             val length = ByteBuffer.DOUBLE_SIZE()
             val byteBufferInput = ByteBuffer.obtain(length)
             byteBufferInput.double = result
             val byteBufferOutput = ByteBuffer.wrap(byteBufferInput.uByteArray)
-            Truth.assertWithMessage("failed after $i").that(byteBufferOutput.double).isEqualTo(result)
+            Truth.assertWithMessage("failed after $i").that(byteBufferOutput.double)
+                .isEqualTo(result)
         }
     }
+
     @Test
-    fun canWriteAndReadBoolean(){
-        for(i in 0..LOOP){
+    fun canWriteAndReadBoolean() {
+        for (i in 0..LOOP) {
             val result = Random.nextBoolean()
             val length = ByteBuffer.BOOLEAN_SIZE()
             val byteBufferInput = ByteBuffer.obtain(length)
             byteBufferInput.boolean = result
             val byteBufferOutput = ByteBuffer.wrap(byteBufferInput.uByteArray)
-            Truth.assertWithMessage("failed after $i").that(byteBufferOutput.boolean).isEqualTo(result)
+            Truth.assertWithMessage("failed after $i").that(byteBufferOutput.boolean)
+                .isEqualTo(result)
         }
     }
 
     @Test
-    fun canWriteAndReadByte(){
-        for(i in 0..LOOP){
+    fun canWriteAndReadByte() {
+        for (i in 0..LOOP) {
             val result = Random.nextUBytes(1)[0]
             val length = ByteBuffer.BYTE_SIZE()
             val byteBufferInput = ByteBuffer.obtain(length)
@@ -111,41 +113,44 @@ class ByteBufferTest {
     }
 
     @Test
-    fun canWriteAndReadBytes(){
-        for(i in 0..LOOP){
+    fun canWriteAndReadBytes() {
+        for (i in 0..LOOP) {
             val size = Random.nextInt(1, 500)
             val result = Random.nextUBytes(size)
             val length = ByteBuffer.BYTES_SIZE(size)
             val byteBufferInput = ByteBuffer.obtain(length)
             byteBufferInput.bytes = result
             val byteBufferOutput = ByteBuffer.wrap(byteBufferInput.uByteArray)
-            Truth.assertWithMessage("failed after $i").that(byteBufferOutput.bytes).containsExactlyElementsIn(result).inOrder()
+            Truth.assertWithMessage("failed after $i").that(byteBufferOutput.bytes)
+                .containsExactlyElementsIn(result).inOrder()
         }
     }
 
     @Test
-    fun canWriteAndReadString(){
-        for(i in 0..LOOP){
+    fun canWriteAndReadString() {
+        for (i in 0..LOOP) {
             val size = Random.nextInt(1, 500)
             val result = Random.nextUBytes(size).toStringChar()
             val length = ByteBuffer.STRING_SIZE(result)
             val byteBufferInput = ByteBuffer.obtain(length)
             byteBufferInput.string = result
             val byteBufferOutput = ByteBuffer.wrap(byteBufferInput.uByteArray)
-            Truth.assertWithMessage("failed after $i").that(byteBufferOutput.string).isEqualTo(result)
+            Truth.assertWithMessage("failed after $i").that(byteBufferOutput.string)
+                .isEqualTo(result)
         }
     }
 
     @Test
-    fun canWriteAndReadChars(){
-        for(i in 0..LOOP){
+    fun canWriteAndReadChars() {
+        for (i in 0..LOOP) {
             val size = Random.nextInt(1, 500)
             val result = Random.nextUBytes(size).toStringChar().toCharArray()
             val length = ByteBuffer.CHARS_SIZE(result)
             val byteBufferInput = ByteBuffer.obtain(length)
             byteBufferInput.chars = result
             val byteBufferOutput = ByteBuffer.wrap(byteBufferInput.uByteArray)
-            Truth.assertWithMessage("failed after $i").that(byteBufferOutput.chars).isEqualTo(result)
+            Truth.assertWithMessage("failed after $i").that(byteBufferOutput.chars)
+                .isEqualTo(result)
         }
     }
 

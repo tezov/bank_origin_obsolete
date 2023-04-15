@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/04/2023 23:14
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/04/2023 23:14
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,14 +19,12 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_kotlin.type.primaire.Scale
 
-fun Modifier.size(size: DpSize):Modifier {
-    return if(size.width != 0.dp && size.height != 0.dp){
+fun Modifier.size(size: DpSize): Modifier {
+    return if (size.width != 0.dp && size.height != 0.dp) {
         width(size.width).height(size.height)
-    }
-    else if(size.width != 0.dp){
+    } else if (size.width != 0.dp) {
         width(size.width).aspectRatio(1.0f)
-    }
-    else{
+    } else {
         height(size.height).aspectRatio(1.0f)
     }
 }
@@ -36,19 +34,20 @@ inline val Double.dpSize: DpSize get() = DpSize(this)
 
 class DpSize constructor(var width: Dp = 0.dp, var height: Dp = 0.dp) {
 
-    constructor(size:Dp):this(size, size)
-    constructor(size:Int):this(size.dp, size.dp)
-    constructor(size:Double):this(size.dp, size.dp)
+    constructor(size: Dp) : this(size, size)
+    constructor(size: Int) : this(size.dp, size.dp)
+    constructor(size: Double) : this(size.dp, size.dp)
 
     fun swap() {
         height = width.also { width = height }
     }
 
-    val ratio get() = if (width.value != 0f) {
-        height.value / width.value
-    } else {
-        Float.NaN
-    }
+    val ratio
+        get() = if (width.value != 0f) {
+            height.value / width.value
+        } else {
+            Float.NaN
+        }
 
     fun scaleTo(s: Scale) {
         width *= s.w

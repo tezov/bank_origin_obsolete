@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 20:20
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 19:02
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,14 +13,11 @@
 package com.tezov.bank.ui.page.lobby.splash
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
-import com.tezov.bank.ui.page.auth.account.PageAccountAction
-import com.tezov.bank.ui.page.auth.account.PageAccountState
-import com.tezov.bank.ui.page.lobby.splash.PageSplashAction
-import com.tezov.bank.ui.page.lobby.splash.PageSplashState
-import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
+import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 
 object PageSplash : Page<PageSplashState, PageSplashAction> {
 
@@ -28,7 +25,7 @@ object PageSplash : Page<PageSplashState, PageSplashAction> {
     override fun Page<PageSplashState, PageSplashAction>.content(innerPadding: PaddingValues) {
         val accessor = AccessorAppUiPage().get(requester = this).contextSplash()
         val action = accessor.action()
-        LaunchedEffect(Unit){
+        LaunchedEffect(Unit) {
             action.onStart()
         }
     }

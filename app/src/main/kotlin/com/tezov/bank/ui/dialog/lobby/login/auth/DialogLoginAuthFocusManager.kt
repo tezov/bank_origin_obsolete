@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:41
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,7 +26,10 @@ import kotlinx.coroutines.launch
 //todo modifier lenght control par une validation login / password au niveau du state comme le credential valid
 
 @OptIn(ExperimentalComposeUiApi::class)
-class DialogLoginAuthFocusManager(private val login: State<String>, private val password: State<String>){
+class DialogLoginAuthFocusManager(
+    private val login: State<String>,
+    private val password: State<String>
+) {
 
     var keyboardController: SoftwareKeyboardController? = null
     lateinit var coroutine: CoroutineScope
@@ -51,33 +54,33 @@ class DialogLoginAuthFocusManager(private val login: State<String>, private val 
         }
     }
 
-    fun showKeyBoard(){
+    fun showKeyBoard() {
         coroutine.launch {
             delay(150)
             keyboardController?.show()
         }
     }
 
-    fun hideKeyBoard(){
+    fun hideKeyBoard() {
         keyboardController?.hide()
     }
 
-    fun requestClearFocus(){
+    fun requestClearFocus() {
         focusOwner.value = null
         focusManager.clearFocus(true)
         hideKeyBoard()
     }
 
     //START - Login
-    fun requestLoginFocus(){
-        if(focusOwner.value != focusLogin){
+    fun requestLoginFocus() {
+        if (focusOwner.value != focusLogin) {
             focusLogin.requestFocus()
         }
     }
 
     fun isLoginHasFocus() = focusOwner.value == focusLogin
 
-    fun onLoginFocus(){
+    fun onLoginFocus() {
         focusOwner.value = focusLogin
         showKeyBoard()
     }
@@ -94,8 +97,8 @@ class DialogLoginAuthFocusManager(private val login: State<String>, private val 
     //END - Login
 
     //START - Password
-    fun requestPasswordFocus(){
-        if(focusOwner.value != focusPassword){
+    fun requestPasswordFocus() {
+        if (focusOwner.value != focusPassword) {
             focusPassword.requestFocus()
         }
     }
@@ -108,10 +111,9 @@ class DialogLoginAuthFocusManager(private val login: State<String>, private val 
     }
 
     fun onPasswordChange() {
-        if(password.value.length < DialogLoginAuthState.PASSWORD_LENGTH){
+        if (password.value.length < DialogLoginAuthState.PASSWORD_LENGTH) {
             requestPasswordFocus()
-        }
-        else if (login.value.length < DialogLoginAuthState.LOGIN_LENGTH) {
+        } else if (login.value.length < DialogLoginAuthState.LOGIN_LENGTH) {
             focusLogin.requestFocus()
         } else {
             requestClearFocus()

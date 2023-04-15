@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 16:15
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 16:01
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,7 +27,6 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
-import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 object PageHelp : Page<PageHelpState, PageHelpAction> {
@@ -61,31 +60,31 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
             ) {
                 contentHeader(state.header)
                 state.emergencies.value?.let {
-                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow){
+                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
                     }
                 }
                 state.paymentModes.value?.let {
-                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow){
+                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
                     }
                 }
                 state.configuration.value?.let {
-                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow){
+                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
                     }
                 }
                 state.account.value?.let {
-                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow){
+                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
                     }
                 }
                 state.misc.value?.let {
-                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow){
+                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
                     }
@@ -103,10 +102,11 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(
-                top = MaterialTheme.dimensionsPaddingExtended.page.normal.vertical,
-                start = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
-                end = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
-                bottom = MaterialTheme.dimensionsPaddingExtended.block.huge.vertical)
+                    top = MaterialTheme.dimensionsPaddingExtended.page.normal.vertical,
+                    start = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
+                    end = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
+                    bottom = MaterialTheme.dimensionsPaddingExtended.block.huge.vertical
+                )
         ) {
             header.headline.value?.let {
                 Text.StateColor(

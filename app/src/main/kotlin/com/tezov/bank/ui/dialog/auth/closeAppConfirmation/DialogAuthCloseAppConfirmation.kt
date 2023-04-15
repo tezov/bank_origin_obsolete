@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 16:15
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 15:38
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,18 +14,10 @@ package com.tezov.bank.ui.dialog.auth.closeAppConfirmation
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.AnnotatedString
-import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
-import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
-import com.tezov.bank.ui.page.lobby.login.provides
-import com.tezov.bank.ui.page.lobby.login.styles
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
@@ -34,7 +26,6 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
 import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 
 object DialogAuthCloseAppConfirmation :
     Dialog<DialogAuthCloseAppConfirmationState, DialogAuthCloseAppConfirmationAction> {
@@ -81,14 +72,14 @@ object DialogAuthCloseAppConfirmation :
                     Link.StateColor(
                         text = "NON",
                         style = DialogAuthCloseAppConfirmationTheme.styles.linkCancel,
-                    ){
+                    ) {
 
                     }
                     Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.element.huge.horizontal))
                     Link.StateColor(
                         text = "OUI",
                         style = DialogAuthCloseAppConfirmationTheme.styles.linkConfirm,
-                    ){
+                    ) {
 
                     }
                 }

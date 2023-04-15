@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/02/2023 19:39
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/02/2023 19:39
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,7 +16,12 @@ import com.tezov.bank.R
 import com.tezov.bank.navigation.NavigationController.Companion.Route
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigationItemData
 
-sealed class BottomNavigationItems(titleResourceId: Int, iconActive: Int, iconInactive: Int, route: Route) :
+sealed class BottomNavigationItems(
+    titleResourceId: Int,
+    iconActive: Int,
+    iconInactive: Int,
+    route: Route
+) :
     BottomNavigationItemData(titleResourceId, iconActive, iconInactive, route) {
     companion object {
         val items: Set<BottomNavigationItemData> by lazy {

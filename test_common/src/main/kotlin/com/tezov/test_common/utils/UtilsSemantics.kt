@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.test_common.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,7 +18,7 @@ import androidx.compose.ui.test.SemanticsNodeInteraction
 object UtilsSemantics {
 
     fun SemanticsNodeInteraction.toDebugLog() {
-        val config =  this.fetchSemanticsNode().config
+        val config = this.fetchSemanticsNode().config
         for ((key, value) in config) {
             Log.d(">>:", "$key : ${key.name} = $value")
         }

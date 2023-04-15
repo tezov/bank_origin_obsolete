@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 16:15
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 16:04
+ *  Last modified 15/04/2023 19:22
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -43,6 +43,7 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
         ExtensionCompositionLocal.CompositionLocalProvider(
             ancestor = arrayOf(
                 PageDiscoverTheme provides PageDiscoverTheme.provideColors(),
+                PageDiscoverTheme provides PageDiscoverTheme.provideDimensions(),
             ),
             child = {
                 arrayOf(
@@ -101,20 +102,19 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
 
                     }
                 }
-
                 state.offers.value?.let {
                     SectionActionCard(data = it, style = PageDiscoverTheme.styles.sectionCard) {
 
 
                     }
                 }
+                Spacer(modifier = Modifier.height(PageDiscoverTheme.dimensions.spacingTopSectionRowToBottomSectionCard.height))
                 state.tips.value?.let {
                     SectionActionRow(data = it, style = PageDiscoverTheme.styles.sectionRow) {
 
 
                     }
                 }
-
                 Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.huge.vertical))
             }
         }

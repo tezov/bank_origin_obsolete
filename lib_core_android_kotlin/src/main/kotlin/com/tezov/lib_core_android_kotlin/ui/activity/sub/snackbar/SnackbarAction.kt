@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,7 +24,7 @@ import kotlinx.coroutines.launch
 class SnackbarAction private constructor(
     private val coroutineScope: CoroutineScope,
     private val hostState: SnackbarHostState
-): ActivitySubAction<SnackbarState> {
+) : ActivitySubAction<SnackbarState> {
 
     companion object {
         @Composable
@@ -37,7 +37,7 @@ class SnackbarAction private constructor(
         )
     }
 
-    var currentJob:Job? = null
+    var currentJob: Job? = null
 
     fun show(message: String, duration: SnackbarDuration = SnackbarDuration.Short) {
         currentJob?.cancel()
@@ -47,7 +47,7 @@ class SnackbarAction private constructor(
                 actionLabel = "[X]",
                 duration = duration
             )
-            when(result){
+            when (result) {
                 SnackbarResult.Dismissed -> {
                     //nothing yet
                 }
@@ -57,6 +57,7 @@ class SnackbarAction private constructor(
             }
         }
     }
+
     fun showNotImplemented() {
         currentJob?.cancel()
         currentJob = coroutineScope.launch {
@@ -65,7 +66,7 @@ class SnackbarAction private constructor(
                 actionLabel = "[X]",
                 duration = SnackbarDuration.Short
             )
-            when(result){
+            when (result) {
                 SnackbarResult.Dismissed -> {
                     //nothing yet
                 }

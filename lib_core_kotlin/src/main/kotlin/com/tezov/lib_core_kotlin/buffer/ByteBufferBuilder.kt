@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,7 +28,7 @@ import com.tezov.lib_core_kotlin.util.UtilsNull.NOT_NULL
 import com.tezov.lib_core_kotlin.util.UtilsNull.NULL
 import kotlin.reflect.KClass
 
-class ByteBufferBuilder private constructor(){
+class ByteBufferBuilder private constructor() {
     private val datas: ListEntry<KClass<*>, Any?> = ListEntry()
     private var length = 0
 
@@ -89,7 +89,7 @@ class ByteBufferBuilder private constructor(){
                             }
                         }
                     }
-                 }
+                }
             }
         }
         datas.clear()
@@ -97,64 +97,64 @@ class ByteBufferBuilder private constructor(){
         return buffer
     }
 
-    var nullFlag:Boolean
+    var nullFlag: Boolean
         get() = throw IllegalAccessError()
-        set(flag){
+        set(flag) {
             length += FLAG_SIZE()
-            add(if(flag) NOT_NULL::class else NULL::class, null)
+            add(if (flag) NOT_NULL::class else NULL::class, null)
         }
 
-    var bytes:UByteArray?
+    var bytes: UByteArray?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             length += BYTES_SIZE(data)
             add(UByteArray::class, data)
         }
-    var byte:UByte?
+    var byte: UByte?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             length += BYTE_SIZE()
             add(UByte::class, data)
         }
-    var chars:CharArray?
+    var chars: CharArray?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             length += CHARS_SIZE(data)
             add(CharArray::class, data)
         }
-    var string:String?
+    var string: String?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             length += STRING_SIZE(data)
             add(String::class, data)
         }
-    var int:Int?
+    var int: Int?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             length += INT_SIZE()
             add(Int::class, data)
         }
-    var float:Float?
+    var float: Float?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             length += FLOAT_SIZE()
             add(Float::class, data)
         }
-    var double:Double?
+    var double: Double?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             length += DOUBLE_SIZE()
             add(Double::class, data)
         }
-    var long:Long?
+    var long: Long?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             length += LONG_SIZE()
             add(Long::class, data)
         }
-    var boolean:Boolean?
+    var boolean: Boolean?
         get() = throw IllegalAccessError()
-        set(data){
+        set(data) {
             length += BOOLEAN_SIZE()
             add(Boolean::class, data)
         }
@@ -163,6 +163,7 @@ class ByteBufferBuilder private constructor(){
         length += 1
         return add(ByteBuffer::class, b)
     }
+
     fun writeToBuffer(bytes: UByteArray) {
         length += bytes.size
         return add(ByteBuffer::class, bytes)

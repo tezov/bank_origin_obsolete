@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.androidTest
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,13 +26,13 @@ import kotlin.random.nextUBytes
 
 
 @RunWith(AndroidJUnit4::class)
-class DirectoryTest{
+class DirectoryTest {
 
 
     @Before
     fun setUp() {
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        StoragePackage.environnement = object : StoragePackage.Environnement{
+        StoragePackage.environnement = object : StoragePackage.Environnement {
             override val privateDataPath: String
                 get() = ""
             override val privateDataCachePath: String
@@ -54,13 +54,14 @@ class DirectoryTest{
 
 
     @Test
-    fun can_create(){
+    fun can_create() {
         var test_done = true
-        do{
+        do {
             val size = Random.nextInt(1, 10)
             val name = Random.nextUBytes(size).toStringHex()
-            val directory = Directory(StoragePackage.Type.PRIVATE_DATA_CACHE, "test_directory_$name")
-            if(directory.exists){
+            val directory =
+                Directory(StoragePackage.Type.PRIVATE_DATA_CACHE, "test_directory_$name")
+            if (directory.exists) {
                 continue
             }
             Truth.assertThat(directory.exists).isFalse()
@@ -69,21 +70,22 @@ class DirectoryTest{
             Truth.assertThat(directory.canRead).isTrue()
             Truth.assertThat(directory.canWrite).isTrue()
             test_done = false
-        }while(test_done)
+        } while (test_done)
     }
 
     @Test
-    fun link_isConform(){
+    fun link_isConform() {
         val result = "PRIVATE_DATA_CACHE:BeWNDhxmZvfiyLpFHckBeGNcJRJPrNSDSaPwztUywS"
-        val directory = Directory(StoragePackage.Type.PRIVATE_DATA_CACHE, "test_directory_link_isConform")
-        if(!directory.exists){
+        val directory =
+            Directory(StoragePackage.Type.PRIVATE_DATA_CACHE, "test_directory_link_isConform")
+        if (!directory.exists) {
             directory.create()
         }
         Truth.assertThat(directory.toLinkString()).isEqualTo(result)
     }
 
     @Test
-    fun can_create_from_link(){
+    fun can_create_from_link() {
         val link = "PRIVATE_DATA_CACHE:BeWNDhxmZvfiyLpFHckBeGNcJRJPrNSDSaPwztUywS"
         val directory = Directory.from(link)
         Truth.assertThat(directory.relativePathString).isEqualTo("test_directory_link_isConform")
@@ -92,10 +94,11 @@ class DirectoryTest{
 
 
     @Test
-    fun path_isConform(){
+    fun path_isConform() {
         val result = "private_data_cache/test_directory_link_isConform/"
-        val directory = Directory(StoragePackage.Type.PRIVATE_DATA_CACHE, "test_directory_link_isConform")
-        if(!directory.exists){
+        val directory =
+            Directory(StoragePackage.Type.PRIVATE_DATA_CACHE, "test_directory_link_isConform")
+        if (!directory.exists) {
             directory.create()
         }
         Truth.assertThat(directory.toLinkPathString()).isEqualTo(result)

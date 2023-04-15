@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.unitTest
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,7 +19,7 @@ import org.junit.Test
 
 //todo random test
 
-class ByteBufferOutputTest{
+class ByteBufferOutputTest {
 
     companion object {
         const val LOOP = 50
@@ -44,7 +44,7 @@ class ByteBufferOutputTest{
         val stringData = "hello world"
         val charsData = stringData.toCharArray()
         val bytesData = UByteArray(10) { index -> 0xAAU }
-        val copyBytesData = UByteArray(10) { index -> 0xAAU  }
+        val copyBytesData = UByteArray(10) { index -> 0xAAU }
         val copyByteData = 0x06.toUByte()
 
         val bytebufferbuilder = ByteBufferBuilder.obtain().apply {

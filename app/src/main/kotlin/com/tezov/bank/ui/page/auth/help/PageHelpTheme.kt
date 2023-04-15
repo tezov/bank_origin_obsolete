@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 20:32
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,7 +26,9 @@ import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon.Simple.Style.Co
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesExtended
 
 val PageHelpTheme.colors: PageHelpTheme.Colors
     @Composable
@@ -116,7 +118,7 @@ object PageHelpTheme {
                 outfitState = colors.primary.asStateSimple
             }
             colorDivider = colors.fade
-            actionRowStyle = actionRowStyle.copy{
+            actionRowStyle = actionRowStyle.copy {
                 iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
                 iconActionStyle = iconActionStyle.copy { tint = colors.accent }
                 outfitText = outfitText?.copy {

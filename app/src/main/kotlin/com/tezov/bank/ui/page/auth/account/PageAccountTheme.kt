@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 13:55
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 13:53
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,7 +24,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesExtended
 
 val PageAccountTheme.colors: PageAccountTheme.Colors
     @Composable
@@ -38,7 +40,8 @@ val PageAccountTheme.dimensions: PageAccountTheme.Dimensions
     @ReadOnlyComposable
     get() = localDimensions.current
 
-infix fun PageAccountTheme.provides(value: PageAccountTheme.Dimensions) = localDimensions provides value
+infix fun PageAccountTheme.provides(value: PageAccountTheme.Dimensions) =
+    localDimensions provides value
 
 val PageAccountTheme.shapes: PageAccountTheme.Shapes
     @Composable
@@ -138,7 +141,7 @@ object PageAccountTheme {
             fontWeight = FontWeight.Bold
         ),
 
-    )
+        )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =
         staticCompositionLocalOf {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,6 @@
 package com.tezov.lib_core_kotlin.socket
 
 import com.tezov.lib_core_java.type.unit.UnitByte
-import kotlin.Throws
 import com.tezov.lib_core_kotlin.util.UtilsBytes
 import java.io.IOException
 import java.io.InputStream

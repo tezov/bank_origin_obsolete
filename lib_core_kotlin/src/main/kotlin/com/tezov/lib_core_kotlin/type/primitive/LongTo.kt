@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -11,16 +11,14 @@
  */
 
 package com.tezov.lib_core_kotlin.type.primitive
+
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringHex
-import com.tezov.lib_core_kotlin.type.primitive.IntTo.toUByteArray
-import com.tezov.lib_core_kotlin.type.primitive.string.StringHexTo
-import com.tezov.lib_core_kotlin.util.UtilsBytes
 
 @OptIn(ExperimentalUnsignedTypes::class)
 object LongTo {
     var BYTES = java.lang.Long.SIZE / ByteTo.SIZE
 
-    fun Long.toUByteArray() =  ubyteArrayOf(
+    fun Long.toUByteArray() = ubyteArrayOf(
         (this shr 56).toUByte(),
         (this shr 48).toUByte(),
         (this shr 40).toUByte(),
@@ -28,7 +26,8 @@ object LongTo {
         (this shr 24).toUByte(),
         (this shr 16).toUByte(),
         (this shr 8).toUByte(),
-        this.toUByte())
+        this.toUByte()
+    )
 
     fun Long?.toUByteArray() = this?.toUByteArray()
 

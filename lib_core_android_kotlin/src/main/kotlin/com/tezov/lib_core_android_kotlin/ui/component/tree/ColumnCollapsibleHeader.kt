@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 16:15
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 16:14
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,14 +18,12 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.input.nestedscroll.NestedScrollConnection
 import androidx.compose.ui.input.nestedscroll.NestedScrollSource
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -83,7 +81,7 @@ object ColumnCollapsibleHeader {
             }
         }
 
-        private fun onDirectionPositive(available: Offset):Offset{
+        private fun onDirectionPositive(available: Offset): Offset {
             if (progress <= 0f) {
                 return Offset.Zero
             }
@@ -97,7 +95,7 @@ object ColumnCollapsibleHeader {
             return Offset(0f, -allowedToBeConsumed)
         }
 
-        private fun onDirectionNegative(available: Offset):Offset{
+        private fun onDirectionNegative(available: Offset): Offset {
             if (progress >= 1f) {
                 return Offset.Zero
             }

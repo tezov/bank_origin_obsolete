@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 20:44
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,8 +15,8 @@ package com.tezov.bank.ui.page.auth.help
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.component.branch.SectionActionRow
+import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageHelpState private constructor(
@@ -64,7 +64,8 @@ class PageHelpState private constructor(
         header.apply {
             headline.value = "Assistance"
             title.value = "En quoi pouvons-nous vous aider?"
-            text.value = "Trouvez une réponse rapide en sélectionnant la thématique qui correspoond à votre besoin."
+            text.value =
+                "Trouvez une réponse rapide en sélectionnant la thématique qui correspoond à votre besoin."
         }
 
         emergencies.value = SectionActionRow.Data(

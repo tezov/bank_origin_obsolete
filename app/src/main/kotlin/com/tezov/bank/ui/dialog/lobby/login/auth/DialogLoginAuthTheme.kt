@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 16:15
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 15:08
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,10 +20,7 @@ import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.tezov.bank.ui.page.lobby.login.colors
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
@@ -37,11 +34,9 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
-import java.time.format.TextStyle
 
 val DialogLoginAuthTheme.colors: DialogLoginAuthTheme.Colors
     @Composable
@@ -138,7 +133,7 @@ object DialogLoginAuthTheme {
                         size = (it.value * 0.65f).dp
                     }
                 },
-                outfitShape = MaterialTheme.shapesExtended.block.small.copy{
+                outfitShape = MaterialTheme.shapesExtended.block.small.copy {
                     size?.firstNotNull?.let {
                         size = OutfitShape.Size(bottomStart = it, bottomEnd = it)
                     }

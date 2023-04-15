@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 21:41
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,7 +31,10 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.S
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsIconExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesExtended
 
 val PageHelpAndServiceTheme.colors: PageHelpAndServiceTheme.Colors
     @Composable
@@ -114,7 +117,7 @@ object PageHelpAndServiceTheme {
                 outfitState = colors.neutral.asStateSimple
             }
             colorDivider = colors.fade
-            actionRowStyle = actionRowStyle.copy{
+            actionRowStyle = actionRowStyle.copy {
                 iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
                 iconActionStyle = iconActionStyle.copy { tint = colors.accent }
                 outfitText = outfitText?.copy {
@@ -128,7 +131,7 @@ object PageHelpAndServiceTheme {
             outfitTextHeader = outfitTextHeader?.copy {
                 outfitState = colors.neutral.asStateSimple
             }
-            actionCardStyle = actionCardStyle.copy{
+            actionCardStyle = actionCardStyle.copy {
                 iconStyle = iconStyle.copy {
                     tint = colors.accent
                     size = MaterialTheme.dimensionsIconExtended.info.big
@@ -136,7 +139,7 @@ object PageHelpAndServiceTheme {
                 outfitTextTitle = outfitTextTitle?.copy {
                     outfitState = colors.primary.asStateSimple
                 }
-                outfitFrame = outfitFrame.copy{
+                outfitFrame = outfitFrame.copy {
                     outfitBorder = outfitBorder.copy {
                         outfitState = colors.decor.asStateSimple
                     }

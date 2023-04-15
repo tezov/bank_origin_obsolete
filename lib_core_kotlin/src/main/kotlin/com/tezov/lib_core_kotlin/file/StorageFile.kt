@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,14 +12,10 @@
 
 package com.tezov.lib_core_kotlin.file
 
-import com.tezov.lib_core_kotlin.file.StorageFile
 import com.tezov.lib_core_kotlin.file.UtilsFile.FileName
-import com.tezov.lib_core_kotlin.file.UtilsFile
 import com.tezov.lib_core_kotlin.file.UtilsFile.FileName.Companion.number
-import com.tezov.lib_core_kotlin.util.UtilsList
 import com.tezov.lib_core_kotlin.util.UtilsString
 import java.util.*
-import kotlin.Comparator
 
 //todo refactor in kolin style
 
@@ -57,8 +53,10 @@ object StorageFile {
             null
         } else {
             val fileFullNameExploded = FileName(fileFullName!!)
-            val predicate: (String)->Boolean = newPredicateSelectFileLike(fileFullNameExploded, excludeFileFullName)
-            val files = directory.list { dir: java.io.File, fullName: String -> predicate(fullName) }
+            val predicate: (String) -> Boolean =
+                newPredicateSelectFileLike(fileFullNameExploded, excludeFileFullName)
+            val files =
+                directory.list { dir: java.io.File, fullName: String -> predicate(fullName) }
             if (files != null && files.size > 0) {
                 Arrays.asList(*files)
             } else {
@@ -70,7 +68,7 @@ object StorageFile {
     fun newPredicateSelectFileLike(
         fileFullNameExploded: FileName,
         excludeFileFullName: Boolean
-    ): (String)->Boolean {
+    ): (String) -> Boolean {
         val fileFullName = fileFullNameExploded.fullName
         val fileFullNameWithoutNumber = fileFullNameExploded.fullNameWithoutNumber
         val fileFullNameNumber = fileFullNameExploded.number
@@ -79,7 +77,7 @@ object StorageFile {
             val fullNameExploded = FileName(fullName)
             if (fileFullNameWithoutNumber == fullNameExploded.fullNameWithoutNumber) {
                 if (!excludeFileFullName || fullName != fileFullName) {
-                    result = if (fileFullNameNumber == null)  true
+                    result = if (fileFullNameNumber == null) true
                     else {
                         val fullNameNumber = fullNameExploded.number
                         fullNameNumber != null && fullNameNumber >= fileFullNameNumber
@@ -98,7 +96,7 @@ object StorageFile {
         val fileNames = selectFileLike(directory, fileFullName, false)
         var fileNamesSorted: List<String?>? = null
         if (fileNames != null) {
-            val comparator:Comparator<String> = Comparator{ s1, s2 ->
+            val comparator: Comparator<String> = Comparator { s1, s2 ->
                 val n1: Int? = s1.number()
                 val n2: Int? = s2.number()
                 if (n1 != null && n2 != null) {
@@ -161,7 +159,7 @@ object StorageFile {
         val fileNames = selectFileLike(directory, fileFullName, true)
         var fileNamesSorted: List<String?>? = null
         if (fileNames != null) {
-            val comparator:Comparator<String> = Comparator{ s1, s2 ->
+            val comparator: Comparator<String> = Comparator { s1, s2 ->
                 val n1: Int? = s1.number()
                 val n2: Int? = s2.number()
                 if (n1 != null && n2 != null) {

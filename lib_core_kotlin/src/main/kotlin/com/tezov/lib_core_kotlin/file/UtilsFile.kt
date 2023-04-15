@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:36
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,10 +12,9 @@
 
 package com.tezov.lib_core_kotlin.file
 
-import com.tezov.lib_core_kotlin.file.UtilsStream.closeSilently
 import com.tezov.lib_core_java.type.unit.UnitByte
-import kotlin.Throws
 import com.tezov.lib_core_kotlin.extension.ExtensionNull.nullify
+import com.tezov.lib_core_kotlin.file.UtilsStream.closeSilently
 import com.tezov.lib_core_kotlin.type.primaire.Pair
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toLong
 import com.tezov.lib_core_kotlin.type.primitive.LongTo
@@ -103,7 +102,7 @@ object UtilsFile {
         var _available = available
         if (_available == null) {
             var length: Int
-            val buffer  = UtilsBytes.obtain(bufferSize).asByteArray()
+            val buffer = UtilsBytes.obtain(bufferSize).asByteArray()
             while (source.read(buffer).also { length = it } > 0) {
                 destination.write(buffer, 0, length)
             }
@@ -131,19 +130,19 @@ object UtilsFile {
                 }.fullName
             } ?: this
 
-    fun String?.mimeTypeForFullName():String? = this?.let {
+    fun String?.mimeTypeForFullName(): String? = this?.let {
         URLConnection.getFileNameMap().run {
             getContentTypeFor(it) ?: MINE_TYPE_OCTET_STREAM
         }
     }
 
-    fun String?.extension():String? = this?.let { name ->
+    fun String?.extension(): String? = this?.let { name ->
         name.lastIndexOf(File.DOT_SEPARATOR).takeIf { it != NULL_INDEX }?.let { index ->
             name.substring(index + 1).nullify()
         }
     }
 
-    fun String?.name():String? = this?.let { name ->
+    fun String?.name(): String? = this?.let { name ->
         name.lastIndexOf(File.DOT_SEPARATOR).takeIf { it != NULL_INDEX }?.let { index ->
             name.substring(0, index).nullify()
         } ?: this
@@ -151,18 +150,18 @@ object UtilsFile {
 
 
     fun String?.splitToNameAndExtension() = this?.let {
-            val name: String?
-            val extension: String?
-            val dotIndex = it.lastIndexOf(File.DOT_SEPARATOR)
-            if (dotIndex != NULL_INDEX) {
-                extension = it.substring(dotIndex + 1)
-                name = it.substring(0, dotIndex)
-            } else {
-                extension = null
-                name = it
-            }
-           Pair(name.nullify(), extension.nullify())
-        } ?: Pair(null, null)
+        val name: String?
+        val extension: String?
+        val dotIndex = it.lastIndexOf(File.DOT_SEPARATOR)
+        if (dotIndex != NULL_INDEX) {
+            extension = it.substring(dotIndex + 1)
+            name = it.substring(0, dotIndex)
+        } else {
+            extension = null
+            name = it
+        }
+        Pair(name.nullify(), extension.nullify())
+    } ?: Pair(null, null)
 
     fun String?.splitToPathAndFileName() = this?.let {
         val index = it.lastIndexOf(Directory.PATH_SEPARATOR)
@@ -173,7 +172,7 @@ object UtilsFile {
         } else {
             Pair(null, it.nullify())
         }
-    }?: Pair(null, null)
+    } ?: Pair(null, null)
 
     class DigesterCRC32(private val digester: CRC32 = CRC32()) {
 
@@ -232,6 +231,7 @@ object UtilsFile {
         fun getFullName(number: Int?): String? {
             return addNumber(shortName!!, extension, number)
         }
+
         val fullNameWithoutNumber: String?
             get() = addNumber(shortName!!, extension, null)
 
@@ -239,6 +239,7 @@ object UtilsFile {
         fun getName(number: Int?): String? {
             return addNumber(shortName!!, null, number)
         }
+
         val nameWithoutNumber: String?
             get() = addNumber(shortName!!, null, null)
 
@@ -246,6 +247,7 @@ object UtilsFile {
             shortName = name
             return this
         }
+
         fun appendToName(s: String): FileName {
             shortName = shortName + s
             return this
@@ -286,10 +288,12 @@ object UtilsFile {
                 }
                 return null
             }
+
             fun String?.addNumber(number: Int?): String? {
                 val p = this.splitToNameAndExtension()
                 return addNumber(p.first, p.second, number)
             }
+
             fun addNumber(fileName: String?, extension: String?, number: Int?): String? {
                 var fileNameWithNumber = fileName
                 fileNameWithNumber?.let {

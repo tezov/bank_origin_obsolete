@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,6 @@ package com.tezov.lib_core_android_kotlin.ui.theme.style
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
-import com.tezov.lib_core_kotlin.extension.ExtensionCollection.firstNotNull
 import java.time.format.TextStyle
 import kotlin.reflect.KClass
 
@@ -92,8 +91,14 @@ object OutfitState {
                         it.builder()
                     }.get()
 
-                inline val Color.asStateSimple: OutfitStateSimple<Color> get() = OutfitStateSimple(value = this)
-                inline val TextStyle.asStateSimple: OutfitStateSimple<TextStyle> get() = OutfitStateSimple(value = this)
+                inline val Color.asStateSimple: OutfitStateSimple<Color>
+                    get() = OutfitStateSimple(
+                        value = this
+                    )
+                inline val TextStyle.asStateSimple: OutfitStateSimple<TextStyle>
+                    get() = OutfitStateSimple(
+                        value = this
+                    )
             }
 
             constructor(style: Style<T>) : this(
@@ -150,7 +155,10 @@ object OutfitState {
                     }.get()
 
                 inline val Color.asStateDual: OutfitStateDual<Color> get() = OutfitStateDual(active = this)
-                inline val TextStyle.asStateDual: OutfitStateDual<TextStyle> get() = OutfitStateDual(active = this)
+                inline val TextStyle.asStateDual: OutfitStateDual<TextStyle>
+                    get() = OutfitStateDual(
+                        active = this
+                    )
             }
 
             constructor(style: Style<T>) : this(
@@ -222,8 +230,14 @@ object OutfitState {
                         it.builder()
                     }.get()
 
-                inline val Color.asStateSemantic: OutfitStateSemantic<Color> get() = OutfitStateSemantic(neutral = this)
-                inline val TextStyle.asStateSemantic: OutfitStateSemantic<TextStyle> get() = OutfitStateSemantic(neutral = this)
+                inline val Color.asStateSemantic: OutfitStateSemantic<Color>
+                    get() = OutfitStateSemantic(
+                        neutral = this
+                    )
+                inline val TextStyle.asStateSemantic: OutfitStateSemantic<TextStyle>
+                    get() = OutfitStateSemantic(
+                        neutral = this
+                    )
             }
 
             constructor(style: Style<T>) : this(

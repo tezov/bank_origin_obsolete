@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -131,7 +131,7 @@ object ThemeColorsExtended {
     }
 
     @Composable
-    fun materialLight() =  Colors(
+    fun materialLight() = Colors(
         primary = MaterialTheme.colorsExtended.primary.default,
         primaryVariant = MaterialTheme.colorsExtended.primary.accent,
         onPrimary = MaterialTheme.colorsExtended.onPrimary.default,

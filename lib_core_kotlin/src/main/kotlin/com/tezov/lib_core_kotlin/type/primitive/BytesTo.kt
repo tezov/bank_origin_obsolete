@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,13 +12,8 @@
 
 package com.tezov.lib_core_kotlin.type.primitive
 
-import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringHex
-import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringHexChar
-import com.tezov.lib_core_kotlin.type.primitive.IntTo.toUByteArray
 import com.tezov.lib_core_kotlin.type.primitive.string.*
-import com.tezov.lib_core_kotlin.util.UtilsBytes
 import com.tezov.lib_core_kotlin.util.UtilsBytes.xor
-import kotlin.experimental.and
 
 @OptIn(ExperimentalUnsignedTypes::class)
 object BytesTo {
@@ -28,9 +23,9 @@ object BytesTo {
 
     fun UByteArray?.toCharArray() = this?.toCharArray()
     fun UByteArray.toCharArray() = this.let {
-        val c = CharArray(it.size/2)
+        val c = CharArray(it.size / 2)
         for (i in it.indices step 2) {
-             c[i/2] = (it[i+1].toInt() or (it[i].toInt() shl 8)).toChar()
+            c[i / 2] = (it[i + 1].toInt() or (it[i].toInt() shl 8)).toChar()
         }
         c
     }

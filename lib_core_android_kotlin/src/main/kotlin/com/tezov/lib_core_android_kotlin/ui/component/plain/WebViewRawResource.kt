@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,35 +15,38 @@ package com.tezov.lib_core_android_kotlin.ui.component.plain
 import android.annotation.SuppressLint
 import android.content.Context
 import android.view.View
-import android.webkit.WebView
 import android.webkit.WebResourceRequest
 import android.webkit.WebResourceResponse
+import android.webkit.WebView
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
 
 @SuppressLint("ViewConstructor")
-class WebViewRawResource private constructor(context: Context, rawHtmlResourceId:Int) : WebView(context) {
+class WebViewRawResource private constructor(context: Context, rawHtmlResourceId: Int) :
+    WebView(context) {
     private val domain = context.packageName
     private val maxHeight: Int? = null
+
     init {
         val assetLoader = WebViewAssetLoader.Builder().apply {
             setDomain(domain)
             addPathHandler("/assets/", WebViewAssetLoader.AssetsPathHandler(context))
             addPathHandler("/res/", WebViewAssetLoader.ResourcesPathHandler(context))
         }.build()
-        webViewClient = object : WebViewClientCompat(){
+        webViewClient = object : WebViewClientCompat() {
             override fun shouldInterceptRequest(
                 view: WebView?,
                 request: WebResourceRequest?
             ): WebResourceResponse? {
                 request?.let {
                     return assetLoader.shouldInterceptRequest(it.url)
-                }?: kotlin.run {
+                } ?: kotlin.run {
                     return super.shouldInterceptRequest(view, request)
                 }
             }
+
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
                 val parent = parent as? View
@@ -80,9 +83,9 @@ class WebViewRawResource private constructor(context: Context, rawHtmlResourceId
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
     }
 
-    companion object{
+    companion object {
         @Composable
-        operator fun invoke(rawHtmlResourceId:Int) {
+        operator fun invoke(rawHtmlResourceId: Int) {
             AndroidView(factory = {
                 WebViewRawResource(it, rawHtmlResourceId)
             }, update = {

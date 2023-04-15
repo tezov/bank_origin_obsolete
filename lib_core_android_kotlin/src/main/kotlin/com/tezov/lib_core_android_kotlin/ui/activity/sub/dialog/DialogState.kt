@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/04/2023 15:32
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/04/2023 15:29
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,8 +13,10 @@
 package com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
@@ -43,7 +45,7 @@ class DialogState private constructor(
     }
 
     @Composable
-    internal fun EmptyContent(){
+    internal fun EmptyContent() {
         Box(
             Modifier
                 .background(MaterialTheme.colorsResource.transparent)
@@ -76,6 +78,7 @@ class DialogState private constructor(
             }
         }
     }
+
     internal fun dialogContent(content: @Composable () -> Unit) {
         _dialogContent = content
         dialogContentUpdated.value++

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,12 +12,12 @@
 
 package com.tezov.lib_core_kotlin.file
 
+import com.tezov.lib_core_java.util.Clock
+import com.tezov.lib_core_kotlin.application.AppRandomNumber
 import com.tezov.lib_core_kotlin.buffer.ByteBuffer
 import com.tezov.lib_core_kotlin.buffer.ByteBufferBuilder
 import com.tezov.lib_core_kotlin.type.primitive.string.StringBase49To.toStringChar
 import com.tezov.lib_core_kotlin.type.primitive.string.StringCharTo.toStringBase49
-import com.tezov.lib_core_java.util.Clock
-import com.tezov.lib_core_kotlin.application.AppRandomNumber
 import java.io.File
 import java.io.FilenameFilter
 import java.io.IOException
@@ -95,7 +95,7 @@ class Directory {
         }
     }
 
-    fun build(create: Boolean):Boolean {
+    fun build(create: Boolean): Boolean {
         assertFileNotBuilt()
         val storageDirectory = _storage?.newFileW()
         _file = when {
@@ -124,6 +124,7 @@ class Directory {
         set(value) {
             _file = value
         }
+
     fun getFile(create: Boolean): FileW? {
         if (!isBuilt) {
             build(create)
@@ -271,7 +272,7 @@ class Directory {
 
     val list get() = file!!.list()
 
-    fun list(filter: FilenameFilter?) =  file!!.list(filter)
+    fun list(filter: FilenameFilter?) = file!!.list(filter)
 
     val listFiles get() = file!!.listFiles()
 
@@ -348,7 +349,7 @@ class Directory {
         const val LINK_SEPARATOR = ":"
         const val LINK_VALUE_NULL = "#"
 
-        fun from(bytes: UByteArray) =  Directory().fromUByteArray(bytes)
+        fun from(bytes: UByteArray) = Directory().fromUByteArray(bytes)
         fun from(link: String) = Directory().fromString(link)
 
         protected fun from(it: Iterator<String>) = Directory().fromStringIterator(it)
@@ -372,8 +373,12 @@ class Directory {
             return directory.toString()
         }
 
-        fun toLinkString(storage: StoragePackage.Type, path: StoragePackage.Path) = toLinkString(storage.name, path.name)
-        fun toLinkString(storage: StoragePackage.Type, path: String?) = toLinkString(storage.name, path)
+        fun toLinkString(storage: StoragePackage.Type, path: StoragePackage.Path) =
+            toLinkString(storage.name, path.name)
+
+        fun toLinkString(storage: StoragePackage.Type, path: String?) =
+            toLinkString(storage.name, path)
+
         fun toLinkString(storage: StoragePackage.Type) = toLinkString(storage.name, null)
 
         fun toLinkString(

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/02/2023 22:45
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/02/2023 21:52
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,29 +12,25 @@
 
 package com.tezov.bank.navigation
 
-import android.os.Bundle
-import android.util.Log
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.*
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.*
 import androidx.navigation.*
-import com.google.accompanist.navigation.animation.composable
 import com.google.accompanist.navigation.animation.AnimatedNavHost
+import com.google.accompanist.navigation.animation.composable
 import com.tezov.bank.navigation.NavigationController.Companion.Route
 import com.tezov.bank.ui.activity.MainActivity
 import com.tezov.bank.ui.di.accessor.AccessorAppUiActivity
-import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndService
-import com.tezov.bank.ui.page.lobby.login.PageLogin
 import com.tezov.bank.ui.page.auth.account.PageAccount
 import com.tezov.bank.ui.page.auth.discover.PageDiscover
 import com.tezov.bank.ui.page.auth.help.PageHelp
 import com.tezov.bank.ui.page.auth.payment.PagePayment
 import com.tezov.bank.ui.page.auth.profile.PageProfile
+import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndService
+import com.tezov.bank.ui.page.lobby.login.PageLogin
 import com.tezov.bank.ui.page.lobby.splash.PageSplash
-import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
-import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
+import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 
 @OptIn(ExperimentalAnimationApi::class)
 object NavigationGraph {
@@ -55,8 +51,8 @@ object NavigationGraph {
             startDestination = NavigationController.startRoute.value,
         ) {
 
-            composableWithAnimation(Route.Splash){
-                 PageSplash(PaddingValues())
+            composableWithAnimation(Route.Splash) {
+                PageSplash(PaddingValues())
             }
 
             composableWithAnimation(Route.Login) {
@@ -66,37 +62,37 @@ object NavigationGraph {
             }
 
             composableWithAnimation(Route.HelpAndService) {
-                (LocalActivity.current as MainActivity).empty{
+                (LocalActivity.current as MainActivity).empty {
                     PageHelpAndService(innerPadding = it)
                 }
             }
 
-            composableWithAnimation(Route.Account){
-                (LocalActivity.current as MainActivity).withBottomNavigationBar{
+            composableWithAnimation(Route.Account) {
+                (LocalActivity.current as MainActivity).withBottomNavigationBar {
                     PageAccount(innerPadding = it)
                 }
             }
 
-            composableWithAnimation(Route.Discover){
-                (LocalActivity.current as MainActivity).withBottomNavigationBar{
+            composableWithAnimation(Route.Discover) {
+                (LocalActivity.current as MainActivity).withBottomNavigationBar {
                     PageDiscover(innerPadding = it)
                 }
             }
 
-            composableWithAnimation(Route.Help){
-                (LocalActivity.current as MainActivity).withBottomNavigationBar{
+            composableWithAnimation(Route.Help) {
+                (LocalActivity.current as MainActivity).withBottomNavigationBar {
                     PageHelp(innerPadding = it)
                 }
             }
 
-            composableWithAnimation(Route.Profile){
-                (LocalActivity.current as MainActivity).withBottomNavigationBar{
+            composableWithAnimation(Route.Profile) {
+                (LocalActivity.current as MainActivity).withBottomNavigationBar {
                     PageProfile(innerPadding = it)
                 }
             }
 
-            composableWithAnimation(Route.Payment){
-                (LocalActivity.current as MainActivity).withBottomNavigationBar{
+            composableWithAnimation(Route.Payment) {
+                (LocalActivity.current as MainActivity).withBottomNavigationBar {
                     PagePayment(innerPadding = it)
                 }
             }
@@ -116,7 +112,7 @@ object NavigationGraph {
 
         enterTransition = { EnterTransition.None },
         exitTransition = { ExitTransition.None },
-        popEnterTransition = {  EnterTransition.None },
+        popEnterTransition = { EnterTransition.None },
         popExitTransition = { ExitTransition.None },
 
 //        enterTransition = {

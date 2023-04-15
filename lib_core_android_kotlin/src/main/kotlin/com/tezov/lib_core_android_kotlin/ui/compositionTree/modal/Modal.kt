@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/02/2023 18:17
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/02/2023 18:15
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,23 +12,22 @@
 
 package com.tezov.lib_core_android_kotlin.ui.compositionTree.modal
 
-import android.annotation.SuppressLint
-import android.util.Log
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.Composition
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModals
 
-interface Modal<S: ModalState, A: ModalAction<S>>: Composition<S, A> {
+interface Modal<S : ModalState, A : ModalAction<S>> : Composition<S, A> {
 
-    companion object{
-        data class Locals(val modal:Modal<*, *>)
+    companion object {
+        data class Locals(val modal: Modal<*, *>)
     }
 
-     @Composable
+    @Composable
     operator fun invoke() {
         val locals = Locals(this)
         val modals = LocalModals.current
-        DisposableEffect(Unit){
+        DisposableEffect(Unit) {
             modals.add(locals)
             onDispose {
                 modals.find { it.modal == this@Modal }?.also { modals.remove(it) }
@@ -38,7 +37,7 @@ interface Modal<S: ModalState, A: ModalAction<S>>: Composition<S, A> {
     }
 
     @Composable
-    fun Modal<S,A>.content()
+    fun Modal<S, A>.content()
 
     @Composable
     fun onBackPressedDispatch() = handleOnBackPressed()

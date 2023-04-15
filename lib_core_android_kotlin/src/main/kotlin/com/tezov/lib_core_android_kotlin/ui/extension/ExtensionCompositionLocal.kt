@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 01:03
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 23:13
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,8 +25,11 @@ object ExtensionCompositionLocal {
         content: @Composable () -> Unit
     ) {
         androidx.compose.runtime.CompositionLocalProvider(values = *ancestor) {
-            androidx.compose.runtime.CompositionLocalProvider(values = *parent()){
-                androidx.compose.runtime.CompositionLocalProvider(values = *child(), content = content)
+            androidx.compose.runtime.CompositionLocalProvider(values = *parent()) {
+                androidx.compose.runtime.CompositionLocalProvider(
+                    values = *child(),
+                    content = content
+                )
             }
         }
     }

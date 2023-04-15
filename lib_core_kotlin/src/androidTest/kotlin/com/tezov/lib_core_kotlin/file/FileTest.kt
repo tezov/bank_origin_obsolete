@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.androidTest
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -55,9 +55,9 @@ class FileTest {
     }
 
     @Test
-    fun can_generate_file_name(){
+    fun can_generate_file_name() {
         val directory = Directory(StoragePackage.Type.PRIVATE_DATA_CACHE, "test_directory")
-        if(!directory.exists){
+        if (!directory.exists) {
             directory.create()
         }
         val file = File(directory)
@@ -68,17 +68,17 @@ class FileTest {
     }
 
     @Test
-    fun can_create(){
+    fun can_create() {
         var test_done = true
-        do{
+        do {
             val size = Random.nextInt(1, 10)
             val name = Random.nextUBytes(size).toStringHex()
             val directory = Directory(StoragePackage.Type.PRIVATE_DATA_CACHE, "test_directory")
-            if(!directory.exists){
+            if (!directory.exists) {
                 directory.create()
             }
             val file = File(directory, name)
-            if(file.exists){
+            if (file.exists) {
                 continue
             }
             Truth.assertThat(file.exists).isFalse()
@@ -87,25 +87,25 @@ class FileTest {
             Truth.assertThat(file.canRead).isTrue()
             Truth.assertThat(file.canWrite).isTrue()
             test_done = false
-        }while(test_done)
+        } while (test_done)
     }
 
     @Test
-    fun link_isConform_no_extension(){
+    fun link_isConform_no_extension() {
         val result = "@:PRIVATE_DATA_CACHE:UJPzPaJHMmbssLJopHMp:SwLanVZFDKwFTnnQiTKN:#"
         val directory = Directory(StoragePackage.Type.PRIVATE_DATA_CACHE, "test_directory")
-        if(!directory.exists){
+        if (!directory.exists) {
             directory.create()
         }
         val file = File(directory, "link_isConform")
-        if(!file.exists){
+        if (!file.exists) {
             file.create()
         }
         Truth.assertThat(file.toLinkString()).isEqualTo(result)
     }
 
     @Test
-    fun can_create_from_link_no_extension(){
+    fun can_create_from_link_no_extension() {
         val link = "@:PRIVATE_DATA_CACHE:UJPzPaJHMmbssLJopHMp:SwLanVZFDKwFTnnQiTKN:#"
         val file = File.from(link)
         Truth.assertThat(file.directory!!.relativePathString).isEqualTo("test_directory")
@@ -114,21 +114,21 @@ class FileTest {
     }
 
     @Test
-    fun link_isConform_with_extension(){
+    fun link_isConform_with_extension() {
         val result = "@:PRIVATE_DATA_CACHE:UJPzPaJHMmbssLJopHMp:GXayCq:LHbZNUFhgnzaz"
         val directory = Directory(StoragePackage.Type.PRIVATE_DATA_CACHE, "test_directory")
-        if(!directory.exists){
+        if (!directory.exists) {
             directory.create()
         }
         val file = File(directory, "link.isConform")
-        if(!file.exists){
+        if (!file.exists) {
             file.create()
         }
         Truth.assertThat(file.toLinkString()).isEqualTo(result)
     }
 
     @Test
-    fun can_create_from_link_with_extension(){
+    fun can_create_from_link_with_extension() {
         val link = "@:PRIVATE_DATA_CACHE:UJPzPaJHMmbssLJopHMp:GXayCq:LHbZNUFhgnzaz"
         val file = File.from(link)
         Truth.assertThat(file.directory!!.relativePathString).isEqualTo("test_directory")
@@ -139,14 +139,14 @@ class FileTest {
 
 
     @Test
-    fun path_isConform(){
+    fun path_isConform() {
         val result = "private_data_cache/test_directory/link_isConform"
         val directory = Directory(StoragePackage.Type.PRIVATE_DATA_CACHE, "test_directory")
-        if(!directory.exists){
+        if (!directory.exists) {
             directory.create()
         }
         val file = File(directory, "link_isConform")
-        if(!file.exists){
+        if (!file.exists) {
             file.create()
         }
         Truth.assertThat(file.toLinkPathString()).isEqualTo(result)

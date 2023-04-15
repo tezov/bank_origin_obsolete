@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,9 +13,6 @@
 package com.tezov.lib_core_kotlin.type.primitive
 
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringHex
-import com.tezov.lib_core_kotlin.type.primitive.FloatTo.toUByteArray
-import com.tezov.lib_core_kotlin.util.UtilsBytes
-import kotlin.jvm.JvmOverloads
 import com.tezov.lib_core_kotlin.type.primitive.string.StringHexTo
 
 @OptIn(ExperimentalUnsignedTypes::class)
@@ -31,11 +28,13 @@ object IntTo {
         (this shr 8).toUByte(),
         this.toUByte()
     )
+
     fun Int?.toUByteArray() = this?.toUByteArray()
 
     fun Int.toStringHex(addPrefix: Boolean = false) =
         if (!addPrefix) this.toUByteArray().toStringHex()
         else StringHexTo.HEX_PREFIX + this.toUByteArray().toStringHex()
+
     fun Int?.toStringHex(addPrefix: Boolean = false) = this?.toStringHex(addPrefix)
 
 }

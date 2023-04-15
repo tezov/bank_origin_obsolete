@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/04/2023 21:15
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/04/2023 21:06
+ *  Last modified 15/04/2023 19:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -44,7 +44,7 @@ class PageDiscoverState private constructor(
     }
 
     init {
-        cardWithButtonData.value =  listOf(
+        cardWithButtonData.value = listOf(
             CarouselCard.Data(
                 tag = "100 euros offerts",
                 title = "Parrainez un proche...",
@@ -82,7 +82,7 @@ class PageDiscoverState private constructor(
         )
 
         offers.value = SectionActionCard.Data(
-            title = "Toute l'offre Hello bank!",
+            title = "Toute l'offre Tezov bank!",
             template = ActionCard.Template.IconTop,
             cards = listOf(
                 ActionCard.Data(

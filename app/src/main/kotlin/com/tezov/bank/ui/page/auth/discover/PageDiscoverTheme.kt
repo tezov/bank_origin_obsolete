@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/04/2023 21:15
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/04/2023 21:06
+ *  Last modified 15/04/2023 19:22
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,6 +18,7 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionCard.Style.Companion.copy
 import com.tezov.bank.ui.component.branch.SectionActionRow
@@ -25,7 +26,11 @@ import com.tezov.bank.ui.component.branch.SectionActionRow.Style.Companion.copy
 import com.tezov.bank.ui.component.leaf.ActionCard.Style.Companion.copy
 import com.tezov.bank.ui.component.leaf.ActionRow.Style.Companion.copy
 import com.tezov.bank.ui.component.leaf.CarouselCard
+import com.tezov.bank.ui.page.auth.payment.colors
+import com.tezov.bank.ui.page.auth.profile.PageProfileTheme
 import com.tezov.bank.ui.theme.ThemeComponentProviders
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
+import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon.Simple.Style.Companion.copy
@@ -43,6 +48,14 @@ val PageDiscoverTheme.colors: PageDiscoverTheme.Colors
     get() = localColors.current
 
 infix fun PageDiscoverTheme.provides(value: PageDiscoverTheme.Colors) = localColors provides value
+
+val PageDiscoverTheme.dimensions: PageDiscoverTheme.Dimensions
+    @Composable
+    @ReadOnlyComposable
+    get() = localDimensions.current
+
+infix fun PageDiscoverTheme.provides(value: PageDiscoverTheme.Dimensions) =
+    localDimensions provides value
 
 val PageDiscoverTheme.styles: PageDiscoverTheme.Style
     @Composable
@@ -77,6 +90,20 @@ object PageDiscoverTheme {
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
         error("not provided")
     }
+
+    data class Dimensions(
+        val spacingTopSectionRowToBottomSectionCard: DpSize,
+    )
+
+    @Composable
+    fun provideDimensions() = Dimensions(
+        spacingTopSectionRowToBottomSectionCard = 64.dpSize,
+    )
+
+    internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
+        staticCompositionLocalOf {
+            error("not provided")
+        }
 
     data class Style(
         val carousel: HorizontalScrollable.Pager.Style,
@@ -157,6 +184,13 @@ object PageDiscoverTheme {
         ),
         sectionRow = ThemeComponentProviders.provideSectionRowStyle().copy {
             dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            outfitTextHeader = MaterialTheme.typographiesExtended.title.huge.copy {
+                outfitState = colors.primary.asStateSimple
+                typo = typo.copy(
+                    fontWeight = FontWeight.Bold
+                )
+            }
+            colorBackgroundHeader = null
             colorDivider = colors.fade
             actionRowStyle = actionRowStyle.copy {
                 iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
@@ -169,7 +203,10 @@ object PageDiscoverTheme {
         sectionCard = ThemeComponentProviders.provideSectionCardStyle().copy {
             dimensionPaddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             actionCardStyle = actionCardStyle.copy {
-                iconStyle = iconStyle.copy { tint = colors.accent }
+                iconStyle = iconStyle.copy {
+                    tint = colors.accent
+                    size = MaterialTheme.dimensionsIconExtended.info.huge
+                }
                 outfitTextTitle = outfitTextTitle?.copy {
                     outfitState = colors.primary.asStateSimple
                 }

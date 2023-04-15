@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.unitTest
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,6 @@ package com.tezov.lib_core_kotlin.buffer
 
 import com.google.common.truth.Truth
 import com.tezov.lib_core_kotlin.type.collection.ListEntry
-import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toLong
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringChar
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringHex
 import com.tezov.lib_core_kotlin.util.UtilsNull
@@ -52,7 +51,7 @@ class ByteBufferBuilderTest {
         val stringData = "hello world"
         val charsData = stringData.toCharArray()
         val bytesData = UByteArray(10) { index -> 0xAAU }
-        val copyBytesData = UByteArray(10) { index -> 0xAAU  }
+        val copyBytesData = UByteArray(10) { index -> 0xAAU }
         val copyByteData = 0x06.toUByte()
 
         // build ByteBuffer
@@ -103,7 +102,7 @@ class ByteBufferBuilderTest {
 
     @Test
     fun random_bytebufferbuilder_is_equal_to_bytebuffer() {
-        for(i in 0..LOOP){
+        for (i in 0..LOOP) {
             //random data
             val datas: ListEntry<KClass<*>, Any?> = ListEntry()
             for (i in 0..30) {
@@ -111,7 +110,9 @@ class ByteBufferBuilderTest {
                     1 -> {
                         datas.add(
                             UByteArray::class,
-                            UByteArray(Random.nextInt(1, 50)) { index -> Random.nextInt().toUByte() })
+                            UByteArray(Random.nextInt(1, 50)) { index ->
+                                Random.nextInt().toUByte()
+                            })
                     }
                     2 -> {
                         datas.add(
@@ -307,7 +308,8 @@ class ByteBufferBuilderTest {
             }
 
             // verify
-            Truth.assertWithMessage("failed after $i").that(bytebuffer.uByteArray).containsExactlyElementsIn(bytebufferbuilder.build().uByteArray).inOrder()
+            Truth.assertWithMessage("failed after $i").that(bytebuffer.uByteArray)
+                .containsExactlyElementsIn(bytebufferbuilder.build().uByteArray).inOrder()
         }
     }
 }

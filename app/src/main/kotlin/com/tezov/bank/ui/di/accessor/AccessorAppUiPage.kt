@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,12 +27,12 @@ import kotlin.reflect.KClass
 class AccessorAppUiPage @Inject protected constructor() :
     AccessorBase<ComponentAppUiPage.EntryPoint, KClass<out Dialog<*, *>>, ComponentAppUiDialog.EntryPoint>() {
 
-    companion object{
+    companion object {
         @Composable
         operator fun invoke() = AccessorAppUiActivity().get(this).accessorPage()
 
         @Composable
-        operator fun invoke(requester:Any) = AccessorAppUiActivity().get(requester).accessorPage()
+        operator fun invoke(requester: Any) = AccessorAppUiActivity().get(requester).accessorPage()
     }
 
     @Composable
@@ -45,12 +45,14 @@ class AccessorAppUiPage @Inject protected constructor() :
 
     @Composable
     override fun createChild(type: KClass<out Dialog<*, *>>) =
-        DaggerComponentAppUiDialog_EntryPoint.factory().create(AccessorCoreUiDialog().get(this), this.get(this))
+        DaggerComponentAppUiDialog_EntryPoint.factory()
+            .create(AccessorCoreUiDialog().get(this), this.get(this))
 
     @Composable
-    override fun getChild(requester:Any, type: KClass<out Dialog<*, *>>) = throw Exception("use getChild(requester:Any) instead")
+    override fun getChild(requester: Any, type: KClass<out Dialog<*, *>>) =
+        throw Exception("use getChild(requester:Any) instead")
 
     @Composable
-    fun getChild(requester:Any) = super.getChild(requester, Dialog::class)
+    fun getChild(requester: Any) = super.getChild(requester, Dialog::class)
 
 }

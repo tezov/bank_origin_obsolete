@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.unitTest
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,18 +13,16 @@
 package com.tezov.lib_core_kotlin.buffer
 
 import com.google.common.truth.Truth
-import com.tezov.lib_core_kotlin.type.primitive.ByteTo.toStringHex
 import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringHex
-import com.tezov.lib_core_kotlin.type.primitive.string.StringHexCharTo.toUByteArrayHexChar
 import com.tezov.lib_core_kotlin.type.primitive.string.StringHexTo.toUByteArrayHex
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
 //todo randomize
-class ByteBufferPackerTest{
+class ByteBufferPackerTest {
 
-    companion object{
+    companion object {
         const val LOOP = 50
     }
 
@@ -40,71 +38,73 @@ class ByteBufferPackerTest{
     }
 
     @Test
-    fun nibbleinputstream_even_isConform(){
+    fun nibbleinputstream_even_isConform() {
         val data = "00112233445566778899AABBCCDDEEFF"
         val input = ByteBufferPacker.NibbleInputStream(data.toUByteArrayHex(), isOdd = false)
         var count = 0
         data.forEach {
-            Truth.assertThat(input.isEven).isEqualTo(count%2 == 0)
-            Truth.assertThat(input.isOdd).isEqualTo(count%2 == 1)
+            Truth.assertThat(input.isEven).isEqualTo(count % 2 == 0)
+            Truth.assertThat(input.isOdd).isEqualTo(count % 2 == 1)
             val result = it.toString().toInt(16).toUByte()
             val read = input.read()
             count++
-            Truth.assertThat(input.isEven).isEqualTo(count%2 == 0)
-            Truth.assertThat(input.isOdd).isEqualTo(count%2 == 1)
-            Truth.assertThat(input.available()).isEqualTo(data.length - count)
-            Truth.assertThat(read).isEqualTo(result)
-        }
-    }
-    @Test
-    fun nibbleinputstream_odd_isConform(){
-        val data = "0112233445566778899AABBCCDDEEFF"
-        val input = ByteBufferPacker.NibbleInputStream(data.toUByteArrayHex(), isOdd = true)
-        var count = 0
-        data.forEach {
-            Truth.assertThat(input.isEven).isEqualTo(count%2 == 1)
-            Truth.assertThat(input.isOdd).isEqualTo(count%2 == 0)
-            val result = it.toString().toInt(16).toUByte()
-            val read = input.read()
-            count++
-            Truth.assertThat(input.isEven).isEqualTo(count%2 == 1)
-            Truth.assertThat(input.isOdd).isEqualTo(count%2 == 0)
+            Truth.assertThat(input.isEven).isEqualTo(count % 2 == 0)
+            Truth.assertThat(input.isOdd).isEqualTo(count % 2 == 1)
             Truth.assertThat(input.available()).isEqualTo(data.length - count)
             Truth.assertThat(read).isEqualTo(result)
         }
     }
 
     @Test
-    fun nibbleoutputstream_even_isConform(){
+    fun nibbleinputstream_odd_isConform() {
+        val data = "0112233445566778899AABBCCDDEEFF"
+        val input = ByteBufferPacker.NibbleInputStream(data.toUByteArrayHex(), isOdd = true)
+        var count = 0
+        data.forEach {
+            Truth.assertThat(input.isEven).isEqualTo(count % 2 == 1)
+            Truth.assertThat(input.isOdd).isEqualTo(count % 2 == 0)
+            val result = it.toString().toInt(16).toUByte()
+            val read = input.read()
+            count++
+            Truth.assertThat(input.isEven).isEqualTo(count % 2 == 1)
+            Truth.assertThat(input.isOdd).isEqualTo(count % 2 == 0)
+            Truth.assertThat(input.available()).isEqualTo(data.length - count)
+            Truth.assertThat(read).isEqualTo(result)
+        }
+    }
+
+    @Test
+    fun nibbleoutputstream_even_isConform() {
         val data = "00112233445566778899AABBCCDDEEFF"
         val input = ByteBufferPacker.NibbleOutputStream()
         var count = 0
         data.forEach {
             val result = it.toString().toInt(16).toUByte()
-            Truth.assertThat(input.isEven).isEqualTo(count%2 == 0)
-            Truth.assertThat(input.isOdd).isEqualTo(count%2 == 1)
+            Truth.assertThat(input.isEven).isEqualTo(count % 2 == 0)
+            Truth.assertThat(input.isOdd).isEqualTo(count % 2 == 1)
             input.write(result)
             count++
-            Truth.assertThat(input.isEven).isEqualTo(count%2 == 0)
-            Truth.assertThat(input.isOdd).isEqualTo(count%2 == 1)
+            Truth.assertThat(input.isEven).isEqualTo(count % 2 == 0)
+            Truth.assertThat(input.isOdd).isEqualTo(count % 2 == 1)
         }
         val dataBytes = input.toBytes()
         Truth.assertThat(dataBytes.size).isEqualTo(data.length / 2)
         Truth.assertThat(dataBytes).containsExactlyElementsIn(data.toUByteArrayHex()).inOrder()
     }
+
     @Test
-    fun nibbleoutputstream_odd_isConform(){
+    fun nibbleoutputstream_odd_isConform() {
         val data = "00112233445566778899AABBCCDDEEF"
         val input = ByteBufferPacker.NibbleOutputStream()
         var count = 0
         data.forEach {
             val result = it.toString().toInt(16).toUByte()
-            Truth.assertThat(input.isEven).isEqualTo(count%2 == 0)
-            Truth.assertThat(input.isOdd).isEqualTo(count%2 == 1)
+            Truth.assertThat(input.isEven).isEqualTo(count % 2 == 0)
+            Truth.assertThat(input.isOdd).isEqualTo(count % 2 == 1)
             input.write(result)
             count++
-            Truth.assertThat(input.isEven).isEqualTo(count%2 == 0)
-            Truth.assertThat(input.isOdd).isEqualTo(count%2 == 1)
+            Truth.assertThat(input.isEven).isEqualTo(count % 2 == 0)
+            Truth.assertThat(input.isOdd).isEqualTo(count % 2 == 1)
         }
         val dataBytes = input.toBytes()
         Truth.assertThat(dataBytes.size).isEqualTo(data.length / 2 + 1)
@@ -112,7 +112,7 @@ class ByteBufferPackerTest{
     }
 
     @Test
-    fun nibbleinputstreamstack_single_write_isConform(){
+    fun nibbleinputstreamstack_single_write_isConform() {
         val data = "00112233445566778899AABBCCDDEEFF"
         val input = ByteBufferPacker.NibbleInputStreamStack(ubyteArrayOf(), isOdd = false)
         data.forEach {
@@ -125,8 +125,9 @@ class ByteBufferPackerTest{
             Truth.assertThat(read).isEqualTo(result)
         }
     }
+
     @Test
-    fun nibbleinputstreamstack_full_write_isConform(){
+    fun nibbleinputstreamstack_full_write_isConform() {
         val data = "00112233445566778899AABBCCDDEEFF"
         val input = ByteBufferPacker.NibbleInputStreamStack(ubyteArrayOf(), isOdd = false)
         Truth.assertThat(input.available()).isEqualTo(0)
@@ -149,8 +150,9 @@ class ByteBufferPackerTest{
     }
 
     @Test
-    fun pack_isCOnform(){
-        val result = "05A516680065006C006C006F00200077006F0072006C0064081BB68656C6C6F20776F726C64061CAAAAAAAAAAAAAAAAAAAAA0005081010F001340040080D10409101041C100AAAAAAAAAAAAAAAAAAAA060"
+    fun pack_isCOnform() {
+        val result =
+            "05A516680065006C006C006F00200077006F0072006C0064081BB68656C6C6F20776F726C64061CAAAAAAAAAAAAAAAAAAAAA0005081010F001340040080D10409101041C100AAAAAAAAAAAAAAAAAAAA060"
         //fix data
         val intData = 1
         val floatData = 2.0f
@@ -160,7 +162,7 @@ class ByteBufferPackerTest{
         val stringData = "hello world"
         val charsData = stringData.toCharArray()
         val bytesData = UByteArray(10) { index -> 0xAAU }
-        val copyBytesData = UByteArray(10) { index -> 0xAAU  }
+        val copyBytesData = UByteArray(10) { index -> 0xAAU }
         val copyByteData = 0x06.toUByte()
         val buffer = ByteBufferBuilder.obtain().apply {
             chars = charsData
@@ -183,7 +185,7 @@ class ByteBufferPackerTest{
     }
 
     @Test
-    fun unpack_isConform(){
+    fun unpack_isConform() {
         //fix data
         val intData = 1
         val floatData = 2.0f
@@ -193,9 +195,10 @@ class ByteBufferPackerTest{
         val stringData = "hello world"
         val charsData = stringData.toCharArray()
         val bytesData = UByteArray(10) { index -> 0xAAU }
-        val copyBytesData = UByteArray(10) { index -> 0xAAU  }
+        val copyBytesData = UByteArray(10) { index -> 0xAAU }
         val copyByteData = 0x06.toUByte()
-        val data = "05A516680065006C006C006F00200077006F0072006C0064081BB68656C6C6F20776F726C64061CAAAAAAAAAAAAAAAAAAAAA0005081010F001340040080D10409101041C100AAAAAAAAAAAAAAAAAAAA060"
+        val data =
+            "05A516680065006C006C006F00200077006F0072006C0064081BB68656C6C6F20776F726C64061CAAAAAAAAAAAAAAAAAAAAA0005081010F001340040080D10409101041C100AAAAAAAAAAAAAAAAAAAA060"
         val value = ByteBufferPacker().unpack(data.toUByteArrayHex())
         val buffer = ByteBuffer.wrap(value!!)
         Truth.assertThat(buffer.chars).isEqualTo(charsData)
@@ -210,7 +213,8 @@ class ByteBufferPackerTest{
         Truth.assertThat(buffer.boolean).isFalse()
         Truth.assertThat(buffer.nullFlag).isTrue()
         Truth.assertThat(buffer.nullFlag).isFalse()
-        Truth.assertThat(buffer.readFromBuffer(10)).containsExactlyElementsIn(copyBytesData).inOrder()
+        Truth.assertThat(buffer.readFromBuffer(10)).containsExactlyElementsIn(copyBytesData)
+            .inOrder()
         Truth.assertThat(buffer.readFromBuffer()).isEqualTo(copyByteData)
 
     }

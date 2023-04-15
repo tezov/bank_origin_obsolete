@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,23 +13,16 @@
 package com.tezov.lib_core_kotlin.util
 
 import com.tezov.lib_core_kotlin.application.AppRandomNumber.nextInt
-import com.tezov.lib_core_kotlin.type.RangeInt
-import com.tezov.lib_core_kotlin.application.AppRandomNumber
-import com.tezov.lib_core_kotlin.buffer.ByteBufferOutput
 import com.tezov.lib_core_kotlin.file.UtilsStream
-import com.tezov.lib_core_kotlin.socket.UtilsSocket
-import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringHex
-import com.tezov.lib_core_kotlin.type.primitive.IntTo.toStringHex
-import com.tezov.lib_core_kotlin.type.primitive.IntTo.toUByteArray
+import com.tezov.lib_core_kotlin.type.RangeInt
 import com.tezov.lib_core_kotlin.type.primitive.string.StringCharTo.toUByteArrayChar
 import java.io.ByteArrayOutputStream
-import kotlin.collections.ArrayList
-import kotlin.text.StringBuilder
 
 object UtilsUnicode {
     class Latin {
         var length: Int = 0
         val ranges: MutableList<RangeInt>
+
         init {
             ranges = ArrayList<RangeInt>().apply {
                 add(RangeInt(0x0020, 0x007E)) //ASCII
@@ -48,7 +41,7 @@ object UtilsUnicode {
             }
         }
 
-        private fun codeAt(length: Int):Int{
+        private fun codeAt(length: Int): Int {
             var value = length
             var charCode = 0
             for (r in ranges) {
@@ -70,7 +63,7 @@ object UtilsUnicode {
         fun randomUByteArray() = randomString().toUByteArrayChar()
 
         fun randomUByteArray(length: Int): UByteArray {
-            var output:ByteArrayOutputStream? = null
+            var output: ByteArrayOutputStream? = null
             return try {
                 output = ByteArrayOutputStream()
                 for (i in 0 until length) {
@@ -79,12 +72,13 @@ object UtilsUnicode {
                 val array = output.toByteArray().asUByteArray()
                 output.close()
                 array
-            } catch (e:Throwable){
+            } catch (e: Throwable) {
                 UtilsStream.closeSilently(output)
                 ubyteArrayOf()
             }
         }
-        fun randomString(length: Int):String{
+
+        fun randomString(length: Int): String {
             val builder = StringBuilder()
             for (i in 0 until length) {
                 builder.append(randomChar())
@@ -92,7 +86,7 @@ object UtilsUnicode {
             return builder.toString()
         }
 
-        fun all():String{
+        fun all(): String {
             val builder = StringBuilder()
             for (i in 0 until length) {
                 builder.append(codeAt(i).toChar())

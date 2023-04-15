@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,16 +15,18 @@ package com.tezov.lib_core_kotlin.buffer
 import com.tezov.lib_core_kotlin.buffer.ByteBufferOutput.Companion.BUFFER_INITIAL_SIZE
 import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
-import kotlin.experimental.and
-import kotlin.experimental.or
-import kotlin.properties.Delegates
 
 class ByteBufferPacker {
     private var output: NibbleOutputStream? = null
     private var input: NibbleInputStreamStack? = null
     private var bufferOut: NibbleOutputStream? = null
 
-    open class NibbleInputStream(data: UByteArray, offset: Int = 0, length: Int = data.size, isOdd: Boolean) {
+    open class NibbleInputStream(
+        data: UByteArray,
+        offset: Int = 0,
+        length: Int = data.size,
+        isOdd: Boolean
+    ) {
         private val input = ByteArrayInputStream(data.asByteArray(), offset, length)
         private var isTop = false
         private var bLow: UByte = 0x00.toUByte()
@@ -56,11 +58,12 @@ class ByteBufferPacker {
                 bHigh = (b shr 4).toUByte()
                 bLow = (b and 0x0F).toUByte()
                 bHigh
-            } else{
+            } else {
                 bLow
             }
         }
     }
+
     open class NibbleInputStreamStack(
         data: UByteArray,
         offset: Int = 0,
@@ -74,8 +77,8 @@ class ByteBufferPacker {
         override fun available() = length
 
         private fun updateTmpIn() {
-             tmpIn.let {
-                if(it == null || it.available() <= 0){
+            tmpIn.let {
+                if (it == null || it.available() <= 0) {
                     if (tmpOut.length() > 0) {
                         tmpIn = NibbleInputStream(tmpOut.toBytes(), isOdd = tmpOut.isOdd)
                         tmpOut.clear()
@@ -83,7 +86,7 @@ class ByteBufferPacker {
                         tmpIn = null
                     }
                 }
-             }
+            }
         }
 
         override fun read(): UByte {
@@ -92,7 +95,7 @@ class ByteBufferPacker {
             }
             updateTmpIn()
             length -= 1
-            return tmpIn?.read()?:super.read()
+            return tmpIn?.read() ?: super.read()
         }
 
         fun write(b: UByte) {
@@ -107,6 +110,7 @@ class ByteBufferPacker {
         private var b: Int = 0
         private var length = 0
         fun length() = length
+
         init {
             clear()
         }
@@ -172,7 +176,8 @@ class ByteBufferPacker {
                     val lengthNibble = (count % (EVEN_MAX_CHAIN + 1) / 2).toUByte()
                     output!!.write(code)
                     output!!.write(lengthNibble)
-                    val bufferIn = NibbleInputStream(bufferOut!!.toBytes(), isOdd = bufferOut!!.isOdd)
+                    val bufferIn =
+                        NibbleInputStream(bufferOut!!.toBytes(), isOdd = bufferOut!!.isOdd)
                     var bufferNibble: UByte
                     while (bufferIn.read().also { bufferNibble = it } != END_STREAM) {
                         output!!.write(bufferNibble)
@@ -187,9 +192,10 @@ class ByteBufferPacker {
         bufferOut = null
         return dataOut
     }
+
     private fun packCountOdd(): Int {
         var count = 0
-        var nibble:UByte = 0x00.toUByte()
+        var nibble: UByte = 0x00.toUByte()
         while (count < ODD_MAX_NIBBLE && (input!!.read().also { nibble = it }) != END_STREAM) {
             if (nibble == ODD_VALUE) {
                 count++
@@ -200,6 +206,7 @@ class ByteBufferPacker {
         }
         return count
     }
+
     private fun packCountEven(): Int {
         var count = 0
         var countOdd = 0
@@ -220,8 +227,7 @@ class ByteBufferPacker {
                             }
                             input!!.write(nibble)
                             break
-                        }
-                        else {
+                        } else {
                             for (i in 0 until countOdd) {
                                 packCountEven_WriteBuffer(ODD_VALUE)
                             }
@@ -230,23 +236,19 @@ class ByteBufferPacker {
                             packCountEven_WriteBuffer(nibble)
                             count++
                         }
-                    }
-                    else {
+                    } else {
                         packCountEven_WriteBuffer(nibble)
                         count++
                     }
-                }
-                else if (countOdd < EVEN_FOLLOWING_ODD_ALLOWED) {
+                } else if (countOdd < EVEN_FOLLOWING_ODD_ALLOWED) {
                     countOdd++
-                }
-                else {
+                } else {
                     for (i in 0..countOdd) {
                         input!!.write(ODD_VALUE)
                     }
                     break
                 }
-            }
-            else {
+            } else {
                 for (i in 0 until countOdd) {
                     input!!.write(ODD_VALUE)
                 }
@@ -255,6 +257,7 @@ class ByteBufferPacker {
         }
         return count
     }
+
     private fun packCountEven_WriteBuffer(nibble: UByte) {
         if (bufferOut != null) {
             bufferOut!!.write(nibble)
@@ -301,12 +304,13 @@ class ByteBufferPacker {
         private val packer = ByteBufferPacker()
 
         fun packData(data: UByteArray): UByteArray? {
-            synchronized(this){
+            synchronized(this) {
                 return packer.pack(data)
             }
         }
+
         fun unpackData(data: UByteArray): UByteArray? {
-            synchronized(this){
+            synchronized(this) {
                 return packer.unpack(data)
             }
         }

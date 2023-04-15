@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 20:13
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,7 +25,7 @@ class PageProfileState private constructor(
     val documents: MutableState<SectionActionRow.Data?>,
     val offers: MutableState<SectionActionRow.Data?>,
     val helps: MutableState<SectionActionRow.Data?>,
-    ) : PageState {
+) : PageState {
 
     companion object {
         fun create(
@@ -65,8 +65,14 @@ class PageProfileState private constructor(
 
         profils.value = SectionActionRow.Data(
             rows = listOf(
-                ActionRow.Data(title = "Mes infos de profil", iconInfoResourceId = R.drawable.ic_profile_line_24dp),
-                ActionRow.Data(title = "Mes paramètres", iconInfoResourceId = R.drawable.ic_setting_24dp),
+                ActionRow.Data(
+                    title = "Mes infos de profil",
+                    iconInfoResourceId = R.drawable.ic_profile_line_24dp
+                ),
+                ActionRow.Data(
+                    title = "Mes paramètres",
+                    iconInfoResourceId = R.drawable.ic_setting_24dp
+                ),
             )
         )
 

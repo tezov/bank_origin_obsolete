@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 22:32
+ *  Last modified 15/04/2023 19:07
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,9 +18,9 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
-import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.bank.ui.theme.font.fontIbm
 import com.tezov.bank.ui.theme.font.fontIndie
+import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asTextStateColor
@@ -34,22 +34,22 @@ object ThemeTypographyProviders {
             normal = TextStyle(
                 fontFamily = MaterialTheme.fontRoboto,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 18.sp
+                fontSize = 16.sp
             ).asTextStateColor,
             big = TextStyle(
                 fontFamily = MaterialTheme.fontRoboto,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 20.sp
+                fontSize = 18.sp
             ).asTextStateColor,
             huge = TextStyle(
                 fontFamily = MaterialTheme.fontRoboto,
                 fontWeight = FontWeight.SemiBold,
-                fontSize = 22.sp
+                fontSize = 20.sp
             ).asTextStateColor,
             supra = TextStyle(
                 fontFamily = MaterialTheme.fontRoboto,
                 fontWeight = FontWeight.Bold,
-                fontSize = 34.sp
+                fontSize = 30.sp
             ).asTextStateColor
         ),
         body = OutfitPaletteSize(

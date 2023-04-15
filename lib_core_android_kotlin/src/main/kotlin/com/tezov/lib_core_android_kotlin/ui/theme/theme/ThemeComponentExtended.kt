@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -79,7 +79,7 @@ object ThemeComponentExtended {
         proceed: ButtonImport.StateColor.Style? = null,
     ) {
 
-        private val delegates = DelegateNullFallBack.Group< ButtonImport.StateColor.Style>()
+        private val delegates = DelegateNullFallBack.Group<ButtonImport.StateColor.Style>()
         val secondary: ButtonImport.StateColor.Style by delegates.ref(secondary)
         val tertiary: ButtonImport.StateColor.Style by delegates.ref(tertiary)
         val confirm: ButtonImport.StateColor.Style by delegates.ref(confirm)
@@ -101,7 +101,7 @@ object ThemeComponentExtended {
         tertiary: LinkImport.StateColor.Style? = null,
     ) {
 
-        private val delegates = DelegateNullFallBack.Group< LinkImport.StateColor.Style>()
+        private val delegates = DelegateNullFallBack.Group<LinkImport.StateColor.Style>()
         val secondary: LinkImport.StateColor.Style by delegates.ref(secondary)
         val tertiary: LinkImport.StateColor.Style by delegates.ref(tertiary)
 

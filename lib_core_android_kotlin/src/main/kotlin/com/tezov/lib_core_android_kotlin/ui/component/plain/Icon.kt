@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 16:15
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 16:00
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,17 +12,13 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.plain
 
-import androidx.compose.foundation.background
 import androidx.compose.material.Icon
-import androidx.compose.material.LocalContentAlpha
-import androidx.compose.material.LocalContentColor
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
-import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
@@ -74,7 +70,7 @@ object Icon {
         operator fun invoke(
             modifier: Modifier = Modifier,
             style: Style = Style(),
-            painter:Painter,
+            painter: Painter,
             description: String? = null,
         ) {
             Icon(

@@ -29,7 +29,7 @@ android {
         kotlinCompilerExtensionVersion composeVersion
     }
     packagingOptions {
-        resources{
+        resources {
             pickFirst 'META-INF/gradle/incremental.annotation.processors'
             excludes.add('META-INF/DEPENDENCIES')
             excludes.add('META-INF/LICENSE')
@@ -69,7 +69,7 @@ android {
                 srcDirs 'src/main/res', main_layouts
             }
             java {
-                srcDirs 'src/main/java','src/main/kotlin'
+                srcDirs 'src/main/java', 'src/main/kotlin'
                 filter.exclude '**/*TODO*'
             }
         }
@@ -78,7 +78,7 @@ android {
                 srcDirs 'src/build_type/debug/res'
             }
             java {
-                srcDirs 'src/build_type/debug/java','src/build_type/debug/kotlin'
+                srcDirs 'src/build_type/debug/java', 'src/build_type/debug/kotlin'
             }
         }
         release {
@@ -86,7 +86,7 @@ android {
                 srcDirs 'src/build_type/release/res'
             }
             java {
-                srcDirs 'src/build_type/release/java','src/build_type/release/kotlin'
+                srcDirs 'src/build_type/release/java', 'src/build_type/release/kotlin'
             }
         }
     }

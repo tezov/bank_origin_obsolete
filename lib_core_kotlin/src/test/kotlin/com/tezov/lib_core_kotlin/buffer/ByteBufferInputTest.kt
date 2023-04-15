@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.unitTest
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,7 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 
-class ByteBufferInputTest{
+class ByteBufferInputTest {
 
     companion object {
         const val LOOP = 50
@@ -42,7 +42,7 @@ class ByteBufferInputTest{
         val stringData = "hello world"
         val charsData = stringData.toCharArray()
         val bytesData = UByteArray(10) { index -> 0xAAU }
-        val copyBytesData = UByteArray(10) { index -> 0xAAU  }
+        val copyBytesData = UByteArray(10) { index -> 0xAAU }
         val copyByteData = 0x06.toUByte()
 
         val bytebufferbuilder = ByteBufferBuilder.obtain().apply {
@@ -76,7 +76,8 @@ class ByteBufferInputTest{
         Truth.assertThat(bytebufferinput.boolean).isEqualTo(false)
         Truth.assertThat(bytebufferinput.nullFlag).isEqualTo(true)
         Truth.assertThat(bytebufferinput.nullFlag).isEqualTo(false)
-        Truth.assertThat(bytebufferinput.readFromBuffer(10)).containsExactlyElementsIn(copyBytesData).inOrder()
+        Truth.assertThat(bytebufferinput.readFromBuffer(10))
+            .containsExactlyElementsIn(copyBytesData).inOrder()
         Truth.assertThat(bytebufferinput.readFromBuffer()).isEqualTo(copyByteData)
     }
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.androidTest
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,13 +30,13 @@ import com.google.common.truth.Truth
 import com.tezov.bank.R
 import com.tezov.bank.dev_utils.UtilsKeyboard
 import com.tezov.bank.dev_utils.UtilsKeyboard.Status
-import com.tezov.test_common.rule.LazyActivityScenarioRule.Companion.lazyActivityScenarioRule
 import com.tezov.bank.ui.activity.MainActivity
+import com.tezov.bank.ui.activity.MainActivityState
 import com.tezov.bank.ui.screen.help.LoginScreen
 import com.tezov.bank.ui.theme.ThemeApplication
+import com.tezov.test_common.rule.LazyActivityScenarioRule.Companion.lazyActivityScenarioRule
 import com.tezov.test_common.rule.RetryRule
 import com.tezov.test_common.rule.RetryTest
-import com.tezov.bank.ui.activity.MainActivityState
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.*
 import org.junit.After
@@ -72,7 +72,8 @@ class LoginPageTest {
 
     @Before
     fun setup() {
-        val intent = Intent(ApplicationProvider.getApplicationContext(), ComponentActivity::class.java)
+        val intent =
+            Intent(ApplicationProvider.getApplicationContext(), ComponentActivity::class.java)
         scenarioRule.launch(intent)
         scenarioRule.scenario.onActivity { activity ->
             activity.setContent {

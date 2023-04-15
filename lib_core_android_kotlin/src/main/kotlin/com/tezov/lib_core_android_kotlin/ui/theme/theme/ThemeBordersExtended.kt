@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 14:59
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -44,7 +44,8 @@ object ThemeBordersExtended {
         icon: OutfitPaletteSize<OutfitBorderStateColor>? = null,
     ) {
 
-        private val delegates = DelegateNullFallBack.Group<OutfitPaletteSize<OutfitBorderStateColor>>()
+        private val delegates =
+            DelegateNullFallBack.Group<OutfitPaletteSize<OutfitBorderStateColor>>()
         val cluster: OutfitPaletteSize<OutfitBorderStateColor> by delegates.ref(cluster)
         val block: OutfitPaletteSize<OutfitBorderStateColor> by delegates.ref(block)
         val element: OutfitPaletteSize<OutfitBorderStateColor> by delegates.ref(element)

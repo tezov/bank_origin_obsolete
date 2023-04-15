@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.unitTest
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,10 +25,10 @@ import org.junit.Rule
 import org.junit.Test
 import kotlin.random.Random
 
-class DoubleToTest{
+class DoubleToTest {
 
 
-    companion object{
+    companion object {
         const val LOOP = 1000
     }
 
@@ -44,7 +44,7 @@ class DoubleToTest{
     }
 
     @Test
-    fun double_to_array_to_double_is_conform(){
+    fun double_to_array_to_double_is_conform() {
         val result = "406649999999999A".toUByteArrayHex()
         val value = 178.3.toUByteArray()
         Truth.assertThat(value).containsExactlyElementsIn(result).inOrder()
@@ -52,7 +52,7 @@ class DoubleToTest{
 
     @RepeatTest(LOOP)
     @Test
-    fun random_double_to_array_to_double_is_conform(){
+    fun random_double_to_array_to_double_is_conform() {
         val result = Random.nextDouble()
         val value = result.toUByteArray()
         Truth.assertThat(value.toDouble()).isEqualTo(result)

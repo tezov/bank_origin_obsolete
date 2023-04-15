@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 16:15
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 16:12
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,7 +26,6 @@ import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionCard.Style.Companion.copy
 import com.tezov.bank.ui.component.leaf.ActionCard.Style.Companion.copy
 import com.tezov.bank.ui.theme.ThemeComponentProviders
-import com.tezov.bank.ui.theme.colorsPalette
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
@@ -138,7 +137,7 @@ object PagePaymentTheme {
             outfitTextHeader = outfitTextHeader?.copy {
                 outfitState = colors.primary.asStateSimple
             }
-            actionCardStyle = actionCardStyle.copy{
+            actionCardStyle = actionCardStyle.copy {
                 iconStyle = iconStyle.copy {
                     tint = colors.accent
                     size = MaterialTheme.dimensionsIconExtended.info.huge
@@ -149,7 +148,7 @@ object PagePaymentTheme {
                 outfitTextSubtitle = outfitTextSubtitle?.copy {
                     outfitState = colors.fade.asStateSimple
                 }
-                outfitFrame = outfitFrame.copy{
+                outfitFrame = outfitFrame.copy {
                     outfitShape = outfitShape.copy {
                         outfitState = colors.backgroundElevated.asStateSimple
                     }

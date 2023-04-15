@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 16:15
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 16:03
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,19 +16,17 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
-
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Shadow
@@ -92,20 +90,29 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 ) {
                     contentHeader(state.header)
                     state.helpAndServices.value?.let {
-                        SectionActionCard(data = it, style = PageHelpAndServiceTheme.styles.sectionCard){
+                        SectionActionCard(
+                            data = it,
+                            style = PageHelpAndServiceTheme.styles.sectionCard
+                        ) {
 
 
                         }
                     }
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
                     state.contacts.value?.let {
-                        SectionActionRow(data = it, style = PageHelpAndServiceTheme.styles.sectionRow){
+                        SectionActionRow(
+                            data = it,
+                            style = PageHelpAndServiceTheme.styles.sectionRow
+                        ) {
 
 
                         }
                     }
                     state.notices.value?.let {
-                        SectionActionRow(data = it, style = PageHelpAndServiceTheme.styles.sectionRow){
+                        SectionActionRow(
+                            data = it,
+                            style = PageHelpAndServiceTheme.styles.sectionRow
+                        ) {
 
 
                         }
@@ -120,7 +127,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     private fun contentHeader(
         header: PageHelpAndServiceState.Header
     ) {
-        header.headline.value?.let{
+        header.headline.value?.let {
             Text.StateColor(
                 modifier = Modifier.padding(MaterialTheme.dimensionsPaddingExtended.page.normal),
                 text = it,
@@ -128,8 +135,6 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
             )
         }
     }
-
-
 
 
 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 22:20
+ *  Last modified 15/04/2023 19:15
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,6 @@ package com.tezov.bank.ui.theme
 
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Direction.Style.Companion.asPaletteDirection
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Size.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteDirection
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
@@ -114,7 +113,7 @@ object ThemeDimensionProviders {
         modal = 42.dpSize.asPaletteSize,
         info = OutfitPaletteSize(
             normal = 36.dpSize,
-            small = 28.dpSize,
+            small = 18.dpSize,
             big = 54.dpSize,
             huge = 86.dpSize,
         ),

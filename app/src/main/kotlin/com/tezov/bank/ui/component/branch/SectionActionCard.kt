@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 21:45
+ *  Last modified 15/04/2023 19:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -121,10 +121,12 @@ object SectionActionCard {
                 .fillMaxWidth()
         ) {
             data.title?.let { text ->
+                var headerHasBackground = false
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .thenOnNotNull(style.colorBackgroundHeader){
+                        .thenOnNotNull(style.colorBackgroundHeader) {
+                            headerHasBackground = true
                             background(it)
                         },
                     verticalAlignment = Alignment.CenterVertically
@@ -145,13 +147,17 @@ object SectionActionCard {
                         style = style.outfitTextHeader
                     )
                 }
+                if(headerHasBackground) {
+                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.big.vertical))
+                }
             }
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .thenOnNotNull(style.colorBackgroundBody){
+                    .thenOnNotNull(style.colorBackgroundBody) {
                         background(it)
-                    }.padding(
+                    }
+                    .padding(
                         horizontal = style.dimensionPaddingBody
                     ),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.block.big.vertical),

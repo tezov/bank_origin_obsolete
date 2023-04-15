@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/04/2023 21:15
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 11/04/2023 21:41
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
@@ -28,8 +27,8 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.Activit
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModals
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPage
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
-import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
+import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
@@ -62,7 +61,7 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
         }
     }
 
-    object Card{
+    object Card {
 
         class StyleBuilder internal constructor(style: Style) {
             var outfitFrame = style.outfitFrame
@@ -77,7 +76,7 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
         class Style(
             outfitFrame: OutfitFrameStateColor? = null,
             val elevation: Dp = 2.dp,
-        ){
+        ) {
 
             val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
                 outfitFrame,
@@ -94,12 +93,13 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
                     )
                 })
 
-            companion object{
+            companion object {
 
                 @Composable
-                fun Style.copy(builder: @Composable StyleBuilder.()->Unit = {}) = StyleBuilder(this).also {
-                    it.builder()
-                }.get()
+                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) =
+                    StyleBuilder(this).also {
+                        it.builder()
+                    }.get()
 
             }
 
@@ -118,8 +118,10 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
         @Composable
         private fun content(content: @Composable () -> Unit) {
             Surface(
-                color = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.resolveColorShape() ?: MaterialTheme.colors.surface,
-                shape = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.getShape() ?: MaterialTheme.shapes.small,
+                color = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.resolveColorShape()
+                    ?: MaterialTheme.colors.surface,
+                shape = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.getShape()
+                    ?: MaterialTheme.shapes.small,
                 elevation = MaterialTheme.componentsCommonExtended.dialogCard.elevation,
                 border = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.resolveBorder()
             ) {
@@ -135,8 +137,6 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
         }
 
     }
-
-
 
 
 }

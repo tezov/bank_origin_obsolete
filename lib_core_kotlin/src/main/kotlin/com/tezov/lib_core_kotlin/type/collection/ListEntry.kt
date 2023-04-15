@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/02/2023 01:03
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/02/2023 23:13
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,21 +12,20 @@
 
 package com.tezov.lib_core_kotlin.type.collection
 
-import com.tezov.lib_core_kotlin.util.UtilsList
-import com.tezov.lib_core_kotlin.type.primaire.Entry
 import com.tezov.lib_core_kotlin.extension.ExtensionCollection.find
 import com.tezov.lib_core_kotlin.extension.ExtensionCollection.findIndex
 import com.tezov.lib_core_kotlin.extension.ExtensionCollection.forEach
+import com.tezov.lib_core_kotlin.type.primaire.Entry
+import com.tezov.lib_core_kotlin.util.UtilsList
 import com.tezov.lib_core_kotlin.util.UtilsList.isNotNullIndex
-import java.lang.UnsupportedOperationException
 
-class ListEntry<KEY, VALUE> (supplier: ()->MutableList<Entry<KEY, VALUE>> = { ArrayList() }) :
+class ListEntry<KEY, VALUE>(supplier: () -> MutableList<Entry<KEY, VALUE>> = { ArrayList() }) :
     MutableList<Entry<KEY, VALUE>> {
 
     private val list: MutableList<Entry<KEY, VALUE>> = supplier()
 
-    fun hasKey(key: KEY, offset:Int = 0) = getEntry(key, offset) != null
-    fun isUnique(key: KEY, offset:Int = 0): Boolean {
+    fun hasKey(key: KEY, offset: Int = 0) = getEntry(key, offset) != null
+    fun isUnique(key: KEY, offset: Int = 0): Boolean {
         var found = false
         list.forEach(offset) {
             if (it.key == key) {
@@ -166,9 +165,11 @@ class ListEntry<KEY, VALUE> (supplier: ()->MutableList<Entry<KEY, VALUE>> = { Ar
         override fun hasNext(): Boolean {
             return iterator.hasNext()
         }
+
         override fun next(): KEY {
             return iterator.next().key
         }
+
         override fun remove() {
             iterator.remove()
         }

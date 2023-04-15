@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,15 +15,14 @@ package com.tezov.lib_core_android_kotlin.ui.di.component
 import com.tezov.lib_core_android_kotlin.ui.activity.ActivityMainAction
 import com.tezov.lib_core_android_kotlin.ui.activity.ActivityMainState
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiPage
-import com.tezov.lib_core_android_kotlin.ui.di.module.ModuleCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.qualifier.QualifierCoroutineScopeMain
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeCoreUiActivity
+import com.tezov.lib_core_android_kotlin.ui.di.module.ModuleCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.module.ModuleCoreUiActivity.Action
 import com.tezov.lib_core_android_kotlin.ui.di.module.ModuleCoreUiActivity.State
 import dagger.Component
-import dagger.Module
 
-object ComponentCoreUiActivity{
+object ComponentCoreUiActivity {
 
     @ScopeCoreUiActivity
     @Component(
@@ -60,8 +59,8 @@ object ComponentCoreUiActivity{
         fun exposeCoreTopNavigationAction(): Action.TopNavigationAction
 
         @QualifierCoroutineScopeMain
-        fun exposeCoreCoroutineScope():State.CoroutineScope
-        fun exposeCoreScaffoldState():State.ScaffoldState
-        fun exposeCoreNavigationController():Action.NavigationController
+        fun exposeCoreCoroutineScope(): State.CoroutineScope
+        fun exposeCoreScaffoldState(): State.ScaffoldState
+        fun exposeCoreNavigationController(): Action.NavigationController
     }
 }

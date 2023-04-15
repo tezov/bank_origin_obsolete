@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:36
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,6 @@ import com.tezov.lib_core_kotlin.type.primitive.BytesTo.toStringHex
 import com.tezov.lib_core_kotlin.type.primitive.FloatTo
 import com.tezov.lib_core_kotlin.type.primitive.IntTo
 import com.tezov.lib_core_kotlin.util.UtilsBytes.random
-import java.lang.StringBuilder
 import java.util.*
 import java.util.regex.Pattern
 import kotlin.math.ceil
@@ -46,32 +45,33 @@ object UtilsString {
     }
 
     fun parseNumber(s: String?, separator: String = NUMBER_SEPARATOR) = s?.let {
-            val pattern = Pattern.compile(
-                "^(" + Pattern.quote(NUMBER_NEGATIVE_SIGN) + ")?([0-9" + "]+)(" + Pattern.quote(
-                    separator
-                ) + ")?([0-9]+)?" + "([a-zA-Z]+)?$"
+        val pattern = Pattern.compile(
+            "^(" + Pattern.quote(NUMBER_NEGATIVE_SIGN) + ")?([0-9" + "]+)(" + Pattern.quote(
+                separator
+            ) + ")?([0-9]+)?" + "([a-zA-Z]+)?$"
+        )
+        val matcher = pattern.matcher(s)
+        if (matcher.matches()) {
+            Number(
+                matcher.group(1),
+                matcher.group(2),
+                matcher.group(4),
+                matcher.group(5)
             )
-            val matcher = pattern.matcher(s)
-            if (matcher.matches()) {
-                Number(
-                    matcher.group(1),
-                    matcher.group(2),
-                    matcher.group(4),
-                    matcher.group(5)
-                )
-            } else {
-                null
-            }
+        } else {
+            null
         }
+    }
 
 
     fun String.removeLeadingZero() = this.replaceFirst("^0+(?!$)".toRegex(), "")
 
-    fun String.removeNumberSeparatorIfLast() = if (NUMBER_SEPARATOR == this[this.length - 1].toString()) {
-        this.substring(0, this.length - 1)
-    } else {
-        this
-    }
+    fun String.removeNumberSeparatorIfLast() =
+        if (NUMBER_SEPARATOR == this[this.length - 1].toString()) {
+            this.substring(0, this.length - 1)
+        } else {
+            this
+        }
 
     fun randomHex(length: Int) = random(length).toStringHex()!!
 
@@ -103,11 +103,9 @@ object UtilsString {
     fun String.capitalize(separator: String) = this.capitalize(arrayOf(separator))
     fun String.capitalize(separators: Array<String>) = if (!this.containsAtLeastOne(separators)) {
         this.capitalizeFirst()
-    }
-    else if (this.length == 1) {
+    } else if (this.length == 1) {
         this
-    }
-    else {
+    } else {
         val out = StringBuilder()
         val textSplit = this.splitAndKeepSeparator(separators)
         for (t in textSplit) {
@@ -127,8 +125,18 @@ object UtilsString {
                 this.substring(1).lowercase(Locale.getDefault())
     }
 
-    fun String.appendDateAndTime() = this + "_" + Clock.DateAndTimeTo.string(Clock.DateAndTime.now(), Clock.FormatDateAndTime.FULL_FILE_NAME)
-    fun StringBuilder.appendDateAndTime(builder: StringBuilder) = builder.append("_").append(Clock.DateAndTimeTo.string(Clock.DateAndTime.now(), Clock.FormatDateAndTime.FULL_FILE_NAME))
+    fun String.appendDateAndTime() = this + "_" + Clock.DateAndTimeTo.string(
+        Clock.DateAndTime.now(),
+        Clock.FormatDateAndTime.FULL_FILE_NAME
+    )
+
+    fun StringBuilder.appendDateAndTime(builder: StringBuilder) = builder.append("_").append(
+        Clock.DateAndTimeTo.string(
+            Clock.DateAndTime.now(),
+            Clock.FormatDateAndTime.FULL_FILE_NAME
+        )
+    )
+
     fun String.insert(c: Char, every: Int) = this.replace(".{" + every + "}(?!$)".toRegex(), "$0$c")
 
     class Number(prefix: String?, integer: String, decimal: String, unit: String?) {
@@ -150,13 +158,11 @@ object UtilsString {
                     } catch (e: Throwable) {
                         this.integer = NUMBER_OVERFLOW
                     }
-                }
-                else {
+                } else {
                     this.integer = NUMBER_OVERFLOW
                 }
                 integerPrecision = integer.length
-            }
-            else {
+            } else {
                 this.integer = 0
                 integerPrecision = 0
             }
@@ -191,8 +197,7 @@ object UtilsString {
             }
             if (integer != NUMBER_OVERFLOW) {
                 data.append(integer)
-            }
-            else {
+            } else {
                 data.append(Int.MAX_VALUE)
             }
             if (decimalPrecision > 0) {

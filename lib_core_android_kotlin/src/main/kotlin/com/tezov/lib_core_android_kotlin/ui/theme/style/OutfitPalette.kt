@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 10/04/2023 13:55
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 10/04/2023 12:19
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,7 +28,7 @@ typealias OutfitPaletteDirection<T> = OutfitPalette.Direction.Style<T>
 
 
 fun Modifier.padding(
-    padding : OutfitPalette.Direction.Style<Dp>
+    padding: OutfitPalette.Direction.Style<Dp>
 ) = this.padding(vertical = padding.vertical, horizontal = padding.horizontal)
 
 object OutfitPalette {
@@ -163,7 +163,7 @@ object OutfitPalette {
                 inline val DpSize.asPaletteSize: Style<DpSize>
                     get() = Style(normal = this)
 
-                inline val <T:Any> OutfitPaletteDirection<T>.asPaletteSize: Style<OutfitPaletteDirection<T>>
+                inline val <T : Any> OutfitPaletteDirection<T>.asPaletteSize: Style<OutfitPaletteDirection<T>>
                     get() = Style(normal = this)
 
             }
@@ -195,7 +195,7 @@ object OutfitPalette {
         class Style<T : Any>(
             vertical: T? = null,
             horizontal: T? = null,
-        )   {
+        ) {
             private val delegates = DelegateNullFallBack.Group<T>()
             val vertical: T by delegates.ref(vertical)
             val horizontal: T by delegates.ref(horizontal)
@@ -212,7 +212,7 @@ object OutfitPalette {
                         it.builder()
                     }
 
-                inline val <T:Any> Size.Style<T>.asPaletteDirection: Style<Size.Style<T>>
+                inline val <T : Any> Size.Style<T>.asPaletteDirection: Style<Size.Style<T>>
                     get() = Style(all = this)
 
                 inline val Dp.asPaletteDirection: Style<Dp>

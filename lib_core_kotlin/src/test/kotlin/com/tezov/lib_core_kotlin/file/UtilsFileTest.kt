@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.unitTest
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,11 +18,10 @@ import com.tezov.lib_core_kotlin.file.UtilsFile.name
 import com.tezov.lib_core_kotlin.file.UtilsFile.splitToNameAndExtension
 import com.tezov.lib_core_kotlin.type.primaire.Pair
 import org.junit.After
-import org.junit.Assert.*
 import org.junit.Before
 import org.junit.Test
 
-class UtilsFileTest{
+class UtilsFileTest {
 
 
     @Before
@@ -34,41 +33,41 @@ class UtilsFileTest{
     }
 
     @Test
-    fun can_find_extension_simple(){
+    fun can_find_extension_simple() {
         val extension = "extension"
         val fileFullName = "name" + File.DOT_SEPARATOR + extension
         Truth.assertThat(fileFullName.extension()).isEqualTo(extension)
     }
 
     @Test
-    fun can_find_extension_double(){
+    fun can_find_extension_double() {
         val extension = "extension"
         val fileFullName = "name.save" + File.DOT_SEPARATOR + extension
         Truth.assertThat(fileFullName.extension()).isEqualTo(extension)
     }
 
     @Test
-    fun can_not_find_extension(){
+    fun can_not_find_extension() {
         val fileFullName = "name"
         Truth.assertThat(fileFullName.extension()).isEqualTo(null)
     }
 
     @Test
-    fun can_find_name_simple(){
+    fun can_find_name_simple() {
         val name = "name"
         val fileFullName = name + File.DOT_SEPARATOR + "extension"
         Truth.assertThat(fileFullName.name()).isEqualTo(name)
     }
 
     @Test
-    fun can_find_name_complexe(){
+    fun can_find_name_complexe() {
         val name = "name.name2"
         val fileFullName = name + File.DOT_SEPARATOR + "extension"
         Truth.assertThat(fileFullName.name()).isEqualTo(name)
     }
 
     @Test
-    fun can_find_name_and_extension_simple(){
+    fun can_find_name_and_extension_simple() {
         val name = "name"
         val extension = "extension"
         val fileFullName = name + File.DOT_SEPARATOR + extension
@@ -76,7 +75,7 @@ class UtilsFileTest{
     }
 
     @Test
-    fun can_find_name_and_extension_complex(){
+    fun can_find_name_and_extension_complex() {
         val name = "name.name2.name3"
         val extension = "extension"
         val fileFullName = name + File.DOT_SEPARATOR + extension

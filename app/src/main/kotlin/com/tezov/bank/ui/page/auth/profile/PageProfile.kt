@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 16:15
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 16:01
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,27 +12,20 @@
 
 package com.tezov.bank.ui.page.auth.profile
 
-import androidx.compose.foundation.*
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Icon
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.branch.SectionActionRow
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
-import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
-import com.tezov.bank.ui.page.lobby.login.styles
-import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Image
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
@@ -41,7 +34,6 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
 import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 object PageProfile : Page<PageProfileState, PageProfileAction> {
@@ -124,7 +116,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                 }) {
                 Icon.StateColor(
                     style = PageProfileTheme.styles.iconLogOut,
-                    resourceId =  R.drawable.ic_logout_24dp,
+                    resourceId = R.drawable.ic_logout_24dp,
                     description = stringResource(id = R.string.pg_profile_icon_close),
                 )
             }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/02/2023 19:39
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/02/2023 19:13
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,25 +13,28 @@
 package com.tezov.bank.ui.activity
 
 import android.os.Bundle
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Scaffold
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
-import com.tezov.lib_core_android_kotlin.ui.activity.ActivityBase
-import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
-import com.tezov.bank.ui.di.accessor.AccessorAppUiActivity
 import com.tezov.bank.navigation.NavigationGraph
 import com.tezov.bank.navigation.bottom_navigation.BottomNavigationItems
+import com.tezov.bank.ui.di.accessor.AccessorAppUiActivity
 import com.tezov.bank.ui.theme.ThemeApplication
-import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarItemData
+import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
+import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarItemData
+import com.tezov.lib_core_android_kotlin.ui.activity.ActivityBase
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
-import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
-
-import kotlinx.coroutines.*
+import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 
 class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
@@ -151,7 +154,7 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
     ) {
         val accessor = AccessorAppUiActivity().get(requester = this)
         val mainState = accessor.contextMain().state()
-        BottomSheet{
+        BottomSheet {
             Scaffold(
                 modifier = Modifier.fillMaxSize(),
                 scaffoldState = mainState.coreState.scaffoldState,

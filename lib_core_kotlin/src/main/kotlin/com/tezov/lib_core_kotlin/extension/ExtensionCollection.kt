@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/04/2023 12:05
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/04/2023 11:36
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,37 +12,40 @@
 
 package com.tezov.lib_core_kotlin.extension
 
-import java.util.Deque
-import java.util.LinkedList
-
 object ExtensionCollection {
 
-    inline fun <T> Iterable<T>.forEach(offset:Int = 0, action: (T) -> Unit) =
+    inline fun <T> Iterable<T>.forEach(offset: Int = 0, action: (T) -> Unit) =
         drop(offset).forEach(action)
-    inline fun <T> Iterable<T>.forEachIndexed(offset:Int = 0, action: (index: Int, T) -> Unit) {
+
+    inline fun <T> Iterable<T>.forEachIndexed(offset: Int = 0, action: (index: Int, T) -> Unit) {
         var index = offset
-        drop(offset).forEach {
-            item -> action(index, item)
+        drop(offset).forEach { item ->
+            action(index, item)
             index++
         }
     }
 
-    inline fun <T> Iterable<T>.find(offset:Int = 0, predicate: (T) -> Boolean): T? = drop(offset).find(predicate)
-    inline fun <T> Iterable<T>.findIndexed(offset:Int = 0, predicate: (index: Int, T) -> Boolean): T? {
-        forEachIndexed(offset){ index, element ->
+    inline fun <T> Iterable<T>.find(offset: Int = 0, predicate: (T) -> Boolean): T? =
+        drop(offset).find(predicate)
+
+    inline fun <T> Iterable<T>.findIndexed(
+        offset: Int = 0,
+        predicate: (index: Int, T) -> Boolean
+    ): T? {
+        forEachIndexed(offset) { index, element ->
             if (predicate(index, element)) return element
         }
         return null
     }
 
-    inline fun <T> Iterable<T>.findIndex(offset:Int = 0, predicate: (T) -> Boolean): Int? {
-        forEachIndexed(offset){ index, element ->
+    inline fun <T> Iterable<T>.findIndex(offset: Int = 0, predicate: (T) -> Boolean): Int? {
+        forEachIndexed(offset) { index, element ->
             if (predicate(element)) return index
         }
         return null
     }
 
-    fun <T> ArrayDeque<T>.push(t:T) = this.addLast(t)
+    fun <T> ArrayDeque<T>.push(t: T) = this.addLast(t)
 
     fun <T> ArrayDeque<T>.pop() = this.removeLastOrNull()
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:43
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,7 +15,10 @@ package com.tezov.bank.ui.screen.login
 import androidx.compose.animation.core.*
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.width
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.mapSaver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
@@ -36,7 +39,8 @@ data class PageLoginStateAnimation(
         Idle,
         Running,
         Done;
-        companion object{
+
+        companion object {
             val Saver = run {
                 val keyStep = "keyStep"
                 mapSaver(
@@ -51,6 +55,7 @@ data class PageLoginStateAnimation(
         val ANIMATION_LOGO_WIDTH = 200.dp
         const val ANIMATION_LOGO_SMALL_SCALE = 1.8f
         const val ANIMATION_TRANSLATE_DURATION_ms = 500
+
         @Composable
         fun remember(): PageLoginStateAnimation {
             val animationStep by rememberSaveable(stateSaver = AnimationStep.Saver) {
@@ -71,7 +76,7 @@ data class PageLoginStateAnimation(
 
     fun startTransition() {
         with(animationStep) {
-            if(isIdle && (currentState == AnimationStep.Idle || currentState == AnimationStep.Done)) {
+            if (isIdle && (currentState == AnimationStep.Idle || currentState == AnimationStep.Done)) {
                 targetState = AnimationStep.Running
             }
         }
@@ -102,14 +107,17 @@ data class PageLoginStateAnimation(
                 .aspectRatio(1.0f)
         )
     }
+
     abstract class TransitionLogo {
         @Composable
         internal abstract fun update(transition: Transition<AnimationStep>)
         abstract fun animate(animatedLogo: AnimatedLogo, modifier: Modifier): Modifier
     }
+
     class TransitionLogoTranslate : TransitionLogo() {
-        lateinit var translateFactor:State<Float>
-        lateinit var scaleProgress:State<Float>
+        lateinit var translateFactor: State<Float>
+        lateinit var scaleProgress: State<Float>
+
         @Composable
         override fun update(transition: Transition<AnimationStep>) {
             translateFactor = transition.animateFloat(
@@ -133,6 +141,7 @@ data class PageLoginStateAnimation(
                 }
             }
         }
+
         override fun animate(animatedLogo: AnimatedLogo, modifier: Modifier) =
             modifier
                 .scale(scaleProgress.value)
@@ -144,14 +153,17 @@ data class PageLoginStateAnimation(
     class AnimatedScreen(val transition: TransitionScreen) {
         fun animate(modifier: Modifier) = transition.animate(this, modifier)
     }
+
     abstract class TransitionScreen {
         @Composable
         internal abstract fun update(transition: Transition<AnimationStep>)
         abstract fun animate(animatedLogo: AnimatedScreen, modifier: Modifier): Modifier
     }
-    class TransitionScreenFade: TransitionScreen() {
-        lateinit var fadeFactor:State<Float>
-        lateinit var scaleProgress:State<Float>
+
+    class TransitionScreenFade : TransitionScreen() {
+        lateinit var fadeFactor: State<Float>
+        lateinit var scaleProgress: State<Float>
+
         @Composable
         override fun update(transition: Transition<AnimationStep>) {
             fadeFactor = transition.animateFloat(
@@ -175,6 +187,7 @@ data class PageLoginStateAnimation(
                 }
             }
         }
+
         override fun animate(animatedLogo: AnimatedScreen, modifier: Modifier) =
             modifier
                 .alpha(fadeFactor.value)

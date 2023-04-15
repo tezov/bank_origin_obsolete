@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 12/02/2023 17:12
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 12/02/2023 16:55
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -72,16 +72,16 @@ interface Page<S : PageState, A : PageAction<S>> : Composition<S, A> {
     fun onBackPressedDispatch() = onBackPressedDispatch(mutableStateOf(true))
 
     @Composable
-    private fun onBackPressedDispatch(onBackPressedState: MutableState<Boolean>):Boolean {
+    private fun onBackPressedDispatch(onBackPressedState: MutableState<Boolean>): Boolean {
         if (!onBackPressedState.value) {
             return false
         }
         var handled = false
-            if(LocalModals.current.lastOrNull()?.modal?.onBackPressedDispatch().isFalseOrNull()
-                && !this.handleOnBackPressed()
-            ) {
-                handled = LocalActivity.current.onBackPressedDispatch()
-            }
+        if (LocalModals.current.lastOrNull()?.modal?.onBackPressedDispatch().isFalseOrNull()
+            && !this.handleOnBackPressed()
+        ) {
+            handled = LocalActivity.current.onBackPressedDispatch()
+        }
         onBackPressedState.value = false
         return handled
     }

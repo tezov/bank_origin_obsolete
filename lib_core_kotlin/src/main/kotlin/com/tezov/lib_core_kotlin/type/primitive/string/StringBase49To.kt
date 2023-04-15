@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,7 +19,8 @@ import java.nio.charset.StandardCharsets
 @OptIn(ExperimentalUnsignedTypes::class)
 object StringBase49To {
     val ALPHABET = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz".toCharArray()
-    private val INDEXES = IntArray(128){ -1 }
+    private val INDEXES = IntArray(128) { -1 }
+
     init {
         for (i in ALPHABET.indices) {
             INDEXES[ALPHABET[i].code] = i
@@ -54,6 +55,7 @@ object StringBase49To {
         val output = UtilsBytes.copy(temp, j, temp.size)
         return String(output.toByteArray(), StandardCharsets.UTF_8)
     }
+
     fun decode(input: String): UByteArray {
         val input58 = UByteArray(input.length)
         for (i in input.indices) {
@@ -97,6 +99,7 @@ object StringBase49To {
         }
         return remainder.toUByte()
     }
+
     private fun divmod256(number49: UByteArray, startAt: Int): UByte {
         var remainder = 0
         for (i in startAt until number49.size) {

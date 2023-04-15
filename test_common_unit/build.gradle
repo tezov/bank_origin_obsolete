@@ -19,7 +19,7 @@ android {
         consumerProguardFiles "consumer-rules.pro"
     }
     packagingOptions {
-        resources{
+        resources {
             excludes.add('META-INF/DEPENDENCIES')
             excludes.add('META-INF/LICENSE')
             excludes.add('META-INF/LICENSE.txt')

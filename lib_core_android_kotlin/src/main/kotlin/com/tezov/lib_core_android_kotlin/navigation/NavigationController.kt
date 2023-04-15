@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/02/2023 18:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/02/2023 18:18
+ *  Last modified 15/04/2023 18:52
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,8 +12,6 @@
 
 package com.tezov.lib_core_android_kotlin.navigation
 
-import android.annotation.SuppressLint
-import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.lifecycle.LifecycleOwner
@@ -44,16 +42,17 @@ class NavigationController constructor(
         fun remember(
             snackbarAction: SnackbarAction,
             navHostController: NavHostController = rememberAnimatedNavController(),
-        ):NavigationController = NavigationController(
+        ): NavigationController = NavigationController(
             snackbarAction = snackbarAction,
             navHostController = navHostController,
         )
     }
 
-    private val actionControllers:ListEntry<KClass<out CompositionAction<*>>, (from: Route?, to: Route)->Unit> = ListEntry()
+    private val actionControllers: ListEntry<KClass<out CompositionAction<*>>, (from: Route?, to: Route) -> Unit> =
+        ListEntry()
 
     @Composable
-    fun onBackPressedDispatch() =  handleOnBackPressed()
+    fun onBackPressedDispatch() = handleOnBackPressed()
 
     @Composable
     fun handleOnBackPressed() = isLastRoute().on(
@@ -64,12 +63,15 @@ class NavigationController constructor(
         }
     )
 
-    fun addAction(klass:KClass<out CompositionAction<*>>, action:(from: Route?, to: Route)->Unit){
+    fun addAction(
+        klass: KClass<out CompositionAction<*>>,
+        action: (from: Route?, to: Route) -> Unit
+    ) {
         actionControllers.add(klass, action)
     }
 
-    fun addAction(actions: Map<KClass<out CompositionAction<*>>, ((from: Route?, to: Route)->Unit)>){
-        actions.forEach{ (klass, action) ->
+    fun addAction(actions: Map<KClass<out CompositionAction<*>>, ((from: Route?, to: Route) -> Unit)>) {
+        actions.forEach { (klass, action) ->
             actionControllers.add(klass, action)
         }
     }
@@ -80,19 +82,23 @@ class NavigationController constructor(
     fun dispatchClick(route: Route) {
         clickDispatcher.value = Event(route)
     }
+
     fun listenClick(lifecycleOwner: LifecycleOwner, observer: Observer<Event<Route>>) {
         clickDispatcher.observe(lifecycleOwner, observer)
     }
+
     fun unlistenClick(lifecycleOwner: LifecycleOwner, observer: Observer<Event<Route>>) {
         clickDispatcher.removeObserver(observer)
     }
+
     fun unlistenClick(lifecycleOwner: LifecycleOwner) {
         clickDispatcher.removeObservers(lifecycleOwner)
     }
 
     fun currentRoute() = routes.find(navHostController.currentBackStackEntry?.destination?.route)
 
-    fun isLastRoute() = navHostController.backQueue.sumOf { (if(it.destination.route != null) 1 else 0).toInt() } <= 1
+    fun isLastRoute() =
+        navHostController.backQueue.sumOf { (if (it.destination.route != null) 1 else 0).toInt() } <= 1
 
     fun navigate(route: Route, builder: NavOptionsBuilder.() -> Unit) {
         navHostController.navigate(route = route.value, builder = builder)
@@ -107,7 +113,7 @@ class NavigationController constructor(
     }
 
     fun requestNavigate(from: Route?, to: Route, askedBy: CompositionAction<*>) {
-        actionControllers.find{
+        actionControllers.find {
             askedBy::class.isInstance(it.key) || askedBy::class.isSubclassOf(it.key)
         }?.value?.invoke(from, to) ?: run {
             showSnackBarNotImplemented()

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.app.androidTest
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,40 +28,36 @@ import org.junit.runner.RunWith
 
 
 @RunWith(AndroidJUnit4::class)
-class MainActivityTest{
+class MainActivityTest {
 
     @get:Rule
     val rule = lazyActivityScenarioRule<MainActivity>()
 
     @Test
-    fun scenario(){
-        fun print(parent:ViewGroup){
+    fun scenario() {
+        fun print(parent: ViewGroup) {
             Log.d(">>:", "parent:" + parent::class.simpleName)
-            for(i in 0 until parent.childCount){
+            for (i in 0 until parent.childCount) {
                 val child = parent.getChildAt(i)
-                if(child is ViewGroup){
+                if (child is ViewGroup) {
                     print(child)
-                }
-                else{
+                } else {
                     Log.d(">>:", "child:" + child::class.simpleName)
                 }
             }
         }
+
         val context = ApplicationProvider.getApplicationContext<Context>()
         val intent = Intent(context, MainActivity::class.java)
         rule.launch(intent)
         rule.scenario.moveToState(Lifecycle.State.RESUMED)
-        rule.scenario.onActivity{ activity ->
+        rule.scenario.onActivity { activity ->
             val root = activity.findViewById<ViewGroup>(android.R.id.content)
 
             Truth.assertThat(root).isNotNull()
             //print(root)
         }
     }
-
-
-
-
 
 
 }

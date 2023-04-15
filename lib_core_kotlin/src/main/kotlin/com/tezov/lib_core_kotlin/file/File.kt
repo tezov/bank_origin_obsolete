@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 15/04/2023 18:51
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,16 +16,14 @@ import com.tezov.lib_core_kotlin.buffer.ByteBuffer
 import com.tezov.lib_core_kotlin.buffer.ByteBufferBuilder
 import com.tezov.lib_core_kotlin.file.Directory.Companion.LINK_SEPARATOR
 import com.tezov.lib_core_kotlin.file.Directory.Companion.LINK_VALUE_NULL
-import com.tezov.lib_core_kotlin.file.UtilsFile.splitToPathAndFileName
 import com.tezov.lib_core_kotlin.file.UtilsFile.splitToNameAndExtension
+import com.tezov.lib_core_kotlin.file.UtilsFile.splitToPathAndFileName
 import com.tezov.lib_core_kotlin.type.primitive.string.StringBase49To.toStringChar
 import com.tezov.lib_core_kotlin.type.primitive.string.StringCharTo.toStringBase49
 import com.tezov.lib_core_kotlin.util.UtilsString
 import com.tezov.lib_core_kotlin.util.UtilsString.appendDateAndTime
 import java.io.*
-import java.lang.StringBuilder
 import java.util.*
-import kotlin.Throws
 
 class File constructor(
     directory: Directory? = null,
@@ -123,7 +121,7 @@ class File constructor(
         }
     }
 
-    fun build(create: Boolean):Boolean {
+    fun build(create: Boolean): Boolean {
         assertFileNotBuilt()
         _file = FileW(_directory!!.file!!, buildFileName()!!)
         if (create && !_file!!.exists()) {
@@ -132,8 +130,8 @@ class File constructor(
         return true
     }
 
-    var file:FileW?
-        get()  {
+    var file: FileW?
+        get() {
             if (!isBuilt) {
                 build(true)
             }
@@ -143,21 +141,21 @@ class File constructor(
             _file = value
         }
 
-    var directory:Directory?
+    var directory: Directory?
         get() = _directory
         set(value) {
             assertFileNotBuilt()
             _directory = value
         }
 
-    var name:String?
+    var name: String?
         get() = _name
         set(value) {
             assertFileNotBuilt()
             _name = value
         }
 
-    var extension:String?
+    var extension: String?
         get() = _extension
         set(value) {
             assertFileNotBuilt()
@@ -181,12 +179,13 @@ class File constructor(
             return _file!!.length().toInt()
         }
 
-    val exists:Boolean get()  {
-        if (!isBuilt) {
-            build(false)
+    val exists: Boolean
+        get() {
+            if (!isBuilt) {
+                build(false)
+            }
+            return _file!!.exists()
         }
-        return _file!!.exists()
-    }
 
     fun create(): Boolean {
         return if (!isBuilt) {
@@ -309,9 +308,12 @@ class File constructor(
         fun from(link: String) = File().fromString(link)
         protected fun from(it: Iterator<String>) = File().fromStringIterator(it)
 
-        fun toLinkString(directoryLink: String?, fileName: String?) = fileName.splitToNameAndExtension().let { toLinkString(directoryLink, it.first, it.second) }
+        fun toLinkString(directoryLink: String?, fileName: String?) =
+            fileName.splitToNameAndExtension()
+                .let { toLinkString(directoryLink, it.first, it.second) }
 
-        fun toLinkString(directory: Directory?, fileName: String?) = fileName.splitToNameAndExtension().let { toLinkString(directory, it.first, it.second) }
+        fun toLinkString(directory: Directory?, fileName: String?) =
+            fileName.splitToNameAndExtension().let { toLinkString(directory, it.first, it.second) }
 
         fun toLinkString(
             directory: Directory?,
@@ -324,7 +326,7 @@ class File constructor(
             directoryLink?.let {
                 data.append(LINK_DIRECTORY).append(LINK_SEPARATOR)
                 data.append(it).append(LINK_SEPARATOR)
-            }?:let {
+            } ?: let {
                 data.append(LINK_VALUE_NULL).append(LINK_SEPARATOR)
             }
             data.append(if (name != null) name.toStringBase49() else LINK_VALUE_NULL)
@@ -338,19 +340,22 @@ class File constructor(
         }
 
         fun getFullName(link: String): String? {
-            val it: Iterator<String> = Arrays.asList(*link.split(LINK_SEPARATOR).toTypedArray()).iterator()
+            val it: Iterator<String> =
+                Arrays.asList(*link.split(LINK_SEPARATOR).toTypedArray()).iterator()
             val name = getName(it)
             val extension = getExtension(it)
             return extension?.let { name + DOT_SEPARATOR + extension } ?: name
         }
 
         fun getExtension(link: String): String? {
-            val it: Iterator<String> = Arrays.asList(*link.split(LINK_SEPARATOR).toTypedArray()).iterator()
+            val it: Iterator<String> =
+                Arrays.asList(*link.split(LINK_SEPARATOR).toTypedArray()).iterator()
             getName(it)
             return getExtension(it)
         }
 
-        fun getName(link: String) = getName( Arrays.asList(*link.split(LINK_SEPARATOR).toTypedArray()).iterator())
+        fun getName(link: String) =
+            getName(Arrays.asList(*link.split(LINK_SEPARATOR).toTypedArray()).iterator())
 
         private fun getName(it: Iterator<String>): String? {
             val directoryString = it.next()

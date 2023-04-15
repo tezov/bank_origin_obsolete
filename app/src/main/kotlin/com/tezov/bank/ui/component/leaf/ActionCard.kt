@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 19:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 21:35
+ *  Last modified 15/04/2023 19:35
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,15 +20,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
-import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
@@ -201,18 +202,27 @@ object ActionCard {
                 resourceId = data.iconResourceId,
                 description = data.title,
             )
-            Text.StateColor(
-                text = data.title,
-                style = style.outfitTextTitle,
-                overflow = TextOverflow.Visible
-            )
-            data.subtitle?.let {
+            Column (
+                modifier = Modifier.fillMaxHeight(),
+                verticalArrangement = Arrangement.Center
+            ){
                 Text.StateColor(
-                    text = it,
-                    style = style.outfitTextSubtitle,
+                    modifier = Modifier.fillMaxWidth(),
+                    text = data.title,
+                    style = style.outfitTextTitle?.copy{
+                        typo = typo.copy(textAlign = TextAlign.Center)
+                    },
                     overflow = TextOverflow.Visible
                 )
+                data.subtitle?.let {
+                    Text.StateColor(
+                        text = it,
+                        style = style.outfitTextSubtitle,
+                        overflow = TextOverflow.Visible
+                    )
+                }
             }
+
         }
 
     }
