@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 11:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 20:06
+ *  Last modified 15/04/2023 11:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -54,7 +54,7 @@ object OutfitShape {
 
     }
 
-    class Size private constructor(
+    class Size constructor(
         val topStart: CornerSize? = null,
         val topEnd: CornerSize? = null,
         val bottomStart: CornerSize? = null,
@@ -68,6 +68,8 @@ object OutfitShape {
             inline val Dp.asShapeSize: Size get() = Size(this)
 
         }
+
+        val firstNotNull get() = topStart ?: topEnd?: bottomStart?: bottomEnd
 
         constructor(
             topStart: Int? = null,

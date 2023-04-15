@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 16:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 22:43
+ *  Last modified 15/04/2023 15:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,6 +18,13 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextDecoration
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.tezov.bank.ui.page.lobby.login.colors
+import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.lib_core_android_kotlin.ui.component.branch.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Companion.copy
@@ -25,12 +32,16 @@ import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
+import java.time.format.TextStyle
 
 val DialogLoginAuthTheme.colors: DialogLoginAuthTheme.Colors
     @Composable
@@ -70,7 +81,7 @@ object DialogLoginAuthTheme {
     fun provideColors() = Colors(
         background = MaterialTheme.colorsExtended.background.dark,
         onBackground = MaterialTheme.colorsExtended.onBackground.dark,
-        dark = MaterialTheme.colorsExtended.primary.default,
+        dark = MaterialTheme.colorsExtended.primary.shady,
         light = MaterialTheme.colorsExtended.primary.accent,
         fade = MaterialTheme.colorsExtended.primary.fade,
     )
@@ -89,6 +100,7 @@ object DialogLoginAuthTheme {
     fun provideTypographies() = Typographies(
         title = MaterialTheme.typographiesExtended.title.big.copy {
             outfitState = colors.onBackground.asStateSimple
+            typo = typo.copy(textAlign = TextAlign.Center)
         },
         input = MaterialTheme.typographiesExtended.input.normal.copy {
             outfitState = colors.onBackground.asStateSimple
@@ -112,10 +124,26 @@ object DialogLoginAuthTheme {
     @Composable
     fun provideStyles() = Style(
         keyBoardGridCube = KeyBoard.GridCube.Style(
-            colorOnBackground = colors.onBackground,
-            outfitBorderOuter = MaterialTheme.bordersExtended.block.normal.copy {
+            outfitText = OutfitTextStateColor(
+                typo = androidx.compose.ui.text.TextStyle(
+                    fontFamily = MaterialTheme.fontRoboto,
+                    fontWeight = FontWeight.SemiBold,
+                ),
                 outfitState = colors.onBackground.asStateSimple
-            },
+            ),
+            outfitFrameOuter = OutfitFrameStateColor(
+                outfitBorder = MaterialTheme.bordersExtended.block.normal.copy {
+                    outfitState = colors.onBackground.asStateSimple
+                    size?.let {
+                        size = (it.value * 0.65f).dp
+                    }
+                },
+                outfitShape = MaterialTheme.shapesExtended.block.small.copy{
+                    size?.firstNotNull?.let {
+                        size = OutfitShape.Size(bottomStart = it, bottomEnd = it)
+                    }
+                }
+            ),
             outfitBorderInner = MaterialTheme.bordersExtended.block.small.copy {
                 outfitState = colors.onBackground.asStateSimple
             },
