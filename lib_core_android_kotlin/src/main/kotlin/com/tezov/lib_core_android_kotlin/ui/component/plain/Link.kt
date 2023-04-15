@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 15/04/2023 16:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:36
+ *  Last modified 15/04/2023 16:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,10 +15,12 @@ package com.tezov.lib_core_android_kotlin.ui.component.plain
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.sp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
@@ -72,18 +74,113 @@ object Link {
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
-            text: String,
             style: Style = Style(),
+            text: AnnotatedString,
+            enabled: Boolean = true,
             selector: Any? = null,
             onClick: () -> Unit = {},
         ) {
             ClickableText(
                 modifier = modifier,
-                text = AnnotatedString(text),
+                text = text,
                 style = style.outfitText.resolve(selector),
             ) {
-                onClick()
+                if(enabled){
+                    onClick()
+                }
             }
+        }
+
+        @Composable
+        operator fun invoke(
+            modifier: Modifier = Modifier,
+            style: Style = Style(),
+            text: String,
+            enabled: Boolean = true,
+            selector: Any? = null,
+            onClick: () -> Unit = {},
+        ) {
+            invoke(
+                modifier,
+                style,
+                AnnotatedString(text),
+                enabled,
+                selector,
+                onClick
+            )
+        }
+
+        @Composable
+        operator fun invoke(
+            modifier: Modifier = Modifier,
+            style: Style = Style(),
+            enabled: Boolean = true,
+            text: Int,
+            selector: Any? = null,
+            onClick: () -> Unit = {},
+        ) {
+            invoke(
+                modifier,
+                style,
+                stringResource(id = text),
+                enabled,
+                selector,
+                onClick
+            )
+        }
+
+//        *** selector dual shortcut
+
+        @Composable
+        operator fun invoke(
+            modifier: Modifier = Modifier,
+            style: Style = Style(),
+            text: AnnotatedString,
+            enabled: Boolean = true,
+            onClick: () -> Unit = {},
+        ) {
+            invoke(
+                modifier,
+                style,
+                text,
+                enabled,
+                if (enabled) OutfitState.Dual.Selector.Enabled else OutfitState.Dual.Selector.Disabled,
+                onClick
+            )
+        }
+
+        @Composable
+        operator fun invoke(
+            modifier: Modifier = Modifier,
+            style: Style = Style(),
+            text: String,
+            enabled: Boolean = true,
+            onClick: () -> Unit = {},
+        ) {
+            invoke(
+                modifier,
+                style,
+                AnnotatedString(text),
+                enabled,
+                onClick
+            )
+        }
+
+        @Composable
+        operator fun invoke(
+            modifier: Modifier = Modifier,
+            style: Style = Style(),
+            text: Int,
+            enabled: Boolean = true,
+            onClick: () -> Unit = {},
+        ) {
+            invoke(
+                modifier,
+                style,
+                stringResource(id = text),
+                enabled,
+                onClick
+            )
         }
 
     }

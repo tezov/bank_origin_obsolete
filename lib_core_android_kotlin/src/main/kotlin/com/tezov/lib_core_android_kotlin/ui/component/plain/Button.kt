@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 15/04/2023 16:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:30
+ *  Last modified 15/04/2023 16:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,6 +20,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -101,7 +103,7 @@ object Button {
 
         @Composable
         operator fun invoke(
-            text: String,
+            text: AnnotatedString,
             modifierButton: Modifier = Modifier,
             modifierText: Modifier = Modifier,
             interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -148,6 +150,59 @@ object Button {
             style: Style = Style(),
             contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
             enabled: Boolean = true,
+            selector: Any? = null,
+            onClick: () -> Unit = {},
+        ) {
+            invoke(
+                AnnotatedString(text),
+                modifierButton,
+                modifierText,
+                interactionSource,
+                style,
+                contentPadding,
+                enabled,
+                selector,
+                onClick
+            )
+        }
+
+        @Composable
+        operator fun invoke(
+            text: Int,
+            modifierButton: Modifier = Modifier,
+            modifierText: Modifier = Modifier,
+            interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+            style: Style = Style(),
+            contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
+            enabled: Boolean = true,
+            selector: Any? = null,
+            onClick: () -> Unit = {},
+        ) {
+            invoke(
+                stringResource(id = text),
+                modifierButton,
+                modifierText,
+                interactionSource,
+                style,
+                contentPadding,
+                enabled,
+                selector,
+                onClick
+            )
+        }
+
+
+//        *** selector dual shortcut
+
+         @Composable
+        operator fun invoke(
+            text: AnnotatedString,
+            modifierButton: Modifier = Modifier,
+            modifierText: Modifier = Modifier,
+            interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+            style: Style = Style(),
+            contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
+            enabled: Boolean = true,
             onClick: () -> Unit = {},
         ) {
             invoke(
@@ -159,6 +214,52 @@ object Button {
                 contentPadding,
                 enabled,
                 if (enabled) OutfitState.Dual.Selector.Enabled else OutfitState.Dual.Selector.Disabled,
+                onClick
+            )
+        }
+
+        @Composable
+        operator fun invoke(
+            text: String,
+            modifierButton: Modifier = Modifier,
+            modifierText: Modifier = Modifier,
+            interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+            style: Style = Style(),
+            contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
+            enabled: Boolean = true,
+            onClick: () -> Unit = {},
+        ) {
+            invoke(
+                AnnotatedString(text),
+                modifierButton,
+                modifierText,
+                interactionSource,
+                style,
+                contentPadding,
+                enabled,
+                onClick
+            )
+        }
+
+        @Composable
+        operator fun invoke(
+            text: Int,
+            modifierButton: Modifier = Modifier,
+            modifierText: Modifier = Modifier,
+            interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+            style: Style = Style(),
+            contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
+            enabled: Boolean = true,
+            onClick: () -> Unit = {},
+        ) {
+            invoke(
+                stringResource(id = text),
+                modifierButton,
+                modifierText,
+                interactionSource,
+                style,
+                contentPadding,
+                enabled,
                 onClick
             )
         }

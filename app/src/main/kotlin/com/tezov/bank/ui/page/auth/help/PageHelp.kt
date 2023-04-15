@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 16:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 20:45
+ *  Last modified 15/04/2023 16:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -90,6 +90,7 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
 
                     }
                 }
+                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.huge.vertical))
             }
         }
     }

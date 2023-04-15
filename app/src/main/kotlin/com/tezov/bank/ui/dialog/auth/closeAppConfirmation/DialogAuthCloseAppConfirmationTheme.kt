@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 16:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 22:43
+ *  Last modified 15/04/2023 15:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,9 +21,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import com.tezov.bank.ui.dialog.lobby.login.auth.colors
 import com.tezov.bank.ui.page.lobby.login.*
 import com.tezov.bank.ui.theme.ThemeColorProviders
 import com.tezov.bank.ui.theme.ThemeComponentProviders
+import com.tezov.bank.ui.theme.colorsPalette
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
@@ -57,6 +59,11 @@ val DialogAuthCloseAppConfirmationTheme.typographies: DialogAuthCloseAppConfirma
 infix fun DialogAuthCloseAppConfirmationTheme.provides(value: DialogAuthCloseAppConfirmationTheme.Typographies) =
     localTypographies provides value
 
+val DialogAuthCloseAppConfirmationTheme.styles: DialogAuthCloseAppConfirmationTheme.Style
+    @Composable
+    @ReadOnlyComposable
+    get() = localStyles.current
+
 infix fun DialogAuthCloseAppConfirmationTheme.provides(value: DialogAuthCloseAppConfirmationTheme.Style) = localStyles provides value
 
 object DialogAuthCloseAppConfirmationTheme {
@@ -66,16 +73,16 @@ object DialogAuthCloseAppConfirmationTheme {
         val onBackground: Color,
         val dark: Color,
         val light: Color,
-        val fade: Color,
+        val decor: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
-        background = MaterialTheme.colorsExtended.background.dark,
-        onBackground = MaterialTheme.colorsExtended.onBackground.dark,
+        background = MaterialTheme.colorsExtended.backgroundElevated.default,
+        onBackground = MaterialTheme.colorsExtended.onBackgroundElevated.default,
         dark = MaterialTheme.colorsExtended.primary.default,
-        light = MaterialTheme.colorsExtended.primary.accent,
-        fade = MaterialTheme.colorsExtended.primary.fade,
+        light = MaterialTheme.colorsExtended.primary.default.copy(alpha = 0.75f),
+        decor = MaterialTheme.colorsExtended.primary.decor,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -92,7 +99,7 @@ object DialogAuthCloseAppConfirmationTheme {
         title = MaterialTheme.typographiesExtended.title.big.copy {
             outfitState = colors.onBackground.asStateSimple
         },
-        body = MaterialTheme.typographiesExtended.body.big.copy {
+        body = MaterialTheme.typographiesExtended.body.normal.copy {
             outfitState = colors.onBackground.asStateSimple
         },
     )
@@ -103,24 +110,22 @@ object DialogAuthCloseAppConfirmationTheme {
         }
 
     data class Style(
-        val button: Button.StateColor.Style,
+        val linkConfirm: Link.StateColor.Style,
+        val linkCancel: Link.StateColor.Style,
     )
 
     @Composable
     fun provideStyles() = Style(
-        button = MaterialTheme.componentsButtonExtended.primary.copy {
-            outfitFrame = outfitFrame.copy {
-                outfitShape = outfitShape.copy {
-                    outfitState = OutfitStateDual(
-                        active = colors.light,
-                        inactive = colors.dark
-                    )
-                }
+        linkConfirm = Link.StateColor.Style(
+            outfitText = MaterialTheme.typographiesExtended.button.normal.copy {
+                outfitState = colors.dark.asStateSimple
             }
-            outfitText = outfitText.copy {
-                outfitState = colors.onBackground.asStateSimple
+        ),
+        linkCancel = Link.StateColor.Style(
+            outfitText = MaterialTheme.typographiesExtended.button.normal.copy {
+                outfitState = colors.light.asStateSimple
             }
-        }
+        ),
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

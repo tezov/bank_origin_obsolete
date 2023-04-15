@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 17:41
+ *  Created by Tezov on 15/04/2023 16:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 17:09
+ *  Last modified 15/04/2023 16:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,6 +17,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
@@ -69,15 +70,30 @@ object Image {
         operator fun invoke(
             modifier: Modifier = Modifier,
             style: Style = Style(),
-            resourceId: Int,
+            painter: Painter,
             description: String? = null,
         ) {
             Image(
                 modifier = modifier.thenOnNotNull(style.size, Modifier::size),
-                painter = painterResource(id = resourceId),
+                painter = painter,
                 colorFilter = style.tint?.let { ColorFilter.tint(it) },
                 contentDescription = description,
                 contentScale = style.contentScale
+            )
+        }
+
+        @Composable
+        operator fun invoke(
+            modifier: Modifier = Modifier,
+            style: Style = Style(),
+            resourceId: Int,
+            description: String? = null,
+        ) {
+            invoke(
+                modifier,
+                style,
+                painterResource(id = resourceId),
+                description
             )
         }
 
@@ -143,7 +159,7 @@ object Image {
         operator fun invoke(
             modifier: Modifier = Modifier,
             style: Style = Style(),
-            resourceId: Int,
+            painter: Painter,
             description: String? = null,
             selector: Any? = null
         ) {
@@ -154,10 +170,28 @@ object Image {
                     .thenOnNotNull(style.outfitFrame) {
                         border(it, selector).background(it, selector)
                     },
-                painter = painterResource(id = resourceId),
+                painter = painter,
                 colorFilter = style.tint?.let { ColorFilter.tint(it) },
                 contentDescription = description,
                 contentScale = style.contentScale
+            )
+
+        }
+
+        @Composable
+        operator fun invoke(
+            modifier: Modifier = Modifier,
+            style: Style = Style(),
+            resourceId: Int,
+            description: String? = null,
+            selector: Any? = null
+        ) {
+            invoke(
+                modifier,
+                style,
+                painterResource(id = resourceId),
+                description,
+                selector
             )
 
         }

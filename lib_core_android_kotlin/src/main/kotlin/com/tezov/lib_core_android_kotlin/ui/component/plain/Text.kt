@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 11:25
+ *  Created by Tezov on 15/04/2023 16:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 09:44
+ *  Last modified 15/04/2023 16:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -67,14 +67,14 @@ object Text {
             selector: Any? = null
         ) {
             invoke(
-                modifier = modifier,
-                style = style,
-                overflow = overflow,
-                softWrap = softWrap,
-                maxLines = maxLines,
-                onTextLayout = onTextLayout,
-                text = AnnotatedString(text),
-                selector = selector,
+                modifier,
+                style,
+                overflow,
+                softWrap,
+                maxLines,
+                onTextLayout,
+                AnnotatedString(text),
+                selector,
             )
         }
 
@@ -90,14 +90,14 @@ object Text {
             selector: Any? = null
         ) {
             invoke(
-                modifier = modifier,
-                style = style,
-                overflow = overflow,
-                softWrap = softWrap,
-                maxLines = maxLines,
-                onTextLayout = onTextLayout,
-                text = stringResource(id = text),
-                selector = selector,
+                modifier,
+                style,
+                overflow,
+                softWrap,
+                maxLines,
+                onTextLayout,
+                stringResource(id = text),
+                selector,
             )
         }
 

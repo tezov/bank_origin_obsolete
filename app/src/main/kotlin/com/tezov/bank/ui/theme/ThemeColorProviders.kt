@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 16:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 22:41
+ *  Last modified 15/04/2023 15:07
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,9 +40,10 @@ object ThemeColorProviders {
         val grayLight = Color(0xFF777777)
         val grayLightOverlay = Color(0x70B6B5B5)
 
-        val blueDark = Color(0xFF011518)
+        val blueDark = Color(0xFF04282E)
         val blueDarkOverlay = Color(0x34011518)
         val blueElegant = Color(0xFF12263F)
+        val blueShady = Color(0xFF203550)
         val blueSea = Color(0xFF0FA8C0)
         val blueShadow= Color(0xFF364C53)
         val blueShiny= Color(0xFFD0E9F1)
@@ -74,6 +75,7 @@ object ThemeColorProviders {
             accent = Palette.blueSea,
             fade = Palette.grayLight,
             shiny = Palette.blueShiny,
+            shady = Palette.blueShady,
         ),
         onPrimary = OutfitPaletteColor(
             default = Palette.whiteShiny,

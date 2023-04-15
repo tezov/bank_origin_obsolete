@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 16:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 20:10
+ *  Last modified 15/04/2023 16:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -51,8 +51,6 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
         val accessor = AccessorAppUiPage().get(requester = this).contextProfile()
         val action = accessor.action()
         val state = accessor.state()
-
-
         ExtensionCompositionLocal.CompositionLocalProvider(
             ancestor = arrayOf(
                 PageProfileTheme provides PageProfileTheme.provideColors(),
@@ -71,7 +69,6 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                 )
             }
         ) {
-
             Column(
                 modifier = Modifier
                     .fillMaxSize()
@@ -104,6 +101,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
 
                     }
                 }
+                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.huge.vertical))
             }
         }
     }
@@ -140,7 +138,9 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                 }
                 header.name.value?.let {
                     Text.StateColor(
-                        modifier = Modifier.align(Alignment.Top).padding(start = MaterialTheme.dimensionsPaddingExtended.element.huge.horizontal),
+                        modifier = Modifier
+                            .align(Alignment.Top)
+                            .padding(start = MaterialTheme.dimensionsPaddingExtended.element.huge.horizontal),
                         text = it,
                         style = PageProfileTheme.typographies.title
                     )

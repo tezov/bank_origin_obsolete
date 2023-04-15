@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 16:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 22:17
+ *  Last modified 15/04/2023 16:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -85,7 +85,6 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                     }
                     Shadow.Bottom(elevation = MaterialTheme.dimensionsCommonExtended.elevation.normal)
                 }
-
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -111,7 +110,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
                         }
                     }
-                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
+                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.huge.vertical))
                 }
             }
         }

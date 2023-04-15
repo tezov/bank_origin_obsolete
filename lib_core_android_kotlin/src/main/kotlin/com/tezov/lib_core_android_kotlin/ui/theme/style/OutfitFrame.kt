@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 15/04/2023 16:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 15:29
+ *  Last modified 15/04/2023 14:21
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -46,7 +46,6 @@ object OutfitFrame {
             outfitShape: OutfitShapeStateColor? = null,
             outfitBorder: OutfitBorderStateColor? = null,
         ) {
-
             val outfitShape: OutfitShapeStateColor by DelegateNullFallBack.Ref(
                 outfitShape,
                 fallBackValue = { OutfitShapeStateColor() }
@@ -77,7 +76,7 @@ object OutfitFrame {
 
             fun resolveShape(selector: Any? = null) = outfitShape.resolve(selector)
 
-            fun resolveColorSBorder(selector: Any? = null) = outfitBorder.resolveColor(selector)
+            fun resolveColorBorder(selector: Any? = null) = outfitBorder.resolveColor(selector)
 
             fun resolveBorder(selector: Any? = null) = outfitBorder.resolve(selector)
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 15/04/2023 16:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 22:41
+ *  Last modified 15/04/2023 15:38
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,15 +19,20 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
+import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
 import com.tezov.bank.ui.page.lobby.login.PageLoginTheme
 import com.tezov.bank.ui.page.lobby.login.provides
+import com.tezov.bank.ui.page.lobby.login.styles
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 
@@ -59,38 +64,34 @@ object DialogAuthCloseAppConfirmation :
                 modifier = Modifier
                     .background(DialogAuthCloseAppConfirmationTheme.colors.background)
                     .fillMaxWidth(0.7f)
-//                    .padding(
-//                        vertical = MaterialTheme.dimensionsPaddingExtended.blockBig_v,
-//                        horizontal = MaterialTheme.dimensionsPaddingExtended.blockBig_h
-//                    )
+                    .padding(MaterialTheme.dimensionsPaddingExtended.page.normal)
             ) {
                 Text.StateColor(
                     text = "Déconnexion",
                     style = DialogAuthCloseAppConfirmationTheme.typographies.title
                 )
-//                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.normal_v))
+                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.normal.vertical))
                 Text.StateColor(
                     text = "Etes-vous sûr de vouloir vous déconnecter ?",
                     style = DialogAuthCloseAppConfirmationTheme.typographies.body
                 )
-//                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsCommonExtended.huge_v))
-//                Row {
-//                    Spacer(modifier = Modifier.weight(1f))
-//                    ClickableText(
-//                        text = AnnotatedString("NON"),
-//                        style = DialogAuthCloseAppConfirmationTheme.typographies.button
-//                    ) {
-//
-//                    }
-////                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsCommonExtended.big_h))
-//                    ClickableText(
-//                        text = AnnotatedString("OUI"),
-//                        style = DialogAuthCloseAppConfirmationTheme.typographies.button
-//                    ) {
-//
-//                    }
-//
-//                }
+                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.huge.vertical))
+                Row {
+                    Spacer(modifier = Modifier.weight(1f))
+                    Link.StateColor(
+                        text = "NON",
+                        style = DialogAuthCloseAppConfirmationTheme.styles.linkCancel,
+                    ){
+
+                    }
+                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.element.huge.horizontal))
+                    Link.StateColor(
+                        text = "OUI",
+                        style = DialogAuthCloseAppConfirmationTheme.styles.linkConfirm,
+                    ){
+
+                    }
+                }
             }
         }
     }
