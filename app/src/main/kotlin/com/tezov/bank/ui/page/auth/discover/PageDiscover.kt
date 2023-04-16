@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 14:41
+ *  Created by Tezov on 16/04/2023 17:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 14:39
+ *  Last modified 16/04/2023 16:47
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,13 +19,11 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.component.leaf.CarouselCard
+import com.tezov.bank.ui.component.branch.SectionCarouselCard
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
-import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
@@ -78,55 +76,25 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                 ) {
                     contentHeader(state.header)
                     state.cardWithButtonData.value?.let {
-                        val cards = ArrayList<@Composable () -> Unit>()
-                        it.forEach { data ->
-                            cards.add {
-                                CarouselCard(
-                                    modifier = Modifier.fillMaxSize(),
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardButton
-                                )
-                            }
-                        }
-                        HorizontalScrollable.Pager(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            style = PageDiscoverTheme.styles.carousel,
-                            pages = cards
-                        ) {
+                        SectionCarouselCard(data = it, style = PageDiscoverTheme.styles.sectionCarouselCardButton){
 
                         }
                     }
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
                     state.cardWithLinkData.value?.let {
-                        val cards = ArrayList<@Composable () -> Unit>()
-                        it.forEach { data ->
-                            cards.add {
-                                CarouselCard(
-                                    modifier = Modifier.fillMaxSize(),
-                                    data = data,
-                                    style = PageDiscoverTheme.styles.cardLink
-                                )
-                            }
-                        }
-                        HorizontalScrollable.Pager(
-                            modifier = Modifier
-                                .fillMaxWidth(),
-                            style = PageDiscoverTheme.styles.carousel,
-                            pages = cards
-                        ) {
+                        SectionCarouselCard(data = it, style = PageDiscoverTheme.styles.sectionCarouselCardLink){
 
                         }
                     }
                     state.offers.value?.let {
-                        SectionActionCard(data = it, style = PageDiscoverTheme.styles.sectionCard) {
+                        SectionActionCard(data = it, style = PageDiscoverTheme.styles.sectionActionCard) {
 
 
                         }
                     }
                     Spacer(modifier = Modifier.height(PageDiscoverTheme.dimensions.spacingTopSectionRowToBottomSectionCard))
                     state.tips.value?.let {
-                        SectionActionRow(data = it, style = PageDiscoverTheme.styles.sectionRow) {
+                        SectionActionRow(data = it, style = PageDiscoverTheme.styles.sectionActionRow) {
 
 
                         }

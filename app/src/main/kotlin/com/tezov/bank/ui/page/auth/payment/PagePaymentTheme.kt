@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 23:53
+ *  Created by Tezov on 16/04/2023 17:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 23:05
+ *  Last modified 16/04/2023 16:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -131,7 +131,7 @@ object PagePaymentTheme {
 
     @Composable
     fun provideStyles() = Style(
-        sectionCard = ThemeComponentProviders.provideSectionCardStyle().copy {
+        sectionCard = ThemeComponentProviders.provideSectionActionCardStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             iconStyle = iconStyle.copy { tint = colors.primary }
             outfitTextHeader = outfitTextHeader?.copy {

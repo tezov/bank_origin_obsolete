@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 14:45
+ *  Created by Tezov on 16/04/2023 17:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 14:44
+ *  Last modified 16/04/2023 16:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,8 +21,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
+import com.tezov.bank.ui.component.branch.SectionCarouselCard
 import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
+import com.tezov.bank.ui.component.leaf.CarouselCard
 import com.tezov.bank.ui.theme.font.fontIbm
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
@@ -33,10 +35,13 @@ import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
 import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -185,7 +190,7 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun provideSectionRowStyle() = SectionActionRow.Style(
+    fun provideSectionActionRowStyle() = SectionActionRow.Style(
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
@@ -215,7 +220,7 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun provideSectionCardStyle() = SectionActionCard.Style(
+    fun provideSectionActionCardStyle() = SectionActionCard.Style(
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
@@ -264,9 +269,100 @@ object ThemeComponentProviders {
     )
 
     @Composable
+    fun provideSectionCarouselCardStyle(carouselStyle: HorizontalScrollable.Pager.Style, cardStyle:CarouselCard.Style.Base) = SectionCarouselCard.Style(
+        iconStyle = Icon.Simple.Style(
+            size = MaterialTheme.dimensionsIconExtended.info.normal,
+            tint = MaterialTheme.colorsExtended.primary.accent
+        ),
+        outfitTextHeader = MaterialTheme.typographiesExtended.title.huge.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
+            typo = typo.copy(
+                fontWeight = FontWeight.Bold
+            )
+        },
+        carouselStyle = carouselStyle,
+        cardStyle = cardStyle,
+    )
+
+    @Composable
     fun provideCarouselStyle() = pagerStyle().copy {
         paddingContent = PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
         spacingItem = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
     }
+
+    @Composable
+    fun provideCarouselCardButtonStyle() = CarouselCard.Style.Button(
+        baseStyle = CarouselCard.Style.Base(
+            outfitFrame = OutfitFrameStateColor(
+                outfitShape = MaterialTheme.shapesExtended.element.big,
+                outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
+                    outfitState = MaterialTheme.colorsExtended.primary.decor.asStateSimple
+                },
+            ),
+            iconInfoStyle = Icon.Simple.Style(
+                size = MaterialTheme.dimensionsIconExtended.info.big,
+                tint = MaterialTheme.colorsExtended.primary.accent.copy(alpha = 0.5f)
+            ),
+            outfitTextTitle = MaterialTheme.typographiesExtended.title.big.copy {
+                outfitState =  MaterialTheme.colorsExtended.primary.default.asStateSimple
+                typo = typo.copy(fontWeight = FontWeight.Bold)
+            },
+            outfitTextBody = MaterialTheme.typographiesExtended.body.normal.copy {
+                outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+            },
+            outfitTextTag = MaterialTheme.typographiesExtended.label.big.copy {
+                outfitState = MaterialTheme.colorsExtended.primary.accent.asStateSimple
+            },
+            outfitFrameTag = OutfitFrameStateColor(
+                outfitShape = MaterialTheme.shapesExtended.element.big,
+                outfitBorder = MaterialTheme.bordersExtended.element.big.copy {
+                    outfitState = MaterialTheme.colorsExtended.primary.accent.asStateSimple
+                }
+            ),
+        ),
+        action = MaterialTheme.componentsButtonExtended.primary.copy{
+            outfitFrame = outfitFrame.copy{
+                outfitShape = MaterialTheme.shapesExtended.button.small.copy{
+                    outfitState = MaterialTheme.colorsExtended.primary.accent.asStateSimple
+                }
+            }
+            outfitText = MaterialTheme.typographiesExtended.button.small.copy {
+                outfitState = MaterialTheme.colorsExtended.primary.shiny.asStateSimple
+            }
+        }
+    )
+
+    @Composable
+    fun provideCarouselCardLinkStyle() = CarouselCard.Style.Link(
+        baseStyle = CarouselCard.Style.Base(
+            outfitFrame = OutfitFrameStateColor(
+                outfitShape = MaterialTheme.shapesExtended.element.big.copy {
+                    outfitState = MaterialTheme.colorsExtended.primary.overlay.asStateSimple
+                },
+            ),
+            iconInfoStyle = Icon.Simple.Style(
+                size = MaterialTheme.dimensionsIconExtended.info.normal,
+                tint = MaterialTheme.colorsExtended.primary.accent
+            ),
+            outfitTextTitle = MaterialTheme.typographiesExtended.title.big.copy {
+                outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+                typo = typo.copy(fontWeight = FontWeight.Bold)
+            },
+            outfitTextBody = MaterialTheme.typographiesExtended.body.normal.copy {
+                outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+            },
+            outfitFrameTag = OutfitFrameStateColor(
+                outfitShape = MaterialTheme.shapesExtended.element.big,
+                outfitBorder = MaterialTheme.bordersExtended.element.big.copy {
+                    outfitState = MaterialTheme.colorsExtended.primary.accent.asStateSimple
+                }
+            ),
+        ),
+        action = MaterialTheme.componentsLinkExtended.primary.copy{
+            outfitText = outfitText.copy{
+                outfitState =  MaterialTheme.colorsExtended.primary.accent.asStateSimple
+            }
+        }
+    )
 
 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 22:02
+ *  Created by Tezov on 16/04/2023 17:05
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 21:24
+ *  Last modified 16/04/2023 16:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.component.branch.SectionActionRow
+import com.tezov.bank.ui.component.branch.SectionCarouselCard
 import com.tezov.bank.ui.component.leaf.ActionCard
 import com.tezov.bank.ui.component.leaf.ActionRow
 import com.tezov.bank.ui.component.leaf.CarouselCard
@@ -25,8 +26,8 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageDiscoverState private constructor(
     val header: Header,
-    val cardWithButtonData: MutableState<List<CarouselCard.Data>?>,
-    val cardWithLinkData: MutableState<List<CarouselCard.Data>?>,
+    val cardWithButtonData: MutableState<SectionCarouselCard.Data?>,
+    val cardWithLinkData: MutableState<SectionCarouselCard.Data?>,
     val offers: MutableState<SectionActionCard.Data?>,
     val tips: MutableState<SectionActionRow.Data?>,
 ) : PageState {
@@ -34,8 +35,8 @@ class PageDiscoverState private constructor(
     companion object {
         fun create(
             header: Header = Header.empty(),
-            cardWithButtonData: MutableState<List<CarouselCard.Data>?> = mutableStateOf(null),
-            cardWithLinkData: MutableState<List<CarouselCard.Data>?> = mutableStateOf(null),
+            cardWithButtonData: MutableState<SectionCarouselCard.Data?> = mutableStateOf(null),
+            cardWithLinkData: MutableState<SectionCarouselCard.Data?> = mutableStateOf(null),
             offers: MutableState<SectionActionCard.Data?> = mutableStateOf(null),
             tips: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
         ) = PageDiscoverState(
@@ -62,41 +63,47 @@ class PageDiscoverState private constructor(
             headline.value = "Découvrir"
         }
 
-        cardWithButtonData.value = listOf(
-            CarouselCard.Data(
-                tag = "100 euros offerts",
-                title = "Parrainez un proche...",
-                body = "Jusqu'au 9 février, c'est 100€ pour vous et 80€ pour vos filleuls à chaque parrainage validé.",
-                action = "Parrainer",
-                iconInfoResourceId = R.drawable.ic_call_24dp
-            ),
-            CarouselCard.Data(
-                title = "Roulez vert !",
-                body = "Grâce au Prêt Véhicule Vert, financez l'achat de votre véhicule peu polluant.",
-                action = "Découvrir",
-                iconInfoResourceId = R.drawable.ic_call_24dp
-            ),
+        cardWithButtonData.value = SectionCarouselCard.Data(
+            cards = listOf(
+                CarouselCard.Data(
+                    tag = "100 euros offerts",
+                    title = "Parrainez un proche...",
+                    body = "Jusqu'au 9 février, c'est 100€ pour vous et 80€ pour vos filleuls à chaque parrainage validé.",
+                    action = "Parrainer",
+                    iconInfoResourceId = R.drawable.ic_call_24dp
+                ),
+                CarouselCard.Data(
+                    title = "Roulez vert !",
+                    body = "Grâce au Prêt Véhicule Vert, financez l'achat de votre véhicule peu polluant.",
+                    action = "Découvrir",
+                    iconInfoResourceId = R.drawable.ic_call_24dp
+                ),
+            )
+
         )
 
-        cardWithLinkData.value = listOf(
-            CarouselCard.Data(
-                title = "Envie de vous faire plaisir en vacances ?",
-                body = "Avec les 2 cartes Visa Hello Prime et les 2 cartes virtuelles de l'offre Hello Prime Duo, réglez vos hôtel et cocktails !",
-                action = "En savoir plus",
-                iconInfoResourceId = R.drawable.ic_call_24dp
-            ),
-            CarouselCard.Data(
-                title = "Vous voulez vous lancer en bourse ?",
-                body = "Profitez de l'espace complet dédié à la Bourse dans notre appli.",
-                action = "En savoir plus",
-                iconInfoResourceId = R.drawable.ic_call_24dp
-            ),
-            CarouselCard.Data(
-                title = "Envie de donner du sens à votre épargne ?",
-                body = "L'Assurance Vie Hello! permet d'investir de manière responsable dans des fonds ISR.",
-                action = "En savoir plus",
-                iconInfoResourceId = R.drawable.ic_call_24dp
-            ),
+        cardWithLinkData.value = SectionCarouselCard.Data(
+            title = "Nos offres pour vos besoins",
+            cards =listOf(
+                CarouselCard.Data(
+                    title = "Envie de vous faire plaisir en vacances ?",
+                    body = "Avec les 2 cartes Visa Hello Prime et les 2 cartes virtuelles de l'offre Hello Prime Duo, réglez vos hôtel et cocktails !",
+                    action = "En savoir plus",
+                    iconInfoResourceId = R.drawable.ic_call_24dp
+                ),
+                CarouselCard.Data(
+                    title = "Vous voulez vous lancer en bourse ?",
+                    body = "Profitez de l'espace complet dédié à la Bourse dans notre appli.",
+                    action = "En savoir plus",
+                    iconInfoResourceId = R.drawable.ic_call_24dp
+                ),
+                CarouselCard.Data(
+                    title = "Envie de donner du sens à votre épargne ?",
+                    body = "L'Assurance Vie Hello! permet d'investir de manière responsable dans des fonds ISR.",
+                    action = "En savoir plus",
+                    iconInfoResourceId = R.drawable.ic_call_24dp
+                ),
+            )
         )
 
         offers.value = SectionActionCard.Data(
