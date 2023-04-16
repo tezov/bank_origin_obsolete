@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 17:05
+ *  Created by Tezov on 16/04/2023 18:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 16:05
+ *  Last modified 16/04/2023 18:06
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -91,7 +91,6 @@ object PagePaymentTheme {
     data class Dimensions(
         val headLineMin: TextUnit,
         val headlineMax: TextUnit,
-        val headerDivider: Dp,
         val headerProperties: ColumnCollapsibleHeader.Properties,
     )
 
@@ -99,8 +98,7 @@ object PagePaymentTheme {
     fun provideDimensions() = Dimensions(
         headLineMin = 24.sp,
         headlineMax = 54.sp,
-        headerDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
-        headerProperties = ColumnCollapsibleHeader.Properties(76.dp, 152.dp)
+        headerProperties = ColumnCollapsibleHeader.Properties(50.dp, 156.dp)
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =

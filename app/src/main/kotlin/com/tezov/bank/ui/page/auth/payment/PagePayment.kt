@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 23:53
+ *  Created by Tezov on 16/04/2023 18:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 23:05
+ *  Last modified 16/04/2023 18:09
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,6 @@ package com.tezov.bank.ui.page.auth.payment
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -24,13 +23,16 @@ import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.branch.SectionActionCard
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
+import com.tezov.lib_core_android_kotlin.ui.component.plain.Shadow
 import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
 import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.then
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 object PagePayment : Page<PagePaymentState, PagePaymentAction> {
@@ -121,15 +123,18 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                         )
                     }
                 )
-                if (progress < DIVIDER_HEADER_VISIBILITY_START) {
-                    Divider(
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .alpha((DIVIDER_HEADER_VISIBILITY_START - progress) / DIVIDER_HEADER_VISIBILITY_START),
-                        color = PagePaymentTheme.colors.fade,
-                        thickness = PagePaymentTheme.dimensions.headerDivider,
-                    )
-                }
+                Shadow.Bottom(
+                    modifier = Modifier
+                        .then(progress < DIVIDER_HEADER_VISIBILITY_START,
+                            onTrue = {
+                                alpha((DIVIDER_HEADER_VISIBILITY_START - progress) / DIVIDER_HEADER_VISIBILITY_START)
+                            },
+                            onFalse = {
+                                alpha(0f)
+                            }
+                        ),
+                    elevation = MaterialTheme.dimensionsCommonExtended.elevation.normal,
+                )
                 Spacer(modifier = Modifier.height((MaterialTheme.dimensionsPaddingExtended.element.normal.vertical * (1f - progress))))
             }
         }
