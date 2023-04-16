@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 14:41
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 13:50
+ *  Last modified 16/04/2023 19:17
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,10 +26,11 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
+import com.google.accompanist.pager.ExperimentalPagerApi
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
-import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
-import com.tezov.lib_core_android_kotlin.ui.component.plain.*
+import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.*
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -197,17 +198,18 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
         }
     }
 
+    @OptIn(ExperimentalPagerApi::class)
     @Composable
     private fun ColumnScope.ContentBody(
         nameState: State<String>
     ) {
-        HorizontalScrollable.Pager(
+        HorizontalPager.Page(
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f),
             style = PageLoginTheme.styles.pager,
-            pageSelected = 0,
-            pages = arrayListOf(
+            itemSelected = 0,
+            items = arrayListOf(
                 {
                     Column(
                         modifier = Modifier
@@ -251,7 +253,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         )
                     }
                 }),
-            onPageChange = {
+            onItemChange = {
 
 
             })

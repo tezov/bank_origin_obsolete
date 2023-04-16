@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 14:41
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 14:34
+ *  Last modified 16/04/2023 20:40
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,8 +10,9 @@
  *  *********************************************************************************
  */
 
-package com.tezov.lib_core_android_kotlin.ui.component.branch
+package com.tezov.lib_core_android_kotlin.ui.component.block
 
+import android.media.midi.MidiDevice.MidiConnection
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -24,7 +25,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.fillMaxHeightRemembered
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.then
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnTrue
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
@@ -33,9 +33,9 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
-object HorizontalScrollable {
+object HorizontalPager {
 
-    object Pager {
+    object Page {
 
         open class StyleBuilder internal constructor(style: Style) {
             var outfitShapeIndicator = style.outfitShapeIndicator
@@ -44,7 +44,7 @@ object HorizontalScrollable {
             var paddingTopIndicator = style.paddingTopIndicator
             var spacingIndicator = style.spacingIndicator
             var paddingContent = style.paddingContent
-            var pageHeightToHeighest = style.pageHeightToHeighest
+            var heightItemToHighest = style.heightItemToHighest
 
             internal open fun get() = Style(
                 outfitShapeIndicator = outfitShapeIndicator,
@@ -53,7 +53,7 @@ object HorizontalScrollable {
                 paddingTopIndicator = paddingTopIndicator,
                 spacingIndicator = spacingIndicator,
                 paddingContent = paddingContent,
-                pageHeightToHeighest = pageHeightToHeighest,
+                heightItemToHighest = heightItemToHighest,
             )
         }
 
@@ -64,7 +64,7 @@ object HorizontalScrollable {
             sizeIndicator: Dp? = null,
             spacingIndicator: Dp? = null,
             paddingContent: PaddingValues? = null,
-            pageHeightToHeighest: Boolean? = null,
+            heightItemToHighest: Boolean? = null,
         ) {
 
             val outfitShapeIndicator: OutfitShapeStateColor by DelegateNullFallBack.Ref(
@@ -90,8 +90,8 @@ object HorizontalScrollable {
             val paddingContent: PaddingValues by DelegateNullFallBack.Ref(
                 paddingContent,
                 fallBackValue = { PaddingValues() })
-            val pageHeightToHeighest: Boolean by DelegateNullFallBack.Ref(
-                pageHeightToHeighest,
+            val heightItemToHighest: Boolean by DelegateNullFallBack.Ref(
+                heightItemToHighest,
                 fallBackValue = { false })
 
             companion object {
@@ -111,7 +111,7 @@ object HorizontalScrollable {
                 paddingTopIndicator = style?.paddingTopIndicator,
                 paddingContent = style?.paddingContent,
                 spacingItem = style?.spacingItem,
-                pageHeightToHeighest = style?.pageHeightToHeighest,
+                heightItemToHighest = style?.heightItemToHighest,
             )
         }
 
@@ -120,9 +120,9 @@ object HorizontalScrollable {
         operator fun invoke(
             modifier: Modifier = Modifier,
             style: Style,
-            pageSelected: Int = 0,
-            pages: List<@Composable () -> Unit>,
-            onPageChange: (pageIndex: Int) -> Unit = {}
+            itemSelected: Int = 0,
+            items: List<@Composable PagerScope.() -> Unit>,
+            onItemChange: ((index: Int) -> Unit)? = null
         ) {
             val pagerState = rememberPagerState()
             Column(
@@ -130,15 +130,15 @@ object HorizontalScrollable {
             ) {
                 HorizontalPager(
                     modifier = Modifier
-                        .thenOnTrue(style.pageHeightToHeighest){
+                        .thenOnTrue(style.heightItemToHighest){
                             fillMaxHeightRemembered()
                         },
-                    count = pages.size,
+                    count = items.size,
                     state = pagerState,
                     contentPadding = style.paddingContent,
                     itemSpacing = style.spacingItem,
-                ) { pageIndex ->
-                    pages[pageIndex].invoke()
+                ) { index ->
+                    items[index]()
                 }
                 style.outfitShapeIndicator.let {
                     HorizontalPagerIndicator(
@@ -160,20 +160,22 @@ object HorizontalScrollable {
                     )
                 }
             }
-            LaunchedEffect(pagerState) {
-                snapshotFlow { pagerState.currentPage }.collect { pageIndex ->
-                    onPageChange(pageIndex)
+            onItemChange?.let {
+                LaunchedEffect(pagerState) {
+                    snapshotFlow { pagerState.currentPage }.collect { index ->
+                        onItemChange(index)
+                    }
                 }
             }
             LaunchedEffect(Unit) {
-                pagerState.scrollToPage(pageSelected)
+                pagerState.scrollToPage(itemSelected)
             }
         }
     }
 
-    object CarouselCard {
+    object Card {
 
-        class StyleBuilder internal constructor(style: Style) : Pager.StyleBuilder(style) {
+        class StyleBuilder internal constructor(style: Style) : Page.StyleBuilder(style) {
             var outfitFrame = style.outfitFrame
             var marginCard = style.marginCard
 
@@ -185,10 +187,10 @@ object HorizontalScrollable {
         }
 
         class Style(
-            pagerStyle: Pager.Style? = null,
+            pagerStyle: Page.Style? = null,
             outfitFrame: OutfitFrameStateColor? = null,
             marginCard: PaddingValues = PaddingValues(horizontal = 4.dp),
-        ) : Pager.Style(pagerStyle) {
+        ) : Page.Style(pagerStyle) {
 
             val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
                 outfitFrame,
@@ -204,7 +206,7 @@ object HorizontalScrollable {
             )
             val marginCard: PaddingValues by DelegateNullFallBack.Ref(
                 marginCard,
-                fallBackValue = { PaddingValues(horizontal = 4.dp) }
+                fallBackValue = { PaddingValues() }
             )
 
             companion object {
@@ -216,7 +218,7 @@ object HorizontalScrollable {
                     }.get()
 
                 @Composable
-                fun Pager.Style.copyToCarouselCardStyle(scope: @Composable StyleBuilder.() -> Unit) =
+                fun Page.Style.copyToCarouselCardStyle(scope: @Composable StyleBuilder.() -> Unit) =
                     StyleBuilder(Style(this)).also { it.scope() }.get()
 
             }
@@ -228,27 +230,27 @@ object HorizontalScrollable {
             )
         }
 
+        @OptIn(ExperimentalPagerApi::class)
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
             style: Style,
-            pageSelected: Int = 0,
-            pages: List<@Composable () -> Unit>,
-            onPageChange: (pageIndex: Int) -> Unit = {}
+            itemSelected: Int = 0,
+            items: List<@Composable PagerScope.() -> Unit>,
+            onItemChange: ((index: Int) -> Unit)? = null
         ) {
-            Pager(modifier, style, pageSelected, pages.map { content ->
+            Page(modifier, style, itemSelected, items.map { content ->
                 {
                     Surface(
-                        modifier = modifier.padding(style.marginCard),
+                        modifier = Modifier.padding(style.marginCard),
                         shape = style.outfitFrame.getShape() ?: RectangleShape,
                         border = style.outfitFrame.resolveBorder(),
-                        color = style.outfitFrame.resolveColorShape()
-                            ?: MaterialTheme.colors.surface,
+                        color = style.outfitFrame.resolveColorShape() ?: MaterialTheme.colors.surface,
                     ) {
                         content()
                     }
                 }
-            }, onPageChange)
+            }, onItemChange)
         }
     }
 

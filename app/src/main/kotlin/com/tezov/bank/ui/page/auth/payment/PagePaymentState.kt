@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 21:23
+ *  Last modified 16/04/2023 20:40
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,8 +15,8 @@ package com.tezov.bank.ui.page.auth.payment
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.branch.SectionActionCard
-import com.tezov.bank.ui.component.leaf.ActionCard
+import com.tezov.bank.ui.component.block.SectionActionCard
+import com.tezov.bank.ui.component.element.ActionCard
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PagePaymentState private constructor(
@@ -58,19 +58,19 @@ class PagePaymentState private constructor(
             cards = listOf(
                 ActionCard.Data(
                     title = "Partager\nmon RIB",
-                    iconResourceId = R.drawable.img_rib_share
+                    iconInfo = R.drawable.img_rib_share
                 ),
                 ActionCard.Data(
                     title = "Faire\nun virement",
-                    iconResourceId = R.drawable.img_transfer_money
+                    iconInfo = R.drawable.img_transfer_money
                 ),
                 ActionCard.Data(
                     title = "Gérer\nmes chèques",
-                    iconResourceId = R.drawable.img_cheque_manage
+                    iconInfo = R.drawable.img_cheque_manage
                 ),
                 ActionCard.Data(
                     title = "Gérer\nmes cartes",
-                    iconResourceId = R.drawable.img_card_manage
+                    iconInfo = R.drawable.img_card_manage
                 ),
             )
         )
@@ -81,17 +81,17 @@ class PagePaymentState private constructor(
                 ActionCard.Data(
                     title = "Lyf Pay",
                     subtitle = "Payer avec votre mobile.",
-                    iconResourceId = R.drawable.img_lyf
+                    iconInfo = R.drawable.img_lyf
                 ),
                 ActionCard.Data(
                     title = "Paylib",
                     subtitle = "Envoyer de l'argent vers un mobile",
-                    iconResourceId = R.drawable.img_paylib
+                    iconInfo = R.drawable.img_paylib
                 ),
                 ActionCard.Data(
                     title = "PaypPal",
                     subtitle = "Payer en ligne",
-                    iconResourceId = R.drawable.img_paypal
+                    iconInfo = R.drawable.img_paypal
                 ),
             )
         )

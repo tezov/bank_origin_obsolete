@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 19:35
+ *  Last modified 16/04/2023 20:40
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,9 +10,8 @@
  *  *********************************************************************************
  */
 
-package com.tezov.bank.ui.component.leaf
+package com.tezov.bank.ui.component.element
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -24,8 +23,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -118,7 +117,7 @@ object ActionCard {
         var template: Template = Template.Undefined,
         val title: String,
         val subtitle: String? = null,
-        val iconResourceId: Int,
+        val iconInfo: Int,
     )
 
     @Composable
@@ -158,7 +157,7 @@ object ActionCard {
             Icon.Simple(
                 modifier = Modifier.align(Alignment.End),
                 style = style.iconStyle,
-                resourceId = data.iconResourceId,
+                resourceId = data.iconInfo,
                 description = data.title,
             )
             Text.StateColor(
@@ -199,7 +198,7 @@ object ActionCard {
         ) {
             Icon.Simple(
                 style = style.iconStyle,
-                resourceId = data.iconResourceId,
+                resourceId = data.iconInfo,
                 description = data.title,
             )
             Column (
@@ -260,7 +259,7 @@ object ActionCard {
             }
             Icon.Simple(
                 style = style.iconStyle,
-                resourceId = data.iconResourceId,
+                resourceId = data.iconInfo,
                 description = data.title,
             )
         }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 17:05
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 16:47
+ *  Last modified 16/04/2023 21:11
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,12 +19,14 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.tezov.bank.ui.component.branch.SectionActionCard
-import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.component.branch.SectionCarouselCard
+import com.google.accompanist.pager.ExperimentalPagerApi
+import com.tezov.bank.ui.component.block.SectionActionCard
+import com.tezov.bank.ui.component.block.SectionActionRow
+import com.tezov.bank.ui.component.block.SectionCarouselCard
+import com.tezov.bank.ui.component.block.SectionRollerCard
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -33,6 +35,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
+@OptIn(ExperimentalPagerApi::class)
 object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
 
     @Composable
@@ -75,17 +78,24 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                         .fillMaxWidth()
                 ) {
                     contentHeader(state.header)
-                    state.cardWithButtonData.value?.let {
+                    state.cardsWithButton.value?.let {
                         SectionCarouselCard(data = it, style = PageDiscoverTheme.styles.sectionCarouselCardButton){
 
                         }
                     }
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
-                    state.cardWithLinkData.value?.let {
+                    state.cardsWithLink.value?.let {
                         SectionCarouselCard(data = it, style = PageDiscoverTheme.styles.sectionCarouselCardLink){
 
                         }
                     }
+                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
+                    state.cashbacks.value?.let {
+                        SectionRollerCard(data = it, style = PageDiscoverTheme.styles.sectionRollerCard){
+
+                        }
+                    }
+                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
                     state.offers.value?.let {
                         SectionActionCard(data = it, style = PageDiscoverTheme.styles.sectionActionCard) {
 

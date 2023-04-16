@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 23:53
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 23:05
+ *  Last modified 16/04/2023 22:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,7 +10,7 @@
  *  *********************************************************************************
  */
 
-package com.tezov.bank.ui.component.branch
+package com.tezov.bank.ui.component.block
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -22,10 +22,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.bank.ui.component.leaf.ActionRow
+import com.tezov.bank.ui.component.element.ActionRow
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
@@ -38,7 +38,7 @@ object SectionActionRow {
         style: Style
     ) {
         var iconStyle = style.iconStyle
-        var outfitTextHeader = style.outfitTextHeader
+        var outfitTextTitle = style.outfitTextTitle
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
         var colorDivider = style.colorDivider
@@ -48,7 +48,7 @@ object SectionActionRow {
 
         fun get() = Style(
             iconStyle = iconStyle,
-            outfitTextHeader = outfitTextHeader,
+            outfitTextTitle = outfitTextTitle,
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
             colorDivider = colorDivider,
@@ -60,7 +60,7 @@ object SectionActionRow {
 
     class Style(
         iconStyle: Icon.Simple.Style? = null,
-        val outfitTextHeader: OutfitText.StateColor.Style? = null,
+        val outfitTextTitle: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
         val colorDivider: Color? = null,
@@ -96,7 +96,7 @@ object SectionActionRow {
 
         constructor(style: Style) : this(
             iconStyle = style.iconStyle,
-            outfitTextHeader = style.outfitTextHeader,
+            outfitTextTitle = style.outfitTextTitle,
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
             colorDivider = style.colorDivider,
@@ -108,7 +108,7 @@ object SectionActionRow {
     }
 
     data class Data(
-        val iconId: Int? = null,
+        val icon: Int? = null,
         val title: String? = null,
         val rows: List<ActionRow.Data>
     )
@@ -133,11 +133,11 @@ object SectionActionRow {
                         .fillMaxWidth()
                         .thenOnNotNull(style.colorBackgroundHeader) {
                             modifier.background(it)
-                        },
+                        }
+                        .padding(start = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.element.small.horizontal))
-                    data.iconId?.let {
+                    data.icon?.let {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
@@ -149,7 +149,7 @@ object SectionActionRow {
                     Text.StateColor(
                         modifier = Modifier.padding(vertical = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
                         text = text,
-                        style = style.outfitTextHeader
+                        style = style.outfitTextTitle
                     )
                 }
             }

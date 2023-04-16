@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 23:53
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 23:05
+ *  Last modified 16/04/2023 22:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,7 +10,7 @@
  *  *********************************************************************************
  */
 
-package com.tezov.bank.ui.component.branch
+package com.tezov.bank.ui.component.block
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -21,10 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.bank.ui.component.leaf.ActionCard
+import com.tezov.bank.ui.component.element.ActionCard
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable.loopOver
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
@@ -38,7 +38,7 @@ object SectionActionCard {
         style: Style
     ) {
         var iconStyle = style.iconStyle
-        var outfitTextHeader = style.outfitTextHeader
+        var outfitTextTitle = style.outfitTextTitle
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
         var paddingBody = style.paddingBody
@@ -46,7 +46,7 @@ object SectionActionCard {
 
         fun get() = Style(
             iconStyle = iconStyle,
-            outfitTextHeader = outfitTextHeader,
+            outfitTextTitle = outfitTextTitle,
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
             paddingBody = paddingBody,
@@ -56,7 +56,7 @@ object SectionActionCard {
 
     class Style(
         iconStyle: Icon.Simple.Style? = null,
-        val outfitTextHeader: OutfitText.StateColor.Style? = null,
+        val outfitTextTitle: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
         val paddingBody: Dp = 0.dp,
@@ -90,7 +90,7 @@ object SectionActionCard {
 
         constructor(style: Style) : this(
             iconStyle = style.iconStyle,
-            outfitTextHeader = style.outfitTextHeader,
+            outfitTextTitle = style.outfitTextTitle,
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
             paddingBody = style.paddingBody,
@@ -100,7 +100,7 @@ object SectionActionCard {
     }
 
     data class Data(
-        val iconId: Int? = null,
+        val icon: Int? = null,
         val title: String? = null,
         var template: ActionCard.Template = ActionCard.Template.Undefined,
         val cards: List<ActionCard.Data>
@@ -128,11 +128,11 @@ object SectionActionCard {
                         .thenOnNotNull(style.colorBackgroundHeader) {
                             headerHasBackground = true
                             background(it)
-                        },
+                        }
+                        .padding(start = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.element.small.horizontal))
-                    data.iconId?.let {
+                    data.icon?.let {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
@@ -144,7 +144,7 @@ object SectionActionCard {
                     Text.StateColor(
                         modifier = Modifier.padding(vertical = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
                         text = text,
-                        style = style.outfitTextHeader
+                        style = style.outfitTextTitle
                     )
                 }
                 if(headerHasBackground) {

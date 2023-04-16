@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 19/03/2023 22:02
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/02/2023 14:33
+ *  Last modified 16/04/2023 20:40
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,10 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.branch.SectionActionCard
-import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.component.leaf.ActionCard
-import com.tezov.bank.ui.component.leaf.ActionRow
+import com.tezov.bank.ui.component.block.SectionActionCard
+import com.tezov.bank.ui.component.block.SectionActionRow
+import com.tezov.bank.ui.component.element.ActionCard
+import com.tezov.bank.ui.component.element.ActionRow
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageHelpAndServiceState private constructor(
@@ -64,31 +64,31 @@ class PageHelpAndServiceState private constructor(
             cards = listOf(
                 ActionCard.Data(
                     title = "Opposer une carte",
-                    iconResourceId = R.drawable.ic_crisis_24dp
+                    iconInfo = R.drawable.ic_crisis_24dp
                 ),
                 ActionCard.Data(
                     title = "Contester un prélèvement",
-                    iconResourceId = R.drawable.ic_argue_24dp
+                    iconInfo = R.drawable.ic_argue_24dp
                 ),
                 ActionCard.Data(
                     title = "Suivre mon dossier",
-                    iconResourceId = R.drawable.ic_checklist_24dp
+                    iconInfo = R.drawable.ic_checklist_24dp
                 ),
                 ActionCard.Data(
                     title = "Trouver un distributeur",
-                    iconResourceId = R.drawable.ic_atm_24dp
+                    iconInfo = R.drawable.ic_atm_24dp
                 ),
                 ActionCard.Data(
                     title = "Retirer à l'étranger",
-                    iconResourceId = R.drawable.ic_explore_24dp
+                    iconInfo = R.drawable.ic_explore_24dp
                 ),
                 ActionCard.Data(
                     title = "Découvrir l'application",
-                    iconResourceId = R.drawable.ic_search_24dp
+                    iconInfo = R.drawable.ic_search_24dp
                 ),
                 ActionCard.Data(
                     title = "Accéder à l'assitance technique",
-                    iconResourceId = R.drawable.ic_help_24dp
+                    iconInfo = R.drawable.ic_help_24dp
                 ),
             )
         )
@@ -96,10 +96,10 @@ class PageHelpAndServiceState private constructor(
         contacts.value = SectionActionRow.Data(
             title = "CONTACTER LA HELLO TEAM",
             rows = listOf(
-                ActionRow.Data(title = "Appeler", iconInfoResourceId = R.drawable.ic_call_24dp),
+                ActionRow.Data(title = "Appeler", iconInfo = R.drawable.ic_call_24dp),
                 ActionRow.Data(
                     title = "Service sourds et malentendats",
-                    iconInfoResourceId = R.drawable.ic_hearing_disabled_24dp
+                    iconInfo = R.drawable.ic_hearing_disabled_24dp
                 ),
             )
         )

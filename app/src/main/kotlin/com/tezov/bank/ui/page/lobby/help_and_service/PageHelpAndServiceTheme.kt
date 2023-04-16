@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 17:05
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 16:05
+ *  Last modified 16/04/2023 22:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,14 +18,14 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import com.tezov.bank.ui.component.branch.SectionActionCard
-import com.tezov.bank.ui.component.branch.SectionActionCard.Style.Companion.copy
-import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.component.branch.SectionActionRow.Style.Companion.copy
-import com.tezov.bank.ui.component.leaf.ActionCard.Style.Companion.copy
-import com.tezov.bank.ui.component.leaf.ActionRow.Style.Companion.copy
+import com.tezov.bank.ui.component.block.SectionActionCard
+import com.tezov.bank.ui.component.block.SectionActionCard.Style.Companion.copy
+import com.tezov.bank.ui.component.block.SectionActionRow
+import com.tezov.bank.ui.component.block.SectionActionRow.Style.Companion.copy
+import com.tezov.bank.ui.component.element.ActionCard.Style.Companion.copy
+import com.tezov.bank.ui.component.element.ActionRow.Style.Companion.copy
 import com.tezov.bank.ui.theme.ThemeComponentProviders
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -111,9 +111,9 @@ object PageHelpAndServiceTheme {
 
     @Composable
     fun provideStyles() = Style(
-        sectionRow = ThemeComponentProviders.provideSectionActionRowStyle().copy {
+        sectionRow = ThemeComponentProviders.sectionActionRowStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-            outfitTextHeader = outfitTextHeader?.copy {
+            outfitTextTitle = outfitTextTitle?.copy {
                 outfitState = colors.neutral.asStateSimple
             }
             colorDivider = colors.fade
@@ -125,10 +125,10 @@ object PageHelpAndServiceTheme {
                 }
             }
         },
-        sectionCard = ThemeComponentProviders.provideSectionActionCardStyle().copy {
+        sectionCard = ThemeComponentProviders.sectionActionCardStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             iconStyle = iconStyle.copy { tint = colors.primary }
-            outfitTextHeader = outfitTextHeader?.copy {
+            outfitTextTitle = outfitTextTitle?.copy {
                 outfitState = colors.neutral.asStateSimple
             }
             actionCardStyle = actionCardStyle.copy {

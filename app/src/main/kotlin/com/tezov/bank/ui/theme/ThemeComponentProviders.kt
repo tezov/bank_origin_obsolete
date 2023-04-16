@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 17:05
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 16:59
+ *  Last modified 16/04/2023 22:11
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,30 +15,37 @@ package com.tezov.bank.ui.theme
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tezov.bank.ui.component.branch.SectionActionCard
-import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.component.branch.SectionCarouselCard
-import com.tezov.bank.ui.component.leaf.ActionCard
-import com.tezov.bank.ui.component.leaf.ActionRow
-import com.tezov.bank.ui.component.leaf.CarouselCard
+import com.tezov.bank.ui.component.block.SectionActionCard
+import com.tezov.bank.ui.component.block.SectionActionRow
+import com.tezov.bank.ui.component.block.SectionCarouselCard
+import com.tezov.bank.ui.component.block.SectionRollerCard
+import com.tezov.bank.ui.component.element.ActionCard
+import com.tezov.bank.ui.component.element.ActionRow
+import com.tezov.bank.ui.component.element.CarouselCard
+import com.tezov.bank.ui.component.element.RollerCard
 import com.tezov.bank.ui.theme.font.fontIbm
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
+import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
-import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
-import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable.Pager.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Button
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Button.StateColor.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Link
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Link.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
+import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager.Page.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller
+import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller.Page.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Image
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
@@ -190,22 +197,22 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun provideSectionActionRowStyle() = SectionActionRow.Style(
+    fun sectionActionRowStyle() = SectionActionRow.Style(
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
-        outfitTextHeader = MaterialTheme.typographiesExtended.title.normal.copy {
+        outfitTextTitle = MaterialTheme.typographiesExtended.title.normal.copy {
             outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
         },
         colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default,
         colorDivider = MaterialTheme.colorsExtended.primary.decor,
         sizeDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
-        actionRowStyle = provideActionRowStyle()
+        actionRowStyle = actionRowStyle()
     )
 
     @Composable
-    fun provideActionRowStyle() = ActionRow.Style(
+    fun actionRowStyle() = ActionRow.Style(
         iconInfoStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
@@ -220,22 +227,22 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun provideSectionActionCardStyle() = SectionActionCard.Style(
+    fun sectionActionCardStyle() = SectionActionCard.Style(
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
-        outfitTextHeader = MaterialTheme.typographiesExtended.title.huge.copy {
+        outfitTextTitle = MaterialTheme.typographiesExtended.title.huge.copy {
             outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
             typo = typo.copy(
                 fontWeight = FontWeight.Bold
             )
         },
-        actionCardStyle = provideActionCardStyle()
+        actionCardStyle = actionCardStyle()
     )
 
     @Composable
-    fun provideActionCardStyle() = ActionCard.Style(
+    fun actionCardStyle() = ActionCard.Style(
         outfitFrame = OutfitFrameStateColor(
             outfitShape = MaterialTheme.shapesExtended.element.normal,
             outfitBorder = MaterialTheme.bordersExtended.element.normal
@@ -256,7 +263,7 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun pagerStyle() = HorizontalScrollable.Pager.Style(
+    fun pagerStyle() = HorizontalPager.Page.Style(
         outfitShapeIndicator = OutfitShapeStateColor(
             outfitState = OutfitStateDual(
                 active = MaterialTheme.colorsExtended.primary.accent,
@@ -269,29 +276,28 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun provideSectionCarouselCardStyle(carouselStyle: HorizontalScrollable.Pager.Style, cardStyle:CarouselCard.Style.Base) = SectionCarouselCard.Style(
-        iconStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsIconExtended.info.normal,
-            tint = MaterialTheme.colorsExtended.primary.accent
-        ),
-        outfitTextHeader = MaterialTheme.typographiesExtended.title.huge.copy {
-            outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
-            typo = typo.copy(
-                fontWeight = FontWeight.Bold
-            )
-        },
-        carouselStyle = carouselStyle,
-        cardStyle = cardStyle,
-    )
+    fun sectionCarouselCardStyle(cardStyle: CarouselCard.Style.Base) =
+        SectionCarouselCard.Style(
+            iconStyle = Icon.Simple.Style(
+                size = MaterialTheme.dimensionsIconExtended.info.normal,
+                tint = MaterialTheme.colorsExtended.primary.accent
+            ),
+            outfitTextTitle = MaterialTheme.typographiesExtended.title.huge.copy {
+                outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
+                typo = typo.copy(
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            carouselStyle = pagerStyle().copy {
+                paddingContent =
+                    PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
+                spacingItem = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            },
+            cardStyle = cardStyle,
+        )
 
     @Composable
-    fun provideCarouselStyle() = pagerStyle().copy {
-        paddingContent = PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
-        spacingItem = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-    }
-
-    @Composable
-    fun provideCarouselCardButtonStyle() = CarouselCard.Style.Button(
+    fun carouselCardButtonStyle() = CarouselCard.Style.Button(
         baseStyle = CarouselCard.Style.Base(
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = MaterialTheme.shapesExtended.element.big,
@@ -304,7 +310,7 @@ object ThemeComponentProviders {
                 tint = MaterialTheme.colorsExtended.primary.accent.copy(alpha = 0.5f)
             ),
             outfitTextTitle = MaterialTheme.typographiesExtended.title.big.copy {
-                outfitState =  MaterialTheme.colorsExtended.primary.default.asStateSimple
+                outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
                 typo = typo.copy(fontWeight = FontWeight.Bold)
             },
             outfitTextBody = MaterialTheme.typographiesExtended.body.normal.copy {
@@ -320,9 +326,9 @@ object ThemeComponentProviders {
                 }
             ),
         ),
-        action = MaterialTheme.componentsButtonExtended.primary.copy{
-            outfitFrame = outfitFrame.copy{
-                outfitShape = MaterialTheme.shapesExtended.button.small.copy{
+        actionStyle = MaterialTheme.componentsButtonExtended.primary.copy {
+            outfitFrame = outfitFrame.copy {
+                outfitShape = MaterialTheme.shapesExtended.button.small.copy {
                     outfitState = MaterialTheme.colorsExtended.primary.accent.asStateSimple
                 }
             }
@@ -333,7 +339,7 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun provideCarouselCardLinkStyle() = CarouselCard.Style.Link(
+    fun carouselCardLinkStyle() = CarouselCard.Style.Link(
         baseStyle = CarouselCard.Style.Base(
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = MaterialTheme.shapesExtended.element.big.copy {
@@ -358,11 +364,70 @@ object ThemeComponentProviders {
                 }
             ),
         ),
-        action = MaterialTheme.componentsLinkExtended.primary.copy{
-            outfitText = outfitText.copy{
-                outfitState =  MaterialTheme.colorsExtended.primary.accent.asStateSimple
+        actionStyle = MaterialTheme.componentsLinkExtended.primary.copy {
+            outfitText = outfitText.copy {
+                outfitState = MaterialTheme.colorsExtended.primary.accent.asStateSimple
             }
         }
+    )
+
+    @Composable
+    fun rollerStyle() = HorizontalRoller.Page.Style(
+        heightItemToHighest = true
+    )
+
+    @Composable
+    fun sectionRollerCardStyle() =
+        SectionRollerCard.Style(
+            iconStyle = Icon.Simple.Style(
+                size = MaterialTheme.dimensionsIconExtended.info.normal,
+                tint = MaterialTheme.colorsExtended.primary.accent
+            ),
+            outfitTextTitle = MaterialTheme.typographiesExtended.title.huge.copy {
+                outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+                typo = typo.copy(
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            outfitTextSubTitle = MaterialTheme.typographiesExtended.title.normal.copy {
+                outfitState = MaterialTheme.colorsExtended.primary.accent.asStateSimple
+                typo = typo.copy(
+                    fontWeight = FontWeight.Bold
+                )
+            },
+            actionStyle = MaterialTheme.componentsButtonExtended.primary.copy{
+                outfitText = outfitText.copy{
+                    outfitState = MaterialTheme.colorsExtended.primary.shiny.asStateSimple
+                }
+                outfitFrame = outfitFrame.copy{
+                    outfitShape = outfitShape.copy{
+                        outfitState = MaterialTheme.colorsExtended.primary.accent.asStateSimple
+                    }
+                }
+            },
+            rollerStyle = rollerStyle().copy {
+                paddingContent =
+                    PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
+                spacingItem = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal
+            },
+            cardStyle = rollerCardStyle()
+        )
+
+    @Composable
+    fun rollerCardStyle() = RollerCard.Style(
+        outfitFrame = OutfitFrameStateColor(
+            outfitShape = MaterialTheme.shapesExtended.element.small,
+            outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
+                outfitState = MaterialTheme.colorsExtended.primary.decor.asStateSimple
+            },
+        ),
+        imageStyle = Image.Simple.Style(
+            size = 96.dpSize,
+            contentScale = ContentScale.FillBounds
+        ),
+        outfitTextTitle = MaterialTheme.typographiesExtended.body.small.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+        },
     )
 
 }

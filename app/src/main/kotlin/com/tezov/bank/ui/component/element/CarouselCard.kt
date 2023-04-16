@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 14:41
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 14:38
+ *  Last modified 16/04/2023 21:43
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,9 +10,8 @@
  *  *********************************************************************************
  */
 
-package com.tezov.bank.ui.component.leaf
+package com.tezov.bank.ui.component.element
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -23,21 +22,22 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Button as ButtonImport
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Link as LinkImport
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button as ButtonImport
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link as LinkImport
 
 
 object CarouselCard {
 
     object Style {
+
+        //todo margin pour quoi?????
 
         open class Base(
             margin: PaddingValues? = null,
@@ -136,11 +136,11 @@ object CarouselCard {
 
         class Button(
             baseStyle: Base? = null,
-            action: ButtonImport.StateColor.Style? = null,
+            actionStyle: ButtonImport.StateColor.Style? = null,
         ) : Base(baseStyle) {
 
-            val action: ButtonImport.StateColor.Style by DelegateNullFallBack.Ref(
-                action,
+            val actionStyle: ButtonImport.StateColor.Style by DelegateNullFallBack.Ref(
+                actionStyle,
                 fallBackValue = { ButtonImport.StateColor.Style() }
             )
 
@@ -149,11 +149,11 @@ object CarouselCard {
                 class Builder internal constructor(
                     style: Button
                 ) : Base.Companion.Builder(style) {
-                    var action = style.action
+                    var actionStyle = style.actionStyle
 
                     override fun get() = Button(
                         baseStyle = super.get(),
-                        action = action,
+                        actionStyle = actionStyle,
                     )
                 }
 
@@ -174,18 +174,18 @@ object CarouselCard {
 
             constructor(style: Button) : this(
                 baseStyle = style,
-                action = style.action,
+                actionStyle = style.actionStyle,
             )
 
         }
 
         class Link(
             baseStyle: Base? = null,
-            action: LinkImport.StateColor.Style? = null,
+            actionStyle: LinkImport.StateColor.Style? = null,
         ) : Base(baseStyle) {
 
-            val action: LinkImport.StateColor.Style by DelegateNullFallBack.Ref(
-                action,
+            val actionStyle: LinkImport.StateColor.Style by DelegateNullFallBack.Ref(
+                actionStyle,
                 fallBackValue = { LinkImport.StateColor.Style() }
             )
 
@@ -194,11 +194,11 @@ object CarouselCard {
                 class Builder internal constructor(
                     style: Link
                 ) : Base.Companion.Builder(style) {
-                    var action = style.action
+                    var actionStyle = style.actionStyle
 
                     override fun get() = Link(
                         baseStyle = super.get(),
-                        action = action,
+                        actionStyle = actionStyle,
                     )
                 }
 
@@ -219,7 +219,7 @@ object CarouselCard {
 
             constructor(style: Link) : this(
                 baseStyle = style,
-                action = style.action,
+                actionStyle = style.actionStyle,
             )
 
         }
@@ -227,7 +227,7 @@ object CarouselCard {
     }
 
     data class Data(
-        val iconInfoResourceId: Int? = null,
+        val iconInfo: Int? = null,
         val tag: String? = null,
         val title: String,
         val body: String,
@@ -307,11 +307,11 @@ object CarouselCard {
                     Spacer(modifier = Modifier.width(0.dp).weight(1f))
                     ButtonImport.StateColor(
                         text = data.action,
-                        style = style.action,
+                        style = style.actionStyle,
                         onClick = onClick,
                     )
                 }
-                data.iconInfoResourceId?.let {
+                data.iconInfo?.let {
                     Icon.Simple(
                         modifier = Modifier.align(Alignment.Top),
                         resourceId = it,
@@ -357,7 +357,7 @@ object CarouselCard {
                     }
                 }
                 Row {
-                    data.iconInfoResourceId?.let {
+                    data.iconInfo?.let {
                         Icon.Simple(
                             modifier = Modifier.padding(end = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal),
                             resourceId = it,
@@ -380,7 +380,7 @@ object CarouselCard {
                 Spacer(modifier = Modifier.width(0.dp).weight(1f))
                 LinkImport.StateColor(
                     text = data.action,
-                    style = style.action,
+                    style = style.actionStyle,
                     onClick = onClick
                 )
 

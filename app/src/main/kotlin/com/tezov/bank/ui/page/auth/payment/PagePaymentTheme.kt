@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 18:10
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:06
+ *  Last modified 16/04/2023 22:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,16 +18,15 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tezov.bank.ui.component.branch.SectionActionCard
-import com.tezov.bank.ui.component.branch.SectionActionCard.Style.Companion.copy
-import com.tezov.bank.ui.component.leaf.ActionCard.Style.Companion.copy
+import com.tezov.bank.ui.component.block.SectionActionCard
+import com.tezov.bank.ui.component.block.SectionActionCard.Style.Companion.copy
+import com.tezov.bank.ui.component.element.ActionCard.Style.Companion.copy
 import com.tezov.bank.ui.theme.ThemeComponentProviders
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon.Simple.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.cluster.ColumnCollapsibleHeader
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -129,10 +128,10 @@ object PagePaymentTheme {
 
     @Composable
     fun provideStyles() = Style(
-        sectionCard = ThemeComponentProviders.provideSectionActionCardStyle().copy {
+        sectionCard = ThemeComponentProviders.sectionActionCardStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             iconStyle = iconStyle.copy { tint = colors.primary }
-            outfitTextHeader = outfitTextHeader?.copy {
+            outfitTextTitle = outfitTextTitle?.copy {
                 outfitState = colors.primary.asStateSimple
             }
             actionCardStyle = actionCardStyle.copy {

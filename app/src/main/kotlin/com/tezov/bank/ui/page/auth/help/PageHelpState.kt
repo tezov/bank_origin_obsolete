@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 23:53
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 23:05
+ *  Last modified 16/04/2023 20:40
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,8 +15,8 @@ package com.tezov.bank.ui.page.auth.help
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.branch.SectionActionRow
-import com.tezov.bank.ui.component.leaf.ActionRow
+import com.tezov.bank.ui.component.block.SectionActionRow
+import com.tezov.bank.ui.component.element.ActionRow
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageHelpState private constructor(
@@ -70,7 +70,7 @@ class PageHelpState private constructor(
 
         emergencies.value = SectionActionRow.Data(
             title = "Urgence",
-            iconId = R.drawable.ic_call_24dp,
+            icon = R.drawable.ic_call_24dp,
             rows = listOf(
                 ActionRow.Data(title = "Paiment carte ou retrait refusé"),
                 ActionRow.Data(title = "Perte ou vol de ma carte"),
@@ -83,7 +83,7 @@ class PageHelpState private constructor(
 
         paymentModes.value = SectionActionRow.Data(
             title = "Moyens de paiment",
-            iconId = R.drawable.ic_call_24dp,
+            icon = R.drawable.ic_call_24dp,
             rows = listOf(
                 ActionRow.Data(title = "Carte bancaire"),
                 ActionRow.Data(title = "Virement"),
@@ -94,7 +94,7 @@ class PageHelpState private constructor(
 
         configuration.value = SectionActionRow.Data(
             title = "Profile, paramétres et sécurité",
-            iconId = R.drawable.ic_call_24dp,
+            icon = R.drawable.ic_call_24dp,
             rows = listOf(
                 ActionRow.Data(title = "Clé Digitale"),
                 ActionRow.Data(title = "Adresse postale"),
@@ -106,7 +106,7 @@ class PageHelpState private constructor(
 
         account.value = SectionActionRow.Data(
             title = "Comptes, épargnes, crédit, assurance",
-            iconId = R.drawable.ic_call_24dp,
+            icon = R.drawable.ic_call_24dp,
             rows = listOf(
                 ActionRow.Data(title = "Relevés, RIB"),
                 ActionRow.Data(title = "Ouverture de compte individuel"),
@@ -121,7 +121,7 @@ class PageHelpState private constructor(
 
         misc.value = SectionActionRow.Data(
             title = "Autres",
-            iconId = R.drawable.ic_call_24dp,
+            icon = R.drawable.ic_call_24dp,
             rows = listOf(
                 ActionRow.Data(title = "Parrainage"),
                 ActionRow.Data(title = "Signaler un problème technique"),

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 14/04/2023 22:46
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 14/04/2023 20:22
+ *  Last modified 16/04/2023 20:17
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,7 +10,7 @@
  *  *********************************************************************************
  */
 
-package com.tezov.bank.ui.component.leaf
+package com.tezov.bank.ui.component.element
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -23,8 +23,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
@@ -94,9 +94,9 @@ object ActionRow {
     }
 
     class Data(
-        val iconInfoResourceId: Int? = null,
+        val iconInfo: Int? = null,
         val title: String,
-        val iconActionResourceId: Int = R.drawable.ic_arrow_cut_right_24dp,
+        val iconAction: Int = R.drawable.ic_arrow_cut_right_24dp,
     )
 
     @Composable
@@ -115,7 +115,7 @@ object ActionRow {
                 .clickable { onClick() },
             verticalAlignment = Alignment.CenterVertically
         ) {
-            data.iconInfoResourceId?.let {
+            data.iconInfo?.let {
                 Icon.Simple(
                     style = style.iconInfoStyle,
                     resourceId = it,
@@ -134,7 +134,7 @@ object ActionRow {
             )
             Icon.Simple(
                 style = style.iconActionStyle,
-                resourceId = data.iconActionResourceId,
+                resourceId = data.iconAction,
                 description = data.title,
             )
         }

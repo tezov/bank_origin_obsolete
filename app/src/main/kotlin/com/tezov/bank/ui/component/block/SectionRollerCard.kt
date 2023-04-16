@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 17:05
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 16:32
+ *  Last modified 16/04/2023 22:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,10 +10,11 @@
  *  *********************************************************************************
  */
 
-package com.tezov.bank.ui.component.branch
+package com.tezov.bank.ui.component.block
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -21,45 +22,52 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.tezov.bank.ui.component.leaf.CarouselCard
+import com.tezov.bank.ui.component.element.RollerCard
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
-import com.tezov.lib_core_android_kotlin.ui.component.branch.HorizontalScrollable
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
+import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
-object SectionCarouselCard {
+object SectionRollerCard {
 
     class StyleBuilder internal constructor(
         style: Style
     ) {
         var iconStyle = style.iconStyle
-        var outfitTextHeader = style.outfitTextHeader
+        var outfitTextTitle = style.outfitTextTitle
+        var outfitTextSubTitle = style.outfitTextSubTitle
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
-        var carouselStyle = style.carouselStyle
+        var actionStyle = style.actionStyle
+        var rollerStyle = style.rollerStyle
         var cardStyle = style.cardStyle
 
         fun get() = Style(
             iconStyle = iconStyle,
-            outfitTextHeader = outfitTextHeader,
+            outfitTextTitle = outfitTextTitle,
+            outfitTextSubTitle = outfitTextSubTitle,
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
-            carouselStyle = carouselStyle,
+            actionStyle = actionStyle,
+            rollerStyle = rollerStyle,
             cardStyle = cardStyle,
         )
     }
 
     class Style(
         iconStyle: Icon.Simple.Style? = null,
-        val outfitTextHeader: OutfitText.StateColor.Style? = null,
+        val outfitTextTitle: OutfitText.StateColor.Style? = null,
+        val outfitTextSubTitle: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
-        carouselStyle: HorizontalScrollable.Pager.Style? = null,
-        cardStyle: CarouselCard.Style.Base? = null
+        actionStyle: Button.StateColor.Style? = null,
+        rollerStyle: HorizontalRoller.Page.Style? = null,
+        cardStyle: RollerCard.Style? = null
     ) {
 
         val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
@@ -71,13 +79,17 @@ object SectionCarouselCard {
                 )
             }
         )
-        val carouselStyle: HorizontalScrollable.Pager.Style by DelegateNullFallBack.Ref(
-            carouselStyle,
-            fallBackValue = { HorizontalScrollable.Pager.Style() }
+        val actionStyle: Button.StateColor.Style by DelegateNullFallBack.Ref(
+            actionStyle,
+            fallBackValue = { Button.StateColor.Style() }
         )
-        val cardStyle: CarouselCard.Style.Base by DelegateNullFallBack.Ref(
+        val rollerStyle: HorizontalRoller.Page.Style by DelegateNullFallBack.Ref(
+            rollerStyle,
+            fallBackValue = { HorizontalRoller.Page.Style() }
+        )
+        val cardStyle: RollerCard.Style by DelegateNullFallBack.Ref(
             cardStyle,
-            fallBackValue = { CarouselCard.Style.Button() }
+            fallBackValue = { RollerCard.Style() }
         )
 
         companion object {
@@ -93,27 +105,33 @@ object SectionCarouselCard {
 
         constructor(style: Style) : this(
             iconStyle = style.iconStyle,
-            outfitTextHeader = style.outfitTextHeader,
+            outfitTextTitle = style.outfitTextTitle,
+            outfitTextSubTitle = style.outfitTextSubTitle,
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
-            carouselStyle = style.carouselStyle,
+            actionStyle = style.actionStyle,
+            rollerStyle = style.rollerStyle,
             cardStyle = style.cardStyle,
         )
 
     }
 
     data class Data(
-        val iconId: Int? = null,
+        val icon: Int? = null,
         val title: String? = null,
-        val cards: List<CarouselCard.Data>
+        val subTitle: String? = null,
+        val action: String? = null,
+        val cards: List<RollerCard.Data>
     )
+
 
     @Composable
     operator fun invoke(
         modifier: Modifier = Modifier,
         style: Style,
         data: Data,
-        onClick: (Int) -> Unit = {}
+        onClickCard: ((Int) -> Unit)? = null,
+        onClickButton: () -> Unit = {}
     ) {
         if (data.cards.isEmpty()) {
             return
@@ -128,11 +146,11 @@ object SectionCarouselCard {
                         .fillMaxWidth()
                         .thenOnNotNull(style.colorBackgroundHeader) {
                             modifier.background(it)
-                        },
+                        }
+                        .padding(start = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Spacer(modifier = modifier.width(MaterialTheme.dimensionsPaddingExtended.element.small.horizontal))
-                    data.iconId?.let {
+                    data.icon?.let {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
@@ -144,9 +162,20 @@ object SectionCarouselCard {
                     Text.StateColor(
                         modifier = Modifier.padding(vertical = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
                         text = text,
-                        style = style.outfitTextHeader
+                        style = style.outfitTextTitle
                     )
                 }
+            }
+            data.subTitle?.let { text ->
+                Text.StateColor(
+                    modifier = Modifier
+                        .padding(
+                            start = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal,
+                            bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical
+                        ),
+                    text = text,
+                    style = style.outfitTextSubTitle
+                )
             }
             Box(
                 modifier = Modifier
@@ -156,27 +185,40 @@ object SectionCarouselCard {
                     },
             ) {
                 val cards = remember(data.cards) {
-                    (ArrayList<@Composable () -> Unit>()).apply {
-                        data.cards.forEach { card ->
+                    (ArrayList<@Composable LazyItemScope.() -> Unit>()).apply {
+                        data.cards.forEachIndexed { index, card ->
                             add {
-                                CarouselCard(
+                                RollerCard(
                                     modifier = Modifier.fillMaxSize(),
                                     data = card,
-                                    style = style.cardStyle
+                                    style = style.cardStyle,
+                                    onClick = onClickCard?.let { { it(index) } }
                                 )
                             }
                         }
                     }
                 }
-                HorizontalScrollable.Pager(
+                HorizontalRoller.Page(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    style = style.carouselStyle,
-                    pages = cards
-                ) {
-                    onClick(it)
-                }
+                    style = style.rollerStyle,
+                    items = cards,
+                )
             }
+            data.action?.let {
+                Button.StateColor(
+                    modifierButton = Modifier
+                        .fillMaxWidth(0.7f)
+                        .align(Alignment.CenterHorizontally)
+                        .padding(
+                            top = MaterialTheme.dimensionsPaddingExtended.element.big.vertical
+                        ),
+                    text = data.action,
+                    style = style.actionStyle,
+                    onClick = onClickButton,
+                )
+            }
+
         }
     }
 

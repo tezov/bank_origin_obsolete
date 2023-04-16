@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 21:03
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 20:52
+ *  Last modified 16/04/2023 21:58
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -58,6 +58,11 @@ object ThemeTypographyProviders {
                 fontFamily = MaterialTheme.fontIbm,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 16.sp
+            ).asTextStateColor,
+            small = TextStyle(
+                fontFamily = MaterialTheme.fontIbm,
+                fontWeight = FontWeight.SemiBold,
+                fontSize = 12.sp
             ).asTextStateColor
         ),
         subtitle = OutfitPaletteSize(

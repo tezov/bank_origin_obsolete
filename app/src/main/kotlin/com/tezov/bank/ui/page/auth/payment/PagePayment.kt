@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 18:10
+ *  Created by Tezov on 16/04/2023 22:13
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:09
+ *  Last modified 16/04/2023 18:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,12 +20,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
-import com.tezov.bank.ui.component.branch.SectionActionCard
+import com.tezov.bank.ui.component.block.SectionActionCard
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Shadow
-import com.tezov.lib_core_android_kotlin.ui.component.plain.Text
-import com.tezov.lib_core_android_kotlin.ui.component.tree.ColumnCollapsibleHeader
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Shadow
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
+import com.tezov.lib_core_android_kotlin.ui.component.cluster.ColumnCollapsibleHeader
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
