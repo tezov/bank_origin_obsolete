@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 23:53
+ *  Created by Tezov on 16/04/2023 14:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 23:47
+ *  Last modified 16/04/2023 14:34
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,17 +12,20 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.branch
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.fillMaxHeightAuto
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.fillMaxHeightRemembered
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.then
+import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnTrue
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
@@ -41,6 +44,7 @@ object HorizontalScrollable {
             var paddingTopIndicator = style.paddingTopIndicator
             var spacingIndicator = style.spacingIndicator
             var paddingContent = style.paddingContent
+            var pageHeightToHeighest = style.pageHeightToHeighest
 
             internal open fun get() = Style(
                 outfitShapeIndicator = outfitShapeIndicator,
@@ -49,6 +53,7 @@ object HorizontalScrollable {
                 paddingTopIndicator = paddingTopIndicator,
                 spacingIndicator = spacingIndicator,
                 paddingContent = paddingContent,
+                pageHeightToHeighest = pageHeightToHeighest,
             )
         }
 
@@ -59,6 +64,7 @@ object HorizontalScrollable {
             sizeIndicator: Dp? = null,
             spacingIndicator: Dp? = null,
             paddingContent: PaddingValues? = null,
+            pageHeightToHeighest: Boolean? = null,
         ) {
 
             val outfitShapeIndicator: OutfitShapeStateColor by DelegateNullFallBack.Ref(
@@ -84,6 +90,9 @@ object HorizontalScrollable {
             val paddingContent: PaddingValues by DelegateNullFallBack.Ref(
                 paddingContent,
                 fallBackValue = { PaddingValues() })
+            val pageHeightToHeighest: Boolean by DelegateNullFallBack.Ref(
+                pageHeightToHeighest,
+                fallBackValue = { false })
 
             companion object {
 
@@ -102,6 +111,7 @@ object HorizontalScrollable {
                 paddingTopIndicator = style?.paddingTopIndicator,
                 paddingContent = style?.paddingContent,
                 spacingItem = style?.spacingItem,
+                pageHeightToHeighest = style?.pageHeightToHeighest,
             )
         }
 
@@ -114,42 +124,41 @@ object HorizontalScrollable {
             pages: List<@Composable () -> Unit>,
             onPageChange: (pageIndex: Int) -> Unit = {}
         ) {
-            val minHeightState = remember {
-                mutableStateOf(Dp.Unspecified)
-            }
             val pagerState = rememberPagerState()
             Column(
                 modifier = modifier
             ) {
                 HorizontalPager(
+                    modifier = Modifier
+                        .thenOnTrue(style.pageHeightToHeighest){
+                            fillMaxHeightRemembered()
+                        },
                     count = pages.size,
                     state = pagerState,
                     contentPadding = style.paddingContent,
                     itemSpacing = style.spacingItem,
                 ) { pageIndex ->
-                    Box(modifier = Modifier.fillMaxHeightAuto(minHeightState).background(Color.Red)){
-                        pages[pageIndex].invoke()
-                    }
+                    pages[pageIndex].invoke()
                 }
-//                style.outfitShapeIndicator.let {
-//                    HorizontalPagerIndicator(
-//                        pagerState = pagerState,
-//                        modifier = Modifier
-//                            .padding(top = style.paddingTopIndicator)
-//                            .align(Alignment.CenterHorizontally),
-//                        indicatorWidth = style.sizeIndicator,
-//                        indicatorHeight = style.sizeIndicator,
-//                        spacing = style.spacingIndicator,
-//                        activeColor = it.resolveColor(OutfitState.Dual.Selector.Enabled)
-//                            ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
-//                        inactiveColor = it.resolveColor(OutfitState.Dual.Selector.Disabled)
-//                            ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
-//                                .copy(
-//                                    ContentAlpha.disabled
-//                                ),
-//                        indicatorShape = it.getShape() ?: CircleShape
-//                    )
-//                }
+                style.outfitShapeIndicator.let {
+                    HorizontalPagerIndicator(
+                        pagerState = pagerState,
+                        modifier = Modifier
+                            .padding(top = style.paddingTopIndicator)
+                            .align(Alignment.CenterHorizontally),
+                        indicatorWidth = style.sizeIndicator,
+                        indicatorHeight = style.sizeIndicator,
+                        spacing = style.spacingIndicator,
+                        activeColor = it.resolveColor(OutfitState.Dual.Selector.Enabled)
+                            ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
+                        inactiveColor = it.resolveColor(OutfitState.Dual.Selector.Disabled)
+                            ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
+                                .copy(
+                                    ContentAlpha.disabled
+                                ),
+                        indicatorShape = it.getShape() ?: CircleShape
+                    )
+                }
             }
             LaunchedEffect(pagerState) {
                 snapshotFlow { pagerState.currentPage }.collect { pageIndex ->

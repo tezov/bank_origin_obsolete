@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 23:53
+ *  Created by Tezov on 16/04/2023 14:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 23:52
+ *  Last modified 16/04/2023 14:38
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -304,6 +304,7 @@ object CarouselCard {
                         text = data.body,
                         style = style.outfitTextBody,
                     )
+                    Spacer(modifier = Modifier.width(0.dp).weight(1f))
                     ButtonImport.StateColor(
                         text = data.action,
                         style = style.action,
@@ -376,6 +377,7 @@ object CarouselCard {
                     text = data.body,
                     style = style.outfitTextBody,
                 )
+                Spacer(modifier = Modifier.width(0.dp).weight(1f))
                 LinkImport.StateColor(
                     text = data.action,
                     style = style.action,

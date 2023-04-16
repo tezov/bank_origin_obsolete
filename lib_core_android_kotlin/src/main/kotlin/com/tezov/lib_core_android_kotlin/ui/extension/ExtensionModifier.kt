@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 23:53
+ *  Created by Tezov on 16/04/2023 14:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 23:52
+ *  Last modified 16/04/2023 14:34
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,10 +12,10 @@
 
 package com.tezov.lib_core_android_kotlin.ui.extension
 
-import android.util.Log
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,24 +24,29 @@ import androidx.compose.ui.composed
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionDensity.toDp
 
 object ExtensionModifier {
 
+    fun Modifier.thenOnTrue(
+        condition: Boolean,
+        block: Modifier.() -> Modifier
+    ) = then(condition, onTrue = block)
+
+    fun Modifier.thenOnFalse(
+        condition: Boolean,
+        block: Modifier.() -> Modifier
+    ) = then(condition, onFalse = block)
+
     fun Modifier.then(
         condition: Boolean,
-        onTrue: Modifier.() -> Modifier,
+        onTrue: (Modifier.() -> Modifier)? = null,
         onFalse: (Modifier.() -> Modifier)? = null
-    ): Modifier {
-        return if (condition) {
-            then(onTrue())
-        } else if (onFalse != null) {
-            then(onFalse())
-        } else {
-            this
-        }
-    }
+    ) = (if(condition){
+        onTrue?.let { then(it()) }
+    } else{
+        onFalse?.let { then(it()) }
+    }) ?: this
 
     fun <T : Any> Modifier.thenOnNotNull(
         condition: T?,
@@ -72,18 +77,36 @@ object ExtensionModifier {
         ) {}
     }
 
-
-    fun Modifier.fillMaxHeightAuto(minHeightState:MutableState<Dp>) = composed {
+    fun Modifier.updateToMaxHeight(heightState: MutableState<Dp>) = composed {
         val density = LocalDensity.current.density
-        onSizeChanged {size ->
+        onSizeChanged { size ->
             val itemHeight = size.height.toDp(density)
-            with(minHeightState.value){
-                if(this == Dp.Unspecified || itemHeight > this){
-                    minHeightState.value = itemHeight
+            with(heightState.value) {
+                if (this == Dp.Unspecified || itemHeight > this) {
+                    heightState.value = itemHeight
                 }
             }
-        }.defaultMinSize(minHeight = minHeightState.value)
+        }
     }
 
+    fun Modifier.fillMaxHeight(heightState: MutableState<Dp>) =
+        updateToMaxHeight(heightState).height(heightState.value)
+
+    fun Modifier.fillMaxHeightRemembered() = composed {
+        val heightState = remember {
+            mutableStateOf(Dp.Unspecified)
+        }
+        fillMaxHeight(heightState)
+    }
+
+    fun Modifier.fillDefaultMinHeight(heightState: MutableState<Dp>) =
+        updateToMaxHeight(heightState).defaultMinSize(minHeight = heightState.value)
+
+    fun Modifier.fillDefaultMinHeightRemembered() = composed {
+        val heightState = remember {
+            mutableStateOf(Dp.Unspecified)
+        }
+        fillDefaultMinHeight(heightState)
+    }
 
 }

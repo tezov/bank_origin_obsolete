@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 23:53
+ *  Created by Tezov on 16/04/2023 14:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 23:05
+ *  Last modified 16/04/2023 14:35
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -149,6 +149,7 @@ object PageDiscoverTheme {
     fun provideStyles() = Style(
         carousel = ThemeComponentProviders.provideCarouselStyle().copy {
             paddingTopIndicator = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical
+            pageHeightToHeighest = true
         },
         cardButton = CarouselCard.Style.Button(
             baseStyle = CarouselCard.Style.Base(

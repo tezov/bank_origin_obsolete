@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 23:53
+ *  Created by Tezov on 16/04/2023 14:41
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 23:05
+ *  Last modified 16/04/2023 13:50
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -95,7 +95,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 .fillMaxSize()
                 .background(PageLoginTheme.colors.background)
                 .padding(innerPadding)
-                .padding(MaterialTheme.dimensionsPaddingExtended.page.huge)
+                .padding(vertical = MaterialTheme.dimensionsPaddingExtended.page.huge.vertical)
         ) {
             ContentHeader(
                 iconState = state.iconState,
@@ -130,7 +130,9 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
         onClickDropDownMenu: (id: Int) -> Unit
     ) {
         Row(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.page.huge.horizontal),
             verticalAlignment = Alignment.CenterVertically
         ) {
             Box(
@@ -208,7 +210,8 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
             pages = arrayListOf(
                 {
                     Column(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .fillMaxSize(),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
@@ -227,7 +230,8 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 },
                 {
                     Column(
-                        modifier = Modifier.fillMaxSize(),
+                        modifier = Modifier
+                            .fillMaxSize(),
                         verticalArrangement = Arrangement.Center,
                         horizontalAlignment = Alignment.CenterHorizontally
                     ) {
@@ -260,7 +264,9 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
         onClickHelpAndService: () -> Unit,
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.page.huge.horizontal),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Button.StateColor(
