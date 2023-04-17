@@ -1,7 +1,13 @@
 
 Faire modal oui/non
 
-
 - IconButton remove padding same button (PageLogin)
+- Clickable button aussi
+- roller text push height
+- scroll end blanc visible sous le bleu
+- solution action row padding / ripple ?
+- roller image fit ?
+- paiment lyf / paypal / paylib image et non icon avec un color filter specifique
+
 - componentManager, is there a way to not destroy if screen is supposed to be behind ??? Same LocalPage in Module
 
