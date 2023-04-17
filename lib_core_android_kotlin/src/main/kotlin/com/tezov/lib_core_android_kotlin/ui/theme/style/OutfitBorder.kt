@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 11:25
+ *  Created by Tezov on 17/04/2023 21:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 10:07
+ *  Last modified 17/04/2023 21:25
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,33 +14,34 @@ package com.tezov.lib_core_android_kotlin.ui.theme.style
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.border
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
 fun Modifier.border(
-    style: OutfitBorder.StateColor.Style,
+    style: OutfitBorder.StateColor.Style?,
     selector: Any? = null,
     sketch: OutfitShape.Sketch? = null
-) = style.resolve(selector)?.let { border ->
-    return sketch?.let {
-        border(border, sketch.shape).clip(sketch.shape)
-    } ?: kotlin.run {
-        border(border)
-    }
-} ?: this
+) = border(style?.resolve(selector), sketch)
 
 fun Modifier.border(
-    styleBorder: OutfitBorder.StateColor.Style,
-    styleShape: OutfitShape.StateColor.Style,
+    styleBorder: OutfitBorder.StateColor.Style?,
+    styleShape: OutfitShape.StateColor.Style?,
     selector: Any? = null,
-) = styleBorder.resolve(selector)?.let { border ->
-    styleShape.resolve(selector)?.let { shape ->
-        border(border, shape.shape)
-    } ?: run {
+) = border(styleBorder?.resolve(selector), styleShape?.resolve(selector))
+
+fun Modifier.border(
+    border: BorderStroke?,
+    sketch: OutfitShape.Sketch? = null
+) = border?.let {
+    sketch?.let {
+        clip(sketch.shape).border(border, sketch.shape)
+    } ?: kotlin.run {
         border(border)
     }
 } ?: this

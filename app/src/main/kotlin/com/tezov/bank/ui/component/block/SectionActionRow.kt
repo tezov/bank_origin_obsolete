@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 17/04/2023 21:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 22:08
+ *  Last modified 17/04/2023 20:21
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,7 +26,7 @@ import com.tezov.bank.ui.component.element.ActionRow
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
+import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
@@ -158,15 +158,14 @@ object SectionActionRow {
                     .fillMaxWidth()
                     .thenOnNotNull(style.colorBackgroundBody) {
                         background(it)
-                    },
+                    }
+                    .padding(
+                        horizontal = style.paddingBody,
+                        vertical = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
             ) {
                 data.rows.forEachIndexed { index, row ->
                     ActionRow(
-                        modifier = Modifier
-                            .padding(
-                                horizontal = style.paddingBody
-                            ),
                         data = row, style = style.actionRowStyle
                     ) {
                         onClick(index)

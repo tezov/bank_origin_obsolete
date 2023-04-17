@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 17/04/2023 21:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 20:40
+ *  Last modified 17/04/2023 20:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,10 +14,12 @@ package com.tezov.bank.ui.component.element
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
@@ -30,6 +32,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.S
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object ActionCard {
@@ -149,7 +152,6 @@ object ActionCard {
     ) {
         Column(
             modifier = modifier
-                .border(style.outfitFrame)
                 .background(style.outfitFrame)
                 .clickable { onClick() }
                 .padding(MaterialTheme.dimensionsPaddingExtended.element.normal)
@@ -185,7 +187,6 @@ object ActionCard {
     ) {
         Column(
             modifier = modifier
-                .border(style.outfitFrame)
                 .background(style.outfitFrame)
                 .clickable {
                     onClick()
@@ -236,7 +237,6 @@ object ActionCard {
         Row(
             modifier = modifier
                 .fillMaxWidth()
-                .border(style.outfitFrame)
                 .background(style.outfitFrame)
                 .clickable { onClick() }
                 .padding(MaterialTheme.dimensionsPaddingExtended.element.normal),

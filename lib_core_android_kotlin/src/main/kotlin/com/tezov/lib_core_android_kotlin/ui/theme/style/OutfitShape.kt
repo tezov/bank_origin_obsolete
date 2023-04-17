@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 17/04/2023 21:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 17/04/2023 20:45
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,9 +25,13 @@ import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
 fun Modifier.background(
-    style: OutfitShape.StateColor.Style,
+    style: OutfitShape.StateColor.Style?,
     selector: Any? = null
-) = style.resolve(selector)?.takeIf { it.color != null }?.let { background(it.color!!, it.shape) }
+) = background(style?.resolve(selector))
+
+fun Modifier.background(
+    sketch: OutfitShape.Sketch?
+) = sketch?.takeIf { it.color != null }?.let { background(it.color!!, it.shape) }
     ?: this
 
 typealias OutfitShapeStateColor = OutfitShape.StateColor.Style

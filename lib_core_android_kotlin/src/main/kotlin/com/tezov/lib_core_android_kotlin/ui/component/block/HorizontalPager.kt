@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 17/04/2023 21:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 20:40
+ *  Last modified 17/04/2023 19:09
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,6 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.block
 
-import android.media.midi.MidiDevice.MidiConnection
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -24,8 +23,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.fillMaxHeightRemembered
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnTrue
+import com.tezov.lib_core_android_kotlin.ui.modifier.fillMaxHeightRemembered
+import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnTrue
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor

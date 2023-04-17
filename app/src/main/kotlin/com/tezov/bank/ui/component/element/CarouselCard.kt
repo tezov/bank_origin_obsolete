@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 17/04/2023 21:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 21:43
+ *  Last modified 17/04/2023 21:25
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -280,7 +280,6 @@ object CarouselCard {
                         Column(
                             modifier = Modifier
                                 .padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical)
-                                .border(style.outfitFrameTag)
                                 .background(style.outfitFrameTag)
                         ) {
                             Text.StateColor(
@@ -343,7 +342,6 @@ object CarouselCard {
                     Column(
                         modifier = Modifier
                             .padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical)
-                            .border(style.outfitFrameTag)
                             .background(style.outfitFrameTag)
                     ) {
                         Text.StateColor(

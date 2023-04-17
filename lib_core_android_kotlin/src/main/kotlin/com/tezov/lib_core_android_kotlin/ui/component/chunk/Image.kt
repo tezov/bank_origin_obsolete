@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 17/04/2023 21:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:13
+ *  Last modified 17/04/2023 20:45
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,7 +23,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.size
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionModifier.thenOnNotNull
+import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -166,9 +166,7 @@ object Image {
             Image(
                 modifier = modifier
                     .thenOnNotNull(style.size, Modifier::size)
-                    .thenOnNotNull(style.outfitFrame) {
-                        border(it, selector).background(it, selector)
-                    },
+                    .background(style.outfitFrame, selector),
                 painter = painter,
                 colorFilter = style.tint?.let { ColorFilter.tint(it) },
                 contentDescription = description,

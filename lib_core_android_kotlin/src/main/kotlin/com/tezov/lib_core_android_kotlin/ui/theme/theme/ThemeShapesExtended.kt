@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 15:37
+ *  Created by Tezov on 17/04/2023 21:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 14:59
+ *  Last modified 17/04/2023 18:32
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,12 +12,14 @@
 
 package com.tezov.lib_core_android_kotlin.ui.theme.theme
 
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
@@ -43,6 +45,7 @@ object ThemeShapesExtended {
         chunk: OutfitPaletteSize<OutfitShapeStateColor>? = null,
         button: OutfitPaletteSize<OutfitShapeStateColor>? = null,
         icon: OutfitPaletteSize<OutfitShapeStateColor>? = null,
+        clip: OutfitPaletteSize<Shape>? = null,
     ) {
 
         private val delegates =
@@ -53,6 +56,9 @@ object ThemeShapesExtended {
         val chunk: OutfitPaletteSize<OutfitShapeStateColor> by delegates.ref(chunk)
         val button: OutfitPaletteSize<OutfitShapeStateColor> by delegates.ref(button)
         val icon: OutfitPaletteSize<OutfitShapeStateColor> by delegates.ref(icon)
+        val clip: OutfitPaletteSize<Shape> by DelegateNullFallBack.Ref(clip, fallBackValue = {
+            OutfitPaletteSize(normal = RoundedCornerShape(4.dp))
+        })
 
         init {
             delegates.fallBackValue = {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 16:15
+ *  Created by Tezov on 17/04/2023 21:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 14:21
+ *  Last modified 17/04/2023 21:25
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,17 +14,26 @@ package com.tezov.lib_core_android_kotlin.ui.theme.style
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import com.tezov.lib_core_android_kotlin.ui.modifier.then
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
-
-fun Modifier.border(
-    style: OutfitFrame.StateColor.Style,
-    selector: Any? = null
-) = border(style.outfitBorder, selector, style.outfitShape.resolve(selector))
 
 fun Modifier.background(
     style: OutfitFrame.StateColor.Style,
     selector: Any? = null
-) = background(style.outfitShape, selector)
+): Modifier {
+    val sketch = style.outfitShape.resolve(selector)
+    val border = style.outfitBorder.resolve(selector)
+    return if(border != null){
+        border(border, sketch).background(sketch)
+    }
+    else if(sketch != null){
+        clip(sketch.shape).background(sketch)
+    }
+    else{
+        this
+    }
+}
 
 typealias OutfitFrameStateColor = OutfitFrame.StateColor.Style
 
