@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 17/04/2023 21:38
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 20:21
+ *  Last modified 17/04/2023 21:37
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,6 +28,7 @@ import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
+import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
@@ -160,12 +161,12 @@ object SectionActionRow {
                         background(it)
                     }
                     .padding(
-                        horizontal = style.paddingBody,
                         vertical = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
             ) {
                 data.rows.forEachIndexed { index, row ->
                     ActionRow(
+                        modifier = Modifier.padding(horizontal = style.paddingBody),
                         data = row, style = style.actionRowStyle
                     ) {
                         onClick(index)
@@ -174,7 +175,7 @@ object SectionActionRow {
                         Divider(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .padding(start = style.paddingBody + MaterialTheme.dimensionsPaddingExtended.element.big.horizontal),
+                                .padding(start = style.paddingBody),
                             color = style.colorDivider,
                             thickness = style.sizeDivider,
                         )
