@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 19:24
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
-import com.tezov.bank.ui.component.block.SectionActionCard
+import com.tezov.bank.ui.component.block.SectionSimpleTile
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Shadow
@@ -75,7 +75,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                 },
                 body = {
                     state.cardSmall.value?.let {
-                        SectionActionCard(
+                        SectionSimpleTile(
                             data = it,
                             style = PagePaymentTheme.styles.sectionCard
                         ) {
@@ -85,7 +85,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                     }
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
                     state.cardLarge.value?.let {
-                        SectionActionCard(
+                        SectionSimpleTile(
                             data = it,
                             style = PagePaymentTheme.styles.sectionCard
                         ) {

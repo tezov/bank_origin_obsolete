@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 20:40
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,25 +15,25 @@ package com.tezov.bank.ui.page.auth.profile
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.block.SectionActionRow
-import com.tezov.bank.ui.component.element.ActionRow
+import com.tezov.bank.ui.component.block.SectionSimpleRow
+import com.tezov.bank.ui.component.element.SimpleRow
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageProfileState private constructor(
     val header: Header,
-    val profils: MutableState<SectionActionRow.Data?>,
-    val documents: MutableState<SectionActionRow.Data?>,
-    val offers: MutableState<SectionActionRow.Data?>,
-    val helps: MutableState<SectionActionRow.Data?>,
+    val profils: MutableState<SectionSimpleRow.Data?>,
+    val documents: MutableState<SectionSimpleRow.Data?>,
+    val offers: MutableState<SectionSimpleRow.Data?>,
+    val helps: MutableState<SectionSimpleRow.Data?>,
 ) : PageState {
 
     companion object {
         fun create(
             header: Header = Header.empty(),
-            profils: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
-            documents: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
-            offers: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
-            helps: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
+            profils: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
+            documents: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
+            offers: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
+            helps: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
 
             ) = PageProfileState(
             header = header,
@@ -63,44 +63,44 @@ class PageProfileState private constructor(
             imageResourceId.value = R.drawable.img_suitcase_blue
         }
 
-        profils.value = SectionActionRow.Data(
+        profils.value = SectionSimpleRow.Data(
             rows = listOf(
-                ActionRow.Data(
+                SimpleRow.Data(
                     title = "Mes infos de profil",
                     iconInfo = R.drawable.ic_profile_line_24dp
                 ),
-                ActionRow.Data(
+                SimpleRow.Data(
                     title = "Mes paramètres",
                     iconInfo = R.drawable.ic_setting_24dp
                 ),
             )
         )
 
-        documents.value = SectionActionRow.Data(
+        documents.value = SectionSimpleRow.Data(
             title = "MES DOCUMENTS",
             rows = listOf(
-                ActionRow.Data(title = "Mes RIB et Documents"),
-                ActionRow.Data(title = "Mes assurances"),
-                ActionRow.Data(title = "Suivi de mes demandes"),
+                SimpleRow.Data(title = "Mes RIB et Documents"),
+                SimpleRow.Data(title = "Mes assurances"),
+                SimpleRow.Data(title = "Suivi de mes demandes"),
             )
         )
 
-        offers.value = SectionActionRow.Data(
+        offers.value = SectionSimpleRow.Data(
             title = "L'OFFRE HELLO BANK!",
             rows = listOf(
-                ActionRow.Data(title = "Mon offre"),
-                ActionRow.Data(title = "Bourse"),
-                ActionRow.Data(title = "Parrainage"),
+                SimpleRow.Data(title = "Mon offre"),
+                SimpleRow.Data(title = "Bourse"),
+                SimpleRow.Data(title = "Parrainage"),
             )
         )
 
-        offers.value = SectionActionRow.Data(
+        offers.value = SectionSimpleRow.Data(
             title = "AIDE",
             rows = listOf(
-                ActionRow.Data(title = "Service sourds et malentendants"),
-                ActionRow.Data(title = "Trouver un distributeur"),
-                ActionRow.Data(title = "Accéder à l'assistance technique"),
-                ActionRow.Data(title = "Sécurité et infos légales"),
+                SimpleRow.Data(title = "Service sourds et malentendants"),
+                SimpleRow.Data(title = "Trouver un distributeur"),
+                SimpleRow.Data(title = "Accéder à l'assistance technique"),
+                SimpleRow.Data(title = "Sécurité et infos légales"),
             )
         )
 

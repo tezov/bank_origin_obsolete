@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 21:11
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,8 +20,8 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.tezov.bank.ui.component.block.SectionActionCard
-import com.tezov.bank.ui.component.block.SectionActionRow
+import com.tezov.bank.ui.component.block.SectionSimpleTile
+import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.component.block.SectionCarouselCard
 import com.tezov.bank.ui.component.block.SectionRollerCard
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
@@ -97,14 +97,14 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                     }
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
                     state.offers.value?.let {
-                        SectionActionCard(data = it, style = PageDiscoverTheme.styles.sectionActionCard) {
+                        SectionSimpleTile(data = it, style = PageDiscoverTheme.styles.sectionActionCard) {
 
 
                         }
                     }
                     Spacer(modifier = Modifier.height(PageDiscoverTheme.dimensions.spacingTopSectionRowToBottomSectionCard))
                     state.tips.value?.let {
-                        SectionActionRow(data = it, style = PageDiscoverTheme.styles.sectionActionRow) {
+                        SectionSimpleRow(data = it, style = PageDiscoverTheme.styles.sectionActionRow) {
 
 
                         }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 20:40
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,27 +15,27 @@ package com.tezov.bank.ui.page.auth.help
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.block.SectionActionRow
-import com.tezov.bank.ui.component.element.ActionRow
+import com.tezov.bank.ui.component.block.SectionSimpleRow
+import com.tezov.bank.ui.component.element.SimpleRow
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PageHelpState private constructor(
     val header: Header,
-    val emergencies: MutableState<SectionActionRow.Data?>,
-    val paymentModes: MutableState<SectionActionRow.Data?>,
-    val configuration: MutableState<SectionActionRow.Data?>,
-    val account: MutableState<SectionActionRow.Data?>,
-    val misc: MutableState<SectionActionRow.Data?>,
+    val emergencies: MutableState<SectionSimpleRow.Data?>,
+    val paymentModes: MutableState<SectionSimpleRow.Data?>,
+    val configuration: MutableState<SectionSimpleRow.Data?>,
+    val account: MutableState<SectionSimpleRow.Data?>,
+    val misc: MutableState<SectionSimpleRow.Data?>,
 ) : PageState {
 
     companion object {
         fun create(
             header: Header = Header.empty(),
-            emergencies: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
-            paymentModes: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
-            configuration: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
-            account: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
-            misc: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
+            emergencies: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
+            paymentModes: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
+            configuration: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
+            account: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
+            misc: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
         ) = PageHelpState(
             header = header,
             emergencies = emergencies,
@@ -68,65 +68,65 @@ class PageHelpState private constructor(
                 "Trouvez une réponse rapide en sélectionnant la thématique qui correspoond à votre besoin."
         }
 
-        emergencies.value = SectionActionRow.Data(
+        emergencies.value = SectionSimpleRow.Data(
             title = "Urgence",
             icon = R.drawable.ic_call_24dp,
             rows = listOf(
-                ActionRow.Data(title = "Paiment carte ou retrait refusé"),
-                ActionRow.Data(title = "Perte ou vol de ma carte"),
-                ActionRow.Data(title = "Victime d'une fraude"),
-                ActionRow.Data(title = "Assistance déplacements et voyage"),
-                ActionRow.Data(title = "Assistance médicale et juridique"),
-                ActionRow.Data(title = "Sinistre habitation, auto ou appareils mobiles"),
+                SimpleRow.Data(title = "Paiment carte ou retrait refusé"),
+                SimpleRow.Data(title = "Perte ou vol de ma carte"),
+                SimpleRow.Data(title = "Victime d'une fraude"),
+                SimpleRow.Data(title = "Assistance déplacements et voyage"),
+                SimpleRow.Data(title = "Assistance médicale et juridique"),
+                SimpleRow.Data(title = "Sinistre habitation, auto ou appareils mobiles"),
             )
         )
 
-        paymentModes.value = SectionActionRow.Data(
+        paymentModes.value = SectionSimpleRow.Data(
             title = "Moyens de paiment",
             icon = R.drawable.ic_call_24dp,
             rows = listOf(
-                ActionRow.Data(title = "Carte bancaire"),
-                ActionRow.Data(title = "Virement"),
-                ActionRow.Data(title = "Prélèvement"),
-                ActionRow.Data(title = "Chéque"),
+                SimpleRow.Data(title = "Carte bancaire"),
+                SimpleRow.Data(title = "Virement"),
+                SimpleRow.Data(title = "Prélèvement"),
+                SimpleRow.Data(title = "Chéque"),
             )
         )
 
-        configuration.value = SectionActionRow.Data(
+        configuration.value = SectionSimpleRow.Data(
             title = "Profile, paramétres et sécurité",
             icon = R.drawable.ic_call_24dp,
             rows = listOf(
-                ActionRow.Data(title = "Clé Digitale"),
-                ActionRow.Data(title = "Adresse postale"),
-                ActionRow.Data(title = "Adresse email"),
-                ActionRow.Data(title = "Numéro de téléphone"),
-                ActionRow.Data(title = "Pièce d'identité"),
+                SimpleRow.Data(title = "Clé Digitale"),
+                SimpleRow.Data(title = "Adresse postale"),
+                SimpleRow.Data(title = "Adresse email"),
+                SimpleRow.Data(title = "Numéro de téléphone"),
+                SimpleRow.Data(title = "Pièce d'identité"),
             )
         )
 
-        account.value = SectionActionRow.Data(
+        account.value = SectionSimpleRow.Data(
             title = "Comptes, épargnes, crédit, assurance",
             icon = R.drawable.ic_call_24dp,
             rows = listOf(
-                ActionRow.Data(title = "Relevés, RIB"),
-                ActionRow.Data(title = "Ouverture de compte individuel"),
-                ActionRow.Data(title = "Ouverture de compte joint"),
-                ActionRow.Data(title = "Clôture de compte"),
-                ActionRow.Data(title = "Épargne et investissements"),
-                ActionRow.Data(title = "Crédit immobilier"),
-                ActionRow.Data(title = "Crédit à la consommation"),
-                ActionRow.Data(title = "Assurance"),
+                SimpleRow.Data(title = "Relevés, RIB"),
+                SimpleRow.Data(title = "Ouverture de compte individuel"),
+                SimpleRow.Data(title = "Ouverture de compte joint"),
+                SimpleRow.Data(title = "Clôture de compte"),
+                SimpleRow.Data(title = "Épargne et investissements"),
+                SimpleRow.Data(title = "Crédit immobilier"),
+                SimpleRow.Data(title = "Crédit à la consommation"),
+                SimpleRow.Data(title = "Assurance"),
             )
         )
 
-        misc.value = SectionActionRow.Data(
+        misc.value = SectionSimpleRow.Data(
             title = "Autres",
             icon = R.drawable.ic_call_24dp,
             rows = listOf(
-                ActionRow.Data(title = "Parrainage"),
-                ActionRow.Data(title = "Signaler un problème technique"),
-                ActionRow.Data(title = "Faire une réclamation"),
-                ActionRow.Data(title = "Transmettre un document"),
+                SimpleRow.Data(title = "Parrainage"),
+                SimpleRow.Data(title = "Signaler un problème technique"),
+                SimpleRow.Data(title = "Faire une réclamation"),
+                SimpleRow.Data(title = "Transmettre un document"),
             )
         )
 

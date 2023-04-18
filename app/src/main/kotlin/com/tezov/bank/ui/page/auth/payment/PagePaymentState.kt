@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 20:40
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,21 +15,21 @@ package com.tezov.bank.ui.page.auth.payment
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.block.SectionActionCard
-import com.tezov.bank.ui.component.element.ActionCard
+import com.tezov.bank.ui.component.block.SectionSimpleTile
+import com.tezov.bank.ui.component.element.SimpleTile
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 class PagePaymentState private constructor(
     val header: Header,
-    val cardSmall: MutableState<SectionActionCard.Data?>,
-    val cardLarge: MutableState<SectionActionCard.Data?>,
+    val cardSmall: MutableState<SectionSimpleTile.Data?>,
+    val cardLarge: MutableState<SectionSimpleTile.Data?>,
 ) : PageState {
 
     companion object {
         fun create(
             header: Header = Header.empty(),
-            cardSmall: MutableState<SectionActionCard.Data?> = mutableStateOf(null),
-            cardLarge: MutableState<SectionActionCard.Data?> = mutableStateOf(null),
+            cardSmall: MutableState<SectionSimpleTile.Data?> = mutableStateOf(null),
+            cardLarge: MutableState<SectionSimpleTile.Data?> = mutableStateOf(null),
         ) = PagePaymentState(
             header = header,
             cardSmall = cardSmall,
@@ -53,42 +53,42 @@ class PagePaymentState private constructor(
             headline.value = "Paiments"
         }
 
-        cardSmall.value = SectionActionCard.Data(
-            template = ActionCard.Template.IconTopEnd,
-            cards = listOf(
-                ActionCard.Data(
+        cardSmall.value = SectionSimpleTile.Data(
+            template = SimpleTile.Template.IconTopEnd,
+            tile = listOf(
+                SimpleTile.Data(
                     title = "Partager\nmon RIB",
                     iconInfo = R.drawable.img_rib_share
                 ),
-                ActionCard.Data(
+                SimpleTile.Data(
                     title = "Faire\nun virement",
                     iconInfo = R.drawable.img_transfer_money
                 ),
-                ActionCard.Data(
+                SimpleTile.Data(
                     title = "Gérer\nmes chèques",
                     iconInfo = R.drawable.img_cheque_manage
                 ),
-                ActionCard.Data(
+                SimpleTile.Data(
                     title = "Gérer\nmes cartes",
                     iconInfo = R.drawable.img_card_manage
                 ),
             )
         )
 
-        cardLarge.value = SectionActionCard.Data(
-            template = ActionCard.Template.IconEnd,
-            cards = listOf(
-                ActionCard.Data(
+        cardLarge.value = SectionSimpleTile.Data(
+            template = SimpleTile.Template.IconEnd,
+            tile = listOf(
+                SimpleTile.Data(
                     title = "Lyf Pay",
                     subtitle = "Payer avec votre mobile.",
                     iconInfo = R.drawable.img_lyf
                 ),
-                ActionCard.Data(
+                SimpleTile.Data(
                     title = "Paylib",
                     subtitle = "Envoyer de l'argent vers un mobile",
                     iconInfo = R.drawable.img_paylib
                 ),
-                ActionCard.Data(
+                SimpleTile.Data(
                     title = "PaypPal",
                     subtitle = "Payer en ligne",
                     iconInfo = R.drawable.img_paypal

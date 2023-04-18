@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 22:11
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,16 +21,16 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.bank.ui.component.block.SectionActionCard
-import com.tezov.bank.ui.component.block.SectionActionCard.Style.Companion.copy
-import com.tezov.bank.ui.component.block.SectionActionRow
-import com.tezov.bank.ui.component.block.SectionActionRow.Style.Companion.copy
+import com.tezov.bank.ui.component.block.SectionSimpleTile
+import com.tezov.bank.ui.component.block.SectionSimpleTile.Style.Companion.copy
+import com.tezov.bank.ui.component.block.SectionSimpleRow
+import com.tezov.bank.ui.component.block.SectionSimpleRow.Style.Companion.copy
 import com.tezov.bank.ui.component.block.SectionCarouselCard
 import com.tezov.bank.ui.component.block.SectionCarouselCard.Style.Companion.copy
 import com.tezov.bank.ui.component.block.SectionRollerCard
 import com.tezov.bank.ui.component.block.SectionRollerCard.Style.Companion.copy
-import com.tezov.bank.ui.component.element.ActionCard.Style.Companion.copy
-import com.tezov.bank.ui.component.element.ActionRow.Style.Companion.copy
+import com.tezov.bank.ui.component.element.SimpleTile.Style.Companion.copy
+import com.tezov.bank.ui.component.element.SimpleRow.Style.Companion.copy
 import com.tezov.bank.ui.component.element.CarouselCard
 import com.tezov.bank.ui.component.element.CarouselCard.Style.Button.Companion.copy
 import com.tezov.bank.ui.component.element.CarouselCard.Style.Link.Companion.copy
@@ -151,8 +151,8 @@ object PageDiscoverTheme {
         val sectionCarouselCardButton: SectionCarouselCard.Style,
         val sectionCarouselCardLink: SectionCarouselCard.Style,
         val sectionRollerCard: SectionRollerCard.Style,
-        val sectionActionRow: SectionActionRow.Style,
-        val sectionActionCard: SectionActionCard.Style,
+        val sectionActionRow: SectionSimpleRow.Style,
+        val sectionActionCard: SectionSimpleTile.Style,
     )
 
     @Composable
@@ -280,7 +280,7 @@ object PageDiscoverTheme {
                 }
             }
         },
-        sectionActionRow = ThemeComponentProviders.sectionActionRowStyle().copy {
+        sectionActionRow = ThemeComponentProviders.sectionSimpleRowStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             outfitTextTitle = MaterialTheme.typographiesExtended.title.huge.copy {
                 outfitState = colors.primary.asStateSimple
@@ -290,7 +290,7 @@ object PageDiscoverTheme {
             }
             colorBackgroundHeader = null
             colorDivider = colors.fade
-            actionRowStyle = actionRowStyle.copy {
+            rowStyle = rowStyle.copy {
                 iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
                 iconActionStyle = iconActionStyle.copy { tint = colors.accent }
                 outfitText = outfitText?.copy {
@@ -298,9 +298,9 @@ object PageDiscoverTheme {
                 }
             }
         },
-        sectionActionCard = ThemeComponentProviders.sectionActionCardStyle().copy {
+        sectionActionCard = ThemeComponentProviders.sectionTileStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-            actionCardStyle = actionCardStyle.copy {
+            tileStyle = tileStyle.copy {
                 iconStyle = iconStyle.copy {
                     tint = colors.accent
                     size = MaterialTheme.dimensionsIconExtended.info.huge

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 19:24
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.bank.ui.component.element.ActionCard
+import com.tezov.bank.ui.component.element.SimpleTile
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
@@ -32,7 +32,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
-object SectionActionCard {
+object SectionSimpleTile {
 
     class StyleBuilder internal constructor(
         style: Style
@@ -42,7 +42,7 @@ object SectionActionCard {
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
         var paddingBody = style.paddingBody
-        var actionCardStyle = style.actionCardStyle
+        var tileStyle = style.tileStyle
 
         fun get() = Style(
             iconStyle = iconStyle,
@@ -50,7 +50,7 @@ object SectionActionCard {
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
             paddingBody = paddingBody,
-            actionCardStyle = actionCardStyle,
+            tileStyle = tileStyle,
         )
     }
 
@@ -60,7 +60,7 @@ object SectionActionCard {
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
         val paddingBody: Dp = 0.dp,
-        actionCardStyle: ActionCard.Style? = null
+        tileStyle: SimpleTile.Style? = null
     ) {
 
         val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
@@ -72,9 +72,9 @@ object SectionActionCard {
                 )
             }
         )
-        val actionCardStyle: ActionCard.Style by DelegateNullFallBack.Ref(
-            actionCardStyle,
-            fallBackValue = { ActionCard.Style() }
+        val tileStyle: SimpleTile.Style by DelegateNullFallBack.Ref(
+            tileStyle,
+            fallBackValue = { SimpleTile.Style() }
         )
 
         companion object {
@@ -94,7 +94,7 @@ object SectionActionCard {
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
             paddingBody = style.paddingBody,
-            actionCardStyle = style.actionCardStyle,
+            tileStyle = style.tileStyle,
         )
 
     }
@@ -102,8 +102,8 @@ object SectionActionCard {
     data class Data(
         val icon: Int? = null,
         val title: String? = null,
-        var template: ActionCard.Template = ActionCard.Template.Undefined,
-        val cards: List<ActionCard.Data>
+        var template: SimpleTile.Template = SimpleTile.Template.Undefined,
+        val tile: List<SimpleTile.Data>
     )
 
     @Composable
@@ -113,7 +113,7 @@ object SectionActionCard {
         data: Data,
         onClick: (Int) -> Unit = {}
     ) {
-        if (data.cards.isEmpty()) {
+        if (data.tile.isEmpty()) {
             return
         }
         Column(
@@ -163,7 +163,7 @@ object SectionActionCard {
                     ),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.block.big.vertical),
             ) {
-                data.cards.loopOver {
+                data.tile.loopOver {
                     val first = next
                     val second = next
                     // set default section template
@@ -183,18 +183,18 @@ object SectionActionCard {
                     if (first != null && second != null) {
                         if (first.data.template.isInlined) {
                             push(second)
-                            ContentRowUno(style.actionCardStyle, first, onClick)
+                            ContentRowUno(style.tileStyle, first, onClick)
                         } else if (second.data.template.isInlined) {
                             push(first)
-                            ContentRowUno(style.actionCardStyle, second, onClick)
+                            ContentRowUno(style.tileStyle, second, onClick)
                         } else {
-                            ContentRowDuo(style.actionCardStyle, first, second, onClick)
+                            ContentRowDuo(style.tileStyle, first, second, onClick)
                         }
                         if (hasReachEnd && isStackEmpty) {
                             done()
                         }
                     } else if (first != null) {
-                        ContentRowUno(style.actionCardStyle, first, onClick)
+                        ContentRowUno(style.tileStyle, first, onClick)
                         done()
                     } else {
                         done()
@@ -206,16 +206,16 @@ object SectionActionCard {
 
     @Composable
     private fun ContentRowUno(
-        style: ActionCard.Style,
-        first: ExtensionComposable.LoopOver.Entry<ActionCard.Data>,
+        style: SimpleTile.Style,
+        first: ExtensionComposable.LoopOver.Entry<SimpleTile.Data>,
         onClick: (Int) -> Unit
     ) {
-        ActionCard(
+        SimpleTile(
             modifier = Modifier
                 .fillMaxWidth(),
             style = style,
             data = first.data.apply {
-                template = ActionCard.Template.InlineDefault
+                template = SimpleTile.Template.InlineDefault
             },
             onClick = { onClick(first.index) }
         )
@@ -223,9 +223,9 @@ object SectionActionCard {
 
     @Composable
     private fun ContentRowDuo(
-        style: ActionCard.Style,
-        first: ExtensionComposable.LoopOver.Entry<ActionCard.Data>,
-        second: ExtensionComposable.LoopOver.Entry<ActionCard.Data>,
+        style: SimpleTile.Style,
+        first: ExtensionComposable.LoopOver.Entry<SimpleTile.Data>,
+        second: ExtensionComposable.LoopOver.Entry<SimpleTile.Data>,
         onClick: (Int) -> Unit
     ) {
         Row(
@@ -234,7 +234,7 @@ object SectionActionCard {
                 .fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.block.big.vertical),
         ) {
-            ActionCard(
+            SimpleTile(
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f),
@@ -242,7 +242,7 @@ object SectionActionCard {
                 data = first.data,
                 onClick = { onClick(first.index) }
             )
-            ActionCard(
+            SimpleTile(
                 modifier = Modifier
                     .fillMaxSize()
                     .weight(1f),

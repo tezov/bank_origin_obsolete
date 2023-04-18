@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:13
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,7 +19,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.tezov.bank.ui.component.block.SectionActionRow
+import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
@@ -60,31 +60,31 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
             ) {
                 contentHeader(state.header)
                 state.emergencies.value?.let {
-                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow) {
+                    SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
                     }
                 }
                 state.paymentModes.value?.let {
-                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow) {
+                    SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
                     }
                 }
                 state.configuration.value?.let {
-                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow) {
+                    SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
                     }
                 }
                 state.account.value?.let {
-                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow) {
+                    SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
                     }
                 }
                 state.misc.value?.let {
-                    SectionActionRow(data = it, style = PageHelpTheme.styles.sectionRow) {
+                    SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
                     }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 21:51
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,12 +15,12 @@ package com.tezov.bank.ui.page.auth.discover
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.block.SectionActionCard
-import com.tezov.bank.ui.component.block.SectionActionRow
+import com.tezov.bank.ui.component.block.SectionSimpleTile
+import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.component.block.SectionCarouselCard
 import com.tezov.bank.ui.component.block.SectionRollerCard
-import com.tezov.bank.ui.component.element.ActionCard
-import com.tezov.bank.ui.component.element.ActionRow
+import com.tezov.bank.ui.component.element.SimpleTile
+import com.tezov.bank.ui.component.element.SimpleRow
 import com.tezov.bank.ui.component.element.CarouselCard
 import com.tezov.bank.ui.component.element.RollerCard
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
@@ -30,8 +30,8 @@ class PageDiscoverState private constructor(
     val cardsWithButton: MutableState<SectionCarouselCard.Data?>,
     val cardsWithLink: MutableState<SectionCarouselCard.Data?>,
     val cashbacks: MutableState<SectionRollerCard.Data?>,
-    val offers: MutableState<SectionActionCard.Data?>,
-    val tips: MutableState<SectionActionRow.Data?>,
+    val offers: MutableState<SectionSimpleTile.Data?>,
+    val tips: MutableState<SectionSimpleRow.Data?>,
 ) : PageState {
 
     companion object {
@@ -40,8 +40,8 @@ class PageDiscoverState private constructor(
             cardsWithButton: MutableState<SectionCarouselCard.Data?> = mutableStateOf(null),
             cardsWithLink: MutableState<SectionCarouselCard.Data?> = mutableStateOf(null),
             cashbacks: MutableState<SectionRollerCard.Data?> = mutableStateOf(null),
-            offers: MutableState<SectionActionCard.Data?> = mutableStateOf(null),
-            tips: MutableState<SectionActionRow.Data?> = mutableStateOf(null),
+            offers: MutableState<SectionSimpleTile.Data?> = mutableStateOf(null),
+            tips: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
         ) = PageDiscoverState(
             header = header,
             cardsWithButton = cardsWithButton,
@@ -194,57 +194,57 @@ class PageDiscoverState private constructor(
             )
         )
 
-        offers.value = SectionActionCard.Data(
+        offers.value = SectionSimpleTile.Data(
             title = "Toute l'offre Tezov bank!",
-            template = ActionCard.Template.IconTop,
-            cards = listOf(
-                ActionCard.Data(
+            template = SimpleTile.Template.IconTop,
+            tile = listOf(
+                SimpleTile.Data(
                     title = "Comptes et cartes",
                     iconInfo = R.drawable.img_account_card
                 ),
-                ActionCard.Data(
+                SimpleTile.Data(
                     title = "Épargne",
                     iconInfo = R.drawable.img_coin
                 ),
-                ActionCard.Data(
+                SimpleTile.Data(
                     title = "Crédit",
                     iconInfo = R.drawable.img_credit
                 ),
-                ActionCard.Data(
+                SimpleTile.Data(
                     title = "Assurances",
                     iconInfo = R.drawable.img_insurance
                 ),
-                ActionCard.Data(
+                SimpleTile.Data(
                     title = "Compte professionnel",
                     iconInfo = R.drawable.img_account_pro
                 ),
-                ActionCard.Data(
+                SimpleTile.Data(
                     title = "Bourse",
                     iconInfo = R.drawable.img_market
                 ),
-                ActionCard.Data(
+                SimpleTile.Data(
                     title = "Offre enfants",
                     iconInfo = R.drawable.img_children
                 ),
-                ActionCard.Data(
+                SimpleTile.Data(
                     title = "Mobilité bancaire",
                     iconInfo = R.drawable.img_account_mobility
                 ),
             )
         )
 
-        tips.value = SectionActionRow.Data(
+        tips.value = SectionSimpleRow.Data(
             title = "Retrouvez nos astuces",
             rows = listOf(
-                ActionRow.Data(
+                SimpleRow.Data(
                     title = "Valider mes paiements en ligne",
                     iconInfo = R.drawable.img_payment_confirm
                 ),
-                ActionRow.Data(
+                SimpleRow.Data(
                     title = "Optimiser mes notifications",
                     iconInfo = R.drawable.img_notification
                 ),
-                ActionRow.Data(
+                SimpleRow.Data(
                     title = "Déposer un chèque en agence",
                     iconInfo = R.drawable.img_cheque_agency
                 ),

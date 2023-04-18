@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:13
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,7 +23,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.block.SectionActionRow
+import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
@@ -70,25 +70,25 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
             ) {
                 contentHeader(state.header)
                 state.profils.value?.let {
-                    SectionActionRow(data = it, style = PageProfileTheme.styles.sectionRow) {
+                    SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
 
 
                     }
                 }
                 state.documents.value?.let {
-                    SectionActionRow(data = it, style = PageProfileTheme.styles.sectionRow) {
+                    SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
 
 
                     }
                 }
                 state.offers.value?.let {
-                    SectionActionRow(data = it, style = PageProfileTheme.styles.sectionRow) {
+                    SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
 
 
                     }
                 }
                 state.helps.value?.let {
-                    SectionActionRow(data = it, style = PageProfileTheme.styles.sectionRow) {
+                    SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
 
 
                     }

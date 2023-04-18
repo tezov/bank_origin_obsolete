@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 22:08
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,9 +21,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tezov.bank.ui.component.block.SectionActionCard
-import com.tezov.bank.ui.component.block.SectionActionCard.Style.Companion.copy
-import com.tezov.bank.ui.component.element.ActionCard.Style.Companion.copy
+import com.tezov.bank.ui.component.block.SectionSimpleTile
+import com.tezov.bank.ui.component.block.SectionSimpleTile.Style.Companion.copy
+import com.tezov.bank.ui.component.element.SimpleTile.Style.Companion.copy
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.cluster.ColumnCollapsibleHeader
@@ -122,19 +122,19 @@ object PagePaymentTheme {
         }
 
     data class Style(
-        val sectionCard: SectionActionCard.Style,
+        val sectionCard: SectionSimpleTile.Style,
 
         )
 
     @Composable
     fun provideStyles() = Style(
-        sectionCard = ThemeComponentProviders.sectionActionCardStyle().copy {
+        sectionCard = ThemeComponentProviders.sectionTileStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             iconStyle = iconStyle.copy { tint = colors.primary }
             outfitTextTitle = outfitTextTitle?.copy {
                 outfitState = colors.primary.asStateSimple
             }
-            actionCardStyle = actionCardStyle.copy {
+            tileStyle = tileStyle.copy {
                 iconStyle = iconStyle.copy {
                     tint = colors.accent
                     size = MaterialTheme.dimensionsIconExtended.info.huge

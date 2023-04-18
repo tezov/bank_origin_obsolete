@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:13
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,8 +25,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.block.SectionActionCard
-import com.tezov.bank.ui.component.block.SectionActionRow
+import com.tezov.bank.ui.component.block.SectionSimpleTile
+import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Shadow
@@ -90,7 +90,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 ) {
                     contentHeader(state.header)
                     state.helpAndServices.value?.let {
-                        SectionActionCard(
+                        SectionSimpleTile(
                             data = it,
                             style = PageHelpAndServiceTheme.styles.sectionCard
                         ) {
@@ -100,7 +100,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                     }
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
                     state.contacts.value?.let {
-                        SectionActionRow(
+                        SectionSimpleRow(
                             data = it,
                             style = PageHelpAndServiceTheme.styles.sectionRow
                         ) {
@@ -109,7 +109,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                         }
                     }
                     state.notices.value?.let {
-                        SectionActionRow(
+                        SectionSimpleRow(
                             data = it,
                             style = PageHelpAndServiceTheme.styles.sectionRow
                         ) {

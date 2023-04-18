@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 22:11
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,12 +20,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.tezov.bank.ui.component.block.SectionActionCard
-import com.tezov.bank.ui.component.block.SectionActionRow
+import com.tezov.bank.ui.component.block.SectionSimpleTile
+import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.component.block.SectionCarouselCard
 import com.tezov.bank.ui.component.block.SectionRollerCard
-import com.tezov.bank.ui.component.element.ActionCard
-import com.tezov.bank.ui.component.element.ActionRow
+import com.tezov.bank.ui.component.element.SimpleTile
+import com.tezov.bank.ui.component.element.SimpleRow
 import com.tezov.bank.ui.component.element.CarouselCard
 import com.tezov.bank.ui.component.element.RollerCard
 import com.tezov.bank.ui.theme.font.fontIbm
@@ -197,7 +197,7 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun sectionActionRowStyle() = SectionActionRow.Style(
+    fun sectionSimpleRowStyle() = SectionSimpleRow.Style(
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
@@ -208,11 +208,11 @@ object ThemeComponentProviders {
         colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default,
         colorDivider = MaterialTheme.colorsExtended.primary.decor,
         sizeDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
-        actionRowStyle = actionRowStyle()
+        rowStyle = simpleRowStyle()
     )
 
     @Composable
-    fun actionRowStyle() = ActionRow.Style(
+    fun simpleRowStyle() = SimpleRow.Style(
         iconInfoStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
@@ -227,7 +227,7 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun sectionActionCardStyle() = SectionActionCard.Style(
+    fun sectionTileStyle() = SectionSimpleTile.Style(
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
@@ -238,11 +238,11 @@ object ThemeComponentProviders {
                 fontWeight = FontWeight.Bold
             )
         },
-        actionCardStyle = actionCardStyle()
+        tileStyle = tileStyle()
     )
 
     @Composable
-    fun actionCardStyle() = ActionCard.Style(
+    fun tileStyle() = SimpleTile.Style(
         outfitFrame = OutfitFrameStateColor(
             outfitShape = MaterialTheme.shapesExtended.element.normal,
             outfitBorder = MaterialTheme.bordersExtended.element.normal

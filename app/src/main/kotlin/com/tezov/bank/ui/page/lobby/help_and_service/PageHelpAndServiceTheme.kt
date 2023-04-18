@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 22:08
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,12 +18,12 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import com.tezov.bank.ui.component.block.SectionActionCard
-import com.tezov.bank.ui.component.block.SectionActionCard.Style.Companion.copy
-import com.tezov.bank.ui.component.block.SectionActionRow
-import com.tezov.bank.ui.component.block.SectionActionRow.Style.Companion.copy
-import com.tezov.bank.ui.component.element.ActionCard.Style.Companion.copy
-import com.tezov.bank.ui.component.element.ActionRow.Style.Companion.copy
+import com.tezov.bank.ui.component.block.SectionSimpleTile
+import com.tezov.bank.ui.component.block.SectionSimpleTile.Style.Companion.copy
+import com.tezov.bank.ui.component.block.SectionSimpleRow
+import com.tezov.bank.ui.component.block.SectionSimpleRow.Style.Companion.copy
+import com.tezov.bank.ui.component.element.SimpleTile.Style.Companion.copy
+import com.tezov.bank.ui.component.element.SimpleRow.Style.Companion.copy
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
@@ -105,19 +105,19 @@ object PageHelpAndServiceTheme {
 
 
     data class Style(
-        val sectionRow: SectionActionRow.Style,
-        val sectionCard: SectionActionCard.Style,
+        val sectionRow: SectionSimpleRow.Style,
+        val sectionCard: SectionSimpleTile.Style,
     )
 
     @Composable
     fun provideStyles() = Style(
-        sectionRow = ThemeComponentProviders.sectionActionRowStyle().copy {
+        sectionRow = ThemeComponentProviders.sectionSimpleRowStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             outfitTextTitle = outfitTextTitle?.copy {
                 outfitState = colors.neutral.asStateSimple
             }
             colorDivider = colors.fade
-            actionRowStyle = actionRowStyle.copy {
+            rowStyle = rowStyle.copy {
                 iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
                 iconActionStyle = iconActionStyle.copy { tint = colors.accent }
                 outfitText = outfitText?.copy {
@@ -125,13 +125,13 @@ object PageHelpAndServiceTheme {
                 }
             }
         },
-        sectionCard = ThemeComponentProviders.sectionActionCardStyle().copy {
+        sectionCard = ThemeComponentProviders.sectionTileStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             iconStyle = iconStyle.copy { tint = colors.primary }
             outfitTextTitle = outfitTextTitle?.copy {
                 outfitState = colors.neutral.asStateSimple
             }
-            actionCardStyle = actionCardStyle.copy {
+            tileStyle = tileStyle.copy {
                 iconStyle = iconStyle.copy {
                     tint = colors.accent
                     size = MaterialTheme.dimensionsIconExtended.info.big

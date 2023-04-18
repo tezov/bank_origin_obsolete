@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:38
+ *  Created by Tezov on 18/04/2023 19:24
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 21:37
+ *  Last modified 18/04/2023 19:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,17 +22,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.tezov.bank.ui.component.element.ActionRow
+import com.tezov.bank.ui.component.element.SimpleRow
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
-import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
-object SectionActionRow {
+object SectionSimpleRow {
 
 
     class StyleBuilder internal constructor(
@@ -45,7 +44,7 @@ object SectionActionRow {
         var colorDivider = style.colorDivider
         var sizeDivider = style.sizeDivider
         var paddingBody = style.paddingBody
-        var actionRowStyle = style.actionRowStyle
+        var rowStyle = style.rowStyle
 
         fun get() = Style(
             iconStyle = iconStyle,
@@ -55,7 +54,7 @@ object SectionActionRow {
             colorDivider = colorDivider,
             sizeDivider = sizeDivider,
             paddingBody = paddingBody,
-            actionRowStyle = actionRowStyle,
+            rowStyle = rowStyle,
         )
     }
 
@@ -67,7 +66,7 @@ object SectionActionRow {
         val colorDivider: Color? = null,
         val sizeDivider: Dp = 1.dp,
         val paddingBody: Dp = 0.dp,
-        actionRowStyle: ActionRow.Style? = null
+        rowStyle: SimpleRow.Style? = null
     ) {
 
         val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
@@ -79,9 +78,9 @@ object SectionActionRow {
                 )
             }
         )
-        val actionRowStyle: ActionRow.Style by DelegateNullFallBack.Ref(
-            actionRowStyle,
-            fallBackValue = { ActionRow.Style() }
+        val rowStyle: SimpleRow.Style by DelegateNullFallBack.Ref(
+            rowStyle,
+            fallBackValue = { SimpleRow.Style() }
         )
 
         companion object {
@@ -103,7 +102,7 @@ object SectionActionRow {
             colorDivider = style.colorDivider,
             sizeDivider = style.sizeDivider,
             paddingBody = style.paddingBody,
-            actionRowStyle = style.actionRowStyle,
+            rowStyle = style.rowStyle,
         )
 
     }
@@ -111,7 +110,7 @@ object SectionActionRow {
     data class Data(
         val icon: Int? = null,
         val title: String? = null,
-        val rows: List<ActionRow.Data>
+        val rows: List<SimpleRow.Data>
     )
 
     @Composable
@@ -165,9 +164,9 @@ object SectionActionRow {
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
             ) {
                 data.rows.forEachIndexed { index, row ->
-                    ActionRow(
+                    SimpleRow(
                         modifier = Modifier.padding(horizontal = style.paddingBody),
-                        data = row, style = style.actionRowStyle
+                        data = row, style = style.rowStyle
                     ) {
                         onClick(index)
                     }
