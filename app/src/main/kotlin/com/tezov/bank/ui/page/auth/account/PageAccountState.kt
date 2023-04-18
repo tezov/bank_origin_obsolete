@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 31/01/2023 20:43
+ *  Created by Tezov on 18/04/2023 20:56
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 31/01/2023 20:18
+ *  Last modified 18/04/2023 20:47
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,13 +12,114 @@
 
 package com.tezov.bank.ui.page.auth.account
 
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.graphics.Color
+import com.tezov.bank.R
+import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow
+import com.tezov.bank.ui.component.block.SectionCarouselCard
+import com.tezov.bank.ui.component.block.SectionSimpleRow
+import com.tezov.bank.ui.component.element.AccountSummaryCard
+import com.tezov.bank.ui.component.element.AccountValueSimpleRow
+import com.tezov.bank.ui.component.element.SimpleRow
+import com.tezov.bank.ui.page.auth.discover.PageDiscoverState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateSemantic
 
-class PageAccountState private constructor() : PageState {
+class PageAccountState private constructor(
+    val header: Header,
+    val accountHistories: MutableState<List<SectionAccountValueSimpleRow.Data>?>,
+
+    ) : PageState {
 
     companion object {
-        fun create() = PageAccountState()
+        fun create(
+            header: Header = Header.empty(),
+            accountHistories: MutableState<List<SectionAccountValueSimpleRow.Data>?> = mutableStateOf(null),
+        ) = PageAccountState(
+            header = header,
+            accountHistories = accountHistories
+        )
     }
 
+    data class Header(
+        val accountSummary: MutableState<AccountSummaryCard.Data?>,
+    ) {
+        companion object {
+            fun empty() = Header(
+                mutableStateOf(null),
+            )
+        }
+    }
+
+    init {
+        header.apply {
+            accountSummary.value = AccountSummaryCard.Data(
+                title = "title",
+                subTitle = "subTitle",
+                amount = "amount",
+            )
+        }
+
+        val semantic = OutfitStateSemantic(
+            neutral = Color.Gray,
+            info = Color.Blue,
+            alert = Color.Black,
+            success = Color.Green,
+            error = Color.Red,
+        )
+
+        accountHistories.value = listOf(
+            SectionAccountValueSimpleRow.Data(
+                title = "VENDREDI 14 AVRIL",
+                rows = listOf(
+                    AccountValueSimpleRow.Data(
+                        iconInfoId = R.drawable.ic_info_24dp,
+                        iconInfoColor = semantic.neutral,
+                        title = "Paiements cb amazon du 12/04 a payli2441535 - CLASS",
+                        subTitle = "Achats,shopping",
+                        amount = "-14.69 €",
+                    ),
+                    AccountValueSimpleRow.Data(
+                        iconInfoId = R.drawable.ic_info_24dp,
+                        iconInfoColor = semantic.info,
+                        title = "Prelevement bouygues telecom du 13/04 - EMMETEUR",
+                        subTitle = "Téléphone",
+                        amount = "-9.95 €",
+                    ),
+                    AccountValueSimpleRow.Data(
+                        iconInfoId = R.drawable.ic_info_24dp,
+                        iconInfoColor = semantic.info,
+                        title = "Paiement cb auchan du 11/04 a Faches-Thumesnil",
+                        subTitle = "Alimentation, supermarché",
+                        amount = "-41.46 €",
+                    ),
+                )
+            ),
+            SectionAccountValueSimpleRow.Data(
+                title = "JEUDI 06 AVRIL",
+                rows = listOf(
+                    AccountValueSimpleRow.Data(
+                        iconInfoId = R.drawable.ic_info_24dp,
+                        iconInfoColor = semantic.success,
+                        title = "Remboursement cb amazon",
+                        subTitle = "Remboursement",
+                        amount = "26.99 €",
+                    ),
+                    AccountValueSimpleRow.Data(
+                        iconInfoId = R.drawable.ic_info_24dp,
+                        iconInfoColor = semantic.alert,
+                        title = "Paiements cb otacos ganbetta du 31/03 à paris 15",
+                        subTitle = "Restaurants, bars",
+                        amount = "-17.20 €",
+                    ),
+                )
+            )
+        )
+
+
+
+
+    }
 
 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 23:53
+ *  Created by Tezov on 18/04/2023 20:56
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 23:05
+ *  Last modified 18/04/2023 20:42
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,10 +23,31 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.typographiesExtended
+import androidx.compose.ui.unit.sp
+import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow
+import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow.Style.Companion.copy
+import com.tezov.bank.ui.component.block.SectionSimpleRow.Style.Companion.copy
+import com.tezov.bank.ui.component.block.SectionSimpleTile
+import com.tezov.bank.ui.component.block.SectionSimpleTile.Style.Companion.copy
+import com.tezov.bank.ui.component.element.AccountSummaryCard
+import com.tezov.bank.ui.component.element.AccountValueSimpleRow.Style.Companion.copy
+import com.tezov.bank.ui.component.element.SimpleRow.Style.Companion.copy
+import com.tezov.bank.ui.component.element.SimpleTile.Style.Companion.copy
+import com.tezov.bank.ui.page.auth.discover.colors
+import com.tezov.bank.ui.page.auth.payment.PagePaymentTheme
+import com.tezov.bank.ui.page.auth.payment.colors
+import com.tezov.bank.ui.page.lobby.help_and_service.colors
+import com.tezov.bank.ui.theme.ThemeComponentProviders
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.cluster.ColumnCollapsibleHeader
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 val PageAccountTheme.colors: PageAccountTheme.Colors
     @Composable
@@ -43,20 +64,6 @@ val PageAccountTheme.dimensions: PageAccountTheme.Dimensions
 infix fun PageAccountTheme.provides(value: PageAccountTheme.Dimensions) =
     localDimensions provides value
 
-val PageAccountTheme.shapes: PageAccountTheme.Shapes
-    @Composable
-    @ReadOnlyComposable
-    get() = localShapes.current
-
-infix fun PageAccountTheme.provides(value: PageAccountTheme.Shapes) = localShapes provides value
-
-val PageAccountTheme.borders: PageAccountTheme.Borders
-    @Composable
-    @ReadOnlyComposable
-    get() = localBorders.current
-
-infix fun PageAccountTheme.provides(value: PageAccountTheme.Borders) = localBorders provides value
-
 val PageAccountTheme.typographies: PageAccountTheme.Typographies
     @Composable
     @ReadOnlyComposable
@@ -65,17 +72,31 @@ val PageAccountTheme.typographies: PageAccountTheme.Typographies
 infix fun PageAccountTheme.provides(value: PageAccountTheme.Typographies) =
     localTypographies provides value
 
+val PageAccountTheme.styles: PageAccountTheme.Style
+    @Composable
+    @ReadOnlyComposable
+    get() = localStyles.current
+
+infix fun PageAccountTheme.provides(value: PageAccountTheme.Style) = localStyles provides value
+
+
 object PageAccountTheme {
 
     data class Colors(
         val background: Color,
-        val textContent: Color,
+        val backgroundElevated: Color,
+        val accent: Color,
+        val primary: Color,
+        val fade: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
-        background = MaterialTheme.colors.primary,
-        textContent = MaterialTheme.colorsExtended.onPrimary.accent,
+        background = MaterialTheme.colorsExtended.background.default,
+        backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.default,
+        accent = MaterialTheme.colorsExtended.primary.accent,
+        primary = MaterialTheme.colorsExtended.primary.default,
+        fade = MaterialTheme.colorsExtended.primary.fade,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -83,12 +104,16 @@ object PageAccountTheme {
     }
 
     data class Dimensions(
-        val icon: Dp,
+        val headLineMin: TextUnit,
+        val headlineMax: TextUnit,
+        val headerProperties: ColumnCollapsibleHeader.Properties,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
-        icon = 24.dp,
+        headLineMin = 24.sp,
+        headlineMax = 54.sp,
+        headerProperties = ColumnCollapsibleHeader.Properties(50.dp, 156.dp)
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -96,56 +121,64 @@ object PageAccountTheme {
             error("not provided")
         }
 
-    data class Shapes(
-        val card: Shape,
-    )
-
-    @Composable
-    fun provideShapes() = Shapes(
-        card = MaterialTheme.shapesExtended.element.normal.getShape() ?: MaterialTheme.shapes.small,
-    )
-
-    internal val localShapes: ProvidableCompositionLocal<Shapes> = staticCompositionLocalOf {
-        error("not provided")
-    }
-
-
-    data class Borders(
-        val card: BorderStroke,
-    )
-
-    @Composable
-    fun provideBorders() = Borders(
-        card = BorderStroke(
-            2.dp,
-            colors.textContent
-        )
-    )
-
-    internal val localBorders: ProvidableCompositionLocal<Borders> = staticCompositionLocalOf {
-        error("not provided")
-    }
 
     data class Typographies(
-        val title: TextStyle,
-        val normal: TextStyle,
+        val headline: OutfitTextStateColor,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesExtended.title.normal.typo.copy(
-            color = colors.textContent
-        ),
-        normal = MaterialTheme.typographiesExtended.title.normal.typo.copy(
-            color = colors.textContent,
-            fontWeight = FontWeight.Bold
-        ),
-
-        )
+        headline = MaterialTheme.typographiesExtended.title.supra.copy {
+            outfitState = colors.primary.asStateSimple
+        },
+    )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =
         staticCompositionLocalOf {
             error("not provided")
         }
+
+    data class Style(
+        val sectionAccountValue: SectionAccountValueSimpleRow.Style,
+        val accountSummary: AccountSummaryCard.Style,
+
+        )
+
+    @Composable
+    fun provideStyles() = Style(
+        sectionAccountValue = ThemeComponentProviders.sectionAccountValueSimpleRowStyle().copy {
+            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            outfitTextTitle = outfitTextTitle?.copy {
+                outfitState = colors.primary.asStateSimple
+            }
+            colorDivider = colors.fade
+            rowStyle = rowStyle.copy {
+                outfitTextTitle = outfitTextTitle?.copy {
+                    outfitState = colors.primary.asStateSimple
+                }
+                outfitTextSubTitle = outfitTextSubTitle?.copy {
+                    outfitState = colors.fade.asStateSimple
+                }
+                outfitTextAmount = outfitTextAmount?.copy {
+                    outfitState = colors.primary.asStateSimple
+                }
+            }
+        },
+        accountSummary = AccountSummaryCard.Style(
+            outfitTextTitle = MaterialTheme.typographiesExtended.body.normal.copy {
+                outfitState = colors.primary.asStateSimple
+            },
+            outfitTextSubTitle = MaterialTheme.typographiesExtended.helper.normal.copy {
+                outfitState = colors.fade.asStateSimple
+            },
+            outfitTextAmount = MaterialTheme.typographiesExtended.body.normal.copy {
+                outfitState = colors.primary.asStateSimple
+            },
+        )
+    )
+
+    internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
+        error("not provided")
+    }
 
 }
