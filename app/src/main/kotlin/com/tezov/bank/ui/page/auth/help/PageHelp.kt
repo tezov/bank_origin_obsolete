@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 20/04/2023 20:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 20/04/2023 20:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,6 +18,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
@@ -59,36 +60,13 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
                     .verticalScroll(rememberScrollState())
             ) {
                 contentHeader(state.header)
-                state.emergencies.value?.let {
-                    SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
-
-
-                    }
-                }
-                state.paymentModes.value?.let {
-                    SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
-
-
-                    }
-                }
-                state.configuration.value?.let {
-                    SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
-
-
-                    }
-                }
-                state.account.value?.let {
-                    SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
-
-
-                    }
-                }
-                state.misc.value?.let {
-                    SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
-
-
-                    }
-                }
+                contentBody(
+                    emergencies = state.emergencies,
+                    paymentModes = state.paymentModes,
+                    configuration = state.configuration,
+                    account = state.account,
+                    misc = state.misc,
+                )
                 Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.huge.vertical))
             }
         }
@@ -129,6 +107,47 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
                 )
             }
         }
+    }
+
+    @Composable
+    private fun contentBody(
+        emergencies: MutableState<SectionSimpleRow.Data?>,
+        paymentModes: MutableState<SectionSimpleRow.Data?>,
+        configuration: MutableState<SectionSimpleRow.Data?>,
+        account: MutableState<SectionSimpleRow.Data?>,
+        misc: MutableState<SectionSimpleRow.Data?>,
+    ) {
+        emergencies.value?.let {
+            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
+
+
+            }
+        }
+        paymentModes.value?.let {
+            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
+
+
+            }
+        }
+        configuration.value?.let {
+            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
+
+
+            }
+        }
+        account.value?.let {
+            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
+
+
+            }
+        }
+        misc.value?.let {
+            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
+
+
+            }
+        }
+
     }
 
     @Composable

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 20/04/2023 20:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 20/04/2023 20:33
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,6 +19,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -69,30 +70,12 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                     .verticalScroll(rememberScrollState())
             ) {
                 contentHeader(state.header)
-                state.profils.value?.let {
-                    SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
-
-
-                    }
-                }
-                state.documents.value?.let {
-                    SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
-
-
-                    }
-                }
-                state.offers.value?.let {
-                    SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
-
-
-                    }
-                }
-                state.helps.value?.let {
-                    SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
-
-
-                    }
-                }
+                contentBody(
+                    profils = state.profils,
+                    documents = state.documents,
+                    offers = state.offers,
+                    helps = state.helps,
+                )
                 Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.huge.vertical))
             }
         }
@@ -139,6 +122,40 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                 }
             }
         }
+    }
+
+    @Composable
+    private fun contentBody(
+        profils: MutableState<SectionSimpleRow.Data?>,
+        documents: MutableState<SectionSimpleRow.Data?>,
+        offers: MutableState<SectionSimpleRow.Data?>,
+        helps: MutableState<SectionSimpleRow.Data?>,
+    ) {
+        profils.value?.let {
+            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
+
+
+            }
+        }
+        documents.value?.let {
+            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
+
+
+            }
+        }
+        offers.value?.let {
+            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
+
+
+            }
+        }
+        helps.value?.let {
+            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
+
+
+            }
+        }
+
     }
 
     @Composable

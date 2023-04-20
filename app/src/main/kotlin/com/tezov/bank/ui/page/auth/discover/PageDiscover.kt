@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 20/04/2023 20:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 20/04/2023 20:23
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,12 +18,10 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import com.google.accompanist.pager.ExperimentalPagerApi
-import com.tezov.bank.ui.component.block.SectionSimpleTile
-import com.tezov.bank.ui.component.block.SectionSimpleRow
-import com.tezov.bank.ui.component.block.SectionCarouselCard
-import com.tezov.bank.ui.component.block.SectionRollerCard
+import com.tezov.bank.ui.component.block.*
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
@@ -78,38 +76,17 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                         .fillMaxWidth()
                 ) {
                     contentHeader(state.header)
-                    state.cardsWithButton.value?.let {
-                        SectionCarouselCard(data = it, style = PageDiscoverTheme.styles.sectionCarouselCardButton){
-
-                        }
-                    }
+                    contentPager(
+                        cardsWithButton = state.cardsWithButton,
+                        cardsWithLink = state.cardsWithLink,
+                        cashbacks = state.cashbacks
+                    )
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
-                    state.cardsWithLink.value?.let {
-                        SectionCarouselCard(data = it, style = PageDiscoverTheme.styles.sectionCarouselCardLink){
-
-                        }
-                    }
+                    contentSection(
+                        offers = state.offers,
+                        tips = state.tips
+                    )
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
-                    state.cashbacks.value?.let {
-                        SectionRollerCard(data = it, style = PageDiscoverTheme.styles.sectionRollerCard){
-
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
-                    state.offers.value?.let {
-                        SectionSimpleTile(data = it, style = PageDiscoverTheme.styles.sectionActionCard) {
-
-
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(PageDiscoverTheme.dimensions.spacingTopSectionRowToBottomSectionCard))
-                    state.tips.value?.let {
-                        SectionSimpleRow(data = it, style = PageDiscoverTheme.styles.sectionActionRow) {
-
-
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.huge.vertical))
                 }
             }
         }
@@ -135,6 +112,57 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                         outfitState = PageDiscoverTheme.colors.background.asStateSimple
                     }
                 )
+            }
+        }
+    }
+
+    @Composable
+    private fun contentPager(
+        cardsWithButton: MutableState<SectionCarouselCard.Data?>,
+        cardsWithLink: MutableState<SectionCarouselCard.Data?>,
+        cashbacks: MutableState<SectionRollerCard.Data?>,
+    ) {
+        cardsWithButton.value?.let {
+            SectionCarouselCard(
+                data = it,
+                style = PageDiscoverTheme.styles.sectionCarouselCardButton
+            ) {
+
+            }
+        }
+        Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
+        cardsWithLink.value?.let {
+            SectionCarouselCard(
+                data = it,
+                style = PageDiscoverTheme.styles.sectionCarouselCardLink
+            ) {
+
+            }
+        }
+        Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
+        cashbacks.value?.let {
+            SectionRollerCard(data = it, style = PageDiscoverTheme.styles.sectionRollerCard) {
+
+            }
+        }
+    }
+
+    @Composable
+    private fun contentSection(
+        offers: MutableState<SectionSimpleTile.Data?>,
+        tips: MutableState<SectionSimpleRow.Data?>,
+    ) {
+        offers.value?.let {
+            SectionSimpleTile(data = it, style = PageDiscoverTheme.styles.sectionActionCard) {
+
+
+            }
+        }
+        Spacer(modifier = Modifier.height(PageDiscoverTheme.dimensions.spacingTopSectionRowToBottomSectionCard))
+        tips.value?.let {
+            SectionSimpleRow(data = it, style = PageDiscoverTheme.styles.sectionActionRow) {
+
+
             }
         }
     }

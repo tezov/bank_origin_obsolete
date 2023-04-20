@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 20/04/2023 20:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 20/04/2023 20:43
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,6 +16,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.Dp
@@ -25,7 +26,7 @@ import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Shadow
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
-import com.tezov.lib_core_android_kotlin.ui.component.cluster.ColumnCollapsibleHeader
+import com.tezov.lib_core_android_kotlin.ui.component.layout.ColumnCollapsibleHeader
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -74,25 +75,10 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                     )
                 },
                 body = {
-                    state.cardSmall.value?.let {
-                        SectionSimpleTile(
-                            data = it,
-                            style = PagePaymentTheme.styles.sectionCard
-                        ) {
-
-
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
-                    state.cardLarge.value?.let {
-                        SectionSimpleTile(
-                            data = it,
-                            style = PagePaymentTheme.styles.sectionCard
-                        ) {
-
-
-                        }
-                    }
+                    contentBody(
+                        cardSmall = state.cardSmall,
+                        cardLarge = state.cardLarge,
+                    )
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.huge.vertical))
                 }
             )
@@ -133,9 +119,34 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                                 alpha(0f)
                             }
                         ),
-                    elevation = MaterialTheme.dimensionsCommonExtended.elevation.normal,
+                    elevation = (MaterialTheme.dimensionsCommonExtended.elevation.normal * (1-progress)),
                 )
-                Spacer(modifier = Modifier.height((MaterialTheme.dimensionsPaddingExtended.element.normal.vertical * (1f - progress))))
+            }
+        }
+    }
+
+    @Composable
+    private fun contentBody(
+        cardSmall: MutableState<SectionSimpleTile.Data?>,
+        cardLarge: MutableState<SectionSimpleTile.Data?>,
+    ){
+        cardSmall.value?.let {
+            SectionSimpleTile(
+                data = it,
+                style = PagePaymentTheme.styles.sectionCard
+            ) {
+
+
+            }
+        }
+        Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
+        cardLarge.value?.let {
+            SectionSimpleTile(
+                data = it,
+                style = PagePaymentTheme.styles.sectionCard
+            ) {
+
+
             }
         }
     }

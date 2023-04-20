@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 20:56
+ *  Created by Tezov on 20/04/2023 20:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 20:42
+ *  Last modified 20/04/2023 20:46
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,22 +17,24 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Image
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
+import com.tezov.lib_core_android_kotlin.ui.component.layout.ShrinkableBox
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 
 object AccountSummaryCard {
+
+    private const val MIN_SHRINK_FACTOR = 0.5f
 
     class StyleBuilder internal constructor(
         style: Style
@@ -100,17 +102,16 @@ object AccountSummaryCard {
         modifier: Modifier = Modifier,
         style: Style,
         data: Data,
+        shrink: Float = 1.0f,
         onClick: (() -> Unit)? = null
     ) {
-        Surface(
-            color = style.outfitFrame.resolveColorShape() ?: MaterialTheme.colors.surface,
-            shape = style.outfitFrame.getShape() ?: MaterialTheme.shapes.small,
-            border = style.outfitFrame.resolveBorder()
-        ) {
+        ShrinkableBox{
             Column(
                 modifier = modifier
+                    .shrink(shrink.coerceAtLeast(MIN_SHRINK_FACTOR))
+                    .background(style.outfitFrame)
                     .padding(MaterialTheme.dimensionsPaddingExtended.block.small)
-                    .thenOnNotNull(onClick){
+                    .thenOnNotNull(onClick) {
                         clickable { it() }
                     }
             ) {

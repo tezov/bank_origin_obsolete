@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 20/04/2023 20:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 19:24
+ *  Last modified 20/04/2023 20:09
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -105,30 +105,26 @@ object RollerCard {
         data: Data,
         onClick: (() -> Unit)? = null
     ) {
-        Surface(
-            color = style.outfitFrame.resolveColorShape() ?: MaterialTheme.colors.surface,
-            shape = style.outfitFrame.getShape() ?: MaterialTheme.shapes.small,
-            border = style.outfitFrame.resolveBorder()
+
+        Column(
+            modifier = modifier
+                .background(style.outfitFrame)
+                .padding(MaterialTheme.dimensionsPaddingExtended.block.small)
+                .thenOnNotNull(onClick){
+                    clickable { it() }
+                }
         ) {
-            Column(
-                modifier = modifier
-                    .padding(MaterialTheme.dimensionsPaddingExtended.block.small)
-                    .thenOnNotNull(onClick){
-                        clickable { it() }
-                    }
-            ) {
-                Image.Simple(
-                    modifier = Modifier.align(Alignment.CenterHorizontally),
-                    resourceId = data.image,
-                    description = null,
-                    style = style.imageStyle
-                )
-                Text.StateColor(
-                    modifier = Modifier.padding(top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical),
-                    text = data.title,
-                    style = style.outfitTextTitle
-                )
-            }
+            Image.Simple(
+                modifier = Modifier.align(Alignment.CenterHorizontally),
+                resourceId = data.image,
+                description = null,
+                style = style.imageStyle
+            )
+            Text.StateColor(
+                modifier = Modifier.padding(top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical),
+                text = data.title,
+                style = style.outfitTextTitle
+            )
         }
     }
 

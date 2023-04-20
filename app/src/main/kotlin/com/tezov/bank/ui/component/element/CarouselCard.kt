@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 20/04/2023 20:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 21:25
+ *  Last modified 20/04/2023 20:16
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,6 @@ package com.tezov.bank.ui.component.element
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -260,83 +259,19 @@ object CarouselCard {
         data: Data,
         onClick: () -> Unit
     ) {
-        Surface(
-            color = style.outfitFrame.resolveColorShape() ?: MaterialTheme.colors.surface,
-            shape = style.outfitFrame.getShape() ?: MaterialTheme.shapes.small,
-            border = style.outfitFrame.resolveBorder()
-        ) {
-            Row {
-                Column(
-                    modifier = modifier
-                        .padding(
-                            top = MaterialTheme.dimensionsPaddingExtended.block.big.vertical,
-                            start = MaterialTheme.dimensionsPaddingExtended.block.big.horizontal,
-                            end = MaterialTheme.dimensionsPaddingExtended.block.big.horizontal,
-                            bottom = MaterialTheme.dimensionsPaddingExtended.block.normal.vertical,
-                        )
-                        .weight(1f)
-                ) {
-                    data.tag?.let {
-                        Column(
-                            modifier = Modifier
-                                .padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical)
-                                .background(style.outfitFrameTag)
-                        ) {
-                            Text.StateColor(
-                                modifier = Modifier.padding(
-                                    vertical = MaterialTheme.dimensionsPaddingExtended.element.small.vertical,
-                                    horizontal = MaterialTheme.dimensionsPaddingExtended.element.big.horizontal
-                                ),
-                                text = it,
-                                style = style.outfitTextTag,
-                            )
-                        }
-                    }
-                    Text.StateColor(
-                        modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
-                        text = data.title,
-                        style = style.outfitTextTitle,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                    Text.StateColor(
-                        modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
-                        text = data.body,
-                        style = style.outfitTextBody,
-                    )
-                    Spacer(modifier = Modifier.width(0.dp).weight(1f))
-                    ButtonImport.StateColor(
-                        text = data.action,
-                        style = style.actionStyle,
-                        onClick = onClick,
-                    )
-                }
-                data.iconInfo?.let {
-                    Icon.Simple(
-                        modifier = Modifier.align(Alignment.Top),
-                        resourceId = it,
-                        description = null,
-                        style = style.iconInfoStyle
-                    )
-                }
-            }
-        }
-    }
-
-    @Composable
-    private fun ContentLink(
-        style: Style.Link,
-        modifier: Modifier,
-        data: Data,
-        onClick: () -> Unit
-    ) {
-        Surface(
-            color = style.outfitFrame.resolveColorShape() ?: MaterialTheme.colors.surface,
-            shape = style.outfitFrame.getShape() ?: MaterialTheme.shapes.small,
-            border = style.outfitFrame.resolveBorder()
+        Row(
+            modifier = modifier
+                .background(style.outfitFrame)
+                .padding(
+                    top = MaterialTheme.dimensionsPaddingExtended.block.big.vertical,
+                    start = MaterialTheme.dimensionsPaddingExtended.block.big.horizontal,
+                    end = MaterialTheme.dimensionsPaddingExtended.block.big.horizontal,
+                    bottom = MaterialTheme.dimensionsPaddingExtended.block.normal.vertical,
+                )
         ) {
             Column(
-                modifier = modifier
-                    .padding(MaterialTheme.dimensionsPaddingExtended.block.big)
+                modifier = Modifier
+                    .weight(1f)
             ) {
                 data.tag?.let {
                     Column(
@@ -354,35 +289,99 @@ object CarouselCard {
                         )
                     }
                 }
-                Row {
-                    data.iconInfo?.let {
-                        Icon.Simple(
-                            modifier = Modifier.padding(end = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal),
-                            resourceId = it,
-                            description = null,
-                            style = style.iconInfoStyle
-                        )
-                    }
+                Text.StateColor(
+                    modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
+                    text = data.title,
+                    style = style.outfitTextTitle,
+                    overflow = TextOverflow.Ellipsis
+                )
+                Text.StateColor(
+                    modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
+                    text = data.body,
+                    style = style.outfitTextBody,
+                )
+                Spacer(
+                    modifier = Modifier
+                        .width(0.dp)
+                        .weight(1f)
+                )
+                ButtonImport.StateColor(
+                    text = data.action,
+                    style = style.actionStyle,
+                    onClick = onClick,
+                )
+            }
+            data.iconInfo?.let {
+                Icon.Simple(
+                    modifier = Modifier.align(Alignment.Top),
+                    resourceId = it,
+                    description = null,
+                    style = style.iconInfoStyle
+                )
+            }
+        }
+    }
+
+    @Composable
+    private fun ContentLink(
+        style: Style.Link,
+        modifier: Modifier,
+        data: Data,
+        onClick: () -> Unit
+    ) {
+        Column(
+            modifier = modifier
+                .background(style.outfitFrame)
+                .padding(MaterialTheme.dimensionsPaddingExtended.block.big)
+        ) {
+            data.tag?.let {
+                Column(
+                    modifier = Modifier
+                        .padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical)
+                        .background(style.outfitFrameTag)
+                ) {
                     Text.StateColor(
-                        modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
-                        text = data.title,
-                        style = style.outfitTextTitle,
-                        overflow = TextOverflow.Ellipsis
+                        modifier = Modifier.padding(
+                            vertical = MaterialTheme.dimensionsPaddingExtended.element.small.vertical,
+                            horizontal = MaterialTheme.dimensionsPaddingExtended.element.big.horizontal
+                        ),
+                        text = it,
+                        style = style.outfitTextTag,
+                    )
+                }
+            }
+            Row {
+                data.iconInfo?.let {
+                    Icon.Simple(
+                        modifier = Modifier.padding(end = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal),
+                        resourceId = it,
+                        description = null,
+                        style = style.iconInfoStyle
                     )
                 }
                 Text.StateColor(
                     modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
-                    text = data.body,
-                    style = style.outfitTextBody,
+                    text = data.title,
+                    style = style.outfitTextTitle,
+                    overflow = TextOverflow.Ellipsis
                 )
-                Spacer(modifier = Modifier.width(0.dp).weight(1f))
-                LinkImport.StateColor(
-                    text = data.action,
-                    style = style.actionStyle,
-                    onClick = onClick
-                )
-
             }
+            Text.StateColor(
+                modifier = Modifier.padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
+                text = data.body,
+                style = style.outfitTextBody,
+            )
+            Spacer(
+                modifier = Modifier
+                    .width(0.dp)
+                    .weight(1f)
+            )
+            LinkImport.StateColor(
+                text = data.action,
+                style = style.actionStyle,
+                onClick = onClick
+            )
+
         }
     }
 

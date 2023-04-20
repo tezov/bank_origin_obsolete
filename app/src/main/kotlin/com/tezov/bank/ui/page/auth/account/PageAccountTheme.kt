@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 20:56
+ *  Created by Tezov on 20/04/2023 20:47
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 20:42
+ *  Last modified 20/04/2023 20:04
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,37 +12,24 @@
 
 package com.tezov.bank.ui.page.auth.account
 
-import androidx.compose.foundation.BorderStroke
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow.Style.Companion.copy
-import com.tezov.bank.ui.component.block.SectionSimpleRow.Style.Companion.copy
-import com.tezov.bank.ui.component.block.SectionSimpleTile
-import com.tezov.bank.ui.component.block.SectionSimpleTile.Style.Companion.copy
 import com.tezov.bank.ui.component.element.AccountSummaryCard
 import com.tezov.bank.ui.component.element.AccountValueSimpleRow.Style.Companion.copy
-import com.tezov.bank.ui.component.element.SimpleRow.Style.Companion.copy
-import com.tezov.bank.ui.component.element.SimpleTile.Style.Companion.copy
-import com.tezov.bank.ui.page.auth.discover.colors
-import com.tezov.bank.ui.page.auth.payment.PagePaymentTheme
-import com.tezov.bank.ui.page.auth.payment.colors
-import com.tezov.bank.ui.page.lobby.help_and_service.colors
 import com.tezov.bank.ui.theme.ThemeComponentProviders
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.component.cluster.ColumnCollapsibleHeader
+import com.tezov.lib_core_android_kotlin.ui.component.layout.ColumnCollapsibleHeader
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
@@ -165,6 +152,11 @@ object PageAccountTheme {
             }
         },
         accountSummary = AccountSummaryCard.Style(
+            outfitFrame = OutfitFrameStateColor(
+              outfitShape = MaterialTheme.shapesExtended.element.big.copy{
+                  outfitState = colors.backgroundElevated.asStateSimple
+              }
+            ),
             outfitTextTitle = MaterialTheme.typographiesExtended.body.normal.copy {
                 outfitState = colors.primary.asStateSimple
             },
