@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 20/04/2023 20:47
+ *  Created by Tezov on 21/04/2023 23:20
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 20/04/2023 20:04
+ *  Last modified 21/04/2023 23:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -100,7 +100,7 @@ object PageAccountTheme {
     fun provideDimensions() = Dimensions(
         headLineMin = 24.sp,
         headlineMax = 54.sp,
-        headerProperties = ColumnCollapsibleHeader.Properties(50.dp, 156.dp)
+        headerProperties = ColumnCollapsibleHeader.Properties(160.dp, 240.dp)
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =

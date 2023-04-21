@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 20/04/2023 20:47
+ *  Created by Tezov on 21/04/2023 23:20
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 20/04/2023 20:47
+ *  Last modified 21/04/2023 23:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,6 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow
 import com.tezov.bank.ui.component.element.AccountSummaryCard
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
@@ -98,9 +99,8 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                 verticalArrangement = Arrangement.Bottom
             ) {
 
-
                 AccountSummaryCard(
-                    shrink = progress,
+                    progress = progress,
                     modifier = Modifier
                         .fillMaxWidth(0.6f),
                     style = PageAccountTheme.styles.accountSummary,

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 21/04/2023 23:20
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 19:07
+ *  Last modified 21/04/2023 23:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,17 +24,22 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionDensity.toDp
 
-fun Modifier.updateToMaxHeight(heightState: MutableState<Dp>) = composed {
-    val density = LocalDensity.current.density
-    onSizeChanged { size ->
-        val itemHeight = size.height.toDp(density)
-        with(heightState.value) {
-            if (this == Dp.Unspecified || itemHeight > this) {
-                heightState.value = itemHeight
+fun Modifier.updateToMaxHeight(heightState: MutableState<Dp>, enabled: Boolean = true) =
+    if (enabled) {
+        composed {
+            val density = LocalDensity.current.density
+            onSizeChanged { size ->
+                val itemHeight = size.height.toDp(density)
+                with(heightState.value) {
+                    if (this == Dp.Unspecified || itemHeight > this) {
+                        heightState.value = itemHeight
+                    }
+                }
             }
         }
+    } else {
+        this
     }
-}
 
 fun Modifier.fillMaxHeight(heightState: MutableState<Dp>) =
     updateToMaxHeight(heightState).height(heightState.value)
