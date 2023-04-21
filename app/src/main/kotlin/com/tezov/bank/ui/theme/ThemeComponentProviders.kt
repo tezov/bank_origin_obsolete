@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 20:56
+ *  Created by Tezov on 21/04/2023 23:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 20:21
+ *  Last modified 21/04/2023 23:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -394,9 +394,7 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun rollerStyle() = HorizontalRoller.Page.Style(
-        heightItemToHighest = true
-    )
+    fun rollerStyle() = HorizontalRoller.Page.Style()
 
     @Composable
     fun sectionRollerCardStyle() =

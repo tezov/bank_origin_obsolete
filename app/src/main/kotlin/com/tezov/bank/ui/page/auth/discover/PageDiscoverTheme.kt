@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 21/04/2023 23:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 21/04/2023 23:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -39,6 +39,7 @@ import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager.Page.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller.Page.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Image.Simple.Style.Companion.copy
@@ -165,7 +166,7 @@ object PageDiscoverTheme {
             }
             carouselStyle = carouselStyle.copy {
                 paddingTopIndicator = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical
-                heightItemToHighest = true
+                //heightItemToHighest = true
             }
             cardStyle = (cardStyle as CarouselCard.Style.Button).copy {
                 outfitFrame = outfitFrame.copy {
@@ -211,7 +212,7 @@ object PageDiscoverTheme {
         ).copy{
             carouselStyle = carouselStyle.copy {
                 paddingTopIndicator = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical
-                heightItemToHighest = true
+                //heightItemToHighest = true
             }
             outfitTextTitle = outfitTextTitle?.copy {
                 outfitState = colors.primary.asStateSimple
@@ -247,6 +248,9 @@ object PageDiscoverTheme {
             }
         },
         sectionRollerCard = ThemeComponentProviders.sectionRollerCardStyle().copy{
+            rollerStyle = rollerStyle.copy {
+                //heightItemToHighest = true
+            }
             outfitTextTitle = outfitTextTitle?.copy {
                 outfitState = colors.primary.asStateSimple
             }
