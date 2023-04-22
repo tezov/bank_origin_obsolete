@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 14:12
+ *  Created by Tezov on 22/04/2023 15:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 14:05
+ *  Last modified 22/04/2023 15:10
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.block.SectionSimpleTile
 import com.tezov.bank.ui.component.block.SectionSimpleTile.Style.Companion.copy
 import com.tezov.bank.ui.component.element.SimpleTile.Style.Companion.copy
+import com.tezov.bank.ui.page.auth.help.colors
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.layout.ColumnCollapsibleHeader
@@ -69,6 +70,7 @@ object PagePaymentTheme {
     data class Colors(
         val background: Color,
         val backgroundElevated: Color,
+        val backgroundElevatedOverlay: Color,
         val accent: Color,
         val primary: Color,
         val fade: Color,
@@ -78,6 +80,7 @@ object PagePaymentTheme {
     fun provideColors() = Colors(
         background = MaterialTheme.colorsExtended.background.default,
         backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.default,
+        backgroundElevatedOverlay = MaterialTheme.colorsExtended.backgroundElevated.overlay,
         accent = MaterialTheme.colorsExtended.primary.accent,
         primary = MaterialTheme.colorsExtended.primary.default,
         fade = MaterialTheme.colorsExtended.primary.fade,
@@ -97,7 +100,7 @@ object PagePaymentTheme {
     fun provideDimensions() = Dimensions(
         headLineMin = 24.sp,
         headlineMax = 54.sp,
-        headerProperties = ColumnCollapsibleHeader.Properties(min = 50.dp, max = 156.dp)
+        headerProperties = ColumnCollapsibleHeader.Properties(min = 50.dp, max = 136.dp)
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -129,28 +132,29 @@ object PagePaymentTheme {
     @Composable
     fun provideStyles() = Style(
         sectionCard = ThemeComponentProviders.sectionTileStyle().copy {
-            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-            iconStyle = iconStyle.copy { tint = colors.primary }
-            outfitTextTitle = outfitTextTitle?.copy {
-                outfitState = colors.primary.asStateSimple
-            }
-            tileStyle = tileStyle.copy {
-                iconStyle = iconStyle.copy {
-                    tint = colors.accent
-                    size = MaterialTheme.dimensionsIconExtended.info.huge
-                }
-                outfitTextTitle = outfitTextTitle?.copy {
-                    outfitState = colors.primary.asStateSimple
-                }
-                outfitTextSubtitle = outfitTextSubtitle?.copy {
-                    outfitState = colors.fade.asStateSimple
-                }
-                outfitFrame = outfitFrame.copy {
-                    outfitShape = outfitShape.copy {
-                        outfitState = colors.backgroundElevated.asStateSimple
-                    }
-                }
-            }
+//            colorBackgroundHeader = colors.backgroundElevatedOverlay
+//            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+//            iconStyle = iconStyle.copy { tint = colors.primary }
+//            outfitTextTitle = outfitTextTitle?.copy {
+//                outfitState = colors.primary.asStateSimple
+//            }
+//            tileStyle = tileStyle.copy {
+//                iconStyle = iconStyle.copy {
+//                    tint = colors.accent
+//                    size = MaterialTheme.dimensionsIconExtended.info.huge
+//                }
+//                outfitTextTitle = outfitTextTitle?.copy {
+//                    outfitState = colors.primary.asStateSimple
+//                }
+//                outfitTextSubtitle = outfitTextSubtitle?.copy {
+//                    outfitState = colors.fade.asStateSimple
+//                }
+//                outfitFrame = outfitFrame.copy {
+//                    outfitShape = outfitShape.copy {
+//                        outfitState = colors.backgroundElevated.asStateSimple
+//                    }
+//                }
+//            }
         }
     )
 

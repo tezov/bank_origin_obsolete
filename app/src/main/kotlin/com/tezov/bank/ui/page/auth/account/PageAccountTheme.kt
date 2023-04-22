@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 14:12
+ *  Created by Tezov on 22/04/2023 15:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 14:10
+ *  Last modified 22/04/2023 15:10
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,6 +26,7 @@ import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow.Style.Companion.copy
 import com.tezov.bank.ui.component.element.AccountSummaryCard
 import com.tezov.bank.ui.component.element.AccountValueSimpleRow.Style.Companion.copy
+import com.tezov.bank.ui.page.auth.discover.colors
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.layout.ColumnCollapsibleHeader
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
@@ -71,6 +72,7 @@ object PageAccountTheme {
     data class Colors(
         val background: Color,
         val backgroundElevated: Color,
+        val backgroundElevatedOverlay: Color,
         val accent: Color,
         val primary: Color,
         val fade: Color,
@@ -80,6 +82,7 @@ object PageAccountTheme {
     fun provideColors() = Colors(
         background = MaterialTheme.colorsExtended.background.default,
         backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.default,
+        backgroundElevatedOverlay = MaterialTheme.colorsExtended.backgroundElevated.overlay,
         accent = MaterialTheme.colorsExtended.primary.accent,
         primary = MaterialTheme.colorsExtended.primary.default,
         fade = MaterialTheme.colorsExtended.primary.fade,
@@ -133,22 +136,23 @@ object PageAccountTheme {
     @Composable
     fun provideStyles() = Style(
         sectionAccountValue = ThemeComponentProviders.sectionAccountValueSimpleRowStyle().copy {
-            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-            outfitTextTitle = outfitTextTitle?.copy {
-                outfitState = colors.primary.asStateSimple
-            }
-            colorDivider = colors.fade
-            rowStyle = rowStyle.copy {
-                outfitTextTitle = outfitTextTitle?.copy {
-                    outfitState = colors.primary.asStateSimple
-                }
-                outfitTextSubTitle = outfitTextSubTitle?.copy {
-                    outfitState = colors.fade.asStateSimple
-                }
-                outfitTextAmount = outfitTextAmount?.copy {
-                    outfitState = colors.primary.asStateSimple
-                }
-            }
+//            colorBackgroundHeader = colors.backgroundElevatedOverlay
+//            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+//            outfitTextTitle = outfitTextTitle?.copy {
+//                outfitState = colors.primary.asStateSimple
+//            }
+//            colorDivider = colors.fade
+//            rowStyle = rowStyle.copy {
+//                outfitTextTitle = outfitTextTitle?.copy {
+//                    outfitState = colors.primary.asStateSimple
+//                }
+//                outfitTextSubTitle = outfitTextSubTitle?.copy {
+//                    outfitState = colors.fade.asStateSimple
+//                }
+//                outfitTextAmount = outfitTextAmount?.copy {
+//                    outfitState = colors.primary.asStateSimple
+//                }
+//            }
         },
         accountSummary = AccountSummaryCard.Style(
             outfitFrame = OutfitFrameStateColor(

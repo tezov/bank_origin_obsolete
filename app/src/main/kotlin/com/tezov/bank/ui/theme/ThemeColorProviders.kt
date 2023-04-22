@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 12:37
+ *  Created by Tezov on 22/04/2023 15:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 12:16
+ *  Last modified 22/04/2023 14:58
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -38,10 +38,11 @@ object ThemeColorProviders {
         val grayBlack = Color(0xFF111010)
         val grayDark = Color(0xFF3F3F3F)
         val grayLight = Color(0xFF777777)
-        val grayLightOverlay = Color(0x70B6B5B5)
+        val grayLightOverlay = Color(0x20B6B5B5)
 
         val blueDark = Color(0xFF04282E)
         val blueDarkOverlay = Color(0x99022D52)
+        val blueLight = Color(0x99E0FFFF)
         val blueElegant = Color(0xFF12263F)
         val blueShady = Color(0xFF203550)
         val blueSea = Color(0xFF0FA8C0)
@@ -61,7 +62,7 @@ object ThemeColorProviders {
 
     fun common() = ThemeColorsExtended.Common(
         background = OutfitPaletteColor(
-            default = Palette.whiteDark,
+            default = Palette.whiteShiny,
             accent = Palette.blueSea,
             dark = Palette.blackOverlay,
         ),
@@ -85,8 +86,9 @@ object ThemeColorProviders {
         ),
 
         backgroundElevated = OutfitPaletteColor(
-            default = Palette.grayLight,
+            default = Palette.blueLight,
             decor = Palette.blueDarkOverlay,
+            overlay = Palette.grayLightOverlay,
         ),
         onBackgroundElevated = OutfitPaletteColor(
             default = Palette.blueElegant,

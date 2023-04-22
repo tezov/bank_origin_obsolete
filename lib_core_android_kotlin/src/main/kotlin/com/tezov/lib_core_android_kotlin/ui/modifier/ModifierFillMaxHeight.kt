@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/04/2023 23:20
+ *  Created by Tezov on 22/04/2023 15:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/04/2023 23:00
+ *  Last modified 22/04/2023 14:21
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -41,22 +41,22 @@ fun Modifier.updateToMaxHeight(heightState: MutableState<Dp>, enabled: Boolean =
         this
     }
 
-fun Modifier.fillMaxHeight(heightState: MutableState<Dp>) =
-    updateToMaxHeight(heightState).height(heightState.value)
+fun Modifier.fillMaxHeight(heightState: MutableState<Dp>, enabled: Boolean = true) =
+    updateToMaxHeight(heightState, enabled).thenOnTrue(enabled) { height(heightState.value) }
 
-fun Modifier.fillMaxHeightRemembered() = composed {
+fun Modifier.fillMaxHeightRemembered(enabled: Boolean = true) = composed {
     val heightState = remember {
         mutableStateOf(Dp.Unspecified)
     }
-    fillMaxHeight(heightState)
+    fillMaxHeight(heightState, enabled)
 }
 
-fun Modifier.fillDefaultMinHeight(heightState: MutableState<Dp>) =
-    updateToMaxHeight(heightState).defaultMinSize(minHeight = heightState.value)
+fun Modifier.fillDefaultMinHeight(heightState: MutableState<Dp>, enabled: Boolean = true) =
+    updateToMaxHeight(heightState, enabled).thenOnTrue(enabled) { defaultMinSize(minHeight = heightState.value) }
 
-fun Modifier.fillDefaultMinHeightRemembered() = composed {
+fun Modifier.fillDefaultMinHeightRemembered(enabled: Boolean = true) = composed {
     val heightState = remember {
         mutableStateOf(Dp.Unspecified)
     }
-    fillDefaultMinHeight(heightState)
+    fillDefaultMinHeight(heightState, enabled)
 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 22/04/2023 15:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 22/04/2023 15:10
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.component.block.SectionSimpleRow.Style.Companion.copy
 import com.tezov.bank.ui.component.element.SimpleRow.Style.Companion.copy
+import com.tezov.bank.ui.page.auth.profile.colors
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -59,17 +60,15 @@ object PageHelpTheme {
         val backgroundElevated: Color,
         val accent: Color,
         val primary: Color,
-        val decor: Color,
         val fade: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
         background = MaterialTheme.colorsExtended.background.default,
-        backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.default,
+        backgroundElevated = MaterialTheme.colorsExtended.backgroundElevated.overlay,
         accent = MaterialTheme.colorsExtended.primary.accent,
         primary = MaterialTheme.colorsExtended.primary.default,
-        decor = MaterialTheme.colorsExtended.backgroundElevated.decor,
         fade = MaterialTheme.colorsExtended.primary.fade,
     )
 
@@ -112,19 +111,20 @@ object PageHelpTheme {
     @Composable
     fun provideStyles() = Style(
         sectionRow = ThemeComponentProviders.sectionSimpleRowStyle().copy {
-            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-            iconStyle = iconStyle.copy { tint = colors.accent }
-            outfitTextTitle = outfitTextTitle?.copy {
-                outfitState = colors.primary.asStateSimple
-            }
-            colorDivider = colors.fade
-            rowStyle = rowStyle.copy {
-                iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
-                iconActionStyle = iconActionStyle.copy { tint = colors.accent }
-                outfitText = outfitText?.copy {
-                    outfitState = colors.primary.asStateSimple
-                }
-            }
+//            colorBackgroundHeader = colors.backgroundElevated
+//            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+//            iconStyle = iconStyle.copy { tint = colors.accent }
+//            outfitTextTitle = outfitTextTitle?.copy {
+//                outfitState = colors.primary.asStateSimple
+//            }
+//            colorDivider = colors.fade
+//            rowStyle = rowStyle.copy {
+//                iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
+//                iconActionStyle = iconActionStyle.copy { tint = colors.accent }
+//                outfitText = outfitText?.copy {
+//                    outfitState = colors.primary.asStateSimple
+//                }
+//            }
         },
     )
 

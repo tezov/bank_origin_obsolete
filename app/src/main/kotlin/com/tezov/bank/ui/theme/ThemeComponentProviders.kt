@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/04/2023 23:29
+ *  Created by Tezov on 22/04/2023 15:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/04/2023 23:28
+ *  Last modified 22/04/2023 15:10
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -199,7 +199,7 @@ object ThemeComponentProviders {
         outfitTextTitle = MaterialTheme.typographiesExtended.title.normal.copy {
             outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
         },
-        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default,
+        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.overlay,
         colorDivider = MaterialTheme.colorsExtended.primary.decor,
         sizeDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
         rowStyle = simpleRowStyle()
@@ -260,14 +260,16 @@ object ThemeComponentProviders {
                 fontWeight = FontWeight.Bold
             )
         },
+        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.overlay,
         tileStyle = tileStyle()
     )
 
     @Composable
     fun tileStyle() = SimpleTile.Style(
         outfitFrame = OutfitFrameStateColor(
-            outfitShape = MaterialTheme.shapesExtended.element.normal,
-            outfitBorder = MaterialTheme.bordersExtended.element.normal
+            outfitShape = MaterialTheme.shapesExtended.element.normal.copy {
+                outfitState = MaterialTheme.colorsExtended.backgroundElevated.default.asStateSimple
+            }
         ),
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
@@ -315,6 +317,7 @@ object ThemeComponentProviders {
                     PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
                 spacingItem = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             },
+            colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.overlay,
             cardStyle = cardStyle,
         )
 
@@ -324,7 +327,7 @@ object ThemeComponentProviders {
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = MaterialTheme.shapesExtended.element.big,
                 outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
-                    outfitState = MaterialTheme.colorsExtended.primary.decor.asStateSimple
+                    outfitState = MaterialTheme.colorsExtended.backgroundElevated.decor.asStateSimple
                 },
             ),
             iconInfoStyle = Icon.Simple.Style(
@@ -365,7 +368,7 @@ object ThemeComponentProviders {
         baseStyle = CarouselCard.Style.Base(
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = MaterialTheme.shapesExtended.element.big.copy {
-                    outfitState = MaterialTheme.colorsExtended.primary.overlay.asStateSimple
+                    outfitState = MaterialTheme.colorsExtended.backgroundElevated.overlay.asStateSimple
                 },
             ),
             iconInfoStyle = Icon.Simple.Style(
@@ -415,12 +418,12 @@ object ThemeComponentProviders {
                     fontWeight = FontWeight.Bold
                 )
             },
-            actionStyle = MaterialTheme.componentsButtonExtended.primary.copy{
-                outfitText = outfitText.copy{
+            actionStyle = MaterialTheme.componentsButtonExtended.primary.copy {
+                outfitText = outfitText.copy {
                     outfitState = MaterialTheme.colorsExtended.primary.shiny.asStateSimple
                 }
-                outfitFrame = outfitFrame.copy{
-                    outfitShape = outfitShape.copy{
+                outfitFrame = outfitFrame.copy {
+                    outfitShape = outfitShape.copy {
                         outfitState = MaterialTheme.colorsExtended.primary.accent.asStateSimple
                     }
                 }
