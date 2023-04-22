@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 14:12
+ *  Created by Tezov on 22/04/2023 22:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 14:09
+ *  Last modified 22/04/2023 22:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,9 +20,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow
 import com.tezov.bank.ui.component.element.AccountSummaryCard
@@ -46,6 +48,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtende
 object PageAccount : Page<PageAccountState, PageAccountAction> {
 
     private const val DIVIDER_HEADER_VISIBILITY_START = 0.3f
+    private const val ICON_ACTION_SCALE_MIN = 0.85f
 
     @Composable
     override fun Page<PageAccountState, PageAccountAction>.content(innerPadding: PaddingValues) {
@@ -116,20 +119,20 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                 )
                 Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.supra.vertical))
             }
-            Column(
-                modifier = Modifier
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.Bottom
+            Row(
+                modifier = Modifier.padding(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
             ) {
-                Row(
+                Column(
                     modifier = Modifier
-                        .weight(1.0f)
-                        .padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
-                    verticalAlignment = Alignment.Top
+                        .weight(1.0f),
+                    verticalArrangement = Arrangement.Bottom
                 ) {
                     header.headline?.let {
                         Text.StateColor(
-                            modifier = Modifier.weight(1.0f),
+                            modifier = Modifier
+                                .weight(1.0f)
+                                .padding(bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical)
+                                .offset(0.dp, progressDp - properties.max),
                             text = it,
                             style = PageAccountTheme.typographies.headline.copy {
                                 outfitState = PageAccountTheme.colors.background.asStateSimple
@@ -138,47 +141,52 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                     } ?: run {
                         Spacer(modifier = Modifier.weight(1.0f))
                     }
+                    header.accountSummary?.let {
+                        Row {
+                            AccountSummaryCard(
+                                progress = progress,
+                                modifier = Modifier.fillMaxWidth(),
+                                style = PageAccountTheme.styles.accountSummary,
+                                data = it
+                            )
+                        }
+                    }
+                }
+                Row(
+                    modifier = Modifier
+                        .offset(0.dp, (properties.max - progressDp)/3)
+                        .scale(progress.coerceAtLeast(ICON_ACTION_SCALE_MIN))
+                ) {
                     header.iconMailbox?.let {
-                        Icon.Simple(
-//                        style = ,
+                        Icon.StateColor(
+                            modifier = Modifier.padding(horizontal = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
+                            style = PageAccountTheme.styles.icon,
                             resourceId = it,
                             description = null
                         )
                     }
                     header.iconAccount?.let {
-                        Icon.Simple(
-//                        style = ,
+                        Icon.StateColor(
+                            style = PageAccountTheme.styles.icon,
                             resourceId = it,
                             description = null
                         )
                     }
                 }
-                header.accountSummary?.let {
-                    Row {
-                        Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal))
-                        AccountSummaryCard(
-                            progress = progress,
-                            modifier = Modifier
-                                .fillMaxWidth(0.80f),
-                            style = PageAccountTheme.styles.accountSummary,
-                            data = it
-                        )
-                    }
-                }
-
-                Shadow.Bottom(
-                    modifier = Modifier
-                        .then(progress < DIVIDER_HEADER_VISIBILITY_START,
-                            onTrue = {
-                                alpha((DIVIDER_HEADER_VISIBILITY_START - progress) / DIVIDER_HEADER_VISIBILITY_START)
-                            },
-                            onFalse = {
-                                alpha(0f)
-                            }
-                        ),
-                    elevation = (MaterialTheme.dimensionsCommonExtended.elevation.normal * (1 - progress)),
-                )
             }
+            Shadow.Bottom(
+                modifier = Modifier
+                    .align(Alignment.BottomCenter)
+                    .then(progress < DIVIDER_HEADER_VISIBILITY_START,
+                        onTrue = {
+                            alpha((DIVIDER_HEADER_VISIBILITY_START - progress) / DIVIDER_HEADER_VISIBILITY_START)
+                        },
+                        onFalse = {
+                            alpha(0f)
+                        }
+                    ),
+                elevation = (MaterialTheme.dimensionsCommonExtended.elevation.normal * (1 - progress)),
+            )
         }
     }
 

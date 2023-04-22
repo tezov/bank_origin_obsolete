@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 15:11
+ *  Created by Tezov on 22/04/2023 22:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 15:10
+ *  Last modified 22/04/2023 20:37
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,6 +18,7 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -132,29 +133,17 @@ object PagePaymentTheme {
     @Composable
     fun provideStyles() = Style(
         sectionCard = ThemeComponentProviders.sectionTileStyle().copy {
-//            colorBackgroundHeader = colors.backgroundElevatedOverlay
-//            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-//            iconStyle = iconStyle.copy { tint = colors.primary }
-//            outfitTextTitle = outfitTextTitle?.copy {
-//                outfitState = colors.primary.asStateSimple
-//            }
-//            tileStyle = tileStyle.copy {
-//                iconStyle = iconStyle.copy {
-//                    tint = colors.accent
-//                    size = MaterialTheme.dimensionsIconExtended.info.huge
-//                }
-//                outfitTextTitle = outfitTextTitle?.copy {
-//                    outfitState = colors.primary.asStateSimple
-//                }
-//                outfitTextSubtitle = outfitTextSubtitle?.copy {
-//                    outfitState = colors.fade.asStateSimple
-//                }
-//                outfitFrame = outfitFrame.copy {
-//                    outfitShape = outfitShape.copy {
-//                        outfitState = colors.backgroundElevated.asStateSimple
-//                    }
-//                }
-//            }
+            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            tileStyle = tileStyle.copy {
+                iconStyle = iconStyle.copy {
+                    size = MaterialTheme.dimensionsIconExtended.info.huge
+                }
+                outfitTextTitle = outfitTextTitle?.copy {
+                    typo = typo.copy(
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
         }
     )
 

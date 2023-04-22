@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 12:37
+ *  Created by Tezov on 22/04/2023 22:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 12:36
+ *  Last modified 22/04/2023 21:58
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -190,7 +190,6 @@ object AccountSummaryCard {
                 start.linkTo(parent.start)
             }
             constrain(subtitle) {
-                visibility = Visibility.Visible
                 top.linkTo(title.bottom)
                 start.linkTo(parent.start)
             }
@@ -234,6 +233,9 @@ object AccountSummaryCard {
             }
             constrain(subtitle) {
                 visibility = Visibility.Invisible
+                scaleX = 0.0f
+                scaleY = 0.0f
+                translationY = (-20).dp
                 top.linkTo(title.bottom)
                 start.linkTo(parent.start)
             }
@@ -256,8 +258,12 @@ object AccountSummaryCard {
                 KeyAttributes: [
                     {
                         target: ['AMOUNT'],
-                        frames: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                        translationY: [0, -50, -60, -70, -90, -90, -70, -50, -40, -20, 0],
+                        frames: [0, 50, 100],
+                        translationY: [+25, -70, 0],
+                        translationX: [-30, 0, 0],
+                        scaleY: [0.75, 0.65, 1.0],
+                        scaleX: [0.75, 0.5, 1.0],
+                        alpha: [1.0, 0.5, 1.0],
                     }
                 ]
             }
@@ -284,16 +290,16 @@ object AccountSummaryCard {
                     height(heightState.value * (progress).coerceAtLeast(MIN_SHRINK_FACTOR))
                 }
                 .background(style.outfitFrame)
-                .padding(MaterialTheme.dimensionsPaddingExtended.block.normal),
+                .padding(MaterialTheme.dimensionsPaddingExtended.block.huge),
             start = constraintSetEnd(),
             end = constraintSetStart(),
             transition = constraintTransition(),
             progress = progress,
 //            debug = EnumSet.of(MotionLayoutDebugFlags.SHOW_ALL)
         ) {
-
             Icon.Simple(
                 modifier = Modifier
+                    .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal)
                     .layoutId(MotionLayoutItem.ICON_INFO.name),
                 style = style.iconInfoStyle,
                 resourceId = data.iconInfo,
@@ -343,7 +349,7 @@ object AccountSummaryCard {
             )
             Text.StateColor(
                 modifier = Modifier
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical)
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical)
                     .layoutId(MotionLayoutItem.TITLE.name),
                 text = data.title,
                 style = style.outfitTextTitle,
@@ -351,14 +357,14 @@ object AccountSummaryCard {
             )
             Text.StateColor(
                 modifier = Modifier
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical)
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical)
                     .layoutId(MotionLayoutItem.SUBTITLE.name),
                 text = data.subTitle,
                 style = style.outfitTextSubtitle
             )
             Text.StateColor(
                 modifier = Modifier
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical)
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical)
                     .layoutId(MotionLayoutItem.AMOUNT.name),
                 text = data.amount,
                 style = style.outfitTextAmount

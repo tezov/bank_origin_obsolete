@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 15:11
+ *  Created by Tezov on 22/04/2023 22:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 15:10
+ *  Last modified 22/04/2023 20:02
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -155,8 +155,8 @@ object PageDiscoverTheme {
         val sectionCarouselCardButton: SectionCarouselCard.Style,
         val sectionCarouselCardLink: SectionCarouselCard.Style,
         val sectionRollerCard: SectionRollerCard.Style,
-        val sectionActionRow: SectionSimpleRow.Style,
         val sectionActionCard: SectionSimpleTile.Style,
+        val sectionActionRow: SectionSimpleRow.Style,
     )
 
     @Composable
@@ -164,165 +164,45 @@ object PageDiscoverTheme {
         sectionCarouselCardButton = ThemeComponentProviders.sectionCarouselCardStyle(
             cardStyle = ThemeComponentProviders.carouselCardButtonStyle()
         ).copy{
-//            outfitTextTitle = outfitTextTitle?.copy {
-//                outfitState = colors.primary.asStateSimple
-//            }
-//            carouselStyle = carouselStyle.copy {
-//                paddingTopIndicator = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical
-//                heightItemToHighest = true
-//            }
-//            cardStyle = (cardStyle as CarouselCard.Style.Button).copy {
-//                outfitFrame = outfitFrame.copy {
-//                    outfitBorder = outfitBorder.copy {
-//                        outfitState = colors.decor.asStateSimple
-//                    }
-//                    outfitShape = outfitShape.copy {
-//                        outfitState = colors.background.asStateSimple
-//                    }
-//                }
-//                iconInfoStyle = iconInfoStyle.copy {
-//                    size = dimensions.iconCard
-//                    tint = colors.accent.copy(alpha = 0.5f)
-//                }
-//                outfitTextTitle = outfitTextTitle?.copy {
-//                    outfitState = colors.primary.asStateSimple
-//                }
-//                outfitTextBody = outfitTextBody?.copy {
-//                    outfitState = colors.primary.asStateSimple
-//                }
-//                outfitTextTag = outfitTextTag?.copy {
-//                    outfitState = colors.accent.asStateSimple
-//                }
-//                outfitFrameTag = outfitFrameTag.copy {
-//                    outfitBorder = outfitBorder.copy {
-//                        outfitState = colors.accent.asStateSimple
-//                    }
-//                }
-//                actionStyle = actionStyle.copy {
-//                    outfitFrame = outfitFrame.copy {
-//                        outfitShape = outfitShape.copy {
-//                            outfitState = colors.accent.asStateSimple
-//                        }
-//                    }
-//                    outfitText = outfitText.copy {
-//                        outfitState = colors.background.asStateSimple
-//                    }
-//                }
-//            }
+            carouselStyle = carouselStyle.copy {
+                paddingTopIndicator = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical
+                heightItemToHighest = true
+            }
         },
         sectionCarouselCardLink = ThemeComponentProviders.sectionCarouselCardStyle(
             cardStyle = ThemeComponentProviders.carouselCardLinkStyle()
         ).copy{
-//            carouselStyle = carouselStyle.copy {
-//                paddingTopIndicator = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical
-//                heightItemToHighest = true
-//            }
-//            outfitTextTitle = outfitTextTitle?.copy {
-//                outfitState = colors.primary.asStateSimple
-//                typo = typo.copy(
-//                    fontWeight = FontWeight.Bold
-//                )
-//            }
-//            cardStyle = (cardStyle as CarouselCard.Style.Link).copy {
-//                outfitFrame = outfitFrame.copy {
-//                    outfitShape = outfitShape.copy {
-//                        outfitState = colors.backgroundElevated.asStateSimple
-//                    }
-//                }
-//                iconInfoStyle = iconInfoStyle.copy {
-//                    tint = colors.accent
-//                }
-//                outfitTextTitle = outfitTextTitle?.copy {
-//                    outfitState = colors.primary.asStateSimple
-//                }
-//                outfitTextBody = outfitTextBody?.copy {
-//                    outfitState = colors.primary.asStateSimple
-//                }
-//                outfitFrameTag = outfitFrameTag.copy {
-//                    outfitBorder = outfitBorder.copy {
-//                        outfitState = colors.accent.asStateSimple
-//                    }
-//                }
-//                actionStyle = actionStyle.copy {
-//                    outfitText = outfitText.copy {
-//                        outfitState = colors.accent.asStateSimple
-//                    }
-//                }
-//            }
+            carouselStyle = carouselStyle.copy {
+                paddingTopIndicator = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical
+                heightItemToHighest = true
+            }
         },
         sectionRollerCard = ThemeComponentProviders.sectionRollerCardStyle().copy{
-//            rollerStyle = rollerStyle.copy {
-//                heightItemToHighest = true
-//            }
-//            outfitTextTitle = outfitTextTitle?.copy {
-//                outfitState = colors.primary.asStateSimple
-//            }
-//            outfitTextSubTitle = outfitTextSubTitle?.copy {
-//                outfitState = colors.accent.asStateSimple
-//            }
-//            actionStyle = actionStyle.copy {
-//                outfitFrame = outfitFrame.copy {
-//                    outfitShape = outfitShape.copy {
-//                        outfitState = colors.accent.asStateSimple
-//                    }
-//                }
-//                outfitText = outfitText.copy {
-//                    outfitState = colors.background.asStateSimple
-//                }
-//            }
-//            cardStyle = cardStyle.copy{
-//                outfitFrame = outfitFrame.copy {
-//                    outfitBorder = outfitBorder.copy {
-//                        outfitState = colors.decor.copy(alpha = 0.35f).asStateSimple
-//                    }
-//                    outfitShape = outfitShape.copy {
-//                        outfitState = colors.backgroundElevated.copy(alpha = 0.35f).asStateSimple
-//                    }
-//                }
-//                outfitTextTitle = outfitTextTitle?.copy {
-//                    outfitState = colors.primary.asStateSimple
-//                }
-//                imageStyle = imageStyle.copy{
-//                    size = dimensions.imageCard
-//                }
-//            }
-        },
-        sectionActionRow = ThemeComponentProviders.sectionSimpleRowStyle().copy {
-//            colorBackgroundHeader = colors.backgroundElevatedOverlay
-//            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-//            outfitTextTitle = MaterialTheme.typographiesExtended.title.huge.copy {
-//                outfitState = colors.primary.asStateSimple
-//                typo = typo.copy(
-//                    fontWeight = FontWeight.Bold
-//                )
-//            }
-//            colorBackgroundHeader = null
-//            colorDivider = colors.fade
-//            rowStyle = rowStyle.copy {
-//                iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
-//                iconActionStyle = iconActionStyle.copy { tint = colors.accent }
-//                outfitText = outfitText?.copy {
-//                    outfitState = colors.primary.asStateSimple
-//                }
-//            }
+            rollerStyle = rollerStyle.copy {
+                heightItemToHighest = true
+            }
+            cardStyle = cardStyle.copy{
+                imageStyle = imageStyle.copy{
+                    size = dimensions.imageCard
+                }
+            }
         },
         sectionActionCard = ThemeComponentProviders.sectionTileStyle().copy {
-//            colorBackgroundHeader = colors.backgroundElevatedOverlay
-//            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-//            tileStyle = tileStyle.copy {
-//                iconStyle = iconStyle.copy {
-//                    tint = colors.accent
-//                    size = MaterialTheme.dimensionsIconExtended.info.huge
-//                }
-//                outfitTextTitle = outfitTextTitle?.copy {
-//                    outfitState = colors.primary.asStateSimple
-//                }
-//                outfitFrame = outfitFrame.copy {
-//                    outfitShape = outfitShape.copy {
-//                        outfitState = colors.backgroundElevated.asStateSimple
-//                    }
-//                }
-//            }
+            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            tileStyle = tileStyle.copy {
+                iconStyle = iconStyle.copy {
+                    size = MaterialTheme.dimensionsIconExtended.info.huge
+                }
+            }
+        },
+        sectionActionRow = ThemeComponentProviders.sectionSimpleRowStyle().copy {
+            colorBackgroundHeader = null
+            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
+            outfitTextTitle = MaterialTheme.typographiesExtended.title.huge.copy {
+                typo = typo.copy(
+                    fontWeight = FontWeight.Bold
+                )
+            }
         },
     )
 

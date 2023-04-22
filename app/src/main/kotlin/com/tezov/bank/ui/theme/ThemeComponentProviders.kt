@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 15:11
+ *  Created by Tezov on 22/04/2023 22:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 15:10
+ *  Last modified 22/04/2023 20:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,6 +22,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.block.*
 import com.tezov.bank.ui.component.element.*
+import com.tezov.bank.ui.page.auth.discover.colors
+import com.tezov.bank.ui.page.auth.discover.dimensions
 import com.tezov.bank.ui.theme.font.fontIbm
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
@@ -37,6 +39,7 @@ import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller.Pag
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Image
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link.StateColor.Style.Companion.copy
@@ -200,7 +203,7 @@ object ThemeComponentProviders {
             outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
         },
         colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.overlay,
-        colorDivider = MaterialTheme.colorsExtended.primary.decor,
+        colorDivider = MaterialTheme.colorsExtended.backgroundElevated.fade,
         sizeDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
         rowStyle = simpleRowStyle()
     )
@@ -225,8 +228,8 @@ object ThemeComponentProviders {
         outfitTextTitle = MaterialTheme.typographiesExtended.title.normal.copy {
             outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
         },
-        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.default,
-        colorDivider = MaterialTheme.colorsExtended.primary.decor,
+        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.overlay,
+        colorDivider = MaterialTheme.colorsExtended.primary.fade,
         sizeDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
         rowStyle = accountValueSimpleRowStyle()
     )
@@ -260,7 +263,7 @@ object ThemeComponentProviders {
                 fontWeight = FontWeight.Bold
             )
         },
-        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.overlay,
+        colorBackgroundHeader = null,
         tileStyle = tileStyle()
     )
 
@@ -277,12 +280,9 @@ object ThemeComponentProviders {
         ),
         outfitTextTitle = MaterialTheme.typographiesExtended.title.big.copy {
             outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
-            typo = typo.copy(
-                fontWeight = FontWeight.Bold
-            )
         },
         outfitTextSubtitle = MaterialTheme.typographiesExtended.body.normal.copy {
-            outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
+            outfitState = MaterialTheme.colorsExtended.primary.fade.asStateSimple
         }
     )
 
@@ -317,7 +317,7 @@ object ThemeComponentProviders {
                     PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
                 spacingItem = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             },
-            colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.overlay,
+            colorBackgroundHeader = null,
             cardStyle = cardStyle,
         )
 
@@ -325,7 +325,9 @@ object ThemeComponentProviders {
     fun carouselCardButtonStyle() = CarouselCard.Style.Button(
         baseStyle = CarouselCard.Style.Base(
             outfitFrame = OutfitFrameStateColor(
-                outfitShape = MaterialTheme.shapesExtended.element.big,
+                outfitShape = MaterialTheme.shapesExtended.element.big.copy{
+                    outfitState = MaterialTheme.colorsExtended.background.default.asStateSimple
+                },
                 outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
                     outfitState = MaterialTheme.colorsExtended.backgroundElevated.decor.asStateSimple
                 },
@@ -439,9 +441,11 @@ object ThemeComponentProviders {
     @Composable
     fun rollerCardStyle() = RollerCard.Style(
         outfitFrame = OutfitFrameStateColor(
-            outfitShape = MaterialTheme.shapesExtended.element.small,
+            outfitShape = MaterialTheme.shapesExtended.element.small.copy{
+                outfitState = MaterialTheme.colorsExtended.backgroundElevated.default.asStateSimple
+            },
             outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
-                outfitState = MaterialTheme.colorsExtended.primary.decor.asStateSimple
+                outfitState = MaterialTheme.colorsExtended.primary.fade.asStateSimple
             },
         ),
         imageStyle = Image.Simple.Style(

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 22/04/2023 22:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 21:24
+ *  Last modified 22/04/2023 21:58
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -121,7 +121,10 @@ object ThemeDimensionProviders {
             big = 54.dpSize,
             huge = 86.dpSize,
         ),
-        action = 22.dpSize.asPaletteSize,
+        action = OutfitPaletteSize(
+            normal = 22.dpSize,
+            big = 32.dpSize,
+        ),
         fieldInfo = 32.dpSize.asPaletteSize,
         fieldAction = 22.dpSize.asPaletteSize,
     )

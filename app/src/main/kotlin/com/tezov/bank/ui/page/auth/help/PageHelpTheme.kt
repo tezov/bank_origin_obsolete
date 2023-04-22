@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 15:11
+ *  Created by Tezov on 22/04/2023 22:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 15:10
+ *  Last modified 22/04/2023 19:57
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -111,20 +111,7 @@ object PageHelpTheme {
     @Composable
     fun provideStyles() = Style(
         sectionRow = ThemeComponentProviders.sectionSimpleRowStyle().copy {
-//            colorBackgroundHeader = colors.backgroundElevated
-//            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-//            iconStyle = iconStyle.copy { tint = colors.accent }
-//            outfitTextTitle = outfitTextTitle?.copy {
-//                outfitState = colors.primary.asStateSimple
-//            }
-//            colorDivider = colors.fade
-//            rowStyle = rowStyle.copy {
-//                iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
-//                iconActionStyle = iconActionStyle.copy { tint = colors.accent }
-//                outfitText = outfitText?.copy {
-//                    outfitState = colors.primary.asStateSimple
-//                }
-//            }
+            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
         },
     )
 

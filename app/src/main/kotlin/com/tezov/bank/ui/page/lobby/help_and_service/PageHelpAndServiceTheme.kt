@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 22/04/2023 22:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 22/04/2023 19:47
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -113,36 +113,12 @@ object PageHelpAndServiceTheme {
     fun provideStyles() = Style(
         sectionRow = ThemeComponentProviders.sectionSimpleRowStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-            outfitTextTitle = outfitTextTitle?.copy {
-                outfitState = colors.neutral.asStateSimple
-            }
-            colorDivider = colors.fade
-            rowStyle = rowStyle.copy {
-                iconInfoStyle = iconInfoStyle.copy { tint = colors.accent }
-                iconActionStyle = iconActionStyle.copy { tint = colors.accent }
-                outfitText = outfitText?.copy {
-                    outfitState = colors.primary.asStateSimple
-                }
-            }
         },
         sectionCard = ThemeComponentProviders.sectionTileStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-            iconStyle = iconStyle.copy { tint = colors.primary }
-            outfitTextTitle = outfitTextTitle?.copy {
-                outfitState = colors.neutral.asStateSimple
-            }
             tileStyle = tileStyle.copy {
                 iconStyle = iconStyle.copy {
-                    tint = colors.accent
                     size = MaterialTheme.dimensionsIconExtended.info.big
-                }
-                outfitTextTitle = outfitTextTitle?.copy {
-                    outfitState = colors.primary.asStateSimple
-                }
-                outfitFrame = outfitFrame.copy {
-                    outfitBorder = outfitBorder.copy {
-                        outfitState = colors.decor.asStateSimple
-                    }
                 }
             }
         },
