@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 12:37
+ *  Created by Tezov on 22/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 12:36
+ *  Last modified 22/04/2023 14:10
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,6 +18,7 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -98,7 +99,7 @@ object PageAccountTheme {
     fun provideDimensions() = Dimensions(
         headLineMin = 24.sp,
         headlineMax = 54.sp,
-        headerProperties = ColumnCollapsibleHeader.Properties(160.dp, 240.dp)
+        headerProperties = ColumnCollapsibleHeader.Properties(min = 120.dp, max = 200.dp)
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =

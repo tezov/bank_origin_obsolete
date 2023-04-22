@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 20/04/2023 20:47
+ *  Created by Tezov on 22/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 20/04/2023 20:43
+ *  Last modified 22/04/2023 13:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -87,11 +87,14 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
 
     @Composable
     private fun contentHeader(
-        header: PagePaymentState.Header,
+        header: PagePaymentState.Header?,
         progress: Float,
         progressDp: Dp
     ) {
-        header.headline.value?.let {
+        if(header == null){
+            return
+        }
+        header.headline?.let {
             Column(
                 modifier = Modifier.height(progressDp),
                 verticalArrangement = Arrangement.Bottom
@@ -127,10 +130,10 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
 
     @Composable
     private fun contentBody(
-        cardSmall: MutableState<SectionSimpleTile.Data?>,
-        cardLarge: MutableState<SectionSimpleTile.Data?>,
+        cardSmall: SectionSimpleTile.Data?,
+        cardLarge: SectionSimpleTile.Data?,
     ){
-        cardSmall.value?.let {
+        cardSmall?.let {
             SectionSimpleTile(
                 data = it,
                 style = PagePaymentTheme.styles.sectionCard
@@ -140,7 +143,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
             }
         }
         Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
-        cardLarge.value?.let {
+        cardLarge?.let {
             SectionSimpleTile(
                 data = it,
                 style = PagePaymentTheme.styles.sectionCard

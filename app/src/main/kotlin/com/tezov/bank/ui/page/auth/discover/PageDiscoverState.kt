@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 22/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 22/04/2023 13:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,62 +12,40 @@
 
 package com.tezov.bank.ui.page.auth.discover
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.block.SectionSimpleTile
-import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.component.block.SectionCarouselCard
 import com.tezov.bank.ui.component.block.SectionRollerCard
-import com.tezov.bank.ui.component.element.SimpleTile
-import com.tezov.bank.ui.component.element.SimpleRow
+import com.tezov.bank.ui.component.block.SectionSimpleRow
+import com.tezov.bank.ui.component.block.SectionSimpleTile
 import com.tezov.bank.ui.component.element.CarouselCard
 import com.tezov.bank.ui.component.element.RollerCard
+import com.tezov.bank.ui.component.element.SimpleRow
+import com.tezov.bank.ui.component.element.SimpleTile
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
-class PageDiscoverState private constructor(
-    val header: Header,
-    val cardsWithButton: MutableState<SectionCarouselCard.Data?>,
-    val cardsWithLink: MutableState<SectionCarouselCard.Data?>,
-    val cashbacks: MutableState<SectionRollerCard.Data?>,
-    val offers: MutableState<SectionSimpleTile.Data?>,
-    val tips: MutableState<SectionSimpleRow.Data?>,
-) : PageState {
+class PageDiscoverState private constructor() : PageState {
+
+    var header: Header? = null
+    var cardsWithButton: SectionCarouselCard.Data? = null
+    var cardsWithLink: SectionCarouselCard.Data? = null
+    var cashbacks: SectionRollerCard.Data? = null
+    var offers: SectionSimpleTile.Data? = null
+    var tips: SectionSimpleRow.Data? = null
 
     companion object {
-        fun create(
-            header: Header = Header.empty(),
-            cardsWithButton: MutableState<SectionCarouselCard.Data?> = mutableStateOf(null),
-            cardsWithLink: MutableState<SectionCarouselCard.Data?> = mutableStateOf(null),
-            cashbacks: MutableState<SectionRollerCard.Data?> = mutableStateOf(null),
-            offers: MutableState<SectionSimpleTile.Data?> = mutableStateOf(null),
-            tips: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
-        ) = PageDiscoverState(
-            header = header,
-            cardsWithButton = cardsWithButton,
-            cardsWithLink = cardsWithLink,
-            cashbacks = cashbacks,
-            offers = offers,
-            tips = tips,
-        )
+        fun create() = PageDiscoverState()
     }
 
     data class Header(
-        val headline: MutableState<String?>,
-    ) {
-        companion object {
-            fun empty() = Header(
-                mutableStateOf(null),
-            )
-        }
-    }
+        val headline: String? = null,
+    )
 
     init {
-        header.apply {
-            headline.value = "Découvrir"
-        }
+        header = Header(
+            headline = "Découvrir"
+        )
 
-        cardsWithButton.value = SectionCarouselCard.Data(
+        cardsWithButton = SectionCarouselCard.Data(
             cards = listOf(
                 CarouselCard.Data(
                     tag = "100 euros offerts",
@@ -86,9 +64,9 @@ class PageDiscoverState private constructor(
 
         )
 
-        cardsWithLink.value = SectionCarouselCard.Data(
+        cardsWithLink = SectionCarouselCard.Data(
             title = "Nos offres pour vos besoins",
-            cards =listOf(
+            cards = listOf(
                 CarouselCard.Data(
                     title = "Envie de vous faire plaisir en vacances ?",
                     body = "Avec les 2 cartes Visa Hello Prime et les 2 cartes virtuelles de l'offre Hello Prime Duo, réglez vos hôtel et cocktails !",
@@ -110,11 +88,11 @@ class PageDiscoverState private constructor(
             )
         )
 
-        cashbacks.value = SectionRollerCard.Data(
+        cashbacks = SectionRollerCard.Data(
             title = "Cashback Hello Extra",
             subTitle = "En ce moment",
             action = "Découvrir Hello Extra",
-            cards =listOf(
+            cards = listOf(
                 RollerCard.Data(
                     title = "BUT",
                     image = R.drawable.cashback_but
@@ -194,7 +172,7 @@ class PageDiscoverState private constructor(
             )
         )
 
-        offers.value = SectionSimpleTile.Data(
+        offers = SectionSimpleTile.Data(
             title = "Toute l'offre Tezov bank!",
             template = SimpleTile.Template.IconTop,
             tile = listOf(
@@ -233,7 +211,7 @@ class PageDiscoverState private constructor(
             )
         )
 
-        tips.value = SectionSimpleRow.Data(
+        tips = SectionSimpleRow.Data(
             title = "Retrouvez nos astuces",
             rows = listOf(
                 SimpleRow.Data(

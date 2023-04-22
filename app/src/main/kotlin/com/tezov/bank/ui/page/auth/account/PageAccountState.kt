@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 12:37
+ *  Created by Tezov on 22/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 12:03
+ *  Last modified 22/04/2023 13:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,49 +12,37 @@
 
 package com.tezov.bank.ui.page.auth.account
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.graphics.Color
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow
-import com.tezov.bank.ui.component.block.SectionCarouselCard
-import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.component.element.AccountSummaryCard
 import com.tezov.bank.ui.component.element.AccountValueSimpleRow
-import com.tezov.bank.ui.component.element.SimpleRow
-import com.tezov.bank.ui.page.auth.discover.PageDiscoverState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateSemantic
+import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
-class PageAccountState private constructor(
-    val header: Header,
-    val accountHistories: MutableState<List<SectionAccountValueSimpleRow.Data>?>,
+class PageAccountState private constructor() : PageState {
 
-    ) : PageState {
+    var header: Header?=null
+    var accountHistories: List<SectionAccountValueSimpleRow.Data>?=null
 
     companion object {
-        fun create(
-            header: Header = Header.empty(),
-            accountHistories: MutableState<List<SectionAccountValueSimpleRow.Data>?> = mutableStateOf(null),
-        ) = PageAccountState(
-            header = header,
-            accountHistories = accountHistories
-        )
+        fun create() = PageAccountState()
     }
 
     data class Header(
-        val accountSummary: MutableState<AccountSummaryCard.Data?>,
-    ) {
-        companion object {
-            fun empty() = Header(
-                mutableStateOf(null),
-            )
-        }
-    }
+        val iconMailbox: Int?=null,
+        val iconAccount: Int?=null,
+        val headline: String?=null,
+        val accountSummary: AccountSummaryCard.Data?=null,
+    )
 
     init {
-        header.apply {
-            accountSummary.value = AccountSummaryCard.Data(
+        this.header = Header(
+            iconMailbox = R.drawable.ic_info_24dp,
+            iconAccount = R.drawable.ic_info_24dp,
+            headline = "Hello !",
+            accountSummary = AccountSummaryCard.Data(
                 iconInfo = R.drawable.ic_info_24dp,
                 iconAction = R.drawable.ic_3dot_h_24dp,
                 surtitle = "N°****3475",
@@ -71,7 +59,7 @@ class PageAccountState private constructor(
                     "Trier par..."
                 )
             )
-        }
+        )
 
         val semantic = OutfitStateSemantic(
             neutral = Color.Gray,
@@ -80,8 +68,7 @@ class PageAccountState private constructor(
             success = Color.Green,
             error = Color.Red,
         )
-
-        accountHistories.value = listOf(
+        this.accountHistories = listOf(
             SectionAccountValueSimpleRow.Data(
                 title = "VENDREDI 14 AVRIL",
                 rows = listOf(
@@ -128,10 +115,6 @@ class PageAccountState private constructor(
                 )
             )
         )
-
-
-
-
     }
 
 }

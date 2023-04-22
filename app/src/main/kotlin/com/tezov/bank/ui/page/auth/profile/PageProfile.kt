@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 20/04/2023 20:47
+ *  Created by Tezov on 22/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 20/04/2023 20:33
+ *  Last modified 22/04/2023 13:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -83,8 +83,11 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
 
     @Composable
     private fun contentHeader(
-        header: PageProfileState.Header
+        header: PageProfileState.Header?
     ) {
+        if(header == null){
+            return
+        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -104,14 +107,14 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                 )
             }
             Row(modifier = Modifier.fillMaxWidth()) {
-                header.imageResourceId.value?.let {
+                header.imageResourceId?.let {
                     Image.StateColor(
                         style = PageProfileTheme.styles.iconUser,
                         resourceId = it,
                         description = stringResource(id = R.string.pg_profile_icon_use)
                     )
                 }
-                header.name.value?.let {
+                header.name?.let {
                     Text.StateColor(
                         modifier = Modifier
                             .align(Alignment.Top)
@@ -126,30 +129,30 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
 
     @Composable
     private fun contentBody(
-        profils: MutableState<SectionSimpleRow.Data?>,
-        documents: MutableState<SectionSimpleRow.Data?>,
-        offers: MutableState<SectionSimpleRow.Data?>,
-        helps: MutableState<SectionSimpleRow.Data?>,
+        profils: SectionSimpleRow.Data?,
+        documents: SectionSimpleRow.Data?,
+        offers: SectionSimpleRow.Data?,
+        helps: SectionSimpleRow.Data?,
     ) {
-        profils.value?.let {
+        profils?.let {
             SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
 
 
             }
         }
-        documents.value?.let {
+        documents?.let {
             SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
 
 
             }
         }
-        offers.value?.let {
+        offers?.let {
             SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
 
 
             }
         }
-        helps.value?.let {
+        helps?.let {
             SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
 
 

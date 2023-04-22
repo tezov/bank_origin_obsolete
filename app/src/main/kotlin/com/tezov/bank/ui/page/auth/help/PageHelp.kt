@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 20/04/2023 20:47
+ *  Created by Tezov on 22/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 20/04/2023 20:28
+ *  Last modified 22/04/2023 13:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -74,8 +74,11 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
 
     @Composable
     private fun contentHeader(
-        header: PageHelpState.Header
+        header: PageHelpState.Header?
     ) {
+        if(header == null){
+            return
+        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -86,20 +89,20 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
                     bottom = MaterialTheme.dimensionsPaddingExtended.block.huge.vertical
                 )
         ) {
-            header.headline.value?.let {
+            header.headline?.let {
                 Text.StateColor(
                     text = it,
                     style = PageHelpTheme.typographies.headline
                 )
             }
-            header.title.value?.let {
+            header.title?.let {
                 Text.StateColor(
                     modifier = Modifier.padding(top = MaterialTheme.dimensionsPaddingExtended.block.huge.vertical),
                     text = it,
                     style = PageHelpTheme.typographies.subHeadline
                 )
             }
-            header.text.value?.let {
+            header.text?.let {
                 Text.StateColor(
                     modifier = Modifier.padding(top = MaterialTheme.dimensionsPaddingExtended.block.normal.vertical),
                     text = it,
@@ -111,37 +114,37 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
 
     @Composable
     private fun contentBody(
-        emergencies: MutableState<SectionSimpleRow.Data?>,
-        paymentModes: MutableState<SectionSimpleRow.Data?>,
-        configuration: MutableState<SectionSimpleRow.Data?>,
-        account: MutableState<SectionSimpleRow.Data?>,
-        misc: MutableState<SectionSimpleRow.Data?>,
+        emergencies: SectionSimpleRow.Data?,
+        paymentModes: SectionSimpleRow.Data?,
+        configuration: SectionSimpleRow.Data?,
+        account: SectionSimpleRow.Data?,
+        misc: SectionSimpleRow.Data?,
     ) {
-        emergencies.value?.let {
+        emergencies?.let {
             SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
             }
         }
-        paymentModes.value?.let {
+        paymentModes?.let {
             SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
             }
         }
-        configuration.value?.let {
+        configuration?.let {
             SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
             }
         }
-        account.value?.let {
+        account?.let {
             SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 
             }
         }
-        misc.value?.let {
+        misc?.let {
             SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
 
 

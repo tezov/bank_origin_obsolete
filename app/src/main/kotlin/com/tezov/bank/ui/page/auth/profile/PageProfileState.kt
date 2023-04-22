@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 22/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 22/04/2023 13:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,53 +17,34 @@ import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.component.element.SimpleRow
+import com.tezov.bank.ui.page.auth.payment.PagePaymentState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
-class PageProfileState private constructor(
-    val header: Header,
-    val profils: MutableState<SectionSimpleRow.Data?>,
-    val documents: MutableState<SectionSimpleRow.Data?>,
-    val offers: MutableState<SectionSimpleRow.Data?>,
-    val helps: MutableState<SectionSimpleRow.Data?>,
-) : PageState {
+class PageProfileState private constructor() : PageState {
+
+    var header: Header? = null
+    var profils: SectionSimpleRow.Data? = null
+    var documents: SectionSimpleRow.Data? = null
+    var offers: SectionSimpleRow.Data? = null
+    var helps: SectionSimpleRow.Data? = null
 
     companion object {
-        fun create(
-            header: Header = Header.empty(),
-            profils: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
-            documents: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
-            offers: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
-            helps: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
-
-            ) = PageProfileState(
-            header = header,
-            profils = profils,
-            documents = documents,
-            offers = offers,
-            helps = helps,
-        )
+        fun create() = PageProfileState()
     }
 
     data class Header(
-        val name: MutableState<String?>,
-        val imageResourceId: MutableState<Int?>
-    ) {
-        companion object {
-            fun empty() = Header(
-                mutableStateOf(null),
-                mutableStateOf(null),
-            )
-        }
-    }
+        val name: String?=null,
+        val imageResourceId: Int?=null,
+    )
 
     init {
 
-        header.apply {
-            name.value = "M. Zollver"
-            imageResourceId.value = R.drawable.img_suitcase_blue
-        }
+        header = Header(
+            name = "M. Zollver",
+            imageResourceId = R.drawable.img_suitcase_blue,
+        )
 
-        profils.value = SectionSimpleRow.Data(
+        profils = SectionSimpleRow.Data(
             rows = listOf(
                 SimpleRow.Data(
                     title = "Mes infos de profil",
@@ -76,7 +57,7 @@ class PageProfileState private constructor(
             )
         )
 
-        documents.value = SectionSimpleRow.Data(
+        documents = SectionSimpleRow.Data(
             title = "MES DOCUMENTS",
             rows = listOf(
                 SimpleRow.Data(title = "Mes RIB et Documents"),
@@ -85,7 +66,7 @@ class PageProfileState private constructor(
             )
         )
 
-        offers.value = SectionSimpleRow.Data(
+        offers = SectionSimpleRow.Data(
             title = "L'OFFRE HELLO BANK!",
             rows = listOf(
                 SimpleRow.Data(title = "Mon offre"),
@@ -94,7 +75,7 @@ class PageProfileState private constructor(
             )
         )
 
-        offers.value = SectionSimpleRow.Data(
+        offers = SectionSimpleRow.Data(
             title = "AIDE",
             rows = listOf(
                 SimpleRow.Data(title = "Service sourds et malentendants"),

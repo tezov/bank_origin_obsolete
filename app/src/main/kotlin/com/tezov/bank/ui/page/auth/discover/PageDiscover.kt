@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 20/04/2023 20:47
+ *  Created by Tezov on 22/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 20/04/2023 20:23
+ *  Last modified 22/04/2023 13:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -94,8 +94,11 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
 
     @Composable
     private fun contentHeader(
-        header: PageDiscoverState.Header
+        header: PageDiscoverState.Header?
     ) {
+        if(header == null){
+            return
+        }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -105,7 +108,7 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                     end = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
                 )
         ) {
-            header.headline.value?.let {
+            header.headline?.let {
                 Text.StateColor(
                     text = it,
                     style = PageDiscoverTheme.typographies.headline.copy {
@@ -118,11 +121,11 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
 
     @Composable
     private fun contentPager(
-        cardsWithButton: MutableState<SectionCarouselCard.Data?>,
-        cardsWithLink: MutableState<SectionCarouselCard.Data?>,
-        cashbacks: MutableState<SectionRollerCard.Data?>,
+        cardsWithButton: SectionCarouselCard.Data?,
+        cardsWithLink: SectionCarouselCard.Data?,
+        cashbacks: SectionRollerCard.Data?,
     ) {
-        cardsWithButton.value?.let {
+        cardsWithButton?.let {
             SectionCarouselCard(
                 data = it,
                 style = PageDiscoverTheme.styles.sectionCarouselCardButton
@@ -131,7 +134,7 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
             }
         }
         Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
-        cardsWithLink.value?.let {
+        cardsWithLink?.let {
             SectionCarouselCard(
                 data = it,
                 style = PageDiscoverTheme.styles.sectionCarouselCardLink
@@ -140,7 +143,7 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
             }
         }
         Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
-        cashbacks.value?.let {
+        cashbacks?.let {
             SectionRollerCard(data = it, style = PageDiscoverTheme.styles.sectionRollerCard) {
 
             }
@@ -149,17 +152,17 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
 
     @Composable
     private fun contentSection(
-        offers: MutableState<SectionSimpleTile.Data?>,
-        tips: MutableState<SectionSimpleRow.Data?>,
+        offers: SectionSimpleTile.Data?,
+        tips: SectionSimpleRow.Data?,
     ) {
-        offers.value?.let {
+        offers?.let {
             SectionSimpleTile(data = it, style = PageDiscoverTheme.styles.sectionActionCard) {
 
 
             }
         }
         Spacer(modifier = Modifier.height(PageDiscoverTheme.dimensions.spacingTopSectionRowToBottomSectionCard))
-        tips.value?.let {
+        tips?.let {
             SectionSimpleRow(data = it, style = PageDiscoverTheme.styles.sectionActionRow) {
 
 

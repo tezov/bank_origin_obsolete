@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 22/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 22/04/2023 13:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,48 +12,33 @@
 
 package com.tezov.bank.ui.page.auth.payment
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.block.SectionSimpleTile
 import com.tezov.bank.ui.component.element.SimpleTile
+import com.tezov.bank.ui.page.auth.help.PageHelpState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
-class PagePaymentState private constructor(
-    val header: Header,
-    val cardSmall: MutableState<SectionSimpleTile.Data?>,
-    val cardLarge: MutableState<SectionSimpleTile.Data?>,
-) : PageState {
+class PagePaymentState private constructor() : PageState {
+
+    var header: Header? = null
+    var cardSmall: SectionSimpleTile.Data? = null
+    var cardLarge: SectionSimpleTile.Data? = null
 
     companion object {
-        fun create(
-            header: Header = Header.empty(),
-            cardSmall: MutableState<SectionSimpleTile.Data?> = mutableStateOf(null),
-            cardLarge: MutableState<SectionSimpleTile.Data?> = mutableStateOf(null),
-        ) = PagePaymentState(
-            header = header,
-            cardSmall = cardSmall,
-            cardLarge = cardLarge,
-        )
+        fun create() = PagePaymentState()
     }
 
     data class Header(
-        val headline: MutableState<String?>,
-    ) {
-        companion object {
-            fun empty() = Header(
-                mutableStateOf(null),
-            )
-        }
-    }
+        val headline: String? = null,
+    )
 
     init {
 
-        header.apply {
-            headline.value = "Paiments"
-        }
+        header = Header(
+            headline = "Paiments"
+        )
 
-        cardSmall.value = SectionSimpleTile.Data(
+        cardSmall = SectionSimpleTile.Data(
             template = SimpleTile.Template.IconTopEnd,
             tile = listOf(
                 SimpleTile.Data(
@@ -75,7 +60,7 @@ class PagePaymentState private constructor(
             )
         )
 
-        cardLarge.value = SectionSimpleTile.Data(
+        cardLarge = SectionSimpleTile.Data(
             template = SimpleTile.Template.IconEnd,
             tile = listOf(
                 SimpleTile.Data(

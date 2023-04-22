@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 22/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 22/04/2023 13:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -89,34 +89,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                         .verticalScroll(rememberScrollState())
                 ) {
                     contentHeader(state.header)
-                    state.helpAndServices.value?.let {
-                        SectionSimpleTile(
-                            data = it,
-                            style = PageHelpAndServiceTheme.styles.sectionCard
-                        ) {
 
-
-                        }
-                    }
-                    Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
-                    state.contacts.value?.let {
-                        SectionSimpleRow(
-                            data = it,
-                            style = PageHelpAndServiceTheme.styles.sectionRow
-                        ) {
-
-
-                        }
-                    }
-                    state.notices.value?.let {
-                        SectionSimpleRow(
-                            data = it,
-                            style = PageHelpAndServiceTheme.styles.sectionRow
-                        ) {
-
-
-                        }
-                    }
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.huge.vertical))
                 }
             }
@@ -125,15 +98,55 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
     @Composable
     private fun contentHeader(
-        header: PageHelpAndServiceState.Header
+        header: PageHelpAndServiceState.Header?
     ) {
-        header.headline.value?.let {
+        if(header == null){
+            return
+        }
+        header.headline?.let {
             Text.StateColor(
                 modifier = Modifier.padding(MaterialTheme.dimensionsPaddingExtended.page.normal),
                 text = it,
                 style = MaterialTheme.typographiesExtended.title.supra
             )
         }
+    }
+
+    @Composable
+    private fun contentBody(
+        helpAndServices: SectionSimpleTile.Data?,
+        contacts: SectionSimpleRow.Data?,
+        notices: SectionSimpleRow.Data?,
+    ) {
+        helpAndServices?.let {
+            SectionSimpleTile(
+                data = it,
+                style = PageHelpAndServiceTheme.styles.sectionCard
+            ) {
+
+
+            }
+        }
+        Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
+        contacts?.let {
+            SectionSimpleRow(
+                data = it,
+                style = PageHelpAndServiceTheme.styles.sectionRow
+            ) {
+
+
+            }
+        }
+        notices?.let {
+            SectionSimpleRow(
+                data = it,
+                style = PageHelpAndServiceTheme.styles.sectionRow
+            ) {
+
+
+            }
+        }
+
     }
 
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 22/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 22/04/2023 13:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,63 +12,40 @@
 
 package com.tezov.bank.ui.page.auth.help
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.component.element.SimpleRow
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
-class PageHelpState private constructor(
-    val header: Header,
-    val emergencies: MutableState<SectionSimpleRow.Data?>,
-    val paymentModes: MutableState<SectionSimpleRow.Data?>,
-    val configuration: MutableState<SectionSimpleRow.Data?>,
-    val account: MutableState<SectionSimpleRow.Data?>,
-    val misc: MutableState<SectionSimpleRow.Data?>,
-) : PageState {
+class PageHelpState private constructor() : PageState {
+
+    var header: Header? = null
+    var emergencies: SectionSimpleRow.Data? = null
+    var paymentModes: SectionSimpleRow.Data? = null
+    var configuration: SectionSimpleRow.Data? = null
+    var account: SectionSimpleRow.Data? = null
+    var misc: SectionSimpleRow.Data? = null
 
     companion object {
-        fun create(
-            header: Header = Header.empty(),
-            emergencies: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
-            paymentModes: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
-            configuration: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
-            account: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
-            misc: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
-        ) = PageHelpState(
-            header = header,
-            emergencies = emergencies,
-            paymentModes = paymentModes,
-            configuration = configuration,
-            account = account,
-            misc = misc,
-        )
+        fun create() = PageHelpState()
     }
 
     data class Header(
-        val headline: MutableState<String?>,
-        val title: MutableState<String?>,
-        val text: MutableState<String?>
-    ) {
-        companion object {
-            fun empty() = Header(
-                mutableStateOf(null),
-                mutableStateOf(null),
-                mutableStateOf(null),
-            )
-        }
-    }
+        val headline: String? = null,
+        val title: String? = null,
+        val text: String? = null
+    )
 
     init {
-        header.apply {
-            headline.value = "Assistance"
-            title.value = "En quoi pouvons-nous vous aider?"
-            text.value =
-                "Trouvez une réponse rapide en sélectionnant la thématique qui correspoond à votre besoin."
-        }
+        header = Header(
+            headline = "Assistance",
+            title = "En quoi pouvons-nous vous aider?",
+            text =
+            "Trouvez une réponse rapide en sélectionnant la thématique qui correspoond à votre besoin.",
 
-        emergencies.value = SectionSimpleRow.Data(
+            )
+
+        emergencies = SectionSimpleRow.Data(
             title = "Urgence",
             icon = R.drawable.ic_call_24dp,
             rows = listOf(
@@ -81,7 +58,7 @@ class PageHelpState private constructor(
             )
         )
 
-        paymentModes.value = SectionSimpleRow.Data(
+        paymentModes = SectionSimpleRow.Data(
             title = "Moyens de paiment",
             icon = R.drawable.ic_call_24dp,
             rows = listOf(
@@ -92,7 +69,7 @@ class PageHelpState private constructor(
             )
         )
 
-        configuration.value = SectionSimpleRow.Data(
+        configuration = SectionSimpleRow.Data(
             title = "Profile, paramétres et sécurité",
             icon = R.drawable.ic_call_24dp,
             rows = listOf(
@@ -104,7 +81,7 @@ class PageHelpState private constructor(
             )
         )
 
-        account.value = SectionSimpleRow.Data(
+        account = SectionSimpleRow.Data(
             title = "Comptes, épargnes, crédit, assurance",
             icon = R.drawable.ic_call_24dp,
             rows = listOf(
@@ -119,7 +96,7 @@ class PageHelpState private constructor(
             )
         )
 
-        misc.value = SectionSimpleRow.Data(
+        misc = SectionSimpleRow.Data(
             title = "Autres",
             icon = R.drawable.ic_call_24dp,
             rows = listOf(

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 22/04/2023 14:12
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 22/04/2023 13:53
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,46 +20,30 @@ import com.tezov.bank.ui.component.block.SectionSimpleTile
 import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.component.element.SimpleTile
 import com.tezov.bank.ui.component.element.SimpleRow
+import com.tezov.bank.ui.page.auth.profile.PageProfileState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
-class PageHelpAndServiceState private constructor(
-    val header: Header,
-    val helpAndServices: MutableState<SectionSimpleTile.Data?>,
-    val contacts: MutableState<SectionSimpleRow.Data?>,
-    val notices: MutableState<SectionSimpleRow.Data?>,
-) : PageState {
+class PageHelpAndServiceState private constructor() : PageState {
+
+    var header: Header? = null
+    var helpAndServices: SectionSimpleTile.Data? = null
+    var contacts: SectionSimpleRow.Data? = null
+    var notices: SectionSimpleRow.Data? = null
 
     companion object {
         @Composable
-        fun create(
-            header: Header = Header.empty(),
-            helpAndServices: MutableState<SectionSimpleTile.Data?> = mutableStateOf(null),
-            contacts: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
-            notices: MutableState<SectionSimpleRow.Data?> = mutableStateOf(null),
-        ) = PageHelpAndServiceState(
-            header = header,
-            helpAndServices = helpAndServices,
-            contacts = contacts,
-            notices = notices,
-        )
+        fun create() = PageHelpAndServiceState()
     }
 
     data class Header(
-        val headline: MutableState<String?>,
-    ) {
-        companion object {
-            fun empty() = Header(
-                mutableStateOf(null),
-            )
-        }
-    }
+        val headline: String?=null,
+    )
 
     init {
-        header.apply {
-            headline.value = "Aide & Service"
-        }
-
-        helpAndServices.value = SectionSimpleTile.Data(
+        header = Header(
+            headline = "Aide & Service"
+        )
+        helpAndServices = SectionSimpleTile.Data(
             template = SimpleTile.Template.IconTopEnd,
             tile = listOf(
                 SimpleTile.Data(
@@ -93,7 +77,7 @@ class PageHelpAndServiceState private constructor(
             )
         )
 
-        contacts.value = SectionSimpleRow.Data(
+        contacts = SectionSimpleRow.Data(
             title = "CONTACTER LA HELLO TEAM",
             rows = listOf(
                 SimpleRow.Data(title = "Appeler", iconInfo = R.drawable.ic_call_24dp),
@@ -104,7 +88,7 @@ class PageHelpAndServiceState private constructor(
             )
         )
 
-        notices.value = SectionSimpleRow.Data(
+        notices = SectionSimpleRow.Data(
             title = "MENTION LEGALES",
             rows = listOf(
                 SimpleRow.Data(title = "Mentions légales"),
