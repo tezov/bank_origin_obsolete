@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 12:37
+ *  Created by Tezov on 22/04/2023 12:40
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 12:28
+ *  Last modified 22/04/2023 12:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -119,15 +119,17 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                     .fillMaxSize(),
                 verticalArrangement = Arrangement.Bottom
             ) {
-                header.accountSummary.value?.let {
-                    AccountSummaryCard(
-                        progress = progress,
-                        modifier = Modifier
-                            .padding(start = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
-                            .fillMaxWidth(0.80f),
-                        style = PageAccountTheme.styles.accountSummary,
-                        data = it
-                    )
+                Row {
+                    Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal))
+                    header.accountSummary.value?.let {
+                        AccountSummaryCard(
+                            progress = progress,
+                            modifier = Modifier
+                                .fillMaxWidth(0.80f),
+                            style = PageAccountTheme.styles.accountSummary,
+                            data = it
+                        )
+                    }
                 }
                 Shadow.Bottom(
                     modifier = Modifier
