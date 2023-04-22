@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/04/2023 23:20
+ *  Created by Tezov on 22/04/2023 12:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/04/2023 23:19
+ *  Last modified 22/04/2023 12:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,8 +27,6 @@ import com.tezov.bank.ui.component.element.AccountSummaryCard
 import com.tezov.bank.ui.component.element.AccountValueSimpleRow.Style.Companion.copy
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.layout.ColumnCollapsibleHeader
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -157,13 +155,19 @@ object PageAccountTheme {
                   outfitState = colors.backgroundElevated.asStateSimple
               }
             ),
+            outfitTextSurtitle = MaterialTheme.typographiesExtended.body.normal.copy {
+                outfitState = colors.primary.asStateSimple
+            },
             outfitTextTitle = MaterialTheme.typographiesExtended.body.normal.copy {
                 outfitState = colors.primary.asStateSimple
             },
-            outfitTextSubTitle = MaterialTheme.typographiesExtended.helper.normal.copy {
-                outfitState = colors.fade.asStateSimple
+            outfitTextSubtitle = MaterialTheme.typographiesExtended.helper.normal.copy {
+                outfitState = colors.primary.asStateSimple
             },
             outfitTextAmount = MaterialTheme.typographiesExtended.body.normal.copy {
+                outfitState = colors.primary.asStateSimple
+            },
+            outfitTextAction = MaterialTheme.typographiesExtended.body.normal.copy {
                 outfitState = colors.primary.asStateSimple
             },
         )

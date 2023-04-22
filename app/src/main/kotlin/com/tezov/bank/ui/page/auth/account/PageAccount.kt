@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/04/2023 23:20
+ *  Created by Tezov on 22/04/2023 12:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/04/2023 23:19
+ *  Last modified 22/04/2023 12:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.bank.ui.page.auth.account
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -20,8 +21,13 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.node.modifierElementOf
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow
 import com.tezov.bank.ui.component.element.AccountSummaryCard
@@ -34,6 +40,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
 import com.tezov.lib_core_android_kotlin.ui.modifier.then
+import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
@@ -71,6 +78,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                 header = { progress, progressDp ->
                     contentHeader(
                         state.header,
+                        properties = PageAccountTheme.dimensions.headerProperties,
                         progress,
                         progressDp
                     )
@@ -86,26 +94,41 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
     @Composable
     private fun contentHeader(
         header: PageAccountState.Header,
+        properties: ColumnCollapsibleHeader.Properties,
         progress: Float,
         progressDp: Dp,
     ) {
-        header.accountSummary.value?.let {
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(progressDp)
+        ) {
+            Column {
+                Image(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(properties.max - MaterialTheme.dimensionsPaddingExtended.element.supra.vertical),
+                    painter = painterResource(id = com.tezov.bank.R.drawable.bg_account),
+                    contentDescription = null,
+                    contentScale = ContentScale.None
+                )
+                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.supra.vertical))
+            }
             Column(
                 modifier = Modifier
-                    .fillMaxWidth()
-                    .height(progressDp)
-                    .background(Color.White),
-                horizontalAlignment = Alignment.CenterHorizontally,
+                    .fillMaxSize(),
                 verticalArrangement = Arrangement.Bottom
             ) {
-
-                AccountSummaryCard(
-                    progress = progress,
-                    modifier = Modifier
-                        .fillMaxWidth(0.6f),
-                    style = PageAccountTheme.styles.accountSummary,
-                    data = it
-                )
+                header.accountSummary.value?.let {
+                    AccountSummaryCard(
+                        progress = progress,
+                        modifier = Modifier
+                            .padding(start = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
+                            .fillMaxWidth(0.80f),
+                        style = PageAccountTheme.styles.accountSummary,
+                        data = it
+                    )
+                }
                 Shadow.Bottom(
                     modifier = Modifier
                         .then(progress < DIVIDER_HEADER_VISIBILITY_START,

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 20:56
+ *  Created by Tezov on 22/04/2023 12:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 20:47
+ *  Last modified 22/04/2023 12:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -55,9 +55,21 @@ class PageAccountState private constructor(
     init {
         header.apply {
             accountSummary.value = AccountSummaryCard.Data(
-                title = "title",
-                subTitle = "subTitle",
-                amount = "amount",
+                iconInfo = R.drawable.ic_info_24dp,
+                iconAction = R.drawable.ic_3dot_h_24dp,
+                surtitle = "N°****3475",
+                title = "Compte de chèques",
+                subTitle = "Aujourd'hui",
+                amount = "47 123,98 €",
+                actions = listOf(
+                    "Informations du compte",
+                    "Faire un virement",
+                    "Catégoriser des opérations",
+                    "Rechercher une opération",
+                    "Pointer des opérations",
+                    "Afficher le RIB",
+                    "Trier par..."
+                )
             )
         }
 

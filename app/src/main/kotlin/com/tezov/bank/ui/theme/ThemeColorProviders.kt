@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 22:02
+ *  Created by Tezov on 22/04/2023 12:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 22:00
+ *  Last modified 22/04/2023 12:16
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -85,7 +85,7 @@ object ThemeColorProviders {
         ),
 
         backgroundElevated = OutfitPaletteColor(
-            default = Palette.grayLightOverlay,
+            default = Palette.grayLight,
             decor = Palette.blueDarkOverlay,
         ),
         onBackgroundElevated = OutfitPaletteColor(

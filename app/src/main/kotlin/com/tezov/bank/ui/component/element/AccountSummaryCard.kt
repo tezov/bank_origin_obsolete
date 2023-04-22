@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/04/2023 23:20
+ *  Created by Tezov on 22/04/2023 12:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/04/2023 23:18
+ *  Last modified 22/04/2023 12:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,20 +12,24 @@
 
 package com.tezov.bank.ui.component.element
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.DropdownMenu
+import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.*
+import com.tezov.bank.ui.page.lobby.login.*
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
-import com.tezov.lib_core_android_kotlin.ui.component.layout.ShrinkableBox
 import com.tezov.lib_core_android_kotlin.ui.modifier.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
@@ -36,29 +40,44 @@ import java.util.*
 
 object AccountSummaryCard {
 
-    private const val MIN_SHRINK_FACTOR = 0.80f
+    private const val MIN_SHRINK_FACTOR = 0.60f
 
     class StyleBuilder internal constructor(
         style: Style
     ) {
         var outfitFrame = style.outfitFrame
+        var iconInfoStyle = style.iconInfoStyle
+        var iconActionStyle = style.iconActionStyle
+        var backgroundAction = style.backgroundAction
+        var outfitTextSurtitle = style.outfitTextSurtitle
         var outfitTextTitle = style.outfitTextTitle
-        var outfitTextSubTitle = style.outfitTextSubTitle
+        var outfitTextSubtitle = style.outfitTextSubtitle
         var outfitTextAmount = style.outfitTextAmount
+        var outfitTextAction = style.outfitTextAction
 
         internal fun get() = Style(
             outfitFrame = outfitFrame,
+            iconInfoStyle = iconInfoStyle,
+            iconActionStyle = iconActionStyle,
+            backgroundAction = backgroundAction,
+            outfitTextSurtitle = outfitTextSurtitle,
             outfitTextTitle = outfitTextTitle,
-            outfitTextSubTitle = outfitTextSubTitle,
+            outfitTextSubtitle = outfitTextSubtitle,
             outfitTextAmount = outfitTextAmount,
+            outfitTextAction = outfitTextAction,
         )
     }
 
     class Style(
         outfitFrame: OutfitFrameStateColor? = null,
+        iconInfoStyle: Icon.Simple.Style? = null,
+        iconActionStyle: Icon.Simple.Style? = null,
+        backgroundAction: Color? = null,
+        val outfitTextSurtitle: OutfitTextStateColor? = null,
         val outfitTextTitle: OutfitTextStateColor? = null,
-        val outfitTextSubTitle: OutfitTextStateColor? = null,
+        val outfitTextSubtitle: OutfitTextStateColor? = null,
         val outfitTextAmount: OutfitTextStateColor? = null,
+        val outfitTextAction: OutfitTextStateColor? = null,
     ) {
         val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
             outfitFrame,
@@ -70,6 +89,30 @@ object AccountSummaryCard {
                         outfitState = Color.Black.asStateSimple,
                     )
                 )
+            }
+        )
+        val iconInfoStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            iconInfoStyle,
+            fallBackValue = {
+                Icon.Simple.Style(
+                    tint = Color.Black,
+                    size = DpSize(24.dp)
+                )
+            }
+        )
+        val iconActionStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            iconActionStyle,
+            fallBackValue = {
+                Icon.Simple.Style(
+                    tint = Color.Black,
+                    size = DpSize(24.dp)
+                )
+            }
+        )
+        val backgroundAction: Color by DelegateNullFallBack.Ref(
+            backgroundAction,
+            fallBackValue = {
+                Color.LightGray
             }
         )
 
@@ -86,43 +129,74 @@ object AccountSummaryCard {
 
         constructor(style: Style?) : this(
             outfitFrame = style?.outfitFrame,
+            iconInfoStyle = style?.iconInfoStyle,
+            iconActionStyle = style?.iconActionStyle,
+            backgroundAction = style?.backgroundAction,
+            outfitTextSurtitle = style?.outfitTextSurtitle,
             outfitTextTitle = style?.outfitTextTitle,
-            outfitTextSubTitle = style?.outfitTextSubTitle,
+            outfitTextSubtitle = style?.outfitTextSubtitle,
             outfitTextAmount = style?.outfitTextAmount,
+            outfitTextAction = style?.outfitTextAction,
         )
 
     }
 
     data class Data(
+        val iconInfo: Int,
+        val iconAction: Int,
+        val surtitle: String,
         val title: String,
         val subTitle: String,
         val amount: String,
+        val actions: List<String>,
     )
 
     private enum class MotionLayoutItem {
+        ICON_INFO,
+        ICON_ACTION,
+        SURTITLE,
         TITLE,
         SUBTITLE,
-        AMOUNT;
+        AMOUNT
     }
 
     @Composable
     private fun constraintSetStart() = remember {
         ConstraintSet {
+            val iconInfo = createRefFor(MotionLayoutItem.ICON_INFO.name)
+            val iconAction = createRefFor(MotionLayoutItem.ICON_ACTION.name)
+            val surtitle = createRefFor(MotionLayoutItem.SURTITLE.name)
             val title = createRefFor(MotionLayoutItem.TITLE.name)
             val subtitle = createRefFor(MotionLayoutItem.SUBTITLE.name)
             val amount = createRefFor(MotionLayoutItem.AMOUNT.name)
-            constrain(title) {
+            constrain(iconAction) {
+                width = Dimension.wrapContent
                 top.linkTo(parent.top)
+                end.linkTo(parent.end)
+            }
+            constrain(iconInfo) {
+                width = Dimension.wrapContent
+                top.linkTo(parent.top)
+                end.linkTo(iconAction.start)
+            }
+            constrain(surtitle) {
+                width = Dimension.fillToConstraints
+                top.linkTo(parent.top)
+                start.linkTo(parent.start)
+                end.linkTo(iconInfo.start)
+            }
+            constrain(title) {
+                top.linkTo(surtitle.bottom)
                 start.linkTo(parent.start)
             }
             constrain(subtitle) {
+                visibility = Visibility.Visible
                 top.linkTo(title.bottom)
                 start.linkTo(parent.start)
             }
             constrain(amount) {
                 top.linkTo(subtitle.bottom)
                 start.linkTo(parent.start)
-                bottom.linkTo(parent.bottom)
             }
         }
     }
@@ -130,27 +204,45 @@ object AccountSummaryCard {
     @Composable
     private fun constraintSetEnd() = remember {
         ConstraintSet {
+            val iconInfo = createRefFor(MotionLayoutItem.ICON_INFO.name)
+            val iconAction = createRefFor(MotionLayoutItem.ICON_ACTION.name)
+            val surtitle = createRefFor(MotionLayoutItem.SURTITLE.name)
             val title = createRefFor(MotionLayoutItem.TITLE.name)
             val subtitle = createRefFor(MotionLayoutItem.SUBTITLE.name)
             val amount = createRefFor(MotionLayoutItem.AMOUNT.name)
-            constrain(title) {
+            constrain(iconAction) {
+                width = Dimension.wrapContent
+                top.linkTo(parent.top)
+                end.linkTo(parent.end)
+            }
+            constrain(iconInfo) {
+                width = Dimension.wrapContent
+                top.linkTo(parent.top)
+                end.linkTo(iconAction.start)
+            }
+            constrain(surtitle) {
+                width = Dimension.fillToConstraints
                 top.linkTo(parent.top)
                 start.linkTo(parent.start)
-
+                end.linkTo(iconInfo.start)
             }
-            constrain(subtitle) {
+            constrain(title) {
                 width = Dimension.fillToConstraints
-                top.linkTo(title.bottom)
+                top.linkTo(surtitle.bottom)
                 start.linkTo(parent.start)
                 end.linkTo(amount.start)
-                bottom.linkTo(parent.bottom)
+            }
+            constrain(subtitle) {
+                visibility = Visibility.Invisible
+                top.linkTo(title.bottom)
+                start.linkTo(parent.start)
             }
             constrain(amount) {
                 width = Dimension.wrapContent
-                top.linkTo(title.bottom)
-                start.linkTo(subtitle.end)
+                top.linkTo(title.top)
+                start.linkTo(title.end)
                 end.linkTo(parent.end)
-                bottom.linkTo(parent.bottom)
+                bottom.linkTo(title.bottom)
             }
         }
     }
@@ -158,16 +250,14 @@ object AccountSummaryCard {
     @Composable
     private fun constraintTransition() = Transition(
         """{
-            pathMotionArc: 'startHorizontal',
+            pathMotionArc: 'startVertical',
             easing: 'easeInOut',
             KeyFrames: {
                 KeyAttributes: [
                     {
                         target: ['AMOUNT'],
-                        frames: [0, 10, 35, 50, 60, 100],
-                        translationY: [0, -10, -15, -25, 10, 0],
-                        rotationZ: [0, 5, -5, -10, -15, 0],
-                        pathRotate: [1.00, 1.05, 1.10, 1.15, 1.00]
+                        frames: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                        translationY: [0, -50, -60, -70, -90, -90, -70, -50, -40, -20, 0],
                     }
                 ]
             }
@@ -181,7 +271,7 @@ object AccountSummaryCard {
         style: Style,
         data: Data,
         progress: Float = 1.0f,
-        onClick: (() -> Unit)? = null
+        onClick: ((Int) -> Unit)? = null
     ) {
         val heightState = remember {
             mutableStateOf(Dp.Unspecified)
@@ -194,10 +284,7 @@ object AccountSummaryCard {
                     height(heightState.value * (progress).coerceAtLeast(MIN_SHRINK_FACTOR))
                 }
                 .background(style.outfitFrame)
-                .padding(MaterialTheme.dimensionsPaddingExtended.block.normal)
-                .thenOnNotNull(onClick) {
-                    clickable { it() }
-                },
+                .padding(MaterialTheme.dimensionsPaddingExtended.block.normal),
             start = constraintSetEnd(),
             end = constraintSetStart(),
             transition = constraintTransition(),
@@ -205,24 +292,74 @@ object AccountSummaryCard {
 //            debug = EnumSet.of(MotionLayoutDebugFlags.SHOW_ALL)
         ) {
 
+            Icon.Simple(
+                modifier = Modifier
+                    .layoutId(MotionLayoutItem.ICON_INFO.name),
+                style = style.iconInfoStyle,
+                resourceId = data.iconInfo,
+                description = data.title
+            )
+            Box(
+                modifier = Modifier
+                    .layoutId(MotionLayoutItem.ICON_ACTION.name),
+            ) {
+                var expanded by remember { mutableStateOf(false) }
+                val items = data.actions
+                Icon.Simple(
+                    modifier = Modifier.clickable { expanded = true },
+                    style = style.iconActionStyle,
+                    resourceId = data.iconAction,
+                    description = data.surtitle
+                )
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = { expanded = false },
+                    modifier = Modifier
+                        .background(style.backgroundAction),
+                    offset = DpOffset.Zero
+                ) {
+                    items.forEachIndexed { index, text ->
+                        DropdownMenuItem(
+                            onClick = {
+                                expanded = false
+                                onClick?.invoke(index)
+                            },
+                            contentPadding = PaddingValues(8.dp, 0.dp)
+                        ) {
+                            Text.StateColor(
+                                text = text,
+                                style = style.outfitTextAction
+                            )
+                        }
+                    }
+                }
+            }
+
             Text.StateColor(
                 modifier = Modifier
-                    .layoutId(MotionLayoutItem.TITLE.name)
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical),
+                    .layoutId(MotionLayoutItem.SURTITLE.name),
+                text = data.surtitle,
+                style = style.outfitTextSurtitle
+            )
+            Text.StateColor(
+                modifier = Modifier
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical)
+                    .layoutId(MotionLayoutItem.TITLE.name),
                 text = data.title,
-                style = style.outfitTextTitle
+                style = style.outfitTextTitle,
+                maxLines = 1
             )
             Text.StateColor(
                 modifier = Modifier
-                    .layoutId(MotionLayoutItem.SUBTITLE.name)
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical)
+                    .layoutId(MotionLayoutItem.SUBTITLE.name),
                 text = data.subTitle,
-                style = style.outfitTextSubTitle
+                style = style.outfitTextSubtitle
             )
             Text.StateColor(
                 modifier = Modifier
-                    .layoutId(MotionLayoutItem.AMOUNT.name)
-                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical)
+                    .layoutId(MotionLayoutItem.AMOUNT.name),
                 text = data.amount,
                 style = style.outfitTextAmount
             )
