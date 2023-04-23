@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 12:53
+ *  Created by Tezov on 23/04/2023 13:42
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 12:52
+ *  Last modified 23/04/2023 13:42
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -355,8 +355,7 @@ object ThemeComponentProviders {
                 )
             },
             carouselStyle = pagerStyle().copy {
-                paddingContent =
-                    PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
+                paddingContent = PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal + MaterialTheme.dimensionsPaddingExtended.element.big.horizontal)
                 spacingItem = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             },
             colorBackgroundHeader = null,

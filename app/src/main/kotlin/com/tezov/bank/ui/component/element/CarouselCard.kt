@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 20/04/2023 20:47
+ *  Created by Tezov on 23/04/2023 13:42
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 20/04/2023 20:16
+ *  Last modified 23/04/2023 13:26
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -35,8 +35,6 @@ import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link as LinkImport
 object CarouselCard {
 
     object Style {
-
-        //todo margin pour quoi?????
 
         open class Base(
             margin: PaddingValues? = null,
