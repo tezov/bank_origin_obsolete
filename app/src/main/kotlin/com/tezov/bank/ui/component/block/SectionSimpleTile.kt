@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 23/04/2023 12:43
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 23/04/2023 12:37
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,6 +27,7 @@ import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable.loopOver
+import com.tezov.lib_core_android_kotlin.ui.modifier.then
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
@@ -157,10 +158,12 @@ object SectionSimpleTile {
                     .thenOnNotNull(style.colorBackgroundBody) {
                         background(it)
                     }
-                    .padding(
-                        horizontal = style.paddingBody,
-                        vertical = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical
-                    ),
+                    .then(style.colorBackgroundHeader, onNotNull = {
+                        padding(vertical = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical)
+                    }, onNull = {
+                        padding(vertical = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical)
+                    })
+                    .padding(horizontal = style.paddingBody),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.block.big.vertical),
             ) {
                 data.tile.loopOver {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 23/04/2023 12:43
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 20:45
+ *  Last modified 23/04/2023 12:32
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -73,7 +73,9 @@ object Image {
             description: String? = null,
         ) {
             Image(
-                modifier = modifier.thenOnNotNull(style.size, Modifier::size),
+                modifier = modifier.thenOnNotNull(style.size){
+                    size(it)
+                },
                 painter = painter,
                 colorFilter = style.tint?.let { ColorFilter.tint(it) },
                 contentDescription = description,
@@ -165,7 +167,9 @@ object Image {
 
             Image(
                 modifier = modifier
-                    .thenOnNotNull(style.size, Modifier::size)
+                    .thenOnNotNull(style.size){
+                        size(it)
+                    }
                     .background(style.outfitFrame, selector),
                 painter = painter,
                 colorFilter = style.tint?.let { ColorFilter.tint(it) },

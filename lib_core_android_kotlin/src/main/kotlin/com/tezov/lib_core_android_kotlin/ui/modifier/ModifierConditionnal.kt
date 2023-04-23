@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 12:17
+ *  Created by Tezov on 23/04/2023 12:43
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 12:04
+ *  Last modified 23/04/2023 12:34
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,56 +12,61 @@
 
 package com.tezov.lib_core_android_kotlin.ui.modifier
 
+import android.annotation.SuppressLint
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.composed
 
 fun Modifier.thenOnTrue(
     condition: Boolean,
-    block: Modifier.() -> Modifier
+    block: @Composable Modifier.() -> Modifier
 ) = thenInternal(condition, onTrue = block)
 
 fun Modifier.thenOnFalse(
     condition: Boolean,
-    block: Modifier.() -> Modifier
+    block: @Composable Modifier.() -> Modifier
 ) = thenInternal(condition, onFalse = block)
 
 fun Modifier.then(
     condition: Boolean,
-    onTrue: (Modifier.() -> Modifier),
-    onFalse: (Modifier.() -> Modifier)
+    onTrue: @Composable (Modifier.() -> Modifier),
+    onFalse: @Composable (Modifier.() -> Modifier)
 ) = thenInternal(condition, onTrue, onFalse)
 
+@SuppressLint("UnnecessaryComposedModifier")
 private fun Modifier.thenInternal(
     condition: Boolean,
-    onTrue: (Modifier.() -> Modifier)? = null,
-    onFalse: (Modifier.() -> Modifier)? = null
-) = (if(condition){
-    onTrue?.let { then(Modifier.it()) }
-} else{
-    onFalse?.let { then(Modifier.it()) }
+    onTrue: @Composable (Modifier.() -> Modifier)? = null,
+    onFalse: @Composable (Modifier.() -> Modifier)? = null
+) = (if (condition) {
+    onTrue?.let { composed { then(Modifier.it()) } }
+} else {
+    onFalse?.let { composed { then(Modifier.it()) } }
 }) ?: this
 
 fun <T : Any> Modifier.thenOnNotNull(
     condition: T?,
-    block: Modifier.(T) -> Modifier
+    block: @Composable Modifier.(T) -> Modifier
 ) = thenInternal(condition, onNotNull = block)
 
 fun <T : Any> Modifier.thenOnNull(
     condition: T?,
-    block: Modifier.() -> Modifier
+    block: @Composable Modifier.() -> Modifier
 ) = thenInternal(condition, onNull = block)
 
 fun <T : Any> Modifier.then(
     condition: T?,
-    onNotNull: (Modifier.(T) -> Modifier),
-    onNull: (Modifier.() -> Modifier)
+    onNotNull: @Composable (Modifier.(T) -> Modifier),
+    onNull: @Composable (Modifier.() -> Modifier)
 ) = thenInternal(condition, onNotNull, onNull)
 
+@SuppressLint("UnnecessaryComposedModifier")
 private fun <T : Any> Modifier.thenInternal(
     condition: T?,
-    onNotNull: (Modifier.(T) -> Modifier)? = null,
-    onNull: (Modifier.() -> Modifier)? = null
+    onNotNull: @Composable (Modifier.(T) -> Modifier)? = null,
+    onNull: @Composable (Modifier.() -> Modifier)? = null
 ) = (condition?.let {
-    onNotNull?.let { then(Modifier.it(condition)) }
+    onNotNull?.let { composed { then(Modifier.it(condition)) } }
 } ?: run {
-    onNull?.let { then(Modifier.it()) }
+    onNull?.let { composed { then(Modifier.it()) } }
 }) ?: this
