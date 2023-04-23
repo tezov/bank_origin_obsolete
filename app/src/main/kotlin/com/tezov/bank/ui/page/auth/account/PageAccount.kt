@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 23/04/2023 19:20
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 15:37
+ *  Last modified 23/04/2023 19:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -129,7 +129,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                         top = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
                         bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
                         start = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
-                        end = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
+                        end = MaterialTheme.dimensionsPaddingExtended.page.small.horizontal,
                     )
             ) {
                 Column(

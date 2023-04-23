@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId "com.tezov.bank"
         resConfigs 'en', 'fr'
-        versionCode 10000
+        versionCode 1
         minSdk defaultMinCompileSdkVersion
         targetSdk defaultTargetCompileSdkVersion
         testInstrumentationRunner "com.tezov.bank.jUnit.JUnitRunner"
@@ -47,18 +47,16 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
-        release {
             shrinkResources true
             minifyEnabled true
-            //signingConfig signingConfigs.releaseConfig
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             debuggable false
+            //signingConfig signingConfigs.releaseConfig
         }
         debug {
             shrinkResources false
             minifyEnabled false
+            debuggable true
             //signingConfig signingConfigs.debugConfig
         }
     }
