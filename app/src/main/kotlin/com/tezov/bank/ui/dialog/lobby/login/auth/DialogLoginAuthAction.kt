@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 23/04/2023 19:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 23/04/2023 17:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,14 +32,22 @@ class DialogLoginAuthAction private constructor(
         )
     }
 
-    fun hide() {
+    fun onClickClose() {
         action.hide()
     }
 
 
-    fun connect() {
-        hide()
+    fun onClickConnect() {
+        action.hide()
         navigationController.requestNavigate(Route.Account, this)
+    }
+
+    fun onClickForgetLogin() {
+        navigationController.showSnackBarNotImplemented("click forget login")
+    }
+
+    fun onClickForgetPassword() {
+        navigationController.showSnackBarNotImplemented("click forget password")
     }
 
 }

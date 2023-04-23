@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 23/04/2023 19:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 17:27
+ *  Last modified 23/04/2023 19:07
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -61,7 +61,7 @@ object ThemeComponentProviders {
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 12.5.sp
             ).asTextStateColor,
-            colorBackground = MaterialTheme.colorsPalette.whiteShady,
+            colorBackground = MaterialTheme.colorsPalette.blueLightElevated,
             outfitColor = OutfitStateBiStable(
                 active = MaterialTheme.colorsPalette.blueSea,
                 inactive = MaterialTheme.colorsPalette.blueShadow
@@ -89,8 +89,9 @@ object ThemeComponentProviders {
                     fontSize = 14.sp
                 ),
                 outfitState = OutfitStateTemplate(
-                    a = MaterialTheme.colorsExtended.onBackgroundModal.accent,
-                    b = MaterialTheme.colorsExtended.onBackgroundModal.default,
+                    a = MaterialTheme.colorsExtended.onBackgroundModal.default,
+//                    a = MaterialTheme.colorsExtended.onBackgroundModal.accent,
+//                    b = MaterialTheme.colorsExtended.onBackgroundModal.default,
                 ),
             ),
             outfitTextAction = OutfitTextStateColor(
@@ -100,15 +101,13 @@ object ThemeComponentProviders {
                     fontSize = 14.sp
                 ),
                 outfitState = OutfitStateTemplate(
-                    a = MaterialTheme.colorsExtended.onBackgroundModal.accent,
-                    b = MaterialTheme.colorsExtended.onBackgroundModal.default,
+                    a = MaterialTheme.colorsExtended.onBackgroundModal.default,
                 ),
             ),
             outfitShape = OutfitShapeStateColor(
                 size = 8.dp.asShapeSize,
                 outfitState = OutfitStateTemplate(
-                    a = MaterialTheme.colorsExtended.backgroundModal.accent,
-                    b = MaterialTheme.colorsExtended.backgroundModal.default,
+                    a = MaterialTheme.colorsExtended.backgroundModal.fade,
                 )
             ),
             elevation = 4.dp,
@@ -284,9 +283,13 @@ object ThemeComponentProviders {
 
     @Composable
     fun accountValueSimpleRowStyle() = AccountValueSimpleRow.Style(
-        iconInfoStyle = Icon.Simple.Style(
+        iconInfoStyle = Icon.StateColor.Style(
             size = MaterialTheme.dimensionsIconExtended.info.small,
-            tint = MaterialTheme.colorsExtended.primary.accent
+            tint = MaterialTheme.colorsExtended.background.default,
+            outfitFrame = OutfitFrameStateColor(
+                outfitShape = MaterialTheme.shapesExtended.icon.normal
+            )
+
         ),
         outfitTextTitle = MaterialTheme.typographiesExtended.body.small.copy {
             outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple

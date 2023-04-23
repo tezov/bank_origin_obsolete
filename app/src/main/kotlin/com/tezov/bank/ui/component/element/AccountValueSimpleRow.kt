@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 12:43
+ *  Created by Tezov on 23/04/2023 19:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 12:23
+ *  Last modified 23/04/2023 18:43
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,8 +26,12 @@ import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.shapesExtended
@@ -54,16 +58,16 @@ object AccountValueSimpleRow {
     }
 
     class Style(
-        iconInfoStyle: Icon.Simple.Style? = null,
+        iconInfoStyle: Icon.StateColor.Style? = null,
         val outfitTextTitle: OutfitTextStateColor? = null,
         val outfitTextSubTitle: OutfitTextStateColor? = null,
         val outfitTextAmount: OutfitTextStateColor? = null,
         val background: Color? = null,
     ) {
-        val iconInfoStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
+        val iconInfoStyle: Icon.StateColor.Style by DelegateNullFallBack.Ref(
             iconInfoStyle,
             fallBackValue = {
-                Icon.Simple.Style(
+                Icon.StateColor.Style(
                     tint = Color.Black,
                     size = DpSize(24.dp)
                 )
@@ -116,9 +120,13 @@ object AccountValueSimpleRow {
                 .clickable { onClick() },
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon.Simple(
+            Icon.StateColor(
                 style = style.iconInfoStyle.copy {
-                    tint = data.iconInfoColor
+                    outfitFrame = outfitFrame.copy{
+                        outfitShape = outfitShape.copy{
+                            outfitState = data.iconInfoColor.asStateSimple
+                        }
+                    }
                 },
                 resourceId = data.iconInfoId,
                 description = null,

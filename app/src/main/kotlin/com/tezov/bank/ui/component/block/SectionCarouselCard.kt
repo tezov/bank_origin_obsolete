@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 23/04/2023 19:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 19:24
+ *  Last modified 23/04/2023 18:18
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -160,12 +160,14 @@ object SectionCarouselCard {
             ) {
                 val cards = remember(data.cards) {
                     (ArrayList<@Composable PagerScope.() -> Unit>()).apply {
-                        data.cards.forEach { card ->
+                        data.cards.forEachIndexed { index, card ->
                             add {
                                 CarouselCard(
-                                    modifier = Modifier.fillMaxSize(),
                                     data = card,
-                                    style = style.cardStyle
+                                    style = style.cardStyle,
+                                    onClick = {
+                                        onClick(index)
+                                    }
                                 )
                             }
                         }
@@ -176,9 +178,7 @@ object SectionCarouselCard {
                         .fillMaxWidth(),
                     style = style.carouselStyle,
                     items = cards
-                ) {
-                    onClick(it)
-                }
+                )
             }
         }
     }

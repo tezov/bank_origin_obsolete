@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 23/04/2023 19:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 23/04/2023 17:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -79,15 +79,11 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
         )
     }
 
-    @Composable
-    operator fun invoke(content: @Composable () -> Unit) {
-        content(content)
-    }
+    //TODO manage selector
 
-    //todo all selector possible
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
-    private fun content(content: @Composable () -> Unit) {
+    operator fun invoke(content: @Composable () -> Unit) {
         val accessor = AccessorCoreUiActivity().get(this).contextSubMap()
         val state = accessor.with<BottomSheet, _, _>().state()
         ModalBottomSheetLayout(

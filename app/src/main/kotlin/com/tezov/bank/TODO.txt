@@ -1,16 +1,19 @@
 
-Faire modal oui/non
 
-- IconButton remove padding same button (PageLogin)
-- Clickable button aussi
-- roller text push height
-- roller image fit ?
-- scroll end blanc visible sous le bleu
-- solution action row padding / ripple ?
-
+- scroll end blanc visible sous le bleu?
 - paiment lyf / paypal / paylib image et non icon avec un color filter specifique
 
+- IconButton remove padding -> modifier pour ça ?
+- TextButton remove padding -> modifier pour ça ?
+
+-OnClick Custom ripple unbounded
 - DropDown menu in lib with style
+- Snackbar selector
+- Dialog selector
+- BottomSheet selector
+
+- Carousel first - last take edge to edge
+- Pager / Roller find the highest
 
 - componentManager, is there a way to not destroy if screen is supposed to be behind ??? Same LocalPage in Module
 

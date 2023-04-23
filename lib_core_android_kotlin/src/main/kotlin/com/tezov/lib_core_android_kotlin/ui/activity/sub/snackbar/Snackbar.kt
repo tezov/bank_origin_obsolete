@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 23/04/2023 19:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 17:27
+ *  Last modified 23/04/2023 17:37
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -103,12 +103,10 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
         )
     }
 
+    //TODO manage selector
+
     @Composable
-    fun invoke(
-        modifier: Modifier = Modifier,
-        selector: Any? = null,
-        style: Style? = null,
-    ) {
+    operator fun invoke(modifier: Modifier = Modifier) {
         val accessor = AccessorCoreUiActivity().get(this).contextSubMap()
         val state = accessor.with<Snackbar, _, _>().state()
         SnackbarHost(
@@ -116,19 +114,16 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
             modifier = modifier
         ) { data ->
             Snackbar(
-                backgroundColor = (style?.outfitShape
-                    ?: MaterialTheme.componentsCommonExtended.snackBar.outfitShape).resolveColor(selector)
+                backgroundColor = MaterialTheme.componentsCommonExtended.snackBar.outfitShape.resolveColor()
                     ?: SnackbarDefaults.backgroundColor,
-                elevation = (style ?: MaterialTheme.componentsCommonExtended.snackBar).elevation,
-                shape = (style?.outfitShape
-                    ?: MaterialTheme.componentsCommonExtended.snackBar.outfitShape).getShape()
+                elevation =  MaterialTheme.componentsCommonExtended.snackBar.elevation,
+                shape = MaterialTheme.componentsCommonExtended.snackBar.outfitShape.getShape()
                     ?: MaterialTheme.shapes.small,
                 content = {
                     Text.StateColor(
                         text = data.message,
-                        style = (style
-                            ?: MaterialTheme.componentsCommonExtended.snackBar).outfitTextMessage,
-                        selector = selector
+                        style = MaterialTheme.componentsCommonExtended.snackBar.outfitTextMessage,
+
                     )
                 },
                 action = {
@@ -137,9 +132,8 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
                             onClick = { data.performAction() }) {
                             Text.StateColor(
                                 text = label,
-                                style = (style
-                                    ?: MaterialTheme.componentsCommonExtended.snackBar).outfitTextAction,
-                                selector = selector
+                                style = MaterialTheme.componentsCommonExtended.snackBar.outfitTextAction,
+
                             )
                         }
                     }

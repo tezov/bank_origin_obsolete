@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 23/04/2023 19:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:13
+ *  Last modified 23/04/2023 17:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -84,7 +84,8 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     .padding(MaterialTheme.dimensionsPaddingExtended.page.big)
             ) {
                 IconButton(
-                    onClick = { action.hide() }) {
+                    onClick = action::onClickClose
+                ) {
                     Icon(
                         modifier = Modifier.size(MaterialTheme.dimensionsIconExtended.modal.normal),
                         painter = painterResource(id = R.drawable.ic_close_24dp),
@@ -103,16 +104,8 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     ContentBody(state.loginState, state.passwordState)
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
                     ContentFooter(
-                        credentialValidState = state.credentialValidState,
-                        onClickConnect = {
-                            action.connect()
-                        },
-                        onClickForgotLogin = {
-
-                        },
-                        onClickForgotPassword = {
-
-                        }
+                        action = action,
+                        credentialValidState = state.credentialValidState
                     )
                 }
             }
@@ -174,6 +167,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 ) {
                     Icon(
                         modifier = Modifier
+                            .padding(start = MaterialTheme.dimensionsPaddingExtended.chunk.normal.horizontal)
                             .size(MaterialTheme.dimensionsIconExtended.fieldInfo.normal)
                             .align(Alignment.CenterVertically),
                         painter = painterResource(id = R.drawable.ic_person_24dp),
@@ -255,6 +249,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     ) {
                         Icon(
                             modifier = Modifier
+                                .padding(start = MaterialTheme.dimensionsPaddingExtended.chunk.normal.horizontal)
                                 .size(MaterialTheme.dimensionsIconExtended.fieldInfo.normal)
                                 .align(Alignment.CenterVertically),
                             painter = painterResource(id = R.drawable.ic_lock_24dp),
@@ -350,16 +345,13 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
 
     @Composable
     private fun ContentFooter(
+        action: DialogLoginAuthAction,
         credentialValidState: Boolean,
-        onClickConnect: () -> Unit,
-        onClickForgotLogin: () -> Unit,
-        onClickForgotPassword: () -> Unit,
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
         ) {
-
             Button.StateColor(
                 modifierButton = Modifier
                     .fillMaxWidth(),
@@ -368,7 +360,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 text = stringResource(id = R.string.dlg_login_auth_btn_connect),
                 style = DialogLoginAuthTheme.styles.button,
                 enabled = credentialValidState,
-                onClick = onClickConnect,
+                onClick = action::onClickConnect,
             )
             Row(
                 modifier = Modifier
@@ -379,12 +371,12 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 Link.StateColor(
                     text = stringResource(id = R.string.dlg_login_auth_link_login_forgotten),
                     style = DialogLoginAuthTheme.styles.link,
-                    onClick = onClickForgotLogin,
+                    onClick = action::onClickForgetLogin,
                 )
                 Link.StateColor(
                     text = stringResource(id = R.string.dlg_login_auth_link_password_forgotten),
                     style = DialogLoginAuthTheme.styles.link,
-                    onClick = onClickForgotPassword,
+                    onClick = action::onClickForgetPassword,
                 )
             }
         }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 23/04/2023 19:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 23/04/2023 17:33
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,6 +33,8 @@ import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
+import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -87,7 +89,9 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                     )
                 },
                 snackbarHost = {
-                    com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar()
+                    com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar(
+                        modifier = Modifier.padding(MaterialTheme.dimensionsPaddingExtended.block.normal)
+                    )
                 },
                 content = content
             )
@@ -116,7 +120,9 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                     )
                 },
                 snackbarHost = {
-                    com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar()
+                    com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar(
+                        modifier = Modifier.padding(MaterialTheme.dimensionsPaddingExtended.block.normal)
+                    )
                 },
                 content = content
             )
@@ -140,7 +146,9 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                 },
                 topBar = { },
                 snackbarHost = {
-                    com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar()
+                    com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar(
+                        modifier = Modifier.padding(MaterialTheme.dimensionsPaddingExtended.block.normal)
+                    )
                 },
                 content = content
             )
@@ -159,7 +167,9 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                 modifier = Modifier.fillMaxSize(),
                 scaffoldState = mainState.coreState.scaffoldState,
                 snackbarHost = {
-                    com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar()
+                    com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar(
+                        modifier = Modifier.padding(MaterialTheme.dimensionsPaddingExtended.block.normal)
+                    )
                 },
                 content = content
             )

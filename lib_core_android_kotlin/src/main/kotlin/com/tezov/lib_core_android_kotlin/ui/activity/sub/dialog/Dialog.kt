@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 23/04/2023 19:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 23/04/2023 17:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -109,14 +109,10 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
             )
         }
 
+        //TODO manage selector
+
         @Composable
         operator fun invoke(content: @Composable () -> Unit) {
-            content(content)
-        }
-
-        //todo all selector possible
-        @Composable
-        private fun content(content: @Composable () -> Unit) {
             Surface(
                 color = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.resolveColorShape()
                     ?: MaterialTheme.colors.surface,
