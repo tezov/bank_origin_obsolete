@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 12:43
+ *  Created by Tezov on 23/04/2023 12:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 12:23
+ *  Last modified 23/04/2023 12:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -257,7 +257,7 @@ object ThemeComponentProviders {
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
         iconActionStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsIconExtended.info.small,
+            size = MaterialTheme.dimensionsIconExtended.action.small,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
         outfitText = MaterialTheme.typographiesExtended.body.normal.copy {
