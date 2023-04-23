@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 20:56
+ *  Created by Tezov on 23/04/2023 12:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:51
+ *  Last modified 23/04/2023 11:04
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,6 +29,7 @@ import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
+import com.tezov.lib_core_android_kotlin.ui.theme.style.background
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
@@ -124,7 +125,11 @@ object SectionAccountValueSimpleRow {
                         .padding(start = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                 ) {
                     Text.StateColor(
-                        modifier = Modifier.padding(vertical = MaterialTheme.dimensionsPaddingExtended.element.big.vertical),
+                        modifier = Modifier
+                            .padding(
+                                top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical,
+                                bottom = MaterialTheme.dimensionsPaddingExtended.element.small.vertical
+                            ),
                         text = text,
                         style = style.outfitTextTitle
                     )
@@ -136,13 +141,16 @@ object SectionAccountValueSimpleRow {
                     .thenOnNotNull(style.colorBackgroundBody) {
                         background(it)
                     }
-                    .padding(
-                        vertical = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
+                    .padding(top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical),
                 verticalArrangement = Arrangement.spacedBy(MaterialTheme.dimensionsPaddingExtended.element.normal.vertical),
             ) {
                 data.rows.forEachIndexed { index, row ->
                     AccountValueSimpleRow(
-                        modifier = Modifier.padding(horizontal = style.paddingBody),
+                        modifier = Modifier.padding(
+                            start = style.paddingBody,
+                            end = style.paddingBody,
+                            bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
+                        ),
                         data = row, style = style.rowStyle
                     ) {
                         onClick(index)

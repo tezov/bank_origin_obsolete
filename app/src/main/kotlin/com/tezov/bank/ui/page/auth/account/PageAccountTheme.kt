@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 22:06
+ *  Created by Tezov on 23/04/2023 12:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 21:57
+ *  Last modified 23/04/2023 12:10
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,11 +26,6 @@ import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow.Style.Companion.copy
 import com.tezov.bank.ui.component.element.AccountSummaryCard
-import com.tezov.bank.ui.component.element.AccountValueSimpleRow.Style.Companion.copy
-import com.tezov.bank.ui.page.auth.discover.colors
-import com.tezov.bank.ui.page.lobby.login.colors
-import com.tezov.bank.ui.page.lobby.login.dimensions
-import com.tezov.bank.ui.page.lobby.login.shapes
 import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.layout.ColumnCollapsibleHeader
@@ -98,16 +93,17 @@ object PageAccountTheme {
     }
 
     data class Dimensions(
-        val headLineMin: TextUnit,
-        val headlineMax: TextUnit,
+        val spacingBottomHeaderBackground: Dp,
         val headerProperties: ColumnCollapsibleHeader.Properties,
     )
 
     @Composable
     fun provideDimensions() = Dimensions(
-        headLineMin = 24.sp,
-        headlineMax = 54.sp,
-        headerProperties = ColumnCollapsibleHeader.Properties(min = 90.dp, max = 180.dp)
+        spacingBottomHeaderBackground = 56.dp,
+        headerProperties = ColumnCollapsibleHeader.Properties(
+            min = (MaterialTheme.dimensionsPaddingExtended.element.normal.vertical * 2) + 80.dp,
+            max = (MaterialTheme.dimensionsPaddingExtended.element.normal.vertical * 2) + 184.dp
+        )
     )
 
     internal val localDimensions: ProvidableCompositionLocal<Dimensions> =
@@ -153,46 +149,7 @@ object PageAccountTheme {
         sectionAccountValue = ThemeComponentProviders.sectionAccountValueSimpleRowStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
         },
-        accountSummary = AccountSummaryCard.Style(
-            outfitFrame = OutfitFrameStateColor(
-              outfitShape = MaterialTheme.shapesExtended.element.big.copy{
-                  outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
-              }
-            ),
-            iconInfoStyle = Icon.Simple.Style(
-                size = MaterialTheme.dimensionsIconExtended.action.normal,
-                tint = MaterialTheme.colorsExtended.onPrimary.default
-            ),
-            iconActionStyle = Icon.Simple.Style(
-                size = MaterialTheme.dimensionsIconExtended.action.normal,
-                tint = MaterialTheme.colorsExtended.onPrimary.default
-            ),
-            outfitTextSurtitle = MaterialTheme.typographiesExtended.label.normal.copy {
-                outfitState = MaterialTheme.colorsExtended.onPrimary.default.asStateSimple
-                typo = typo.copy(
-                    fontWeight = FontWeight.SemiBold
-                )
-            },
-            outfitTextTitle = MaterialTheme.typographiesExtended.body.normal.copy {
-                outfitState = MaterialTheme.colorsExtended.onPrimary.default.asStateSimple
-                typo = typo.copy(
-                    fontWeight = FontWeight.SemiBold
-                )
-            },
-            outfitTextSubtitle = MaterialTheme.typographiesExtended.label.normal.copy {
-                outfitState = MaterialTheme.colorsExtended.onPrimary.fade.asStateSimple
-            },
-            outfitTextAmount = MaterialTheme.typographiesExtended.title.big.copy {
-                outfitState = MaterialTheme.colorsExtended.onPrimary.default.asStateSimple
-                typo = typo.copy(
-                    fontWeight = FontWeight.Bold
-                )
-            },
-            backgroundAction = MaterialTheme.colorsExtended.background.default,
-            outfitTextAction = MaterialTheme.typographiesExtended.body.normal.copy {
-                outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
-            },
-        )
+        accountSummary = ThemeComponentProviders.accountSummaryCard()
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

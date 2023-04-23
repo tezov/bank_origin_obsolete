@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 23/04/2023 12:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 20:45
+ *  Last modified 23/04/2023 12:04
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.chunk
 
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -19,8 +20,10 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
+import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
+import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnTrue
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -74,7 +77,8 @@ object Icon {
             description: String? = null,
         ) {
             Icon(
-                modifier = modifier.thenOnNotNull(style.size, Modifier::size),
+                modifier = modifier
+                    .thenOnNotNull(style.size, Modifier::size),
                 painter = painter,
                 tint = style.tint,
                 contentDescription = description,
@@ -162,11 +166,13 @@ object Icon {
             description: String? = null,
             selector: Any? = null
         ) {
-
             Icon(
                 modifier = modifier
                     .thenOnNotNull(style.size, Modifier::size)
-                    .background(style.outfitFrame, selector),
+                    .background(style.outfitFrame, selector)
+                    .thenOnNotNull(style.size?.padding){
+                           padding(it)
+                    },
                 painter = painter,
                 tint = style.tint,
                 contentDescription = description,

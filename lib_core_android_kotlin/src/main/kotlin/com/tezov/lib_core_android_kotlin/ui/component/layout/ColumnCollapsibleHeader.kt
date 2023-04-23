@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 14:12
+ *  Created by Tezov on 23/04/2023 12:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 14:05
+ *  Last modified 23/04/2023 11:22
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,8 +13,7 @@
 package com.tezov.lib_core_android_kotlin.ui.component.layout
 
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -119,7 +118,7 @@ object ColumnCollapsibleHeader {
     operator fun invoke(
         modifier: Modifier = Modifier,
         properties: Properties,
-        header: @Composable ColumnScope.(progress: Float, progressPx: Dp) -> Unit,
+        header: @Composable BoxScope.(progress: Float, progressPx: Dp) -> Unit,
         body: @Composable ColumnScope.() -> Unit,
     ) {
         val density = LocalDensity.current.density
@@ -130,13 +129,18 @@ object ColumnCollapsibleHeader {
             rememberCollapsibleHeaderState(sizePx)
         Column(
             modifier = modifier
-        ){
-            header(
-                collapsibleHeaderState.progress,
-                properties.min + collapsibleHeaderState.progressPx.toDp(density)
-            )
+        ) {
+            Box(
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                header(
+                    collapsibleHeaderState.progress,
+                    properties.min + collapsibleHeaderState.progressPx.toDp(density)
+                )
+            }
             Column(
                 Modifier
+                    .fillMaxSize()
                     .nestedScroll(collapsibleHeaderState)
                     .verticalScroll(collapsibleHeaderState.scrollState)
             ) {

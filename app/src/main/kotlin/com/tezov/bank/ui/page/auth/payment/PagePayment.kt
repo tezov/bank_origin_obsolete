@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 14:12
+ *  Created by Tezov on 23/04/2023 12:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 13:48
+ *  Last modified 23/04/2023 11:23
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -63,7 +63,6 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
         ) {
             ColumnCollapsibleHeader(
                 modifier = Modifier
-                    .fillMaxSize()
                     .background(PagePaymentTheme.colors.background)
                     .padding(innerPadding),
                 properties = PagePaymentTheme.dimensions.headerProperties,
@@ -129,7 +128,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
     }
 
     @Composable
-    private fun contentBody(
+    private fun ColumnScope.contentBody(
         cardSmall: SectionSimpleTile.Data?,
         cardLarge: SectionSimpleTile.Data?,
     ){

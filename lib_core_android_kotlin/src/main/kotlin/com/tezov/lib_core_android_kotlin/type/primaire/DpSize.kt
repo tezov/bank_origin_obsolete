@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 23/04/2023 12:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 23/04/2023 11:51
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -11,6 +11,7 @@
  */
 package com.tezov.lib_core_android_kotlin.type.primaire
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
@@ -32,7 +33,7 @@ fun Modifier.size(size: DpSize): Modifier {
 inline val Int.dpSize: DpSize get() = DpSize(this)
 inline val Double.dpSize: DpSize get() = DpSize(this)
 
-class DpSize constructor(var width: Dp = 0.dp, var height: Dp = 0.dp) {
+class DpSize constructor(var width: Dp = 0.dp, var height: Dp = 0.dp, var padding:PaddingValues? = null) {
 
     constructor(size: Dp) : this(size, size)
     constructor(size: Int) : this(size.dp, size.dp)

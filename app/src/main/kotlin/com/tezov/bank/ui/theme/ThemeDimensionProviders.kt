@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 22:06
+ *  Created by Tezov on 23/04/2023 12:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 21:58
+ *  Last modified 23/04/2023 12:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,9 @@
 
 package com.tezov.bank.ui.theme
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.ui.unit.dp
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPalette.Size.Style.Companion.asPaletteSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteDirection
@@ -39,6 +41,10 @@ object ThemeDimensionProviders {
             normal = OutfitPaletteDirection(
                 vertical = 8.dp,
                 horizontal = 10.dp
+            ),
+            small = OutfitPaletteDirection(
+                vertical = 4.dp,
+                horizontal = 6.dp
             ),
         ),
         cluster = OutfitPaletteSize(
@@ -114,16 +120,24 @@ object ThemeDimensionProviders {
     )
 
     fun icons() = ThemeDimensionsExtended.Icons(
-        modal = 42.dpSize.asPaletteSize,
+        modal = DpSize(
+            width = 42.dp,
+            height = 42.dp,
+            padding = PaddingValues(10.dp),
+        ).asPaletteSize,
         info = OutfitPaletteSize(
             normal = 36.dpSize,
-            small = 18.dpSize,
+            small = 26.dpSize,
             big = 54.dpSize,
             huge = 86.dpSize,
         ),
         action = OutfitPaletteSize(
             normal = 22.dpSize,
-            big = 32.dpSize,
+            big = DpSize(
+                width = 36.dp,
+                height = 36.dp,
+                padding = PaddingValues(8.dp),
+            ),
         ),
         fieldInfo = 32.dpSize.asPaletteSize,
         fieldAction = 22.dpSize.asPaletteSize,

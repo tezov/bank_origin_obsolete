@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 21/04/2023 23:20
+ *  Created by Tezov on 23/04/2023 12:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 21/04/2023 22:57
+ *  Last modified 23/04/2023 12:04
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -35,9 +35,9 @@ private fun Modifier.thenInternal(
     onTrue: (Modifier.() -> Modifier)? = null,
     onFalse: (Modifier.() -> Modifier)? = null
 ) = (if(condition){
-    onTrue?.let { then(it()) }
+    onTrue?.let { then(Modifier.it()) }
 } else{
-    onFalse?.let { then(it()) }
+    onFalse?.let { then(Modifier.it()) }
 }) ?: this
 
 fun <T : Any> Modifier.thenOnNotNull(
@@ -61,7 +61,7 @@ private fun <T : Any> Modifier.thenInternal(
     onNotNull: (Modifier.(T) -> Modifier)? = null,
     onNull: (Modifier.() -> Modifier)? = null
 ) = (condition?.let {
-    onNotNull?.let { then(it(condition)) }
+    onNotNull?.let { then(Modifier.it(condition)) }
 } ?: run {
-    onNull?.let { then(it()) }
+    onNull?.let { then(Modifier.it()) }
 }) ?: this

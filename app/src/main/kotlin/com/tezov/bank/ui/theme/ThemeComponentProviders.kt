@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 22:06
+ *  Created by Tezov on 23/04/2023 12:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 20:36
+ *  Last modified 23/04/2023 10:56
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -194,6 +194,48 @@ object ThemeComponentProviders {
     )
 
     @Composable
+    fun accountSummaryCard() = AccountSummaryCard.Style(
+        outfitFrame = OutfitFrameStateColor(
+            outfitShape = MaterialTheme.shapesExtended.element.big.copy {
+                outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+            }
+        ),
+        iconInfoStyle = Icon.Simple.Style(
+            size = MaterialTheme.dimensionsIconExtended.action.normal,
+            tint = MaterialTheme.colorsExtended.onPrimary.default
+        ),
+        iconActionStyle = Icon.Simple.Style(
+            size = MaterialTheme.dimensionsIconExtended.action.normal,
+            tint = MaterialTheme.colorsExtended.onPrimary.default
+        ),
+        outfitTextSurtitle = MaterialTheme.typographiesExtended.label.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.onPrimary.default.asStateSimple
+            typo = typo.copy(
+                fontWeight = FontWeight.SemiBold
+            )
+        },
+        outfitTextTitle = MaterialTheme.typographiesExtended.body.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.onPrimary.default.asStateSimple
+            typo = typo.copy(
+                fontWeight = FontWeight.Bold
+            )
+        },
+        outfitTextSubtitle = MaterialTheme.typographiesExtended.label.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.onPrimary.fade.asStateSimple
+        },
+        outfitTextAmount = MaterialTheme.typographiesExtended.title.big.copy {
+            outfitState = MaterialTheme.colorsExtended.onPrimary.default.asStateSimple
+            typo = typo.copy(
+                fontWeight = FontWeight.Bold
+            )
+        },
+        backgroundAction = MaterialTheme.colorsExtended.background.default,
+        outfitTextAction = MaterialTheme.typographiesExtended.body.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+        },
+    )
+
+    @Composable
     fun sectionSimpleRowStyle() = SectionSimpleRow.Style(
         iconStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
@@ -225,11 +267,11 @@ object ThemeComponentProviders {
 
     @Composable
     fun sectionAccountValueSimpleRowStyle() = SectionAccountValueSimpleRow.Style(
-        outfitTextTitle = MaterialTheme.typographiesExtended.title.normal.copy {
+        outfitTextTitle = MaterialTheme.typographiesExtended.label.normal.copy {
             outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
         },
-        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.overlay,
-        colorDivider = MaterialTheme.colorsExtended.primary.fade,
+        colorBackgroundHeader = null,
+        colorDivider = MaterialTheme.colorsExtended.backgroundElevated.fade,
         sizeDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
         rowStyle = accountValueSimpleRowStyle()
     )
@@ -237,14 +279,14 @@ object ThemeComponentProviders {
     @Composable
     fun accountValueSimpleRowStyle() = AccountValueSimpleRow.Style(
         iconInfoStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsIconExtended.info.normal,
+            size = MaterialTheme.dimensionsIconExtended.info.small,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
-        outfitTextTitle = MaterialTheme.typographiesExtended.body.normal.copy {
+        outfitTextTitle = MaterialTheme.typographiesExtended.body.small.copy {
             outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
         },
-        outfitTextSubTitle = MaterialTheme.typographiesExtended.helper.normal.copy {
-            outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+        outfitTextSubTitle = MaterialTheme.typographiesExtended.label.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.fade.asStateSimple
         },
         outfitTextAmount = MaterialTheme.typographiesExtended.body.normal.copy {
             outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 14:12
+ *  Created by Tezov on 23/04/2023 12:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 13:48
+ *  Last modified 23/04/2023 11:33
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -39,13 +39,13 @@ class PageAccountState private constructor() : PageState {
 
     init {
         this.header = Header(
-            iconMailbox = R.drawable.ic_info_24dp,
-            iconAccount = R.drawable.ic_info_24dp,
+            iconMailbox = R.drawable.ic_bell_24dp,
+            iconAccount = R.drawable.ic_dashboard_24dp,
             headline = "Hello !",
             accountSummary = AccountSummaryCard.Data(
-                iconInfo = R.drawable.ic_info_24dp,
+                iconInfo = R.drawable.ic_chart_line_24dp,
                 iconAction = R.drawable.ic_3dot_h_24dp,
-                surtitle = "N°****3475",
+                surtitle = "N° **** 3475",
                 title = "Compte de chèques",
                 subTitle = "Aujourd'hui",
                 amount = "47 123,98 €",

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 22:06
+ *  Created by Tezov on 23/04/2023 12:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 22:05
+ *  Last modified 23/04/2023 12:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -49,6 +49,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
 
     private const val DIVIDER_HEADER_VISIBILITY_START = 0.3f
     private const val ICON_ACTION_SCALE_MIN = 0.85f
+    private const val ICON_ACTION_Y_OFFSET_FACTOR = 0.15f
 
     @Composable
     override fun Page<PageAccountState, PageAccountAction>.content(innerPadding: PaddingValues) {
@@ -73,7 +74,6 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
         ) {
             ColumnCollapsibleHeader(
                 modifier = Modifier
-                    .fillMaxSize()
                     .background(PageAccountTheme.colors.background)
                     .padding(innerPadding),
                 properties = PageAccountTheme.dimensions.headerProperties,
@@ -112,15 +112,21 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                 Image(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .height(properties.max - MaterialTheme.dimensionsPaddingExtended.element.supra.vertical),
+                        .height(properties.max - PageAccountTheme.dimensions.spacingBottomHeaderBackground),
                     painter = painterResource(id = R.drawable.bg_account),
                     contentDescription = null,
                     contentScale = ContentScale.None
                 )
-                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.supra.vertical))
+                Spacer(modifier = Modifier.height(PageAccountTheme.dimensions.spacingBottomHeaderBackground))
             }
             Row(
-                modifier = Modifier.padding(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
+                modifier = Modifier
+                    .padding(
+                        top = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
+                        bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
+                        start = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
+                        end = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
+                    )
             ) {
                 Column(
                     modifier = Modifier
@@ -154,12 +160,13 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                 }
                 Row(
                     modifier = Modifier
-                        .offset(0.dp, (properties.max - progressDp)/3)
+                        .offset(0.dp, ((properties.max - progressDp) * ICON_ACTION_Y_OFFSET_FACTOR))
                         .scale(progress.coerceAtLeast(ICON_ACTION_SCALE_MIN))
                 ) {
                     header.iconMailbox?.let {
                         Icon.StateColor(
-                            modifier = Modifier.padding(horizontal = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
+                            modifier = Modifier
+                                .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                             style = PageAccountTheme.styles.icon,
                             resourceId = it,
                             description = null
@@ -191,50 +198,22 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
     }
 
     @Composable
-    private fun contentBody(
+    private fun ColumnScope.contentBody(
         accountHistories: List<SectionAccountValueSimpleRow.Data>?
     ) {
         accountHistories?.let {
             it.forEach { data ->
                 SectionAccountValueSimpleRow(
+                    modifier = Modifier.padding(start = MaterialTheme.dimensionsPaddingExtended.page.small.horizontal),
                     data = data,
                     style = PageAccountTheme.styles.sectionAccountValue
                 ) {
 
                 }
+                Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
             }
         }
-        accountHistories?.let {
-            it.forEach { data ->
-                SectionAccountValueSimpleRow(
-                    data = data,
-                    style = PageAccountTheme.styles.sectionAccountValue
-                ) {
-
-                }
-            }
-        }
-        accountHistories?.let {
-            it.forEach { data ->
-                SectionAccountValueSimpleRow(
-                    data = data,
-                    style = PageAccountTheme.styles.sectionAccountValue
-                ) {
-
-                }
-            }
-        }
-        accountHistories?.let {
-            it.forEach { data ->
-                SectionAccountValueSimpleRow(
-                    data = data,
-                    style = PageAccountTheme.styles.sectionAccountValue
-                ) {
-
-                }
-            }
-        }
-        Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
+        Spacer(modifier = Modifier.defaultMinSize(minHeight = MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
     }
 
     @Composable
