@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 14:12
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 13:48
+ *  Last modified 23/04/2023 15:26
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,7 +18,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.tezov.bank.ui.component.block.*
@@ -77,12 +76,14 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
                 ) {
                     contentHeader(state.header)
                     contentPager(
+                        action = action,
                         cardsWithButton = state.cardsWithButton,
                         cardsWithLink = state.cardsWithLink,
                         cashbacks = state.cashbacks
                     )
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
                     contentSection(
+                        action = action,
                         offers = state.offers,
                         tips = state.tips
                     )
@@ -96,7 +97,7 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
     private fun contentHeader(
         header: PageDiscoverState.Header?
     ) {
-        if(header == null){
+        if (header == null) {
             return
         }
         Column(
@@ -121,6 +122,7 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
 
     @Composable
     private fun contentPager(
+        action: PageDiscoverAction,
         cardsWithButton: SectionCarouselCard.Data?,
         cardsWithLink: SectionCarouselCard.Data?,
         cashbacks: SectionRollerCard.Data?,
@@ -128,45 +130,49 @@ object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
         cardsWithButton?.let {
             SectionCarouselCard(
                 data = it,
-                style = PageDiscoverTheme.styles.sectionCarouselCardButton
-            ) {
-
-            }
+                style = PageDiscoverTheme.styles.sectionCarouselCardButton,
+                onClick = action::onClickCardsWithButton
+            )
         }
         Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
         cardsWithLink?.let {
             SectionCarouselCard(
                 data = it,
-                style = PageDiscoverTheme.styles.sectionCarouselCardLink
-            ) {
-
-            }
+                style = PageDiscoverTheme.styles.sectionCarouselCardLink,
+                onClick = action::onClickCardsWithLink
+            )
         }
         Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
         cashbacks?.let {
-            SectionRollerCard(data = it, style = PageDiscoverTheme.styles.sectionRollerCard) {
-
-            }
+            SectionRollerCard(
+                data = it,
+                style = PageDiscoverTheme.styles.sectionRollerCard,
+                onClickCard = action::onClickCashbacksCard,
+                onClickButton = action::onClickCashbacksButton
+            )
         }
     }
 
     @Composable
     private fun contentSection(
+        action: PageDiscoverAction,
         offers: SectionSimpleTile.Data?,
         tips: SectionSimpleRow.Data?,
     ) {
         offers?.let {
-            SectionSimpleTile(data = it, style = PageDiscoverTheme.styles.sectionActionCard) {
-
-
-            }
+            SectionSimpleTile(
+                data = it,
+                style = PageDiscoverTheme.styles.sectionActionCard,
+                onClick = action::onClickOffers
+            )
         }
         Spacer(modifier = Modifier.height(PageDiscoverTheme.dimensions.spacingTopSectionRowToBottomSectionCard))
         tips?.let {
-            SectionSimpleRow(data = it, style = PageDiscoverTheme.styles.sectionActionRow) {
-
-
-            }
+            SectionSimpleRow(
+                data = it,
+                style = PageDiscoverTheme.styles.sectionActionRow,
+                onClick = action::onClickTips
+            )
         }
     }
 

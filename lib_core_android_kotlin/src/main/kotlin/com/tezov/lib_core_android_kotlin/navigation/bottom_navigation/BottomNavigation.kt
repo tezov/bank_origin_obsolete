@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 09/04/2023 13:44
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 09/04/2023 13:38
+ *  Last modified 23/04/2023 17:18
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,7 +26,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.navigation.bottom_navigation.BottomNavigationState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateBiStable
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsCommonExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
@@ -49,7 +49,7 @@ object BottomNavigation :
     class Style(
         outfitText: OutfitTextStateColor? = null,
         val colorBackground: Color = Color.Gray.copy(alpha = 0.25f),
-        outfitColor: OutfitStateDual<Color>? = null,
+        outfitColor: OutfitStateBiStable<Color>? = null,
     ) {
 
         val outfitText: OutfitTextStateColor by DelegateNullFallBack.Ref(
@@ -63,10 +63,10 @@ object BottomNavigation :
                     )
                 )
             })
-        val outfitColor: OutfitStateDual<Color> by DelegateNullFallBack.Ref(
+        val outfitColor: OutfitStateBiStable<Color> by DelegateNullFallBack.Ref(
             outfitColor,
             fallBackValue = {
-                OutfitStateDual(active = Color.Black, inactive = Color.Gray)
+                OutfitStateBiStable(active = Color.Black, inactive = Color.Gray)
             })
 
         companion object {
@@ -117,10 +117,10 @@ object BottomNavigation :
                         )
                     },
                     selectedContentColor = MaterialTheme.componentsCommonExtended.bottomNavigation.outfitColor.resolve(
-                        OutfitState.Dual.Selector.Enabled
+                        OutfitState.BiStable.Selector.Enabled
                     ) ?: LocalContentColor.current,
                     unselectedContentColor = MaterialTheme.componentsCommonExtended.bottomNavigation.outfitColor.resolve(
-                        OutfitState.Dual.Selector.Disabled
+                        OutfitState.BiStable.Selector.Disabled
                     ) ?: LocalContentColor.current.copy(alpha = ContentAlpha.medium),
                     alwaysShowLabel = true,
                     selected = action.navigationController.currentRoute() == item.route,

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 23/04/2023 17:19
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,8 +19,9 @@ import kotlin.reflect.KClass
 
 typealias OutfitStateNull<T> = OutfitState.Null.Style<T>
 typealias OutfitStateSimple<T> = OutfitState.Simple.Style<T>
-typealias OutfitStateDual<T> = OutfitState.Dual.Style<T>
+typealias OutfitStateBiStable<T> = OutfitState.BiStable.Style<T>
 typealias OutfitStateSemantic<T> = OutfitState.Semantic.Style<T>
+typealias OutfitStateTemplate<T> = OutfitState.Template.Style<T>
 
 object OutfitState {
 
@@ -117,7 +118,7 @@ object OutfitState {
 
     }
 
-    object Dual {
+    object BiStable {
 
         enum class Selector {
             Enabled, Disabled
@@ -154,9 +155,9 @@ object OutfitState {
                         it.builder()
                     }.get()
 
-                inline val Color.asStateDual: OutfitStateDual<Color> get() = OutfitStateDual(active = this)
-                inline val TextStyle.asStateDual: OutfitStateDual<TextStyle>
-                    get() = OutfitStateDual(
+                inline val Color.asStateDual: OutfitStateBiStable<Color> get() = OutfitStateBiStable(active = this)
+                inline val TextStyle.asStateDual: OutfitStateBiStable<TextStyle>
+                    get() = OutfitStateBiStable(
                         active = this
                     )
             }
@@ -262,6 +263,101 @@ object OutfitState {
                 }
             }
         }
+    }
+
+    object Template {
+
+        enum class Selector {
+            A, B, C, D, E, F, G
+        }
+
+        class StyleBuilder<T : Any> internal constructor(val style: Style<T>) {
+            var a = style.a
+            var b = style.b
+            var c = style.c
+            var d = style.d
+            var e = style.e
+            var f = style.f
+            var g = style.g
+
+            internal fun get() = Style(
+                a = a,
+                b = b,
+                c = c,
+                d = d,
+                e = e,
+                f = f,
+                g = g,
+            )
+        }
+
+        class Style<T : Any>(
+            a: T? = null,
+            b: T? = null,
+            c: T? = null,
+            d: T? = null,
+            e: T? = null,
+            f: T? = null,
+            g: T? = null,
+
+        ) : OutfitState.Style<T> {
+
+            private val delegates = DelegateNullFallBack.Group<T>()
+            val a: T by delegates.ref(a)
+            val b: T by delegates.ref(b)
+            val c: T by delegates.ref(c)
+            val d: T by delegates.ref(d)
+            val e: T by delegates.ref(e)
+            val f: T by delegates.ref(f)
+            val g: T by delegates.ref(g)
+
+            init {
+                delegates.fallBackValue = delegates.firstNotNull()?.fallBackValue
+            }
+
+            companion object {
+
+                @Composable
+                fun <T : Any> Style<T>.copy(builder: @Composable StyleBuilder<T>.() -> Unit = {}) =
+                    StyleBuilder(this).also {
+                        it.builder()
+                    }.get()
+
+                inline val Color.asStateDual: OutfitStateBiStable<Color> get() = OutfitStateBiStable(active = this)
+                inline val TextStyle.asStateDual: OutfitStateBiStable<TextStyle>
+                    get() = OutfitStateBiStable(
+                        active = this
+                    )
+            }
+
+            constructor(style: Style<T>) : this(
+                a = style.a,
+                b = style.b,
+                c = style.c,
+                d = style.d,
+                e = style.e,
+                f = style.f,
+                g = style.g,
+
+            )
+            override fun selectorType() = Selector::class
+
+            override fun selectorDefault() = Selector.A
+
+            override fun resolve(selector: Any?) = resolve<Selector>(selector) {
+                when (it) {
+                    Selector.A -> a
+                    Selector.B -> b
+                    Selector.C -> c
+                    Selector.D -> d
+                    Selector.E -> e
+                    Selector.F -> f
+                    Selector.G -> g
+                }
+            }
+
+        }
+
     }
 
 }

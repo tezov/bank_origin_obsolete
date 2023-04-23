@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 23/04/2023 15:54
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,5 +31,20 @@ class PageAccountAction private constructor(
         )
     }
 
+    fun onClickAccountSummary(index: Int) {
+        navigationController.showSnackBarNotImplemented("click menu $index")
+    }
+
+    fun onClickAccountHistories(index: Int) {
+        navigationController.showSnackBarNotImplemented("click history $index")
+    }
+
+    fun onClickMailBox() {
+        navigationController.showSnackBarNotImplemented("click mail box")
+    }
+
+    fun onClickAccount() {
+        navigationController.showSnackBarNotImplemented("click account")
+    }
 
 }

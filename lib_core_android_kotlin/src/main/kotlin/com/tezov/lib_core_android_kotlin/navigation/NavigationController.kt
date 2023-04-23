@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 23/04/2023 15:53
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -76,7 +76,7 @@ class NavigationController constructor(
         }
     }
 
-    fun showSnackBarNotImplemented() = snackbarAction.showNotImplemented()
+    fun showSnackBarNotImplemented(message:String? = null) = snackbarAction.showNotImplemented(message)
 
     private val clickDispatcher = MutableLiveData<Event<Route>>()
     fun dispatchClick(route: Route) {

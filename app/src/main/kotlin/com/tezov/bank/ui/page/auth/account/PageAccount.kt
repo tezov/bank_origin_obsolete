@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 12:43
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 12:23
+ *  Last modified 23/04/2023 15:37
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,12 +14,14 @@ package com.tezov.bank.ui.page.auth.account
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -39,9 +41,9 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
 import com.tezov.lib_core_android_kotlin.ui.modifier.then
+import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
@@ -79,14 +81,15 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                 properties = PageAccountTheme.dimensions.headerProperties,
                 header = { progress, progressDp ->
                     contentHeader(
-                        state.header,
+                        action = action,
+                        header = state.header,
                         properties = PageAccountTheme.dimensions.headerProperties,
-                        progress,
-                        progressDp
+                        progress = progress,
+                        progressDp = progressDp
                     )
                 },
                 body = {
-                    contentBody(state.accountHistories)
+                    contentBody(action = action, accountHistories = state.accountHistories)
                 }
             )
         }
@@ -95,6 +98,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
 
     @Composable
     private fun contentHeader(
+        action: PageAccountAction,
         header: PageAccountState.Header?,
         properties: ColumnCollapsibleHeader.Properties,
         progress: Float,
@@ -153,7 +157,8 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                                 progress = progress,
                                 modifier = Modifier.fillMaxWidth(),
                                 style = PageAccountTheme.styles.accountSummary,
-                                data = it
+                                data = it,
+                                onClick = action::onClickAccountSummary
                             )
                         }
                     }
@@ -166,7 +171,11 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                     header.iconMailbox?.let {
                         Icon.StateColor(
                             modifier = Modifier
-                                .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
+                                .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal)
+                                .thenOnNotNull(PageAccountTheme.styles.icon.outfitFrame.getShape()){ shape ->
+                                    clip(shape)
+                                }
+                                .clickable(onClick = action::onClickMailBox),
                             style = PageAccountTheme.styles.icon,
                             resourceId = it,
                             description = null
@@ -174,6 +183,11 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                     }
                     header.iconAccount?.let {
                         Icon.StateColor(
+                            modifier = Modifier
+                                .thenOnNotNull(PageAccountTheme.styles.icon.outfitFrame.getShape()){ shape ->
+                                    clip(shape)
+                                }
+                                .clickable(onClick = action::onClickAccount),
                             style = PageAccountTheme.styles.icon,
                             resourceId = it,
                             description = null
@@ -199,6 +213,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
 
     @Composable
     private fun ColumnScope.contentBody(
+        action: PageAccountAction,
         accountHistories: List<SectionAccountValueSimpleRow.Data>?
     ) {
         accountHistories?.let {
@@ -206,10 +221,9 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                 SectionAccountValueSimpleRow(
                     modifier = Modifier.padding(start = MaterialTheme.dimensionsPaddingExtended.page.small.horizontal),
                     data = data,
-                    style = PageAccountTheme.styles.sectionAccountValue
-                ) {
-
-                }
+                    style = PageAccountTheme.styles.sectionAccountValue,
+                    onClick = action::onClickAccountHistories
+                )
                 Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
             }
         }

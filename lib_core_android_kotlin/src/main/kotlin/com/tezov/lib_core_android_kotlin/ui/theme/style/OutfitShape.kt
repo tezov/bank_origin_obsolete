@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 20:45
+ *  Last modified 23/04/2023 17:18
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -152,7 +152,7 @@ object OutfitShape {
                 inline val OutfitStateSimple<ColorImport>.asStateColor: OutfitShapeStateColor
                     get() = OutfitShapeStateColor(size = 0.dp.asShapeSize, outfitState = this)
 
-                inline val OutfitStateDual<ColorImport>.asStateColor: OutfitShapeStateColor
+                inline val OutfitStateBiStable<ColorImport>.asStateColor: OutfitShapeStateColor
                     get() = OutfitShapeStateColor(size = 0.dp.asShapeSize, outfitState = this)
 
                 inline val OutfitStateSemantic<ColorImport>.asStateColor: OutfitShapeStateColor

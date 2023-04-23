@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 14:12
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 13:48
+ *  Last modified 23/04/2023 16:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,7 +18,6 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
@@ -61,6 +60,7 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
             ) {
                 contentHeader(state.header)
                 contentBody(
+                    action= action,
                     emergencies = state.emergencies,
                     paymentModes = state.paymentModes,
                     configuration = state.configuration,
@@ -114,6 +114,7 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
 
     @Composable
     private fun contentBody(
+        action: PageHelpAction,
         emergencies: SectionSimpleRow.Data?,
         paymentModes: SectionSimpleRow.Data?,
         configuration: SectionSimpleRow.Data?,
@@ -121,34 +122,19 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
         misc: SectionSimpleRow.Data?,
     ) {
         emergencies?.let {
-            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
-
-
-            }
+            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow, onClick = action::onClickEmergencies)
         }
         paymentModes?.let {
-            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
-
-
-            }
+            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow, onClick = action::onClickPaymentModes)
         }
         configuration?.let {
-            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
-
-
-            }
+            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow, onClick = action::onClickConfigurations)
         }
         account?.let {
-            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
-
-
-            }
+            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow, onClick = action::onClickAccounts)
         }
         misc?.let {
-            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow) {
-
-
-            }
+            SectionSimpleRow(data = it, style = PageHelpTheme.styles.sectionRow, onClick = action::onClickMisc)
         }
 
     }

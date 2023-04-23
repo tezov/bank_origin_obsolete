@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 13:42
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 13:41
+ *  Last modified 23/04/2023 17:18
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,8 +23,6 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.*
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionPadding.end
-import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionPadding.start
 import com.tezov.lib_core_android_kotlin.ui.modifier.fillMaxHeightRemembered
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnTrue
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
@@ -72,7 +70,7 @@ object HorizontalPager {
                 outfitShapeIndicator,
                 fallBackValue = {
                     OutfitShapeStateColor(
-                        outfitState = OutfitStateDual(active = Color.Black, inactive = Color.Gray),
+                        outfitState = OutfitStateBiStable(active = Color.Black, inactive = Color.Gray),
                         size = 6.dp.asShapeSize
                     )
                 })
@@ -150,9 +148,9 @@ object HorizontalPager {
                         indicatorWidth = style.sizeIndicator,
                         indicatorHeight = style.sizeIndicator,
                         spacing = style.spacingIndicator,
-                        activeColor = it.resolveColor(OutfitState.Dual.Selector.Enabled)
+                        activeColor = it.resolveColor(OutfitState.BiStable.Selector.Enabled)
                             ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
-                        inactiveColor = it.resolveColor(OutfitState.Dual.Selector.Disabled)
+                        inactiveColor = it.resolveColor(OutfitState.BiStable.Selector.Disabled)
                             ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
                                 .copy(
                                     ContentAlpha.disabled

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:13
+ *  Last modified 23/04/2023 17:18
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -213,7 +213,7 @@ object Button {
                 style,
                 contentPadding,
                 enabled,
-                if (enabled) OutfitState.Dual.Selector.Enabled else OutfitState.Dual.Selector.Disabled,
+                if (enabled) OutfitState.BiStable.Selector.Enabled else OutfitState.BiStable.Selector.Disabled,
                 onClick
             )
         }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 12:43
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 12:23
+ *  Last modified 23/04/2023 16:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,7 +16,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.Dp
@@ -75,6 +74,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                 },
                 body = {
                     contentBody(
+                        action = action,
                         cardSmall = state.cardSmall,
                         cardLarge = state.cardLarge,
                     )
@@ -129,27 +129,24 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
 
     @Composable
     private fun ColumnScope.contentBody(
+        action: PagePaymentAction,
         cardSmall: SectionSimpleTile.Data?,
         cardLarge: SectionSimpleTile.Data?,
     ){
         cardSmall?.let {
             SectionSimpleTile(
                 data = it,
-                style = PagePaymentTheme.styles.sectionCard
-            ) {
-
-
-            }
+                style = PagePaymentTheme.styles.sectionCard,
+                onClick = action::onClickCardsSmall
+            )
         }
         Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
         cardLarge?.let {
             SectionSimpleTile(
                 data = it,
-                style = PagePaymentTheme.styles.sectionCard
-            ) {
-
-
-            }
+                style = PagePaymentTheme.styles.sectionCard,
+                onClick = action::onClickCardsLarge
+            )
         }
     }
 

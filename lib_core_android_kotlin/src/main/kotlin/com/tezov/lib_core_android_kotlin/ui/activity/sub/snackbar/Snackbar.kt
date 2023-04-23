@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:13
+ *  Last modified 23/04/2023 17:27
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,6 @@
 
 package com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar
 
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -30,7 +29,6 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Compani
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
@@ -106,32 +104,31 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
     }
 
     @Composable
-    operator fun invoke() {
-        content()
-    }
-
-    //todo all selector possible
-    @Composable
-    private fun content() {
+    fun invoke(
+        modifier: Modifier = Modifier,
+        selector: Any? = null,
+        style: Style? = null,
+    ) {
         val accessor = AccessorCoreUiActivity().get(this).contextSubMap()
         val state = accessor.with<Snackbar, _, _>().state()
-
         SnackbarHost(
             hostState = state.hostState,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(MaterialTheme.dimensionsPaddingExtended.block.small)
+            modifier = modifier
         ) { data ->
             Snackbar(
-                backgroundColor = MaterialTheme.componentsCommonExtended.snackBar.outfitShape.resolveColor()
+                backgroundColor = (style?.outfitShape
+                    ?: MaterialTheme.componentsCommonExtended.snackBar.outfitShape).resolveColor(selector)
                     ?: SnackbarDefaults.backgroundColor,
-                elevation = MaterialTheme.componentsCommonExtended.snackBar.elevation,
-                shape = MaterialTheme.componentsCommonExtended.snackBar.outfitShape.getShape()
+                elevation = (style ?: MaterialTheme.componentsCommonExtended.snackBar).elevation,
+                shape = (style?.outfitShape
+                    ?: MaterialTheme.componentsCommonExtended.snackBar.outfitShape).getShape()
                     ?: MaterialTheme.shapes.small,
                 content = {
                     Text.StateColor(
                         text = data.message,
-                        style = MaterialTheme.componentsCommonExtended.snackBar.outfitTextMessage
+                        style = (style
+                            ?: MaterialTheme.componentsCommonExtended.snackBar).outfitTextMessage,
+                        selector = selector
                     )
                 },
                 action = {
@@ -140,7 +137,9 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
                             onClick = { data.performAction() }) {
                             Text.StateColor(
                                 text = label,
-                                style = MaterialTheme.componentsCommonExtended.snackBar.outfitTextAction
+                                style = (style
+                                    ?: MaterialTheme.componentsCommonExtended.snackBar).outfitTextAction,
+                                selector = selector
                             )
                         }
                     }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 23/04/2023 16:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,7 +28,20 @@ class PageHelpAndServiceAction private constructor(
         )
     }
 
-    fun close() {
+    fun onClickClose() {
         navigationController.navigateBack()
     }
+
+    fun onClickHelpAndServices(index: Int) {
+        navigationController.showSnackBarNotImplemented("click help $index")
+    }
+
+    fun onClickContacts(index: Int) {
+        navigationController.showSnackBarNotImplemented("click contact $index")
+    }
+
+    fun onClickNotices(index: Int) {
+        navigationController.showSnackBarNotImplemented("click notices $index")
+    }
+
 }

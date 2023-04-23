@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 19:17
+ *  Last modified 23/04/2023 16:12
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -99,36 +99,22 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 .padding(vertical = MaterialTheme.dimensionsPaddingExtended.page.huge.vertical)
         ) {
             ContentHeader(
+                action = action,
                 iconState = state.iconState,
-                onClickAdd = {
-
-                },
-                onClickDropDownMenu = { index ->
-
-                }
             )
             ContentBody(
                 nameState = state.nameState
             )
             ContentFooter(
-                onClickConnect = {
-                    action.onClickConnect()
-                },
-                onClickSendMoney = {
-
-                },
-                onClickHelpAndService = {
-                    action.onClickHelpAndService()
-                },
+                action = action,
             )
         }
     }
 
     @Composable
     private fun ContentHeader(
+        action: PageLoginAction,
         iconState: State<Int>,
-        onClickAdd: () -> Unit,
-        onClickDropDownMenu: (id: Int) -> Unit
     ) {
         Row(
             modifier = Modifier
@@ -151,7 +137,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 description = stringResource(id = R.string.pg_login_img_suit_case)
             )
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconBig))
-            IconButton(onClick = { onClickAdd() }) {
+            IconButton(onClick = action::onClickAdd) {
                 Icon.StateColor(
                     resourceId = R.drawable.ic_add_24dp,
                     style = PageLoginTheme.styles.iconMedium,
@@ -183,7 +169,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         DropdownMenuItem(
                             onClick = {
                                 expanded = false
-                                onClickDropDownMenu(index)
+                                action.onClickMenu(index)
                             },
                             contentPadding = PaddingValues(8.dp, 0.dp)
                         ) {
@@ -261,9 +247,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
     @Composable
     private fun ContentFooter(
-        onClickConnect: () -> Unit,
-        onClickSendMoney: () -> Unit,
-        onClickHelpAndService: () -> Unit,
+        action: PageLoginAction,
     ) {
         Column(
             modifier = Modifier
@@ -279,7 +263,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     .padding(MaterialTheme.dimensionsPaddingExtended.text.big),
                 text = stringResource(id = R.string.pg_login_btn_connect),
                 style = PageLoginTheme.styles.buttonDark,
-                onClick = onClickConnect,
+                onClick = action::onClickConnect,
             )
             Button.StateColor(
                 modifierButton = Modifier
@@ -289,13 +273,13 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                     .padding(MaterialTheme.dimensionsPaddingExtended.text.big),
                 text = stringResource(id = R.string.pg_login_btn_send_money),
                 style = PageLoginTheme.styles.buttonLight,
-                onClick = onClickSendMoney,
+                onClick = action::onClickSendMoney,
             )
             Spacer(modifier = Modifier.height(PageLoginTheme.dimensions.spacingTopFromLinkService))
             Link.StateColor(
                 text = stringResource(id = R.string.pg_login_link_help_and_service),
                 style = PageLoginTheme.styles.link,
-                onClick = onClickHelpAndService,
+                onClick = action::onClickHelpAndService,
             )
         }
     }

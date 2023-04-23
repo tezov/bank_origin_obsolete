@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 14:12
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 13:59
+ *  Last modified 23/04/2023 16:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,7 +19,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -69,8 +68,12 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                     .padding(innerPadding)
                     .verticalScroll(rememberScrollState())
             ) {
-                contentHeader(state.header)
+                contentHeader(
+                    action = action,
+                    header = state.header
+                )
                 contentBody(
+                    action = action,
                     profils = state.profils,
                     documents = state.documents,
                     offers = state.offers,
@@ -83,6 +86,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
 
     @Composable
     private fun contentHeader(
+        action: PageProfileAction,
         header: PageProfileState.Header?
     ) {
         if(header == null){
@@ -97,9 +101,8 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                 modifier = Modifier
                     .wrapContentSize()
                     .align(Alignment.End),
-                onClick = {
-
-                }) {
+                onClick = action::onClickExit
+            ) {
                 Icon.StateColor(
                     style = PageProfileTheme.styles.iconLogOut,
                     resourceId = R.drawable.ic_logout_24dp,
@@ -129,36 +132,24 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
 
     @Composable
     private fun contentBody(
+        action: PageProfileAction,
         profils: SectionSimpleRow.Data?,
         documents: SectionSimpleRow.Data?,
         offers: SectionSimpleRow.Data?,
         helps: SectionSimpleRow.Data?,
     ) {
         profils?.let {
-            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
-
-
-            }
+            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow, onClick = action::onClickProfiles)
         }
         documents?.let {
-            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
-
-
-            }
+            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow, onClick = action::onClickDocuments)
         }
         offers?.let {
-            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
-
-
-            }
+            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow, onClick = action::onClickOffers)
         }
         helps?.let {
-            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow) {
-
-
-            }
+            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow, onClick = action::onClickHelps)
         }
-
     }
 
     @Composable

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 22:06
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 20:10
+ *  Last modified 23/04/2023 16:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,6 +28,7 @@ import com.tezov.bank.R
 import com.tezov.bank.ui.component.block.SectionSimpleTile
 import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
+import com.tezov.bank.ui.page.auth.profile.PageProfileAction
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Shadow
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
@@ -73,7 +74,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                     IconButton(
                         modifier = Modifier
                             .align(Alignment.Start),
-                        onClick = { action.close() }) {
+                        onClick = action::onClickClose) {
                         Icon(
                             modifier = Modifier.size(MaterialTheme.dimensionsIconExtended.modal.normal),
                             painter = painterResource(id = R.drawable.ic_close_24dp),
@@ -90,6 +91,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
                 ) {
                     contentHeader(state.header)
                     contentBody(
+                        action = action,
                         helpAndServices = state.helpAndServices,
                         contacts = state.contacts,
                         notices = state.notices,
@@ -118,6 +120,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
     @Composable
     private fun contentBody(
+        action: PageHelpAndServiceAction,
         helpAndServices: SectionSimpleTile.Data?,
         contacts: SectionSimpleRow.Data?,
         notices: SectionSimpleRow.Data?,
@@ -125,30 +128,24 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
         helpAndServices?.let {
             SectionSimpleTile(
                 data = it,
-                style = PageHelpAndServiceTheme.styles.sectionCard
-            ) {
-
-
-            }
+                style = PageHelpAndServiceTheme.styles.sectionCard,
+                onClick = action::onClickHelpAndServices
+            )
         }
         Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.block.huge.vertical))
         contacts?.let {
             SectionSimpleRow(
                 data = it,
-                style = PageHelpAndServiceTheme.styles.sectionRow
-            ) {
-
-
-            }
+                style = PageHelpAndServiceTheme.styles.sectionRow,
+                onClick = action::onClickContacts
+            )
         }
         notices?.let {
             SectionSimpleRow(
                 data = it,
-                style = PageHelpAndServiceTheme.styles.sectionRow
-            ) {
-
-
-            }
+                style = PageHelpAndServiceTheme.styles.sectionRow,
+                onClick = action::onClickNotices
+            )
         }
 
     }

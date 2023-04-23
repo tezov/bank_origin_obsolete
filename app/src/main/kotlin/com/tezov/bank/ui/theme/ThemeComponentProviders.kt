@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 13:42
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 13:42
+ *  Last modified 23/04/2023 17:27
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,8 +22,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.block.*
 import com.tezov.bank.ui.component.element.*
-import com.tezov.bank.ui.page.auth.discover.colors
-import com.tezov.bank.ui.page.auth.discover.dimensions
 import com.tezov.bank.ui.theme.font.fontIbm
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
@@ -39,7 +37,6 @@ import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller.Pag
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Image
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link.StateColor.Style.Companion.copy
@@ -65,7 +62,7 @@ object ThemeComponentProviders {
                 fontSize = 12.5.sp
             ).asTextStateColor,
             colorBackground = MaterialTheme.colorsPalette.whiteShady,
-            outfitColor = OutfitStateDual(
+            outfitColor = OutfitStateBiStable(
                 active = MaterialTheme.colorsPalette.blueSea,
                 inactive = MaterialTheme.colorsPalette.blueShadow
             ),
@@ -91,7 +88,10 @@ object ThemeComponentProviders {
                     fontWeight = FontWeight.SemiBold,
                     fontSize = 14.sp
                 ),
-                outfitState = MaterialTheme.colorsExtended.onBackgroundModal.dark.asStateSimple,
+                outfitState = OutfitStateTemplate(
+                    a = MaterialTheme.colorsExtended.onBackgroundModal.accent,
+                    b = MaterialTheme.colorsExtended.onBackgroundModal.default,
+                ),
             ),
             outfitTextAction = OutfitTextStateColor(
                 typo = TextStyle(
@@ -99,11 +99,17 @@ object ThemeComponentProviders {
                     fontWeight = FontWeight.Bold,
                     fontSize = 14.sp
                 ),
-                outfitState = MaterialTheme.colorsExtended.onBackgroundModal.dark.asStateSimple,
+                outfitState = OutfitStateTemplate(
+                    a = MaterialTheme.colorsExtended.onBackgroundModal.accent,
+                    b = MaterialTheme.colorsExtended.onBackgroundModal.default,
+                ),
             ),
             outfitShape = OutfitShapeStateColor(
                 size = 8.dp.asShapeSize,
-                outfitState = MaterialTheme.colorsExtended.backgroundModal.default.asStateSimple,
+                outfitState = OutfitStateTemplate(
+                    a = MaterialTheme.colorsExtended.backgroundModal.accent,
+                    b = MaterialTheme.colorsExtended.backgroundModal.default,
+                )
             ),
             elevation = 4.dp,
         ),
@@ -114,14 +120,14 @@ object ThemeComponentProviders {
         primary = Button.StateColor.Style(
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = MaterialTheme.shapesExtended.button.normal.copy {
-                    outfitState = OutfitStateDual(
+                    outfitState = OutfitStateBiStable(
                         active = MaterialTheme.colorsExtended.primary.default,
                         inactive = MaterialTheme.colorsExtended.primary.fade,
                     )
                 }
             ),
             outfitText = MaterialTheme.typographiesExtended.button.normal.copy {
-                outfitState = OutfitStateDual(
+                outfitState = OutfitStateBiStable(
                     active = MaterialTheme.colorsExtended.onPrimary.default,
                     inactive = MaterialTheme.colorsExtended.onPrimary.fade,
                 )
@@ -130,7 +136,7 @@ object ThemeComponentProviders {
         secondary = Button.StateColor.Style(
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = MaterialTheme.shapesExtended.button.normal.copy {
-                    outfitState = OutfitStateDual(
+                    outfitState = OutfitStateBiStable(
                         active = MaterialTheme.colorsExtended.primary.shiny,
                         inactive = MaterialTheme.colorsExtended.primary.fade,
                     )
@@ -140,7 +146,7 @@ object ThemeComponentProviders {
                 }
             ),
             outfitText = MaterialTheme.typographiesExtended.button.normal.copy {
-                outfitState = OutfitStateDual(
+                outfitState = OutfitStateBiStable(
                     active = MaterialTheme.colorsExtended.onPrimary.default,
                     inactive = MaterialTheme.colorsExtended.onPrimary.fade,
                 )
@@ -150,14 +156,14 @@ object ThemeComponentProviders {
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = MaterialTheme.shapesExtended.button.normal,
                 outfitBorder = MaterialTheme.bordersExtended.button.big.copy {
-                    outfitState = OutfitStateDual(
+                    outfitState = OutfitStateBiStable(
                         active = MaterialTheme.colorsExtended.primary.default,
                         inactive = MaterialTheme.colorsPalette.grayLight,
                     )
                 }
             ),
             outfitText = MaterialTheme.typographiesExtended.button.big.copy {
-                outfitState = OutfitStateDual(
+                outfitState = OutfitStateBiStable(
                     active = MaterialTheme.colorsExtended.onPrimary.default,
                     inactive = MaterialTheme.colorsPalette.grayBlack,
                 )
@@ -169,7 +175,7 @@ object ThemeComponentProviders {
     fun link() = ThemeComponentExtended.Links(
         primary = Link.StateColor.Style(
             outfitText = MaterialTheme.typographiesExtended.link.normal.copy {
-                outfitState = OutfitStateDual(
+                outfitState = OutfitStateBiStable(
                     active = MaterialTheme.colorsExtended.primary.default,
                     inactive = MaterialTheme.colorsPalette.grayLight,
                 )
@@ -177,7 +183,7 @@ object ThemeComponentProviders {
         ),
         secondary = Link.StateColor.Style(
             outfitText = MaterialTheme.typographiesExtended.link.big.copy {
-                outfitState = OutfitStateDual(
+                outfitState = OutfitStateBiStable(
                     active = MaterialTheme.colorsExtended.primary.default,
                     inactive = MaterialTheme.colorsPalette.grayLight,
                 )
@@ -185,7 +191,7 @@ object ThemeComponentProviders {
         ),
         tertiary = Link.StateColor.Style(
             outfitText = MaterialTheme.typographiesExtended.link.small.copy {
-                outfitState = OutfitStateDual(
+                outfitState = OutfitStateBiStable(
                     active = MaterialTheme.colorsExtended.primary.default,
                     inactive = MaterialTheme.colorsPalette.grayLight,
                 )
@@ -229,9 +235,9 @@ object ThemeComponentProviders {
                 fontWeight = FontWeight.Bold
             )
         },
-        backgroundAction = MaterialTheme.colorsExtended.background.default,
+        backgroundAction = MaterialTheme.colorsExtended.backgroundModal.default,
         outfitTextAction = MaterialTheme.typographiesExtended.body.normal.copy {
-            outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+            outfitState = MaterialTheme.colorsExtended.onBackgroundModal.default.asStateSimple
         },
     )
 
@@ -331,7 +337,7 @@ object ThemeComponentProviders {
     @Composable
     fun pagerStyle() = HorizontalPager.Page.Style(
         outfitShapeIndicator = OutfitShapeStateColor(
-            outfitState = OutfitStateDual(
+            outfitState = OutfitStateBiStable(
                 active = MaterialTheme.colorsExtended.primary.accent,
                 inactive = MaterialTheme.colorsExtended.primary.default.copy(alpha = 0.6f),
             )

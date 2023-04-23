@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:13
+ *  Last modified 23/04/2023 17:18
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,7 +33,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateDual
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateBiStable
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
@@ -146,7 +146,7 @@ object DialogLoginAuthTheme {
         button = MaterialTheme.componentsButtonExtended.primary.copy {
             outfitFrame = outfitFrame.copy {
                 outfitShape = outfitShape.copy {
-                    outfitState = OutfitStateDual(
+                    outfitState = OutfitStateBiStable(
                         active = colors.light,
                         inactive = colors.dark
                     )

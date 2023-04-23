@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 22:06
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 20:58
+ *  Last modified 23/04/2023 15:44
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -92,6 +92,14 @@ object ThemeColorProviders {
         ),
         onBackgroundElevated = OutfitPaletteColor(
             default = Palette.blueElegant,
+        ),
+        backgroundModal = OutfitPaletteColor(
+            default = Palette.whiteShiny,
+            accent = Palette.blueSea,
+        ),
+        onBackgroundModal = OutfitPaletteColor(
+            default = Palette.blueElegant,
+            accent = Palette.blueElegant,
         ),
     )
 

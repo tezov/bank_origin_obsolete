@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 23/04/2023 15:53
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,6 +20,7 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.Activit
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import java.lang.StringBuilder
 
 class SnackbarAction private constructor(
     private val coroutineScope: CoroutineScope,
@@ -58,11 +59,16 @@ class SnackbarAction private constructor(
         }
     }
 
-    fun showNotImplemented() {
+    fun showNotImplemented(message:String? = null) {
         currentJob?.cancel()
         currentJob = coroutineScope.launch {
             val result = hostState.showSnackbar(
-                message = "Not Implemented",
+                message = StringBuilder().apply {
+                    append("Not implemented")
+                    message?.let {
+                        append("\n$message")
+                    }
+                }.toString(),
                 actionLabel = "[X]",
                 duration = SnackbarDuration.Short
             )

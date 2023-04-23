@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 23/04/2023 17:27
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:17
+ *  Last modified 23/04/2023 17:18
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -211,7 +211,7 @@ object PageLoginTheme {
     fun provideStyles() = Style(
         pager = ThemeComponentProviders.pagerStyle().copy {
             outfitShapeIndicator = OutfitShapeStateColor(
-                outfitState = OutfitStateDual(
+                outfitState = OutfitStateBiStable(
                     active = colors.dark,
                     inactive = colors.dark.copy(alpha = 0.45f),
                 )
