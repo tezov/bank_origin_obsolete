@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 25/04/2023 21:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 25/04/2023 19:37
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,11 +23,11 @@ object PageSplash : Page<PageSplashState, PageSplashAction> {
 
     @Composable
     override fun Page<PageSplashState, PageSplashAction>.content(innerPadding: PaddingValues) {
-        val accessor = AccessorAppUiPage().get(requester = this).contextSplash()
-        val action = accessor.action()
-        LaunchedEffect(Unit) {
-            action.onStart()
-        }
+        val accessor = AccessorAppUiPage(requester = this).contextSplash()
+//        val action = accessor.action()
+//        LaunchedEffect(Unit) {
+//            action.onStart()
+//        }
     }
 
 }

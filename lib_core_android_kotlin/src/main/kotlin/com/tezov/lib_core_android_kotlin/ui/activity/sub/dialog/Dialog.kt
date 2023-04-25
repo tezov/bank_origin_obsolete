@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:08
+ *  Created by Tezov on 25/04/2023 21:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 17:36
+ *  Last modified 25/04/2023 19:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,6 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPages
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModals
@@ -47,7 +48,7 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
 
     @Composable
     private fun content() {
-        val accessor = AccessorCoreUiActivity().get(this).contextSubMap()
+        val accessor = AccessorCoreUiActivity().get(LocalActivity.current).contextSubMap()
         val state = accessor.with<Dialog, _, _>().state()
         if (state.isVisible()) {
             Dialog(

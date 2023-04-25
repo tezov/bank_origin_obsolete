@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 25/04/2023 21:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 25/04/2023 20:45
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,9 +13,11 @@
 package com.tezov.lib_core_android_kotlin.ui.compositionTree.page
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.*
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPages
@@ -37,30 +39,34 @@ interface Page<S : PageState, A : PageAction<S>> : Composition<S, A> {
         data class Locals(val page: Page<*, *>, val modals: ArrayDeque<Modal.Companion.Locals>)
     }
 
-    @SuppressLint("UnrememberedMutableState")
+    @SuppressLint("RememberReturnType")
     @Composable
     operator fun invoke(innerPadding: PaddingValues) {
-        val locals = Locals(this, ArrayDeque())
         val pages = LocalPages.current
-        DisposableEffect(Unit) {
+        remember {
+            val locals = Locals(this, ArrayDeque())
             pages.push(locals)
+        }
+        pages.find { it.page == this@Page }?.let { locals ->
+            CompositionLocalProvider(
+                Activity.DebugLocalLevel provides 1,
+                LocalPage provides locals.page,
+                LocalModals provides locals.modals
+            ) {
+                val onBackPressedState = remember {
+                    mutableStateOf(false)
+                }
+                BackHandler(true) {
+                    onBackPressedState.value = true
+                }
+                onBackPressedDispatch(onBackPressedState)
+                content(innerPadding = innerPadding)
+            }
+        }
+        DisposableEffect(Unit) {
             onDispose {
                 pages.find { it.page == this@Page }?.also { pages.remove(it) }
             }
-        }
-        CompositionLocalProvider(
-            Activity.DebugLocalLevel provides 1,
-            LocalPage provides locals.page,
-            LocalModals provides locals.modals
-        ) {
-            val onBackPressedState = remember {
-                mutableStateOf(false)
-            }
-            BackHandler(true) {
-                onBackPressedState.value = true
-            }
-            onBackPressedDispatch(onBackPressedState)
-            content(innerPadding = innerPadding)
         }
     }
 

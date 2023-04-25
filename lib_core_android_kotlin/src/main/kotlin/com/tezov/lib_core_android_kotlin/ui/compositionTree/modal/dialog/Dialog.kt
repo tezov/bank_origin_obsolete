@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 25/04/2023 21:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 25/04/2023 20:42
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,6 +18,8 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.Modal
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModals
 
 interface Dialog<S : DialogState, A : DialogAction<S>> : Modal<S, A> {
     companion object {
@@ -28,11 +30,15 @@ interface Dialog<S : DialogState, A : DialogAction<S>> : Modal<S, A> {
 
     @Composable
     override fun Modal<S, A>.content() {
-        CompositionLocalProvider(
-            Activity.DebugLocalLevel provides 2,
-            LocalDialog provides (this as Dialog<*, *>)
-        ) {
-            (this as Dialog<S, A>).content()
+        val modals = LocalModals.current
+        modals.find { it.modal == this@Dialog }?.let {
+            this as Dialog<S, A>
+            CompositionLocalProvider(
+                Activity.DebugLocalLevel provides 2,
+                LocalDialog provides this
+            ) {
+                this.content()
+            }
         }
     }
 

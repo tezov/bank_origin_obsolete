@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 25/04/2023 21:10
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 25/04/2023 21:04
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,56 +15,42 @@ package com.tezov.bank.ui.di.accessor
 import androidx.compose.runtime.Composable
 import com.tezov.bank.application.Application
 import com.tezov.bank.ui.di.component.ComponentAppUiActivity
-import com.tezov.bank.ui.di.component.ComponentAppUiPage
 import com.tezov.bank.ui.di.component.DaggerComponentAppUiActivity_EntryPoint
-import com.tezov.bank.ui.di.component.DaggerComponentAppUiPage_EntryPoint
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalApplication
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorBase
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
-import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiPage
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.wakeUp
 import kotlin.reflect.KClass
 
 class AccessorAppUiActivity protected constructor() :
-    AccessorBase<ComponentAppUiActivity.EntryPoint, KClass<out Page<*, *>>, ComponentAppUiPage.EntryPoint>() {
+    AccessorBase<Activity<*, *>, ComponentAppUiActivity.EntryPoint>() {
 
     companion object {
         @Composable
-        operator fun invoke() = (Activity.LocalApplication.current as Application).accessorAppUi
+        operator fun invoke() = (LocalApplication.current as Application).accessorAppUi
 
         @Composable
-        operator fun invoke(requester: Any) =
-            (Activity.LocalApplication.current as Application).accessorAppUi
+        operator fun invoke(requester: Activity<*, *>) =
+            (LocalApplication.current as Application)
+                .accessorAppUi
+                .get(requester = requester)
     }
 
     @Composable
-    override fun create() =
-        DaggerComponentAppUiActivity_EntryPoint.factory().create(AccessorCoreUiActivity().get(this))
-
-    @Composable
-    override fun onCreated() {
-        getChild(this)
-    }
-
-    @Composable
-    override fun createChild(type: KClass<out Page<*, *>>) =
-        DaggerComponentAppUiPage_EntryPoint.factory()
-            .create(AccessorCoreUiPage().get(this), this.get(this))
-
-
-    @Composable
-    override fun getChild(requester: Any, type: KClass<out Page<*, *>>) =
-        throw Exception("use getChild(requester:Any) instead")
-
-    @Composable
-    fun getChild(requester: Any) = super.getChild(requester, Page::class)
+    override fun create() = DaggerComponentAppUiActivity_EntryPoint
+        .factory()
+        .create(
+            AccessorCoreUiActivity().get(
+                requester = LocalActivity.current
+            )
+        )
 
     @Composable
     fun wakeUp(requester: Activity<*, *>) {
         AccessorCoreUiActivity().wakeUp(LocalActivity.current)
-        get(LocalActivity.current).contextMain().wakeUp()
+        get(requester, LocalActivity.current::class).contextMain().wakeUp()
     }
 
 }
