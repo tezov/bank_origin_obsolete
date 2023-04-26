@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 26/04/2023 21:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 21:01
+ *  Last modified 26/04/2023 21:21
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,8 +18,6 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.Modal
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModals
 
 interface BottomSheet<S : BottomSheetState, A : BottomSheetAction<S>> : Modal<S, A> {
@@ -38,7 +36,7 @@ interface BottomSheet<S : BottomSheetState, A : BottomSheetAction<S>> : Modal<S,
                 Activity.DebugLocalLevel provides 2,
                 LocalBottomSheet provides this
             ) {
-                enableLifeCycle()
+                lifeCycleAware()
                 this.content()
             }
         }

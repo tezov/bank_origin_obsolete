@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 26/04/2023 21:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 21:05
+ *  Last modified 26/04/2023 21:47
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,8 +34,7 @@ object PageSplash : Page<PageSplashState, PageSplashAction> {
     }
 
     @Composable
-    override fun Composition<PageSplashState, PageSplashAction>.onStop() {
+    override fun Composition<PageSplashState, PageSplashAction>.onDispose() {
         DiAccessorAppUiPage(requester = this as Page).contextSplash().dispose()
-
     }
 }

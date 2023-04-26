@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 26/04/2023 21:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 20:41
+ *  Last modified 26/04/2023 21:54
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -58,6 +58,6 @@ class DiAccessorAppUiDialog @Inject protected constructor() :
 
     @Composable
     override fun dispose(requester: Any, key: Key) =
-        DiAccessorCoreUiDialog().dispose(requester, key) || super.dispose(requester, key)
+        DiAccessorCoreUiDialog().dispose(requester, key) or super.dispose(requester, key)
 
 }

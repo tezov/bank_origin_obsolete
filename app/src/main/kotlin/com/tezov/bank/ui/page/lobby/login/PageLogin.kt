@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 26/04/2023 21:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 20:03
+ *  Last modified 26/04/2023 21:47
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,8 +29,12 @@ import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
+import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndService
+import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceAction
+import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceState
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.*
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.Composition
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -275,6 +279,11 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 onClick = action::onClickHelpAndService,
             )
         }
+    }
+
+    @Composable
+    override fun Composition<PageLoginState, PageLoginAction>.onDispose() {
+        DiAccessorAppUiPage().with(key = this as Page).contextLogin().dispose()
     }
 
 }

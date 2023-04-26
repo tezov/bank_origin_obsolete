@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 26/04/2023 21:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 21:02
+ *  Last modified 26/04/2023 21:21
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,11 +13,9 @@
 package com.tezov.lib_core_android_kotlin.ui.compositionTree.page
 
 import android.annotation.SuppressLint
-import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.*
-import androidx.compose.ui.platform.LocalLifecycleOwner
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPages
@@ -65,7 +63,7 @@ interface Page<S : PageState, A : PageAction<S>> : Composition<S, A>, DiAccessor
                     onBackPressedState.value = true
                 }
                 onBackPressedDispatch(onBackPressedState)
-                enableLifeCycle()
+                lifeCycleAware()
                 content(innerPadding = innerPadding)
             }
         }

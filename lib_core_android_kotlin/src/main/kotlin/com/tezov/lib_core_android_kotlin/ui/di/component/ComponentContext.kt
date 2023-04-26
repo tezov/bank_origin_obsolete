@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 26/04/2023 21:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 20:50
+ *  Last modified 26/04/2023 21:53
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,7 +40,7 @@ interface ComponentContextLazy<S : CompositionState, A : CompositionAction<S>> {
 
     fun lazyAction(): ComposableHolder<A>
 
-    fun dispose() = lazyState().dispose() || lazyAction().dispose()
+    fun dispose() = lazyState().dispose() or lazyAction().dispose()
 
     companion object {
 
@@ -61,7 +61,7 @@ interface ComponentContextMap {
 
     fun lazyMap(): Map<Class<out Composition<*, *>>, ComponentContextLazy<*, *>>
 
-    fun dispose() = lazyMap().values.fold(false){ acc, value -> acc || value.dispose() }
+    fun dispose() = lazyMap().values.fold(false){ acc, value -> acc or value.dispose() }
 
         companion object {
 
