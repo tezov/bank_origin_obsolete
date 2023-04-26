@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 25/04/2023 21:10
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 25/04/2023 19:09
+ *  Last modified 26/04/2023 20:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,7 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import com.tezov.bank.navigation.NavigationController.Companion.Route
 import com.tezov.bank.ui.activity.MainActivity
-import com.tezov.bank.ui.di.accessor.AccessorAppUiActivity
+import com.tezov.bank.ui.di.accessor.DiAccessorAppUiActivity
 import com.tezov.bank.ui.page.auth.account.PageAccount
 import com.tezov.bank.ui.page.auth.discover.PageDiscover
 import com.tezov.bank.ui.page.auth.help.PageHelp
@@ -43,7 +43,7 @@ object NavigationGraph {
 
     @Composable
     private fun graph() {
-        val accessor = AccessorAppUiActivity().get(LocalActivity.current)
+        val accessor = DiAccessorAppUiActivity().with(LocalActivity.current)
         val mainAction = accessor.contextMain().action()
 
         AnimatedNavHost(

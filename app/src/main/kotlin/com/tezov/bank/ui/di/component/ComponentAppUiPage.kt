@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 26/04/2023 19:43
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,7 @@
 
 package com.tezov.bank.ui.di.component
 
-import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
+import com.tezov.bank.ui.di.accessor.DiAccessorAppUiDialog
 import com.tezov.bank.ui.di.module.ModuleAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
 import com.tezov.bank.ui.page.auth.account.PageAccountAction
@@ -55,7 +55,7 @@ object ComponentAppUiPage {
             ): EntryPoint
         }
 
-        fun accessorDialog(): AccessorAppUiDialog
+        fun accessorDialog(): DiAccessorAppUiDialog
 
         fun contextSplash(): ComponentContextLazy<PageSplashState, PageSplashAction>
         fun contextLogin(): ComponentContextLazy<PageLoginState, PageLoginAction>

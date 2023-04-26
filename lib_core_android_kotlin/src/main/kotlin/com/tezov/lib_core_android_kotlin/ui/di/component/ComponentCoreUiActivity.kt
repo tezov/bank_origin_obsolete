@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 26/04/2023 19:43
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,7 @@ package com.tezov.lib_core_android_kotlin.ui.di.component
 
 import com.tezov.lib_core_android_kotlin.ui.activity.ActivityMainAction
 import com.tezov.lib_core_android_kotlin.ui.activity.ActivityMainState
-import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiPage
+import com.tezov.lib_core_android_kotlin.ui.di.accessor.DiAccessorCoreUiPage
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.qualifier.QualifierCoroutineScopeMain
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.module.ModuleCoreUiActivity
@@ -35,7 +35,7 @@ object ComponentCoreUiActivity {
             fun create(): EntryPoint
         }
 
-        fun accessorPage(): AccessorCoreUiPage
+        fun accessorPage(): DiAccessorCoreUiPage
 
         fun contextMain(): ComponentContextLazy<ActivityMainState, ActivityMainAction>
 

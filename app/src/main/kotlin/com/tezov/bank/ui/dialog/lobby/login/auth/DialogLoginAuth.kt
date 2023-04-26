@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:08
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 17:52
+ *  Last modified 26/04/2023 20:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -36,7 +36,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import com.tezov.bank.R
-import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
+import com.tezov.bank.ui.di.accessor.DiAccessorAppUiDialog
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.LOGIN_LENGTH
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.PASSWORD_LENGTH
 import com.tezov.lib_core_android_kotlin.type.primaire.size
@@ -58,7 +58,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
 
     @Composable
     override fun Dialog<DialogLoginAuthState, DialogLoginAuthAction>.content() {
-        val accessor = AccessorAppUiDialog().get(requester = this).contextLoginAuth()
+        val accessor = DiAccessorAppUiDialog().with(key = this).contextLoginAuth()
         val state = accessor.state()
         val action = accessor.action()
 

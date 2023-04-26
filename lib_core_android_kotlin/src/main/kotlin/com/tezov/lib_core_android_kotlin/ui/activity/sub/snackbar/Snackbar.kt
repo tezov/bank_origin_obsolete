@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 25/04/2023 21:10
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 25/04/2023 19:01
+ *  Last modified 26/04/2023 20:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,10 +21,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
-import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
+import com.tezov.lib_core_android_kotlin.ui.di.accessor.DiAccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
@@ -109,7 +108,7 @@ object Snackbar : ActivitySub<SnackbarState, SnackbarAction> {
 
     @Composable
     operator fun invoke(modifier: Modifier = Modifier) {
-        val accessor = AccessorCoreUiActivity().get(LocalActivity.current).contextSubMap()
+        val accessor = DiAccessorCoreUiActivity().with(LocalActivity.current).contextSubMap()
         val state = accessor.with<Snackbar, _, _>().state()
         SnackbarHost(
             hostState = state.hostState,

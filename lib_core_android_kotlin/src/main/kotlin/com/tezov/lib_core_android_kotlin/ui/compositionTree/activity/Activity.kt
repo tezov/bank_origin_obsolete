@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 26/04/2023 21:00
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,10 +21,14 @@ import com.tezov.lib_core_android_kotlin.application.Application
 import com.tezov.lib_core_android_kotlin.ui.activity.ActivityBase
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.Composition
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
-import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiActivity
+import com.tezov.lib_core_android_kotlin.ui.di.accessor.DiAccessor
+import com.tezov.lib_core_android_kotlin.ui.di.accessor.DiAccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 
-interface Activity<S : ActivityState, A : ActivityAction<S>> : Composition<S, A> {
+interface Activity<S : ActivityState, A : ActivityAction<S>> : Composition<S, A>, DiAccessor.Key {
+
+    override val diAccessorKeyId: Int
+        get() = Activity.hashCode()
 
     companion object {
         val DebugLocalLevel: ProvidableCompositionLocal<Int> = staticCompositionLocalOf {
@@ -50,6 +54,7 @@ interface Activity<S : ActivityState, A : ActivityAction<S>> : Composition<S, A>
             LocalActivity provides this,
             LocalPages provides ArrayDeque()
         ) {
+            enableLifeCycle()
             content()
         }
     }
@@ -60,7 +65,7 @@ interface Activity<S : ActivityState, A : ActivityAction<S>> : Composition<S, A>
     @Composable
     fun onBackPressedDispatch(): Boolean {
         if (!this.handleOnBackPressed()) {
-            val accessor = AccessorCoreUiActivity().get(requester = this)
+            val accessor = DiAccessorCoreUiActivity().with(key = this)
             val mainAction = accessor.contextMain().action()
             if (!mainAction.navigationController.onBackPressedDispatch()) {
                 (LocalActivity.current as? ActivityBase)?.finishAffinity()

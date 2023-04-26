@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 26/04/2023 19:43
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,17 +12,17 @@
 
 package com.tezov.bank.application
 
-import com.tezov.bank.ui.di.accessor.AccessorAppUiActivity
+import com.tezov.bank.ui.di.accessor.DiAccessorAppUiActivity
 import com.tezov.lib_core_android_kotlin.application.Application
 import kotlin.reflect.full.primaryConstructor
 import kotlin.reflect.jvm.isAccessible
 
 class Application : Application() {
-    lateinit var accessorAppUi: AccessorAppUiActivity
+    lateinit var accessorAppUi: DiAccessorAppUiActivity
 
     override fun onCreate() {
         super.onCreate()
-        accessorAppUi = AccessorAppUiActivity::class.primaryConstructor?.apply {
+        accessorAppUi = DiAccessorAppUiActivity::class.primaryConstructor?.apply {
             isAccessible = true
         }?.call() ?: throw Exception("failed to create instance of AccessorAppUiApplication")
 

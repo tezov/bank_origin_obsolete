@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:08
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 18:21
+ *  Last modified 26/04/2023 20:34
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,30 +12,32 @@
 
 package com.tezov.lib_core_android_kotlin.ui.di.helper
 
-import androidx.compose.runtime.DisposableEffect
+import android.util.Log
+import androidx.compose.runtime.Composable
+import com.tezov.lib_core_kotlin.type.primitive.IntTo.toStringHex
 
 abstract class ComposableHolder<T : Any> {
     private var value: T? = null
 
-    @androidx.compose.runtime.Composable
+    @Composable
     protected abstract fun create(): T
-    private fun exist() = value != null
 
-    @androidx.compose.runtime.Composable
-    fun get(): T {
-        if (!exist()) {
-            value = create()
-//            Log.d(">>:", "${DebugLocalLevel.current}: create ${this.javaClass.simpleName} ${this.hashCode().toStringHex()}::${value.hashCode().toStringHex()}")
-            DisposableEffect(Unit) {
-                onDispose {
-//                    with(this@ComposableHolder){
-//                        Log.d(">>:", "dispose ${this.javaClass.simpleName} ${this.hashCode().toStringHex()}::${value.hashCode().toStringHex()}")
-//                    }
-//                    value = null
-                }
-            }
+    @Composable
+    protected open fun onCreated() {
+    }
+
+    @Composable
+    fun get(): T = value ?: run {
+        create().also {
+            value = it
+             Log.d(">>:", "create ${this.javaClass.simpleName} ${this.hashCode().toStringHex()}::${value.hashCode().toStringHex()}")
+            onCreated()
         }
-//        Log.d(">>:", "${DebugLocalLevel.current}: get ${this.javaClass.simpleName} ${this.hashCode().toStringHex()}::${value.hashCode().toStringHex()}")
-        return value ?: throw Exception("failed to create")
+
+    }
+
+    fun dispose(): Boolean = null != value.also {
+         Log.d(">>:", "dispose ${this.javaClass.simpleName} ${this.hashCode().toStringHex()}::${value.hashCode().toStringHex()}")
+        value = null
     }
 }

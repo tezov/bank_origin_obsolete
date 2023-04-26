@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 26/04/2023 19:43
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,7 @@
 
 package com.tezov.lib_core_android_kotlin.ui.di.component
 
-import com.tezov.lib_core_android_kotlin.ui.di.accessor.AccessorCoreUiDialog
+import com.tezov.lib_core_android_kotlin.ui.di.accessor.DiAccessorCoreUiDialog
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeCoreUiPage
 import dagger.Component
 
@@ -31,7 +31,7 @@ object ComponentCoreUiPage {
             fun create(componentCoreActivity: ComponentCoreUiActivity.EntryPoint): EntryPoint
         }
 
-        fun accessorDialog(): AccessorCoreUiDialog
+        fun accessorDialog(): DiAccessorCoreUiDialog
 
     }
 

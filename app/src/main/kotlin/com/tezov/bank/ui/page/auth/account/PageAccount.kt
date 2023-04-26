@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:20
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 19:19
+ *  Last modified 26/04/2023 20:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,7 +30,7 @@ import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow
 import com.tezov.bank.ui.component.element.AccountSummaryCard
-import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
+import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Shadow
@@ -55,7 +55,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
 
     @Composable
     override fun Page<PageAccountState, PageAccountAction>.content(innerPadding: PaddingValues) {
-        val accessor = AccessorAppUiPage().get(requester = this).contextAccount()
+        val accessor = DiAccessorAppUiPage().with(key = this).contextAccount()
         val action = accessor.action()
         val state = accessor.state()
         ExtensionCompositionLocal.CompositionLocalProvider(

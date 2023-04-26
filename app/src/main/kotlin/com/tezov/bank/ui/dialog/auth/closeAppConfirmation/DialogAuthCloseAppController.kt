@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 25/04/2023 21:10
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 25/04/2023 19:09
+ *  Last modified 26/04/2023 20:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,7 @@
 package com.tezov.bank.ui.dialog.auth.closeAppConfirmation
 
 import androidx.compose.runtime.Composable
-import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
+import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.navigation.NavigationController
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
@@ -37,7 +37,7 @@ class DialogAuthCloseAppController private constructor(
         @Composable
         fun handleOnBackPressed(): Boolean {
             val accessor =
-                AccessorAppUiPage().get(requester = Activity.LocalPages.current.last().page)
+                DiAccessorAppUiPage().with(key = Activity.LocalPages.current.last().page)
                     .controllerDialogAuthCloseApp()
             val ref = accessor.ref()
             if (ref.navigationController.isLastRoute()) {

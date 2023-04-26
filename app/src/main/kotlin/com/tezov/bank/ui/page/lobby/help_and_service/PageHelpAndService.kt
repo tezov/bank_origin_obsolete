@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 16:03
+ *  Last modified 26/04/2023 20:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,8 +27,7 @@ import androidx.compose.ui.res.stringResource
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.block.SectionSimpleTile
 import com.tezov.bank.ui.component.block.SectionSimpleRow
-import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
-import com.tezov.bank.ui.page.auth.profile.PageProfileAction
+import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Shadow
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
@@ -43,7 +42,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
     @Composable
     override fun Page<PageHelpAndServiceState, PageHelpAndServiceAction>.content(innerPadding: PaddingValues) {
-        val accessor = AccessorAppUiPage().get(requester = this).contextHelpAndService()
+        val accessor = DiAccessorAppUiPage().with(key = this).contextHelpAndService()
         val state = accessor.state()
         val action = accessor.action()
         ExtensionCompositionLocal.CompositionLocalProvider(

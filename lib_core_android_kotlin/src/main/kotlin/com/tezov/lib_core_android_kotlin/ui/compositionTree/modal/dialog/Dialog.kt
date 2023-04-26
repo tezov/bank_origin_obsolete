@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 25/04/2023 21:10
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 25/04/2023 20:42
+ *  Last modified 26/04/2023 21:01
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -37,6 +37,7 @@ interface Dialog<S : DialogState, A : DialogAction<S>> : Modal<S, A> {
                 Activity.DebugLocalLevel provides 2,
                 LocalDialog provides this
             ) {
+                enableLifeCycle()
                 this.content()
             }
         }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:08
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 18:16
+ *  Last modified 26/04/2023 20:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -28,7 +28,7 @@ import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.tezov.bank.R
-import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
+import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.*
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
@@ -43,7 +43,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
     @Composable
     override fun Page<PageLoginState, PageLoginAction>.content(innerPadding: PaddingValues) {
-        val accessor = AccessorAppUiPage().get(requester = this).contextLogin()
+        val accessor = DiAccessorAppUiPage().with(key = this).contextLogin()
         val state = accessor.state()
         val action = accessor.action()
 

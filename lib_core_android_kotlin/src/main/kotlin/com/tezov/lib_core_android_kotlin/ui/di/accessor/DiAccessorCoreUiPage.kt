@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 25/04/2023 21:10
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 25/04/2023 21:04
+ *  Last modified 26/04/2023 20:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,26 +19,25 @@ import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeCoreUiActiv
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiPage
 import com.tezov.lib_core_android_kotlin.ui.di.component.DaggerComponentCoreUiPage_EntryPoint
 import javax.inject.Inject
-import kotlin.reflect.KClass
 
 @ScopeCoreUiActivity
-class AccessorCoreUiPage @Inject protected constructor() :
-    AccessorBase<Page<*, *>, ComponentCoreUiPage.EntryPoint>() {
+class DiAccessorCoreUiPage @Inject protected constructor() :
+    DiAccessor<ComponentCoreUiPage.EntryPoint>() {
 
     companion object {
         @Composable
         operator fun invoke() =
-            AccessorCoreUiActivity().get(
+            DiAccessorCoreUiActivity().with(
                 requester = this,
-                key = LocalActivity.current::class
+                key = LocalActivity.current
             ).accessorPage()
 
         @Composable
         operator fun invoke(requester: Page<*, *>) =
-            AccessorCoreUiActivity().get(
-                requester = LocalActivity.current
-            ).accessorPage().get(
-                requester = requester
+            DiAccessorCoreUiActivity().with(
+                key = LocalActivity.current
+            ).accessorPage().with(
+                key = requester
             )
     }
 
@@ -46,8 +45,8 @@ class AccessorCoreUiPage @Inject protected constructor() :
     override fun create() = DaggerComponentCoreUiPage_EntryPoint
         .factory()
         .create(
-            AccessorCoreUiActivity().get(
-                requester = LocalActivity.current
+            DiAccessorCoreUiActivity().with(
+                key = LocalActivity.current
             )
         )
 

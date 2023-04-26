@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 16:05
+ *  Last modified 26/04/2023 20:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,7 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.tezov.bank.ui.component.block.SectionSimpleRow
-import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
+import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
@@ -33,7 +33,7 @@ object PageHelp : Page<PageHelpState, PageHelpAction> {
 
     @Composable
     override fun Page<PageHelpState, PageHelpAction>.content(innerPadding: PaddingValues) {
-        val accessor = AccessorAppUiPage().get(requester = this).contextHelp()
+        val accessor = DiAccessorAppUiPage().with(key = this).contextHelp()
         val action = accessor.action()
         val state = accessor.state()
         ExtensionCompositionLocal.CompositionLocalProvider(

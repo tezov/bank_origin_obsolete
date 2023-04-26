@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:08
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 17:33
+ *  Last modified 26/04/2023 20:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,7 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.lifecycle.lifecycleScope
 import com.tezov.bank.navigation.NavigationGraph
 import com.tezov.bank.navigation.bottom_navigation.BottomNavigationItems
-import com.tezov.bank.ui.di.accessor.AccessorAppUiActivity
+import com.tezov.bank.ui.di.accessor.DiAccessorAppUiActivity
 import com.tezov.bank.ui.theme.ThemeApplication
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
@@ -48,7 +48,7 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                 modifier = Modifier.fillMaxSize(),
                 color = MaterialTheme.colors.background
             ) {
-                AccessorAppUiActivity().wakeUp(requester = this)
+                DiAccessorAppUiActivity().wakeUp(requester = this)
                 NavigationGraph()
             }
         }
@@ -72,7 +72,7 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
         topAppBarTrailingItem: TopAppBarItemData? = null,
         content: @Composable (PaddingValues) -> Unit
     ) {
-        val accessor = AccessorAppUiActivity().get(requester = this)
+        val accessor = DiAccessorAppUiActivity().with(key = this)
         val mainState = accessor.contextMain().state()
         BottomSheet {
             Scaffold(
@@ -106,7 +106,7 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
         topAppBarTrailingItem: TopAppBarItemData? = null,
         content: @Composable (PaddingValues) -> Unit
     ) {
-        val accessor = AccessorAppUiActivity().get(requester = this)
+        val accessor = DiAccessorAppUiActivity().with(key = this)
         val mainState = accessor.contextMain().state()
         BottomSheet {
             Scaffold(
@@ -134,7 +134,7 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
     fun withBottomNavigationBar(
         content: @Composable (PaddingValues) -> Unit
     ) {
-        val accessor = AccessorAppUiActivity().get(requester = this)
+        val accessor = DiAccessorAppUiActivity().with(key = this)
         val mainState = accessor.contextMain().state()
 
         BottomSheet {
@@ -160,7 +160,7 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
     fun empty(
         content: @Composable (PaddingValues) -> Unit
     ) {
-        val accessor = AccessorAppUiActivity().get(requester = this)
+        val accessor = DiAccessorAppUiActivity().with(key = this)
         val mainState = accessor.contextMain().state()
         BottomSheet {
             Scaffold(

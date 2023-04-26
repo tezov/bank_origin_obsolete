@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:13
+ *  Last modified 26/04/2023 20:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.tezov.bank.ui.di.accessor.AccessorAppUiDialog
+import com.tezov.bank.ui.di.accessor.DiAccessorAppUiDialog
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
@@ -32,7 +32,7 @@ object DialogAuthCloseAppConfirmation :
 
     @Composable
     override fun Dialog<DialogAuthCloseAppConfirmationState, DialogAuthCloseAppConfirmationAction>.content() {
-        val accessor = AccessorAppUiDialog().get(requester = this).contextAuthCloseAppConfirmation()
+        val accessor = DiAccessorAppUiDialog().with(key = this).contextAuthCloseAppConfirmation()
         val state = accessor.state()
         val action = accessor.action()
 

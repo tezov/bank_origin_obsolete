@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 26/04/2023 21:07
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 16:05
+ *  Last modified 26/04/2023 20:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.block.SectionSimpleTile
-import com.tezov.bank.ui.di.accessor.AccessorAppUiPage
+import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Shadow
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
@@ -41,7 +41,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
 
     @Composable
     override fun Page<PagePaymentState, PagePaymentAction>.content(innerPadding: PaddingValues) {
-        val accessor = AccessorAppUiPage().get(requester = this).contextPayment()
+        val accessor = DiAccessorAppUiPage().with(key = this).contextPayment()
         val action = accessor.action()
         val state = accessor.state()
         ExtensionCompositionLocal.CompositionLocalProvider(
