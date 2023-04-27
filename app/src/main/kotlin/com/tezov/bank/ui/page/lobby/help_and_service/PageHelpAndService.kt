@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:54
+ *  Created by Tezov on 27/04/2023 20:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 21:45
+ *  Last modified 27/04/2023 19:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -154,7 +154,8 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     }
 
     @Composable
-    override fun Composition<PageHelpAndServiceState, PageHelpAndServiceAction>.onDispose() {
-        DiAccessorAppUiPage().with(key = this as PageHelpAndService).contextHelpAndService().dispose()
+    override fun onDispose() {
+        DiAccessorAppUiPage().with(key = this).contextHelpAndService().dispose()
+        super.onDispose()
     }
 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:54
+ *  Created by Tezov on 27/04/2023 20:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 21:47
+ *  Last modified 27/04/2023 19:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,6 +32,7 @@ import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
 import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndService
 import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceAction
 import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceState
+import com.tezov.bank.ui.page.lobby.login.PageLogin.content
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.*
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.Composition
@@ -282,8 +283,13 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
     }
 
     @Composable
-    override fun Composition<PageLoginState, PageLoginAction>.onDispose() {
-        DiAccessorAppUiPage().with(key = this as Page).contextLogin().dispose()
+    override fun onDispose() {
+        val accessor = DiAccessorAppUiPage().with(key = this).contextLogin()
+        val state = accessor.state()
+//        if(state.diCanDispose){
+            DiAccessorAppUiPage().with(key = this).contextLogin().dispose()
+//        }
+        super.onDispose()
     }
 
 }

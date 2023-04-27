@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 27/04/2023 20:26
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 27/04/2023 20:26
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -38,6 +38,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ComposableHolder
 import com.tezov.lib_core_android_kotlin.ui.navigation.bottom_navigation.BottomNavigationState
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.GlobalScope
 import javax.inject.Inject
 
 
@@ -121,7 +122,8 @@ object ModuleCoreUiActivity {
         class CoroutineScope : ComposableHolder<kotlinx.coroutines.CoroutineScope>() {
 
             @androidx.compose.runtime.Composable
-            override fun create() = rememberCoroutineScope()
+            override fun create() = GlobalScope //TODO -> all remember foireux ici
+
         }
 
         @ScopeCoreUiActivity

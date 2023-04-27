@@ -1,4 +1,13 @@
 
+dispose on page lobby
+--> login only when logged
+--> auth only when logged too
+-> poursuivre pour refaire marcher completement la navigation -> snackbar ???
+
+
+
+
+
 
 - scroll end blanc visible sous le bleu?
 - paiment lyf / paypal / paylib image et non icon avec un color filter specifique
