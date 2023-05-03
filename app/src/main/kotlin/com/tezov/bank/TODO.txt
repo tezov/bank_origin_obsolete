@@ -1,26 +1,34 @@
 
-dispose on page lobby
+1
+--> replace default color par un jeu de couleur pourri visible trés vite
+--> propre valeur par défault
+--> clean global
 
+2
 --> login only when logged
 --> auth only when logged too
 --> help and service only when logged
-
 -----> comment depuis le dialog retourner quelque chose a celui a qui appelé ? Mettre à jour les canDispose et se logger
 --> vérifier le scope activité -> le coroutine doit pas etre utilisé cross activité
 
-
+3
 - scroll end blanc visible sous le bleu?
 - paiment lyf / paypal / paylib image et non icon avec un color filter specifique
 - IconButton remove padding -> modifier pour ça ?
 - TextButton remove padding -> modifier pour ça ?
 
 
+--> faire une page bottom sheet
+--> faire une page tab bar
+--> Autre deja fait a reprendre ?
+
+--> Faire animation
+--> ajouter animation navigation
+
 -OnClick Custom ripple unbounded
-- DropDown menu in lib with style
 - Snackbar selector
 - Dialog selector
 - BottomSheet selector
-
 - Carousel first and last take edge to edge
 - Pager / Roller find the highest
 
