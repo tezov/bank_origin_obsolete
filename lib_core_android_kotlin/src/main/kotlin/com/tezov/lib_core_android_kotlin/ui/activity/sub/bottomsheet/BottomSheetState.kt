@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 03/05/2023 21:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 03/05/2023 20:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -37,9 +37,12 @@ class BottomSheetState private constructor(
     companion object {
         @OptIn(ExperimentalMaterialApi::class)
         @Composable
-        fun remember(
-            bottomSheetState: ModalBottomSheetState = rememberModalBottomSheetState(
-                initialValue = ModalBottomSheetValue.Hidden
+        fun create(
+            bottomSheetState: ModalBottomSheetState = ModalBottomSheetState(
+                initialValue = ModalBottomSheetValue.Hidden,
+                animationSpec = SwipeableDefaults.AnimationSpec,
+                isSkipHalfExpanded = false,
+                confirmStateChange = { true }
             ),
             showState: MutableState<Boolean> = mutableStateOf(false),
             sheetContentUpdated: MutableState<Int> = mutableStateOf(0)

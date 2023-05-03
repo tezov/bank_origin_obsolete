@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 03/05/2023 21:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 03/05/2023 20:11
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -61,7 +61,6 @@ data class PageLoginStateAnimation(
             val animationStep by rememberSaveable(stateSaver = AnimationStep.Saver) {
                 mutableStateOf(MutableTransitionState(AnimationStep.Done))
             }
-
             val animatedLogo = AnimatedLogo(TransitionLogoTranslate()).apply {
                 width = ANIMATION_LOGO_WIDTH
             }

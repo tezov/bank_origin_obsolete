@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 03/05/2023 21:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 03/05/2023 20:58
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,6 +13,7 @@
 package com.tezov.bank.ui.page.lobby.login
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
@@ -21,6 +22,7 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 
 class PageLoginState private constructor(
+    private val _diCanDispose: MutableState<Boolean>,
     val animationState: PageLoginStateAnimation,
     val nameState: State<String>,
     val iconState: State<Int>,
@@ -28,15 +30,22 @@ class PageLoginState private constructor(
 
     companion object {
         @Composable
-        fun remember(
-            animationState: PageLoginStateAnimation = PageLoginStateAnimation.remember(),
+        fun create(
+            diCanDispose:MutableState<Boolean> = mutableStateOf(false),
+            animationState: PageLoginStateAnimation = PageLoginStateAnimation.remember(), //TODO
             nameState: State<String> = mutableStateOf("M.ZOLLVER"),
             iconState: State<Int> = mutableStateOf(R.drawable.img_suitcase_blue),
         ) = PageLoginState(
+            _diCanDispose = diCanDispose,
             animationState = animationState,
             nameState = nameState,
             iconState = iconState,
         )
     }
+
+    var diCanDispose get() = _diCanDispose.value
+        set(value) {
+            _diCanDispose.value = value
+        }
 
 }

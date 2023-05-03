@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 03/05/2023 21:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 20:03
+ *  Last modified 03/05/2023 21:33
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,6 +23,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
@@ -44,6 +45,8 @@ import com.tezov.lib_core_android_kotlin.ui.modifier.then
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.style.background
+import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
@@ -129,7 +132,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                         top = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
                         bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
                         start = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
-                        end = MaterialTheme.dimensionsPaddingExtended.page.small.horizontal,
+                        end = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal,
                     )
             ) {
                 Column(
@@ -165,14 +168,17 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                 }
                 Row(
                     modifier = Modifier
-                        .offset(0.dp, ((properties.max - progressDp) * ICON_ACTION_Y_OFFSET_FACTOR))
+                        .offset(
+                            (MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal / 2) * (1f -progress),
+                            ((properties.max - progressDp) * ICON_ACTION_Y_OFFSET_FACTOR)
+                        )
                         .scale(progress.coerceAtLeast(ICON_ACTION_SCALE_MIN))
                 ) {
                     header.iconMailbox?.let {
                         Icon.StateColor(
                             modifier = Modifier
-                                .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal)
-                                .thenOnNotNull(PageAccountTheme.styles.icon.outfitFrame.getShape()){ shape ->
+                                .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal)
+                                .thenOnNotNull(PageAccountTheme.styles.icon.outfitFrame.getShape()) { shape ->
                                     clip(shape)
                                 }
                                 .clickable(onClick = action::onClickMailBox),
@@ -184,7 +190,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                     header.iconAccount?.let {
                         Icon.StateColor(
                             modifier = Modifier
-                                .thenOnNotNull(PageAccountTheme.styles.icon.outfitFrame.getShape()){ shape ->
+                                .thenOnNotNull(PageAccountTheme.styles.icon.outfitFrame.getShape()) { shape ->
                                     clip(shape)
                                 }
                                 .clickable(onClick = action::onClickAccount),

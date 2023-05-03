@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 27/04/2023 20:26
+ *  Created by Tezov on 03/05/2023 21:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 27/04/2023 20:26
+ *  Last modified 03/05/2023 20:50
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,11 +13,14 @@
 package com.tezov.lib_core_android_kotlin.ui.di.module
 
 
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.rememberScaffoldState
+import androidx.activity.ComponentActivity
+import androidx.compose.material.*
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.lifecycleScope
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigationAction
+import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigationState
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarAction
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarState
@@ -30,16 +33,18 @@ import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogState
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.SnackbarAction
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.SnackbarState
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.qualifier.*
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentContextLazy
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentContextMap
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ComposableHolder
-import com.tezov.lib_core_android_kotlin.ui.navigation.bottom_navigation.BottomNavigationState
 import dagger.Module
 import dagger.Provides
-import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 
 
 object ModuleCoreUiActivity {
@@ -120,10 +125,8 @@ object ModuleCoreUiActivity {
     object State {
 
         class CoroutineScope : ComposableHolder<kotlinx.coroutines.CoroutineScope>() {
-
             @androidx.compose.runtime.Composable
-            override fun create() = GlobalScope //TODO -> all remember foireux ici
-
+            override fun create() = (LocalContext.current as ComponentActivity).lifecycleScope
         }
 
         @ScopeCoreUiActivity
@@ -139,7 +142,10 @@ object ModuleCoreUiActivity {
         class ScaffoldState @Inject constructor() :
             ComposableHolder<androidx.compose.material.ScaffoldState>() {
             @androidx.compose.runtime.Composable
-            override fun create() = rememberScaffoldState()
+            override fun create() = ScaffoldState(
+                DrawerState(DrawerValue.Closed, confirmStateChange = { true }),
+                SnackbarHostState()
+            )
         }
 
         @ScopeCoreUiActivity
@@ -158,7 +164,7 @@ object ModuleCoreUiActivity {
             @OptIn(ExperimentalMaterialApi::class)
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheetState.remember()
+                com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheetState.create()
         }
 
         @ScopeCoreUiActivity
@@ -171,10 +177,10 @@ object ModuleCoreUiActivity {
 
         @ScopeCoreUiActivity
         class BottomNavigationState @Inject constructor() :
-            ComposableHolder<com.tezov.lib_core_android_kotlin.ui.navigation.bottom_navigation.BottomNavigationState>() {
+            ComposableHolder<com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigationState>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.lib_core_android_kotlin.ui.navigation.bottom_navigation.BottomNavigationState.create()
+                com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigationState.create()
         }
 
         @ScopeCoreUiActivity
@@ -266,7 +272,7 @@ object ModuleCoreUiActivity {
 
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.lib_core_android_kotlin.navigation.NavigationController.remember(
+                com.tezov.lib_core_android_kotlin.navigation.NavigationController.create(
                     snackbarAction.get()
                 )
         }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 27/04/2023 20:26
+ *  Created by Tezov on 03/05/2023 21:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 27/04/2023 19:41
+ *  Last modified 03/05/2023 21:20
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,6 +19,7 @@ import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.DialogState
 
 class DialogLoginAuthState private constructor(
+    private val _diCanDispose: MutableState<Boolean>,
     val loginState: MutableState<String>,
     val passwordState: MutableState<String>,
 ) : DialogState {
@@ -30,13 +31,20 @@ class DialogLoginAuthState private constructor(
 
         @Composable
         fun create(
-            loginState: MutableState<String> = mutableStateOf(""),
-            passwordState: MutableState<String> = mutableStateOf(""),
+            diCanDispose:MutableState<Boolean> = mutableStateOf(false),
+            loginState: MutableState<String> = mutableStateOf("1234"),
+            passwordState: MutableState<String> = mutableStateOf("1234"),
         ) = DialogLoginAuthState(
+            _diCanDispose = diCanDispose,
             loginState = loginState,
             passwordState = passwordState,
         )
     }
+
+    var diCanDispose get() = _diCanDispose.value
+        set(value) {
+            _diCanDispose.value = value
+        }
 
     val credentialValidState get() = loginState.value.length == LOGIN_LENGTH && passwordState.value.length == PASSWORD_LENGTH
 

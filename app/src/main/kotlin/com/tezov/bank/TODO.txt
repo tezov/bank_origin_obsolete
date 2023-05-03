@@ -1,19 +1,19 @@
 
 dispose on page lobby
+
 --> login only when logged
 --> auth only when logged too
--> poursuivre pour refaire marcher completement la navigation -> snackbar ???
+--> help and service only when logged
 
-
-
-
+-----> comment depuis le dialog retourner quelque chose a celui a qui appelé ? Mettre à jour les canDispose et se logger
+--> vérifier le scope activité -> le coroutine doit pas etre utilisé cross activité
 
 
 - scroll end blanc visible sous le bleu?
 - paiment lyf / paypal / paylib image et non icon avec un color filter specifique
-
 - IconButton remove padding -> modifier pour ça ?
 - TextButton remove padding -> modifier pour ça ?
+
 
 -OnClick Custom ripple unbounded
 - DropDown menu in lib with style
@@ -21,8 +21,7 @@ dispose on page lobby
 - Dialog selector
 - BottomSheet selector
 
-- Carousel first - last take edge to edge
+- Carousel first and last take edge to edge
 - Pager / Roller find the highest
 
-- componentManager, is there a way to not destroy if screen is supposed to be behind ??? Same LocalPage in Module
 

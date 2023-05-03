@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 03/05/2023 21:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 03/05/2023 20:12
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -106,7 +106,7 @@ interface ModuleAppUiPage {
         class PageLoginState @Inject constructor() :
             ComposableHolder<com.tezov.bank.ui.page.lobby.login.PageLoginState>() {
             @androidx.compose.runtime.Composable
-            override fun create() = com.tezov.bank.ui.page.lobby.login.PageLoginState.remember()
+            override fun create() = com.tezov.bank.ui.page.lobby.login.PageLoginState.create()
         }
 
         @ScopeAppUiPage

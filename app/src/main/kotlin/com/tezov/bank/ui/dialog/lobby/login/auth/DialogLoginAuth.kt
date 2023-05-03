@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 27/04/2023 20:26
+ *  Created by Tezov on 03/05/2023 21:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 27/04/2023 19:52
+ *  Last modified 03/05/2023 21:07
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -38,6 +38,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiDialog
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
+import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuth.content
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.LOGIN_LENGTH
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.PASSWORD_LENGTH
 import com.tezov.bank.ui.page.lobby.login.PageLoginAction
@@ -390,8 +391,12 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
 
     @Composable
     override fun onDispose() {
-        DiAccessorAppUiDialog().with(key = this).contextLoginAuth().dispose()
-        super.onDispose()
+        val accessor = DiAccessorAppUiDialog().with(key = this).contextLoginAuth()
+        val state = accessor.state()
+        if(state.diCanDispose){
+            accessor.dispose()
+            super.onDispose()
+        }
     }
 
 }

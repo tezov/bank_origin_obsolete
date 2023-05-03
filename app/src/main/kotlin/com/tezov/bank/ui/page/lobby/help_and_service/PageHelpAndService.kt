@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 27/04/2023 20:26
+ *  Created by Tezov on 03/05/2023 21:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 27/04/2023 19:52
+ *  Last modified 03/05/2023 21:07
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -155,7 +155,11 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
 
     @Composable
     override fun onDispose() {
-        DiAccessorAppUiPage().with(key = this).contextHelpAndService().dispose()
-        super.onDispose()
+        val accessor = DiAccessorAppUiPage().with(key = this).contextHelpAndService()
+        val state = accessor.state()
+        if(state.diCanDispose){
+            accessor.dispose()
+            super.onDispose()
+        }
     }
 }

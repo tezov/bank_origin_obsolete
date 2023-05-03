@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 22/04/2023 14:12
+ *  Created by Tezov on 03/05/2023 21:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 22/04/2023 13:53
+ *  Last modified 03/05/2023 21:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,15 +16,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
-import com.tezov.bank.ui.component.block.SectionSimpleTile
 import com.tezov.bank.ui.component.block.SectionSimpleRow
-import com.tezov.bank.ui.component.element.SimpleTile
+import com.tezov.bank.ui.component.block.SectionSimpleTile
 import com.tezov.bank.ui.component.element.SimpleRow
-import com.tezov.bank.ui.page.auth.profile.PageProfileState
+import com.tezov.bank.ui.component.element.SimpleTile
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
-class PageHelpAndServiceState private constructor() : PageState {
-
+class PageHelpAndServiceState private constructor(private val _diCanDispose: MutableState<Boolean>) :
+    PageState {
     var header: Header? = null
     var helpAndServices: SectionSimpleTile.Data? = null
     var contacts: SectionSimpleRow.Data? = null
@@ -32,11 +31,19 @@ class PageHelpAndServiceState private constructor() : PageState {
 
     companion object {
         @Composable
-        fun create() = PageHelpAndServiceState()
+        fun create(
+            diCanDispose: MutableState<Boolean> = mutableStateOf(false)
+        ) = PageHelpAndServiceState(_diCanDispose = diCanDispose)
     }
 
+    var diCanDispose
+        get() = _diCanDispose.value
+        set(value) {
+            _diCanDispose.value = value
+        }
+
     data class Header(
-        val headline: String?=null,
+        val headline: String? = null,
     )
 
     init {

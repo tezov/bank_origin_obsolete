@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 03/05/2023 21:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 15:53
+ *  Last modified 03/05/2023 20:10
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,11 +14,15 @@ package com.tezov.lib_core_android_kotlin.navigation
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
+import androidx.navigation.compose.ComposeNavigator
+import androidx.navigation.compose.DialogNavigator
+import com.google.accompanist.navigation.animation.AnimatedComposeNavigator
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.tezov.lib_core_android_kotlin.navigation.RouteManager.Route
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.SnackbarAction
@@ -39,9 +43,13 @@ class NavigationController constructor(
     companion object {
         @OptIn(ExperimentalAnimationApi::class)
         @Composable
-        fun remember(
+        fun create(
             snackbarAction: SnackbarAction,
-            navHostController: NavHostController = rememberAnimatedNavController(),
+            navHostController: NavHostController = NavHostController(LocalContext.current).apply {
+                navigatorProvider.addNavigator(AnimatedComposeNavigator())
+                navigatorProvider.addNavigator(ComposeNavigator())
+                navigatorProvider.addNavigator(DialogNavigator())
+            }
         ): NavigationController = NavigationController(
             snackbarAction = snackbarAction,
             navHostController = navHostController,
