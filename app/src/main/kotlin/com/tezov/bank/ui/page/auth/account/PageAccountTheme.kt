@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 12:43
+ *  Created by Tezov on 03/05/2023 22:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 12:23
+ *  Last modified 03/05/2023 22:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,7 +26,9 @@ import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow.Style.Companion.copy
 import com.tezov.bank.ui.component.element.AccountSummaryCard
+import com.tezov.bank.ui.component.element.AccountSummaryCard.Style.Companion.copy
 import com.tezov.bank.ui.theme.ThemeComponentProviders
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.DropDownMenu.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.layout.ColumnCollapsibleHeader
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
@@ -149,7 +151,14 @@ object PageAccountTheme {
         sectionAccountValue = ThemeComponentProviders.sectionAccountValueSimpleRowStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
         },
-        accountSummary = ThemeComponentProviders.accountSummaryCard()
+        accountSummary = ThemeComponentProviders.accountSummaryCard().copy{
+            dropDownMenuStyle = dropDownMenuStyle.copy{
+                iconStyle = Icon.StateColor.Style(
+                    size = MaterialTheme.dimensionsIconExtended.action.normal,
+                    tint = MaterialTheme.colorsExtended.onPrimary.default,
+                )
+            }
+        }
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

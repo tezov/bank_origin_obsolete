@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 03/05/2023 22:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 14:57
+ *  Last modified 03/05/2023 22:44
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,12 +22,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.res.stringArrayResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.*
+import com.tezov.bank.R
 import com.tezov.bank.ui.page.lobby.login.*
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.DropDownMenu
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.modifier.*
@@ -47,37 +51,31 @@ object AccountSummaryCard {
     ) {
         var outfitFrame = style.outfitFrame
         var iconInfoStyle = style.iconInfoStyle
-        var iconActionStyle = style.iconActionStyle
-        var backgroundAction = style.backgroundAction
         var outfitTextSurtitle = style.outfitTextSurtitle
         var outfitTextTitle = style.outfitTextTitle
         var outfitTextSubtitle = style.outfitTextSubtitle
         var outfitTextAmount = style.outfitTextAmount
-        var outfitTextAction = style.outfitTextAction
+        var dropDownMenuStyle = style.dropDownMenuStyle
 
         internal fun get() = Style(
             outfitFrame = outfitFrame,
             iconInfoStyle = iconInfoStyle,
-            iconActionStyle = iconActionStyle,
-            backgroundAction = backgroundAction,
             outfitTextSurtitle = outfitTextSurtitle,
             outfitTextTitle = outfitTextTitle,
             outfitTextSubtitle = outfitTextSubtitle,
             outfitTextAmount = outfitTextAmount,
-            outfitTextAction = outfitTextAction,
+            dropDownMenuStyle = dropDownMenuStyle,
         )
     }
 
     class Style(
         outfitFrame: OutfitFrameStateColor? = null,
         iconInfoStyle: Icon.Simple.Style? = null,
-        iconActionStyle: Icon.Simple.Style? = null,
-        backgroundAction: Color? = null,
         val outfitTextSurtitle: OutfitTextStateColor? = null,
         val outfitTextTitle: OutfitTextStateColor? = null,
         val outfitTextSubtitle: OutfitTextStateColor? = null,
         val outfitTextAmount: OutfitTextStateColor? = null,
-        val outfitTextAction: OutfitTextStateColor? = null,
+        dropDownMenuStyle: DropDownMenu.StateColor.Style? = null,
     ) {
         val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
             outfitFrame,
@@ -100,19 +98,10 @@ object AccountSummaryCard {
                 )
             }
         )
-        val iconActionStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
-            iconActionStyle,
+        val dropDownMenuStyle: DropDownMenu.StateColor.Style by DelegateNullFallBack.Ref(
+            dropDownMenuStyle,
             fallBackValue = {
-                Icon.Simple.Style(
-                    tint = Color.Black,
-                    size = DpSize(24.dp)
-                )
-            }
-        )
-        val backgroundAction: Color by DelegateNullFallBack.Ref(
-            backgroundAction,
-            fallBackValue = {
-                Color.LightGray
+                DropDownMenu.StateColor.Style()
             }
         )
 
@@ -130,13 +119,11 @@ object AccountSummaryCard {
         constructor(style: Style?) : this(
             outfitFrame = style?.outfitFrame,
             iconInfoStyle = style?.iconInfoStyle,
-            iconActionStyle = style?.iconActionStyle,
-            backgroundAction = style?.backgroundAction,
             outfitTextSurtitle = style?.outfitTextSurtitle,
             outfitTextTitle = style?.outfitTextTitle,
             outfitTextSubtitle = style?.outfitTextSubtitle,
             outfitTextAmount = style?.outfitTextAmount,
-            outfitTextAction = style?.outfitTextAction,
+            dropDownMenuStyle = style?.dropDownMenuStyle,
         )
 
     }
@@ -277,7 +264,7 @@ object AccountSummaryCard {
         style: Style,
         data: Data,
         progress: Float = 1.0f,
-        onClick: ((Int) -> Unit)? = null
+        onClick: ((Int) -> Unit) = {}
     ) {
         val heightState = remember {
             mutableStateOf(Dp.Unspecified)
@@ -305,42 +292,16 @@ object AccountSummaryCard {
                 resourceId = data.iconInfo,
                 description = data.title
             )
-            Box(
-                modifier = Modifier
+            DropDownMenu.StateColor(
+                modifierBox = Modifier
                     .layoutId(MotionLayoutItem.ICON_ACTION.name),
-            ) {
-                var expanded by remember { mutableStateOf(false) }
-                val items = data.actions
-                Icon.Simple(
-                    modifier = Modifier.clickable { expanded = true },
-                    style = style.iconActionStyle,
-                    resourceId = data.iconAction,
-                    description = data.surtitle
-                )
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false },
-                    modifier = Modifier
-                        .background(style.backgroundAction),
-                    offset = DpOffset(Dp.Infinity,0.dp)
-                ) {
-                    items.forEachIndexed { index, text ->
-                        DropdownMenuItem(
-                            onClick = {
-                                expanded = false
-                                onClick?.invoke(index)
-                            },
-                            contentPadding = PaddingValues(8.dp, 0.dp)
-                        ) {
-                            Text.StateColor(
-                                text = text,
-                                style = style.outfitTextAction
-                            )
-                        }
-                    }
-                }
-            }
-
+                style =  style.dropDownMenuStyle,
+                resourceId = data.iconAction,
+                description = data.surtitle,
+                items = data.actions,
+                offset = DpOffset(Dp.Infinity,0.dp),
+                onClick = onClick
+            )
             Text.StateColor(
                 modifier = Modifier
                     .layoutId(MotionLayoutItem.SURTITLE.name),
@@ -369,7 +330,6 @@ object AccountSummaryCard {
                 text = data.amount,
                 style = style.outfitTextAmount
             )
-
         }
 
     }

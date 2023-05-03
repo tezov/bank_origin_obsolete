@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 12:43
+ *  Created by Tezov on 03/05/2023 22:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 12:32
+ *  Last modified 03/05/2023 22:53
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -131,16 +131,7 @@ object Icon {
             val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
                 outfitFrame,
                 fallBackValue = {
-                    OutfitFrameStateColor(
-                        outfitBorder = OutfitBorderStateColor(
-                            outfitState = ColorImport.Black.asStateSimple,
-                            size = 2.dp
-                        ),
-                        outfitShape = OutfitShapeStateColor(
-                            outfitState = ColorImport.Gray.copy(alpha = 0.25f).asStateSimple,
-                            size = 50.asShapeSize
-                        )
-                    )
+                    OutfitFrameStateColor()
                 })
 
             companion object {

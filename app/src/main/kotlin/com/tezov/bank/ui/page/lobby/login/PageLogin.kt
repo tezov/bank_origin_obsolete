@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 21:39
+ *  Created by Tezov on 03/05/2023 22:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 21:07
+ *  Last modified 03/05/2023 22:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,8 +14,6 @@ package com.tezov.bank.ui.page.lobby.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.DropdownMenu
-import androidx.compose.material.DropdownMenuItem
 import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
@@ -25,17 +23,11 @@ import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
-import androidx.compose.ui.unit.dp
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
-import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndService
-import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceAction
-import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceState
-import com.tezov.bank.ui.page.lobby.login.PageLogin.content
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.*
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.Composition
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -150,42 +142,17 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 )
             }
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconMedium))
-            Box {
-                var expanded by remember { mutableStateOf(false) }
-                val items = stringArrayResource(id = R.array.pg_login_drop_down_menu)
-                IconButton(onClick = { expanded = true }) {
-                    Icon.StateColor(
-                        style = PageLoginTheme.styles.iconSmall,
-                        resourceId = R.drawable.ic_3dot_v_24dp,
-                        description = stringResource(id = R.string.pg_login_icon_more_action)
-                    )
-                }
-                DropdownMenu(
-                    expanded = expanded,
-                    onDismissRequest = { expanded = false },
-                    modifier = Modifier
-                        .background(PageLoginTheme.colors.backgroundDropDownMenu),
-                    offset = DpOffset(
-                        PageLoginTheme.dimensions.iconSmall.width / 2,
-                        -PageLoginTheme.dimensions.iconSmall.height / 5
-                    )
-                ) {
-                    items.forEachIndexed { index, text ->
-                        DropdownMenuItem(
-                            onClick = {
-                                expanded = false
-                                action.onClickMenu(index)
-                            },
-                            contentPadding = PaddingValues(8.dp, 0.dp)
-                        ) {
-                            Text.StateColor(
-                                text = text,
-                                style = PageLoginTheme.typographies.dropDownMenu
-                            )
-                        }
-                    }
-                }
-            }
+            DropDownMenu.StateColor(
+                style =  PageLoginTheme.styles.dropDownMenu,
+                resourceId = R.drawable.ic_3dot_v_24dp,
+                description = stringResource(id = R.string.pg_login_icon_more_action),
+                items = stringArrayResource(id = R.array.pg_login_drop_down_menu).toList(),
+                offset = DpOffset(
+                    PageLoginTheme.dimensions.iconSmall.width / 2,
+                    -PageLoginTheme.dimensions.iconSmall.height / 5
+                ),
+                onClick = action::onClickMenu
+            )
         }
     }
 

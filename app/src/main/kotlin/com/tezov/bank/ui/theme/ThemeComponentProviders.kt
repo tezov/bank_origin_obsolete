@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:08
+ *  Created by Tezov on 03/05/2023 22:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 19:07
+ *  Last modified 03/05/2023 22:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,11 +34,8 @@ import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager.Page.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller.Page.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.*
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button.StateColor.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Image
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
@@ -199,6 +196,14 @@ object ThemeComponentProviders {
     )
 
     @Composable
+    fun dropDownMenu() = DropDownMenu.StateColor.Style(
+        outfitText = MaterialTheme.typographiesExtended.menu.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.onBackgroundModal.default.asStateSimple
+        },
+        colorBackgroundMenu = MaterialTheme.colorsExtended.backgroundModal.default
+    )
+
+        @Composable
     fun accountSummaryCard() = AccountSummaryCard.Style(
         outfitFrame = OutfitFrameStateColor(
             outfitShape = MaterialTheme.shapesExtended.element.big.copy {
@@ -206,10 +211,6 @@ object ThemeComponentProviders {
             }
         ),
         iconInfoStyle = Icon.Simple.Style(
-            size = MaterialTheme.dimensionsIconExtended.action.normal,
-            tint = MaterialTheme.colorsExtended.onPrimary.default
-        ),
-        iconActionStyle = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.action.normal,
             tint = MaterialTheme.colorsExtended.onPrimary.default
         ),
@@ -234,10 +235,7 @@ object ThemeComponentProviders {
                 fontWeight = FontWeight.Bold
             )
         },
-        backgroundAction = MaterialTheme.colorsExtended.backgroundModal.default,
-        outfitTextAction = MaterialTheme.typographiesExtended.body.normal.copy {
-            outfitState = MaterialTheme.colorsExtended.onBackgroundModal.default.asStateSimple
-        },
+        dropDownMenuStyle = dropDownMenu(),
     )
 
     @Composable

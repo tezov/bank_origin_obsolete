@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 03/05/2023 22:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 17:18
+ *  Last modified 03/05/2023 22:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,11 +26,9 @@ import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager.Page.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.*
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button.StateColor.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Image
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.DropDownMenu.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
@@ -88,8 +86,6 @@ object PageLoginTheme {
     data class Colors(
         val background: Color,
         val onBackground: Color,
-        val backgroundDropDownMenu: Color,
-        val onBackgroundDropDownMenu: Color,
         val dark: Color,
         val light: Color,
         val fade: Color,
@@ -99,8 +95,6 @@ object PageLoginTheme {
     fun provideColors() = Colors(
         background = MaterialTheme.colorsExtended.background.accent,
         onBackground = MaterialTheme.colorsExtended.onBackground.accent,
-        backgroundDropDownMenu = MaterialTheme.colorsExtended.backgroundModal.default,
-        onBackgroundDropDownMenu = MaterialTheme.colorsExtended.onBackgroundModal.default,
         dark = MaterialTheme.colorsExtended.primary.default,
         light = MaterialTheme.colorsExtended.primary.shiny.copy(alpha = 0.65f),
         fade = MaterialTheme.colorsExtended.primary.fade.copy(alpha = 0.35f),
@@ -168,7 +162,6 @@ object PageLoginTheme {
         val supra: OutfitTextStateColor,
         val huge: OutfitTextStateColor,
         val body: OutfitTextStateColor,
-        val dropDownMenu: OutfitTextStateColor,
     )
 
     @Composable
@@ -185,9 +178,6 @@ object PageLoginTheme {
         body = MaterialTheme.typographiesExtended.helper.big.copy {
             outfitState = colors.onBackground.asStateSimple
         },
-        dropDownMenu = MaterialTheme.typographiesExtended.menu.normal.copy {
-            outfitState = colors.onBackgroundDropDownMenu.asStateSimple
-        }
     )
 
     internal val localTypographies: ProvidableCompositionLocal<Typographies> =
@@ -196,6 +186,7 @@ object PageLoginTheme {
         }
 
     data class Style(
+        val dropDownMenu: DropDownMenu.StateColor.Style,
         val pager: HorizontalPager.Page.Style,
         val buttonDark: Button.StateColor.Style,
         val buttonLight: Button.StateColor.Style,
@@ -204,11 +195,21 @@ object PageLoginTheme {
         val logo: Image.Simple.Style,
         val iconBig: Image.StateColor.Style,
         val iconMedium: Icon.StateColor.Style,
-        val iconSmall: Icon.StateColor.Style,
     )
 
     @Composable
     fun provideStyles() = Style(
+        dropDownMenu =ThemeComponentProviders.dropDownMenu().copy{
+            iconStyle = Icon.StateColor.Style(
+                size = dimensions.iconSmall,
+                tint = colors.onBackground,
+                outfitFrame = OutfitFrameStateColor(
+                    outfitShape = shapes.icon.copy {
+                        outfitState = colors.dark.asStateSimple
+                    }
+                )
+            )
+        },
         pager = ThemeComponentProviders.pagerStyle().copy {
             outfitShapeIndicator = OutfitShapeStateColor(
                 outfitState = OutfitStateBiStable(
@@ -277,16 +278,7 @@ object PageLoginTheme {
                     outfitState = colors.onBackground.asStateSimple
                 }
             )
-        ),
-        iconSmall = Icon.StateColor.Style(
-            size = dimensions.iconSmall,
-            tint = colors.onBackground,
-            outfitFrame = OutfitFrameStateColor(
-                outfitShape = shapes.icon.copy {
-                    outfitState = colors.dark.asStateSimple
-                }
-            )
-        ),
+        )
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {
