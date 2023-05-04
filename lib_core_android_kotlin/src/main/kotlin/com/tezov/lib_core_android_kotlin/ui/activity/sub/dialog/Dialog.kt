@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 20:03
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -82,16 +82,7 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
             val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
                 outfitFrame,
                 fallBackValue = {
-                    OutfitFrameStateColor(
-                        outfitBorder = OutfitBorderStateColor(
-                            outfitState = Color.Black.asStateSimple,
-                            size = 1.dp
-                        ),
-                        outfitShape = OutfitShapeStateColor(
-                            outfitState = Color.Gray.copy(alpha = 0.25f).asStateSimple,
-                            size = 12.dp.asShapeSize
-                        )
-                    )
+                    ThemeColorsExtended.Dummy.outfitFrameState
                 })
 
             companion object {

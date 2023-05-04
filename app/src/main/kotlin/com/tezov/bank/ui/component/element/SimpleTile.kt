@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 18/04/2023 19:24
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 18/04/2023 19:24
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,6 +29,7 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
@@ -74,23 +75,14 @@ object SimpleTile {
         val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
             outfitFrame,
             fallBackValue = {
-                OutfitFrameStateColor(
-                    outfitShape = 8.asStateColor,
-                    outfitBorder = OutfitBorderStateColor(
-                        size = 1.dp,
-                        outfitState = Color.Black.asStateSimple,
-                    )
-                )
+                ThemeColorsExtended.Dummy.outfitFrameState
             }
         )
 
         val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
             iconStyle,
             fallBackValue = {
-                Icon.Simple.Style(
-                    tint = Color.Black,
-                    size = DpSize(24.dp)
-                )
+                Icon.Simple.Style()
             }
         )
 

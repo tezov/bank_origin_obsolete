@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 17:18
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -104,20 +104,12 @@ object KeyBoard {
             val outfitFrameOuter: OutfitFrameStateColor by DelegateNullFallBack.Ref(
                 outfitFrameOuter,
                 fallBackValue = {
-                    OutfitFrameStateColor(
-                        outfitBorder = OutfitBorderStateColor(
-                            size = 2.dp,
-                            outfitState = Color.Black.asStateSimple
-                        )
-                    )
+                    ThemeColorsExtended.Dummy.outfitFrameState
                 })
             val outfitBorderInner: OutfitBorderStateColor by DelegateNullFallBack.Ref(
                 outfitBorderInner,
                 fallBackValue = {
-                    OutfitBorderStateColor(
-                        size = 1.dp,
-                        outfitState = Color.Black.asStateSimple
-                    )
+                    ThemeColorsExtended.Dummy.outfitBorderState
                 })
 
             companion object {

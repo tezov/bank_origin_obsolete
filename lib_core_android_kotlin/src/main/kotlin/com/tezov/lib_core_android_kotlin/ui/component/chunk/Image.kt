@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 12:43
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 12:32
+ *  Last modified 04/05/2023 19:49
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,14 +20,10 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
-import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object Image {
 
@@ -119,24 +115,9 @@ object Image {
         class Style(
             val size: DpSize? = null,
             val tint: Color? = null,
-            outfitFrame: OutfitFrameStateColor? = null,
+            val outfitFrame: OutfitFrameStateColor? = null,
             val contentScale: ContentScale = ContentScale.Fit
         ) {
-
-            val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
-                outfitFrame,
-                fallBackValue = {
-                    OutfitFrameStateColor(
-                        outfitBorder = OutfitBorderStateColor(
-                            outfitState = Color.Black.asStateSimple,
-                            size = 2.dp
-                        ),
-                        outfitShape = OutfitShapeStateColor(
-                            outfitState = Color.Gray.copy(alpha = 0.25f).asStateSimple,
-                            size = 50.asShapeSize
-                        )
-                    )
-                })
 
             companion object {
 
@@ -170,7 +151,9 @@ object Image {
                     .thenOnNotNull(style.size){
                         size(it)
                     }
-                    .background(style.outfitFrame, selector),
+                    .thenOnNotNull(style.outfitFrame){
+                        background(it, selector)
+                    },
                 painter = painter,
                 colorFilter = style.tint?.let { ColorFilter.tint(it) },
                 contentDescription = description,

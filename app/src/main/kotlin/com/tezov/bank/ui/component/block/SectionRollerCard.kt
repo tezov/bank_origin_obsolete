@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 19:24
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -73,10 +73,7 @@ object SectionRollerCard {
         val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
             iconStyle,
             fallBackValue = {
-                Icon.Simple.Style(
-                    tint = Color.Black,
-                    size = DpSize(24.dp)
-                )
+                Icon.Simple.Style()
             }
         )
         val actionStyle: Button.StateColor.Style by DelegateNullFallBack.Ref(

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:08
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 18:43
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -67,10 +67,7 @@ object AccountValueSimpleRow {
         val iconInfoStyle: Icon.StateColor.Style by DelegateNullFallBack.Ref(
             iconInfoStyle,
             fallBackValue = {
-                Icon.StateColor.Style(
-                    tint = Color.Black,
-                    size = DpSize(24.dp)
-                )
+                Icon.StateColor.Style()
             }
         )
 
@@ -122,7 +119,7 @@ object AccountValueSimpleRow {
         ) {
             Icon.StateColor(
                 style = style.iconInfoStyle.copy {
-                    outfitFrame = outfitFrame.copy{
+                    outfitFrame = outfitFrame?.copy{
                         outfitShape = outfitShape.copy{
                             outfitState = data.iconInfoColor.asStateSimple
                         }

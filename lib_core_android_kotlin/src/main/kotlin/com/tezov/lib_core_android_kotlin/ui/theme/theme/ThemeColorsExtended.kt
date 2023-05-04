@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,8 +19,15 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitPaletteColorSemantic
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.tezov.lib_core_android_kotlin.ui.theme.style.*
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asPaletteSize
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asTextStateColor
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 val MaterialTheme.colorsResource
@@ -38,6 +45,30 @@ infix fun MaterialTheme.provides(value: ThemeColorsExtended.Common) =
 
 object ThemeColorsExtended {
 
+    object Dummy {
+        val pink: Color = Color(0xFFFF00E5)
+        val green: Color = Color(0xFF80FF00)
+        val blue: Color = Color(0xFF00D9FF)
+
+        val outfitShapeState get() = OutfitShapeStateColor(
+            outfitState = pink.asStateSimple,
+            size = 12.dp.asShapeSize
+        )
+        val outfitBorderState get() = OutfitBorderStateColor(
+            size = 2.dp,
+            outfitState = blue.asStateSimple,
+        )
+        val outfitFrameState get() = OutfitFrameStateColor(
+            outfitShape = outfitShapeState,
+            outfitBorder = outfitBorderState,
+        )
+        val textStyle get() = TextStyle(
+            color =  green,
+            fontSize = 14.sp
+        )
+        val outfitTextState get() = textStyle.asTextStateColor
+    }
+
     object Resources {
         val transparent: Color = Color.Transparent
         val red: Color = Color(0xFFFF0000)
@@ -49,11 +80,7 @@ object ThemeColorsExtended {
         val cian: Color = Color(0xFF00FFFF)
         val magenta: Color = Color(0xFFFF00FF)
         val gray: Color = Color(0xFF888888)
-        val grayLight: Color = Color(0xFF4F5050)
-        val whiteGray: Color = Color(0xFF8D8D8D)
         val orange: Color = Color(0xFFD37A73)
-        val orangeGray: Color = Color(0xFFDF9C86)
-        val orangeLight: Color = Color(0xFFE4B8AA)
         val blueLight: Color = Color(0xFF6741BB)
         val greenMelon: Color = Color(0xFF52E057)
     }

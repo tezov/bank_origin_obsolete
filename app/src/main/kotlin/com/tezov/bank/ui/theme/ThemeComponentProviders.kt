@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 22:54
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 22:48
+ *  Last modified 04/05/2023 20:06
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -489,9 +489,7 @@ object ThemeComponentProviders {
     @Composable
     fun rollerCardStyle() = RollerCard.Style(
         outfitFrame = OutfitFrameStateColor(
-            outfitShape = MaterialTheme.shapesExtended.element.small.copy{
-                outfitState = MaterialTheme.colorsExtended.backgroundElevated.default.asStateSimple
-            },
+            outfitShape = MaterialTheme.shapesExtended.element.small,
             outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
                 outfitState = MaterialTheme.colorsExtended.primary.fade.asStateSimple
             },

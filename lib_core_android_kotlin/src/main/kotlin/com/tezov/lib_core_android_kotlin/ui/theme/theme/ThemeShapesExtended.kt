@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 18:32
+ *  Last modified 04/05/2023 19:44
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -62,10 +62,7 @@ object ThemeShapesExtended {
 
         init {
             delegates.fallBackValue = {
-                OutfitShapeStateColor(
-                    outfitState = Color.Gray.copy(alpha = 0.25f).asStateSimple,
-                    size = 12.dp.asShapeSize
-                ).asPaletteSize
+                ThemeColorsExtended.Dummy.outfitShapeState.asPaletteSize
             }
         }
 

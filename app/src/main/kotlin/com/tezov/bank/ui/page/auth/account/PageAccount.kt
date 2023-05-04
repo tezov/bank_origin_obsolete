@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 21:39
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 21:33
+ *  Last modified 04/05/2023 20:04
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -178,7 +178,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                         Icon.StateColor(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal)
-                                .thenOnNotNull(PageAccountTheme.styles.icon.outfitFrame.getShape()) { shape ->
+                                .thenOnNotNull(PageAccountTheme.styles.icon.outfitFrame?.getShape()) { shape ->
                                     clip(shape)
                                 }
                                 .clickable(onClick = action::onClickMailBox),
@@ -190,7 +190,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                     header.iconAccount?.let {
                         Icon.StateColor(
                             modifier = Modifier
-                                .thenOnNotNull(PageAccountTheme.styles.icon.outfitFrame.getShape()) { shape ->
+                                .thenOnNotNull(PageAccountTheme.styles.icon.outfitFrame?.getShape()) { shape ->
                                     clip(shape)
                                 }
                                 .clickable(onClick = action::onClickAccount),
@@ -223,12 +223,14 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
         accountHistories: List<SectionAccountValueSimpleRow.Data>?
     ) {
         accountHistories?.let {
-            it.forEach { data ->
+            it.forEachIndexed { index, data ->
                 SectionAccountValueSimpleRow(
                     modifier = Modifier.padding(start = MaterialTheme.dimensionsPaddingExtended.page.small.horizontal),
                     data = data,
                     style = PageAccountTheme.styles.sectionAccountValue,
-                    onClick = action::onClickAccountHistories
+                    onClick = {
+                        action.onClickAccountHistories(index, it)
+                    }
                 )
                 Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
             }

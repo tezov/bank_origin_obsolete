@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 20:03
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -59,10 +59,7 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
         val outfitShape: OutfitShapeStateColor by DelegateNullFallBack.Ref(
             outfitShape,
             fallBackValue = {
-                OutfitShapeStateColor(
-                    outfitState = Color.Gray.copy(alpha = 0.25f).asStateSimple,
-                    size = OutfitShape.Size(topStart = 12.dp, topEnd = 12.dp)
-                )
+                ThemeColorsExtended.Dummy.outfitShapeState
             })
         val padding: PaddingValues by DelegateNullFallBack.Ref(
             padding,

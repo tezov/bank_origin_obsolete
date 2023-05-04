@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 21:39
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 20:12
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,9 +25,11 @@ import com.tezov.lib_core_android_kotlin.ui.di.accessor.DiAccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.BiStable.Style.Companion.asStateBiStable
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateBiStable
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsCommonExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
@@ -48,25 +50,26 @@ object BottomNavigation :
 
     class Style(
         outfitText: OutfitTextStateColor? = null,
-        val colorBackground: Color = Color.Gray.copy(alpha = 0.25f),
+        colorBackground: Color? = null,
         outfitColor: OutfitStateBiStable<Color>? = null,
     ) {
 
         val outfitText: OutfitTextStateColor by DelegateNullFallBack.Ref(
             outfitText,
             fallBackValue = {
-                OutfitTextStateColor(
-                    outfitState = Color.Black.asStateSimple,
-                    typo = TextStyle(
-                        color = Color.Black,
-                        fontSize = 14.sp
-                    )
-                )
+                OutfitTextStateColor()
             })
+
+        val colorBackground: Color by DelegateNullFallBack.Ref(
+            colorBackground,
+            fallBackValue = {
+                ThemeColorsExtended.Dummy.pink
+            })
+
         val outfitColor: OutfitStateBiStable<Color> by DelegateNullFallBack.Ref(
             outfitColor,
             fallBackValue = {
-                OutfitStateBiStable(active = Color.Black, inactive = Color.Gray)
+                ThemeColorsExtended.Dummy.green.asStateBiStable
             })
 
         companion object {

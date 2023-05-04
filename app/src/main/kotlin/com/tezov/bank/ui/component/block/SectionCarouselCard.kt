@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:08
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 18:18
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -67,10 +67,7 @@ object SectionCarouselCard {
         val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
             iconStyle,
             fallBackValue = {
-                Icon.Simple.Style(
-                    tint = Color.Black,
-                    size = DpSize(24.dp)
-                )
+                Icon.Simple.Style()
             }
         )
         val carouselStyle: HorizontalPager.Page.Style by DelegateNullFallBack.Ref(

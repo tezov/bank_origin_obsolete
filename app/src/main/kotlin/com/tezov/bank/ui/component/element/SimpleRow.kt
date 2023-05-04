@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 12:43
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 12:23
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -59,19 +59,13 @@ object SimpleRow {
         val iconInfoStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
             iconInfoStyle,
             fallBackValue = {
-                Icon.Simple.Style(
-                    tint = Color.Black,
-                    size = DpSize(24.dp)
-                )
+                Icon.Simple.Style()
             }
         )
         val iconActionStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
             iconActionStyle,
             fallBackValue = {
-                Icon.Simple.Style(
-                    tint = Color.Black,
-                    size = DpSize(24.dp)
-                )
+                Icon.Simple.Style()
             }
         )
 

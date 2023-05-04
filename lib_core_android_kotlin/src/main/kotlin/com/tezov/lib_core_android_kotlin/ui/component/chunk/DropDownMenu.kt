@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 22:54
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 22:41
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,6 +33,7 @@ import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
@@ -57,7 +58,7 @@ object DropDownMenu {
         class Style(
             iconStyle: Icon.StateColor.Style? = null,
             outfitText: OutfitTextStateColor? = null,
-            val colorBackgroundMenu: ColorImport? = null,
+            colorBackgroundMenu: ColorImport? = null,
         ) {
             val iconStyle: Icon.StateColor.Style by DelegateNullFallBack.Ref(
                 iconStyle,
@@ -67,13 +68,12 @@ object DropDownMenu {
             val outfitText: OutfitTextStateColor by DelegateNullFallBack.Ref(
                 outfitText,
                 fallBackValue = {
-                    OutfitTextStateColor(
-                        outfitState = ColorImport.Black.asStateSimple,
-                        typo = TextStyle(
-                            color = ColorImport.Black,
-                            fontSize = 14.sp
-                        )
-                    )
+                    ThemeColorsExtended.Dummy.outfitTextState
+                })
+            val colorBackgroundMenu: ColorImport by DelegateNullFallBack.Ref(
+                colorBackgroundMenu,
+                fallBackValue = {
+                    ThemeColorsExtended.Dummy.pink
                 })
 
             companion object {
@@ -115,7 +115,7 @@ object DropDownMenu {
                 var expanded by remember { mutableStateOf(false) }
                 Icon.StateColor(
                     modifier = modifierIcon
-                        .clip(style.iconStyle.outfitFrame.getShape() ?: RoundedCornerShape(50))
+                        .clip(style.iconStyle.outfitFrame?.getShape() ?: RoundedCornerShape(50))
                         .clickable {
                             if (enabled) {
                                 expanded = true

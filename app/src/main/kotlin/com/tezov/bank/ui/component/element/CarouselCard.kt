@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 13:42
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 13:26
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -26,6 +26,7 @@ import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button as ButtonImport
@@ -54,34 +55,19 @@ object CarouselCard {
             val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
                 outfitFrame,
                 fallBackValue = {
-                    OutfitFrameStateColor(
-                        outfitShape = 8.asStateColor,
-                        outfitBorder = OutfitBorderStateColor(
-                            size = 1.dp,
-                            outfitState = Color.Black.asStateSimple,
-                        )
-                    )
+                    ThemeColorsExtended.Dummy.outfitFrameState
                 }
             )
             val iconInfoStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
                 iconInfoStyle,
                 fallBackValue = {
-                    Icon.Simple.Style(
-                        tint = Color.Black,
-                        size = DpSize(24.dp)
-                    )
+                    Icon.Simple.Style()
                 }
             )
             val outfitFrameTag: OutfitFrameStateColor by DelegateNullFallBack.Ref(
                 outfitFrameTag,
                 fallBackValue = {
-                    OutfitFrameStateColor(
-                        outfitShape = 4.asStateColor,
-                        outfitBorder = OutfitBorderStateColor(
-                            size = 2.dp,
-                            outfitState = Color.Black.asStateSimple,
-                        )
-                    )
+                    ThemeColorsExtended.Dummy.outfitFrameState
                 }
             )
 

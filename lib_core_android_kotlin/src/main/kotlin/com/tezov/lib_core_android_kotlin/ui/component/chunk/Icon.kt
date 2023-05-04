@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 22:54
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 22:53
+ *  Last modified 04/05/2023 19:30
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,15 +18,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
-import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
-import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnTrue
-import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.background
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
@@ -50,7 +47,7 @@ object Icon {
         ) {
 
             val tint: ColorImport by DelegateNullFallBack.Ref(tint, fallBackValue = {
-                ColorImport.Black
+                ThemeColorsExtended.Dummy.pink
             })
 
             companion object {
@@ -78,8 +75,8 @@ object Icon {
         ) {
             Icon(
                 modifier = modifier
-                    .thenOnNotNull(style.size){
-                          size(it)
+                    .thenOnNotNull(style.size) {
+                        size(it)
                     },
                 painter = painter,
                 tint = style.tint,
@@ -121,18 +118,12 @@ object Icon {
         class Style(
             val size: DpSize? = null,
             tint: ColorImport? = null,
-            outfitFrame: OutfitFrameStateColor? = null,
+            val outfitFrame: OutfitFrameStateColor? = null,
         ) {
 
             val tint: ColorImport by DelegateNullFallBack.Ref(tint, fallBackValue = {
-                ColorImport.Black
+                ThemeColorsExtended.Dummy.pink
             })
-
-            val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
-                outfitFrame,
-                fallBackValue = {
-                    OutfitFrameStateColor()
-                })
 
             companion object {
 
@@ -161,12 +152,14 @@ object Icon {
         ) {
             Icon(
                 modifier = modifier
-                    .thenOnNotNull(style.size){
+                    .thenOnNotNull(style.size) {
                         size(it)
                     }
-                    .background(style.outfitFrame, selector)
-                    .thenOnNotNull(style.size?.padding){
-                           padding(it)
+                    .thenOnNotNull(style.outfitFrame) {
+                        background(it, selector)
+                    }
+                    .thenOnNotNull(style.size?.padding) {
+                        padding(it)
                     },
                 painter = painter,
                 tint = style.tint,

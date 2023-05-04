@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 16:05
+ *  Last modified 04/05/2023 20:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,6 +13,7 @@
 package com.tezov.bank.ui.page.auth.profile
 
 import androidx.compose.runtime.Composable
+import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
 import com.tezov.lib_core_android_kotlin.navigation.NavigationController
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageAction
 
@@ -31,7 +32,8 @@ class PageProfileAction private constructor(
 
 
     fun onClickExit() {
-
+//        DialogAuthCloseAppController.handleOnBackPressed()
+        navigationController.showSnackBarNotImplemented("click exit")
     }
 
     fun onClickProfiles(index: Int) {

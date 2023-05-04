@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 20:03
+ *  Last modified 04/05/2023 19:30
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -27,6 +27,7 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsCommonExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
@@ -48,21 +49,31 @@ object TopAppBar : ActivitySub<TopAppBarState, TopAppBarAction> {
 
     class Style(
         outfitText: OutfitTextStateColor? = null,
-        val colorBackground: Color = Color.Gray.copy(alpha = 0.25f),
-        val colorIconLeading: Color = Color.Black,
-        val colorIconTrailing: Color = Color.Black,
+        colorBackground: Color? = null,
+        colorIconLeading: Color? = null,
+        colorIconTrailing: Color? = null,
     ) {
         val outfitText: OutfitTextStateColor by DelegateNullFallBack.Ref(
             outfitText,
             fallBackValue = {
-                OutfitTextStateColor(
-                    outfitState = Color.Black.asStateSimple,
-                    typo = TextStyle(
-                        color = Color.Black,
-                        fontSize = 14.sp
-                    )
-                )
+                OutfitTextStateColor()
             })
+        val colorBackground: Color by DelegateNullFallBack.Ref(
+            colorBackground,
+            fallBackValue = {
+                ThemeColorsExtended.Dummy.pink
+            })
+        val colorIconLeading: Color by DelegateNullFallBack.Ref(
+            colorIconLeading,
+            fallBackValue = {
+                ThemeColorsExtended.Dummy.green
+            })
+        val colorIconTrailing: Color by DelegateNullFallBack.Ref(
+            colorIconTrailing,
+            fallBackValue = {
+                ThemeColorsExtended.Dummy.green
+            })
+
 
         companion object {
 

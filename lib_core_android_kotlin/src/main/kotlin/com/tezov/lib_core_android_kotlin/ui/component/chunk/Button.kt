@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 04/05/2023 20:17
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 17:18
+ *  Last modified 04/05/2023 19:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -29,6 +29,7 @@ import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
+import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
@@ -59,29 +60,14 @@ object Button {
             val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
                 outfitFrame,
                 fallBackValue = {
-                    OutfitFrameStateColor(
-                        outfitBorder = OutfitBorderStateColor(
-                            outfitState = ColorImport.Black.asStateSimple,
-                            size = 1.dp
-                        ),
-                        outfitShape = OutfitShapeStateColor(
-                            outfitState = ColorImport.Gray.copy(alpha = 0.25f).asStateSimple,
-                            size = 12.dp.asShapeSize
-                        )
-                    )
+                    ThemeColorsExtended.Dummy.outfitFrameState
+
                 })
             val outfitText: OutfitTextStateColor by DelegateNullFallBack.Ref(
                 outfitText,
                 fallBackValue = {
-                    OutfitTextStateColor(
-                        outfitState = ColorImport.Black.asStateSimple,
-                        typo = TextStyle(
-                            color = ColorImport.Black,
-                            fontSize = 14.sp
-                        )
-                    )
+                    OutfitTextStateColor()
                 })
-
 
             companion object {
 
