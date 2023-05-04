@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 21:39
+ *  Created by Tezov on 04/05/2023 21:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 21:07
+ *  Last modified 04/05/2023 20:57
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -37,20 +37,15 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiDialog
-import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
-import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuth.content
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.LOGIN_LENGTH
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.PASSWORD_LENGTH
-import com.tezov.bank.ui.page.lobby.login.PageLoginAction
-import com.tezov.bank.ui.page.lobby.login.PageLoginState
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.block.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.Composition
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
@@ -88,9 +83,8 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 modifier = Modifier
                     .fillMaxSize()
                     .background(DialogLoginAuthTheme.colors.background)
-                    .padding(MaterialTheme.dimensionsPaddingExtended.page.big)
             ) {
-                IconButton(
+                Icon.Clickable(
                     onClick = action::onClickClose
                 ) {
                     Icon(
@@ -102,7 +96,8 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                 }
                 Column(
                     modifier = Modifier
-                        .fillMaxSize(),
+                        .fillMaxSize()
+                        .padding(MaterialTheme.dimensionsPaddingExtended.page.big),
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
@@ -222,7 +217,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                             }
                         ),
                         trailingIcon = {
-                            IconButton(onClick = {
+                            Icon.Clickable(onClick = {
                                 login.value = ""
                                 focusManagement.requestLoginFocus()
                             }) {
@@ -294,7 +289,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                             ),
                             keyboardActions = KeyboardActions(),
                             trailingIcon = {
-                                IconButton(onClick = {
+                                Icon.Clickable(onClick = {
                                     password.takeIf { it.value.isNotEmpty() }?.apply {
                                         value = value.dropLast(1)
                                         focusManagement.requestPasswordFocus()

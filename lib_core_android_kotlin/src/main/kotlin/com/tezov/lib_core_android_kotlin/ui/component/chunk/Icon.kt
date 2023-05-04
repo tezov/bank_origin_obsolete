@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 04/05/2023 21:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:30
+ *  Last modified 04/05/2023 20:44
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,12 +12,20 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.chunk
 
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Icon
+import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
@@ -28,6 +36,33 @@ import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
 object Icon {
+
+    object Clickable{
+
+        @Composable
+        operator fun invoke(
+            onClick: () -> Unit,
+            modifier: Modifier = Modifier,
+            enabled: Boolean = true,
+            interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+            content: @Composable () -> Unit
+        ){
+            Box(
+                modifier = modifier
+                    .clickable(
+                        onClick = onClick,
+                        enabled = enabled,
+                        role = Role.Button,
+                        interactionSource = interactionSource,
+                        indication = rememberRipple(bounded = false, radius = 24.dp)
+                    ),
+                contentAlignment = Alignment.Center
+            ) {
+                content()
+            }
+        }
+
+    }
 
     object Simple {
 

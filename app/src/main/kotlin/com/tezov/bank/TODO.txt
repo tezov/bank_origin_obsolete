@@ -12,9 +12,6 @@
 - scroll end blanc visible sous le bleu?
 - paiment lyf / paypal / paylib image et non icon avec un color filter specifique
 
-- IconButton remove padding -> modifier pour ça ?
-- TextButton remove padding -> modifier pour ça ?
-
 --> faire une page bottom sheet
 --> faire une page tab bar
 --> Autre deja fait a reprendre ?

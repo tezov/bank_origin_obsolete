@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 04/05/2023 21:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:59
+ *  Last modified 04/05/2023 20:44
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,25 +13,19 @@
 package com.tezov.lib_core_android_kotlin.ui.component.chunk
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.DropdownMenu
 import androidx.compose.material.DropdownMenuItem
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.DpOffset
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
@@ -113,19 +107,20 @@ object DropDownMenu {
                 modifier = modifierBox
             ) {
                 var expanded by remember { mutableStateOf(false) }
-                Icon.StateColor(
-                    modifier = modifierIcon
-                        .clip(style.iconStyle.outfitFrame?.getShape() ?: RoundedCornerShape(50))
-                        .clickable {
-                            if (enabled) {
-                                expanded = true
-                            }
-                        },
-                    style = style.iconStyle,
-                    painter = painter,
-                    description = description,
-                    selector = selector
-                )
+                Icon.Clickable(
+                    onClick = {
+                        if (enabled) {
+                            expanded = true
+                        }
+                    }
+                ){
+                    Icon.StateColor(
+                        style = style.iconStyle,
+                        painter = painter,
+                        description = description,
+                        selector = selector
+                    )
+                }
                 DropdownMenu(
                     expanded = expanded,
                     onDismissRequest = { expanded = false },

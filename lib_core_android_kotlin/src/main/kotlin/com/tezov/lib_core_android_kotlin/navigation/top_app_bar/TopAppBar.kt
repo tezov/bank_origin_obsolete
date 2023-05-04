@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 04/05/2023 21:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:30
+ *  Last modified 04/05/2023 20:44
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,15 +17,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.unit.sp
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.DiAccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.componentsCommonExtended
@@ -121,7 +119,7 @@ object TopAppBar : ActivitySub<TopAppBarState, TopAppBarAction> {
             backgroundColor = MaterialTheme.componentsCommonExtended.topAppBar.colorBackground,
             navigationIcon = {
                 leadingItem?.let {
-                    IconButton(onClick = {
+                    Icon.Clickable(onClick = {
                         action.onClickIconButton(it.route)
                     }) {
                         Icon(
@@ -134,7 +132,7 @@ object TopAppBar : ActivitySub<TopAppBarState, TopAppBarAction> {
             },
             actions = {
                 trailingItem?.let {
-                    IconButton(onClick = {
+                    Icon.Clickable(onClick = {
                         action.onClickIconButton(it.route)
 
                     }) {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 22:54
+ *  Created by Tezov on 04/05/2023 21:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 22:32
+ *  Last modified 04/05/2023 20:44
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,7 +14,6 @@ package com.tezov.bank.ui.page.lobby.login
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -134,7 +133,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 description = stringResource(id = R.string.pg_login_img_suit_case)
             )
             Spacer(modifier = Modifier.width(PageLoginTheme.dimensions.paddingStartToIconBig))
-            IconButton(onClick = action::onClickAdd) {
+            Icon.Clickable(onClick = action::onClickAdd) {
                 Icon.StateColor(
                     resourceId = R.drawable.ic_add_24dp,
                     style = PageLoginTheme.styles.iconMedium,

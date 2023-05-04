@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 04/05/2023 21:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:49
+ *  Last modified 04/05/2023 20:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -75,7 +75,7 @@ object Link {
             selector: Any? = null,
             onClick: () -> Unit = {},
         ) {
-            ClickableText(
+            Text.Clickable(
                 modifier = modifier,
                 text = text,
                 style = style.outfitText.resolve(selector),

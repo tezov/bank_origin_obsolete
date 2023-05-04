@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 04/05/2023 21:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 20:04
+ *  Last modified 04/05/2023 21:04
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,16 +14,13 @@ package com.tezov.bank.ui.page.auth.account
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
@@ -42,11 +39,8 @@ import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
 import com.tezov.lib_core_android_kotlin.ui.modifier.then
-import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.background
-import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
@@ -175,29 +169,28 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                         .scale(progress.coerceAtLeast(ICON_ACTION_SCALE_MIN))
                 ) {
                     header.iconMailbox?.let {
-                        Icon.StateColor(
+                        Icon.Clickable(
                             modifier = Modifier
-                                .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal)
-                                .thenOnNotNull(PageAccountTheme.styles.icon.outfitFrame?.getShape()) { shape ->
-                                    clip(shape)
-                                }
-                                .clickable(onClick = action::onClickMailBox),
-                            style = PageAccountTheme.styles.icon,
-                            resourceId = it,
-                            description = null
-                        )
+                                .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
+                            onClick = action::onClickMailBox
+                        ){
+                            Icon.StateColor(
+                                style = PageAccountTheme.styles.icon,
+                                resourceId = it,
+                                description = null
+                            )
+                        }
                     }
                     header.iconAccount?.let {
-                        Icon.StateColor(
-                            modifier = Modifier
-                                .thenOnNotNull(PageAccountTheme.styles.icon.outfitFrame?.getShape()) { shape ->
-                                    clip(shape)
-                                }
-                                .clickable(onClick = action::onClickAccount),
-                            style = PageAccountTheme.styles.icon,
-                            resourceId = it,
-                            description = null
-                        )
+                        Icon.Clickable(
+                            onClick = action::onClickAccount
+                        ){
+                            Icon.StateColor(
+                                style = PageAccountTheme.styles.icon,
+                                resourceId = it,
+                                description = null
+                            )
+                        }
                     }
                 }
             }

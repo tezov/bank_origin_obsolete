@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 04/05/2023 21:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 20:03
+ *  Last modified 04/05/2023 21:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,7 +16,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.IconButton
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -89,16 +88,19 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
         action: PageProfileAction,
         header: PageProfileState.Header?
     ) {
-        if(header == null){
+        if (header == null) {
             return
         }
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(MaterialTheme.dimensionsPaddingExtended.page.big)
         ) {
-            IconButton(
+            Icon.Clickable(
                 modifier = Modifier
+                    .padding(
+                        horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.vertical,
+                        vertical = MaterialTheme.dimensionsPaddingExtended.page.normal.vertical
+                    )
                     .wrapContentSize()
                     .align(Alignment.End),
                 onClick = action::onClickExit
@@ -109,7 +111,11 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                     description = stringResource(id = R.string.pg_profile_icon_close),
                 )
             }
-            Row(modifier = Modifier.fillMaxWidth()) {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(MaterialTheme.dimensionsPaddingExtended.page.big)
+            ) {
                 header.imageResourceId?.let {
                     Image.StateColor(
                         style = PageProfileTheme.styles.iconUser,
@@ -139,16 +145,32 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
         helps: SectionSimpleRow.Data?,
     ) {
         profils?.let {
-            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow, onClick = action::onClickProfiles)
+            SectionSimpleRow(
+                data = it,
+                style = PageProfileTheme.styles.sectionRow,
+                onClick = action::onClickProfiles
+            )
         }
         documents?.let {
-            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow, onClick = action::onClickDocuments)
+            SectionSimpleRow(
+                data = it,
+                style = PageProfileTheme.styles.sectionRow,
+                onClick = action::onClickDocuments
+            )
         }
         offers?.let {
-            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow, onClick = action::onClickOffers)
+            SectionSimpleRow(
+                data = it,
+                style = PageProfileTheme.styles.sectionRow,
+                onClick = action::onClickOffers
+            )
         }
         helps?.let {
-            SectionSimpleRow(data = it, style = PageProfileTheme.styles.sectionRow, onClick = action::onClickHelps)
+            SectionSimpleRow(
+                data = it,
+                style = PageProfileTheme.styles.sectionRow,
+                onClick = action::onClickHelps
+            )
         }
     }
 

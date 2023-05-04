@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 04/05/2023 21:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:59
+ *  Last modified 04/05/2023 20:38
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -104,10 +104,10 @@ object RollerCard {
         Column(
             modifier = modifier
                 .background(style.outfitFrame)
-                .padding(MaterialTheme.dimensionsPaddingExtended.block.small)
                 .thenOnNotNull(onClick){
                     clickable { it() }
                 }
+                .padding(MaterialTheme.dimensionsPaddingExtended.block.small)
         ) {
             Image.Simple(
                 modifier = Modifier.align(Alignment.CenterHorizontally),

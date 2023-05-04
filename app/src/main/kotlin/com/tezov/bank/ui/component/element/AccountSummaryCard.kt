@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 04/05/2023 21:06
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:59
+ *  Last modified 04/05/2023 21:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -238,7 +238,7 @@ object AccountSummaryCard {
                     {
                         target: ['AMOUNT'],
                         frames: [0, 50, 100],
-                        translationY: [+25, -70, 0],
+                        translationY: [+25, -80, 0],
                         translationX: [-30, 0, 0],
                         scaleY: [0.75, 0.65, 1.0],
                         scaleX: [0.75, 0.5, 1.0],
