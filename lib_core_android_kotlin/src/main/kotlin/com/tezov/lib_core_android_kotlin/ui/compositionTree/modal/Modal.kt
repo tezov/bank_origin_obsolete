@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 05/05/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 20:15
+ *  Last modified 05/05/2023 20:28
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,13 +15,14 @@ package com.tezov.lib_core_android_kotlin.ui.compositionTree.modal
 import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.*
+import com.tezov.lib_core_android_kotlin.ui.common.Event
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.Composition
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModals
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModalsBundle
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.DiAccessor
 import com.tezov.lib_core_kotlin.extension.ExtensionCollection.push
-import kotlin.reflect.KClass
+import com.tezov.lib_core_kotlin.type.collection.ListEntry
 
 interface Modal<S : ModalState, A : ModalAction<S>> : Composition<S, A>, DiAccessor.Key {
 
@@ -29,21 +30,49 @@ interface Modal<S : ModalState, A : ModalAction<S>> : Composition<S, A>, DiAcces
         get() = Modal.hashCode()
 
     companion object {
-        data class Locals(val modal: Modal<*, *>)
+        val LocalModalBundle: ProvidableCompositionLocal<Bundle> = staticCompositionLocalOf {
+            error("not provided")
+        }
+        val LocalModal @Composable get() = LocalModalBundle.current
+
+        data class Bundle(
+            val current: Modal<*, *>,
+//            val eventListener: ListEntry<Event, @Composable () -> Unit> = ListEntry(),
+        )
+
+//        val LocalEventListener: ProvidableCompositionLocal<ListEntry<Event, @Composable () -> Unit>> =
+//            compositionLocalOf {
+//                error("not provided")
+//            }
+
     }
 
     @SuppressLint("RememberReturnType")
     @Composable
     operator fun invoke() {
-        val modals = LocalModals.current
+        val modals = LocalModalsBundle
         remember {
-            val locals = Locals(this)
+            val locals = Bundle(this)
             modals.push(locals)
         }
-        content()
+        modals.find { it.current == this@Modal }?.let { bundle ->
+            CompositionLocalProvider(
+                Activity.LocalLevel provides 2,
+                LocalModalBundle provides bundle,
+            ) {
+                val onBackPressedState = remember {
+                    mutableStateOf(false)
+                }
+                BackHandler(true) {
+                    onBackPressedState.value = true
+                }
+                lifeCycleAware()
+                content()
+            }
+        }
         DisposableEffect(Unit) {
             onDispose {
-                modals.find { it.modal == this@Modal }?.also { modals.remove(it) }
+                modals.find { it.current == this@Modal }?.also { modals.remove(it) }
             }
         }
     }

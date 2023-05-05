@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:54
+ *  Created by Tezov on 05/05/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 21:40
+ *  Last modified 05/05/2023 20:27
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,28 +31,30 @@ interface Activity<S : ActivityState, A : ActivityAction<S>> : Composition<S, A>
         get() = Activity.hashCode()
 
     companion object {
-        val DebugLocalLevel: ProvidableCompositionLocal<Int> = staticCompositionLocalOf {
+        val LocalLevel: ProvidableCompositionLocal<Int> = staticCompositionLocalOf {
             -1
         }
         val LocalApplication: ProvidableCompositionLocal<Application> = staticCompositionLocalOf {
             error("not provided")
         }
-        val LocalActivity: ProvidableCompositionLocal<Activity<*, *>> = staticCompositionLocalOf {
+        val LocalActivityBundle: ProvidableCompositionLocal<Bundle> = staticCompositionLocalOf {
             error("not provided")
         }
-        val LocalPages: ProvidableCompositionLocal<ArrayDeque<Page.Companion.Locals>> =
-            staticCompositionLocalOf {
-                error("not provided")
-            }
+        val LocalActivity @Composable get() = LocalActivityBundle.current
+        val LocalPagesBundle @Composable get() = LocalActivityBundle.current.pages
+
+        data class Bundle(
+            val current: Activity<*, *>,
+            val pages: ArrayDeque<Page.Companion.Bundle> = ArrayDeque(),
+        )
     }
 
     @Composable
     fun invokeContent() {
         CompositionLocalProvider(
-            DebugLocalLevel provides 0,
+            LocalLevel provides 0,
             LocalApplication provides LocalContext.current.applicationContext as Application,
-            LocalActivity provides this,
-            LocalPages provides ArrayDeque()
+            LocalActivityBundle provides Bundle(this),
         ) {
             lifeCycleAware()
             content()

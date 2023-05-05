@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 21:39
+ *  Created by Tezov on 05/05/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 20:05
+ *  Last modified 05/05/2023 20:24
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,8 +22,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalLevel
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySubState
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPage
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPageBundle
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsResource
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -76,11 +79,9 @@ class BottomSheetState private constructor(
     @Composable
     internal fun sheetContent() {
         if (isVisible() && sheetContentUpdated.value >= 0) {
-            val locals = Activity.LocalPages.current.last()
             CompositionLocalProvider(
-                Activity.DebugLocalLevel provides 1,
-                Page.LocalPage provides locals.page,
-                Page.LocalModals provides locals.modals
+                LocalLevel provides 1,
+                LocalPageBundle provides Activity.LocalPagesBundle.last(),
             ) {
                 _sheetContent()
             }

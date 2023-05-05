@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 21:06
+ *  Created by Tezov on 05/05/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 20:57
+ *  Last modified 05/05/2023 18:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -56,7 +56,6 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 
 object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
-
 
     @Composable
     override fun Dialog<DialogLoginAuthState, DialogLoginAuthAction>.content() {

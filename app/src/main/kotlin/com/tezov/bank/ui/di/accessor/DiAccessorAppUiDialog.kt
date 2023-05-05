@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:54
+ *  Created by Tezov on 05/05/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 21:54
+ *  Last modified 05/05/2023 20:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,13 +32,13 @@ class DiAccessorAppUiDialog @Inject protected constructor() :
         operator fun invoke() =
             DiAccessorAppUiPage().with(
                 requester = this,
-                key = Activity.LocalPages.current.last().page
+                key = Activity.LocalPagesBundle.last().current
             ).accessorDialog()
 
         @Composable
         operator fun invoke(requester: Dialog<*, *>) =
             DiAccessorAppUiPage().with(
-                key = Activity.LocalPages.current.last().page,
+                key = Activity.LocalPagesBundle.last().current,
             ).accessorDialog().with(
                 key = requester
             )
@@ -49,10 +49,10 @@ class DiAccessorAppUiDialog @Inject protected constructor() :
         .factory()
         .create(
             DiAccessorCoreUiDialog().with(
-                key = Page.LocalModals.current.last().modal
+                key = Page.LocalModalsBundle.last().current
             ),
             DiAccessorAppUiPage().with(
-                key = Activity.LocalPages.current.last().page
+                key = Activity.LocalPagesBundle.last().current
             )
         )
 

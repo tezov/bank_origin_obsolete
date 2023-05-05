@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 05/05/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:59
+ *  Last modified 05/05/2023 20:20
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,25 +16,23 @@ import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPages
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalLevel
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPagesBundle
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModals
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModalsBundle
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPage
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPageBundle
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.DiAccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.with
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShapeStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
@@ -113,11 +111,9 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
                 elevation = MaterialTheme.componentsCommonExtended.dialogCard.elevation,
                 border = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.resolveBorder()
             ) {
-                val locals = LocalPages.current.last()
                 CompositionLocalProvider(
-                    Activity.DebugLocalLevel provides 1,
-                    LocalPage provides locals.page,
-                    LocalModals provides locals.modals
+                    LocalLevel provides 1,
+                    LocalPageBundle provides LocalPagesBundle.last(),
                 ) {
                     content()
                 }

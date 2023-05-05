@@ -19,7 +19,7 @@
 --> Faire animation
 --> ajouter animation navigation
 
--OnClick Custom ripple unbounded
+- OnClick Custom ripple unbounded
 - Snackbar selector
 - Dialog selector
 - BottomSheet selector

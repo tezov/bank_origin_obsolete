@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:54
+ *  Created by Tezov on 05/05/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 21:21
+ *  Last modified 05/05/2023 20:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,34 +12,21 @@
 
 package com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog
 
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.ProvidableCompositionLocal
-import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.runtime.*
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.Modal
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModals
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.Modal.Companion.LocalModal
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModalsBundle
 
 interface Dialog<S : DialogState, A : DialogAction<S>> : Modal<S, A> {
     companion object {
-        val LocalDialog: ProvidableCompositionLocal<Dialog<*, *>> = compositionLocalOf {
-            error("not provided")
-        }
+        val LocalDialog @Composable get() = LocalModal.current as Dialog<*,*>
     }
 
     @Composable
     override fun Modal<S, A>.content() {
-        val modals = LocalModals.current
-        modals.find { it.modal == this@Dialog }?.let {
-            this as Dialog<S, A>
-            CompositionLocalProvider(
-                Activity.DebugLocalLevel provides 2,
-                LocalDialog provides this
-            ) {
-                lifeCycleAware()
-                this.content()
-            }
-        }
+        (this as Dialog<S, A>).content()
     }
 
     @Composable

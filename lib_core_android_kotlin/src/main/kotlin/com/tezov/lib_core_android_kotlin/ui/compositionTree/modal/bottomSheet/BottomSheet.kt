@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:54
+ *  Created by Tezov on 05/05/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 21:21
+ *  Last modified 05/05/2023 20:16
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,28 +18,18 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.compositionLocalOf
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.Modal
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModals
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.Modal.Companion.LocalModal
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModalsBundle
 
 interface BottomSheet<S : BottomSheetState, A : BottomSheetAction<S>> : Modal<S, A> {
     companion object {
-        val LocalBottomSheet: ProvidableCompositionLocal<BottomSheet<*, *>> = compositionLocalOf {
-            error("not provided")
-        }
+        val LocalBottomSheet @Composable get() = LocalModal.current as BottomSheet<*, *>
     }
 
     @Composable
     override fun Modal<S, A>.content() {
-        val modals = LocalModals.current
-        modals.find { it.modal == this@BottomSheet }?.let {
-            this as BottomSheet<S, A>
-            CompositionLocalProvider(
-                Activity.DebugLocalLevel provides 2,
-                LocalBottomSheet provides this
-            ) {
-                lifeCycleAware()
-                this.content()
-            }
-        }
+        (this as BottomSheet<S, A>).content()
     }
 
     @Composable

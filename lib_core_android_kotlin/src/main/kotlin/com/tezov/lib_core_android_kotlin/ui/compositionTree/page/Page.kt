@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:54
+ *  Created by Tezov on 05/05/2023 20:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 21:21
+ *  Last modified 05/05/2023 20:28
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,7 +18,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.*
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPages
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPagesBundle
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.Composition
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.Modal
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.DiAccessor
@@ -31,30 +31,30 @@ interface Page<S : PageState, A : PageAction<S>> : Composition<S, A>, DiAccessor
         get() = Page.hashCode()
 
     companion object {
-        val LocalPage: ProvidableCompositionLocal<Page<*, *>> = staticCompositionLocalOf {
+        val LocalPageBundle: ProvidableCompositionLocal<Bundle> = staticCompositionLocalOf {
             error("not provided")
         }
-        val LocalModals: ProvidableCompositionLocal<ArrayDeque<Modal.Companion.Locals>> =
-            staticCompositionLocalOf {
-                error("not provided")
-            }
+        val LocalPage @Composable get() = LocalPageBundle.current
+        val LocalModalsBundle @Composable get() =LocalPageBundle.current.modals
 
-        data class Locals(val page: Page<*, *>, val modals: ArrayDeque<Modal.Companion.Locals>)
+        data class Bundle(
+            val current: Page<*, *>,
+            val modals: ArrayDeque<Modal.Companion.Bundle> = ArrayDeque()
+        )
     }
 
     @SuppressLint("RememberReturnType")
     @Composable
     operator fun invoke(innerPadding: PaddingValues) {
-        val pages = LocalPages.current
+        val pages = LocalPagesBundle
         remember {
-            val locals = Locals(this, ArrayDeque())
+            val locals = Bundle(this)
             pages.push(locals)
         }
-        pages.find { it.page == this@Page }?.let { locals ->
+        pages.find { it.current == this@Page }?.let { bundle ->
             CompositionLocalProvider(
-                Activity.DebugLocalLevel provides 1,
-                LocalPage provides locals.page,
-                LocalModals provides locals.modals
+                Activity.LocalLevel provides 1,
+                LocalPageBundle provides bundle,
             ) {
                 val onBackPressedState = remember {
                     mutableStateOf(false)
@@ -69,7 +69,7 @@ interface Page<S : PageState, A : PageAction<S>> : Composition<S, A>, DiAccessor
         }
         DisposableEffect(Unit) {
             onDispose {
-                pages.find { it.page == this@Page }?.also { pages.remove(it) }
+                pages.find { it.current == this@Page }?.also { pages.remove(it) }
             }
         }
     }
@@ -87,7 +87,7 @@ interface Page<S : PageState, A : PageAction<S>> : Composition<S, A>, DiAccessor
             return false
         }
         var handled = false
-        if (LocalModals.current.lastOrNull()?.modal?.onBackPressedDispatch().isFalseOrNull()
+        if (LocalModalsBundle.lastOrNull()?.current?.onBackPressedDispatch().isFalseOrNull()
             && !this.handleOnBackPressed()
         ) {
             handled = LocalActivity.current.onBackPressedDispatch()
