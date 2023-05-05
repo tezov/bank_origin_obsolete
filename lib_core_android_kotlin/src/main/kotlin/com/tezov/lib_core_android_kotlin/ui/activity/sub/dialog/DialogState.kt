@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 20:30
+ *  Created by Tezov on 06/05/2023 00:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 20:24
+ *  Last modified 06/05/2023 00:07
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,76 +12,45 @@
 
 package com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog
 
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalLevel
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySubState
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPageBundle
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsResource
 
 class DialogState private constructor(
-    private val showState: MutableState<Boolean>,
-    private val dialogContentUpdated: MutableState<Int>,
+    val stateUpdated: MutableState<Int>,
 ) : ActivitySubState {
+
+    var isVisible = false
+        get() = (stateUpdated.value > 0) && field
+        private set
 
     companion object {
         @Composable
         fun create(
-            showState: MutableState<Boolean> = mutableStateOf(false),
             dialogContentUpdated: MutableState<Int> = mutableStateOf(0)
         ) = DialogState(
-            showState = showState,
-            dialogContentUpdated = dialogContentUpdated,
+            stateUpdated = dialogContentUpdated,
         )
     }
 
-    @Composable
-    internal fun EmptyContent() {
-        Box(
-            Modifier
-                .background(MaterialTheme.colorsResource.transparent)
-                .fillMaxWidth()
-                .height(1.dp)
-        )
-    }
+    var content: (@Composable () -> Unit) = { }
 
-    private var _dialogContent: (@Composable () -> Unit) = {
-        //hack content dialog can't be null even if not showing
-        EmptyContent()
-    }
-
-    fun isVisible() = showState.value
-    fun show(visible: Boolean) {
-        showState.value = visible
-    }
-
-    @Composable
-    internal fun dialogContent() {
-        //todo animation show/hide
-        if (isVisible() && dialogContentUpdated.value >= 0) {
-            CompositionLocalProvider(
-                LocalLevel provides 1,
-                LocalPageBundle provides Activity.LocalPagesBundle.last(),
-            ) {
-                _dialogContent()
-            }
+    internal fun show(visible: Boolean) {
+        if(!visible){
+            content = { }
         }
-    }
-
-    internal fun dialogContent(content: @Composable () -> Unit) {
-        _dialogContent = content
-        dialogContentUpdated.value++
+        isVisible = visible
+        stateUpdated.value++
     }
 
 }

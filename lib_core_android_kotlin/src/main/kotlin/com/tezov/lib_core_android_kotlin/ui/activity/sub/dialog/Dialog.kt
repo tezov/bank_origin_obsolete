@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 20:30
+ *  Created by Tezov on 06/05/2023 00:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 20:20
+ *  Last modified 06/05/2023 00:05
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog
 
+import android.util.Log
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -25,9 +26,6 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Co
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalLevel
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPagesBundle
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalModalsBundle
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPage
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPageBundle
 import com.tezov.lib_core_android_kotlin.ui.di.accessor.DiAccessorCoreUiActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
@@ -48,14 +46,19 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
     private fun content() {
         val accessor = DiAccessorCoreUiActivity().with(LocalActivity.current).contextSubMap()
         val state = accessor.with<Dialog, _, _>().state()
-        if (state.isVisible()) {
+        if (state.isVisible) {
             Dialog(
                 onDismissRequest = { state.show(false) },
                 properties = DialogProperties(
                     usePlatformDefaultWidth = false
                 )
             ) {
-                state.dialogContent()
+                CompositionLocalProvider(
+                    LocalLevel provides 1,
+                    LocalPageBundle provides Activity.LocalPagesBundle.last(),
+                ) {
+                    state.content()
+                }
             }
         }
     }

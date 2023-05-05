@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 06/05/2023 00:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 05/05/2023 23:35
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -48,7 +48,7 @@ class BottomSheetAction constructor(
     }
 
     @OptIn(ExperimentalMaterialApi::class)
-    fun hide() {
+    fun close() {
         currentJob?.cancel()
         currentJob = coroutineScope.launch {
             state.bottomSheetState.hide()

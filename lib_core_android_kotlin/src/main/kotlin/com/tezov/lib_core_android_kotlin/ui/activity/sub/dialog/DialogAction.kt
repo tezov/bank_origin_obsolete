@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 23:33
+ *  Created by Tezov on 06/05/2023 00:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 21:40
+ *  Last modified 05/05/2023 23:49
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,6 @@
 
 package com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySubAction
 import kotlinx.coroutines.CoroutineScope
@@ -40,7 +39,7 @@ class DialogAction private constructor(
     fun show(content: @Composable () -> Unit) {
         currentJob?.cancel()
         currentJob = coroutineScope.launch {
-            state.dialogContent(content)
+            state.content = content
             state.show(true)
         }
     }
@@ -49,11 +48,10 @@ class DialogAction private constructor(
         show { Dialog.Card(content) }
     }
 
-    fun hide() {
+    fun close() {
         currentJob?.cancel()
         currentJob = coroutineScope.launch {
             state.show(false)
-            state.dialogContent { state.EmptyContent() } //todo wait animation done
         }
     }
 

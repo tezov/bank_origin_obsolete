@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 23:33
+ *  Created by Tezov on 06/05/2023 00:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 21:09
+ *  Last modified 05/05/2023 23:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,12 +34,12 @@ class DialogLoginAuthAction private constructor(
 
 
     fun onClickClose() {
-        action.hide()
+        action.close()
     }
 
 
     fun onClickConnect() {
-        action.hide()
+        action.close()
         navigationController.requestNavigate(Route.Account, this)
     }
 
