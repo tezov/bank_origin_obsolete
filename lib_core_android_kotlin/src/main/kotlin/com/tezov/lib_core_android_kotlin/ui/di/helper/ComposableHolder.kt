@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 20:30
+ *  Created by Tezov on 05/05/2023 23:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 21:09
+ *  Last modified 05/05/2023 22:11
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,14 +30,14 @@ abstract class ComposableHolder<T : Any> {
     fun get(): T = value ?: run {
         create().also {
             value = it
-            Log.d(">>:", "create ${this.javaClass.simpleName} ${this.hashCode().toStringHex()}::${value.hashCode().toStringHex()}")
+//            Log.d(">>:", "create ${this.javaClass.simpleName} ${this.hashCode().toStringHex()}::${value.hashCode().toStringHex()}")
             onCreated()
         }
 
     }
 
     fun dispose(): Boolean = null != value.also {
-         Log.d(">>:", "dispose ${this.javaClass.simpleName} ${this.hashCode().toStringHex()}::${value.hashCode().toStringHex()}")
+//         Log.d(">>:", "dispose ${this.javaClass.simpleName} ${this.hashCode().toStringHex()}::${value.hashCode().toStringHex()}")
         value = null
     }
 }

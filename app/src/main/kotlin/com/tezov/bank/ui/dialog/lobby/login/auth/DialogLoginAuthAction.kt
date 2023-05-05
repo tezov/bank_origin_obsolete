@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:08
+ *  Created by Tezov on 05/05/2023 23:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 17:49
+ *  Last modified 05/05/2023 21:09
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,6 +31,7 @@ class DialogLoginAuthAction private constructor(
             navigationController = navigationController,
         )
     }
+
 
     fun onClickClose() {
         action.hide()

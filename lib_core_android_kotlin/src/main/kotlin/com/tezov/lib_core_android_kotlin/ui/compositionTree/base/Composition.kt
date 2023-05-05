@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 21:39
+ *  Created by Tezov on 05/05/2023 23:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 20:50
+ *  Last modified 05/05/2023 23:32
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,6 +21,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.lifecycle.Lifecycle.Event
 import androidx.lifecycle.LifecycleEventObserver
+import com.tezov.lib_core_kotlin.type.primitive.IntTo.toStringHex
 
 interface Composition<S : CompositionState, A : CompositionAction<S>>{
 
@@ -31,7 +32,7 @@ interface Composition<S : CompositionState, A : CompositionAction<S>>{
     fun onHideEventEnabled() = true
 
     @Composable
-    fun onStopEventEnabled() = true
+    fun onDisposeEventEnabled() = true
 
     @Composable
     fun Composition<S, A>.lifeCycleAware(){
@@ -49,15 +50,18 @@ interface Composition<S : CompositionState, A : CompositionAction<S>>{
                 }
             }
             Event.ON_STOP -> {
-                if(onStopEventEnabled()){
+                if(onDisposeEventEnabled()){
                     onDispose()
                 }
             }
             else -> {}
         }
+        lifecycleEvent.value = Event.ON_ANY
         DisposableEffect(lifecycle) {
             val observer = LifecycleEventObserver { _, event ->
-                lifecycleEvent.value = event
+                if(event == Event.ON_RESUME || event == Event.ON_PAUSE || event == Event.ON_STOP){
+                    lifecycleEvent.value = event
+                }
             }
             lifecycle.addObserver(observer)
             onDispose {
@@ -69,19 +73,19 @@ interface Composition<S : CompositionState, A : CompositionAction<S>>{
     @CallSuper
     @Composable
     fun onShow(){
-
+//        Log.d(">>:", "onShow: ${this::class.simpleName} ${this.hashCode().toStringHex()}")
     }
 
     @CallSuper
     @Composable
     fun onHide(){
-
+//        Log.d(">>:", "onHide: ${this::class.simpleName} ${this.hashCode().toStringHex()}")
     }
 
     @CallSuper
     @Composable
     fun onDispose(){
-
+//        Log.d(">>:", "onDispose: ${this::class.simpleName} ${this.hashCode().toStringHex()}")
     }
 
 }

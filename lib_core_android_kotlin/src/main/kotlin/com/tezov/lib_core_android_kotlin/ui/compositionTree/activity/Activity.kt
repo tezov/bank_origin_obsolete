@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 20:30
+ *  Created by Tezov on 05/05/2023 23:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 20:27
+ *  Last modified 05/05/2023 23:22
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -45,8 +45,9 @@ interface Activity<S : ActivityState, A : ActivityAction<S>> : Composition<S, A>
 
         data class Bundle(
             val current: Activity<*, *>,
-            val pages: ArrayDeque<Page.Companion.Bundle> = ArrayDeque(),
-        )
+        ){
+            val pages by lazy{ ArrayDeque<Page.Companion.Bundle>() }
+        }
     }
 
     @Composable

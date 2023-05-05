@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 20:30
+ *  Created by Tezov on 05/05/2023 23:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 20:28
+ *  Last modified 05/05/2023 23:23
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -39,8 +39,9 @@ interface Page<S : PageState, A : PageAction<S>> : Composition<S, A>, DiAccessor
 
         data class Bundle(
             val current: Page<*, *>,
-            val modals: ArrayDeque<Modal.Companion.Bundle> = ArrayDeque()
-        )
+        ){
+            val modals by lazy{ ArrayDeque<Modal.Companion.Bundle>() }
+        }
     }
 
     @SuppressLint("RememberReturnType")
@@ -77,23 +78,17 @@ interface Page<S : PageState, A : PageAction<S>> : Composition<S, A>, DiAccessor
     @Composable
     fun Page<S, A>.content(innerPadding: PaddingValues)
 
-    @SuppressLint("UnrememberedMutableState")
     @Composable
-    fun onBackPressedDispatch() = onBackPressedDispatch(mutableStateOf(true))
-
-    @Composable
-    private fun onBackPressedDispatch(onBackPressedState: MutableState<Boolean>): Boolean {
+    private fun onBackPressedDispatch(onBackPressedState: MutableState<Boolean>) {
         if (!onBackPressedState.value) {
-            return false
+            return
         }
-        var handled = false
         if (LocalModalsBundle.lastOrNull()?.current?.onBackPressedDispatch().isFalseOrNull()
             && !this.handleOnBackPressed()
         ) {
-            handled = LocalActivity.current.onBackPressedDispatch()
+            LocalActivity.current.onBackPressedDispatch()
         }
         onBackPressedState.value = false
-        return handled
     }
 
     @Composable

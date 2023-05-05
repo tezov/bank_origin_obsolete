@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 20:30
+ *  Created by Tezov on 05/05/2023 23:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 18:14
+ *  Last modified 05/05/2023 22:55
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -383,14 +383,15 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         }
     }
 
-    @Composable
-    override fun onDispose() {
-        val accessor = DiAccessorAppUiDialog().with(key = this).contextLoginAuth()
-        val state = accessor.state()
-        if(state.diCanDispose){
-            accessor.dispose()
-            super.onDispose()
-        }
-    }
+
+//    @Composable
+//    override fun onDispose() {
+//        val accessor = DiAccessorAppUiDialog().with(key = this).contextLoginAuth()
+//        val state = accessor.state()
+//        if(state.diCanDispose){
+//            accessor.dispose()
+//            super.onDispose()
+//        }
+//    }
 
 }

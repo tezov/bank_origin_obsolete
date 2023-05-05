@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 27/04/2023 20:26
+ *  Created by Tezov on 05/05/2023 23:33
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 27/04/2023 19:59
+ *  Last modified 05/05/2023 21:40
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -48,7 +48,6 @@ class DialogAction private constructor(
     fun showOnCardWithOverlay(content: @Composable () -> Unit) {
         show { Dialog.Card(content) }
     }
-
 
     fun hide() {
         currentJob?.cancel()
