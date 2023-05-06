@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 06/05/2023 22:55
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:59
+ *  Last modified 06/05/2023 22:54
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -245,6 +245,7 @@ object CarouselCard {
     ) {
         Row(
             modifier = modifier
+                .fillMaxWidth()
                 .background(style.outfitFrame)
                 .padding(
                     top = MaterialTheme.dimensionsPaddingExtended.block.big.vertical,
@@ -315,6 +316,7 @@ object CarouselCard {
     ) {
         Column(
             modifier = modifier
+                .fillMaxWidth()
                 .background(style.outfitFrame)
                 .padding(MaterialTheme.dimensionsPaddingExtended.block.big)
         ) {
