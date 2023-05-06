@@ -44,7 +44,6 @@ buildscript {
                                 viewmodel                   : '2.6.1',
                                 livedata                    : '1.4.3',
                                 navigation                  : '2.5.3',
-                                navigation_accompanist      : '0.31.1-alpha',
                                 google_maps                 : "2.2.0",
                         ],
                         lib    : [
@@ -130,7 +129,6 @@ buildscript {
                         viewmodel                   : "androidx.lifecycle:lifecycle-viewmodel-compose:${version.dependencies.compose.viewmodel}",
                         livedata                    : "androidx.compose.runtime:runtime-livedata:${version.dependencies.compose.livedata}",
                         navigation                  : "androidx.navigation:navigation-compose:${version.dependencies.compose.navigation}",
-                        navigation_accompanist      : "com.google.accompanist:accompanist-navigation-animation:${version.dependencies.compose.navigation_accompanist}",
                         google_maps                 : "com.google.maps.android:maps-compose:${version.dependencies.compose.google_maps}",
                 ],
                 lib    : [

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 14:54
+ *  Created by Tezov on 06/05/2023 16:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 14:36
+ *  Last modified 06/05/2023 16:35
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -107,7 +107,6 @@ class NavigationController(
                                 popUpTo(from.value) {
                                     inclusive = true
                                 }
-                                launchSingleTop = true
                             }
                             showSnackBarNotImplemented = false
                         }
@@ -139,7 +138,6 @@ class NavigationController(
                                 popUpTo(from.value) {
                                     inclusive = true
                                 }
-                                launchSingleTop = true
                             }
                             showSnackBarNotImplemented = false
                         }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 06/05/2023 16:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 20:03
+ *  Last modified 06/05/2023 16:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,8 +16,8 @@ import androidx.compose.animation.*
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.*
 import androidx.navigation.*
-import com.google.accompanist.navigation.animation.AnimatedNavHost
-import com.google.accompanist.navigation.animation.composable
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import com.tezov.bank.navigation.NavigationController.Companion.Route
 import com.tezov.bank.ui.activity.MainActivity
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiActivity
@@ -32,7 +32,6 @@ import com.tezov.bank.ui.page.lobby.splash.PageSplash
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 
-@OptIn(ExperimentalAnimationApi::class)
 object NavigationGraph {
     private const val TRANSITION_DURATION_ms = 350
 
@@ -46,7 +45,7 @@ object NavigationGraph {
         val accessor = DiAccessorAppUiActivity().with(LocalActivity.current)
         val mainAction = accessor.contextMain().action()
 
-        AnimatedNavHost(
+        NavHost(
             navController = mainAction.navigationController.navHostController,
             startDestination = NavigationController.startRoute.value,
         ) {
@@ -101,33 +100,13 @@ object NavigationGraph {
     }
 
 
-    @OptIn(ExperimentalAnimationApi::class)
     private fun NavGraphBuilder.composableWithAnimation(
         route: Route,
         arguments: List<NamedNavArgument> = emptyList(),
-        content: @Composable AnimatedVisibilityScope.(NavBackStackEntry) -> Unit
+        content: @Composable (NavBackStackEntry) -> Unit
     ) = composable(
         route = route.value,
         arguments = arguments,
-
-        enterTransition = { EnterTransition.None },
-        exitTransition = { ExitTransition.None },
-        popEnterTransition = { EnterTransition.None },
-        popExitTransition = { ExitTransition.None },
-
-//        enterTransition = {
-//            fadeIn(animationSpec = tween(TRANSITION_DURATION_ms))
-//        },
-//        exitTransition = {
-//            fadeOut(animationSpec = tween(TRANSITION_DURATION_ms))
-//        },
-//        popEnterTransition = {
-//            fadeIn(animationSpec = tween(TRANSITION_DURATION_ms))
-//        },
-//        popExitTransition = {
-//            fadeOut(animationSpec = tween(TRANSITION_DURATION_ms))
-//        },
-
         content = content
     )
 

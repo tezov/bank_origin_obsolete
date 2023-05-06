@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 15:39
+ *  Created by Tezov on 06/05/2023 16:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 15:30
+ *  Last modified 06/05/2023 16:33
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.DialogNavigator
-import com.google.accompanist.navigation.animation.AnimatedComposeNavigator
+import androidx.navigation.compose.rememberNavController
 import com.tezov.lib_core_android_kotlin.navigation.RouteManager.Route
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.SnackbarAction
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.CompositionAction
@@ -37,12 +37,10 @@ class NavigationController constructor(
 ) {
 
     companion object {
-        @OptIn(ExperimentalAnimationApi::class)
         @Composable
         fun create(
             snackbarAction: SnackbarAction,
             navHostController: NavHostController = NavHostController(LocalContext.current).apply {
-                navigatorProvider.addNavigator(AnimatedComposeNavigator())
                 navigatorProvider.addNavigator(ComposeNavigator())
                 navigatorProvider.addNavigator(DialogNavigator())
             }
