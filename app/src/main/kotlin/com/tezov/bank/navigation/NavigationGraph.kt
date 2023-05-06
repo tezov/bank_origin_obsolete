@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 22:22
+ *  Created by Tezov on 06/05/2023 22:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 22:04
+ *  Last modified 06/05/2023 22:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,20 +12,13 @@
 
 package com.tezov.bank.navigation
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.navigation.NamedNavArgument
 import androidx.navigation.NavBackStackEntry
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.dialog
 import androidx.navigation.navigation
 import com.tezov.bank.navigation.NavigationController.Route
 import com.tezov.bank.ui.activity.MainActivity
@@ -60,47 +53,47 @@ object NavigationGraph {
         ) {
             navigation(route = Route.NavLobby.value, startDestination = NavigationController.startLobbyRoute.value) {
                 composable(Route.Splash) {
-                    PageSplash(PaddingValues())
+                    PageSplash.invokeContent(PaddingValues())
                 }
                 composable(Route.Login) {
                     (LocalActivity.current as MainActivity).empty {
-                        PageLogin(innerPadding = it)
+                        PageLogin.invokeContent(innerPadding = it)
                     }
                 }
                 composable(Route.HelpAndService) {
                     (LocalActivity.current as MainActivity).empty {
-                        PageHelpAndService(innerPadding = it)
+                        PageHelpAndService.invokeContent(innerPadding = it)
                     }
                 }
             }
             navigation(route = Route.NavAuth.value, startDestination = NavigationController.startAuthRoute.value) {
                 composable(Route.Account) {
                     (LocalActivity.current as MainActivity).withBottomNavigationBar {
-                        PageAccount(innerPadding = it)
+                        PageAccount.invokeContent(innerPadding = it)
                     }
                 }
 
                 composable(Route.Discover) {
                     (LocalActivity.current as MainActivity).withBottomNavigationBar {
-                        PageDiscover(innerPadding = it)
+                        PageDiscover.invokeContent(innerPadding = it)
                     }
                 }
 
                 composable(Route.Help) {
                     (LocalActivity.current as MainActivity).withBottomNavigationBar {
-                        PageHelp(innerPadding = it)
+                        PageHelp.invokeContent(innerPadding = it)
                     }
                 }
 
                 composable(Route.Profile) {
                     (LocalActivity.current as MainActivity).withBottomNavigationBar {
-                        PageProfile(innerPadding = it)
+                        PageProfile.invokeContent(innerPadding = it)
                     }
                 }
 
                 composable(Route.Payment) {
                     (LocalActivity.current as MainActivity).withBottomNavigationBar {
-                        PagePayment(innerPadding = it)
+                        PagePayment.invokeContent(innerPadding = it)
                     }
                 }
             }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 22:22
+ *  Created by Tezov on 06/05/2023 22:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 22:21
+ *  Last modified 06/05/2023 22:33
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,10 @@
 
 package com.tezov.bank.navigation
 
+import android.os.Bundle
+import android.util.Log
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import com.tezov.lib_core_android_kotlin.navigation.RouteManager
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigationAction
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarAction
@@ -43,7 +47,7 @@ class NavigationController(
             child = setOf(Account, Discover, Payment, Help, Profile)
         )
 
-        val startNavRoute = NavAuth
+        val startNavRoute = NavLobby
         val startLobbyRoute = Splash
         val startAuthRoute = Account
     }

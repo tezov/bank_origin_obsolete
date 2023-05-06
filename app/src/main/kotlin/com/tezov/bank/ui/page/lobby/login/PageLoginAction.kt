@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 22:22
+ *  Created by Tezov on 06/05/2023 22:44
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 22:01
+ *  Last modified 06/05/2023 22:30
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -43,7 +43,7 @@ class PageLoginAction private constructor(
 
     fun onClickConnect() {
         dialogAction.show {
-            DialogLoginAuth()
+            DialogLoginAuth.invokeContent()
         }
     }
 
