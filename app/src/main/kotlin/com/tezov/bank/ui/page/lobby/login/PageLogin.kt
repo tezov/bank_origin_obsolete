@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 14:54
+ *  Created by Tezov on 06/05/2023 15:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 14:01
+ *  Last modified 06/05/2023 15:11
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,7 +22,6 @@ import androidx.compose.ui.res.stringArrayResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.DpOffset
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
@@ -155,7 +154,6 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
         }
     }
 
-    @OptIn(ExperimentalPagerApi::class)
     @Composable
     private fun ColumnScope.ContentBody(
         nameState: State<String>

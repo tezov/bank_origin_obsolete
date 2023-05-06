@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 13:31
+ *  Created by Tezov on 06/05/2023 15:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 13:24
+ *  Last modified 06/05/2023 15:10
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -42,7 +42,7 @@ class BottomSheetState private constructor(
                 initialValue = ModalBottomSheetValue.Hidden,
                 animationSpec = SwipeableDefaults.AnimationSpec,
                 isSkipHalfExpanded = false,
-                confirmStateChange = { true }
+                confirmValueChange = { true }
             ),
             showState: MutableState<Boolean> = mutableStateOf(false),
             sheetContentUpdated: MutableState<Int> = mutableStateOf(0)

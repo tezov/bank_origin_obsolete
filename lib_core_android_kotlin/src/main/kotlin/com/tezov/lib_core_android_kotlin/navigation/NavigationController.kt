@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 14:54
+ *  Created by Tezov on 06/05/2023 15:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 14:41
+ *  Last modified 06/05/2023 15:30
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -84,8 +84,7 @@ class NavigationController constructor(
 
     fun currentRoute() = routes.find(navHostController.currentBackStackEntry?.destination?.route)
 
-    fun isLastRoute() =
-        navHostController.backQueue.sumOf { (if (it.destination.route != null) 1 else 0).toInt() } <= 1
+    fun isLastRoute() = navHostController.previousBackStackEntry == null
 
     fun navigate(to: Route, builder: NavOptionsBuilder.() -> Unit) {
         navHostController.navigate(route = to.value, builder = builder)

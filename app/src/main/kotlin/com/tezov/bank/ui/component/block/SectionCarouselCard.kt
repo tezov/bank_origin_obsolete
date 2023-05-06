@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 06/05/2023 15:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:59
+ *  Last modified 06/05/2023 15:11
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,7 +21,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.google.accompanist.pager.PagerScope
 import com.tezov.bank.ui.component.element.CarouselCard
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
@@ -107,7 +106,6 @@ object SectionCarouselCard {
         val cards: List<CarouselCard.Data>
     )
 
-    @OptIn(ExperimentalPagerApi::class)
     @Composable
     operator fun invoke(
         modifier: Modifier = Modifier,

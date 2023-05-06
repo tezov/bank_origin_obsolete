@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 14:54
+ *  Created by Tezov on 06/05/2023 15:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 14:43
+ *  Last modified 06/05/2023 15:38
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,6 +13,7 @@
 package com.tezov.lib_core_android_kotlin.ui.compositionTree.modal
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.activity.compose.BackHandler
 import androidx.annotation.CallSuper
 import androidx.compose.runtime.*
@@ -56,18 +57,11 @@ interface Modal<S : ModalState, A : ModalAction<S>> : Composition<S, A>, DiAcces
                 Activity.LocalLevel provides 2,
                 LocalModalBundle provides bundle,
             ) {
-                val onBackPressedState = remember {
-                    mutableStateOf(false)
-                }
-                BackHandler(true) {
-                    onBackPressedState.value = true
-                }
                 content()
             }
         }
         DisposableEffect(Unit) {
             onDispose {
-
                 modals.find { it.current == this@Modal }?.also { modals.remove(it) }
             }
         }

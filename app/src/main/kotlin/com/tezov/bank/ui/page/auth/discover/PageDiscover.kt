@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 06/05/2023 15:39
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 20:03
+ *  Last modified 06/05/2023 15:12
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,7 +19,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import com.google.accompanist.pager.ExperimentalPagerApi
 import com.tezov.bank.ui.component.block.*
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
@@ -32,7 +31,6 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
-@OptIn(ExperimentalPagerApi::class)
 object PageDiscover : Page<PageDiscoverState, PageDiscoverAction> {
 
     @Composable
