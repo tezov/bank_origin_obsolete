@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 15:39
+ *  Created by Tezov on 06/05/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 15:11
+ *  Last modified 06/05/2023 15:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.block
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
@@ -22,11 +23,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.*
+import androidx.compose.foundation.pager.*
+import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.tezov.lib_core_android_kotlin.ui.modifier.fillMaxHeightRemembered
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnTrue
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
@@ -111,12 +112,13 @@ object HorizontalPager {
             )
         }
 
+        @OptIn(ExperimentalFoundationApi::class)
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
             style: Style,
             itemSelected: Int = 0,
-            items: List<@Composable PagerScope.() -> Unit>,
+            items: List<@Composable () -> Unit>,
             onItemChange: ((index: Int) -> Unit)? = null
         ) {
             val pagerState = rememberPagerState()
@@ -128,16 +130,17 @@ object HorizontalPager {
                         .thenOnTrue(style.heightItemToHighest){
                             fillMaxHeightRemembered()
                         },
-                    count = items.size,
+                    pageCount = items.size,
                     state = pagerState,
                     contentPadding = style.paddingContent,
-                    itemSpacing = style.spacingItem,
+                    pageSpacing = style.spacingItem,
                 ) { index ->
                     items[index]()
                 }
                 style.outfitShapeIndicator.let {
                     HorizontalPagerIndicator(
                         pagerState = pagerState,
+                        pageCount = items.size,
                         modifier = Modifier
                             .padding(top = style.paddingTopIndicator)
                             .align(Alignment.CenterHorizontally),
@@ -230,7 +233,7 @@ object HorizontalPager {
             modifier: Modifier = Modifier,
             style: Style,
             itemSelected: Int = 0,
-            items: List<@Composable PagerScope.() -> Unit>,
+            items: List<@Composable () -> Unit>,
             onItemChange: ((index: Int) -> Unit)? = null
         ) {
             Page(modifier, style, itemSelected, items.map { content ->

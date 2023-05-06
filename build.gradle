@@ -37,6 +37,7 @@ buildscript {
                                 material_icons_core         : "1.1.1",
                                 material_icons_extended     : "1.1.1",
                                 foundation                  : '1.5.0-alpha03',
+                                accompanist_pager_indicators: '0.31.1-alpha',
                                 animation                   : '1.5.0-alpha03',
                                 activity                    : '1.7.1',
                                 constraintlayout            : "1.0.1",
@@ -44,8 +45,6 @@ buildscript {
                                 livedata                    : '1.4.3',
                                 navigation                  : '2.5.3',
                                 navigation_accompanist      : '0.31.1-alpha',
-                                accompanist_pager           : '0.31.1-alpha',
-                                accompanist_pager_indicators: '0.31.1-alpha',
                                 google_maps                 : "2.2.0",
                         ],
                         lib    : [
@@ -124,6 +123,7 @@ buildscript {
                         material_icons_core         : "androidx.compose.material:material-icons-core:${version.dependencies.compose.material_icons_core}",
                         material_icons_extended     : "androidx.compose.material:material-icons-extended:${version.dependencies.compose.material_icons_extended}",
                         foundation                  : "androidx.compose.foundation:foundation:${version.dependencies.compose.foundation}",
+                        accompanist_pager_indicators: "com.google.accompanist:accompanist-pager-indicators:${version.dependencies.compose.accompanist_pager_indicators}",
                         animation                   : "androidx.compose.animation:animation:${version.dependencies.compose.animation}",
                         activity                    : "androidx.activity:activity-compose:${version.dependencies.compose.activity}",
                         constraintlayout            : "androidx.constraintlayout:constraintlayout-compose:${version.dependencies.compose.constraintlayout}",
@@ -131,8 +131,6 @@ buildscript {
                         livedata                    : "androidx.compose.runtime:runtime-livedata:${version.dependencies.compose.livedata}",
                         navigation                  : "androidx.navigation:navigation-compose:${version.dependencies.compose.navigation}",
                         navigation_accompanist      : "com.google.accompanist:accompanist-navigation-animation:${version.dependencies.compose.navigation_accompanist}",
-                        accompanist_pager           : "com.google.accompanist:accompanist-pager:${version.dependencies.compose.accompanist_pager}",
-                        accompanist_pager_indicators: "com.google.accompanist:accompanist-pager-indicators:${version.dependencies.compose.accompanist_pager_indicators}",
                         google_maps                 : "com.google.maps.android:maps-compose:${version.dependencies.compose.google_maps}",
                 ],
                 lib    : [

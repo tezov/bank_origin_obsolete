@@ -76,6 +76,7 @@ android {
             }
         }
     }
+    namespace 'com.tezov.lib_core_android_kotlin'
 }
 
 dependencies {
@@ -96,6 +97,7 @@ dependencies {
     api dependencies_lib.compose.runtime
     api dependencies_lib.compose.material
     api dependencies_lib.compose.foundation
+    api dependencies_lib.compose.accompanist_pager_indicators
     api dependencies_lib.compose.animation
     api dependencies_lib.compose.activity
     api dependencies_lib.compose.constraintlayout
@@ -109,7 +111,6 @@ dependencies {
     kapt dependencies_lib.lib.dagger_kapt
 
     implementation dependencies_lib.lib.webkit
-    implementation dependencies_lib.compose.accompanist_pager
-    implementation dependencies_lib.compose.accompanist_pager_indicators
+
 
 }

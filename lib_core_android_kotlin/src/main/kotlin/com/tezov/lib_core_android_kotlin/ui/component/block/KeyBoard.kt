@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 06/05/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:59
+ *  Last modified 06/05/2023 16:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -164,7 +164,7 @@ object KeyBoard {
             selector: Any? = null,
         ) {
             Layout(
-                measurePolicy = { measurables, constraints ->
+                measurePolicy = { _, constraints ->
                     with(constraints) {
                         val digitSize = maxWidth / cubes.columnCount
                         val maxHeight = digitSize * cubes.rowCount

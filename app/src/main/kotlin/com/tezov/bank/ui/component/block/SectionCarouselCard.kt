@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 15:39
+ *  Created by Tezov on 06/05/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 15:11
+ *  Last modified 06/05/2023 15:56
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -154,7 +154,7 @@ object SectionCarouselCard {
                     },
             ) {
                 val cards = remember(data.cards) {
-                    (ArrayList<@Composable PagerScope.() -> Unit>()).apply {
+                    (ArrayList<@Composable () -> Unit>()).apply {
                         data.cards.forEachIndexed { index, card ->
                             add {
                                 CarouselCard(

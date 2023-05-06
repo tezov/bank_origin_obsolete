@@ -20,7 +20,6 @@ android {
         minSdk defaultMinCompileSdkVersion
         targetSdk defaultTargetCompileSdkVersion
         testInstrumentationRunner "com.tezov.bank.jUnit.JUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
     }
     buildFeatures {
         compose true
@@ -93,6 +92,7 @@ android {
         checkReleaseBuilds false
 //        disable 'InvalidPackage'
     }
+    namespace 'com.tezov.bank'
 }
 
 dependencies {
@@ -101,8 +101,6 @@ dependencies {
 
     implementation dependencies_lib.lib.threetenabp
     implementation dependencies_lib.lib.webkit
-    implementation dependencies_lib.compose.accompanist_pager
-    implementation dependencies_lib.compose.accompanist_pager_indicators
 
     implementation dependencies_lib.lib.dagger
     kapt dependencies_lib.lib.dagger_kapt

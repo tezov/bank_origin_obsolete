@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 21:06
+ *  Created by Tezov on 06/05/2023 16:08
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 20:44
+ *  Last modified 06/05/2023 16:03
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -115,6 +115,7 @@ object DropDownMenu {
                     }
                 ){
                     Icon.StateColor(
+                        modifier = modifierIcon,
                         style = style.iconStyle,
                         painter = painter,
                         description = description,
