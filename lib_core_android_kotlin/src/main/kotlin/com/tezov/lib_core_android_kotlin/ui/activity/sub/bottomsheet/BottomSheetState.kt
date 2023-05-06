@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 15:39
+ *  Created by Tezov on 06/05/2023 22:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 15:10
+ *  Last modified 06/05/2023 22:20
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,7 +23,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalLevel
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPagesBundle
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySubState
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPageBundle
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsResource
 
@@ -67,12 +69,26 @@ class BottomSheetState private constructor(
         get() = (stateUpdated.value > 0) && field
         private set
 
-    var content: (@Composable () -> Unit) = { EmptyContent() }
+    private var _content: (@Composable () -> Unit) = { EmptyContent() }
+
+    @Composable
+    fun content() = _content()
+
+    fun content(value : @Composable () -> Unit){
+        _content = {
+            CompositionLocalProvider(
+                LocalLevel provides 1,
+                LocalPageBundle provides LocalPagesBundle.last(),
+            ) {
+                value()
+            }
+        }
+    }
 
     @OptIn(ExperimentalMaterialApi::class)
     suspend fun show(visible: Boolean) {
         if(!visible){
-            content = { EmptyContent() }
+            _content = { EmptyContent() }
         }
         isVisible = visible
         stateUpdated.value++

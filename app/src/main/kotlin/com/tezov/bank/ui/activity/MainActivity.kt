@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 26/04/2023 21:07
+ *  Created by Tezov on 06/05/2023 22:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 26/04/2023 20:03
+ *  Last modified 06/05/2023 21:16
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -95,8 +95,8 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                 },
                 content = content
             )
-            Dialog()
         }
+        Dialog()
     }
 
     @Composable
@@ -126,8 +126,8 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                 },
                 content = content
             )
-            Dialog()
         }
+        Dialog()
     }
 
     @Composable
@@ -136,7 +136,6 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
     ) {
         val accessor = DiAccessorAppUiActivity().with(key = this)
         val mainState = accessor.contextMain().state()
-
         BottomSheet {
             Scaffold(
                 modifier = Modifier.fillMaxSize(),
@@ -152,8 +151,8 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                 },
                 content = content
             )
-            Dialog()
         }
+        Dialog()
     }
 
     @Composable
@@ -173,8 +172,8 @@ class MainActivity : ActivityBase<MainActivityState, MainActivityAction>() {
                 },
                 content = content
             )
-            Dialog()
         }
+        Dialog()
     }
 
 

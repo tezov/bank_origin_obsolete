@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 13:31
+ *  Created by Tezov on 06/05/2023 22:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 13:24
+ *  Last modified 06/05/2023 22:21
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,7 +40,7 @@ class BottomSheetAction constructor(
     fun show(content: @Composable () -> Unit) {
         currentJob?.cancel()
         currentJob = coroutineScope.launch {
-            state.content = content
+            state.content(value = content)
             state.show(true)
         }
     }

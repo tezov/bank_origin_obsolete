@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 06/05/2023 22:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:52
+ *  Last modified 06/05/2023 21:59
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,18 +15,44 @@ package com.tezov.lib_core_android_kotlin.navigation
 
 class RouteManager {
 
-    abstract class Route(val value: String)
+    abstract class Route(val value: String, parent:Route ?= null ){
+        var parent:Route ?= parent
+            internal set
+    }
+    abstract class Routes(value: String, val child:Set<Route>):Route(value){
+        init {
+            child.forEach { it.parent = this }
+        }
+    }
 
     object Back : Route("back")
     object NotImplemented : Route("not_implemented")
 
-    private val _items = mutableSetOf(
+    private val _routes:MutableSet<Route> = mutableSetOf(
         Back,
         NotImplemented,
     )
-    val items get():Set<Route> = _items
+    val routes get():Set<Route> = _routes
 
-    fun add(route: Route) = _items.add(route)
-    fun add(routes: Collection<Route>) = _items.addAll(routes)
-    fun find(route: String?) = _items.find { it.value == route }
+    fun add(route: Route) = _routes.add(route)
+    fun add(routes: Collection<Route>) = _routes.addAll(routes)
+
+    fun find(route: String?) = find(route, _routes)
+
+    private fun find(route: String?, routes:Set<Route>):Route? {
+        val iterator = routes.iterator()
+        while (iterator.hasNext()){
+            val next = iterator.next()
+            if(route == next.value){
+                return next
+            }
+            if(next is Routes){
+                find(route, next.child)?.let {
+                    return it
+                }
+            }
+        }
+        return null
+
+    }
 }

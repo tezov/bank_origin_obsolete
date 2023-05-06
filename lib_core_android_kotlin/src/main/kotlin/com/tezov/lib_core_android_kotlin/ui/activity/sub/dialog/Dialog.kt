@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 13:31
+ *  Created by Tezov on 06/05/2023 22:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 13:25
+ *  Last modified 06/05/2023 22:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -50,15 +50,11 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
             Dialog(
                 onDismissRequest = { state.show(false) },
                 properties = DialogProperties(
-                    usePlatformDefaultWidth = false
+                    usePlatformDefaultWidth = false,
+                    decorFitsSystemWindows = false,
                 )
             ) {
-                CompositionLocalProvider(
-                    LocalLevel provides 1,
-                    LocalPageBundle provides LocalPagesBundle.last(),
-                ) {
-                    state.content()
-                }
+                state.content()
             }
         }
     }

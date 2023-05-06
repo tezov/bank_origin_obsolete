@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 06/05/2023 22:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 06/05/2023 22:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,14 +13,16 @@
 package com.tezov.bank.navigation.bottom_navigation
 
 import com.tezov.bank.R
-import com.tezov.bank.navigation.NavigationController.Companion.Route
+import com.tezov.bank.navigation.NavigationController
+import com.tezov.bank.navigation.NavigationController.*
+import com.tezov.lib_core_android_kotlin.navigation.RouteManager
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigationItemData
 
 sealed class BottomNavigationItems(
     titleResourceId: Int,
     iconActive: Int,
     iconInactive: Int,
-    route: Route
+    route: RouteManager.Route
 ) :
     BottomNavigationItemData(titleResourceId, iconActive, iconInactive, route) {
     companion object {

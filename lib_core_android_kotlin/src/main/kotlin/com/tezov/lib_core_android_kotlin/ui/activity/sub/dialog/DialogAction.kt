@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 00:08
+ *  Created by Tezov on 06/05/2023 22:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 23:49
+ *  Last modified 06/05/2023 22:16
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -39,7 +39,7 @@ class DialogAction private constructor(
     fun show(content: @Composable () -> Unit) {
         currentJob?.cancel()
         currentJob = coroutineScope.launch {
-            state.content = content
+            state.content(value = content)
             state.show(true)
         }
     }

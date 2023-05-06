@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 16:45
+ *  Created by Tezov on 06/05/2023 22:22
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 16:45
+ *  Last modified 06/05/2023 22:21
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,45 +21,38 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageAction
 class NavigationController(
     val navigationController: com.tezov.lib_core_android_kotlin.navigation.NavigationController
 ) {
-    companion object {
-        sealed class Route(value: String) : RouteManager.Route(value) {
+    companion object Route {
 
-            //lobby
-            object NavLobby : Route("navLobby")
-            object Splash : Route("splash")
-            object Login : Route("login")
-            object HelpAndService : Route("help_and_service")
+        //lobby
+        object Splash : RouteManager.Route("splash")
+        object Login : RouteManager.Route("login")
+        object HelpAndService : RouteManager.Route("help_and_service")
+        object NavLobby : RouteManager.Routes(
+            "navLobby",
+            child = setOf(Splash, Login, HelpAndService)
+        )
 
-            //auth
-            object NavAuth : Route("navAuth")
-            object Account : Route("account")
-            object Discover : Route("discover")
-            object Payment : Route("payment")
-            object Help : Route("help")
-            object Profile : Route("Profile")
+        //auth
+        object Account : RouteManager.Route("account")
+        object Discover : RouteManager.Route("discover")
+        object Payment : RouteManager.Route("payment")
+        object Help : RouteManager.Route("help")
+        object Profile : RouteManager.Route("Profile")
+        object NavAuth : RouteManager.Routes(
+            "navAuth",
+            child = setOf(Account, Discover, Payment, Help, Profile)
+        )
 
-            companion object {
-                val items
-                    get():Set<RouteManager.Route> = setOf(
-                        Splash,
-                        Login,
-                        HelpAndService,
-                        Discover,
-                        Payment,
-                        Help,
-                        Profile,
-                        Account,
-                    )
-            }
-        }
-
-        val startRoute = Route.NavLobby
+        val startNavRoute = NavAuth
+        val startLobbyRoute = Splash
+        val startAuthRoute = Account
     }
 
     val navHostController get() = navigationController.navHostController
 
     init {
-        navigationController.routes.add(Route.items)
+        navigationController.routes.add(NavLobby)
+        navigationController.routes.add(NavAuth)
         navigationController.addRequestManager(
             mapOf(
                 TopAppBarAction::class to this::navigateFromTopAppBar,
