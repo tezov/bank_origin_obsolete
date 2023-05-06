@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 16:36
+ *  Created by Tezov on 06/05/2023 16:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 16:32
+ *  Last modified 06/05/2023 16:43
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -49,58 +49,57 @@ object NavigationGraph {
             navController = mainAction.navigationController.navHostController,
             startDestination = NavigationController.startRoute.value,
         ) {
-
-            composableWithAnimation(Route.Splash) {
-                PageSplash(PaddingValues())
-            }
-
-            composableWithAnimation(Route.Login) {
-                (LocalActivity.current as MainActivity).empty {
-                    PageLogin(innerPadding = it)
+            navigation(startDestination  = Route.Splash.value, route = Route.NavLobby.value){
+                composable(Route.Splash) {
+                    PageSplash(PaddingValues())
+                }
+                composable(Route.Login) {
+                    (LocalActivity.current as MainActivity).empty {
+                        PageLogin(innerPadding = it)
+                    }
+                }
+                composable(Route.HelpAndService) {
+                    (LocalActivity.current as MainActivity).empty {
+                        PageHelpAndService(innerPadding = it)
+                    }
                 }
             }
+            navigation(startDestination  = Route.Account.value, route = Route.NavAuth.value){
+                composable(Route.Account) {
+                    (LocalActivity.current as MainActivity).withBottomNavigationBar {
+                        PageAccount(innerPadding = it)
+                    }
+                }
 
-            composableWithAnimation(Route.HelpAndService) {
-                (LocalActivity.current as MainActivity).empty {
-                    PageHelpAndService(innerPadding = it)
+                composable(Route.Discover) {
+                    (LocalActivity.current as MainActivity).withBottomNavigationBar {
+                        PageDiscover(innerPadding = it)
+                    }
+                }
+
+                composable(Route.Help) {
+                    (LocalActivity.current as MainActivity).withBottomNavigationBar {
+                        PageHelp(innerPadding = it)
+                    }
+                }
+
+                composable(Route.Profile) {
+                    (LocalActivity.current as MainActivity).withBottomNavigationBar {
+                        PageProfile(innerPadding = it)
+                    }
+                }
+
+                composable(Route.Payment) {
+                    (LocalActivity.current as MainActivity).withBottomNavigationBar {
+                        PagePayment(innerPadding = it)
+                    }
                 }
             }
-
-            composableWithAnimation(Route.Account) {
-                (LocalActivity.current as MainActivity).withBottomNavigationBar {
-                    PageAccount(innerPadding = it)
-                }
-            }
-
-            composableWithAnimation(Route.Discover) {
-                (LocalActivity.current as MainActivity).withBottomNavigationBar {
-                    PageDiscover(innerPadding = it)
-                }
-            }
-
-            composableWithAnimation(Route.Help) {
-                (LocalActivity.current as MainActivity).withBottomNavigationBar {
-                    PageHelp(innerPadding = it)
-                }
-            }
-
-            composableWithAnimation(Route.Profile) {
-                (LocalActivity.current as MainActivity).withBottomNavigationBar {
-                    PageProfile(innerPadding = it)
-                }
-            }
-
-            composableWithAnimation(Route.Payment) {
-                (LocalActivity.current as MainActivity).withBottomNavigationBar {
-                    PagePayment(innerPadding = it)
-                }
-            }
-
         }
     }
 
 
-    private fun NavGraphBuilder.composableWithAnimation(
+    private fun NavGraphBuilder.composable(
         route: Route,
         arguments: List<NamedNavArgument> = emptyList(),
         content: @Composable (NavBackStackEntry) -> Unit

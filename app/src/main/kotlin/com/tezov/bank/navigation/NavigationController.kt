@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 16:36
+ *  Created by Tezov on 06/05/2023 16:45
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 16:35
+ *  Last modified 06/05/2023 16:45
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,11 +25,13 @@ class NavigationController(
         sealed class Route(value: String) : RouteManager.Route(value) {
 
             //lobby
+            object NavLobby : Route("navLobby")
             object Splash : Route("splash")
             object Login : Route("login")
             object HelpAndService : Route("help_and_service")
 
             //auth
+            object NavAuth : Route("navAuth")
             object Account : Route("account")
             object Discover : Route("discover")
             object Payment : Route("payment")
@@ -51,7 +53,7 @@ class NavigationController(
             }
         }
 
-        val startRoute = Route.Splash
+        val startRoute = Route.NavLobby
     }
 
     val navHostController get() = navigationController.navHostController
