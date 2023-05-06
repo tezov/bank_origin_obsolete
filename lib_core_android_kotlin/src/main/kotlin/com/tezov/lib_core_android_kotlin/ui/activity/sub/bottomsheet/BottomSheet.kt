@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 20:30
+ *  Created by Tezov on 06/05/2023 13:31
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 20:20
+ *  Last modified 06/05/2023 13:17
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -107,7 +107,7 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
                         LocalLevel provides 1,
                         LocalPageBundle provides LocalPagesBundle.last(),
                     ) {
-                        state.sheetContent()
+                        state.content
                     }
                 }
             },

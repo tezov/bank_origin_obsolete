@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 20:30
+ *  Created by Tezov on 06/05/2023 13:31
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 20:24
+ *  Last modified 06/05/2023 13:24
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,8 +24,6 @@ import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalLevel
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySubState
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPage
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPageBundle
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsResource
 
@@ -33,9 +31,8 @@ import com.tezov.lib_core_android_kotlin.ui.theme.theme.colorsResource
 class BottomSheetState private constructor(
     val bottomSheetState: ModalBottomSheetState,
     private val showState: MutableState<Boolean>,
-    private val sheetContentUpdated: MutableState<Int>
+    private val stateUpdated: MutableState<Int>
 ) : ActivitySubState {
-
 
     companion object {
         @OptIn(ExperimentalMaterialApi::class)
@@ -52,7 +49,7 @@ class BottomSheetState private constructor(
         ) = BottomSheetState(
             bottomSheetState = bottomSheetState,
             showState = showState,
-            sheetContentUpdated = sheetContentUpdated,
+            stateUpdated = sheetContentUpdated,
         )
     }
 
@@ -66,33 +63,25 @@ class BottomSheetState private constructor(
         )
     }
 
-    private var _sheetContent: (@Composable () -> Unit) = {
-        //hack content bottomsheet can't be null even if not showing
-        EmptyContent()
-    }
+    var isVisible = false
+        get() = (stateUpdated.value > 0) && field
+        private set
 
-    fun isVisible() = showState.value
-    fun show(visible: Boolean) {
-        showState.value = visible
-    }
+    var content: (@Composable () -> Unit) = { EmptyContent() }
 
-    @Composable
-    internal fun sheetContent() {
-        if (isVisible() && sheetContentUpdated.value >= 0) {
-            CompositionLocalProvider(
-                LocalLevel provides 1,
-                LocalPageBundle provides Activity.LocalPagesBundle.last(),
-            ) {
-                _sheetContent()
-            }
-        } else {
-            EmptyContent()
+    @OptIn(ExperimentalMaterialApi::class)
+    suspend fun show(visible: Boolean) {
+        if(!visible){
+            content = { EmptyContent() }
         }
-    }
-
-    internal fun sheetContent(content: @Composable () -> Unit) {
-        _sheetContent = content
-        sheetContentUpdated.value++
+        isVisible = visible
+        stateUpdated.value++
+        if(visible){
+            bottomSheetState.show()
+        }
+        else{
+            bottomSheetState.hide()
+        }
     }
 
 }

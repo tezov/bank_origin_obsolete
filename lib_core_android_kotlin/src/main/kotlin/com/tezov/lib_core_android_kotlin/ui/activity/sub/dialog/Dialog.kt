@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 00:08
+ *  Created by Tezov on 06/05/2023 13:31
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 00:05
+ *  Last modified 06/05/2023 13:25
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -55,7 +55,7 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
             ) {
                 CompositionLocalProvider(
                     LocalLevel provides 1,
-                    LocalPageBundle provides Activity.LocalPagesBundle.last(),
+                    LocalPageBundle provides LocalPagesBundle.last(),
                 ) {
                     state.content()
                 }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 00:08
+ *  Created by Tezov on 06/05/2023 13:31
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 00:07
+ *  Last modified 06/05/2023 13:18
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -30,10 +30,6 @@ class DialogState private constructor(
     val stateUpdated: MutableState<Int>,
 ) : ActivitySubState {
 
-    var isVisible = false
-        get() = (stateUpdated.value > 0) && field
-        private set
-
     companion object {
         @Composable
         fun create(
@@ -42,6 +38,10 @@ class DialogState private constructor(
             stateUpdated = dialogContentUpdated,
         )
     }
+
+    var isVisible = false
+        get() = (stateUpdated.value > 0) && field
+        private set
 
     var content: (@Composable () -> Unit) = { }
 
