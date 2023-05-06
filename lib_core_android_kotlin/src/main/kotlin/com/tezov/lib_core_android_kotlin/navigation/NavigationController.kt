@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 21:39
+ *  Created by Tezov on 06/05/2023 14:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 20:10
+ *  Last modified 06/05/2023 14:41
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,24 +12,20 @@
 
 package com.tezov.lib_core_android_kotlin.navigation
 
+import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.navigation.NavHostController
 import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.compose.ComposeNavigator
 import androidx.navigation.compose.DialogNavigator
 import com.google.accompanist.navigation.animation.AnimatedComposeNavigator
-import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import com.tezov.lib_core_android_kotlin.navigation.RouteManager.Route
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.SnackbarAction
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.CompositionAction
 import com.tezov.lib_core_kotlin.extension.ExtensionBoolean.on
 import com.tezov.lib_core_kotlin.type.collection.ListEntry
-import com.tezov.lib_core_kotlin.util.Event
 import kotlinx.coroutines.*
 import kotlin.reflect.KClass
 import kotlin.reflect.full.isSubclassOf
@@ -56,8 +52,21 @@ class NavigationController constructor(
         )
     }
 
-    private val actionControllers: ListEntry<KClass<out CompositionAction<*>>, (from: Route?, to: Route) -> Unit> =
+    private val requestManagers: ListEntry<KClass<out CompositionAction<*>>, (from: Route?, to: Route) -> Unit> =
         ListEntry()
+
+    fun addRequestManager(
+        klass: KClass<out CompositionAction<*>>,
+        manager: (from: Route?, to: Route) -> Unit
+    ) {
+        requestManagers.add(klass, manager)
+    }
+
+    fun addRequestManager(manager: Map<KClass<out CompositionAction<*>>, ((from: Route?, to: Route) -> Unit)>) {
+        manager.forEach { (klass, action) ->
+            requestManagers.add(klass, action)
+        }
+    }
 
     @Composable
     fun onBackPressedDispatch() = handleOnBackPressed()
@@ -71,57 +80,31 @@ class NavigationController constructor(
         }
     )
 
-    fun addAction(
-        klass: KClass<out CompositionAction<*>>,
-        action: (from: Route?, to: Route) -> Unit
-    ) {
-        actionControllers.add(klass, action)
-    }
-
-    fun addAction(actions: Map<KClass<out CompositionAction<*>>, ((from: Route?, to: Route) -> Unit)>) {
-        actions.forEach { (klass, action) ->
-            actionControllers.add(klass, action)
-        }
-    }
-
     fun showSnackBarNotImplemented(message:String? = null) = snackbarAction.showNotImplemented(message)
-
-    private val clickDispatcher = MutableLiveData<Event<Route>>()
-    fun dispatchClick(route: Route) {
-        clickDispatcher.value = Event(route)
-    }
-
-    fun listenClick(lifecycleOwner: LifecycleOwner, observer: Observer<Event<Route>>) {
-        clickDispatcher.observe(lifecycleOwner, observer)
-    }
-
-    fun unlistenClick(lifecycleOwner: LifecycleOwner, observer: Observer<Event<Route>>) {
-        clickDispatcher.removeObserver(observer)
-    }
-
-    fun unlistenClick(lifecycleOwner: LifecycleOwner) {
-        clickDispatcher.removeObservers(lifecycleOwner)
-    }
 
     fun currentRoute() = routes.find(navHostController.currentBackStackEntry?.destination?.route)
 
     fun isLastRoute() =
         navHostController.backQueue.sumOf { (if (it.destination.route != null) 1 else 0).toInt() } <= 1
 
-    fun navigate(route: Route, builder: NavOptionsBuilder.() -> Unit) {
-        navHostController.navigate(route = route.value, builder = builder)
+    fun navigate(to: Route, builder: NavOptionsBuilder.() -> Unit) {
+        navHostController.navigate(route = to.value, builder = builder)
     }
 
-    fun navigate(route: Route) = navHostController.navigate(route = route.value)
+    fun navigate(to: Route) {
+        navHostController.navigate(route = to.value)
+    }
 
-    fun navigateBack() = navHostController.popBackStack()
+    fun navigateBack():Boolean {
+        return navHostController.popBackStack()
+    }
 
     fun requestNavigate(to: Route, askedBy: CompositionAction<*>) {
         requestNavigate(currentRoute(), to, askedBy)
     }
 
     fun requestNavigate(from: Route?, to: Route, askedBy: CompositionAction<*>) {
-        actionControllers.find {
+        requestManagers.find {
             askedBy::class.isInstance(it.key) || askedBy::class.isSubclassOf(it.key)
         }?.value?.invoke(from, to) ?: run {
             showSnackBarNotImplemented()

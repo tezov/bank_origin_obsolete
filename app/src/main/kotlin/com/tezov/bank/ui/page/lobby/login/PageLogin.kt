@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 21:06
+ *  Created by Tezov on 06/05/2023 14:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 20:44
+ *  Last modified 06/05/2023 14:01
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -248,14 +248,14 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
         }
     }
 
-    @Composable
-    override fun onDispose() {
-        val accessor = DiAccessorAppUiPage().with(key = this).contextLogin()
-        val state = accessor.state()
-        if(state.diCanDispose){
-            accessor.dispose()
-            super.onDispose()
-        }
-    }
+//    @Composable
+//    override fun onDispose() {
+//        val accessor = DiAccessorAppUiPage().with(key = this).contextLogin()
+//        val state = accessor.state()
+//        if(state.diCanDispose){
+//            accessor.dispose()
+//            super.onDispose()
+//        }
+//    }
 
 }

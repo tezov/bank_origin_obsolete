@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 25/04/2023 21:10
+ *  Created by Tezov on 06/05/2023 14:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 25/04/2023 19:36
+ *  Last modified 06/05/2023 14:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -58,7 +58,7 @@ class NavigationController(
 
     init {
         navigationController.routes.add(Route.items)
-        navigationController.addAction(
+        navigationController.addRequestManager(
             mapOf(
                 TopAppBarAction::class to this::navigateFromTopAppBar,
                 BottomNavigationAction::class to this::navigateFromBottomNavigation,
@@ -116,9 +116,7 @@ class NavigationController(
                 Route.Login -> {
                     when (to) {
                         Route.HelpAndService -> {
-                            navigate(to) {
-                                launchSingleTop = true
-                            }
+                            navigate(to)
                             showSnackBarNotImplemented = false
                         }
                     }

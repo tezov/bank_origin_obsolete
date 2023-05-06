@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 30/01/2023 20:18
+ *  Created by Tezov on 06/05/2023 14:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 30/01/2023 20:11
+ *  Last modified 06/05/2023 14:54
  *  First project bank / bank.lib_core_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,27 +10,16 @@
  *  *********************************************************************************
  */
 
-package com.tezov.lib_core_kotlin.util
+package com.tezov.lib_core_kotlin.type
 
-class Event<T>(content: T) {
-    private val content: T
-    private var hasBeenHandled = false
+class ValueSingleRead<T:Any>(private val content: T) {
+    var hasBeenRead = false
+        private set
 
-    init {
-        this.content = content
-    }
-
-    val contentIfNotHandled: T?
-        get() = if (hasBeenHandled) {
+    val get get() = if (hasBeenRead) {
             null
         } else {
-            hasBeenHandled = true
+            hasBeenRead = true
             content
         }
-
-    fun hasBeenHandled(): Boolean {
-        return hasBeenHandled
-    }
-
-
 }

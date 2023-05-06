@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 21:39
+ *  Created by Tezov on 06/05/2023 14:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 20:58
+ *  Last modified 06/05/2023 14:44
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,7 +22,6 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
 
 class PageLoginState private constructor(
-    private val _diCanDispose: MutableState<Boolean>,
     val animationState: PageLoginStateAnimation,
     val nameState: State<String>,
     val iconState: State<Int>,
@@ -31,21 +30,14 @@ class PageLoginState private constructor(
     companion object {
         @Composable
         fun create(
-            diCanDispose:MutableState<Boolean> = mutableStateOf(false),
             animationState: PageLoginStateAnimation = PageLoginStateAnimation.remember(), //TODO
             nameState: State<String> = mutableStateOf("M.ZOLLVER"),
             iconState: State<Int> = mutableStateOf(R.drawable.img_suitcase_blue),
         ) = PageLoginState(
-            _diCanDispose = diCanDispose,
             animationState = animationState,
             nameState = nameState,
             iconState = iconState,
         )
     }
-
-    var diCanDispose get() = _diCanDispose.value
-        set(value) {
-            _diCanDispose.value = value
-        }
 
 }

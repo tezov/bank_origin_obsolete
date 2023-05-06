@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 23:33
+ *  Created by Tezov on 06/05/2023 14:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 23:31
+ *  Last modified 06/05/2023 14:43
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,7 +17,6 @@ import com.tezov.bank.navigation.NavigationController.Companion.Route
 import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuth
 import com.tezov.lib_core_android_kotlin.navigation.NavigationController
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.Modal
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageAction
 
 class PageLoginAction private constructor(
@@ -46,14 +45,6 @@ class PageLoginAction private constructor(
     fun onClickConnect() {
         dialogAction.show {
             DialogLoginAuth()
-            {
-                onShowed {
-                    Log.d(">>:", "onShowed: ")
-                }
-                onClosed {
-                    Log.d(">>:", "onClosed: ")
-                }
-            }
         }
     }
 

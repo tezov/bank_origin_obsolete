@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 23:33
+ *  Created by Tezov on 06/05/2023 14:54
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 23:29
+ *  Last modified 06/05/2023 14:43
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -37,56 +37,17 @@ interface Modal<S : ModalState, A : ModalAction<S>> : Composition<S, A>, DiAcces
 
         data class Bundle(
             val current: Modal<*, *>,
-            val scope: Scope? = null,
-        ) {
-            internal val eventListener by lazy { ArrayList<EventListener>() }
-        }
+        )
 
-        class Scope {
-            var actionOnShowed: (@Composable (modal: Modal<*, *>) -> Unit)? = null
-            var actionOnClosed: (@Composable (modal: Modal<*, *>) -> Unit)? = null
-
-            fun onShowed(action: @Composable (modal: Modal<*, *>) -> Unit) {
-                actionOnShowed = action
-            }
-
-            fun onClosed(action: @Composable (modal: Modal<*, *>) -> Unit) {
-                actionOnClosed = action
-            }
-        }
-
-    }
-
-    @Composable
-    fun registerListener(listener: EventListener) {
-        LocalModalBundle.current.eventListener.add(listener)
-    }
-
-    @Composable
-    fun unregisterListener(listener: EventListener) {
-        LocalModalBundle.current.eventListener.remove(listener)
-    }
-
-    @Composable
-    fun notify(event: Event?) {
-        val iterator = LocalModalBundle.current.eventListener.iterator()
-        while (iterator.hasNext()) {
-            val next = iterator.next()
-            next.notify(event = event)
-            if (!next.isValid) {
-                iterator.remove()
-            }
-        }
     }
 
     @SuppressLint("RememberReturnType")
     @Composable
-    operator fun invoke(scope: (Scope.() -> Unit)? = null) {
+    operator fun invoke() {
         val modals = LocalModalsBundle
         remember {
             val locals = Bundle(
                 this,
-                scope?.let { Scope().apply { it.invoke(this) } }
             )
             modals.push(locals)
         }
@@ -101,12 +62,12 @@ interface Modal<S : ModalState, A : ModalAction<S>> : Composition<S, A>, DiAcces
                 BackHandler(true) {
                     onBackPressedState.value = true
                 }
-                lifeCycleAware()
                 content()
             }
         }
         DisposableEffect(Unit) {
             onDispose {
+
                 modals.find { it.current == this@Modal }?.also { modals.remove(it) }
             }
         }
@@ -120,19 +81,5 @@ interface Modal<S : ModalState, A : ModalAction<S>> : Composition<S, A>, DiAcces
 
     @Composable
     fun handleOnBackPressed() = false
-
-    @CallSuper
-    @Composable
-    override fun onShow() {
-        super.onShow()
-        LocalModal.scope?.actionOnShowed?.invoke(this)
-    }
-
-    @CallSuper
-    @Composable
-    override fun onHide() {
-        LocalModal.scope?.actionOnClosed?.invoke(this)
-        super.onHide()
-    }
 
 }
