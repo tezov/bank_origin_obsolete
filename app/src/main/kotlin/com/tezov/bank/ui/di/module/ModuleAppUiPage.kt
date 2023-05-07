@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:14
+ *  Created by Tezov on 07/05/2023 13:58
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 23:03
+ *  Last modified 07/05/2023 13:57
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -239,11 +239,13 @@ interface ModuleAppUiPage {
         @ScopeAppUiPage
         class PageProfileAction @Inject constructor(
             private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
+            private val dialogAction: ModuleCoreUiActivity.Action.DialogAction,
         ) : ComposableHolder<com.tezov.bank.ui.page.auth.profile.PageProfileAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
                 com.tezov.bank.ui.page.auth.profile.PageProfileAction.create(
-                    navigationController.get()
+                    navigationController.get(),
+                    dialogAction.get()
                 )
         }
     }
