@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:32
+ *  Last modified 07/05/2023 17:56
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -110,8 +110,8 @@ object AccountSummaryCard {
     }
 
     data class Data(
-        val iconInfo: Int,
-        val iconAction: Int,
+        val iconInfoId: Int,
+        val iconActionId: Int,
         val surtitle: String,
         val title: String,
         val subTitle: String,
@@ -270,14 +270,14 @@ object AccountSummaryCard {
                     .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal)
                     .layoutId(MotionLayoutItem.ICON_INFO.name),
                 style = style.iconInfoStyle,
-                resourceId = data.iconInfo,
+                resourceId = data.iconInfoId,
                 description = data.title
             )
             DropDownMenu.StateColor(
                 modifierBox = Modifier
                     .layoutId(MotionLayoutItem.ICON_ACTION.name),
                 style =  style.dropDownMenuStyle,
-                resourceId = data.iconAction,
+                resourceId = data.iconActionId,
                 description = data.surtitle,
                 items = data.actions,
                 offset = DpOffset(Dp.Infinity,0.dp),

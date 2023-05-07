@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 16:08
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 15:56
+ *  Last modified 07/05/2023 17:56
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,10 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
-import com.google.accompanist.pager.PagerScope
 import com.tezov.bank.ui.component.element.CarouselCard
-import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
@@ -101,7 +98,7 @@ object SectionCarouselCard {
     }
 
     data class Data(
-        val icon: Int? = null,
+        val iconId: Int? = null,
         val title: String? = null,
         val cards: List<CarouselCard.Data>
     )
@@ -130,7 +127,7 @@ object SectionCarouselCard {
                         .padding(start = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    data.icon?.let {
+                    data.iconId?.let {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),

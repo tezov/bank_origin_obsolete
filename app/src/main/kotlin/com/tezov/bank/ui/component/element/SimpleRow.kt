@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:59
+ *  Last modified 07/05/2023 17:55
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,9 +21,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import com.tezov.bank.R
-import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
@@ -90,9 +88,9 @@ object SimpleRow {
     }
 
     class Data(
-        val iconInfo: Int? = null,
+        val iconInfoId: Int? = null,
         val title: String,
-        val iconAction: Int = R.drawable.ic_arrow_cut_right_24dp,
+        val iconActionId: Int = R.drawable.ic_arrow_cut_right_24dp,
     )
 
     @Composable
@@ -112,7 +110,7 @@ object SimpleRow {
                 .clickable { onClick() },
             verticalAlignment = Alignment.CenterVertically
         ) {
-            data.iconInfo?.let {
+            data.iconInfoId?.let {
                 Icon.Simple(
                     style = style.iconInfoStyle,
                     resourceId = it,
@@ -128,7 +126,7 @@ object SimpleRow {
             )
             Icon.Simple(
                 style = style.iconActionStyle,
-                resourceId = data.iconAction,
+                resourceId = data.iconActionId,
                 description = data.title,
             )
         }

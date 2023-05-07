@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:59
+ *  Last modified 07/05/2023 17:49
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,13 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
@@ -103,14 +100,26 @@ object SimpleTile {
             outfitTextTitle = style.outfitTextTitle,
             outfitTextSubtitle = style.outfitTextSubtitle,
         )
+
+        @Composable
+        internal fun iconStyle(color: Color?) = color?.let {
+            iconStyle.copy {
+                tint = it
+            }
+        } ?: run {
+            iconStyle
+        }
+
     }
 
     data class Data(
         var template: Template = Template.Undefined,
         val title: String,
         val subtitle: String? = null,
-        val iconInfo: Int,
-    )
+        val iconId: Int,
+        val iconColor: Color? = null,
+
+        )
 
     @Composable
     operator fun invoke(
@@ -147,8 +156,8 @@ object SimpleTile {
         ) {
             Icon.Simple(
                 modifier = Modifier.align(Alignment.End),
-                style = style.iconStyle,
-                resourceId = data.iconInfo,
+                style = style.iconStyle(color = data.iconColor),
+                resourceId = data.iconId,
                 description = data.title,
             )
             Text.StateColor(
@@ -187,8 +196,8 @@ object SimpleTile {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon.Simple(
-                style = style.iconStyle,
-                resourceId = data.iconInfo,
+                style = style.iconStyle(color = data.iconColor),
+                resourceId = data.iconId,
                 description = data.title,
             )
             Column (
@@ -247,8 +256,8 @@ object SimpleTile {
                 }
             }
             Icon.Simple(
-                style = style.iconStyle,
-                resourceId = data.iconInfo,
+                style = style.iconStyle(color = data.iconColor),
+                resourceId = data.iconId,
                 description = data.title,
             )
         }

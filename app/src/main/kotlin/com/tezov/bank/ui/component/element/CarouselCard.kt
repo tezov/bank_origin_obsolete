@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 22:55
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 22:54
+ *  Last modified 07/05/2023 17:55
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,12 +20,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
@@ -40,7 +38,7 @@ object CarouselCard {
         open class Base(
             margin: PaddingValues? = null,
             outfitFrame: OutfitFrameStateColor? = null,
-            iconInfoStyle: Icon.Simple.Style? = null,
+            iconStyle: Icon.Simple.Style? = null,
             val outfitTextTag: OutfitTextStateColor? = null,
             val outfitTextTitle: OutfitTextStateColor? = null,
             val outfitTextBody: OutfitTextStateColor? = null,
@@ -58,8 +56,8 @@ object CarouselCard {
                     ThemeColorsExtended.Dummy.outfitFrameState
                 }
             )
-            val iconInfoStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
-                iconInfoStyle,
+            val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
+                iconStyle,
                 fallBackValue = {
                     Icon.Simple.Style()
                 }
@@ -78,7 +76,7 @@ object CarouselCard {
                 ) {
                     var margin = style.margin
                     var outfitFrame = style.outfitFrame
-                    var iconInfoStyle = style.iconInfoStyle
+                    var iconStyle = style.iconStyle
                     var outfitTextTag = style.outfitTextTag
                     var outfitTextTitle = style.outfitTextTitle
                     var outfitTextBody = style.outfitTextBody
@@ -88,7 +86,7 @@ object CarouselCard {
                     internal open fun get() = Base(
                         margin = margin,
                         outfitFrame = outfitFrame,
-                        iconInfoStyle = iconInfoStyle,
+                        iconStyle = iconStyle,
                         outfitTextTag = outfitTextTag,
                         outfitTextTitle = outfitTextTitle,
                         outfitTextBody = outfitTextBody,
@@ -108,12 +106,21 @@ object CarouselCard {
             constructor(style: Base?) : this(
                 margin = style?.margin,
                 outfitFrame = style?.outfitFrame,
-                iconInfoStyle = style?.iconInfoStyle,
+                iconStyle = style?.iconStyle,
                 outfitTextTag = style?.outfitTextTag,
                 outfitTextTitle = style?.outfitTextTitle,
                 outfitTextBody = style?.outfitTextBody,
                 outfitFrameTag = style?.outfitFrameTag,
             )
+
+            @Composable
+            internal fun iconStyle(color: Color?) = color?.let {
+                iconStyle.copy {
+                    tint = it
+                }
+            } ?: run {
+                iconStyle
+            }
 
         }
 
@@ -210,7 +217,8 @@ object CarouselCard {
     }
 
     data class Data(
-        val iconInfo: Int? = null,
+        val iconId: Int? = null,
+        val iconColor: Color? = null,
         val tag: String? = null,
         val title: String,
         val body: String,
@@ -296,12 +304,12 @@ object CarouselCard {
                     onClick = onClick,
                 )
             }
-            data.iconInfo?.let {
+            data.iconId?.let {
                 Icon.Simple(
                     modifier = Modifier.align(Alignment.Top),
                     resourceId = it,
                     description = null,
-                    style = style.iconInfoStyle
+                    style = style.iconStyle(data.iconColor)
                 )
             }
         }
@@ -337,12 +345,12 @@ object CarouselCard {
                 }
             }
             Row {
-                data.iconInfo?.let {
+                data.iconId?.let {
                     Icon.Simple(
                         modifier = Modifier.padding(end = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal),
                         resourceId = it,
                         description = null,
-                        style = style.iconInfoStyle
+                        style = style.iconStyle(data.iconColor)
                     )
                 }
                 Text.StateColor(

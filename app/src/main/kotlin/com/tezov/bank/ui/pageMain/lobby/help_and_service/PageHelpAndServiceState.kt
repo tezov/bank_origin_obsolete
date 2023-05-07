@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:32
+ *  Last modified 07/05/2023 17:55
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -55,31 +55,31 @@ class PageHelpAndServiceState private constructor(private val _diCanDispose: Mut
             tile = listOf(
                 SimpleTile.Data(
                     title = "Opposer une carte",
-                    iconInfo = R.drawable.ic_crisis_24dp
+                    iconId = R.drawable.ic_crisis_24dp
                 ),
                 SimpleTile.Data(
                     title = "Contester un prélèvement",
-                    iconInfo = R.drawable.ic_argue_24dp
+                    iconId = R.drawable.ic_argue_24dp
                 ),
                 SimpleTile.Data(
                     title = "Suivre mon dossier",
-                    iconInfo = R.drawable.ic_checklist_24dp
+                    iconId = R.drawable.ic_checklist_24dp
                 ),
                 SimpleTile.Data(
                     title = "Trouver un distributeur",
-                    iconInfo = R.drawable.ic_atm_24dp
+                    iconId = R.drawable.ic_atm_24dp
                 ),
                 SimpleTile.Data(
                     title = "Retirer à l'étranger",
-                    iconInfo = R.drawable.ic_explore_24dp
+                    iconId = R.drawable.ic_explore_24dp
                 ),
                 SimpleTile.Data(
                     title = "Découvrir l'application",
-                    iconInfo = R.drawable.ic_search_24dp
+                    iconId = R.drawable.ic_search_24dp
                 ),
                 SimpleTile.Data(
                     title = "Accéder à l'assitance technique",
-                    iconInfo = R.drawable.ic_help_24dp
+                    iconId = R.drawable.ic_help_24dp
                 ),
             )
         )
@@ -87,10 +87,10 @@ class PageHelpAndServiceState private constructor(private val _diCanDispose: Mut
         contacts = SectionSimpleRow.Data(
             title = "CONTACTER LA HELLO TEAM",
             rows = listOf(
-                SimpleRow.Data(title = "Appeler", iconInfo = R.drawable.ic_call_24dp),
+                SimpleRow.Data(title = "Appeler", iconInfoId = R.drawable.ic_call_24dp),
                 SimpleRow.Data(
                     title = "Service sourds et malentendats",
-                    iconInfo = R.drawable.ic_hearing_disabled_24dp
+                    iconInfoId = R.drawable.ic_hearing_disabled_24dp
                 ),
             )
         )

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:18
+ *  Last modified 07/05/2023 17:55
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,7 +15,6 @@ package com.tezov.bank.ui.theme
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -311,7 +310,7 @@ object ThemeComponentProviders {
 
     @Composable
     fun accountValueSimpleRowStyle() = AccountValueSimpleRow.Style(
-        iconInfoStyle = Icon.StateColor.Style(
+        iconStyle = Icon.StateColor.Style(
             size = MaterialTheme.dimensionsIconExtended.info.small,
             tint = MaterialTheme.colorsExtended.background.default,
             outfitFrame = OutfitFrameStateColor(
@@ -410,7 +409,7 @@ object ThemeComponentProviders {
                     outfitState = MaterialTheme.colorsExtended.backgroundElevated.decor.asStateSimple
                 },
             ),
-            iconInfoStyle = Icon.Simple.Style(
+            iconStyle = Icon.Simple.Style(
                 size = MaterialTheme.dimensionsIconExtended.info.big,
                 tint = MaterialTheme.colorsExtended.primary.accent.copy(alpha = 0.5f)
             ),
@@ -451,7 +450,7 @@ object ThemeComponentProviders {
                     outfitState = MaterialTheme.colorsExtended.backgroundElevated.overlay.asStateSimple
                 },
             ),
-            iconInfoStyle = Icon.Simple.Style(
+            iconStyle = Icon.Simple.Style(
                 size = MaterialTheme.dimensionsIconExtended.info.normal,
                 tint = MaterialTheme.colorsExtended.primary.accent
             ),

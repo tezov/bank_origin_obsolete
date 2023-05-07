@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:30
+ *  Last modified 07/05/2023 17:21
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -16,18 +16,9 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
-import com.tezov.bank.R
-import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
-import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppController
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Image
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state

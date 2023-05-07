@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:59
+ *  Last modified 07/05/2023 17:56
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,7 +22,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.element.SimpleTile
-import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionComposable
@@ -98,7 +97,7 @@ object SectionSimpleTile {
     }
 
     data class Data(
-        val icon: Int? = null,
+        val iconId: Int? = null,
         val title: String? = null,
         var template: SimpleTile.Template = SimpleTile.Template.Undefined,
         val tile: List<SimpleTile.Data>
@@ -130,7 +129,7 @@ object SectionSimpleTile {
                         .padding(start = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    data.icon?.let {
+                    data.iconId?.let {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),

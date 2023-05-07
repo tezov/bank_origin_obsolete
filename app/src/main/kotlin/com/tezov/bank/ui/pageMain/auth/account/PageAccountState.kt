@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:38
+ *  Last modified 07/05/2023 17:56
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -42,8 +42,8 @@ class PageAccountState private constructor() : PageState {
             iconAccount = R.drawable.ic_dashboard_24dp,
             headline = "Hello !",
             accountSummary = AccountSummaryCard.Data(
-                iconInfo = R.drawable.ic_chart_line_24dp,
-                iconAction = R.drawable.ic_3dot_h_24dp,
+                iconInfoId = R.drawable.ic_chart_line_24dp,
+                iconActionId = R.drawable.ic_3dot_h_24dp,
                 surtitle = "N° **** 3475",
                 title = "Compte de chèques",
                 subTitle = "Aujourd'hui",
@@ -73,20 +73,20 @@ class PageAccountState private constructor() : PageState {
             iconInfoId = R.drawable.ic_question_24dp,
             rows = listOf(
                 AccountValueSimpleRow.Data(
-                    iconInfoId = R.drawable.cat_clock_24dp,
-                    iconInfoColor = semantic.neutral,
+                    iconId = R.drawable.cat_clock_24dp,
+                    iconColor = semantic.neutral,
                     title = "Facture carte du 010223 k06794851",
                     amount = "-10.20 €",
                 ),
                 AccountValueSimpleRow.Data(
-                    iconInfoId = R.drawable.cat_clock_24dp,
-                    iconInfoColor = semantic.neutral,
+                    iconId = R.drawable.cat_clock_24dp,
+                    iconColor = semantic.neutral,
                     title = "Facture carte du total...",
                     amount = "-133.13 €",
                 ),
                 AccountValueSimpleRow.Data(
-                    iconInfoId = R.drawable.cat_clock_24dp,
-                    iconInfoColor = semantic.neutral,
+                    iconId = R.drawable.cat_clock_24dp,
+                    iconColor = semantic.neutral,
                     title = "Facture carte du 010223 auchan 134 5784",
                     amount = "-1.00 €",
                 ),
@@ -98,22 +98,22 @@ class PageAccountState private constructor() : PageState {
                 title = "VENDREDI 14 AVRIL",
                 rows = listOf(
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_dining_24dp,
-                        iconInfoColor = semantic.success,
+                        iconId = R.drawable.cat_dining_24dp,
+                        iconColor = semantic.success,
                         title = "Paiements cb amazon du 12/04 a payli2441535 - CLASS",
                         subTitle = "Achats,shopping",
                         amount = "-14.69 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_bar_24dp,
-                        iconInfoColor = semantic.info,
+                        iconId = R.drawable.cat_bar_24dp,
+                        iconColor = semantic.info,
                         title = "Prelevement bouygues telecom du 13/04 - EMMETEUR",
                         subTitle = "Téléphone",
                         amount = "-9.95 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_drop_24dp,
-                        iconInfoColor = semantic.info,
+                        iconId = R.drawable.cat_drop_24dp,
+                        iconColor = semantic.info,
                         title = "Paiement cb auchan du 11/04 a Faches-Thumesnil",
                         subTitle = "Alimentation, supermarché",
                         amount = "-41.46 €",
@@ -124,15 +124,15 @@ class PageAccountState private constructor() : PageState {
                 title = "JEUDI 06 AVRIL",
                 rows = listOf(
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_dining_24dp,
-                        iconInfoColor = semantic.success,
+                        iconId = R.drawable.cat_dining_24dp,
+                        iconColor = semantic.success,
                         title = "Remboursement cb amazon",
                         subTitle = "Remboursement",
                         amount = "26.99 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_shower_24dp,
-                        iconInfoColor = semantic.alert,
+                        iconId = R.drawable.cat_shower_24dp,
+                        iconColor = semantic.alert,
                         title = "Paiements cb otacos ganbetta du 31/03 à paris 15",
                         subTitle = "Restaurants, bars",
                         amount = "-17.20 €",
@@ -143,15 +143,15 @@ class PageAccountState private constructor() : PageState {
                 title = "MERCREDI 08 MARS",
                 rows = listOf(
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_rocket_24dp,
-                        iconInfoColor = semantic.success,
+                        iconId = R.drawable.cat_rocket_24dp,
+                        iconColor = semantic.success,
                         title = "Prlv sepa edf clients par mdt/ mm 9760236677",
                         subTitle = "Prélèvement",
                         amount = "-65.00 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_shower_24dp,
-                        iconInfoColor = semantic.alert,
+                        iconId = R.drawable.cat_shower_24dp,
+                        iconColor = semantic.alert,
                         title = "Virement vers payward ltd - Motif : AA...",
                         subTitle = "Virement émis",
                         amount = "-778.20 €",
@@ -162,29 +162,29 @@ class PageAccountState private constructor() : PageState {
                 title = "VENDREDI 24 FEVRIER",
                 rows = listOf(
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_rocket_24dp,
-                        iconInfoColor = semantic.error,
+                        iconId = R.drawable.cat_rocket_24dp,
+                        iconColor = semantic.error,
                         title = "Paiements cb leroy merlin du 23/02 à Lesquin - Cart",
                         subTitle = "Bricolage et jardinage",
                         amount = "-36.50 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_bar_24dp,
-                        iconInfoColor = semantic.success,
+                        iconId = R.drawable.cat_bar_24dp,
+                        iconColor = semantic.success,
                         title = "Online store, latex doll",
                         subTitle = "Ameublement",
                         amount = "-3778.20 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_bar_24dp,
-                        iconInfoColor = semantic.info,
+                        iconId = R.drawable.cat_bar_24dp,
+                        iconColor = semantic.info,
                         title = "Paiment cb maxicoffe nord",
                         subTitle = "Alimentation, supermarché",
                         amount = "-0.40 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_dining_24dp,
-                        iconInfoColor = semantic.info,
+                        iconId = R.drawable.cat_dining_24dp,
+                        iconColor = semantic.info,
                         title = "Paiment cb distri-flandre du 16/02 a Fache",
                         subTitle = "Carburant",
                         amount = "-77.94 €",
@@ -195,50 +195,50 @@ class PageAccountState private constructor() : PageState {
                 title = "MARDI 24 JANVIER",
                 rows = listOf(
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_dining_24dp,
-                        iconInfoColor = semantic.neutral,
+                        iconId = R.drawable.cat_dining_24dp,
+                        iconColor = semantic.neutral,
                         title = "Paiement cb peage sanef du 22/01 a senlis",
                         subTitle = "Péage",
                         amount = "-17.30 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_bar_24dp,
-                        iconInfoColor = semantic.neutral,
+                        iconId = R.drawable.cat_bar_24dp,
+                        iconColor = semantic.neutral,
                         title = "Paiement cb peage sanef du 20/01 a senlis",
                         subTitle = "Péage",
                         amount = "-17.30 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_shower_24dp,
-                        iconInfoColor = semantic.success,
+                        iconId = R.drawable.cat_shower_24dp,
+                        iconColor = semantic.success,
                         title = "Paiement cb timbre fiscal du 05/12 a Rennes",
                         subTitle = "Impôts et taxes - Autres",
                         amount = "-30.00 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_drop_24dp,
-                        iconInfoColor = semantic.alert,
+                        iconId = R.drawable.cat_drop_24dp,
+                        iconColor = semantic.alert,
                         title = "Paiement cb web amende.gouv du 26/11 a Rennes",
                         subTitle = "Autres dépenses à catégoriser",
                         amount = "-30.00 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_rocket_24dp,
-                        iconInfoColor = semantic.error,
+                        iconId = R.drawable.cat_rocket_24dp,
+                        iconColor = semantic.error,
                         title = "Paiement cb photomaton du 22/11 à Paris - Carte*88",
                         subTitle = "Vie quotidienne - Autres",
                         amount = "-8.00 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_shower_24dp,
-                        iconInfoColor = semantic.neutral,
+                        iconId = R.drawable.cat_shower_24dp,
+                        iconColor = semantic.neutral,
                         title = "Retrait distributeur caisse federale de C du 11/01",
                         subTitle = "Retrait d'espéces",
                         amount = "-800.00 €",
                     ),
                     AccountValueSimpleRow.Data(
-                        iconInfoId = R.drawable.cat_bar_24dp,
-                        iconInfoColor = semantic.info,
+                        iconId = R.drawable.cat_bar_24dp,
+                        iconColor = semantic.info,
                         title = "Paiement cb airbnb (Quartier Rouge Pays-Bas)",
                         subTitle = "Voyages, vacances",
                         amount = "-478.49 €",

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:53
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 13:20
+ *  Last modified 07/05/2023 17:55
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,10 +22,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.unit.dp
-import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
-import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
@@ -42,14 +39,14 @@ object AccountValueSimpleRow {
     class StyleBuilder internal constructor(
         style: Style
     ) {
-        var iconInfoStyle = style.iconInfoStyle
+        var iconStyle = style.iconStyle
         var outfitTextTitle = style.outfitTextTitle
         var outfitTextSubTitle = style.outfitTextSubTitle
         var outfitTextAmount = style.outfitTextAmount
         var background = style.background
 
         fun get() = Style(
-            iconInfoStyle = iconInfoStyle,
+            iconStyle = iconStyle,
             outfitTextTitle = outfitTextTitle,
             outfitTextSubTitle = outfitTextSubTitle,
             outfitTextAmount = outfitTextAmount,
@@ -58,14 +55,14 @@ object AccountValueSimpleRow {
     }
 
     class Style(
-        iconInfoStyle: Icon.StateColor.Style? = null,
+        iconStyle: Icon.StateColor.Style? = null,
         val outfitTextTitle: OutfitTextStateColor? = null,
         val outfitTextSubTitle: OutfitTextStateColor? = null,
         val outfitTextAmount: OutfitTextStateColor? = null,
         val background: Color? = null,
     ) {
-        val iconInfoStyle: Icon.StateColor.Style by DelegateNullFallBack.Ref(
-            iconInfoStyle,
+        val iconStyle: Icon.StateColor.Style by DelegateNullFallBack.Ref(
+            iconStyle,
             fallBackValue = {
                 Icon.StateColor.Style()
             }
@@ -83,18 +80,31 @@ object AccountValueSimpleRow {
         }
 
         constructor(style: Style) : this(
-            iconInfoStyle = style.iconInfoStyle,
+            iconStyle = style.iconStyle,
             outfitTextTitle = style.outfitTextTitle,
             outfitTextSubTitle = style.outfitTextSubTitle,
             outfitTextAmount = style.outfitTextAmount,
             background = style.background,
         )
 
+        @Composable
+        internal fun iconStyle(color: Color?) = color?.let {
+            iconStyle.copy {
+                outfitFrame = outfitFrame?.copy {
+                    outfitShape = outfitShape.copy {
+                        outfitState = it.asStateSimple
+                    }
+                }
+            }
+        } ?: run {
+            iconStyle
+        }
+
     }
 
     class Data(
-        val iconInfoId: Int,
-        val iconInfoColor: Color,
+        val iconId: Int,
+        val iconColor: Color? = null,
         val title: String,
         val subTitle: String? = null,
         val amount: String,
@@ -118,14 +128,8 @@ object AccountValueSimpleRow {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon.StateColor(
-                style = style.iconInfoStyle.copy {
-                    outfitFrame = outfitFrame?.copy{
-                        outfitShape = outfitShape.copy{
-                            outfitState = data.iconInfoColor.asStateSimple
-                        }
-                    }
-                },
-                resourceId = data.iconInfoId,
+                style = style.iconStyle(color = data.iconColor),
+                resourceId = data.iconId,
                 description = null,
             )
             Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal))

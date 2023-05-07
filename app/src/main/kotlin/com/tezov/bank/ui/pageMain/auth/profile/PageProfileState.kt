@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:15
+ *  Last modified 07/05/2023 17:55
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -45,11 +45,11 @@ class PageProfileState private constructor() : PageState {
             rows = listOf(
                 SimpleRow.Data(
                     title = "Mes infos de profil",
-                    iconInfo = R.drawable.ic_profile_line_24dp
+                    iconInfoId = R.drawable.ic_profile_line_24dp
                 ),
                 SimpleRow.Data(
                     title = "Mes paramètres",
-                    iconInfo = R.drawable.ic_setting_24dp
+                    iconInfoId = R.drawable.ic_setting_24dp
                 ),
             )
         )

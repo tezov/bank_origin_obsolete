@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:32
+ *  Last modified 07/05/2023 17:56
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -47,7 +47,7 @@ class PageHelpState private constructor() : PageState {
 
         emergencies = SectionSimpleRow.Data(
             title = "Urgence",
-            icon = R.drawable.ic_call_24dp,
+            iconId = R.drawable.ic_call_24dp,
             rows = listOf(
                 SimpleRow.Data(title = "Paiment carte ou retrait refusé"),
                 SimpleRow.Data(title = "Perte ou vol de ma carte"),
@@ -60,7 +60,7 @@ class PageHelpState private constructor() : PageState {
 
         paymentModes = SectionSimpleRow.Data(
             title = "Moyens de paiment",
-            icon = R.drawable.ic_call_24dp,
+            iconId = R.drawable.ic_call_24dp,
             rows = listOf(
                 SimpleRow.Data(title = "Carte bancaire"),
                 SimpleRow.Data(title = "Virement"),
@@ -71,7 +71,7 @@ class PageHelpState private constructor() : PageState {
 
         configuration = SectionSimpleRow.Data(
             title = "Profile, paramétres et sécurité",
-            icon = R.drawable.ic_call_24dp,
+            iconId = R.drawable.ic_call_24dp,
             rows = listOf(
                 SimpleRow.Data(title = "Clé Digitale"),
                 SimpleRow.Data(title = "Adresse postale"),
@@ -83,7 +83,7 @@ class PageHelpState private constructor() : PageState {
 
         account = SectionSimpleRow.Data(
             title = "Comptes, épargnes, crédit, assurance",
-            icon = R.drawable.ic_call_24dp,
+            iconId = R.drawable.ic_call_24dp,
             rows = listOf(
                 SimpleRow.Data(title = "Relevés, RIB"),
                 SimpleRow.Data(title = "Ouverture de compte individuel"),
@@ -98,7 +98,7 @@ class PageHelpState private constructor() : PageState {
 
         misc = SectionSimpleRow.Data(
             title = "Autres",
-            icon = R.drawable.ic_call_24dp,
+            iconId = R.drawable.ic_call_24dp,
             rows = listOf(
                 SimpleRow.Data(title = "Parrainage"),
                 SimpleRow.Data(title = "Signaler un problème technique"),

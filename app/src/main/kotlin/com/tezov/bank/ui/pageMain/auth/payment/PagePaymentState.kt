@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 07/05/2023 17:59
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:32
+ *  Last modified 07/05/2023 17:58
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,7 @@
 
 package com.tezov.bank.ui.pageMain.auth.payment
 
+import androidx.compose.ui.graphics.Color
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.block.SectionSimpleTile
 import com.tezov.bank.ui.component.element.SimpleTile
@@ -42,19 +43,19 @@ class PagePaymentState private constructor() : PageState {
             tile = listOf(
                 SimpleTile.Data(
                     title = "Partager\nmon RIB",
-                    iconInfo = R.drawable.img_rib_share
+                    iconId = R.drawable.img_rib_share
                 ),
                 SimpleTile.Data(
                     title = "Faire\nun virement",
-                    iconInfo = R.drawable.img_transfer_money
+                    iconId = R.drawable.img_transfer_money
                 ),
                 SimpleTile.Data(
                     title = "Gérer\nmes chèques",
-                    iconInfo = R.drawable.img_cheque_manage
+                    iconId = R.drawable.img_cheque_manage
                 ),
                 SimpleTile.Data(
                     title = "Gérer\nmes cartes",
-                    iconInfo = R.drawable.img_card_manage
+                    iconId = R.drawable.img_card_manage
                 ),
             )
         )
@@ -65,17 +66,20 @@ class PagePaymentState private constructor() : PageState {
                 SimpleTile.Data(
                     title = "Lyf Pay",
                     subtitle = "Payer avec votre mobile.",
-                    iconInfo = R.drawable.img_lyf
+                    iconId = R.drawable.img_lyf,
+                    iconColor = Color.Red
                 ),
                 SimpleTile.Data(
                     title = "Paylib",
                     subtitle = "Envoyer de l'argent vers un mobile",
-                    iconInfo = R.drawable.img_paylib
+                    iconId = R.drawable.img_paylib,
+                    iconColor = Color.DarkGray
                 ),
                 SimpleTile.Data(
                     title = "PaypPal",
                     subtitle = "Payer en ligne",
-                    iconInfo = R.drawable.img_paypal
+                    iconId = R.drawable.img_paypal,
+                    iconColor = Color.Blue
                 ),
             )
         )
