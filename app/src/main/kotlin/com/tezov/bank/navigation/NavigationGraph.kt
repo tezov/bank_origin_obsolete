@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 16:09
+ *  Created by Tezov on 07/05/2023 17:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 14:00
+ *  Last modified 07/05/2023 16:50
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,18 +20,21 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.tezov.bank.R
 import com.tezov.bank.navigation.NavigationController.Route
 import com.tezov.bank.ui.activity.MainActivity
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiActivity
-import com.tezov.bank.ui.page.auth.account.PageAccount
-import com.tezov.bank.ui.page.auth.discover.PageDiscover
-import com.tezov.bank.ui.page.auth.help.PageHelp
-import com.tezov.bank.ui.page.auth.payment.PagePayment
-import com.tezov.bank.ui.page.auth.profile.PageProfile
-import com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndService
-import com.tezov.bank.ui.page.lobby.login.PageLogin
-import com.tezov.bank.ui.page.lobby.splash.PageSplash
+import com.tezov.bank.ui.pageMain.auth.account.PageAccount
+import com.tezov.bank.ui.pageMain.auth.discover.PageDiscover
+import com.tezov.bank.ui.pageMain.auth.help.PageHelp
+import com.tezov.bank.ui.pageMain.auth.payment.PagePayment
+import com.tezov.bank.ui.pageMain.auth.profile.PageProfile
+import com.tezov.bank.ui.pageMain.lobby.help_and_service.PageHelpAndService
+import com.tezov.bank.ui.pageMain.lobby.login.PageLogin
+import com.tezov.bank.ui.pageMain.lobby.splash.PageSplash
+import com.tezov.bank.ui.pageSecondary.auth.messageInfo.PageMessageInfo
 import com.tezov.lib_core_android_kotlin.navigation.RouteManager
+import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBarItemData
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 
@@ -73,9 +76,25 @@ object NavigationGraph {
                 route = Route.NavAuth.value,
                 startDestination = NavigationController.startAuthRoute.value
             ) {
-                composable(Route.Account) {
-                    (LocalActivity.current as MainActivity).withBottomNavigationBar {
-                        PageAccount.invokeContent(innerPadding = it)
+                navigation(
+                    route = Route.NavAccount.value,
+                    startDestination = Route.Account.value
+                ){
+                    composable(Route.Account) {
+                        (LocalActivity.current as MainActivity).withBottomNavigationBar {
+                            PageAccount.invokeContent(innerPadding = it)
+                        }
+                    }
+                    composable(Route.MessageInfo) {
+                        (LocalActivity.current as MainActivity).withTopAppBar(
+                            topAppBarTitleResourceId = R.string.nav_top_message_info,
+                            topAppBarLeadingItem = object : TopAppBarItemData(
+                                icon = R.drawable.ic_arrow_left_24dp,
+                                route = RouteManager.Back
+                            ){}
+                        ) {
+                            PageMessageInfo.invokeContent(innerPadding = it)
+                        }
                     }
                 }
                 composable(Route.Discover) {

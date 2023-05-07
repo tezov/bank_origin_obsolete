@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:14
+ *  Created by Tezov on 07/05/2023 17:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 12:39
+ *  Last modified 07/05/2023 17:13
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -62,8 +62,8 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
     object Card {
 
         class StyleBuilder internal constructor(style: Style) {
-            var outfitFrame = style.outfitFrame
             var elevation = style.elevation
+            var outfitFrame = style.outfitFrame
 
             internal fun get() = Style(
                 elevation = elevation,
@@ -72,8 +72,8 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
         }
 
         class Style(
-            outfitFrame: OutfitFrameStateColor? = null,
             val elevation: Dp = 2.dp,
+            outfitFrame: OutfitFrameStateColor? = null,
         ) {
 
             val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
@@ -93,8 +93,8 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
             }
 
             constructor(style: Style) : this(
-                outfitFrame = style.outfitFrame,
                 elevation = style.elevation,
+                outfitFrame = style.outfitFrame,
             )
         }
 
@@ -102,13 +102,14 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
 
         @Composable
         operator fun invoke(content: @Composable () -> Unit) {
+            val style =MaterialTheme.componentsCommonExtended.dialogCard
             Surface(
-                color = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.resolveColorShape()
+                color = style.outfitFrame.resolveColorShape()
                     ?: MaterialTheme.colors.surface,
-                shape = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.getShape()
+                shape = style.outfitFrame.getShape()
                     ?: MaterialTheme.shapes.small,
-                elevation = MaterialTheme.componentsCommonExtended.dialogCard.elevation,
-                border = MaterialTheme.componentsCommonExtended.dialogCard.outfitFrame.resolveBorder()
+                elevation = style.elevation,
+                border = style.outfitFrame.resolveBorder()
             ) {
                 CompositionLocalProvider(
                     LocalLevel provides 1,

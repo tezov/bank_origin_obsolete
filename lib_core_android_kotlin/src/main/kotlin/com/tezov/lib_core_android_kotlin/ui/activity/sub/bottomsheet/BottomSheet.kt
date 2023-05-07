@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:14
+ *  Created by Tezov on 07/05/2023 17:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 13:13
+ *  Last modified 07/05/2023 17:12
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -38,10 +38,10 @@ import kotlinx.coroutines.flow.filter
 object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
 
     class StyleBuilder internal constructor(style: Style) {
+        var elevation = style.elevation
         var shape = style.outfitShape
         var paddingOuter = style.paddingOuter
         var paddingInner = style.paddingOuter
-        var elevation = style.elevation
 
         internal fun get() = Style(
             elevation = elevation,
@@ -52,10 +52,10 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
     }
 
     class Style(
+        val elevation: Dp = 2.dp,
         outfitShape: OutfitShapeStateColor? = null,
         paddingOuter: PaddingValues? = null,
         paddingInner: PaddingValues? = null,
-        val elevation: Dp = 2.dp,
     ) {
         val outfitShape: OutfitShapeStateColor by DelegateNullFallBack.Ref(
             outfitShape,
@@ -80,10 +80,10 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
         }
 
         constructor(style: Style) : this(
+            elevation = style.elevation,
             outfitShape = style.outfitShape,
             paddingOuter = style.paddingOuter,
             paddingInner = style.paddingInner,
-            elevation = style.elevation,
         )
     }
 
@@ -101,13 +101,14 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
             sheetShape = RectangleShape,
             sheetElevation = 0.dp,
             sheetContent = {
-                //todo MaterialTheme.componentsCommonExtended.bottomSheet.elevation -> TopShaddow rounded
+                //todo elevation from style
+                val style = MaterialTheme.componentsCommonExtended.bottomSheet
                 Box(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(MaterialTheme.componentsCommonExtended.bottomSheet.paddingOuter)
-                        .background(MaterialTheme.componentsCommonExtended.bottomSheet.outfitShape)
-                        .padding(MaterialTheme.componentsCommonExtended.bottomSheet.paddingOuter),
+                        .padding(style.paddingOuter)
+                        .background(style.outfitShape)
+                        .padding(style.paddingOuter),
                 ) {
                     state.content()
                 }

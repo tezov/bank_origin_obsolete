@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:53
+ *  Created by Tezov on 07/05/2023 17:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 13:42
+ *  Last modified 07/05/2023 17:18
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -24,6 +24,7 @@ import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.block.*
 import com.tezov.bank.ui.component.element.*
 import com.tezov.bank.ui.theme.font.fontIbm
+import com.tezov.bank.ui.theme.font.fontIndie
 import com.tezov.bank.ui.theme.font.fontRoboto
 import com.tezov.lib_core_android_kotlin.navigation.bottom_navigation.BottomNavigation
 import com.tezov.lib_core_android_kotlin.navigation.top_app_bar.TopAppBar
@@ -52,17 +53,30 @@ object ThemeComponentProviders {
 
     @Composable
     fun common() = ThemeComponentExtended.Common(
-        topAppBar = TopAppBar.Style(),
+        topAppBar = TopAppBar.Style(
+            elevation = MaterialTheme.dimensionsCommonExtended.elevation.normal,
+            outfitText = OutfitTextStateColor(
+                typo = TextStyle(
+                    fontFamily = MaterialTheme.fontIndie,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 16.5.sp,
+                ),
+                outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+            ),
+            colorBackground = MaterialTheme.colorsExtended.backgroundElevated.shady,
+            colorIconLeading = MaterialTheme.colorsExtended.primary.accent,
+        ),
         bottomNavigation = BottomNavigation.Style(
+            elevation = MaterialTheme.dimensionsCommonExtended.elevation.normal,
             outfitText = TextStyle(
                 fontFamily = MaterialTheme.fontRoboto,
                 fontWeight = FontWeight.SemiBold,
                 fontSize = 12.5.sp
             ).asTextStateColor,
-            colorBackground = MaterialTheme.colorsPalette.blueLightElevated,
+            colorBackground = MaterialTheme.colorsExtended.backgroundElevated.fade,
             outfitColor = OutfitStateBiStable(
-                active = MaterialTheme.colorsPalette.blueSea,
-                inactive = MaterialTheme.colorsPalette.blueShadow
+                active = MaterialTheme.colorsExtended.primary.accent,
+                inactive = MaterialTheme.colorsExtended.primary.dark,
             ),
         ),
         dialogCard = Dialog.Card.Style(

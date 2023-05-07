@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 16:09
+ *  Created by Tezov on 07/05/2023 17:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:08
+ *  Last modified 07/05/2023 16:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -38,18 +38,23 @@ class NavigationController(
 
         //auth
         object Account : RouteManager.Route("account")
+        object MessageInfo : RouteManager.Route("messageInfo")
+        object NavAccount : RouteManager.Routes(
+            "navAccount",
+            child = setOf(Account, MessageInfo)
+        )
         object Discover : RouteManager.Route("discover")
         object Payment : RouteManager.Route("payment")
         object Help : RouteManager.Route("help")
         object Profile : RouteManager.Route("Profile")
         object NavAuth : RouteManager.Routes(
             "navAuth",
-            child = setOf(Account, Discover, Payment, Help, Profile)
+            child = setOf(NavAccount, Discover, Payment, Help, Profile)
         )
 
         val startNavRoute = NavAuth
         val startLobbyRoute = Splash
-        val startAuthRoute = Account
+        val startAuthRoute = NavAccount
     }
 
     val navHostController get() = navigationController.navHostController
@@ -99,6 +104,7 @@ class NavigationController(
         with(navigationController) {
             var showSnackBarNotImplemented = true
             when (from) {
+                //lobby
                 Splash -> {
                     when (to) {
                         Login -> {
@@ -114,6 +120,15 @@ class NavigationController(
                 Login -> {
                     when (to) {
                         HelpAndService -> {
+                            navigate(to)
+                            showSnackBarNotImplemented = false
+                        }
+                    }
+                }
+                //auth
+                Account -> {
+                    when (to) {
+                        MessageInfo -> {
                             navigate(to)
                             showSnackBarNotImplemented = false
                         }

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 07/05/2023 17:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 19:59
+ *  Last modified 07/05/2023 17:10
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,6 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySub
@@ -37,11 +39,13 @@ object BottomNavigation :
     ActivitySub<BottomNavigationState, BottomNavigationAction> {
 
     class StyleBuilder internal constructor(style: Style) {
+        var elevation = style.elevation
         var outfitText = style.outfitText
         var colorBackground = style.colorBackground
         var outfitColor = style.outfitColor
 
         internal fun get() = Style(
+            elevation = elevation,
             outfitText = outfitText,
             colorBackground = colorBackground,
             outfitColor = outfitColor,
@@ -49,6 +53,7 @@ object BottomNavigation :
     }
 
     class Style(
+        val elevation: Dp = 2.dp,
         outfitText: OutfitTextStateColor? = null,
         colorBackground: Color? = null,
         outfitColor: OutfitStateBiStable<Color>? = null,
@@ -83,6 +88,7 @@ object BottomNavigation :
         }
 
         constructor(style: Style) : this(
+            elevation = style.elevation,
             outfitText = style.outfitText,
             colorBackground = style.colorBackground,
             outfitColor = style.outfitColor,
@@ -98,9 +104,10 @@ object BottomNavigation :
     private fun content(items: Set<BottomNavigationItemData>) {
         val accessor = DiAccessorCoreUiActivity().with(LocalActivity.current).contextSubMap()
         val action = accessor.with<BottomNavigation, _, _>().action()
-
+        val style = MaterialTheme.componentsCommonExtended.bottomNavigation
         BottomNavigation(
-            backgroundColor = MaterialTheme.componentsCommonExtended.bottomNavigation.colorBackground,
+            elevation = style.elevation,
+            backgroundColor = style.colorBackground,
         ) {
             items.forEach { item ->
                 BottomNavigationItem(
@@ -116,13 +123,13 @@ object BottomNavigation :
                     label = {
                         Text(
                             text = stringResource(id = item.titleResourceId),
-                            style = MaterialTheme.componentsCommonExtended.bottomNavigation.outfitText.typo,
+                            style =style.outfitText.typo,
                         )
                     },
-                    selectedContentColor = MaterialTheme.componentsCommonExtended.bottomNavigation.outfitColor.resolve(
+                    selectedContentColor = style.outfitColor.resolve(
                         OutfitState.BiStable.Selector.Enabled
                     ) ?: LocalContentColor.current,
-                    unselectedContentColor = MaterialTheme.componentsCommonExtended.bottomNavigation.outfitColor.resolve(
+                    unselectedContentColor = style.outfitColor.resolve(
                         OutfitState.BiStable.Selector.Disabled
                     ) ?: LocalContentColor.current.copy(alpha = ContentAlpha.medium),
                     alwaysShowLabel = true,

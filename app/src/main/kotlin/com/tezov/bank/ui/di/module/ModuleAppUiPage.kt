@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:58
+ *  Created by Tezov on 07/05/2023 17:18
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 13:57
+ *  Last modified 07/05/2023 16:29
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -56,12 +56,21 @@ interface ModuleAppUiPage {
             action: Action.PageHelpAndServiceAction
         ) = ComponentContextLazy.make(state, action)
 
+        //------------ *******
         @ScopeAppUiPage
         @Provides
         fun provideContextAccount(
             state: State.PageAccountState,
             action: Action.PageAccountAction
         ) = ComponentContextLazy.make(state, action)
+
+        @ScopeAppUiPage
+        @Provides
+        fun provideContextMessageInfo(
+            state: State.PageMessageInfoState,
+            action: Action.PageMessageInfoAction
+        ) = ComponentContextLazy.make(state, action)
+        //............ *******
 
         @ScopeAppUiPage
         @Provides
@@ -96,60 +105,69 @@ interface ModuleAppUiPage {
     object State {
         @ScopeAppUiPage
         class PageSplashState @Inject constructor() :
-            ComposableHolder<com.tezov.bank.ui.page.lobby.splash.PageSplashState>() {
+            ComposableHolder<com.tezov.bank.ui.pageMain.lobby.splash.PageSplashState>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.bank.ui.page.lobby.splash.PageSplashState.create()
+                com.tezov.bank.ui.pageMain.lobby.splash.PageSplashState.create()
         }
 
         @ScopeAppUiPage
         class PageLoginState @Inject constructor() :
-            ComposableHolder<com.tezov.bank.ui.page.lobby.login.PageLoginState>() {
+            ComposableHolder<com.tezov.bank.ui.pageMain.lobby.login.PageLoginState>() {
             @androidx.compose.runtime.Composable
-            override fun create() = com.tezov.bank.ui.page.lobby.login.PageLoginState.create()
+            override fun create() = com.tezov.bank.ui.pageMain.lobby.login.PageLoginState.create()
         }
 
         @ScopeAppUiPage
         class PageHelpAndServiceState @Inject constructor(
-        ) : ComposableHolder<com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceState>() {
+        ) : ComposableHolder<com.tezov.bank.ui.pageMain.lobby.help_and_service.PageHelpAndServiceState>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceState.create()
+                com.tezov.bank.ui.pageMain.lobby.help_and_service.PageHelpAndServiceState.create()
+        }
+
+        //------------ *******
+        @ScopeAppUiPage
+        class PageAccountState @Inject constructor() :
+            ComposableHolder<com.tezov.bank.ui.pageMain.auth.account.PageAccountState>() {
+            @androidx.compose.runtime.Composable
+            override fun create() = com.tezov.bank.ui.pageMain.auth.account.PageAccountState.create()
         }
 
         @ScopeAppUiPage
-        class PageAccountState @Inject constructor() :
-            ComposableHolder<com.tezov.bank.ui.page.auth.account.PageAccountState>() {
+        class PageMessageInfoState @Inject constructor() :
+            ComposableHolder<com.tezov.bank.ui.pageSecondary.auth.messageInfo.PageMessageInfoState>() {
             @androidx.compose.runtime.Composable
-            override fun create() = com.tezov.bank.ui.page.auth.account.PageAccountState.create()
+            override fun create() = com.tezov.bank.ui.pageSecondary.auth.messageInfo.PageMessageInfoState.create()
         }
+        //............ *******
 
         @ScopeAppUiPage
         class PageDiscoverState @Inject constructor() :
-            ComposableHolder<com.tezov.bank.ui.page.auth.discover.PageDiscoverState>() {
+            ComposableHolder<com.tezov.bank.ui.pageMain.auth.discover.PageDiscoverState>() {
             @androidx.compose.runtime.Composable
-            override fun create() = com.tezov.bank.ui.page.auth.discover.PageDiscoverState.create()
+            override fun create() = com.tezov.bank.ui.pageMain.auth.discover.PageDiscoverState.create()
         }
 
         @ScopeAppUiPage
         class PageHelpState @Inject constructor() :
-            ComposableHolder<com.tezov.bank.ui.page.auth.help.PageHelpState>() {
+            ComposableHolder<com.tezov.bank.ui.pageMain.auth.help.PageHelpState>() {
             @androidx.compose.runtime.Composable
-            override fun create() = com.tezov.bank.ui.page.auth.help.PageHelpState.create()
+            override fun create() = com.tezov.bank.ui.pageMain.auth.help.PageHelpState.create()
         }
 
         @ScopeAppUiPage
         class PagePaymentState @Inject constructor() :
-            ComposableHolder<com.tezov.bank.ui.page.auth.payment.PagePaymentState>() {
+            ComposableHolder<com.tezov.bank.ui.pageMain.auth.payment.PagePaymentState>() {
             @androidx.compose.runtime.Composable
-            override fun create() = com.tezov.bank.ui.page.auth.payment.PagePaymentState.create()
+            override fun create() = com.tezov.bank.ui.pageMain.auth.payment.PagePaymentState.create()
         }
 
         @ScopeAppUiPage
         class PageProfileState @Inject constructor() :
-            ComposableHolder<com.tezov.bank.ui.page.auth.profile.PageProfileState>() {
+            ComposableHolder<com.tezov.bank.ui.pageMain.auth.profile.PageProfileState>() {
             @androidx.compose.runtime.Composable
-            override fun create() = com.tezov.bank.ui.page.auth.profile.PageProfileState.create()
+            override fun create() = com.tezov.bank.ui.pageMain.auth.profile.PageProfileState.create()
         }
 
     }
@@ -158,10 +176,10 @@ interface ModuleAppUiPage {
         @ScopeAppUiPage
         class PageSplashAction @Inject constructor(
             private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
-        ) : ComposableHolder<com.tezov.bank.ui.page.lobby.splash.PageSplashAction>() {
+        ) : ComposableHolder<com.tezov.bank.ui.pageMain.lobby.splash.PageSplashAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.bank.ui.page.lobby.splash.PageSplashAction.create(
+                com.tezov.bank.ui.pageMain.lobby.splash.PageSplashAction.create(
                     navigationController.get()
                 )
         }
@@ -170,10 +188,10 @@ interface ModuleAppUiPage {
         class PageLoginAction @Inject constructor(
             private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
             private val dialogAction: ModuleCoreUiActivity.Action.DialogAction,
-        ) : ComposableHolder<com.tezov.bank.ui.page.lobby.login.PageLoginAction>() {
+        ) : ComposableHolder<com.tezov.bank.ui.pageMain.lobby.login.PageLoginAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.bank.ui.page.lobby.login.PageLoginAction.create(
+                com.tezov.bank.ui.pageMain.lobby.login.PageLoginAction.create(
                     navigationController.get(),
                     dialogAction.get()
                 )
@@ -182,34 +200,47 @@ interface ModuleAppUiPage {
         @ScopeAppUiPage
         class PageHelpAndServiceAction @Inject constructor(
             private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
-        ) : ComposableHolder<com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceAction>() {
+        ) : ComposableHolder<com.tezov.bank.ui.pageMain.lobby.help_and_service.PageHelpAndServiceAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.bank.ui.page.lobby.help_and_service.PageHelpAndServiceAction.create(
+                com.tezov.bank.ui.pageMain.lobby.help_and_service.PageHelpAndServiceAction.create(
                     navigationController.get(),
                 )
         }
 
+        //------------ *******
         @ScopeAppUiPage
         class PageAccountAction @Inject constructor(
             private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
             private val bottomSheetAction: ModuleCoreUiActivity.Action.BottomSheetAction,
-        ) : ComposableHolder<com.tezov.bank.ui.page.auth.account.PageAccountAction>() {
+        ) : ComposableHolder<com.tezov.bank.ui.pageMain.auth.account.PageAccountAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.bank.ui.page.auth.account.PageAccountAction.create(
+                com.tezov.bank.ui.pageMain.auth.account.PageAccountAction.create(
                     navigationController.get(),
                     bottomSheetAction.get()
                 )
         }
 
         @ScopeAppUiPage
-        class PageDiscoverAction @Inject constructor(
+        class PageMessageInfoAction @Inject constructor(
             private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
-        ) : ComposableHolder<com.tezov.bank.ui.page.auth.discover.PageDiscoverAction>() {
+        ) : ComposableHolder<com.tezov.bank.ui.pageSecondary.auth.messageInfo.PageMessageInfoAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.bank.ui.page.auth.discover.PageDiscoverAction.create(
+                com.tezov.bank.ui.pageSecondary.auth.messageInfo.PageMessageInfoAction.create(
+                    navigationController.get(),
+                )
+        }
+        //............ *******
+
+        @ScopeAppUiPage
+        class PageDiscoverAction @Inject constructor(
+            private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
+        ) : ComposableHolder<com.tezov.bank.ui.pageMain.auth.discover.PageDiscoverAction>() {
+            @androidx.compose.runtime.Composable
+            override fun create() =
+                com.tezov.bank.ui.pageMain.auth.discover.PageDiscoverAction.create(
                     navigationController.get()
                 )
         }
@@ -217,10 +248,10 @@ interface ModuleAppUiPage {
         @ScopeAppUiPage
         class PageHelpAction @Inject constructor(
             private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
-        ) : ComposableHolder<com.tezov.bank.ui.page.auth.help.PageHelpAction>() {
+        ) : ComposableHolder<com.tezov.bank.ui.pageMain.auth.help.PageHelpAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.bank.ui.page.auth.help.PageHelpAction.create(
+                com.tezov.bank.ui.pageMain.auth.help.PageHelpAction.create(
                     navigationController.get()
                 )
         }
@@ -228,10 +259,10 @@ interface ModuleAppUiPage {
         @ScopeAppUiPage
         class PagePaymentAction @Inject constructor(
             private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
-        ) : ComposableHolder<com.tezov.bank.ui.page.auth.payment.PagePaymentAction>() {
+        ) : ComposableHolder<com.tezov.bank.ui.pageMain.auth.payment.PagePaymentAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.bank.ui.page.auth.payment.PagePaymentAction.create(
+                com.tezov.bank.ui.pageMain.auth.payment.PagePaymentAction.create(
                     navigationController.get()
                 )
         }
@@ -240,10 +271,10 @@ interface ModuleAppUiPage {
         class PageProfileAction @Inject constructor(
             private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
             private val dialogAction: ModuleCoreUiActivity.Action.DialogAction,
-        ) : ComposableHolder<com.tezov.bank.ui.page.auth.profile.PageProfileAction>() {
+        ) : ComposableHolder<com.tezov.bank.ui.pageMain.auth.profile.PageProfileAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.bank.ui.page.auth.profile.PageProfileAction.create(
+                com.tezov.bank.ui.pageMain.auth.profile.PageProfileAction.create(
                     navigationController.get(),
                     dialogAction.get()
                 )
