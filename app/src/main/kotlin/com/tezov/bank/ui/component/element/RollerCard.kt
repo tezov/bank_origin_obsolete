@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:55
+ *  Last modified 07/05/2023 23:34
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -35,19 +35,19 @@ object RollerCard {
         style: Style
     ) {
         var outfitFrame = style.outfitFrame
-        var imageStyle = style.imageStyle
+        var styleImage = style.styleImage
         var outfitTextTitle = style.outfitTextTitle
 
         internal fun get() = Style(
             outfitFrame = outfitFrame,
-            imageStyle = imageStyle,
+            styleImage = styleImage,
             outfitTextTitle = outfitTextTitle,
         )
     }
 
     class Style(
         outfitFrame: OutfitFrameStateColor? = null,
-        imageStyle: Image.Simple.Style? = null,
+        styleImage: Image.Simple.Style? = null,
         val outfitTextTitle: OutfitTextStateColor? = null,
     ) {
         val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
@@ -56,8 +56,8 @@ object RollerCard {
                 ThemeColorsExtended.Dummy.outfitFrameState
             }
         )
-        val imageStyle: Image.Simple.Style by DelegateNullFallBack.Ref(
-            imageStyle,
+        val styleImage: Image.Simple.Style by DelegateNullFallBack.Ref(
+            styleImage,
             fallBackValue = {
                 Image.Simple.Style(
                     size = DpSize(96.dp)
@@ -78,7 +78,7 @@ object RollerCard {
 
         constructor(style: Style?) : this(
             outfitFrame = style?.outfitFrame,
-            imageStyle = style?.imageStyle,
+            styleImage = style?.styleImage,
             outfitTextTitle = style?.outfitTextTitle,
         )
 
@@ -108,7 +108,7 @@ object RollerCard {
                 modifier = Modifier.align(Alignment.CenterHorizontally),
                 resourceId = data.imageId,
                 description = null,
-                style = style.imageStyle
+                style = style.styleImage
             )
             Box(
                 modifier = Modifier

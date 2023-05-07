@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:15
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:14
+ *  Last modified 07/05/2023 23:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -130,7 +130,7 @@ object HorizontalPager {
             var spacingIndicator = style.spacingIndicator
 
             override fun get() = Style(
-                pagerStyle = super.get(),
+                stylePager = super.get(),
                 outfitShapeIndicator = outfitShapeIndicator,
                 sizeIndicator = sizeIndicator,
                 paddingTopIndicator = paddingTopIndicator,
@@ -139,12 +139,12 @@ object HorizontalPager {
         }
 
         class Style(
-            pagerStyle: Simple.Style? = null,
+            stylePager: Simple.Style? = null,
             outfitShapeIndicator: OutfitShapeStateColor? = null,
             paddingTopIndicator: Dp? = null,
             sizeIndicator: Dp? = null,
             spacingIndicator: Dp? = null,
-        ) : Simple.Style(pagerStyle) {
+        ) : Simple.Style(stylePager) {
 
             val outfitShapeIndicator: OutfitShapeStateColor by DelegateNullFallBack.Ref(
                 outfitShapeIndicator,
@@ -176,7 +176,7 @@ object HorizontalPager {
             }
 
             constructor(style: Style) : this(
-                pagerStyle = style,
+                stylePager = style,
                 outfitShapeIndicator = style.outfitShapeIndicator,
                 sizeIndicator = style.sizeIndicator,
                 spacingIndicator = style.spacingIndicator,
@@ -237,7 +237,7 @@ object HorizontalPager {
             var colorIndicator = style.colorIndicator
 
             override fun get() = Style(
-                pagerStyle = super.get(),
+                stylePager = super.get(),
                 outfitTextStateColor = outfitTextStateColor,
                 sizeIndicator = sizeIndicator,
                 colorIndicator = colorIndicator,
@@ -245,11 +245,11 @@ object HorizontalPager {
         }
 
         class Style(
-            pagerStyle: Simple.Style? = null,
+            stylePager: Simple.Style? = null,
             outfitTextStateColor: OutfitTextStateColor? = null,
             sizeIndicator: DpSize? = null,
             colorIndicator: OutfitStateBiStable<Color>? = null
-        ) : Simple.Style(pagerStyle) {
+        ) : Simple.Style(stylePager) {
 
             val outfitTextStateColor: OutfitTextStateColor by DelegateNullFallBack.Ref(
                 outfitTextStateColor,
@@ -286,13 +286,13 @@ object HorizontalPager {
                     }.get()
 
                 @Composable
-                fun Simple.Style.copyToIndicatorStyle(scope: @Composable StyleBuilder.() -> Unit) =
+                fun Simple.Style.copyToTabRowStyle(scope: @Composable StyleBuilder.() -> Unit) =
                     StyleBuilder(Style(this)).also { it.scope() }.get()
 
             }
 
             constructor(style: Style) : this(
-                pagerStyle = style,
+                stylePager = style,
                 outfitTextStateColor = style.outfitTextStateColor,
                 sizeIndicator = style.sizeIndicator,
                 colorIndicator = style.colorIndicator,

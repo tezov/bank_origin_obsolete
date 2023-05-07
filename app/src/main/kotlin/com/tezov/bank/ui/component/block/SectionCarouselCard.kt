@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:15
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 21:25
+ *  Last modified 07/05/2023 23:31
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,44 +34,44 @@ object SectionCarouselCard {
     class StyleBuilder internal constructor(
         style: Style
     ) {
-        var iconStyle = style.iconStyle
+        var styleIcon = style.styleIcon
         var outfitTextTitle = style.outfitTextTitle
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
-        var carouselStyle = style.carouselStyle
-        var cardStyle = style.cardStyle
+        var styleCarousel = style.styleCarousel
+        var styleCard = style.styleCard
 
         fun get() = Style(
-            iconStyle = iconStyle,
+            styleIcon = styleIcon,
             outfitTextTitle = outfitTextTitle,
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
-            carouselStyle = carouselStyle,
-            cardStyle = cardStyle,
+            styleCarousel = styleCarousel,
+            styleCard = styleCard,
         )
     }
 
     class Style(
-        iconStyle: Icon.Simple.Style? = null,
+        styleIcon: Icon.Simple.Style? = null,
         val outfitTextTitle: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
-        carouselStyle: HorizontalPager.WithIndicator.Style? = null,
-        cardStyle: CarouselCard.Style.Base? = null
+        styleCarousel: HorizontalPager.WithIndicator.Style? = null,
+        styleCard: CarouselCard.Style.Base? = null
     ) {
 
-        val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
-            iconStyle,
+        val styleIcon: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            styleIcon,
             fallBackValue = {
                 Icon.Simple.Style()
             }
         )
-        val carouselStyle: HorizontalPager.WithIndicator.Style by DelegateNullFallBack.Ref(
-            carouselStyle,
+        val styleCarousel: HorizontalPager.WithIndicator.Style by DelegateNullFallBack.Ref(
+            styleCarousel,
             fallBackValue = { HorizontalPager.WithIndicator.Style() }
         )
-        val cardStyle: CarouselCard.Style.Base by DelegateNullFallBack.Ref(
-            cardStyle,
+        val styleCard: CarouselCard.Style.Base by DelegateNullFallBack.Ref(
+            styleCard,
             fallBackValue = { CarouselCard.Style.Button() }
         )
 
@@ -87,12 +87,12 @@ object SectionCarouselCard {
         }
 
         constructor(style: Style) : this(
-            iconStyle = style.iconStyle,
+            styleIcon = style.styleIcon,
             outfitTextTitle = style.outfitTextTitle,
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
-            carouselStyle = style.carouselStyle,
-            cardStyle = style.cardStyle,
+            styleCarousel = style.styleCarousel,
+            styleCard = style.styleCard,
         )
 
     }
@@ -131,7 +131,7 @@ object SectionCarouselCard {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
-                            style = style.iconStyle,
+                            style = style.styleIcon,
                             resourceId = it,
                             description = text,
                         )
@@ -156,7 +156,7 @@ object SectionCarouselCard {
                             add {
                                 CarouselCard(
                                     data = card,
-                                    style = style.cardStyle,
+                                    style = style.styleCard,
                                     onClick = {
                                         onClick(index)
                                     }
@@ -168,7 +168,7 @@ object SectionCarouselCard {
                 HorizontalPager.WithIndicator(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    style = style.carouselStyle,
+                    style = style.styleCarousel,
                     items = cards
                 )
             }

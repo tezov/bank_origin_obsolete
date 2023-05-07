@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 16:08
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 16:03
+ *  Last modified 07/05/2023 23:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -38,24 +38,24 @@ object DropDownMenu {
         class StyleBuilder internal constructor(
             style: Style
         ) {
-            var iconStyle = style.iconStyle
+            var styleIcon = style.styleIcon
             var outfitText = style.outfitText
             var colorBackgroundMenu = style.colorBackgroundMenu
 
             internal fun get() = Style(
-                iconStyle = iconStyle,
+                styleIcon = styleIcon,
                 outfitText = outfitText,
                 colorBackgroundMenu = colorBackgroundMenu,
             )
         }
 
         class Style(
-            iconStyle: Icon.StateColor.Style? = null,
+            styleIcon: Icon.StateColor.Style? = null,
             outfitText: OutfitTextStateColor? = null,
             colorBackgroundMenu: ColorImport? = null,
         ) {
-            val iconStyle: Icon.StateColor.Style by DelegateNullFallBack.Ref(
-                iconStyle,
+            val styleIcon: Icon.StateColor.Style by DelegateNullFallBack.Ref(
+                styleIcon,
                 fallBackValue = {
                     Icon.StateColor.Style()
                 })
@@ -82,7 +82,7 @@ object DropDownMenu {
             }
 
             constructor(style: Style) : this(
-                iconStyle = style.iconStyle,
+                styleIcon = style.styleIcon,
                 outfitText = style.outfitText,
                 colorBackgroundMenu = style.colorBackgroundMenu,
             )
@@ -116,7 +116,7 @@ object DropDownMenu {
                 ){
                     Icon.StateColor(
                         modifier = modifierIcon,
-                        style = style.iconStyle,
+                        style = style.styleIcon,
                         painter = painter,
                         description = description,
                         selector = selector

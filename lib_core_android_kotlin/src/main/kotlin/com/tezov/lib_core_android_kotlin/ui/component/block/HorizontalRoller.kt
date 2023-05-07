@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 19:09
+ *  Last modified 07/05/2023 23:36
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,7 +33,7 @@ import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 object HorizontalRoller {
 
-    object Page {
+    object Simple {
 
         open class StyleBuilder internal constructor(style: Style) {
             var spacingItem = style.spacingItem
@@ -109,22 +109,22 @@ object HorizontalRoller {
 
     object Card {
 
-        class StyleBuilder internal constructor(style: Style) : Page.StyleBuilder(style) {
+        class StyleBuilder internal constructor(style: Style) : Simple.StyleBuilder(style) {
             var outfitFrame = style.outfitFrame
             var marginCard = style.marginCard
 
             override fun get() = Style(
-                pagerStyle = super.get(),
+                stylePager = super.get(),
                 outfitFrame = outfitFrame,
                 marginCard = marginCard,
             )
         }
 
         class Style(
-            pagerStyle: Page.Style? = null,
+            stylePager: Simple.Style? = null,
             outfitFrame: OutfitFrameStateColor? = null,
             marginCard: PaddingValues = PaddingValues(horizontal = 4.dp),
-        ) : Page.Style(pagerStyle) {
+        ) : Simple.Style(stylePager) {
 
             val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
                 outfitFrame,
@@ -152,13 +152,13 @@ object HorizontalRoller {
                     }.get()
 
                 @Composable
-                fun Page.Style.copyToCarouselCardStyle(scope: @Composable StyleBuilder.() -> Unit) =
+                fun Simple.Style.copyToCardStyle(scope: @Composable StyleBuilder.() -> Unit) =
                     StyleBuilder(Style(this)).also { it.scope() }.get()
 
             }
 
             constructor(style: Style) : this(
-                pagerStyle = style,
+                stylePager = style,
                 outfitFrame = style.outfitFrame,
                 marginCard = style.marginCard,
             )
@@ -171,7 +171,7 @@ object HorizontalRoller {
             itemSelected: Int = 0,
             items: List<@Composable LazyItemScope.() -> Unit>,
         ) {
-            Page(modifier, style, itemSelected, items.map { content ->
+            Simple(modifier, style, itemSelected, items.map { content ->
                 {
                     Surface(
                         shape = style.outfitFrame.getShape() ?: RectangleShape,

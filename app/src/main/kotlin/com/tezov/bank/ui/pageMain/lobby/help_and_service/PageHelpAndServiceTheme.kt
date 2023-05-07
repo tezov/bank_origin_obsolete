@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:32
+ *  Last modified 07/05/2023 23:34
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -113,8 +113,8 @@ object PageHelpAndServiceTheme {
         },
         sectionCard = ThemeComponentProviders.sectionTileStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-            tileStyle = tileStyle.copy {
-                iconStyle = iconStyle.copy {
+            styleTile = styleTile.copy {
+                styleIcon = styleIcon.copy {
                     size = MaterialTheme.dimensionsIconExtended.info.big
                 }
             }

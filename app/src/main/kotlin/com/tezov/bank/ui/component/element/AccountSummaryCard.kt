@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:56
+ *  Last modified 07/05/2023 23:34
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,32 +40,32 @@ object AccountSummaryCard {
         style: Style
     ) {
         var outfitFrame = style.outfitFrame
-        var iconInfoStyle = style.iconInfoStyle
+        var styleIconInfo = style.styleIconInfo
         var outfitTextSurtitle = style.outfitTextSurtitle
         var outfitTextTitle = style.outfitTextTitle
         var outfitTextSubtitle = style.outfitTextSubtitle
         var outfitTextAmount = style.outfitTextAmount
-        var dropDownMenuStyle = style.dropDownMenuStyle
+        var styleDropDownMenu = style.styleDropDownMenu
 
         internal fun get() = Style(
             outfitFrame = outfitFrame,
-            iconInfoStyle = iconInfoStyle,
+            styleIconInfo = styleIconInfo,
             outfitTextSurtitle = outfitTextSurtitle,
             outfitTextTitle = outfitTextTitle,
             outfitTextSubtitle = outfitTextSubtitle,
             outfitTextAmount = outfitTextAmount,
-            dropDownMenuStyle = dropDownMenuStyle,
+            styleDropDownMenu = styleDropDownMenu,
         )
     }
 
     class Style(
         outfitFrame: OutfitFrameStateColor? = null,
-        iconInfoStyle: Icon.Simple.Style? = null,
+        styleIconInfo: Icon.Simple.Style? = null,
         val outfitTextSurtitle: OutfitTextStateColor? = null,
         val outfitTextTitle: OutfitTextStateColor? = null,
         val outfitTextSubtitle: OutfitTextStateColor? = null,
         val outfitTextAmount: OutfitTextStateColor? = null,
-        dropDownMenuStyle: DropDownMenu.StateColor.Style? = null,
+        styleDropDownMenu: DropDownMenu.StateColor.Style? = null,
     ) {
         val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
             outfitFrame,
@@ -73,14 +73,14 @@ object AccountSummaryCard {
                 ThemeColorsExtended.Dummy.outfitFrameState
             }
         )
-        val iconInfoStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
-            iconInfoStyle,
+        val styleIconInfo: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            styleIconInfo,
             fallBackValue = {
                 Icon.Simple.Style()
             }
         )
-        val dropDownMenuStyle: DropDownMenu.StateColor.Style by DelegateNullFallBack.Ref(
-            dropDownMenuStyle,
+        val styleDropDownMenu: DropDownMenu.StateColor.Style by DelegateNullFallBack.Ref(
+            styleDropDownMenu,
             fallBackValue = {
                 DropDownMenu.StateColor.Style()
             }
@@ -99,12 +99,12 @@ object AccountSummaryCard {
 
         constructor(style: Style?) : this(
             outfitFrame = style?.outfitFrame,
-            iconInfoStyle = style?.iconInfoStyle,
+            styleIconInfo = style?.styleIconInfo,
             outfitTextSurtitle = style?.outfitTextSurtitle,
             outfitTextTitle = style?.outfitTextTitle,
             outfitTextSubtitle = style?.outfitTextSubtitle,
             outfitTextAmount = style?.outfitTextAmount,
-            dropDownMenuStyle = style?.dropDownMenuStyle,
+            styleDropDownMenu = style?.styleDropDownMenu,
         )
 
     }
@@ -269,14 +269,14 @@ object AccountSummaryCard {
                 modifier = Modifier
                     .padding(horizontal = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal)
                     .layoutId(MotionLayoutItem.ICON_INFO.name),
-                style = style.iconInfoStyle,
+                style = style.styleIconInfo,
                 resourceId = data.iconInfoId,
                 description = data.title
             )
             DropDownMenu.StateColor(
                 modifierBox = Modifier
                     .layoutId(MotionLayoutItem.ICON_ACTION.name),
-                style =  style.dropDownMenuStyle,
+                style =  style.styleDropDownMenu,
                 resourceId = data.iconActionId,
                 description = data.surtitle,
                 items = data.actions,

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:49
+ *  Last modified 07/05/2023 23:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -51,13 +51,13 @@ object SimpleTile {
         style: Style
     ) {
         var outfitFrame = style.outfitFrame
-        var iconStyle = style.iconStyle
+        var styleIcon = style.styleIcon
         var outfitTextTitle = style.outfitTextTitle
         var outfitTextSubtitle = style.outfitTextSubtitle
 
         fun get() = Style(
             outfitFrame = outfitFrame,
-            iconStyle = iconStyle,
+            styleIcon = styleIcon,
             outfitTextTitle = outfitTextTitle,
             outfitTextSubtitle = outfitTextSubtitle,
         )
@@ -65,7 +65,7 @@ object SimpleTile {
 
     class Style(
         outfitFrame: OutfitFrameStateColor? = null,
-        iconStyle: Icon.Simple.Style? = null,
+        styleIcon: Icon.Simple.Style? = null,
         val outfitTextTitle: OutfitTextStateColor? = null,
         val outfitTextSubtitle: OutfitTextStateColor? = null,
     ) {
@@ -76,8 +76,8 @@ object SimpleTile {
             }
         )
 
-        val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
-            iconStyle,
+        val styleIcon: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            styleIcon,
             fallBackValue = {
                 Icon.Simple.Style()
             }
@@ -96,18 +96,18 @@ object SimpleTile {
 
         constructor(style: Style) : this(
             outfitFrame = style.outfitFrame,
-            iconStyle = style.iconStyle,
+            styleIcon = style.styleIcon,
             outfitTextTitle = style.outfitTextTitle,
             outfitTextSubtitle = style.outfitTextSubtitle,
         )
 
         @Composable
         internal fun iconStyle(color: Color?) = color?.let {
-            iconStyle.copy {
+            styleIcon.copy {
                 tint = it
             }
         } ?: run {
-            iconStyle
+            styleIcon
         }
 
     }

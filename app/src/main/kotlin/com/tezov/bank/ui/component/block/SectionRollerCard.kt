@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:56
+ *  Last modified 07/05/2023 23:34
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -36,54 +36,54 @@ object SectionRollerCard {
     class StyleBuilder internal constructor(
         style: Style
     ) {
-        var iconStyle = style.iconStyle
+        var styleIcon = style.styleIcon
         var outfitTextTitle = style.outfitTextTitle
         var outfitTextSubTitle = style.outfitTextSubTitle
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
-        var actionStyle = style.actionStyle
-        var rollerStyle = style.rollerStyle
-        var cardStyle = style.cardStyle
+        var styleAction = style.styleAction
+        var styleRoller = style.styleRoller
+        var styleCard = style.styleCard
 
         fun get() = Style(
-            iconStyle = iconStyle,
+            styleIcon = styleIcon,
             outfitTextTitle = outfitTextTitle,
             outfitTextSubTitle = outfitTextSubTitle,
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
-            actionStyle = actionStyle,
-            rollerStyle = rollerStyle,
-            cardStyle = cardStyle,
+            styleAction = styleAction,
+            styleRoller = styleRoller,
+            styleCard = styleCard,
         )
     }
 
     class Style(
-        iconStyle: Icon.Simple.Style? = null,
+        styleIcon: Icon.Simple.Style? = null,
         val outfitTextTitle: OutfitText.StateColor.Style? = null,
         val outfitTextSubTitle: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
-        actionStyle: Button.StateColor.Style? = null,
-        rollerStyle: HorizontalRoller.Page.Style? = null,
-        cardStyle: RollerCard.Style? = null
+        styleAction: Button.StateColor.Style? = null,
+        styleRoller: HorizontalRoller.Simple.Style? = null,
+        styleCard: RollerCard.Style? = null
     ) {
 
-        val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
-            iconStyle,
+        val styleIcon: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            styleIcon,
             fallBackValue = {
                 Icon.Simple.Style()
             }
         )
-        val actionStyle: Button.StateColor.Style by DelegateNullFallBack.Ref(
-            actionStyle,
+        val styleAction: Button.StateColor.Style by DelegateNullFallBack.Ref(
+            styleAction,
             fallBackValue = { Button.StateColor.Style() }
         )
-        val rollerStyle: HorizontalRoller.Page.Style by DelegateNullFallBack.Ref(
-            rollerStyle,
-            fallBackValue = { HorizontalRoller.Page.Style() }
+        val styleRoller: HorizontalRoller.Simple.Style by DelegateNullFallBack.Ref(
+            styleRoller,
+            fallBackValue = { HorizontalRoller.Simple.Style() }
         )
-        val cardStyle: RollerCard.Style by DelegateNullFallBack.Ref(
-            cardStyle,
+        val styleCard: RollerCard.Style by DelegateNullFallBack.Ref(
+            styleCard,
             fallBackValue = { RollerCard.Style() }
         )
 
@@ -99,14 +99,14 @@ object SectionRollerCard {
         }
 
         constructor(style: Style) : this(
-            iconStyle = style.iconStyle,
+            styleIcon = style.styleIcon,
             outfitTextTitle = style.outfitTextTitle,
             outfitTextSubTitle = style.outfitTextSubTitle,
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
-            actionStyle = style.actionStyle,
-            rollerStyle = style.rollerStyle,
-            cardStyle = style.cardStyle,
+            styleAction = style.styleAction,
+            styleRoller = style.styleRoller,
+            styleCard = style.styleCard,
         )
 
     }
@@ -149,7 +149,7 @@ object SectionRollerCard {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
-                            style = style.iconStyle,
+                            style = style.styleIcon,
                             resourceId = it,
                             description = text,
                         )
@@ -186,17 +186,17 @@ object SectionRollerCard {
                                 RollerCard(
                                     modifier = Modifier.fillMaxSize(),
                                     data = card,
-                                    style = style.cardStyle,
+                                    style = style.styleCard,
                                     onClick = onClickCard?.let { { it(index) } }
                                 )
                             }
                         }
                     }
                 }
-                HorizontalRoller.Page(
+                HorizontalRoller.Simple(
                     modifier = Modifier
                         .fillMaxWidth(),
-                    style = style.rollerStyle,
+                    style = style.styleRoller,
                     items = cards,
                 )
             }
@@ -209,7 +209,7 @@ object SectionRollerCard {
                             top = MaterialTheme.dimensionsPaddingExtended.element.big.vertical
                         ),
                     text = data.action,
-                    style = style.actionStyle,
+                    style = style.styleAction,
                     onClick = onClickButton,
                 )
             }

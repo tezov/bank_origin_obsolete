@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:55
+ *  Last modified 07/05/2023 23:34
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -39,14 +39,14 @@ object AccountValueSimpleRow {
     class StyleBuilder internal constructor(
         style: Style
     ) {
-        var iconStyle = style.iconStyle
+        var styleIcon = style.styleIcon
         var outfitTextTitle = style.outfitTextTitle
         var outfitTextSubTitle = style.outfitTextSubTitle
         var outfitTextAmount = style.outfitTextAmount
         var background = style.background
 
         fun get() = Style(
-            iconStyle = iconStyle,
+            styleIcon = styleIcon,
             outfitTextTitle = outfitTextTitle,
             outfitTextSubTitle = outfitTextSubTitle,
             outfitTextAmount = outfitTextAmount,
@@ -55,14 +55,14 @@ object AccountValueSimpleRow {
     }
 
     class Style(
-        iconStyle: Icon.StateColor.Style? = null,
+        styleIcon: Icon.StateColor.Style? = null,
         val outfitTextTitle: OutfitTextStateColor? = null,
         val outfitTextSubTitle: OutfitTextStateColor? = null,
         val outfitTextAmount: OutfitTextStateColor? = null,
         val background: Color? = null,
     ) {
-        val iconStyle: Icon.StateColor.Style by DelegateNullFallBack.Ref(
-            iconStyle,
+        val styleIcon: Icon.StateColor.Style by DelegateNullFallBack.Ref(
+            styleIcon,
             fallBackValue = {
                 Icon.StateColor.Style()
             }
@@ -80,7 +80,7 @@ object AccountValueSimpleRow {
         }
 
         constructor(style: Style) : this(
-            iconStyle = style.iconStyle,
+            styleIcon = style.styleIcon,
             outfitTextTitle = style.outfitTextTitle,
             outfitTextSubTitle = style.outfitTextSubTitle,
             outfitTextAmount = style.outfitTextAmount,
@@ -89,7 +89,7 @@ object AccountValueSimpleRow {
 
         @Composable
         internal fun iconStyle(color: Color?) = color?.let {
-            iconStyle.copy {
+            styleIcon.copy {
                 outfitFrame = outfitFrame?.copy {
                     outfitShape = outfitShape.copy {
                         outfitState = it.asStateSimple
@@ -97,7 +97,7 @@ object AccountValueSimpleRow {
                 }
             }
         } ?: run {
-            iconStyle
+            styleIcon
         }
 
     }

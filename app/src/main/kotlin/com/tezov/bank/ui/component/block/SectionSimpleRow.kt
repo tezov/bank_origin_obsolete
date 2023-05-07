@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:56
+ *  Last modified 07/05/2023 23:34
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -37,46 +37,46 @@ object SectionSimpleRow {
     class StyleBuilder internal constructor(
         style: Style
     ) {
-        var iconStyle = style.iconStyle
+        var styleIcon = style.styleIcon
         var outfitTextTitle = style.outfitTextTitle
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
         var colorDivider = style.colorDivider
         var sizeDivider = style.sizeDivider
         var paddingBody = style.paddingBody
-        var rowStyle = style.rowStyle
+        var styleRow = style.styleRow
 
         fun get() = Style(
-            iconStyle = iconStyle,
+            styleIcon = styleIcon,
             outfitTextTitle = outfitTextTitle,
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
             colorDivider = colorDivider,
             sizeDivider = sizeDivider,
             paddingBody = paddingBody,
-            rowStyle = rowStyle,
+            styleRow = styleRow,
         )
     }
 
     class Style(
-        iconStyle: Icon.Simple.Style? = null,
+        styleIcon: Icon.Simple.Style? = null,
         val outfitTextTitle: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
         val colorDivider: Color? = null,
         val sizeDivider: Dp = 1.dp,
         val paddingBody: Dp = 0.dp,
-        rowStyle: SimpleRow.Style? = null
+        styleRow: SimpleRow.Style? = null
     ) {
 
-        val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
-            iconStyle,
+        val styleIcon: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            styleIcon,
             fallBackValue = {
                 Icon.Simple.Style()
             }
         )
-        val rowStyle: SimpleRow.Style by DelegateNullFallBack.Ref(
-            rowStyle,
+        val styleRow: SimpleRow.Style by DelegateNullFallBack.Ref(
+            styleRow,
             fallBackValue = { SimpleRow.Style() }
         )
 
@@ -92,14 +92,14 @@ object SectionSimpleRow {
         }
 
         constructor(style: Style) : this(
-            iconStyle = style.iconStyle,
+            styleIcon = style.styleIcon,
             outfitTextTitle = style.outfitTextTitle,
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
             colorDivider = style.colorDivider,
             sizeDivider = style.sizeDivider,
             paddingBody = style.paddingBody,
-            rowStyle = style.rowStyle,
+            styleRow = style.styleRow,
         )
 
     }
@@ -138,7 +138,7 @@ object SectionSimpleRow {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
-                            style = style.iconStyle,
+                            style = style.styleIcon,
                             resourceId = it,
                             description = text,
                         )
@@ -166,7 +166,7 @@ object SectionSimpleRow {
                 data.rows.forEachIndexed { index, row ->
                     SimpleRow(
                         modifier = Modifier.padding(horizontal = style.paddingBody),
-                        data = row, style = style.rowStyle
+                        data = row, style = style.styleRow
                     ) {
                         onClick(index)
                     }

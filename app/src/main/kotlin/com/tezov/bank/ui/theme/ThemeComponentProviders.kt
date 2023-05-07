@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:15
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:03
+ *  Last modified 07/05/2023 23:34
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,7 +34,7 @@ import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager.WithIndicator.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller
-import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller.Page.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.*
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link.StateColor.Style.Companion.copy
@@ -230,7 +230,7 @@ object ThemeComponentProviders {
                 outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
             }
         ),
-        iconInfoStyle = Icon.Simple.Style(
+        styleIconInfo = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.action.normal,
             tint = MaterialTheme.colorsExtended.onPrimary.default
         ),
@@ -255,12 +255,12 @@ object ThemeComponentProviders {
                 fontWeight = FontWeight.Bold
             )
         },
-        dropDownMenuStyle = dropDownMenu(),
+        styleDropDownMenu = dropDownMenu(),
     )
 
     @Composable
     fun sectionSimpleRowStyle() = SectionSimpleRow.Style(
-        iconStyle = Icon.Simple.Style(
+        styleIcon = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
@@ -270,16 +270,16 @@ object ThemeComponentProviders {
         colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.overlay,
         colorDivider = MaterialTheme.colorsExtended.backgroundElevated.fade,
         sizeDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
-        rowStyle = simpleRowStyle()
+        styleRow = simpleRowStyle()
     )
 
     @Composable
     fun simpleRowStyle() = SimpleRow.Style(
-        iconInfoStyle = Icon.Simple.Style(
+        styleIconInfo = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
-        iconActionStyle = Icon.Simple.Style(
+        styleIconAction = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.action.small,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
@@ -293,7 +293,7 @@ object ThemeComponentProviders {
         outfitTextTitle = MaterialTheme.typographiesExtended.label.big.copy {
             outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
         },
-        iconInfoStyle = Icon.StateColor.Style(
+        styleIconInfo = Icon.StateColor.Style(
             size = MaterialTheme.dimensionsIconExtended.info.micro,
             tint = MaterialTheme.colorsExtended.background.default,
             outfitFrame = OutfitFrameStateColor(
@@ -305,12 +305,12 @@ object ThemeComponentProviders {
         colorBackgroundHeader = null,
         colorDivider = MaterialTheme.colorsExtended.backgroundElevated.fade,
         sizeDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
-        rowStyle = accountValueSimpleRowStyle()
+        styleRow = accountValueSimpleRowStyle()
     )
 
     @Composable
     fun accountValueSimpleRowStyle() = AccountValueSimpleRow.Style(
-        iconStyle = Icon.StateColor.Style(
+        styleIcon = Icon.StateColor.Style(
             size = MaterialTheme.dimensionsIconExtended.info.small,
             tint = MaterialTheme.colorsExtended.background.default,
             outfitFrame = OutfitFrameStateColor(
@@ -331,7 +331,7 @@ object ThemeComponentProviders {
 
     @Composable
     fun sectionTileStyle() = SectionSimpleTile.Style(
-        iconStyle = Icon.Simple.Style(
+        styleIcon = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
@@ -342,7 +342,7 @@ object ThemeComponentProviders {
             )
         },
         colorBackgroundHeader = null,
-        tileStyle = tileStyle()
+        styleTile = tileStyle()
     )
 
     @Composable
@@ -352,7 +352,7 @@ object ThemeComponentProviders {
                 outfitState = MaterialTheme.colorsExtended.backgroundElevated.default.asStateSimple
             }
         ),
-        iconStyle = Icon.Simple.Style(
+        styleIcon = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
@@ -380,7 +380,7 @@ object ThemeComponentProviders {
     @Composable
     fun sectionCarouselCardStyle(cardStyle: CarouselCard.Style.Base) =
         SectionCarouselCard.Style(
-            iconStyle = Icon.Simple.Style(
+            styleIcon = Icon.Simple.Style(
                 size = MaterialTheme.dimensionsIconExtended.info.normal,
                 tint = MaterialTheme.colorsExtended.primary.accent
             ),
@@ -390,12 +390,12 @@ object ThemeComponentProviders {
                     fontWeight = FontWeight.Bold
                 )
             },
-            carouselStyle = pagerWidthIndicatorStyle().copy {
+            styleCarousel = pagerWidthIndicatorStyle().copy {
                 paddingContent = PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal + MaterialTheme.dimensionsPaddingExtended.element.big.horizontal)
                 spacingItem = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             },
             colorBackgroundHeader = null,
-            cardStyle = cardStyle,
+            styleCard = cardStyle,
         )
 
     @Composable
@@ -409,7 +409,7 @@ object ThemeComponentProviders {
                     outfitState = MaterialTheme.colorsExtended.backgroundElevated.decor.asStateSimple
                 },
             ),
-            iconStyle = Icon.Simple.Style(
+            styleIcon = Icon.Simple.Style(
                 size = MaterialTheme.dimensionsIconExtended.info.big,
                 tint = MaterialTheme.colorsExtended.primary.accent.copy(alpha = 0.5f)
             ),
@@ -450,7 +450,7 @@ object ThemeComponentProviders {
                     outfitState = MaterialTheme.colorsExtended.backgroundElevated.overlay.asStateSimple
                 },
             ),
-            iconStyle = Icon.Simple.Style(
+            styleIcon = Icon.Simple.Style(
                 size = MaterialTheme.dimensionsIconExtended.info.normal,
                 tint = MaterialTheme.colorsExtended.primary.accent
             ),
@@ -476,12 +476,12 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun rollerStyle() = HorizontalRoller.Page.Style()
+    fun rollerStyle() = HorizontalRoller.Simple.Style()
 
     @Composable
     fun sectionRollerCardStyle() =
         SectionRollerCard.Style(
-            iconStyle = Icon.Simple.Style(
+            styleIcon = Icon.Simple.Style(
                 size = MaterialTheme.dimensionsIconExtended.info.normal,
                 tint = MaterialTheme.colorsExtended.primary.accent
             ),
@@ -497,7 +497,7 @@ object ThemeComponentProviders {
                     fontWeight = FontWeight.Bold
                 )
             },
-            actionStyle = MaterialTheme.componentsButtonExtended.primary.copy {
+            styleAction = MaterialTheme.componentsButtonExtended.primary.copy {
                 outfitText = outfitText.copy {
                     outfitState = MaterialTheme.colorsExtended.primary.shiny.asStateSimple
                 }
@@ -507,12 +507,12 @@ object ThemeComponentProviders {
                     }
                 }
             },
-            rollerStyle = rollerStyle().copy {
+            styleRoller = rollerStyle().copy {
                 paddingContent =
                     PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal)
                 spacingItem = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal
             },
-            cardStyle = rollerCardStyle()
+            styleCard = rollerCardStyle()
         )
 
     @Composable
@@ -523,7 +523,7 @@ object ThemeComponentProviders {
                 outfitState = MaterialTheme.colorsExtended.primary.fade.asStateSimple
             },
         ),
-        imageStyle = Image.Simple.Style(
+        styleImage = Image.Simple.Style(
             size = 96.dpSize,
             contentScale = ContentScale.FillBounds
         ),

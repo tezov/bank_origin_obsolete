@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:15
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 21:25
+ *  Last modified 07/05/2023 23:34
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -35,7 +35,7 @@ import com.tezov.bank.ui.theme.ThemeComponentProviders
 import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.type.primaire.dpSize
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager.WithIndicator.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller.Page.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Image.Simple.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
@@ -154,7 +154,7 @@ object PageDiscoverTheme {
         sectionCarouselCardButton = ThemeComponentProviders.sectionCarouselCardStyle(
             cardStyle = ThemeComponentProviders.carouselCardButtonStyle()
         ).copy{
-            carouselStyle = carouselStyle.copy {
+            styleCarousel = styleCarousel.copy {
                 paddingTopIndicator = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical
                 heightItemToHighest = true
             }
@@ -162,25 +162,25 @@ object PageDiscoverTheme {
         sectionCarouselCardLink = ThemeComponentProviders.sectionCarouselCardStyle(
             cardStyle = ThemeComponentProviders.carouselCardLinkStyle()
         ).copy{
-            carouselStyle = carouselStyle.copy {
+            styleCarousel = styleCarousel.copy {
                 paddingTopIndicator = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical
                 heightItemToHighest = true
             }
         },
         sectionRollerCard = ThemeComponentProviders.sectionRollerCardStyle().copy{
-            rollerStyle = rollerStyle.copy {
+            styleRoller = styleRoller.copy {
                 heightItemToHighest = true
             }
-            cardStyle = cardStyle.copy{
-                imageStyle = imageStyle.copy{
+            styleCard = styleCard.copy{
+                styleImage = styleImage.copy{
                     size = dimensions.imageCard
                 }
             }
         },
         sectionActionCard = ThemeComponentProviders.sectionTileStyle().copy {
             paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-            tileStyle = tileStyle.copy {
-                iconStyle = iconStyle.copy {
+            styleTile = styleTile.copy {
+                styleIcon = styleIcon.copy {
                     size = MaterialTheme.dimensionsIconExtended.info.huge
                 }
             }

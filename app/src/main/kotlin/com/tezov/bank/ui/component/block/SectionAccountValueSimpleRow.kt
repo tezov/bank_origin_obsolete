@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:53
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 13:46
+ *  Last modified 07/05/2023 23:32
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -38,46 +38,46 @@ object SectionAccountValueSimpleRow {
         style: Style
     ) {
         var outfitTextTitle = style.outfitTextTitle
-        var iconInfoStyle = style.iconInfoStyle
+        var styleIconInfo = style.styleIconInfo
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
         var colorDivider = style.colorDivider
         var sizeDivider = style.sizeDivider
         var paddingBody = style.paddingBody
-        var rowStyle = style.rowStyle
+        var styleRow = style.styleRow
 
         fun get() = Style(
             outfitTextTitle = outfitTextTitle,
-            iconInfoStyle = iconInfoStyle,
+            styleIconInfo = styleIconInfo,
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
             colorDivider = colorDivider,
             sizeDivider = sizeDivider,
             paddingBody = paddingBody,
-            rowStyle = rowStyle,
+            styleRow = styleRow,
         )
     }
 
     class Style(
         val outfitTextTitle: OutfitText.StateColor.Style? = null,
-        iconInfoStyle: Icon.StateColor.Style? = null,
+        styleIconInfo: Icon.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
         val colorDivider: Color? = null,
         val sizeDivider: Dp = 1.dp,
         val paddingBody: Dp = 0.dp,
-        rowStyle: AccountValueSimpleRow.Style? = null
+        styleRow: AccountValueSimpleRow.Style? = null
     ) {
 
-        val iconInfoStyle: Icon.StateColor.Style by DelegateNullFallBack.Ref(
-            iconInfoStyle,
+        val styleIconInfo: Icon.StateColor.Style by DelegateNullFallBack.Ref(
+            styleIconInfo,
             fallBackValue = {
                 Icon.StateColor.Style()
             }
         )
 
-        val rowStyle: AccountValueSimpleRow.Style by DelegateNullFallBack.Ref(
-            rowStyle,
+        val styleRow: AccountValueSimpleRow.Style by DelegateNullFallBack.Ref(
+            styleRow,
             fallBackValue = { AccountValueSimpleRow.Style() }
         )
 
@@ -94,13 +94,13 @@ object SectionAccountValueSimpleRow {
 
         constructor(style: Style) : this(
             outfitTextTitle = style.outfitTextTitle,
-            iconInfoStyle = style.iconInfoStyle,
+            styleIconInfo = style.styleIconInfo,
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
             colorDivider = style.colorDivider,
             sizeDivider = style.sizeDivider,
             paddingBody = style.paddingBody,
-            rowStyle = style.rowStyle,
+            styleRow = style.styleRow,
         )
 
     }
@@ -153,7 +153,7 @@ object SectionAccountValueSimpleRow {
                             onClick = onClickInfo
                         ){
                             Icon.StateColor(
-                                style = style.iconInfoStyle,
+                                style = style.styleIconInfo,
                                 resourceId = it,
                                 description = null,
                             )
@@ -181,7 +181,7 @@ object SectionAccountValueSimpleRow {
                             end = style.paddingBody,
                             bottom = MaterialTheme.dimensionsPaddingExtended.element.normal.vertical,
                         ),
-                        data = row, style = style.rowStyle
+                        data = row, style = style.styleRow
                     ) {
                         onClickRow(index)
                     }

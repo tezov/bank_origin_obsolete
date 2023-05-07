@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:56
+ *  Last modified 07/05/2023 23:28
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -37,40 +37,40 @@ object SectionSimpleTile {
     class StyleBuilder internal constructor(
         style: Style
     ) {
-        var iconStyle = style.iconStyle
+        var styleIcon = style.styleIcon
         var outfitTextTitle = style.outfitTextTitle
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
         var paddingBody = style.paddingBody
-        var tileStyle = style.tileStyle
+        var styleTile = style.styleTile
 
         fun get() = Style(
-            iconStyle = iconStyle,
+            styleIcon = styleIcon,
             outfitTextTitle = outfitTextTitle,
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
             paddingBody = paddingBody,
-            tileStyle = tileStyle,
+            styleTile = styleTile,
         )
     }
 
     class Style(
-        iconStyle: Icon.Simple.Style? = null,
+        styleIcon: Icon.Simple.Style? = null,
         val outfitTextTitle: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
         val paddingBody: Dp = 0.dp,
-        tileStyle: SimpleTile.Style? = null
+        styleTile: SimpleTile.Style? = null
     ) {
 
-        val iconStyle: Icon.Simple.Style by DelegateNullFallBack.Ref(
-            iconStyle,
+        val styleIcon: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            styleIcon,
             fallBackValue = {
                 Icon.Simple.Style()
             }
         )
-        val tileStyle: SimpleTile.Style by DelegateNullFallBack.Ref(
-            tileStyle,
+        val styleTile: SimpleTile.Style by DelegateNullFallBack.Ref(
+            styleTile,
             fallBackValue = { SimpleTile.Style() }
         )
 
@@ -86,12 +86,12 @@ object SectionSimpleTile {
         }
 
         constructor(style: Style) : this(
-            iconStyle = style.iconStyle,
+            styleIcon = style.styleIcon,
             outfitTextTitle = style.outfitTextTitle,
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
             paddingBody = style.paddingBody,
-            tileStyle = style.tileStyle,
+            styleTile = style.styleTile,
         )
 
     }
@@ -133,7 +133,7 @@ object SectionSimpleTile {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
-                            style = style.iconStyle,
+                            style = style.styleIcon,
                             resourceId = it,
                             description = text,
                         )
@@ -182,18 +182,18 @@ object SectionSimpleTile {
                     if (first != null && second != null) {
                         if (first.data.template.isInlined) {
                             push(second)
-                            ContentRowUno(style.tileStyle, first, onClick)
+                            ContentRowUno(style.styleTile, first, onClick)
                         } else if (second.data.template.isInlined) {
                             push(first)
-                            ContentRowUno(style.tileStyle, second, onClick)
+                            ContentRowUno(style.styleTile, second, onClick)
                         } else {
-                            ContentRowDuo(style.tileStyle, first, second, onClick)
+                            ContentRowDuo(style.styleTile, first, second, onClick)
                         }
                         if (hasReachEnd && isStackEmpty) {
                             done()
                         }
                     } else if (first != null) {
-                        ContentRowUno(style.tileStyle, first, onClick)
+                        ContentRowUno(style.styleTile, first, onClick)
                         done()
                     } else {
                         done()

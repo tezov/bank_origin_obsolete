@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:15
+ *  Created by Tezov on 07/05/2023 23:36
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:03
+ *  Last modified 07/05/2023 23:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -200,7 +200,7 @@ object PageLoginTheme {
     @Composable
     fun provideStyles() = Style(
         dropDownMenu =ThemeComponentProviders.dropDownMenu().copy{
-            iconStyle = Icon.StateColor.Style(
+            styleIcon = Icon.StateColor.Style(
                 size = dimensions.iconSmall,
                 tint = colors.onBackground,
                 outfitFrame = OutfitFrameStateColor(
