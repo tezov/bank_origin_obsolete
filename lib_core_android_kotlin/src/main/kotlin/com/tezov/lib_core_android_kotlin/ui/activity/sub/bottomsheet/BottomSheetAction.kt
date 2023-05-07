@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 22:22
+ *  Created by Tezov on 07/05/2023 13:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 22:21
+ *  Last modified 07/05/2023 12:20
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,36 +20,24 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class BottomSheetAction constructor(
-    val coroutineScope: CoroutineScope,
     val state: BottomSheetState
 ) : ActivitySubAction<BottomSheetState> {
 
     companion object {
         @Composable
         fun create(
-            coroutineScope: CoroutineScope,
             bottomSheetState: BottomSheetState
         ) = BottomSheetAction(
-            coroutineScope = coroutineScope,
             state = bottomSheetState,
         )
     }
 
-    var currentJob: Job? = null
-
     fun show(content: @Composable () -> Unit) {
-        currentJob?.cancel()
-        currentJob = coroutineScope.launch {
-            state.content(value = content)
-            state.show(true)
-        }
+        state.show(content)
     }
 
     fun close() {
-        currentJob?.cancel()
-        currentJob = coroutineScope.launch {
-            state.show(false)
-        }
+        state.show(null)
     }
 
 }

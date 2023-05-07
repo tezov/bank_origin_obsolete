@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 17/04/2023 21:26
+ *  Created by Tezov on 07/05/2023 13:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 17/04/2023 21:25
+ *  Last modified 07/05/2023 13:09
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -25,10 +25,10 @@ fun Modifier.background(
     val sketch = style.outfitShape.resolve(selector)
     val border = style.outfitBorder.resolve(selector)
     return if(border != null){
-        border(border, sketch).background(sketch)
+        border(border, sketch).background(sketch, false)
     }
     else if(sketch != null){
-        clip(sketch.shape).background(sketch)
+        background(sketch)
     }
     else{
         this

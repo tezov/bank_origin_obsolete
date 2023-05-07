@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 21:39
+ *  Created by Tezov on 07/05/2023 13:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 20:12
+ *  Last modified 06/05/2023 23:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -193,11 +193,13 @@ interface ModuleAppUiPage {
         @ScopeAppUiPage
         class PageAccountAction @Inject constructor(
             private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
+            private val bottomSheetAction: ModuleCoreUiActivity.Action.BottomSheetAction,
         ) : ComposableHolder<com.tezov.bank.ui.page.auth.account.PageAccountAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
                 com.tezov.bank.ui.page.auth.account.PageAccountAction.create(
-                    navigationController.get()
+                    navigationController.get(),
+                    bottomSheetAction.get()
                 )
         }
 

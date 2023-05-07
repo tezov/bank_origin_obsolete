@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 07/05/2023 13:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 17:18
+ *  Last modified 07/05/2023 13:08
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -17,9 +17,11 @@ import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnTrue
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
@@ -30,9 +32,14 @@ fun Modifier.background(
 ) = background(style?.resolve(selector))
 
 fun Modifier.background(
-    sketch: OutfitShape.Sketch?
-) = sketch?.takeIf { it.color != null }?.let { background(it.color!!, it.shape) }
-    ?: this
+    sketch: OutfitShape.Sketch?,
+    clip:Boolean = true
+) = sketch?.takeIf { it.color != null }?.let {
+    thenOnTrue(clip){
+        clip(it.shape)
+    }
+    .background(it.color!!, it.shape)
+} ?: this
 
 typealias OutfitShapeStateColor = OutfitShape.StateColor.Style
 

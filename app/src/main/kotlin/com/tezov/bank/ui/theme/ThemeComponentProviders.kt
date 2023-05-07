@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 20:17
+ *  Created by Tezov on 07/05/2023 13:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 20:06
+ *  Last modified 07/05/2023 12:52
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -77,7 +77,15 @@ object ThemeComponentProviders {
                 )
             )
         ),
-        bottomSheet = BottomSheet.Style(),
+        bottomSheet = BottomSheet.Style(
+            outfitShape = OutfitShapeStateColor(
+                size = OutfitShape.Size(
+                    topStart = 14.dp,
+                    topEnd = 14.dp
+                ),
+                outfitState = MaterialTheme.colorsExtended.backgroundModal.default.asStateSimple,
+            )
+        ),
         snackBar = Snackbar.Style(
             outfitTextMessage = OutfitTextStateColor(
                 typo = TextStyle(
@@ -87,8 +95,6 @@ object ThemeComponentProviders {
                 ),
                 outfitState = OutfitStateTemplate(
                     a = MaterialTheme.colorsExtended.onBackgroundModal.default,
-//                    a = MaterialTheme.colorsExtended.onBackgroundModal.accent,
-//                    b = MaterialTheme.colorsExtended.onBackgroundModal.default,
                 ),
             ),
             outfitTextAction = OutfitTextStateColor(

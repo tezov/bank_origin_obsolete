@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 21:39
+ *  Created by Tezov on 07/05/2023 13:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 20:50
+ *  Last modified 07/05/2023 12:20
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -220,26 +220,22 @@ object ModuleCoreUiActivity {
 
         @ScopeCoreUiActivity
         class BottomSheetAction @Inject constructor(
-            @QualifierCoroutineScopeMain private val coroutineScope: State.CoroutineScope,
             private val bottomSheetState: State.BottomSheetState,
         ) : ComposableHolder<com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheetAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
                 com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheetAction.create(
-                    coroutineScope.get(),
                     bottomSheetState.get()
                 )
         }
 
         @ScopeCoreUiActivity
         class DialogAction @Inject constructor(
-            @QualifierCoroutineScopeMain private val coroutineScope: State.CoroutineScope,
             private val dialogState: State.DialogState,
         ) : ComposableHolder<com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
                 com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction.create(
-                    coroutineScope.get(),
                     dialogState.get()
                 )
         }

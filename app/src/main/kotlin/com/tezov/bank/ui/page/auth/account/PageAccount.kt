@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 04/05/2023 21:06
+ *  Created by Tezov on 07/05/2023 13:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 04/05/2023 21:04
+ *  Last modified 07/05/2023 12:50
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,12 +15,15 @@ package com.tezov.bank.ui.page.auth.account
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
@@ -163,7 +166,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                 Row(
                     modifier = Modifier
                         .offset(
-                            (MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal / 2) * (1f -progress),
+                            (MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal / 2) * (1f - progress),
                             ((properties.max - progressDp) * ICON_ACTION_Y_OFFSET_FACTOR)
                         )
                         .scale(progress.coerceAtLeast(ICON_ACTION_SCALE_MIN))
@@ -173,7 +176,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                             onClick = action::onClickMailBox
-                        ){
+                        ) {
                             Icon.StateColor(
                                 style = PageAccountTheme.styles.icon,
                                 resourceId = it,
@@ -184,7 +187,7 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                     header.iconAccount?.let {
                         Icon.Clickable(
                             onClick = action::onClickAccount
-                        ){
+                        ) {
                             Icon.StateColor(
                                 style = PageAccountTheme.styles.icon,
                                 resourceId = it,
@@ -215,6 +218,26 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
         action: PageAccountAction,
         accountHistories: List<SectionAccountValueSimpleRow.Data>?
     ) {
+
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .background(Color.Green)
+        ) {
+
+            val accessor = DiAccessorAppUiPage().with(key = this@PageAccount).contextAccount()
+            val action = accessor.action()
+
+            Button(
+                modifier = Modifier.align(Alignment.Center),
+                onClick = action::onClickIci) {
+                Text("Click Ici")
+            }
+
+        }
+
+
+
         accountHistories?.let {
             it.forEachIndexed { index, data ->
                 SectionAccountValueSimpleRow(

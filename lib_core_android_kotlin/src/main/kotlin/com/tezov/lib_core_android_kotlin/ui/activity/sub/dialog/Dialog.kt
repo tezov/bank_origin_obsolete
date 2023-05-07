@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 22:22
+ *  Created by Tezov on 07/05/2023 13:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 22:08
+ *  Last modified 07/05/2023 12:39
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -48,7 +48,7 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
         val state = accessor.with<Dialog, _, _>().state()
         if (state.isVisible) {
             Dialog(
-                onDismissRequest = { state.show(false) },
+                onDismissRequest = { state.show(null) },
                 properties = DialogProperties(
                     usePlatformDefaultWidth = false,
                     decorFitsSystemWindows = false,
