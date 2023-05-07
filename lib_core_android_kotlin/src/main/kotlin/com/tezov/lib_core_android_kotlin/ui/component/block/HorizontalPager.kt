@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 16:08
+ *  Created by Tezov on 07/05/2023 23:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 15:59
+ *  Last modified 07/05/2023 23:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,77 +13,55 @@
 package com.tezov.lib_core_android_kotlin.ui.component.block
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.pager.*
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import androidx.compose.foundation.pager.*
 import com.google.accompanist.pager.HorizontalPagerIndicator
+import com.google.accompanist.pager.pagerTabIndicatorOffset
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
+import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager.WithTabRow.Style.Companion.INDICATOR_PADDING_VERTICAL
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.modifier.fillMaxHeightRemembered
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnTrue
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asStateColor
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
+import com.tezov.lib_core_kotlin.type.collection.ListEntry
+import kotlinx.coroutines.launch
 
 object HorizontalPager {
 
-    object Page {
+    object Simple {
 
         open class StyleBuilder internal constructor(style: Style) {
-            var outfitShapeIndicator = style.outfitShapeIndicator
-            var sizeIndicator = style.sizeIndicator
             var spacingItem = style.spacingItem
-            var paddingTopIndicator = style.paddingTopIndicator
-            var spacingIndicator = style.spacingIndicator
             var paddingContent = style.paddingContent
             var heightItemToHighest = style.heightItemToHighest
 
             internal open fun get() = Style(
-                outfitShapeIndicator = outfitShapeIndicator,
-                sizeIndicator = sizeIndicator,
                 spacingItem = spacingItem,
-                paddingTopIndicator = paddingTopIndicator,
-                spacingIndicator = spacingIndicator,
                 paddingContent = paddingContent,
                 heightItemToHighest = heightItemToHighest,
             )
         }
 
         open class Style(
-            outfitShapeIndicator: OutfitShapeStateColor? = null,
             spacingItem: Dp? = null,
-            paddingTopIndicator: Dp? = null,
-            sizeIndicator: Dp? = null,
-            spacingIndicator: Dp? = null,
             paddingContent: PaddingValues? = null,
             heightItemToHighest: Boolean? = null,
         ) {
-
-            val outfitShapeIndicator: OutfitShapeStateColor by DelegateNullFallBack.Ref(
-                outfitShapeIndicator,
-                fallBackValue = {
-                    ThemeColorsExtended.Dummy.outfitShapeState
-                })
             val spacingItem: Dp by DelegateNullFallBack.Ref(
                 spacingItem,
                 fallBackValue = { 0.dp })
-            val paddingTopIndicator: Dp by DelegateNullFallBack.Ref(
-                paddingTopIndicator,
-                fallBackValue = { 6.dp })
-            val sizeIndicator: Dp by DelegateNullFallBack.Ref(
-                sizeIndicator,
-                fallBackValue = { 6.dp })
-            val spacingIndicator: Dp by DelegateNullFallBack.Ref(
-                spacingIndicator,
-                fallBackValue = { 6.dp })
             val paddingContent: PaddingValues by DelegateNullFallBack.Ref(
                 paddingContent,
                 fallBackValue = { PaddingValues() })
@@ -102,13 +80,107 @@ object HorizontalPager {
             }
 
             constructor(style: Style?) : this(
-                outfitShapeIndicator = style?.outfitShapeIndicator,
-                sizeIndicator = style?.sizeIndicator,
-                spacingIndicator = style?.spacingIndicator,
-                paddingTopIndicator = style?.paddingTopIndicator,
                 paddingContent = style?.paddingContent,
                 spacingItem = style?.spacingItem,
                 heightItemToHighest = style?.heightItemToHighest,
+            )
+        }
+
+        @OptIn(ExperimentalFoundationApi::class)
+        @Composable
+        operator fun invoke(
+            modifier: Modifier = Modifier,
+            pagerState: PagerState = rememberPagerState(),
+            style: Style,
+            itemSelected: Int = 0,
+            items: List<@Composable () -> Unit>,
+            onItemChange: ((index: Int) -> Unit)? = null
+        ) {
+            HorizontalPager(
+                modifier = modifier
+                    .thenOnTrue(style.heightItemToHighest) {
+                        fillMaxHeightRemembered()
+                    },
+                pageCount = items.size,
+                state = pagerState,
+                contentPadding = style.paddingContent,
+                pageSpacing = style.spacingItem,
+            ) { index ->
+                items[index]()
+            }
+            onItemChange?.let {
+                LaunchedEffect(pagerState) {
+                    snapshotFlow { pagerState.currentPage }.collect { index ->
+                        onItemChange(index)
+                    }
+                }
+            }
+            LaunchedEffect(Unit) {
+                pagerState.scrollToPage(itemSelected)
+            }
+        }
+    }
+
+    object WithIndicator {
+
+        class StyleBuilder internal constructor(style: Style) : Simple.StyleBuilder(style) {
+            var outfitShapeIndicator = style.outfitShapeIndicator
+            var sizeIndicator = style.sizeIndicator
+            var paddingTopIndicator = style.paddingTopIndicator
+            var spacingIndicator = style.spacingIndicator
+
+            override fun get() = Style(
+                pagerStyle = super.get(),
+                outfitShapeIndicator = outfitShapeIndicator,
+                sizeIndicator = sizeIndicator,
+                paddingTopIndicator = paddingTopIndicator,
+                spacingIndicator = spacingIndicator,
+            )
+        }
+
+        class Style(
+            pagerStyle: Simple.Style? = null,
+            outfitShapeIndicator: OutfitShapeStateColor? = null,
+            paddingTopIndicator: Dp? = null,
+            sizeIndicator: Dp? = null,
+            spacingIndicator: Dp? = null,
+        ) : Simple.Style(pagerStyle) {
+
+            val outfitShapeIndicator: OutfitShapeStateColor by DelegateNullFallBack.Ref(
+                outfitShapeIndicator,
+                fallBackValue = {
+                    ThemeColorsExtended.Dummy.outfitShapeState
+                })
+            val paddingTopIndicator: Dp by DelegateNullFallBack.Ref(
+                paddingTopIndicator,
+                fallBackValue = { 6.dp })
+            val sizeIndicator: Dp by DelegateNullFallBack.Ref(
+                sizeIndicator,
+                fallBackValue = { 6.dp })
+            val spacingIndicator: Dp by DelegateNullFallBack.Ref(
+                spacingIndicator,
+                fallBackValue = { 6.dp })
+
+            companion object {
+
+                @Composable
+                fun Style.copy(scope: @Composable StyleBuilder.() -> Unit) =
+                    StyleBuilder(this).also {
+                        it.scope()
+                    }.get()
+
+                @Composable
+                fun Simple.Style.copyToIndicatorStyle(scope: @Composable StyleBuilder.() -> Unit) =
+                    StyleBuilder(Style(this)).also { it.scope() }.get()
+
+            }
+
+            constructor(style: Style) : this(
+                pagerStyle = style,
+                outfitShapeIndicator = style.outfitShapeIndicator,
+                sizeIndicator = style.sizeIndicator,
+                spacingIndicator = style.spacingIndicator,
+                paddingTopIndicator = style.paddingTopIndicator,
             )
         }
 
@@ -125,18 +197,14 @@ object HorizontalPager {
             Column(
                 modifier = modifier
             ) {
-                HorizontalPager(
-                    modifier = modifier
-                        .thenOnTrue(style.heightItemToHighest){
-                            fillMaxHeightRemembered()
-                        },
-                    pageCount = items.size,
-                    state = pagerState,
-                    contentPadding = style.paddingContent,
-                    pageSpacing = style.spacingItem,
-                ) { index ->
-                    items[index]()
-                }
+                Simple(
+                    modifier = modifier,
+                    pagerState = pagerState,
+                    style = style,
+                    itemSelected = itemSelected,
+                    items = items,
+                    onItemChange = onItemChange
+                )
                 style.outfitShapeIndicator.let {
                     HorizontalPagerIndicator(
                         pagerState = pagerState,
@@ -158,56 +226,58 @@ object HorizontalPager {
                     )
                 }
             }
-            onItemChange?.let {
-                LaunchedEffect(pagerState) {
-                    snapshotFlow { pagerState.currentPage }.collect { index ->
-                        onItemChange(index)
-                    }
-                }
-            }
-            LaunchedEffect(Unit) {
-                pagerState.scrollToPage(itemSelected)
-            }
         }
     }
 
-    object Card {
+    object WithTabRow {
 
-        class StyleBuilder internal constructor(style: Style) : Page.StyleBuilder(style) {
-            var outfitFrame = style.outfitFrame
-            var marginCard = style.marginCard
+        class StyleBuilder internal constructor(style: Style) : Simple.StyleBuilder(style) {
+            var outfitTextStateColor = style.outfitTextStateColor
+            var sizeIndicator = style.sizeIndicator
+            var colorIndicator = style.colorIndicator
 
             override fun get() = Style(
                 pagerStyle = super.get(),
-                outfitFrame = outfitFrame,
-                marginCard = marginCard,
+                outfitTextStateColor = outfitTextStateColor,
+                sizeIndicator = sizeIndicator,
+                colorIndicator = colorIndicator,
             )
         }
 
         class Style(
-            pagerStyle: Page.Style? = null,
-            outfitFrame: OutfitFrameStateColor? = null,
-            marginCard: PaddingValues = PaddingValues(horizontal = 4.dp),
-        ) : Page.Style(pagerStyle) {
+            pagerStyle: Simple.Style? = null,
+            outfitTextStateColor: OutfitTextStateColor? = null,
+            sizeIndicator: DpSize? = null,
+            colorIndicator: OutfitStateBiStable<Color>? = null
+        ) : Simple.Style(pagerStyle) {
 
-            val outfitFrame: OutfitFrameStateColor by DelegateNullFallBack.Ref(
-                outfitFrame,
+            val outfitTextStateColor: OutfitTextStateColor by DelegateNullFallBack.Ref(
+                outfitTextStateColor,
                 fallBackValue = {
-                    OutfitFrameStateColor(
-                        outfitShape = 8.asStateColor,
-                        outfitBorder = OutfitBorderStateColor(
-                            size = 1.dp,
-                            outfitState = Color.Black.asStateSimple
-                        ),
+                    OutfitTextStateColor(
+                        outfitState = OutfitStateBiStable(
+                            active = ThemeColorsExtended.Dummy.pink,
+                            inactive = ThemeColorsExtended.Dummy.blue,
+                        )
                     )
-                }
-            )
-            val marginCard: PaddingValues by DelegateNullFallBack.Ref(
-                marginCard,
-                fallBackValue = { PaddingValues() }
-            )
+                })
+            val sizeIndicator: DpSize by DelegateNullFallBack.Ref(
+                sizeIndicator,
+                fallBackValue = {
+                    DpSize(height = 4.dp, width = 16.dp)
+                })
+            val colorIndicator: OutfitStateBiStable<Color> by DelegateNullFallBack.Ref(
+                colorIndicator,
+                fallBackValue = {
+                    OutfitStateBiStable(
+                        active = ThemeColorsExtended.Dummy.pink,
+                        inactive = ThemeColorsExtended.Dummy.green,
+                    )
+                })
 
             companion object {
+
+                val INDICATOR_PADDING_VERTICAL = 1.25.dp
 
                 @Composable
                 fun Style.copy(scope: @Composable StyleBuilder.() -> Unit) =
@@ -216,39 +286,95 @@ object HorizontalPager {
                     }.get()
 
                 @Composable
-                fun Page.Style.copyToCarouselCardStyle(scope: @Composable StyleBuilder.() -> Unit) =
+                fun Simple.Style.copyToIndicatorStyle(scope: @Composable StyleBuilder.() -> Unit) =
                     StyleBuilder(Style(this)).also { it.scope() }.get()
 
             }
 
             constructor(style: Style) : this(
                 pagerStyle = style,
-                outfitFrame = style.outfitFrame,
-                marginCard = style.marginCard,
+                outfitTextStateColor = style.outfitTextStateColor,
+                sizeIndicator = style.sizeIndicator,
+                colorIndicator = style.colorIndicator,
             )
         }
 
+        class Tab(val title: String)
+
+        @OptIn(ExperimentalFoundationApi::class)
         @Composable
         operator fun invoke(
             modifier: Modifier = Modifier,
             style: Style,
             itemSelected: Int = 0,
-            items: List<@Composable () -> Unit>,
+            items: ListEntry<Tab, @Composable () -> Unit>,
             onItemChange: ((index: Int) -> Unit)? = null
         ) {
-            Page(modifier, style, itemSelected, items.map { content ->
-                {
-                    Surface(
-                        modifier = Modifier.padding(style.marginCard),
-                        shape = style.outfitFrame.getShape() ?: RectangleShape,
-                        border = style.outfitFrame.resolveBorder(),
-                        color = style.outfitFrame.resolveColorShape() ?: MaterialTheme.colors.surface,
-                    ) {
-                        content()
+            val coroutineScope = rememberCoroutineScope()
+            val pagerState = rememberPagerState()
+            Column(
+                modifier = modifier
+            ) {
+                TabRow(modifier = Modifier
+                    .fillMaxWidth(),
+                    selectedTabIndex = itemSelected,
+                    divider = {
+                        style.sizeIndicator.takeIf { it.height > 0.dp }?.let {
+                            TabRowDefaults.Divider(
+                                modifier = Modifier
+                                    .wrapContentSize(Alignment.BottomCenter),
+                                color = style.colorIndicator.inactive,
+                                thickness = it.height + INDICATOR_PADDING_VERTICAL * 2
+                            )
+                        }
+                    },
+                    indicator = { tabPositions ->
+                        style.sizeIndicator.takeIf { it.height > 0.dp }?.let {
+                            Box(
+                                Modifier
+                                    .padding(vertical = INDICATOR_PADDING_VERTICAL)
+                                    .pagerTabIndicatorOffset(pagerState, tabPositions)
+                                    .padding(horizontal = it.width)
+                                    .fillMaxWidth()
+                                    .height(it.height)
+                                    .background(style.colorIndicator.active, RoundedCornerShape(50))
+                            )
+                        }
+                    }
+                ) {
+                    items.forEachIndexed { index, entry ->
+                        Tab(
+                            modifier = Modifier.background(MaterialTheme.colors.background),
+                            selected = pagerState.currentPage == index,
+                            onClick = {
+                                coroutineScope.launch {
+                                    pagerState.animateScrollToPage(index)
+                                }
+                            },
+                            text = {
+                                Text.StateColor(
+                                    text = entry.key.title,
+                                    style = style.outfitTextStateColor,
+                                    selector = if (pagerState.currentPage == index) {
+                                        OutfitState.BiStable.Selector.Enabled
+                                    } else {
+                                        OutfitState.BiStable.Selector.Disabled
+                                    }
+                                )
+                            })
                     }
                 }
-            }, onItemChange)
+                Simple(
+                    modifier = modifier,
+                    pagerState = pagerState,
+                    style = style,
+                    itemSelected = itemSelected,
+                    items = items.getValues,
+                    onItemChange = onItemChange
+                )
+            }
+
+
         }
     }
-
 }

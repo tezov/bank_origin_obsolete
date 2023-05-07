@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 07/05/2023 23:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:55
+ *  Last modified 07/05/2023 23:03
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -32,7 +32,7 @@ import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.snackbar.Snackbar
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
-import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager.Page.Style.Companion.copy
+import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager.WithIndicator.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalRoller.Page.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.*
@@ -365,7 +365,7 @@ object ThemeComponentProviders {
     )
 
     @Composable
-    fun pagerStyle() = HorizontalPager.Page.Style(
+    fun pagerWidthIndicatorStyle() = HorizontalPager.WithIndicator.Style(
         outfitShapeIndicator = OutfitShapeStateColor(
             outfitState = OutfitStateBiStable(
                 active = MaterialTheme.colorsExtended.primary.accent,
@@ -390,7 +390,7 @@ object ThemeComponentProviders {
                     fontWeight = FontWeight.Bold
                 )
             },
-            carouselStyle = pagerStyle().copy {
+            carouselStyle = pagerWidthIndicatorStyle().copy {
                 paddingContent = PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal + MaterialTheme.dimensionsPaddingExtended.element.big.horizontal)
                 spacingItem = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             },

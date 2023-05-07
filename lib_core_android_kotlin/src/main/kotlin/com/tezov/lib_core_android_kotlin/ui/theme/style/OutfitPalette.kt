@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 17:27
+ *  Created by Tezov on 07/05/2023 23:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 17:18
+ *  Last modified 07/05/2023 22:17
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -20,7 +20,7 @@ import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 import androidx.compose.ui.graphics.Color as ColorImport
 
 typealias OutfitPaletteColor = OutfitPalette.Color.Style
-typealias OutfitPaletteColorDual = OutfitStateBiStable<OutfitPaletteColor>
+typealias OutfitPaletteColorBiStable = OutfitStateBiStable<OutfitPaletteColor>
 typealias OutfitPaletteColorSemantic = OutfitStateSemantic<OutfitPaletteColor>
 
 typealias OutfitPaletteSize<T> = OutfitPalette.Size.Style<T>

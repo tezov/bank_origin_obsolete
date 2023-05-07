@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 07/05/2023 23:15
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:56
+ *  Last modified 07/05/2023 21:25
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -56,7 +56,7 @@ object SectionCarouselCard {
         val outfitTextTitle: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
-        carouselStyle: HorizontalPager.Page.Style? = null,
+        carouselStyle: HorizontalPager.WithIndicator.Style? = null,
         cardStyle: CarouselCard.Style.Base? = null
     ) {
 
@@ -66,9 +66,9 @@ object SectionCarouselCard {
                 Icon.Simple.Style()
             }
         )
-        val carouselStyle: HorizontalPager.Page.Style by DelegateNullFallBack.Ref(
+        val carouselStyle: HorizontalPager.WithIndicator.Style by DelegateNullFallBack.Ref(
             carouselStyle,
-            fallBackValue = { HorizontalPager.Page.Style() }
+            fallBackValue = { HorizontalPager.WithIndicator.Style() }
         )
         val cardStyle: CarouselCard.Style.Base by DelegateNullFallBack.Ref(
             cardStyle,
@@ -165,7 +165,7 @@ object SectionCarouselCard {
                         }
                     }
                 }
-                HorizontalPager.Page(
+                HorizontalPager.WithIndicator(
                     modifier = Modifier
                         .fillMaxWidth(),
                     style = style.carouselStyle,
