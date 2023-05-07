@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 22:44
+ *  Created by Tezov on 07/05/2023 16:09
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 22:30
+ *  Last modified 07/05/2023 14:00
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -51,7 +51,10 @@ object NavigationGraph {
             navController = mainAction.navigationController.navHostController,
             startDestination = NavigationController.startNavRoute.value,
         ) {
-            navigation(route = Route.NavLobby.value, startDestination = NavigationController.startLobbyRoute.value) {
+            navigation(
+                route = Route.NavLobby.value,
+                startDestination = NavigationController.startLobbyRoute.value
+            ) {
                 composable(Route.Splash) {
                     PageSplash.invokeContent(PaddingValues())
                 }
@@ -66,31 +69,30 @@ object NavigationGraph {
                     }
                 }
             }
-            navigation(route = Route.NavAuth.value, startDestination = NavigationController.startAuthRoute.value) {
+            navigation(
+                route = Route.NavAuth.value,
+                startDestination = NavigationController.startAuthRoute.value
+            ) {
                 composable(Route.Account) {
                     (LocalActivity.current as MainActivity).withBottomNavigationBar {
                         PageAccount.invokeContent(innerPadding = it)
                     }
                 }
-
                 composable(Route.Discover) {
                     (LocalActivity.current as MainActivity).withBottomNavigationBar {
                         PageDiscover.invokeContent(innerPadding = it)
                     }
                 }
-
                 composable(Route.Help) {
                     (LocalActivity.current as MainActivity).withBottomNavigationBar {
                         PageHelp.invokeContent(innerPadding = it)
                     }
                 }
-
                 composable(Route.Profile) {
                     (LocalActivity.current as MainActivity).withBottomNavigationBar {
                         PageProfile.invokeContent(innerPadding = it)
                     }
                 }
-
                 composable(Route.Payment) {
                     (LocalActivity.current as MainActivity).withBottomNavigationBar {
                         PagePayment.invokeContent(innerPadding = it)

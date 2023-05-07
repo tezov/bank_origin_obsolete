@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:14
+ *  Created by Tezov on 07/05/2023 16:09
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 11:49
+ *  Last modified 07/05/2023 16:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -99,9 +99,9 @@ class NavigationController(
         with(navigationController) {
             var showSnackBarNotImplemented = true
             when (from) {
-                Route.Splash -> {
+                Splash -> {
                     when (to) {
-                        Route.Login -> {
+                        Login -> {
                             navigate(to) {
                                 popUpTo(from.value) {
                                     inclusive = true
@@ -111,9 +111,9 @@ class NavigationController(
                         }
                     }
                 }
-                Route.Login -> {
+                Login -> {
                     when (to) {
-                        Route.HelpAndService -> {
+                        HelpAndService -> {
                             navigate(to)
                             showSnackBarNotImplemented = false
                         }
@@ -130,9 +130,9 @@ class NavigationController(
         with(navigationController) {
             var showSnackBarNotImplemented = true
             when (from) {
-                Route.Login -> {
+                Login -> {
                     when (to) {
-                        Route.Account -> {
+                        NavAuth -> {
                             navigate(to) {
                                 popUpTo(from.value) {
                                     inclusive = true
