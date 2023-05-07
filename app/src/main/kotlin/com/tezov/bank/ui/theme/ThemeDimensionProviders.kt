@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:08
+ *  Created by Tezov on 07/05/2023 13:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 18:47
+ *  Last modified 07/05/2023 13:43
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -131,6 +131,11 @@ object ThemeDimensionProviders {
         ).asPaletteSize,
         info = OutfitPaletteSize(
             normal = 36.dpSize,
+            micro = DpSize(
+                width = 16.dp,
+                height = 16.dp,
+                padding = PaddingValues(2.dp),
+            ),
             small = DpSize(
                 width = 26.dp,
                 height = 26.dp,

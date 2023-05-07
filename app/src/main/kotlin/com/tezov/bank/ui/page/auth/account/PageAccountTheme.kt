@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 03/05/2023 22:54
+ *  Created by Tezov on 07/05/2023 13:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 03/05/2023 22:52
+ *  Last modified 07/05/2023 13:37
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,11 +18,8 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow
 import com.tezov.bank.ui.component.block.SectionAccountValueSimpleRow.Style.Companion.copy
 import com.tezov.bank.ui.component.element.AccountSummaryCard
@@ -132,10 +129,9 @@ object PageAccountTheme {
 
     data class Style(
         val icon: Icon.StateColor.Style,
-        val sectionAccountValue: SectionAccountValueSimpleRow.Style,
         val accountSummary: AccountSummaryCard.Style,
-
-        )
+        val sectionAccountValue: SectionAccountValueSimpleRow.Style,
+    )
 
     @Composable
     fun provideStyles() = Style(
@@ -148,17 +144,18 @@ object PageAccountTheme {
                 }
             )
         ),
-        sectionAccountValue = ThemeComponentProviders.sectionAccountValueSimpleRowStyle().copy {
-            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
-        },
-        accountSummary = ThemeComponentProviders.accountSummaryCard().copy{
-            dropDownMenuStyle = dropDownMenuStyle.copy{
+        accountSummary = ThemeComponentProviders.accountSummaryCard().copy {
+            dropDownMenuStyle = dropDownMenuStyle.copy {
                 iconStyle = Icon.StateColor.Style(
                     size = MaterialTheme.dimensionsIconExtended.action.normal,
                     tint = MaterialTheme.colorsExtended.onPrimary.default,
                 )
             }
+        },
+        sectionAccountValue = ThemeComponentProviders.sectionAccountValueSimpleRowStyle().copy {
+            paddingBody = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
         }
+
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

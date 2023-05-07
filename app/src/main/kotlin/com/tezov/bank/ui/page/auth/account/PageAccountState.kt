@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:08
+ *  Created by Tezov on 07/05/2023 13:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 18:58
+ *  Last modified 07/05/2023 13:34
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,12 +19,11 @@ import com.tezov.bank.ui.component.element.AccountSummaryCard
 import com.tezov.bank.ui.component.element.AccountValueSimpleRow
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitStateSemantic
-import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
 class PageAccountState private constructor() : PageState {
-
     var header: Header?=null
-    var accountHistories: List<SectionAccountValueSimpleRow.Data>?=null
+    var incoming: SectionAccountValueSimpleRow.Data?=null
+    var histories: List<SectionAccountValueSimpleRow.Data>?=null
 
     companion object {
         fun create() = PageAccountState()
@@ -68,13 +67,39 @@ class PageAccountState private constructor() : PageState {
             success = Color(0xAA57AC81),
             error = Color(0xAA8D3F3F),
         )
-        this.accountHistories = listOf(
+
+        this.incoming =  SectionAccountValueSimpleRow.Data(
+            title = "ENREGISTREES",
+            iconInfoId = R.drawable.ic_question_24dp,
+            rows = listOf(
+                AccountValueSimpleRow.Data(
+                    iconInfoId = R.drawable.cat_clock_24dp,
+                    iconInfoColor = semantic.neutral,
+                    title = "Facture carte du 010223 k06794851",
+                    amount = "-10.20 €",
+                ),
+                AccountValueSimpleRow.Data(
+                    iconInfoId = R.drawable.cat_clock_24dp,
+                    iconInfoColor = semantic.neutral,
+                    title = "Facture carte du total...",
+                    amount = "-133.13 €",
+                ),
+                AccountValueSimpleRow.Data(
+                    iconInfoId = R.drawable.cat_clock_24dp,
+                    iconInfoColor = semantic.neutral,
+                    title = "Facture carte du 010223 auchan 134 5784",
+                    amount = "-1.00 €",
+                ),
+            )
+        )
+
+        this.histories = listOf(
             SectionAccountValueSimpleRow.Data(
                 title = "VENDREDI 14 AVRIL",
                 rows = listOf(
                     AccountValueSimpleRow.Data(
                         iconInfoId = R.drawable.cat_dining_24dp,
-                        iconInfoColor = semantic.neutral,
+                        iconInfoColor = semantic.success,
                         title = "Paiements cb amazon du 12/04 a payli2441535 - CLASS",
                         subTitle = "Achats,shopping",
                         amount = "-14.69 €",

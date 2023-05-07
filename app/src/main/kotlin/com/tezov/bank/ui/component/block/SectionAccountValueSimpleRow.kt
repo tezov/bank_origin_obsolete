@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 12:43
+ *  Created by Tezov on 07/05/2023 13:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 12:40
+ *  Last modified 07/05/2023 13:46
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,14 +23,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.element.AccountValueSimpleRow
-import com.tezov.bank.ui.component.element.SimpleRow
-import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.modifier.then
 import com.tezov.lib_core_android_kotlin.ui.modifier.thenOnNotNull
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
-import com.tezov.lib_core_android_kotlin.ui.theme.style.background
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
@@ -41,6 +38,7 @@ object SectionAccountValueSimpleRow {
         style: Style
     ) {
         var outfitTextTitle = style.outfitTextTitle
+        var iconInfoStyle = style.iconInfoStyle
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
         var colorDivider = style.colorDivider
@@ -50,6 +48,7 @@ object SectionAccountValueSimpleRow {
 
         fun get() = Style(
             outfitTextTitle = outfitTextTitle,
+            iconInfoStyle = iconInfoStyle,
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
             colorDivider = colorDivider,
@@ -61,6 +60,7 @@ object SectionAccountValueSimpleRow {
 
     class Style(
         val outfitTextTitle: OutfitText.StateColor.Style? = null,
+        iconInfoStyle: Icon.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
         val colorDivider: Color? = null,
@@ -68,6 +68,13 @@ object SectionAccountValueSimpleRow {
         val paddingBody: Dp = 0.dp,
         rowStyle: AccountValueSimpleRow.Style? = null
     ) {
+
+        val iconInfoStyle: Icon.StateColor.Style by DelegateNullFallBack.Ref(
+            iconInfoStyle,
+            fallBackValue = {
+                Icon.StateColor.Style()
+            }
+        )
 
         val rowStyle: AccountValueSimpleRow.Style by DelegateNullFallBack.Ref(
             rowStyle,
@@ -87,6 +94,7 @@ object SectionAccountValueSimpleRow {
 
         constructor(style: Style) : this(
             outfitTextTitle = style.outfitTextTitle,
+            iconInfoStyle = style.iconInfoStyle,
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
             colorDivider = style.colorDivider,
@@ -99,6 +107,7 @@ object SectionAccountValueSimpleRow {
 
     data class Data(
         val title: String? = null,
+        val iconInfoId: Int? = null,
         val rows: List<AccountValueSimpleRow.Data>
     )
 
@@ -107,7 +116,8 @@ object SectionAccountValueSimpleRow {
         modifier: Modifier = Modifier,
         style: Style,
         data: Data,
-        onClick: (Int) -> Unit = {}
+        onClickInfo: () -> Unit = {},
+        onClickRow: (Int) -> Unit = {}
     ) {
         if (data.rows.isEmpty()) {
             return
@@ -116,7 +126,7 @@ object SectionAccountValueSimpleRow {
             modifier = modifier
                 .fillMaxWidth()
         ) {
-            data.title?.let { text ->
+            if(data.title != null || data.iconInfoId != null) {
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -124,16 +134,31 @@ object SectionAccountValueSimpleRow {
                             modifier.background(it)
                         }
                         .padding(start = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text.StateColor(
-                        modifier = Modifier
-                            .padding(
-                                top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical,
-                                bottom = MaterialTheme.dimensionsPaddingExtended.element.small.vertical
-                            ),
-                        text = text,
-                        style = style.outfitTextTitle
-                    )
+                    data.title?.let { text ->
+                        Text.StateColor(
+                            modifier = Modifier
+                                .padding(
+                                    top = MaterialTheme.dimensionsPaddingExtended.element.small.vertical,
+                                    bottom = MaterialTheme.dimensionsPaddingExtended.element.small.vertical
+                                ),
+                            text = text,
+                            style = style.outfitTextTitle
+                        )
+                    }
+                    data.iconInfoId?.let {
+                        Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.element.small.horizontal))
+                        Icon.Clickable(
+                            onClick = onClickInfo
+                        ){
+                            Icon.StateColor(
+                                style = style.iconInfoStyle,
+                                resourceId = it,
+                                description = null,
+                            )
+                        }
+                    }
                 }
             }
             Column(
@@ -158,7 +183,7 @@ object SectionAccountValueSimpleRow {
                         ),
                         data = row, style = style.rowStyle
                     ) {
-                        onClick(index)
+                        onClickRow(index)
                     }
                     if (style.sizeDivider > 0.dp && style.colorDivider != null && index != data.rows.lastIndex) {
                         Divider(

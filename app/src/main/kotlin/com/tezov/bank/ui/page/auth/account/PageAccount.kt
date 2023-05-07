@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:14
+ *  Created by Tezov on 07/05/2023 13:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 12:50
+ *  Last modified 07/05/2023 13:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,15 +15,12 @@ package com.tezov.bank.ui.page.auth.account
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Button
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.Dp
@@ -89,7 +86,11 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
                     )
                 },
                 body = {
-                    contentBody(action = action, accountHistories = state.accountHistories)
+                    contentBody(
+                        action = action,
+                        incoming = state.incoming,
+                        histories = state.histories
+                    )
                 }
             )
         }
@@ -216,35 +217,28 @@ object PageAccount : Page<PageAccountState, PageAccountAction> {
     @Composable
     private fun ColumnScope.contentBody(
         action: PageAccountAction,
-        accountHistories: List<SectionAccountValueSimpleRow.Data>?
+        incoming: SectionAccountValueSimpleRow.Data?,
+        histories: List<SectionAccountValueSimpleRow.Data>?
     ) {
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-                .background(Color.Green)
-        ) {
-
-            val accessor = DiAccessorAppUiPage().with(key = this@PageAccount).contextAccount()
-            val action = accessor.action()
-
-            Button(
-                modifier = Modifier.align(Alignment.Center),
-                onClick = action::onClickIci) {
-                Text("Click Ici")
-            }
-
+        incoming?.let { data ->
+            SectionAccountValueSimpleRow(
+                modifier = Modifier.padding(start = MaterialTheme.dimensionsPaddingExtended.page.small.horizontal),
+                data = data,
+                style = PageAccountTheme.styles.sectionAccountValue,
+                onClickInfo = action::onClickIncomingHelp,
+                onClickRow = {
+                    action.onClickAccountHistories(-1, it)
+                }
+            )
+            Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
         }
-
-
-
-        accountHistories?.let {
-            it.forEachIndexed { index, data ->
+        histories?.let { list ->
+            list.forEachIndexed { index, data ->
                 SectionAccountValueSimpleRow(
                     modifier = Modifier.padding(start = MaterialTheme.dimensionsPaddingExtended.page.small.horizontal),
                     data = data,
                     style = PageAccountTheme.styles.sectionAccountValue,
-                    onClick = {
+                    onClickRow = {
                         action.onClickAccountHistories(index, it)
                     }
                 )

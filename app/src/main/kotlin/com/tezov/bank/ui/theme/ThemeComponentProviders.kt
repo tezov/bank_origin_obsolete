@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:14
+ *  Created by Tezov on 07/05/2023 13:53
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 12:52
+ *  Last modified 07/05/2023 13:42
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,6 +15,7 @@ package com.tezov.bank.ui.theme
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -276,9 +277,18 @@ object ThemeComponentProviders {
 
     @Composable
     fun sectionAccountValueSimpleRowStyle() = SectionAccountValueSimpleRow.Style(
-        outfitTextTitle = MaterialTheme.typographiesExtended.label.normal.copy {
+        outfitTextTitle = MaterialTheme.typographiesExtended.label.big.copy {
             outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
         },
+        iconInfoStyle = Icon.StateColor.Style(
+            size = MaterialTheme.dimensionsIconExtended.info.micro,
+            tint = MaterialTheme.colorsExtended.background.default,
+            outfitFrame = OutfitFrameStateColor(
+                outfitShape = MaterialTheme.shapesExtended.icon.normal.copy {
+                    outfitState = MaterialTheme.colorsExtended.primary.accent.asStateSimple
+                }
+            )
+        ),
         colorBackgroundHeader = null,
         colorDivider = MaterialTheme.colorsExtended.backgroundElevated.fade,
         sizeDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
