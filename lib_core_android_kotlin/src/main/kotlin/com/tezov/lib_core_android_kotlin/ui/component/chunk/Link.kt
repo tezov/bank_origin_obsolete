@@ -1,6 +1,6 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 16:11
+ *  Created by Tezov on 08/05/2023 16:14
  *  Copyright (c) 2023 . All rights reserved.
  *  Last modified 08/05/2023 16:11
  *  First project bank / bank.lib_core_android_kotlin.main
@@ -12,22 +12,15 @@
 
 package com.tezov.lib_core_android_kotlin.ui.component.chunk
 
-import androidx.compose.foundation.text.ClickableText
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.AnnotatedString
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.ThemeColorsExtended
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
-import androidx.compose.ui.graphics.Color as ColorImport
 
 object Link {
 

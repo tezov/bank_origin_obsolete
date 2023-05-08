@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 15:29
+ *  Created by Tezov on 08/05/2023 16:14
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 14:48
+ *  Last modified 08/05/2023 16:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -82,11 +82,4 @@ object DialogAuthCloseAppConfirmation :
             }
         }
     }
-
-//    @Composable
-//    override fun onDispose() {
-//        DiAccessorAppUiDialog().with(key = this).contextAuthCloseAppConfirmation().dispose()
-//        super.onDispose()
-//    }
-
 }

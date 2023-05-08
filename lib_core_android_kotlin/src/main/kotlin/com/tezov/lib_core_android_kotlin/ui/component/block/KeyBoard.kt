@@ -1,6 +1,6 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 16:11
+ *  Created by Tezov on 08/05/2023 16:14
  *  Copyright (c) 2023 . All rights reserved.
  *  Last modified 08/05/2023 16:11
  *  First project bank / bank.lib_core_android_kotlin.main
@@ -24,12 +24,10 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.*
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorderStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
