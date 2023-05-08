@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:13
+ *  Last modified 08/05/2023 14:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -52,20 +52,16 @@ infix fun DialogAuthCloseAppConfirmationTheme.provides(value: DialogAuthCloseApp
 object DialogAuthCloseAppConfirmationTheme {
 
     data class Colors(
-        val background: Color,
         val onBackground: Color,
-        val dark: Color,
         val light: Color,
-        val decor: Color,
+        val accent: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
-        background = MaterialTheme.colorsExtended.backgroundElevated.default,
         onBackground = MaterialTheme.colorsExtended.onBackgroundElevated.default,
-        dark = MaterialTheme.colorsExtended.primary.default,
-        light = MaterialTheme.colorsExtended.primary.default.copy(alpha = 0.75f),
-        decor = MaterialTheme.colorsExtended.primary.decor,
+        light = MaterialTheme.colorsExtended.primary.default,
+        accent = MaterialTheme.colorsExtended.primary.accent,
     )
 
     internal val localColors: ProvidableCompositionLocal<Colors> = staticCompositionLocalOf {
@@ -80,7 +76,7 @@ object DialogAuthCloseAppConfirmationTheme {
     @Composable
     fun provideTypographies() = Typographies(
         title = MaterialTheme.typographiesExtended.title.big.copy {
-            outfitState = colors.onBackground.asStateSimple
+            outfitState = colors.accent.asStateSimple
         },
         body = MaterialTheme.typographiesExtended.body.normal.copy {
             outfitState = colors.onBackground.asStateSimple
@@ -101,7 +97,7 @@ object DialogAuthCloseAppConfirmationTheme {
     fun provideStyles() = Style(
         linkConfirm = Link.StateColor.Style(
             outfitText = MaterialTheme.typographiesExtended.button.normal.copy {
-                outfitState = colors.dark.asStateSimple
+                outfitState = colors.accent.asStateSimple
             }
         ),
         linkCancel = Link.StateColor.Style(

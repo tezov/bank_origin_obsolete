@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:36
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:24
+ *  Last modified 08/05/2023 15:15
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -51,13 +51,13 @@ object SimpleTile {
         style: Style
     ) {
         var outfitFrame = style.outfitFrame
-        var styleIcon = style.styleIcon
+        var styleIconInfo = style.styleIconInfo
         var outfitTextTitle = style.outfitTextTitle
         var outfitTextSubtitle = style.outfitTextSubtitle
 
         fun get() = Style(
             outfitFrame = outfitFrame,
-            styleIcon = styleIcon,
+            styleIconInfo = styleIconInfo,
             outfitTextTitle = outfitTextTitle,
             outfitTextSubtitle = outfitTextSubtitle,
         )
@@ -65,7 +65,7 @@ object SimpleTile {
 
     class Style(
         outfitFrame: OutfitFrameStateColor? = null,
-        styleIcon: Icon.Simple.Style? = null,
+        styleIconInfo: Icon.Simple.Style? = null,
         val outfitTextTitle: OutfitTextStateColor? = null,
         val outfitTextSubtitle: OutfitTextStateColor? = null,
     ) {
@@ -76,8 +76,8 @@ object SimpleTile {
             }
         )
 
-        val styleIcon: Icon.Simple.Style by DelegateNullFallBack.Ref(
-            styleIcon,
+        val styleIconInfo: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            styleIconInfo,
             fallBackValue = {
                 Icon.Simple.Style()
             }
@@ -96,18 +96,18 @@ object SimpleTile {
 
         constructor(style: Style) : this(
             outfitFrame = style.outfitFrame,
-            styleIcon = style.styleIcon,
+            styleIconInfo = style.styleIconInfo,
             outfitTextTitle = style.outfitTextTitle,
             outfitTextSubtitle = style.outfitTextSubtitle,
         )
 
         @Composable
-        internal fun iconStyle(color: Color?) = color?.let {
-            styleIcon.copy {
+        internal fun styleIconInfo(color: Color?) = color?.let {
+            styleIconInfo.copy {
                 tint = it
             }
         } ?: run {
-            styleIcon
+            styleIconInfo
         }
 
     }
@@ -116,8 +116,8 @@ object SimpleTile {
         var template: Template = Template.Undefined,
         val title: String,
         val subtitle: String? = null,
-        val iconId: Int,
-        val iconColor: Color? = null,
+        val iconInfoId: Int,
+        val iconInfoColor: Color? = null,
 
         )
 
@@ -156,8 +156,8 @@ object SimpleTile {
         ) {
             Icon.Simple(
                 modifier = Modifier.align(Alignment.End),
-                style = style.iconStyle(color = data.iconColor),
-                resourceId = data.iconId,
+                style = style.styleIconInfo(color = data.iconInfoColor),
+                resourceId = data.iconInfoId,
                 description = data.title,
             )
             Text.StateColor(
@@ -196,8 +196,8 @@ object SimpleTile {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Icon.Simple(
-                style = style.iconStyle(color = data.iconColor),
-                resourceId = data.iconId,
+                style = style.styleIconInfo(color = data.iconInfoColor),
+                resourceId = data.iconInfoId,
                 description = data.title,
             )
             Column (
@@ -256,8 +256,8 @@ object SimpleTile {
                 }
             }
             Icon.Simple(
-                style = style.iconStyle(color = data.iconColor),
-                resourceId = data.iconId,
+                style = style.styleIconInfo(color = data.iconInfoColor),
+                resourceId = data.iconInfoId,
                 description = data.title,
             )
         }

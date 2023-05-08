@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:56
+ *  Last modified 08/05/2023 15:26
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,7 +23,7 @@ class PageHelpState private constructor() : PageState {
     var emergencies: SectionSimpleRow.Data? = null
     var paymentModes: SectionSimpleRow.Data? = null
     var configuration: SectionSimpleRow.Data? = null
-    var account: SectionSimpleRow.Data? = null
+    var accounts: SectionSimpleRow.Data? = null
     var misc: SectionSimpleRow.Data? = null
 
     companion object {
@@ -33,14 +33,14 @@ class PageHelpState private constructor() : PageState {
     data class Header(
         val headline: String? = null,
         val title: String? = null,
-        val text: String? = null
+        val body: String? = null
     )
 
     init {
         header = Header(
             headline = "Assistance",
             title = "En quoi pouvons-nous vous aider?",
-            text =
+            body =
             "Trouvez une réponse rapide en sélectionnant la thématique qui correspoond à votre besoin.",
 
             )
@@ -81,7 +81,7 @@ class PageHelpState private constructor() : PageState {
             )
         )
 
-        account = SectionSimpleRow.Data(
+        accounts = SectionSimpleRow.Data(
             title = "Comptes, épargnes, crédit, assurance",
             iconId = R.drawable.ic_call_24dp,
             rows = listOf(

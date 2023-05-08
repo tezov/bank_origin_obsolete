@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:32
+ *  Last modified 08/05/2023 15:25
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -75,8 +75,8 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
                 body = {
                     contentBody(
                         action = action,
-                        cardSmall = state.cardSmall,
-                        cardLarge = state.cardLarge,
+                        cardSmall = state.cardsSmall,
+                        cardLarge = state.cardsLarge,
                     )
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.huge.vertical))
                 }

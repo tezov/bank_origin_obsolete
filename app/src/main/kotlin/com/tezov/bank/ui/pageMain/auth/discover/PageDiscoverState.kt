@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:55
+ *  Last modified 08/05/2023 15:13
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -52,13 +52,13 @@ class PageDiscoverState private constructor() : PageState {
                     title = "Parrainez un proche...",
                     body = "Jusqu'au 9 février, c'est 100€ pour vous et 80€ pour vos filleuls à chaque parrainage validé.",
                     action = "Parrainer",
-                    iconId = R.drawable.ic_call_24dp
+                    iconInfoId = R.drawable.ic_call_24dp
                 ),
                 CarouselCard.Data(
                     title = "Roulez vert !",
                     body = "Grâce au Prêt Véhicule Vert, financez l'achat de votre véhicule peu polluant.",
                     action = "Découvrir",
-                    iconId = R.drawable.ic_call_24dp
+                    iconInfoId = R.drawable.ic_call_24dp
                 ),
             )
 
@@ -71,19 +71,19 @@ class PageDiscoverState private constructor() : PageState {
                     title = "Envie de vous faire plaisir en vacances ?",
                     body = "Avec les 2 cartes Visa Hello Prime et les 2 cartes virtuelles de l'offre Hello Prime Duo, réglez vos hôtel et cocktails !",
                     action = "En savoir plus",
-                    iconId = R.drawable.ic_call_24dp
+                    iconInfoId = R.drawable.ic_call_24dp
                 ),
                 CarouselCard.Data(
                     title = "Vous voulez vous lancer en bourse ?",
                     body = "Profitez de l'espace complet dédié à la Bourse dans notre appli.",
                     action = "En savoir plus",
-                    iconId = R.drawable.ic_call_24dp
+                    iconInfoId = R.drawable.ic_call_24dp
                 ),
                 CarouselCard.Data(
                     title = "Envie de donner du sens à votre épargne ?",
                     body = "L'Assurance Vie Hello! permet d'investir de manière responsable dans des fonds ISR.",
                     action = "En savoir plus",
-                    iconId = R.drawable.ic_call_24dp
+                    iconInfoId = R.drawable.ic_call_24dp
                 ),
             )
         )
@@ -178,35 +178,35 @@ class PageDiscoverState private constructor() : PageState {
             tile = listOf(
                 SimpleTile.Data(
                     title = "Comptes et cartes",
-                    iconId = R.drawable.img_account_card
+                    iconInfoId = R.drawable.img_account_card
                 ),
                 SimpleTile.Data(
                     title = "Épargne",
-                    iconId = R.drawable.img_coin
+                    iconInfoId = R.drawable.img_coin
                 ),
                 SimpleTile.Data(
                     title = "Crédit",
-                    iconId = R.drawable.img_credit
+                    iconInfoId = R.drawable.img_credit
                 ),
                 SimpleTile.Data(
                     title = "Assurances",
-                    iconId = R.drawable.img_insurance
+                    iconInfoId = R.drawable.img_insurance
                 ),
                 SimpleTile.Data(
                     title = "Compte professionnel",
-                    iconId = R.drawable.img_account_pro
+                    iconInfoId = R.drawable.img_account_pro
                 ),
                 SimpleTile.Data(
                     title = "Bourse",
-                    iconId = R.drawable.img_market
+                    iconInfoId = R.drawable.img_market
                 ),
                 SimpleTile.Data(
                     title = "Offre enfants",
-                    iconId = R.drawable.img_children
+                    iconInfoId = R.drawable.img_children
                 ),
                 SimpleTile.Data(
                     title = "Mobilité bancaire",
-                    iconId = R.drawable.img_account_mobility
+                    iconInfoId = R.drawable.img_account_mobility
                 ),
             )
         )

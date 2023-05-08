@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:36
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:34
+ *  Last modified 08/05/2023 15:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -36,7 +36,7 @@ object SectionRollerCard {
     class StyleBuilder internal constructor(
         style: Style
     ) {
-        var styleIcon = style.styleIcon
+        var styleIconInfo = style.styleIconInfo
         var outfitTextTitle = style.outfitTextTitle
         var outfitTextSubTitle = style.outfitTextSubTitle
         var colorBackgroundHeader = style.colorBackgroundHeader
@@ -46,7 +46,7 @@ object SectionRollerCard {
         var styleCard = style.styleCard
 
         fun get() = Style(
-            styleIcon = styleIcon,
+            styleIconInfo = styleIconInfo,
             outfitTextTitle = outfitTextTitle,
             outfitTextSubTitle = outfitTextSubTitle,
             colorBackgroundHeader = colorBackgroundHeader,
@@ -58,7 +58,7 @@ object SectionRollerCard {
     }
 
     class Style(
-        styleIcon: Icon.Simple.Style? = null,
+        styleIconInfo: Icon.Simple.Style? = null,
         val outfitTextTitle: OutfitText.StateColor.Style? = null,
         val outfitTextSubTitle: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
@@ -68,8 +68,8 @@ object SectionRollerCard {
         styleCard: RollerCard.Style? = null
     ) {
 
-        val styleIcon: Icon.Simple.Style by DelegateNullFallBack.Ref(
-            styleIcon,
+        val styleIconInfo: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            styleIconInfo,
             fallBackValue = {
                 Icon.Simple.Style()
             }
@@ -99,7 +99,7 @@ object SectionRollerCard {
         }
 
         constructor(style: Style) : this(
-            styleIcon = style.styleIcon,
+            styleIconInfo = style.styleIconInfo,
             outfitTextTitle = style.outfitTextTitle,
             outfitTextSubTitle = style.outfitTextSubTitle,
             colorBackgroundHeader = style.colorBackgroundHeader,
@@ -112,7 +112,7 @@ object SectionRollerCard {
     }
 
     data class Data(
-        val iconId: Int? = null,
+        val iconInfoId: Int? = null,
         val title: String? = null,
         val subTitle: String? = null,
         val action: String? = null,
@@ -145,11 +145,11 @@ object SectionRollerCard {
                         .padding(start = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    data.iconId?.let {
+                    data.iconInfoId?.let {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
-                            style = style.styleIcon,
+                            style = style.styleIconInfo,
                             resourceId = it,
                             description = text,
                         )

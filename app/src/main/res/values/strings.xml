@@ -1,8 +1,8 @@
 <!--
   ~  *********************************************************************************
-  ~  Created by Tezov on 07/05/2023 17:18
+  ~  Created by Tezov on 08/05/2023 15:29
   ~  Copyright (c) 2023 . All rights reserved.
-  ~  Last modified 07/05/2023 16:49
+  ~  Last modified 08/05/2023 15:28
   ~  First project bank / bank.app.main
   ~  This file is private and it is not allowed to use it, copy it or modified it
   ~  without the permission granted by the owner Tezov. For any request request,
@@ -39,13 +39,6 @@
         <item>Supprimer le profil</item>
     </string-array>
 
-    <!--    help and service-->
-    <string name="pg_h_and_s_icon_close">icon fermeture</string>
-
-    <!--    profil-->
-    <string name="pg_profile_icon_close">icon déconnection utilisateur</string>
-    <string name="pg_profile_icon_use">icon utilisateur</string>
-
     <!--    dialog login auth-->
     <string name="dlg_login_auth_icon_close">icon fermeture</string>
     <string name="dlg_login_auth_enter_password">Saisissez votre code secret pour\naccéder à vos comptes</string>
@@ -58,5 +51,12 @@
     <string name="dlg_login_auth_btn_connect">Se connecter</string>
     <string name="dlg_login_auth_link_login_forgotten">Mon n° client?</string>
     <string name="dlg_login_auth_link_password_forgotten">Code secret oublié ?</string>
+
+    <!--    help and service-->
+    <string name="pg_h_and_s_icon_close">icon fermeture</string>
+
+    <!--    profil-->
+    <string name="pg_profile_icon_close">icon déconnection utilisateur</string>
+    <string name="pg_profile_icon_use">icon utilisateur</string>
 
 </resources>

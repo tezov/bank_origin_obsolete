@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:36
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:26
+ *  Last modified 08/05/2023 15:15
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -38,7 +38,7 @@ object CarouselCard {
         open class Base(
             margin: PaddingValues? = null,
             outfitFrame: OutfitFrameStateColor? = null,
-            styleIcon: Icon.Simple.Style? = null,
+            styleIconInfo: Icon.Simple.Style? = null,
             val outfitTextTag: OutfitTextStateColor? = null,
             val outfitTextTitle: OutfitTextStateColor? = null,
             val outfitTextBody: OutfitTextStateColor? = null,
@@ -56,8 +56,8 @@ object CarouselCard {
                     ThemeColorsExtended.Dummy.outfitFrameState
                 }
             )
-            val styleIcon: Icon.Simple.Style by DelegateNullFallBack.Ref(
-                styleIcon,
+            val styleIconInfo: Icon.Simple.Style by DelegateNullFallBack.Ref(
+                styleIconInfo,
                 fallBackValue = {
                     Icon.Simple.Style()
                 }
@@ -76,7 +76,7 @@ object CarouselCard {
                 ) {
                     var margin = style.margin
                     var outfitFrame = style.outfitFrame
-                    var styleIcon = style.styleIcon
+                    var styleIconInfo = style.styleIconInfo
                     var outfitTextTag = style.outfitTextTag
                     var outfitTextTitle = style.outfitTextTitle
                     var outfitTextBody = style.outfitTextBody
@@ -86,7 +86,7 @@ object CarouselCard {
                     internal open fun get() = Base(
                         margin = margin,
                         outfitFrame = outfitFrame,
-                        styleIcon = styleIcon,
+                        styleIconInfo = styleIconInfo,
                         outfitTextTag = outfitTextTag,
                         outfitTextTitle = outfitTextTitle,
                         outfitTextBody = outfitTextBody,
@@ -106,7 +106,7 @@ object CarouselCard {
             constructor(style: Base?) : this(
                 margin = style?.margin,
                 outfitFrame = style?.outfitFrame,
-                styleIcon = style?.styleIcon,
+                styleIconInfo = style?.styleIconInfo,
                 outfitTextTag = style?.outfitTextTag,
                 outfitTextTitle = style?.outfitTextTitle,
                 outfitTextBody = style?.outfitTextBody,
@@ -114,12 +114,12 @@ object CarouselCard {
             )
 
             @Composable
-            internal fun iconStyle(color: Color?) = color?.let {
-                styleIcon.copy {
+            internal fun styleIconInfo(color: Color?) = color?.let {
+                styleIconInfo.copy {
                     tint = it
                 }
             } ?: run {
-                styleIcon
+                styleIconInfo
             }
 
         }
@@ -217,8 +217,8 @@ object CarouselCard {
     }
 
     data class Data(
-        val iconId: Int? = null,
-        val iconColor: Color? = null,
+        val iconInfoId: Int? = null,
+        val iconInfoColor: Color? = null,
         val tag: String? = null,
         val title: String,
         val body: String,
@@ -304,12 +304,12 @@ object CarouselCard {
                     onClick = onClick,
                 )
             }
-            data.iconId?.let {
+            data.iconInfoId?.let {
                 Icon.Simple(
                     modifier = Modifier.align(Alignment.Top),
                     resourceId = it,
                     description = null,
-                    style = style.iconStyle(data.iconColor)
+                    style = style.styleIconInfo(data.iconInfoColor)
                 )
             }
         }
@@ -345,12 +345,12 @@ object CarouselCard {
                 }
             }
             Row {
-                data.iconId?.let {
+                data.iconInfoId?.let {
                     Icon.Simple(
                         modifier = Modifier.padding(end = MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal),
                         resourceId = it,
                         description = null,
-                        style = style.iconStyle(data.iconColor)
+                        style = style.styleIconInfo(data.iconInfoColor)
                     )
                 }
                 Text.StateColor(

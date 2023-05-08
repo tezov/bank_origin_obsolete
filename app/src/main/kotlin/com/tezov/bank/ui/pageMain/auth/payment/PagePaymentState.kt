@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:58
+ *  Last modified 08/05/2023 15:25
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -21,8 +21,8 @@ import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 class PagePaymentState private constructor() : PageState {
 
     var header: Header? = null
-    var cardSmall: SectionSimpleTile.Data? = null
-    var cardLarge: SectionSimpleTile.Data? = null
+    var cardsSmall: SectionSimpleTile.Data? = null
+    var cardsLarge: SectionSimpleTile.Data? = null
 
     companion object {
         fun create() = PagePaymentState()
@@ -38,48 +38,48 @@ class PagePaymentState private constructor() : PageState {
             headline = "Paiments"
         )
 
-        cardSmall = SectionSimpleTile.Data(
+        cardsSmall = SectionSimpleTile.Data(
             template = SimpleTile.Template.IconTopEnd,
             tile = listOf(
                 SimpleTile.Data(
                     title = "Partager\nmon RIB",
-                    iconId = R.drawable.img_rib_share
+                    iconInfoId = R.drawable.img_rib_share
                 ),
                 SimpleTile.Data(
                     title = "Faire\nun virement",
-                    iconId = R.drawable.img_transfer_money
+                    iconInfoId = R.drawable.img_transfer_money
                 ),
                 SimpleTile.Data(
                     title = "Gérer\nmes chèques",
-                    iconId = R.drawable.img_cheque_manage
+                    iconInfoId = R.drawable.img_cheque_manage
                 ),
                 SimpleTile.Data(
                     title = "Gérer\nmes cartes",
-                    iconId = R.drawable.img_card_manage
+                    iconInfoId = R.drawable.img_card_manage
                 ),
             )
         )
 
-        cardLarge = SectionSimpleTile.Data(
+        cardsLarge = SectionSimpleTile.Data(
             template = SimpleTile.Template.IconEnd,
             tile = listOf(
                 SimpleTile.Data(
                     title = "Lyf Pay",
                     subtitle = "Payer avec votre mobile.",
-                    iconId = R.drawable.img_lyf,
-                    iconColor = Color.Red
+                    iconInfoId = R.drawable.img_lyf,
+                    iconInfoColor = Color.Red
                 ),
                 SimpleTile.Data(
                     title = "Paylib",
                     subtitle = "Envoyer de l'argent vers un mobile",
-                    iconId = R.drawable.img_paylib,
-                    iconColor = Color.DarkGray
+                    iconInfoId = R.drawable.img_paylib,
+                    iconInfoColor = Color.DarkGray
                 ),
                 SimpleTile.Data(
                     title = "PaypPal",
                     subtitle = "Payer en ligne",
-                    iconId = R.drawable.img_paypal,
-                    iconColor = Color.Blue
+                    iconInfoId = R.drawable.img_paypal,
+                    iconInfoColor = Color.Blue
                 ),
             )
         )

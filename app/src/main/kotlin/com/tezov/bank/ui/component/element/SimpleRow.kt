@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:36
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:25
+ *  Last modified 08/05/2023 14:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,21 +33,22 @@ object SimpleRow {
         style: Style
     ) {
         var styleIconInfo = style.styleIconInfo
+        var outfitTextTitle = style.outfitTextTitle
         var styleIconAction = style.styleIconAction
-        var outfitText = style.outfitText
 
         fun get() = Style(
             styleIconInfo = styleIconInfo,
+            outfitTextTitle = outfitTextTitle,
             styleIconAction = styleIconAction,
-            outfitText = outfitText,
         )
     }
 
     class Style(
         styleIconInfo: Icon.Simple.Style? = null,
+        val outfitTextTitle: OutfitTextStateColor? = null,
         styleIconAction: Icon.Simple.Style? = null,
-        val outfitText: OutfitTextStateColor? = null,
     ) {
+
         val styleIconInfo: Icon.Simple.Style by DelegateNullFallBack.Ref(
             styleIconInfo,
             fallBackValue = {
@@ -74,8 +75,8 @@ object SimpleRow {
 
         constructor(style: Style) : this(
             styleIconInfo = style.styleIconInfo,
+            outfitTextTitle = style.outfitTextTitle,
             styleIconAction = style.styleIconAction,
-            outfitText = style.outfitText,
         )
 
     }
@@ -83,7 +84,7 @@ object SimpleRow {
     class Data(
         val iconInfoId: Int? = null,
         val title: String,
-        val iconActionId: Int = R.drawable.ic_arrow_cut_right_24dp,
+        val iconActionId: Int? = R.drawable.ic_arrow_cut_right_24dp,
     )
 
     @Composable
@@ -112,13 +113,15 @@ object SimpleRow {
                 modifier = Modifier
                     .weight(1f),
                 text = data.title,
-                style = style.outfitText
+                style = style.outfitTextTitle
             )
-            Icon.Simple(
-                style = style.styleIconAction,
-                resourceId = data.iconActionId,
-                description = data.title,
-            )
+            data.iconActionId?.let {
+                Icon.Simple(
+                    style = style.styleIconAction,
+                    resourceId = it,
+                    description = data.title,
+                )
+            }
         }
     }
 

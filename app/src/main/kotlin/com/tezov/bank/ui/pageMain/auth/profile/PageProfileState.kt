@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:55
+ *  Last modified 08/05/2023 15:24
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -31,14 +31,14 @@ class PageProfileState private constructor() : PageState {
 
     data class Header(
         val name: String?=null,
-        val imageResourceId: Int?=null,
+        val imageId: Int?=null,
     )
 
     init {
 
         header = Header(
             name = "M. Zollver",
-            imageResourceId = R.drawable.img_suitcase_blue,
+            imageId = R.drawable.img_suitcase_blue,
         )
 
         profils = SectionSimpleRow.Data(

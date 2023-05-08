@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:36
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:34
+ *  Last modified 08/05/2023 15:16
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -39,14 +39,14 @@ object AccountValueSimpleRow {
     class StyleBuilder internal constructor(
         style: Style
     ) {
-        var styleIcon = style.styleIcon
+        var styleIconInfo = style.styleIconInfo
         var outfitTextTitle = style.outfitTextTitle
         var outfitTextSubTitle = style.outfitTextSubTitle
         var outfitTextAmount = style.outfitTextAmount
         var background = style.background
 
         fun get() = Style(
-            styleIcon = styleIcon,
+            styleIconInfo = styleIconInfo,
             outfitTextTitle = outfitTextTitle,
             outfitTextSubTitle = outfitTextSubTitle,
             outfitTextAmount = outfitTextAmount,
@@ -55,14 +55,14 @@ object AccountValueSimpleRow {
     }
 
     class Style(
-        styleIcon: Icon.StateColor.Style? = null,
+        styleIconInfo: Icon.StateColor.Style? = null,
         val outfitTextTitle: OutfitTextStateColor? = null,
         val outfitTextSubTitle: OutfitTextStateColor? = null,
         val outfitTextAmount: OutfitTextStateColor? = null,
         val background: Color? = null,
     ) {
-        val styleIcon: Icon.StateColor.Style by DelegateNullFallBack.Ref(
-            styleIcon,
+        val styleIconInfo: Icon.StateColor.Style by DelegateNullFallBack.Ref(
+            styleIconInfo,
             fallBackValue = {
                 Icon.StateColor.Style()
             }
@@ -80,7 +80,7 @@ object AccountValueSimpleRow {
         }
 
         constructor(style: Style) : this(
-            styleIcon = style.styleIcon,
+            styleIconInfo = style.styleIconInfo,
             outfitTextTitle = style.outfitTextTitle,
             outfitTextSubTitle = style.outfitTextSubTitle,
             outfitTextAmount = style.outfitTextAmount,
@@ -88,8 +88,8 @@ object AccountValueSimpleRow {
         )
 
         @Composable
-        internal fun iconStyle(color: Color?) = color?.let {
-            styleIcon.copy {
+        internal fun styleIconInfo(color: Color?) = color?.let {
+            styleIconInfo.copy {
                 outfitFrame = outfitFrame?.copy {
                     outfitShape = outfitShape.copy {
                         outfitState = it.asStateSimple
@@ -97,14 +97,14 @@ object AccountValueSimpleRow {
                 }
             }
         } ?: run {
-            styleIcon
+            styleIconInfo
         }
 
     }
 
     class Data(
-        val iconId: Int,
-        val iconColor: Color? = null,
+        val iconInfoId: Int,
+        val iconInfoColor: Color? = null,
         val title: String,
         val subTitle: String? = null,
         val amount: String,
@@ -128,8 +128,8 @@ object AccountValueSimpleRow {
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon.StateColor(
-                style = style.iconStyle(color = data.iconColor),
-                resourceId = data.iconId,
+                style = style.styleIconInfo(color = data.iconInfoColor),
+                resourceId = data.iconInfoId,
                 description = null,
             )
             Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.element.normal.horizontal))

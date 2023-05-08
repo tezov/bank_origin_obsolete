@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 14:37
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 14:27
+ *  Last modified 08/05/2023 14:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,7 +12,6 @@
 
 package com.tezov.bank.ui.dialog.auth.closeAppConfirmation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -57,30 +56,28 @@ object DialogAuthCloseAppConfirmation :
                     .padding(MaterialTheme.dimensionsPaddingExtended.page.normal)
             ) {
                 Text.StateColor(
-                    text = "Déconnexion",
+                    text = state.contentData.title,
                     style = DialogAuthCloseAppConfirmationTheme.typographies.title
                 )
                 Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.normal.vertical))
                 Text.StateColor(
-                    text = "Etes-vous sûr de vouloir vous déconnecter ?",
+                    text = state.contentData.body,
                     style = DialogAuthCloseAppConfirmationTheme.typographies.body
                 )
                 Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.huge.vertical))
                 Row {
                     Spacer(modifier = Modifier.weight(1f))
                     Link.StateColor(
-                        text = "NON",
+                        text = state.contentData.cancel,
                         style = DialogAuthCloseAppConfirmationTheme.styles.linkCancel,
-                    ) {
-
-                    }
+                        onClick = action::onClickCancel
+                    )
                     Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.element.huge.horizontal))
                     Link.StateColor(
-                        text = "OUI",
+                        text = state.contentData.confirm,
                         style = DialogAuthCloseAppConfirmationTheme.styles.linkConfirm,
-                    ) {
-
-                    }
+                        onClick = action::onClickConfirm
+                    )
                 }
             }
         }

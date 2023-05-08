@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 03:00
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 02:39
+ *  Last modified 08/05/2023 15:12
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,8 +13,6 @@
 package com.tezov.bank.ui.pageMain.lobby.help_and_service
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import com.tezov.bank.R
 import com.tezov.bank.ui.component.block.SectionSimpleRow
 import com.tezov.bank.ui.component.block.SectionSimpleTile
@@ -46,31 +44,31 @@ class PageHelpAndServiceState private constructor() : PageState {
             tile = listOf(
                 SimpleTile.Data(
                     title = "Opposer une carte",
-                    iconId = R.drawable.ic_crisis_24dp
+                    iconInfoId = R.drawable.ic_crisis_24dp
                 ),
                 SimpleTile.Data(
                     title = "Contester un prélèvement",
-                    iconId = R.drawable.ic_argue_24dp
+                    iconInfoId = R.drawable.ic_argue_24dp
                 ),
                 SimpleTile.Data(
                     title = "Suivre mon dossier",
-                    iconId = R.drawable.ic_checklist_24dp
+                    iconInfoId = R.drawable.ic_checklist_24dp
                 ),
                 SimpleTile.Data(
                     title = "Trouver un distributeur",
-                    iconId = R.drawable.ic_atm_24dp
+                    iconInfoId = R.drawable.ic_atm_24dp
                 ),
                 SimpleTile.Data(
                     title = "Retirer à l'étranger",
-                    iconId = R.drawable.ic_explore_24dp
+                    iconInfoId = R.drawable.ic_explore_24dp
                 ),
                 SimpleTile.Data(
                     title = "Découvrir l'application",
-                    iconId = R.drawable.ic_search_24dp
+                    iconInfoId = R.drawable.ic_search_24dp
                 ),
                 SimpleTile.Data(
                     title = "Accéder à l'assitance technique",
-                    iconId = R.drawable.ic_help_24dp
+                    iconInfoId = R.drawable.ic_help_24dp
                 ),
             )
         )

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:36
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:31
+ *  Last modified 08/05/2023 15:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -34,7 +34,7 @@ object SectionCarouselCard {
     class StyleBuilder internal constructor(
         style: Style
     ) {
-        var styleIcon = style.styleIcon
+        var styleIconInfo = style.styleIconInfo
         var outfitTextTitle = style.outfitTextTitle
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
@@ -42,7 +42,7 @@ object SectionCarouselCard {
         var styleCard = style.styleCard
 
         fun get() = Style(
-            styleIcon = styleIcon,
+            styleIconInfo = styleIconInfo,
             outfitTextTitle = outfitTextTitle,
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
@@ -52,7 +52,7 @@ object SectionCarouselCard {
     }
 
     class Style(
-        styleIcon: Icon.Simple.Style? = null,
+        styleIconInfo: Icon.Simple.Style? = null,
         val outfitTextTitle: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
@@ -60,8 +60,8 @@ object SectionCarouselCard {
         styleCard: CarouselCard.Style.Base? = null
     ) {
 
-        val styleIcon: Icon.Simple.Style by DelegateNullFallBack.Ref(
-            styleIcon,
+        val styleIconInfo: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            styleIconInfo,
             fallBackValue = {
                 Icon.Simple.Style()
             }
@@ -87,7 +87,7 @@ object SectionCarouselCard {
         }
 
         constructor(style: Style) : this(
-            styleIcon = style.styleIcon,
+            styleIconInfo = style.styleIconInfo,
             outfitTextTitle = style.outfitTextTitle,
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
@@ -98,7 +98,7 @@ object SectionCarouselCard {
     }
 
     data class Data(
-        val iconId: Int? = null,
+        val iconInfoId: Int? = null,
         val title: String? = null,
         val cards: List<CarouselCard.Data>
     )
@@ -127,11 +127,11 @@ object SectionCarouselCard {
                         .padding(start = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    data.iconId?.let {
+                    data.iconInfoId?.let {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
-                            style = style.styleIcon,
+                            style = style.styleIconInfo,
                             resourceId = it,
                             description = text,
                         )

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 14:37
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 14:36
+ *  Last modified 08/05/2023 15:23
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -41,7 +41,6 @@ import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link.StateColor.Styl
 import com.tezov.lib_core_android_kotlin.ui.theme.style.*
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrame.StateColor.Style.Companion.copy
-import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.Size.Companion.asShapeSize
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.asTextStateColor
@@ -259,7 +258,7 @@ object ThemeComponentProviders {
 
     @Composable
     fun sectionSimpleRowStyle() = SectionSimpleRow.Style(
-        styleIcon = Icon.Simple.Style(
+        styleIconInfo = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
@@ -282,7 +281,7 @@ object ThemeComponentProviders {
             size = MaterialTheme.dimensionsIconExtended.action.small,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
-        outfitText = MaterialTheme.typographiesExtended.body.normal.copy {
+        outfitTextTitle = MaterialTheme.typographiesExtended.body.normal.copy {
             outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
         },
     )
@@ -303,7 +302,7 @@ object ThemeComponentProviders {
 
     @Composable
     fun sectionMessageRowStyle() = SectionMessageRow.Style(
-        styleIcon = Icon.Simple.Style(
+        styleIconInfo = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
@@ -318,13 +317,16 @@ object ThemeComponentProviders {
 
     @Composable
     fun messageRowStyle() = MessageRow.Style(
-        colorIconInfo = MaterialTheme.colorsPalette.redBlood,
+        colorBadge = MaterialTheme.colorsPalette.redBlood,
         styleIconAction = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.action.small,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
         outfitTextTitle = MaterialTheme.typographiesExtended.title.normal.copy {
             outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+            typo = typo.copy(
+                fontWeight = FontWeight.Normal
+            )
         },
         outfitTextSubtitle = MaterialTheme.typographiesExtended.subtitle.normal.copy {
             outfitState = MaterialTheme.colorsExtended.primary.fade.asStateSimple
@@ -353,7 +355,7 @@ object ThemeComponentProviders {
 
     @Composable
     fun accountValueSimpleRowStyle() = AccountValueSimpleRow.Style(
-        styleIcon = Icon.StateColor.Style(
+        styleIconInfo = Icon.StateColor.Style(
             size = MaterialTheme.dimensionsIconExtended.info.small,
             tint = MaterialTheme.colorsExtended.background.default,
             outfitFrame = OutfitFrameStateColor(
@@ -374,7 +376,7 @@ object ThemeComponentProviders {
 
     @Composable
     fun sectionTileStyle() = SectionSimpleTile.Style(
-        styleIcon = Icon.Simple.Style(
+        styleIconInfo = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
@@ -395,7 +397,7 @@ object ThemeComponentProviders {
                 outfitState = MaterialTheme.colorsExtended.backgroundElevated.default.asStateSimple
             }
         ),
-        styleIcon = Icon.Simple.Style(
+        styleIconInfo = Icon.Simple.Style(
             size = MaterialTheme.dimensionsIconExtended.info.normal,
             tint = MaterialTheme.colorsExtended.primary.accent
         ),
@@ -423,7 +425,7 @@ object ThemeComponentProviders {
     @Composable
     fun sectionCarouselCardStyle(cardStyle: CarouselCard.Style.Base) =
         SectionCarouselCard.Style(
-            styleIcon = Icon.Simple.Style(
+            styleIconInfo = Icon.Simple.Style(
                 size = MaterialTheme.dimensionsIconExtended.info.normal,
                 tint = MaterialTheme.colorsExtended.primary.accent
             ),
@@ -454,7 +456,7 @@ object ThemeComponentProviders {
                         MaterialTheme.colorsExtended.backgroundElevated.decor.asStateSimple
                 },
             ),
-            styleIcon = Icon.Simple.Style(
+            styleIconInfo = Icon.Simple.Style(
                 size = MaterialTheme.dimensionsIconExtended.info.big,
                 tint = MaterialTheme.colorsExtended.primary.accent.copy(alpha = 0.5f)
             ),
@@ -493,7 +495,7 @@ object ThemeComponentProviders {
                         MaterialTheme.colorsExtended.backgroundElevated.overlay.asStateSimple
                 },
             ),
-            styleIcon = Icon.Simple.Style(
+            styleIconInfo = Icon.Simple.Style(
                 size = MaterialTheme.dimensionsIconExtended.info.normal,
                 tint = MaterialTheme.colorsExtended.primary.accent
             ),
@@ -524,7 +526,7 @@ object ThemeComponentProviders {
     @Composable
     fun sectionRollerCardStyle() =
         SectionRollerCard.Style(
-            styleIcon = Icon.Simple.Style(
+            styleIconInfo = Icon.Simple.Style(
                 size = MaterialTheme.dimensionsIconExtended.info.normal,
                 tint = MaterialTheme.colorsExtended.primary.accent
             ),

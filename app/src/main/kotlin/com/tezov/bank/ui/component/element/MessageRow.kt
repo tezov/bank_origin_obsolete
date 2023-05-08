@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 03:00
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 02:36
+ *  Last modified 08/05/2023 15:20
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -40,13 +40,13 @@ object MessageRow {
     class StyleBuilder internal constructor(
         style: Style
     ) {
-        var colorIconInfo = style.colorIconInfo
+        var colorBadge = style.colorBadge
         var styleIconAction = style.styleIconAction
         var outfitTextTitle = style.outfitTextTitle
         var outfitTextSubTitle = style.outfitTextSubtitle
 
         fun get() = Style(
-            colorIconInfo = colorIconInfo,
+            colorBadge = colorBadge,
             styleIconAction = styleIconAction,
             outfitTextTitle = outfitTextTitle,
             outfitTextSubtitle = outfitTextSubTitle,
@@ -54,11 +54,18 @@ object MessageRow {
     }
 
     class Style(
-        val colorIconInfo: Color = ThemeColorsExtended.Dummy.pink,
+        colorBadge: Color = ThemeColorsExtended.Dummy.pink,
         styleIconAction: Icon.Simple.Style? = null,
         val outfitTextTitle: OutfitTextStateColor? = null,
         val outfitTextSubtitle: OutfitTextStateColor? = null,
     ) {
+
+        val colorBadge: Color by DelegateNullFallBack.Ref(
+            colorBadge,
+            fallBackValue = {
+                ThemeColorsExtended.Dummy.pink
+            }
+        )
 
         val styleIconAction: Icon.Simple.Style by DelegateNullFallBack.Ref(
             styleIconAction,
@@ -81,7 +88,7 @@ object MessageRow {
         }
 
         constructor(style: Style) : this(
-            colorIconInfo = style.colorIconInfo,
+            colorBadge = style.colorBadge,
             styleIconAction = style.styleIconAction,
             outfitTextTitle = style.outfitTextTitle,
             outfitTextSubtitle = style.outfitTextSubtitle,
@@ -93,7 +100,7 @@ object MessageRow {
         val title: String,
         val subtitle: String,
         val iconActionId: Int = R.drawable.ic_arrow_cut_right_24dp,
-        val hasBeenRead: Boolean = false
+        val active: Boolean = false
     )
 
     @Composable
@@ -114,10 +121,10 @@ object MessageRow {
                 Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                if (!data.hasBeenRead) {
+                if (data.active) {
                     Box(
                         modifier = Modifier
-                            .background(style.colorIconInfo, CircleShape)
+                            .background(style.colorBadge, CircleShape)
                             .size(ICON_INFO_SIZE)
                     )
                     Spacer(modifier = Modifier.width(MaterialTheme.dimensionsPaddingExtended.chunk.small.horizontal))
@@ -125,10 +132,10 @@ object MessageRow {
                 Text.StateColor(
                     modifier = Modifier.weight(1f),
                     text = data.title,
-                    style = if (data.hasBeenRead) {
+                    style = if (data.active) {
                         style.outfitTextTitle?.copy{
                             typo = typo.copy(
-                                fontWeight = FontWeight.Normal
+                                fontWeight = FontWeight.SemiBold
                             )
                         }
                     } else {

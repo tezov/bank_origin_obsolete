@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 03:00
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 01:35
+ *  Last modified 08/05/2023 15:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,7 +23,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.tezov.bank.ui.component.element.MessageRow
-import com.tezov.bank.ui.component.element.SimpleRow
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.modifier.then
@@ -38,7 +37,7 @@ object SectionMessageRow {
     class StyleBuilder internal constructor(
         style: Style
     ) {
-        var styleIcon = style.styleIcon
+        var styleIconInfo = style.styleIconInfo
         var outfitTextTitle = style.outfitTextTitle
         var colorBackgroundHeader = style.colorBackgroundHeader
         var colorBackgroundBody = style.colorBackgroundBody
@@ -48,7 +47,7 @@ object SectionMessageRow {
         var styleRow = style.styleRow
 
         fun get() = Style(
-            styleIcon = styleIcon,
+            styleIconInfo = styleIconInfo,
             outfitTextTitle = outfitTextTitle,
             colorBackgroundHeader = colorBackgroundHeader,
             colorBackgroundBody = colorBackgroundBody,
@@ -60,7 +59,7 @@ object SectionMessageRow {
     }
 
     class Style(
-        styleIcon: Icon.Simple.Style? = null,
+        styleIconInfo: Icon.Simple.Style? = null,
         val outfitTextTitle: OutfitText.StateColor.Style? = null,
         val colorBackgroundHeader: Color? = null,
         val colorBackgroundBody: Color? = null,
@@ -70,8 +69,8 @@ object SectionMessageRow {
         styleRow: MessageRow.Style? = null
     ) {
 
-        val styleIcon: Icon.Simple.Style by DelegateNullFallBack.Ref(
-            styleIcon,
+        val styleIconInfo: Icon.Simple.Style by DelegateNullFallBack.Ref(
+            styleIconInfo,
             fallBackValue = {
                 Icon.Simple.Style()
             }
@@ -93,7 +92,7 @@ object SectionMessageRow {
         }
 
         constructor(style: Style) : this(
-            styleIcon = style.styleIcon,
+            styleIconInfo = style.styleIconInfo,
             outfitTextTitle = style.outfitTextTitle,
             colorBackgroundHeader = style.colorBackgroundHeader,
             colorBackgroundBody = style.colorBackgroundBody,
@@ -106,7 +105,7 @@ object SectionMessageRow {
     }
 
     data class Data(
-        val iconId: Int? = null,
+        val iconInfoId: Int? = null,
         val title: String? = null,
         val rows: List<MessageRow.Data>
     )
@@ -135,11 +134,11 @@ object SectionMessageRow {
                         .padding(start = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
-                    data.iconId?.let {
+                    data.iconInfoId?.let {
                         Icon.Simple(
                             modifier = Modifier
                                 .padding(end = MaterialTheme.dimensionsPaddingExtended.element.small.horizontal),
-                            style = style.styleIcon,
+                            style = style.styleIconInfo,
                             resourceId = it,
                             description = text,
                         )

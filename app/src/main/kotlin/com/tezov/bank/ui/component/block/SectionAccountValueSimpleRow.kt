@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:36
+ *  Created by Tezov on 08/05/2023 15:29
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:32
+ *  Last modified 08/05/2023 15:20
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -106,8 +106,8 @@ object SectionAccountValueSimpleRow {
     }
 
     data class Data(
-        val title: String? = null,
         val iconInfoId: Int? = null,
+        val title: String? = null,
         val rows: List<AccountValueSimpleRow.Data>
     )
 
