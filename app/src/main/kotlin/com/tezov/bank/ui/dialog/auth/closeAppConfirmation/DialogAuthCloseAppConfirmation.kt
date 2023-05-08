@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 14:54
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 14:44
+ *  Last modified 08/05/2023 14:27
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,13 +18,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiDialog
-import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthAction
-import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.Composition
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
@@ -57,7 +53,6 @@ object DialogAuthCloseAppConfirmation :
         ) {
             Column(
                 modifier = Modifier
-                    .background(DialogAuthCloseAppConfirmationTheme.colors.background)
                     .fillMaxWidth(0.7f)
                     .padding(MaterialTheme.dimensionsPaddingExtended.page.normal)
             ) {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 08/05/2023 13:58
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,11 +12,13 @@
 
 package com.tezov.bank.ui.di.component
 
+import com.tezov.bank.ui.bottomsheet.account.accountIncoming.BottomSheetAccountIncomingAction
+import com.tezov.bank.ui.bottomsheet.account.accountIncoming.BottomSheetAccountIncomingState
 import com.tezov.bank.ui.di.module.ModuleAppUiDialog
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppConfirmationAction
 import com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppConfirmationState
-import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthAction
-import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState
+import com.tezov.bank.ui.dialog.lobby.login.loginAuth.DialogLoginAuthAction
+import com.tezov.bank.ui.dialog.lobby.login.loginAuth.DialogLoginAuthState
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeAppUiDialog
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentContextLazy
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentCoreUiDialog
@@ -41,6 +43,8 @@ object ComponentAppUiDialog {
 
         fun contextLoginAuth(): ComponentContextLazy<DialogLoginAuthState, DialogLoginAuthAction>
         fun contextAuthCloseAppConfirmation(): ComponentContextLazy<DialogAuthCloseAppConfirmationState, DialogAuthCloseAppConfirmationAction>
+
+        fun contextAccountIncoming(): ComponentContextLazy<BottomSheetAccountIncomingState, BottomSheetAccountIncomingAction>
 
     }
 

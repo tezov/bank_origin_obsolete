@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:32
+ *  Last modified 08/05/2023 13:58
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,7 +13,7 @@
 package com.tezov.bank.ui.pageMain.lobby.login
 
 import com.tezov.bank.navigation.NavigationController.Route
-import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuth
+import com.tezov.bank.ui.dialog.lobby.login.loginAuth.DialogLoginAuth
 import com.tezov.lib_core_android_kotlin.navigation.NavigationController
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageAction

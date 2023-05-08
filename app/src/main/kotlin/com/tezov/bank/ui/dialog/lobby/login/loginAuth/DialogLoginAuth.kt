@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 05/05/2023 23:33
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 05/05/2023 22:55
+ *  Last modified 08/05/2023 13:58
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -10,7 +10,7 @@
  *  *********************************************************************************
  */
 
-package com.tezov.bank.ui.dialog.lobby.login.auth
+package com.tezov.bank.ui.dialog.lobby.login.loginAuth
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -37,8 +37,8 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiDialog
-import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.LOGIN_LENGTH
-import com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.Companion.PASSWORD_LENGTH
+import com.tezov.bank.ui.dialog.lobby.login.loginAuth.DialogLoginAuthState.Companion.LOGIN_LENGTH
+import com.tezov.bank.ui.dialog.lobby.login.loginAuth.DialogLoginAuthState.Companion.PASSWORD_LENGTH
 import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.block.KeyBoard
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button

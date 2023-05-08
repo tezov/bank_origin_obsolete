@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:14
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 12:20
+ *  Last modified 08/05/2023 14:17
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,6 +14,7 @@ package com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet
 
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySubAction
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
@@ -38,6 +39,10 @@ class BottomSheetAction constructor(
 
     fun close() {
         state.show(null)
+    }
+
+    fun showOnSheetWithOverlay(content: @Composable () -> Unit) {
+        show { BottomSheet.Sheet(content) }
     }
 
 }

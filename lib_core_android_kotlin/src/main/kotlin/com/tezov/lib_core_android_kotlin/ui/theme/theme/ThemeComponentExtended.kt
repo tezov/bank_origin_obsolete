@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:13
+ *  Last modified 08/05/2023 14:18
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -55,13 +55,13 @@ object ThemeComponentExtended {
         topAppBar: TopAppBar.Style? = null,
         bottomNavigation: BottomNavigation.Style? = null,
         dialogCard: Dialog.Card.Style? = null,
-        bottomSheet: BottomSheet.Style? = null,
+        bottomSheet: BottomSheet.Sheet.Style? = null,
         snackBar: Snackbar.Style? = null,
     ) {
         val topAppBar: TopAppBar.Style by DelegateNullFallBack.Ref(topAppBar)
         val bottomNavigation: BottomNavigation.Style by DelegateNullFallBack.Ref(bottomNavigation)
         val dialogCard: Dialog.Card.Style by DelegateNullFallBack.Ref(dialogCard)
-        val bottomSheet: BottomSheet.Style by DelegateNullFallBack.Ref(bottomSheet)
+        val bottomSheet: BottomSheet.Sheet.Style by DelegateNullFallBack.Ref(bottomSheet)
         val snackBar: Snackbar.Style by DelegateNullFallBack.Ref(snackBar)
     }
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 15/04/2023 19:41
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 15/04/2023 18:51
+ *  Last modified 08/05/2023 14:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,6 +13,8 @@
 package com.tezov.bank.ui.di.module
 
 
+import com.tezov.bank.ui.bottomsheet.account.accountIncoming.BottomSheetAccountIncomingAction
+import com.tezov.bank.ui.bottomsheet.account.accountIncoming.BottomSheetAccountIncomingState
 import com.tezov.lib_core_android_kotlin.ui.di.annotation.scope.ScopeAppUiDialog
 import com.tezov.lib_core_android_kotlin.ui.di.component.ComponentContextLazy
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ComposableHolder
@@ -40,16 +42,23 @@ interface ModuleAppUiDialog {
             action: Action.DialogAuthCloseAppConfirmationAction
         ) = ComponentContextLazy.make(state, action)
 
+        @ScopeAppUiDialog
+        @Provides
+        fun provideContextBottomSheetAccountIncoming(
+            state: State.BottomSheetAccountIncomingState,
+            action: Action.BottomSheetAccountIncomingAction
+        ) = ComponentContextLazy.make(state, action)
+
     }
 
     object State {
 
         @ScopeAppUiDialog
         class DialogLoginAuthState @Inject constructor() :
-            ComposableHolder<com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState>() {
+            ComposableHolder<com.tezov.bank.ui.dialog.lobby.login.loginAuth.DialogLoginAuthState>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthState.create()
+                com.tezov.bank.ui.dialog.lobby.login.loginAuth.DialogLoginAuthState.create()
         }
 
         @ScopeAppUiDialog
@@ -60,6 +69,16 @@ interface ModuleAppUiDialog {
                 com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppConfirmationState.create()
         }
 
+        @ScopeAppUiDialog
+        class BottomSheetAccountIncomingState @Inject constructor() :
+            ComposableHolder<com.tezov.bank.ui.bottomsheet.account.accountIncoming.BottomSheetAccountIncomingState>() {
+            @androidx.compose.runtime.Composable
+            override fun create() =
+                com.tezov.bank.ui.bottomsheet.account.accountIncoming.BottomSheetAccountIncomingState.create()
+        }
+
+
+
     }
 
     object Action {
@@ -68,10 +87,10 @@ interface ModuleAppUiDialog {
         class DialogLoginAuthAction @Inject constructor(
             private val action: ModuleCoreUiActivity.Action.DialogAction,
             private val navigationController: ModuleCoreUiActivity.Action.NavigationController,
-        ) : ComposableHolder<com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthAction>() {
+        ) : ComposableHolder<com.tezov.bank.ui.dialog.lobby.login.loginAuth.DialogLoginAuthAction>() {
             @androidx.compose.runtime.Composable
             override fun create() =
-                com.tezov.bank.ui.dialog.lobby.login.auth.DialogLoginAuthAction.create(
+                com.tezov.bank.ui.dialog.lobby.login.loginAuth.DialogLoginAuthAction.create(
                     action.get(),
                     navigationController.get()
                 )
@@ -87,6 +106,17 @@ interface ModuleAppUiDialog {
                 com.tezov.bank.ui.dialog.auth.closeAppConfirmation.DialogAuthCloseAppConfirmationAction.create(
                     action.get(),
                     navigationController.get()
+                )
+        }
+
+        @ScopeAppUiDialog
+        class BottomSheetAccountIncomingAction @Inject constructor(
+            private val action: ModuleCoreUiActivity.Action.BottomSheetAction,
+        ) : ComposableHolder<com.tezov.bank.ui.bottomsheet.account.accountIncoming.BottomSheetAccountIncomingAction>() {
+            @androidx.compose.runtime.Composable
+            override fun create() =
+                com.tezov.bank.ui.bottomsheet.account.accountIncoming.BottomSheetAccountIncomingAction.create(
+                    action.get(),
                 )
         }
 

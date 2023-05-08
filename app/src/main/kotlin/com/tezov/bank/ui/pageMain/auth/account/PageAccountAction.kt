@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 03:00
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 02:46
+ *  Last modified 08/05/2023 14:19
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -23,6 +23,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.tezov.bank.navigation.NavigationController.Route
+import com.tezov.bank.ui.bottomsheet.account.accountIncoming.BottomSheetAccountIncoming
 import com.tezov.lib_core_android_kotlin.navigation.NavigationController
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheetAction
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageAction
@@ -45,21 +46,8 @@ class PageAccountAction private constructor(
     }
 
     fun onClickIncomingHelp() {
-        bottomsheetAction.show {
-            Box(
-                modifier = Modifier
-                    .fillMaxHeight(0.5f)
-                    .fillMaxWidth()
-            ) {
-                Text(
-                    modifier = Modifier.align(Alignment.Center),
-                    text = "Not Implemented",
-                    style = TextStyle(
-                        fontSize = 16.sp,
-                        fontWeight = FontWeight.SemiBold
-                    )
-                )
-            }
+        bottomsheetAction.showOnSheetWithOverlay {
+            BottomSheetAccountIncoming.invokeContent()
         }
     }
 

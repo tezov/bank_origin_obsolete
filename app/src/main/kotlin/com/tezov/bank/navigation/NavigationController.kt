@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:39
+ *  Last modified 08/05/2023 03:05
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -52,7 +52,7 @@ class NavigationController(
             child = setOf(NavAccount, Discover, Payment, Help, Profile)
         )
 
-        val startNavRoute = NavAuth
+        val startNavRoute = NavLobby
         val startLobbyRoute = Splash
         val startAuthRoute = NavAccount
     }

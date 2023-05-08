@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:13
+ *  Last modified 08/05/2023 14:13
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,16 +12,13 @@
 
 package com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog
 
-import android.util.Log
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalLevel
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPagesBundle
@@ -34,16 +31,11 @@ import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitFrameStateColor
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.*
 import com.tezov.lib_core_kotlin.delegate.DelegateNullFallBack
 
-@OptIn(ExperimentalComposeUiApi::class)
 object Dialog : ActivitySub<DialogState, DialogAction> {
+
 
     @Composable
     operator fun invoke() {
-        content()
-    }
-
-    @Composable
-    private fun content() {
         val accessor = DiAccessorCoreUiActivity().with(LocalActivity.current).contextSubMap()
         val state = accessor.with<Dialog, _, _>().state()
         if (state.isVisible) {
@@ -54,7 +46,12 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
                     decorFitsSystemWindows = false,
                 )
             ) {
-                state.content()
+                CompositionLocalProvider(
+                    LocalLevel provides 1,
+                    LocalPageBundle provides LocalPagesBundle.last(),
+                ) {
+                    state.content()
+                }
             }
         }
     }
@@ -102,7 +99,7 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
 
         @Composable
         operator fun invoke(content: @Composable () -> Unit) {
-            val style =MaterialTheme.componentsCommonExtended.dialogCard
+            val style = MaterialTheme.componentsCommonExtended.dialogCard
             Surface(
                 color = style.outfitFrame.resolveColorShape()
                     ?: MaterialTheme.colors.surface,
@@ -111,16 +108,10 @@ object Dialog : ActivitySub<DialogState, DialogAction> {
                 elevation = style.elevation,
                 border = style.outfitFrame.resolveBorder()
             ) {
-                CompositionLocalProvider(
-                    LocalLevel provides 1,
-                    LocalPageBundle provides LocalPagesBundle.last(),
-                ) {
-                    content()
-                }
+                content()
             }
         }
 
     }
-
 
 }

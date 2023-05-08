@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:14
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 12:46
+ *  Last modified 08/05/2023 14:23
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,11 +18,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalLevel
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalPagesBundle
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.sub.ActivitySubState
-import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page.Companion.LocalPageBundle
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -50,23 +48,12 @@ class BottomSheetState private constructor(
 
     internal var _isVisible = false
 
-    val isVisible  get() = (stateUpdated.value > 0) && _isVisible
+    val isVisible get() = (stateUpdated.value > 0) && _isVisible
 
     private var _content: (@Composable () -> Unit) = { }
 
     @Composable
-    internal fun content() = if(_isVisible) _content() else { }
-
-    internal fun content(value: @Composable () -> Unit) {
-        _content = {
-            CompositionLocalProvider(
-                LocalLevel provides 1,
-                LocalPageBundle provides LocalPagesBundle.last(),
-            ) {
-                value()
-            }
-        }
-    }
+    internal fun content() = _content()
 
     internal fun show(content: (@Composable () -> Unit)?) {
         if (content == null) {
@@ -75,8 +62,8 @@ class BottomSheetState private constructor(
         } else {
             _content = {
                 CompositionLocalProvider(
-                    Activity.LocalLevel provides 1,
-                    Page.LocalPageBundle provides Activity.LocalPagesBundle.last(),
+                    LocalLevel provides 1,
+                    LocalPageBundle provides LocalPagesBundle.last(),
                 ) {
                     content()
                 }

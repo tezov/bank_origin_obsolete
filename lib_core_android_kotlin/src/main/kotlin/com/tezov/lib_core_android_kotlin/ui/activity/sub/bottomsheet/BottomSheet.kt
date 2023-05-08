@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:12
+ *  Last modified 08/05/2023 14:14
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -37,61 +37,9 @@ import kotlinx.coroutines.flow.filter
 
 object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
 
-    class StyleBuilder internal constructor(style: Style) {
-        var elevation = style.elevation
-        var shape = style.outfitShape
-        var paddingOuter = style.paddingOuter
-        var paddingInner = style.paddingOuter
-
-        internal fun get() = Style(
-            elevation = elevation,
-            paddingOuter = paddingOuter,
-            paddingInner = paddingInner,
-            outfitShape = shape,
-        )
-    }
-
-    class Style(
-        val elevation: Dp = 2.dp,
-        outfitShape: OutfitShapeStateColor? = null,
-        paddingOuter: PaddingValues? = null,
-        paddingInner: PaddingValues? = null,
-    ) {
-        val outfitShape: OutfitShapeStateColor by DelegateNullFallBack.Ref(
-            outfitShape,
-            fallBackValue = {
-                ThemeColorsExtended.Dummy.outfitShapeState
-            })
-        val paddingOuter: PaddingValues by DelegateNullFallBack.Ref(
-            paddingOuter,
-            fallBackValue = { PaddingValues(start = 1.dp, end = 1.dp) })
-        val paddingInner: PaddingValues by DelegateNullFallBack.Ref(
-            paddingInner,
-            fallBackValue = { PaddingValues() })
-
-        companion object {
-
-            @Composable
-            fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) =
-                StyleBuilder(this).also {
-                    it.builder()
-                }.get()
-
-        }
-
-        constructor(style: Style) : this(
-            elevation = style.elevation,
-            outfitShape = style.outfitShape,
-            paddingOuter = style.paddingOuter,
-            paddingInner = style.paddingInner,
-        )
-    }
-
-    //TODO manage selector
-
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
-    operator fun invoke(mainContent: @Composable () -> Unit) {
+    operator fun invoke(content: @Composable () -> Unit) {
         val accessor = DiAccessorCoreUiActivity().with(LocalActivity.current).contextSubMap()
         val state = accessor.with<BottomSheet, _, _>().state()
         ModalBottomSheetLayout(
@@ -101,17 +49,7 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
             sheetShape = RectangleShape,
             sheetElevation = 0.dp,
             sheetContent = {
-                //todo elevation from style
-                val style = MaterialTheme.componentsCommonExtended.bottomSheet
-                Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(style.paddingOuter)
-                        .background(style.outfitShape)
-                        .padding(style.paddingOuter),
-                ) {
-                    state.content()
-                }
+                state.content()
                 LaunchedEffect(Unit) {
                     snapshotFlow { state.bottomSheetState.currentValue }
                         .filter { it == ModalBottomSheetValue.Hidden }
@@ -127,8 +65,79 @@ object BottomSheet : ActivitySub<BottomSheetState, BottomSheetAction> {
                     }
                 }
             },
-            content = mainContent
+            content = content
         )
+    }
+
+    object Sheet{
+
+        class StyleBuilder internal constructor(style: Style) {
+            var elevation = style.elevation
+            var shape = style.outfitShape
+            var paddingOuter = style.paddingOuter
+            var paddingInner = style.paddingInner
+
+            internal fun get() = Style(
+                elevation = elevation,
+                paddingOuter = paddingOuter,
+                paddingInner = paddingInner,
+                outfitShape = shape,
+            )
+        }
+
+        class Style(
+            val elevation: Dp = 2.dp,
+            outfitShape: OutfitShapeStateColor? = null,
+            paddingOuter: PaddingValues? = null,
+            paddingInner: PaddingValues? = null,
+        ) {
+            val outfitShape: OutfitShapeStateColor by DelegateNullFallBack.Ref(
+                outfitShape,
+                fallBackValue = {
+                    ThemeColorsExtended.Dummy.outfitShapeState
+                })
+            val paddingOuter: PaddingValues by DelegateNullFallBack.Ref(
+                paddingOuter,
+                fallBackValue = { PaddingValues(start = 1.dp, end = 1.dp) })
+            val paddingInner: PaddingValues by DelegateNullFallBack.Ref(
+                paddingInner,
+                fallBackValue = { PaddingValues() })
+
+            companion object {
+
+                @Composable
+                fun Style.copy(builder: @Composable StyleBuilder.() -> Unit = {}) =
+                    StyleBuilder(this).also {
+                        it.builder()
+                    }.get()
+
+            }
+
+            constructor(style: Style) : this(
+                elevation = style.elevation,
+                outfitShape = style.outfitShape,
+                paddingOuter = style.paddingOuter,
+                paddingInner = style.paddingInner,
+            )
+        }
+
+        //TODO manage selector
+        //TODO elevation from style
+
+        @Composable
+        operator fun invoke(content: @Composable () -> Unit) {
+            val style = MaterialTheme.componentsCommonExtended.bottomSheet
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(style.paddingOuter)
+                    .background(style.outfitShape)
+                    .padding(style.paddingInner),
+            ) {
+                content()
+            }
+        }
+
     }
 
 }

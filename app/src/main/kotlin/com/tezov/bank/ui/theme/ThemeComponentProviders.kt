@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 03:00
+ *  Created by Tezov on 08/05/2023 14:37
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 02:59
+ *  Last modified 08/05/2023 14:36
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -79,26 +79,26 @@ object ThemeComponentProviders {
             ),
         ),
         dialogCard = Dialog.Card.Style(
-            elevation = 2.dp,
+            elevation = MaterialTheme.dimensionsCommonExtended.elevation.normal,
             outfitFrame = OutfitFrameStateColor(
-                outfitBorder = OutfitBorderStateColor(
-                    size = 1.2.dp,
-                    outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple,
-                ),
-                outfitShape = OutfitShapeStateColor(
-                    size = 8.asShapeSize,
-                    outfitState = MaterialTheme.colorsExtended.backgroundModal.default.asStateSimple,
-                )
+                outfitBorder = MaterialTheme.bordersExtended.block.big.copy {
+                    outfitState = MaterialTheme.colorsExtended.backgroundModal.decor.asStateSimple
+                },
+                outfitShape = MaterialTheme.shapesExtended.block.normal.copy {
+                    outfitState = MaterialTheme.colorsExtended.backgroundModal.default.asStateSimple
+                }
             )
         ),
-        bottomSheet = BottomSheet.Style(
-            outfitShape = OutfitShapeStateColor(
-                size = OutfitShape.Size(
-                    topStart = 14.dp,
-                    topEnd = 14.dp
-                ),
-                outfitState = MaterialTheme.colorsExtended.backgroundModal.default.asStateSimple,
-            )
+        bottomSheet = BottomSheet.Sheet.Style(
+            outfitShape = MaterialTheme.shapesExtended.block.big.copy{
+                size = size?.firstNotNull?.let {
+                    OutfitShape.Size(
+                        topStart = it,
+                        topEnd = it
+                    )
+                }
+                outfitState = MaterialTheme.colorsExtended.backgroundModal.default.asStateSimple
+            }
         ),
         snackBar = Snackbar.Style(
             outfitTextMessage = OutfitTextStateColor(
@@ -121,13 +121,12 @@ object ThemeComponentProviders {
                     a = MaterialTheme.colorsExtended.onBackgroundModal.default,
                 ),
             ),
-            outfitShape = OutfitShapeStateColor(
-                size = 8.dp.asShapeSize,
+            outfitShape = MaterialTheme.shapesExtended.block.normal.copy {
                 outfitState = OutfitStateTemplate(
                     a = MaterialTheme.colorsExtended.backgroundModal.fade,
                 )
-            ),
-            elevation = 4.dp,
+            },
+            elevation = MaterialTheme.dimensionsCommonExtended.elevation.big,
         ),
     )
 
@@ -223,7 +222,7 @@ object ThemeComponentProviders {
         colorBackgroundMenu = MaterialTheme.colorsExtended.backgroundModal.default
     )
 
-        @Composable
+    @Composable
     fun accountSummaryCard() = AccountSummaryCard.Style(
         outfitFrame = OutfitFrameStateColor(
             outfitShape = MaterialTheme.shapesExtended.element.big.copy {
@@ -435,7 +434,8 @@ object ThemeComponentProviders {
                 )
             },
             styleCarousel = pagerWidthIndicatorStyle().copy {
-                paddingContent = PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal + MaterialTheme.dimensionsPaddingExtended.element.big.horizontal)
+                paddingContent =
+                    PaddingValues(horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal + MaterialTheme.dimensionsPaddingExtended.element.big.horizontal)
                 spacingItem = MaterialTheme.dimensionsPaddingExtended.page.normal.horizontal
             },
             colorBackgroundHeader = null,
@@ -446,11 +446,12 @@ object ThemeComponentProviders {
     fun carouselCardButtonStyle() = CarouselCard.Style.Button(
         baseStyle = CarouselCard.Style.Base(
             outfitFrame = OutfitFrameStateColor(
-                outfitShape = MaterialTheme.shapesExtended.element.big.copy{
+                outfitShape = MaterialTheme.shapesExtended.element.big.copy {
                     outfitState = MaterialTheme.colorsExtended.background.default.asStateSimple
                 },
                 outfitBorder = MaterialTheme.bordersExtended.element.normal.copy {
-                    outfitState = MaterialTheme.colorsExtended.backgroundElevated.decor.asStateSimple
+                    outfitState =
+                        MaterialTheme.colorsExtended.backgroundElevated.decor.asStateSimple
                 },
             ),
             styleIcon = Icon.Simple.Style(
@@ -488,7 +489,8 @@ object ThemeComponentProviders {
         baseStyle = CarouselCard.Style.Base(
             outfitFrame = OutfitFrameStateColor(
                 outfitShape = MaterialTheme.shapesExtended.element.big.copy {
-                    outfitState = MaterialTheme.colorsExtended.backgroundElevated.overlay.asStateSimple
+                    outfitState =
+                        MaterialTheme.colorsExtended.backgroundElevated.overlay.asStateSimple
                 },
             ),
             styleIcon = Icon.Simple.Style(
