@@ -1,8 +1,9 @@
 - Couleur Payment Lyf, Paypal, etc
 - Profil Date Connexion
 - retrait ripple des icones
+- scroll end blanc visible sous le bleu?
 
-- Animation page
+- Animation navigation
 - Bug fermeture ouverture
 
 - Test Contenu text trés long pour voir le comportement
@@ -11,21 +12,14 @@
 --> login only when logged
 --> auth only when logged too
 --> help and service only when logged
-
 -----> comment depuis le dialog retourner quelque chose a celui a qui appelé ? Mettre à jour les canDispose et se logger
 --> vérifier le scope activité -> le coroutine doit pas etre utilisé cross activité
 
-
-3
-- scroll end blanc visible sous le bleu?
---> Faire animation
---> ajouter animation navigation
 
 - OnClick Custom ripple unbounded
 - Snackbar selector
 - Dialog selector
 - BottomSheet selector
-
 - Carousel first and last take edge to edge
 - Pager / Roller find the highest
 
