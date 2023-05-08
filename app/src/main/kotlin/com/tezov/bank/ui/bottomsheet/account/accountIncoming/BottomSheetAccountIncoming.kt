@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 16:11
+ *  Created by Tezov on 08/05/2023 18:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 16:03
+ *  Last modified 08/05/2023 18:25
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -15,27 +15,19 @@ package com.tezov.bank.ui.bottomsheet.account.accountIncoming
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
-import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.tezov.bank.R
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiDialog
-import com.tezov.bank.ui.pageMain.auth.profile.PageProfileTheme
-import com.tezov.bank.ui.pageMain.auth.profile.styles
-import com.tezov.lib_core_android_kotlin.type.primaire.size
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.bottomSheet.BottomSheet
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
-import com.tezov.lib_core_android_kotlin.ui.theme.style.padding
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsCommonExtended
-import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsIconExtended
 import com.tezov.lib_core_android_kotlin.ui.theme.theme.dimensionsPaddingExtended
 
 object BottomSheetAccountIncoming :
@@ -67,13 +59,13 @@ object BottomSheetAccountIncoming :
                     .background(BottomSheetAccountIncomingTheme.colors.background)
                     .fillMaxWidth()
             ) {
-                ContentHeader(action = action, title = state.contentData.title)
+                contentHeader(action = action, title = state.contentData.title)
                 Divider(
                     modifier = Modifier.padding(vertical = MaterialTheme.dimensionsPaddingExtended.element.huge.vertical),
                     thickness = MaterialTheme.dimensionsCommonExtended.divider.huge,
                     color = BottomSheetAccountIncomingTheme.colors.fade
                 )
-                ContentBody(
+                contentBody(
                     body = state.contentData.body,
                     footer = state.contentData.footer
                 )
@@ -82,7 +74,7 @@ object BottomSheetAccountIncoming :
     }
 
     @Composable
-    private fun ColumnScope.ContentHeader(
+    private fun ColumnScope.contentHeader(
         action: BottomSheetAccountIncomingAction,
         title: String
     ) {
@@ -110,7 +102,7 @@ object BottomSheetAccountIncoming :
     }
 
     @Composable
-    private fun ColumnScope.ContentBody(
+    private fun ColumnScope.contentBody(
         body: String,
         footer: String,
     ) {

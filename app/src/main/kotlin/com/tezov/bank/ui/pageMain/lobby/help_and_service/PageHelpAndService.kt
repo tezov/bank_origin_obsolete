@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 16:14
+ *  Created by Tezov on 08/05/2023 18:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 16:12
+ *  Last modified 08/05/2023 18:17
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -102,7 +102,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     }
 
     @Composable
-    private fun contentHeader(
+    private fun ColumnScope.contentHeader(
         header: PageHelpAndServiceState.Header?
     ) {
         if(header == null){
@@ -118,7 +118,7 @@ object PageHelpAndService : Page<PageHelpAndServiceState, PageHelpAndServiceActi
     }
 
     @Composable
-    private fun contentBody(
+    private fun ColumnScope.contentBody(
         action: PageHelpAndServiceAction,
         helpAndServices: SectionSimpleTile.Data?,
         contacts: SectionSimpleRow.Data?,

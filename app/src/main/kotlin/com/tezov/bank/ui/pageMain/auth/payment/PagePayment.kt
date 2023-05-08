@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 15:29
+ *  Created by Tezov on 08/05/2023 18:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 15:25
+ *  Last modified 08/05/2023 18:14
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -85,7 +85,7 @@ object PagePayment : Page<PagePaymentState, PagePaymentAction> {
     }
 
     @Composable
-    private fun contentHeader(
+    private fun BoxScope.contentHeader(
         header: PagePaymentState.Header?,
         progress: Float,
         progressDp: Dp

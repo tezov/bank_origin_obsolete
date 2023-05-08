@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 03:00
+ *  Created by Tezov on 08/05/2023 18:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 02:44
+ *  Last modified 08/05/2023 18:23
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -50,19 +50,21 @@ object PageMessageInfo : Page<PageMessageInfoState, PageMessageInfoAction> {
                 )
             }
         ) {
-            val tabTitles = remember {
+            val tabTitles = remember(state.header) {
                 ListEntry<HorizontalPager.WithTabRow.Tab, @Composable () -> Unit>().apply {
-                    state.header?.tabNotification?.let {
-                        add(it) {
-                            TabNotification(
-                                action = action,
-                                messages = state.messages
-                            )
+                    state.header?.let { header ->
+                        header.tabNotification?.let {
+                            add(it) {
+                                TabNotification(
+                                    action = action,
+                                    messages = state.messages
+                                )
+                            }
                         }
-                    }
-                    state.header?.tabMessageBox?.let {
-                        add(it) {
-                            TabMessageBox()
+                        header.tabMessageBox?.let {
+                            add(it) {
+                                TabMessageBox()
+                            }
                         }
                     }
                 }

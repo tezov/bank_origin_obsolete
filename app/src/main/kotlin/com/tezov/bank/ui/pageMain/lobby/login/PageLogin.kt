@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 16:14
+ *  Created by Tezov on 08/05/2023 18:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 16:12
+ *  Last modified 08/05/2023 18:17
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -95,21 +95,21 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 .padding(innerPadding)
                 .padding(vertical = MaterialTheme.dimensionsPaddingExtended.page.huge.vertical)
         ) {
-            ContentHeader(
+            contentHeader(
                 action = action,
                 iconState = state.iconState,
             )
-            ContentBody(
+            contentBody(
                 nameState = state.nameState
             )
-            ContentFooter(
+            contentFooter(
                 action = action,
             )
         }
     }
 
     @Composable
-    private fun ContentHeader(
+    private fun ColumnScope.contentHeader(
         action: PageLoginAction,
         iconState: State<Int>,
     ) {
@@ -157,7 +157,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
     }
 
     @Composable
-    private fun ColumnScope.ContentBody(
+    private fun ColumnScope.contentBody(
         nameState: State<String>
     ) {
         HorizontalPager.WithIndicator(
@@ -213,7 +213,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
     }
 
     @Composable
-    private fun ContentFooter(
+    private fun ColumnScope.contentFooter(
         action: PageLoginAction,
     ) {
         Column(

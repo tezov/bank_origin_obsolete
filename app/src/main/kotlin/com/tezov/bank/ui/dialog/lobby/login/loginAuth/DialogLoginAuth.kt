@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 16:14
+ *  Created by Tezov on 08/05/2023 18:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 16:14
+ *  Last modified 08/05/2023 18:25
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -100,11 +100,11 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
                     verticalArrangement = Arrangement.Center,
                     horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    ContentHeader()
+                    contentHeader()
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
-                    ContentBody(state.loginState, state.passwordState)
+                    contentBody(state.loginState, state.passwordState)
                     Spacer(modifier = Modifier.height(MaterialTheme.dimensionsPaddingExtended.element.big.vertical))
-                    ContentFooter(
+                    contentFooter(
                         action = action,
                         credentialValidState = state.credentialValidState
                     )
@@ -114,7 +114,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
     }
 
     @Composable
-    private fun ContentHeader() {
+    private fun ColumnScope.contentHeader() {
         Text.StateColor(
             text = R.string.dlg_login_auth_enter_password,
             style = DialogLoginAuthTheme.typographies.title
@@ -123,7 +123,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
 
     //todo modifier lenght control par une validation login / password au niveau du state comme le credential valid
     @Composable
-    private fun ContentBody(
+    private fun ColumnScope.contentBody(
         login: MutableState<String>,
         password: MutableState<String>,
     ) {
@@ -345,7 +345,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
     }
 
     @Composable
-    private fun ContentFooter(
+    private fun ColumnScope.contentFooter(
         action: DialogLoginAuthAction,
         credentialValidState: Boolean,
     ) {

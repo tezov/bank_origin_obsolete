@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 16:11
+ *  Created by Tezov on 08/05/2023 18:25
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 15:51
+ *  Last modified 08/05/2023 18:25
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -84,7 +84,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
     }
 
     @Composable
-    private fun contentHeader(
+    private fun ColumnScope.contentHeader(
         action: PageProfileAction,
         header: PageProfileState.Header?
     ) {
@@ -136,7 +136,7 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
     }
 
     @Composable
-    private fun contentBody(
+    private fun ColumnScope.contentBody(
         action: PageProfileAction,
         profils: SectionSimpleRow.Data?,
         documents: SectionSimpleRow.Data?,
