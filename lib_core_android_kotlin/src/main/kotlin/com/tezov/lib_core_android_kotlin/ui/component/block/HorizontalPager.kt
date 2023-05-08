@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 03:00
+ *  Created by Tezov on 08/05/2023 16:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 02:27
+ *  Last modified 08/05/2023 16:11
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -215,9 +215,9 @@ object HorizontalPager {
                         indicatorWidth = style.sizeIndicator,
                         indicatorHeight = style.sizeIndicator,
                         spacing = style.spacingIndicator,
-                        activeColor = it.resolveColor(OutfitState.BiStable.Selector.Enabled)
+                        activeColor = it.resolveColor(OutfitState.BiStable.Selector.Active)
                             ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current),
-                        inactiveColor = it.resolveColor(OutfitState.BiStable.Selector.Disabled)
+                        inactiveColor = it.resolveColor(OutfitState.BiStable.Selector.Inactive)
                             ?: LocalContentColor.current.copy(alpha = LocalContentAlpha.current)
                                 .copy(
                                     ContentAlpha.disabled
@@ -356,9 +356,9 @@ object HorizontalPager {
                                     text = entry.key.title,
                                     style = style.outfitText,
                                     selector = if (pagerState.currentPage == index) {
-                                        OutfitState.BiStable.Selector.Enabled
+                                        OutfitState.BiStable.Selector.Active
                                     } else {
-                                        OutfitState.BiStable.Selector.Disabled
+                                        OutfitState.BiStable.Selector.Inactive
                                     }
                                 )
                             })

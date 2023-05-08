@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 14:37
+ *  Created by Tezov on 08/05/2023 16:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 14:25
+ *  Last modified 08/05/2023 15:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -18,7 +18,13 @@ import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import com.tezov.bank.ui.pageMain.auth.profile.colors
+import com.tezov.bank.ui.pageMain.auth.profile.shapes
+import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.asFrameStateColor
+import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitShape.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitText.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitTextStateColor
@@ -51,17 +57,15 @@ infix fun BottomSheetAccountIncomingTheme.provides(value: BottomSheetAccountInco
 object BottomSheetAccountIncomingTheme {
 
     data class Colors(
+        val background: Color, // TODO remove and replace by selector when bottomsheet manage selector
         val onBackground: Color,
-        val dark: Color,
-        val light: Color,
         val fade: Color,
     )
 
     @Composable
     fun provideColors() = Colors(
-        onBackground = MaterialTheme.colorsExtended.onBackgroundModal.default,
-        dark = MaterialTheme.colorsExtended.primary.shady,
-        light = MaterialTheme.colorsExtended.primary.accent,
+        background = MaterialTheme.colorsExtended.background.accent,
+        onBackground = MaterialTheme.colorsExtended.onBackground.accent,
         fade = MaterialTheme.colorsExtended.primary.fade,
     )
 
@@ -71,13 +75,21 @@ object BottomSheetAccountIncomingTheme {
 
     data class Typographies(
         val title: OutfitTextStateColor,
+        val body: OutfitTextStateColor,
+        val footer: OutfitTextStateColor,
     )
 
     @Composable
     fun provideTypographies() = Typographies(
-        title = MaterialTheme.typographiesExtended.title.big.copy {
+        title = MaterialTheme.typographiesExtended.title.huge.copy {
             outfitState = colors.onBackground.asStateSimple
-            typo = typo.copy(textAlign = TextAlign.Center)
+            typo = typo.copy(fontWeight = FontWeight.Bold)
+        },
+        body = MaterialTheme.typographiesExtended.body.small.copy {
+            outfitState = colors.onBackground.asStateSimple
+        },
+        footer = MaterialTheme.typographiesExtended.body.small.copy {
+            outfitState = colors.onBackground.asStateSimple
         },
     )
 
@@ -87,12 +99,18 @@ object BottomSheetAccountIncomingTheme {
         }
 
     data class Style(
-        val dummy: Any,
+        val iconClose: Icon.StateColor.Style,
     )
 
     @Composable
     fun provideStyles() = Style(
-        dummy = Any()
+        iconClose = Icon.StateColor.Style(
+            size = MaterialTheme.dimensionsIconExtended.modal.small,
+            tint = colors.background,
+            outfitFrame = MaterialTheme.shapesExtended.icon.normal.copy {
+                outfitState = colors.onBackground.asStateSimple
+            }.asFrameStateColor
+        ),
     )
 
     internal val localStyles: ProvidableCompositionLocal<Style> = staticCompositionLocalOf {

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 15:29
+ *  Created by Tezov on 08/05/2023 16:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 15:12
+ *  Last modified 08/05/2023 16:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -63,17 +63,17 @@ class PageMessageInfoState private constructor() : PageState {
                 MessageRow.Data(
                     title = "Sécurité: Spoofing, la fraude par téléphone",
                     subtitle = "Lundi 06 février",
-                    active = false
+                    active = true
                 ),
                 MessageRow.Data(
                     title = "Fonds de Garantie des Dépots et de Résolution",
                     subtitle = "Mercredi 18 janvier",
-                    active = false
+                    active = true
                 ),
                 MessageRow.Data(
                     title = "Modification de votre convention de compte",
                     subtitle = "Mercredi 18 janvier",
-                    active = false
+                    active = true
                 ),
                 MessageRow.Data(
                     title = "Virements: nouvelle liste de bénéficiaires",
@@ -83,6 +83,21 @@ class PageMessageInfoState private constructor() : PageState {
                 MessageRow.Data(
                     title = "Opératon refusée",
                     subtitle = "Lundi 06 janvier",
+                    active = false
+                ),
+                MessageRow.Data(
+                    title = "Virement: suppression d'un bénéficiaire",
+                    subtitle = "Mercredi 16 Novembre",
+                    active = false
+                ),
+                MessageRow.Data(
+                    title = "Evolutions tarifaires au 01/01/2023",
+                    subtitle = "Lundi 31 Octobre",
+                    active = false
+                ),
+                MessageRow.Data(
+                    title = "Plafond paiement atteint à 80%",
+                    subtitle = "Vendredi 14 Octobre",
                     active = false
                 ),
             )

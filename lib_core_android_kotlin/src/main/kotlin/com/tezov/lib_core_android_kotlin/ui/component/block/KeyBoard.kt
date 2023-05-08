@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 16:08
+ *  Created by Tezov on 08/05/2023 16:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 16:03
+ *  Last modified 08/05/2023 16:11
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -71,7 +71,7 @@ object KeyBoard {
                 modifier = modifier,
                 style = style,
                 enabled = enabled,
-                selector = if (enabled) OutfitState.BiStable.Selector.Enabled else OutfitState.BiStable.Selector.Disabled,
+                selector = if (enabled) OutfitState.BiStable.Selector.Active else OutfitState.BiStable.Selector.Inactive,
                 onclick = onclick,
             )
         }

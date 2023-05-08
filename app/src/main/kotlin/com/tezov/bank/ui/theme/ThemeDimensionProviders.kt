@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 13:53
+ *  Created by Tezov on 08/05/2023 16:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 13:43
+ *  Last modified 08/05/2023 15:57
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -33,6 +33,7 @@ object ThemeDimensionProviders {
             normal = 1.dp,
             small = 0.8.dp,
             big = 1.2.dp,
+            huge = 2.5.dp,
         ),
     )
 
@@ -124,11 +125,18 @@ object ThemeDimensionProviders {
     )
 
     fun icons() = ThemeDimensionsExtended.Icons(
-        modal = DpSize(
-            width = 42.dp,
-            height = 42.dp,
-            padding = PaddingValues(10.dp),
-        ).asPaletteSize,
+        modal = OutfitPaletteSize(
+            normal = DpSize(
+                width = 42.dp,
+                height = 42.dp,
+                padding = PaddingValues(10.dp),
+            ),
+            small = DpSize(
+                width = 18.dp,
+                height = 18.dp,
+                padding = PaddingValues(2.dp),
+            )
+        ),
         info = OutfitPaletteSize(
             normal = 36.dpSize,
             micro = DpSize(

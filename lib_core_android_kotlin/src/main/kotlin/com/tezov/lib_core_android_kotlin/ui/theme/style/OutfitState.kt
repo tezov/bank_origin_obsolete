@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 23/04/2023 19:08
+ *  Created by Tezov on 08/05/2023 16:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 23/04/2023 17:55
+ *  Last modified 08/05/2023 16:11
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -121,7 +121,7 @@ object OutfitState {
     object BiStable {
 
         enum class Selector {
-            Enabled, Disabled
+            Active, Inactive
         }
 
         class StyleBuilder<T : Any> internal constructor(val style: Style<T>) {
@@ -169,12 +169,12 @@ object OutfitState {
 
             override fun selectorType() = Selector::class
 
-            override fun selectorDefault() = Selector.Enabled
+            override fun selectorDefault() = Selector.Active
 
             override fun resolve(selector: Any?) = resolve<Selector>(selector) {
                 when (it) {
-                    Selector.Enabled -> active
-                    Selector.Disabled -> inactive
+                    Selector.Active -> active
+                    Selector.Inactive -> inactive
                 }
             }
 

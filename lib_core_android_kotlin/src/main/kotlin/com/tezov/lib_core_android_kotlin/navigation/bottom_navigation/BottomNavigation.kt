@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 08/05/2023 16:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:10
+ *  Last modified 08/05/2023 16:11
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -127,10 +127,10 @@ object BottomNavigation :
                         )
                     },
                     selectedContentColor = style.outfitColor.resolve(
-                        OutfitState.BiStable.Selector.Enabled
+                        OutfitState.BiStable.Selector.Active
                     ) ?: LocalContentColor.current,
                     unselectedContentColor = style.outfitColor.resolve(
-                        OutfitState.BiStable.Selector.Disabled
+                        OutfitState.BiStable.Selector.Inactive
                     ) ?: LocalContentColor.current.copy(alpha = ContentAlpha.medium),
                     alwaysShowLabel = true,
                     selected = action.navigationController.currentRoute() == item.route,

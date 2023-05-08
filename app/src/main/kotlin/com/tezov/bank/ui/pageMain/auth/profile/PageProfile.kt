@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 15:29
+ *  Created by Tezov on 08/05/2023 16:11
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 15:24
+ *  Last modified 08/05/2023 15:51
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -101,7 +101,6 @@ object PageProfile : Page<PageProfileState, PageProfileAction> {
                         horizontal = MaterialTheme.dimensionsPaddingExtended.page.normal.vertical,
                         vertical = MaterialTheme.dimensionsPaddingExtended.page.normal.vertical
                     )
-                    .wrapContentSize()
                     .align(Alignment.End),
                 onClick = action::onClickExit
             ) {

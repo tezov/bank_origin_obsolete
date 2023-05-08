@@ -1,8 +1,8 @@
 <!--
   ~  *********************************************************************************
-  ~  Created by Tezov on 08/05/2023 15:29
+  ~  Created by Tezov on 08/05/2023 16:11
   ~  Copyright (c) 2023 . All rights reserved.
-  ~  Last modified 08/05/2023 15:28
+  ~  Last modified 08/05/2023 15:51
   ~  First project bank / bank.app.main
   ~  This file is private and it is not allowed to use it, copy it or modified it
   ~  without the permission granted by the owner Tezov. For any request request,
@@ -58,5 +58,8 @@
     <!--    profil-->
     <string name="pg_profile_icon_close">icon déconnection utilisateur</string>
     <string name="pg_profile_icon_use">icon utilisateur</string>
+
+    <!--    account-->
+    <string name="pg_a_bts_icon_close">icon fermeture</string>
 
 </resources>
