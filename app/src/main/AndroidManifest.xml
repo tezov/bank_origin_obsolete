@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?><!--
   ~  *********************************************************************************
-  ~  Created by Tezov on 06/05/2023 16:08
+  ~  Created by Tezov on 08/05/2023 21:30
   ~  Copyright (c) 2023 . All rights reserved.
-  ~  Last modified 06/05/2023 16:05
+  ~  Last modified 08/05/2023 21:14
   ~  First project bank / bank.app.main
   ~  This file is private and it is not allowed to use it, copy it or modified it
   ~  without the permission granted by the owner Tezov. For any request request,
@@ -12,6 +12,8 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:name="com.tezov.bank.application.Application"
@@ -26,7 +28,8 @@
         <activity
             android:name="com.tezov.bank.ui.activity.MainActivity"
             android:exported="true"
-            android:theme="@style/Theme.BankDefault">
+            android:theme="@style/Theme.BankDefault"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -1,7 +1,8 @@
 - Couleur Payment Lyf, Paypal, etc
 - Profil Date Connexion
-- webView
-- Page explication Specimen
+- retrait ripple des icones
+- Animation page
+- Bug fermeture ouverture
 
 - Test Contenu text trés long pour voir le comportement
 

@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 22:44
+ *  Created by Tezov on 08/05/2023 21:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 22:30
+ *  Last modified 08/05/2023 20:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -13,6 +13,7 @@
 package com.tezov.bank.ui.dialog.auth.closeAppConfirmation
 
 import androidx.compose.runtime.Composable
+import com.tezov.bank.navigation.NavigationController.Route
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.navigation.NavigationController
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.dialog.DialogAction
@@ -39,7 +40,11 @@ class DialogAuthCloseAppController private constructor(
             DiAccessorAppUiPage()
                 .with(key = LocalPagesBundle.last().current)
                 .controllerDialogAuthCloseApp()
-                .ref().takeIf { it.navigationController.isLastRoute() }?.let {
+                .ref().takeIf {
+                    //Splash is kept in memory if the user want to see again the terms
+                    //So before to go back in lobby, we ask if the user wants to disconnect cf. NavigationController
+                    it.navigationController.previousRoute() == Route.Splash
+                }?.let {
                     it.show()
                     return true
                 }

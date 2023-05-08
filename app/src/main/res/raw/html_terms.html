@@ -1,0 +1,103 @@
+<!--
+  ~  *********************************************************************************
+  ~  Created by Tezov on 08/05/2023 21:30
+  ~  Copyright (c) 2023 . All rights reserved.
+  ~  Last modified 08/05/2023 21:08
+  ~  First project bank / bank.app.main
+  ~  This file is private and it is not allowed to use it, copy it or modified it
+  ~  without the permission granted by the owner Tezov. For any request request,
+  ~  please send an email to tezov.app@gmail.com
+  ~  *********************************************************************************
+  -->
+
+<!DOCTYPE html>
+<html lang="en"
+        xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta
+                content="text/html; charset=UTF-8"
+                http-equiv="Content-Type" />
+        <link
+                href="/assets/html_terms.css"
+                rel="stylesheet">
+    </head>
+    <body>
+        <div id="block">
+            <img src="/res/drawable/html_specimen.png" />
+            <h2>Tezov Bank Application</h2>
+            <p>L'application "Tezov Bank" (dénommé cette "App") présente une application de démonstration.
+                Toutes les données présentées sont factices. Cette App ne vend rien et ne collecte aucunes données.
+                Elle est totalement gratuite d'utilisation et est la propriété de Tezov.
+            </p>
+            </br>
+            <p>A savoir:</p>
+            <ul>
+                <li>Tous les logins et mots de passes sont acceptés. Il suffit de mettre 4 chiffres.</li>
+                <li>Toutes les pages ne sont pas implémentées. Quand il n'y a pas de contenu, une snackbar vous en informe.</li>
+            </ul>
+            </br>
+            <p>Vous pouvez parcourir la suite de ce document pour avoir des informations supplémentaires.</p>
+            <div id="button">
+                <a href="onStart">** Demarrer l'application **</a>
+            </div>
+        </div>
+        <div id="block">
+            <h3>En savoir plus</h3>
+            <p>Cette application est réalisé majoritairement en Koltin. L'interface visuel est 100% réalisé avec Compose.</p>
+            <ul>
+                <li>Architecture: 3 modules (core - 100% kotlin, core - android UI, application - UI)</li>
+                <li>Injection de dépendance avec Dagger multi-module (State et Action fourni à l'UI)</li>
+                <li>Séparation UI avec injection du State (donnée + etats de la vue) et Action (gestion action d'utilisateur)</li>
+                <li>Navigation en seule source de vérité (coordinator pattern)</li>
+                <li>Chaque module a un module de Test associé.</li>
+                <li>La totalité du contenu affiché par l'ui est reçu par le viewModel (Sauf bottom navigation, top app bar et icon/image). La vue se construit en fonction des données reçu du viewModel</li>
+            </ul>
+            </br>
+            <p><b>En cours d'ajout:</b></p>
+            <ul>
+                <li>un module qui contiendra le viewModel</li>
+                <li>un module qui contiendra la logique server</li>
+                <li>un module qui contiendra les fonctionnaliteés propre à la plateforme (réseaux, persistance de données, camera, etc...)</li>
+            </ul>
+            <p>Le tout organisé avec une logique de clean architecture.</p>
+        </div>
+        <div id="block">
+            <h3>UI</h3>
+            <p>Liste des composants UI que l'on trouve dans cette application</p>
+            <ul>
+                <li>bottom navigation bar</li>
+                <li>top navigation bar</li>
+                <li>dialog</li>
+                <li>bottom sheet</li>
+                <li>snackbar</li>
+                <li>tablayout</li>
+                <li>pager (full screen et carousel)</li>
+                <li>collaspible animated header (Compose animation + Motion Layout + Custom Layout)</li>
+                <li>drop down menu</li>
+                <li>vue custom cf. login keyboard</li>
+            </ul>
+            <p>Le theming est intégralement réalisé en Kotlin pour compose.
+                Un theme générale est founi à tous les composants peu importe le niveau de héirachie.
+                Chaque composant peut customiser son propre style.
+                L'architecture du theme est fournie par le module core - android UI qui complémente le materialTheme
+                et apporte une notion d'états (default, success, error, alert, ...) d'un composant affectant le jeu de couleur/graisse/dimension/etc.
+            </p>
+        </div>
+        <div id="block">
+            <h3>Me contacter</h3>
+            <p>tezov.app@gmail.com</p>
+        </div>
+        <div id="block">
+            <h3>Plus</h3>
+            <p>Tezov Bank est focalisé sur l'UI et restera à l'état de démo. Je vous invite à consulter 3 autres applications finalisé et disponible sur le store.
+                Ces applications ne sont plus mise à jour pour le moment (fonctionnel API21 jusque API31). Elle sont focalisées sur le technique plutôt que l'UI.</p>
+            <ul>
+                <li><a href="https://play.google.com/store/apps/details?id=com.tezov.wifer.rse">Wifier (java):</a>: Application sur le stream de données. Echanges robuste entre Server / Client avec détection automatique d'appareil.</li>
+                <li><a href="https://play.google.com/store/apps/details?id=com.tezov.crypter.rse">Crypter (java):</a>: Application sur le cryptage. Génération, Partage, Sauvegarde de clés. L'encryptage respect scrupulesement les bonnes pratiques. Utilisation caméra 2 direct, persistance de donnée, xml/json parser custom, deeplink, etc...</li>
+                <li><a href="https://play.google.com/store/apps/details?id=com.tezov.gofo.rse">Gofo (java / kotlin):</a>: Application sur les échanges REST. Avec Scroll infini à la volé sans bloquage ou surcharge réseaux. (Api Unsplash en freeware limité en nombre de requêtes)</li>
+            </ul>
+        </div>
+        </br>
+        </br>
+    </body>
+</html>

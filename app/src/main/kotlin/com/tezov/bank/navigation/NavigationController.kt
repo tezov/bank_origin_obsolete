@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 14:37
+ *  Created by Tezov on 08/05/2023 21:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 03:05
+ *  Last modified 08/05/2023 20:48
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -109,9 +109,10 @@ class NavigationController(
                     when (to) {
                         Login -> {
                             navigate(to) {
-                                popUpTo(from.value) {
-                                    inclusive = true
-                                }
+                                //kept in memory to be able to see again the terms cf. DialogAuthCloseAppController
+//                                popUpTo(from.value) {
+//                                    inclusive = true
+//                                }
                             }
                             showSnackBarNotImplemented = false
                         }

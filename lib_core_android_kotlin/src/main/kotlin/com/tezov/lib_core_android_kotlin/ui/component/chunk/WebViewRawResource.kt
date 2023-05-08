@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 16/04/2023 22:13
+ *  Created by Tezov on 08/05/2023 21:30
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 16/04/2023 18:13
+ *  Last modified 08/05/2023 21:29
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,47 +14,69 @@ package com.tezov.lib_core_android_kotlin.ui.component.chunk
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import android.view.View
 import android.webkit.WebResourceRequest
-import android.webkit.WebResourceResponse
 import android.webkit.WebView
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.webkit.WebViewAssetLoader
 import androidx.webkit.WebViewClientCompat
 
+
+@Suppress("CAST_NEVER_SUCCEEDS")
 @SuppressLint("ViewConstructor")
 class WebViewRawResource private constructor(context: Context, rawHtmlResourceId: Int) :
     WebView(context) {
     private val domain = context.packageName
     private val maxHeight: Int? = null
 
+    private var listener: ((segment: String) -> Boolean)? = null
+
     init {
-        val assetLoader = WebViewAssetLoader.Builder().apply {
-            setDomain(domain)
-            addPathHandler("/assets/", WebViewAssetLoader.AssetsPathHandler(context))
-            addPathHandler("/res/", WebViewAssetLoader.ResourcesPathHandler(context))
-        }.build()
         webViewClient = object : WebViewClientCompat() {
+            val assetLoader = WebViewAssetLoader.Builder().apply {
+                setDomain(domain)
+                addPathHandler("/assets/", WebViewAssetLoader.AssetsPathHandler(context))
+                addPathHandler("/res/", WebViewAssetLoader.ResourcesPathHandler(context))
+            }.build()
+
             override fun shouldInterceptRequest(
                 view: WebView?,
                 request: WebResourceRequest?
-            ): WebResourceResponse? {
-                request?.let {
-                    return assetLoader.shouldInterceptRequest(it.url)
-                } ?: kotlin.run {
-                    return super.shouldInterceptRequest(view, request)
+            ) = request?.let {
+                assetLoader.shouldInterceptRequest(it.url)
+            }
+
+            override fun shouldOverrideUrlLoading(
+                view: WebView,
+                request: WebResourceRequest
+            ): Boolean {
+                request.url.lastPathSegment?.let { segment ->
+                    listener?.takeIf { it.invoke(segment) }?.let {
+                        return true
+                    }
                 }
+                //open in outside browser
+                request.url.scheme?.takeIf {scheme ->
+                    scheme == "http" || scheme == "https"
+                }?.let {
+                    view.context.startActivity(Intent(Intent.ACTION_VIEW, request.url))
+                    return true
+                }
+                return false
             }
 
             override fun onPageFinished(view: WebView, url: String) {
                 super.onPageFinished(view, url)
                 val parent = parent as? View
                 invalidate()
-                if (parent != null) {
-                    parent.invalidate()
-                    parent.requestLayout()
-                } else {
+                parent?.apply {
+                    invalidate()
+                    requestLayout()
+                } ?: run {
                     requestLayout()
                 }
             }
@@ -85,11 +107,16 @@ class WebViewRawResource private constructor(context: Context, rawHtmlResourceId
 
     companion object {
         @Composable
-        operator fun invoke(rawHtmlResourceId: Int) {
+        operator fun invoke(
+            rawHtmlResourceId: Int,
+            listener: ((segment: String) -> Boolean)? = null
+        ) {
             AndroidView(factory = {
-                WebViewRawResource(it, rawHtmlResourceId)
+                WebViewRawResource(it, rawHtmlResourceId).apply {
+                    this.listener = listener
+                }
             }, update = {
-
+                it.listener = listener
             })
         }
     }
