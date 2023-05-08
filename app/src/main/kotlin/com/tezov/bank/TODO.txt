@@ -1,6 +1,7 @@
 - Couleur Payment Lyf, Paypal, etc
 - Profil Date Connexion
 - retrait ripple des icones
+
 - Animation page
 - Bug fermeture ouverture
 
