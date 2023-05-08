@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:59
+ *  Created by Tezov on 08/05/2023 03:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 17:55
+ *  Last modified 08/05/2023 02:39
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -22,8 +22,7 @@ import com.tezov.bank.ui.component.element.SimpleRow
 import com.tezov.bank.ui.component.element.SimpleTile
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.PageState
 
-class PageHelpAndServiceState private constructor(private val _diCanDispose: MutableState<Boolean>) :
-    PageState {
+class PageHelpAndServiceState private constructor() : PageState {
     var header: Header? = null
     var helpAndServices: SectionSimpleTile.Data? = null
     var contacts: SectionSimpleRow.Data? = null
@@ -31,16 +30,8 @@ class PageHelpAndServiceState private constructor(private val _diCanDispose: Mut
 
     companion object {
         @Composable
-        fun create(
-            diCanDispose: MutableState<Boolean> = mutableStateOf(false)
-        ) = PageHelpAndServiceState(_diCanDispose = diCanDispose)
+        fun create() = PageHelpAndServiceState()
     }
-
-    var diCanDispose
-        get() = _diCanDispose.value
-        set(value) {
-            _diCanDispose.value = value
-        }
 
     data class Header(
         val headline: String? = null,
@@ -87,7 +78,10 @@ class PageHelpAndServiceState private constructor(private val _diCanDispose: Mut
         contacts = SectionSimpleRow.Data(
             title = "CONTACTER LA HELLO TEAM",
             rows = listOf(
-                SimpleRow.Data(title = "Appeler", iconInfoId = R.drawable.ic_call_24dp),
+                SimpleRow.Data(
+                    title = "Appeler",
+                    iconInfoId = R.drawable.ic_call_24dp
+                ),
                 SimpleRow.Data(
                     title = "Service sourds et malentendats",
                     iconInfoId = R.drawable.ic_hearing_disabled_24dp

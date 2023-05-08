@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:15
+ *  Created by Tezov on 08/05/2023 03:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:14
+ *  Last modified 08/05/2023 02:44
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -14,9 +14,17 @@ package com.tezov.bank.ui.pageSecondary.auth.messageInfo
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
+import com.tezov.bank.ui.component.block.SectionMessageRow
 import com.tezov.bank.ui.di.accessor.DiAccessorAppUiPage
 import com.tezov.lib_core_android_kotlin.ui.component.block.HorizontalPager
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
@@ -35,25 +43,28 @@ object PageMessageInfo : Page<PageMessageInfoState, PageMessageInfoAction> {
         ExtensionCompositionLocal.CompositionLocalProvider(
             ancestor = arrayOf(
                 PageMessageInfoTheme provides PageMessageInfoTheme.provideColors(),
-                PageMessageInfoTheme provides PageMessageInfoTheme.provideDimensions(),
             ),
-            parent = {
-                arrayOf(
-                    PageMessageInfoTheme provides PageMessageInfoTheme.provideTypographies(),
-                )
-            },
             child = {
                 arrayOf(
                     PageMessageInfoTheme provides PageMessageInfoTheme.provideStyles(),
                 )
             }
         ) {
-            val tabTitles = ListEntry<HorizontalPager.WithTabRow.Tab, @Composable () -> Unit>().apply{
-                add(HorizontalPager.WithTabRow.Tab("tab_1")) {
-                    TabNotification()
-                }
-                add(HorizontalPager.WithTabRow.Tab("tab_2")) {
-                    TabMessageBox()
+            val tabTitles = remember {
+                ListEntry<HorizontalPager.WithTabRow.Tab, @Composable () -> Unit>().apply {
+                    state.header?.tabNotification?.let {
+                        add(it) {
+                            TabNotification(
+                                action = action,
+                                messages = state.messages
+                            )
+                        }
+                    }
+                    state.header?.tabMessageBox?.let {
+                        add(it) {
+                            TabMessageBox()
+                        }
+                    }
                 }
             }
             HorizontalPager.WithTabRow(
@@ -61,21 +72,32 @@ object PageMessageInfo : Page<PageMessageInfoState, PageMessageInfoAction> {
                     .fillMaxWidth()
                     .background(PageMessageInfoTheme.colors.background)
                     .padding(innerPadding),
-                style = HorizontalPager.WithTabRow.Style(
-
-                ),
+                style = PageMessageInfoTheme.styles.pagerTabRow,
                 items = tabTitles
             )
         }
     }
 
     @Composable
-    private fun TabNotification() {
+    private fun TabNotification(
+        action: PageMessageInfoAction,
+        messages: SectionMessageRow.Data?,
+    ) {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Blue)
-        )
+                .verticalScroll(rememberScrollState())
+        ) {
+            messages?.let {
+                SectionMessageRow( //todo lazy column for this section and maybe the other too
+                    modifier = Modifier
+                        .fillMaxSize(),
+                    data = messages,
+                    style = PageMessageInfoTheme.styles.sectionRow,
+                    onClick = action::onClickMessage
+                )
+            }
+        }
     }
 
     @Composable
@@ -83,7 +105,15 @@ object PageMessageInfo : Page<PageMessageInfoState, PageMessageInfoAction> {
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .background(Color.Green)
-        )
+        ) {
+            Text(
+                modifier = Modifier.align(Alignment.Center),
+                text = "Not Implemented",
+                style = TextStyle(
+                    fontSize = 16.sp,
+                    fontWeight = FontWeight.SemiBold
+                )
+            )
+        }
     }
 }

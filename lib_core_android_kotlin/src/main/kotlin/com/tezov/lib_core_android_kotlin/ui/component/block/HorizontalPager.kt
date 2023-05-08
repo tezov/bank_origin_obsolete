@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:36
+ *  Created by Tezov on 08/05/2023 03:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:36
+ *  Last modified 08/05/2023 02:27
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -232,13 +232,13 @@ object HorizontalPager {
     object WithTabRow {
 
         class StyleBuilder internal constructor(style: Style) : Simple.StyleBuilder(style) {
-            var outfitTextStateColor = style.outfitTextStateColor
+            var outfitText = style.outfitText
             var sizeIndicator = style.sizeIndicator
             var colorIndicator = style.colorIndicator
 
             override fun get() = Style(
                 stylePager = super.get(),
-                outfitTextStateColor = outfitTextStateColor,
+                outfitText = outfitText,
                 sizeIndicator = sizeIndicator,
                 colorIndicator = colorIndicator,
             )
@@ -246,13 +246,13 @@ object HorizontalPager {
 
         class Style(
             stylePager: Simple.Style? = null,
-            outfitTextStateColor: OutfitTextStateColor? = null,
+            outfitText: OutfitTextStateColor? = null,
             sizeIndicator: DpSize? = null,
             colorIndicator: OutfitStateBiStable<Color>? = null
         ) : Simple.Style(stylePager) {
 
-            val outfitTextStateColor: OutfitTextStateColor by DelegateNullFallBack.Ref(
-                outfitTextStateColor,
+            val outfitText: OutfitTextStateColor by DelegateNullFallBack.Ref(
+                outfitText,
                 fallBackValue = {
                     OutfitTextStateColor(
                         outfitState = OutfitStateBiStable(
@@ -264,7 +264,7 @@ object HorizontalPager {
             val sizeIndicator: DpSize by DelegateNullFallBack.Ref(
                 sizeIndicator,
                 fallBackValue = {
-                    DpSize(height = 4.dp, width = 16.dp)
+                    DpSize(height = 3.5.dp, width = 16.dp)
                 })
             val colorIndicator: OutfitStateBiStable<Color> by DelegateNullFallBack.Ref(
                 colorIndicator,
@@ -277,7 +277,7 @@ object HorizontalPager {
 
             companion object {
 
-                val INDICATOR_PADDING_VERTICAL = 1.25.dp
+                internal val INDICATOR_PADDING_VERTICAL = 1.0.dp
 
                 @Composable
                 fun Style.copy(scope: @Composable StyleBuilder.() -> Unit) =
@@ -293,7 +293,7 @@ object HorizontalPager {
 
             constructor(style: Style) : this(
                 stylePager = style,
-                outfitTextStateColor = style.outfitTextStateColor,
+                outfitText = style.outfitText,
                 sizeIndicator = style.sizeIndicator,
                 colorIndicator = style.colorIndicator,
             )
@@ -354,7 +354,7 @@ object HorizontalPager {
                             text = {
                                 Text.StateColor(
                                     text = entry.key.title,
-                                    style = style.outfitTextStateColor,
+                                    style = style.outfitText,
                                     selector = if (pagerState.currentPage == index) {
                                         OutfitState.BiStable.Selector.Enabled
                                     } else {

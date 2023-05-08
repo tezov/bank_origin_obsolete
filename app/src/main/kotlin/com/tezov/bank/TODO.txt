@@ -1,10 +1,9 @@
-
-
-- Dialog exit
+- TopAppBar Title from state of the page who use it
+- All text remove from string ressource for those which can be removed
+- BottomSheet Content + theme
+- Dialog Exit theme
 - Couleur Payment Lyf, Paypal, etc
-- contenu bottom sheet
-- tab
-
+- Test Contenu text trés long pour voir le comportement
 
 2
 --> login only when logged
@@ -17,12 +16,6 @@
 
 3
 - scroll end blanc visible sous le bleu?
-- paiment lyf / paypal / paylib image et non icon avec un color filter specifique
-
---> faire une page bottom sheet
---> faire une page tab bar
---> Autre deja fait a reprendre ?
-
 --> Faire animation
 --> ajouter animation navigation
 
@@ -30,6 +23,7 @@
 - Snackbar selector
 - Dialog selector
 - BottomSheet selector
+
 - Carousel first and last take edge to edge
 - Pager / Roller find the highest
 

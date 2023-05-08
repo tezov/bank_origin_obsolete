@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 17:18
+ *  Created by Tezov on 08/05/2023 03:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 16:38
+ *  Last modified 08/05/2023 02:46
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -19,6 +19,9 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.sp
 import com.tezov.bank.navigation.NavigationController.Route
 import com.tezov.lib_core_android_kotlin.navigation.NavigationController
 import com.tezov.lib_core_android_kotlin.ui.activity.sub.bottomsheet.BottomSheetAction
@@ -50,7 +53,11 @@ class PageAccountAction private constructor(
             ) {
                 Text(
                     modifier = Modifier.align(Alignment.Center),
-                    text = "Donne moi du contenu que je sois utile..."
+                    text = "Not Implemented",
+                    style = TextStyle(
+                        fontSize = 16.sp,
+                        fontWeight = FontWeight.SemiBold
+                    )
                 )
             }
         }

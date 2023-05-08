@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 07/05/2023 23:36
+ *  Created by Tezov on 08/05/2023 03:00
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 07/05/2023 23:34
+ *  Last modified 08/05/2023 02:59
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -289,6 +289,50 @@ object ThemeComponentProviders {
     )
 
     @Composable
+    fun pagerWidthTabRowStyle() = HorizontalPager.WithTabRow.Style(
+        outfitText = MaterialTheme.typographiesExtended.title.normal.copy {
+            outfitState = OutfitStateBiStable(
+                active = MaterialTheme.colorsExtended.primary.accent,
+                inactive = MaterialTheme.colorsExtended.primary.fade,
+            )
+        },
+        colorIndicator = OutfitStateBiStable(
+            active = MaterialTheme.colorsExtended.primary.accent,
+            inactive = MaterialTheme.colorsExtended.backgroundElevated.overlay,
+        ),
+    )
+
+    @Composable
+    fun sectionMessageRowStyle() = SectionMessageRow.Style(
+        styleIcon = Icon.Simple.Style(
+            size = MaterialTheme.dimensionsIconExtended.info.normal,
+            tint = MaterialTheme.colorsExtended.primary.accent
+        ),
+        outfitTextTitle = MaterialTheme.typographiesExtended.title.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
+        },
+        colorBackgroundHeader = MaterialTheme.colorsExtended.backgroundElevated.overlay,
+        colorDivider = MaterialTheme.colorsExtended.backgroundElevated.fade,
+        sizeDivider = MaterialTheme.dimensionsCommonExtended.divider.normal,
+        styleRow = messageRowStyle()
+    )
+
+    @Composable
+    fun messageRowStyle() = MessageRow.Style(
+        colorIconInfo = MaterialTheme.colorsPalette.redBlood,
+        styleIconAction = Icon.Simple.Style(
+            size = MaterialTheme.dimensionsIconExtended.action.small,
+            tint = MaterialTheme.colorsExtended.primary.accent
+        ),
+        outfitTextTitle = MaterialTheme.typographiesExtended.title.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.default.asStateSimple
+        },
+        outfitTextSubtitle = MaterialTheme.typographiesExtended.subtitle.normal.copy {
+            outfitState = MaterialTheme.colorsExtended.primary.fade.asStateSimple
+        },
+    )
+
+    @Composable
     fun sectionAccountValueSimpleRowStyle() = SectionAccountValueSimpleRow.Style(
         outfitTextTitle = MaterialTheme.typographiesExtended.label.big.copy {
             outfitState = MaterialTheme.colorsExtended.primary.shady.asStateSimple
@@ -435,9 +479,6 @@ object ThemeComponentProviders {
                 outfitShape = MaterialTheme.shapesExtended.button.small.copy {
                     outfitState = MaterialTheme.colorsExtended.primary.accent.asStateSimple
                 }
-            }
-            outfitText = MaterialTheme.typographiesExtended.button.small.copy {
-                outfitState = MaterialTheme.colorsExtended.primary.shiny.asStateSimple
             }
         }
     )
