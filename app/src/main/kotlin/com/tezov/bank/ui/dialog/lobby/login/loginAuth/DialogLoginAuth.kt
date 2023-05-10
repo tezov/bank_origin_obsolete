@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 18:25
+ *  Created by Tezov on 10/05/2023 22:21
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 18:25
+ *  Last modified 10/05/2023 22:21
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -45,10 +45,13 @@ import com.tezov.lib_core_android_kotlin.ui.component.chunk.Button
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Icon
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Link
 import com.tezov.lib_core_android_kotlin.ui.component.chunk.Text
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity
+import com.tezov.lib_core_android_kotlin.ui.compositionTree.activity.Activity.Companion.LocalActivityBundle
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.modal.dialog.Dialog
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.action
 import com.tezov.lib_core_android_kotlin.ui.di.helper.ExtensionCoreUi.state
 import com.tezov.lib_core_android_kotlin.ui.extension.ExtensionCompositionLocal
+import com.tezov.lib_core_android_kotlin.ui.modifier.requireFullScreen
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitBorder.StateColor.Style.Companion.copy
 import com.tezov.lib_core_android_kotlin.ui.theme.style.OutfitState.Simple.Style.Companion.asStateSimple
 import com.tezov.lib_core_android_kotlin.ui.theme.style.border
@@ -80,7 +83,7 @@ object DialogLoginAuth : Dialog<DialogLoginAuthState, DialogLoginAuthAction> {
         ) {
             Column(
                 modifier = Modifier
-                    .fillMaxSize()
+                    .requireFullScreen()
                     .background(DialogLoginAuthTheme.colors.background)
             ) {
                 Icon.Clickable(

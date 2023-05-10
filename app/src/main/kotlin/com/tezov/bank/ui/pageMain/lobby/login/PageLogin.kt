@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 18:25
+ *  Created by Tezov on 10/05/2023 22:21
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 18:17
+ *  Last modified 10/05/2023 20:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -100,9 +100,11 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                 iconState = state.iconState,
             )
             contentBody(
+                action = action,
                 nameState = state.nameState
             )
             contentFooter(
+
                 action = action,
             )
         }
@@ -158,6 +160,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
 
     @Composable
     private fun ColumnScope.contentBody(
+        action: PageLoginAction,
         nameState: State<String>
     ) {
         HorizontalPager.WithIndicator(
@@ -203,7 +206,7 @@ object PageLogin : Page<PageLoginState, PageLoginAction> {
                         Button.StateColor(
                             modifierText = Modifier
                                 .padding(MaterialTheme.dimensionsPaddingExtended.text.big),
-                            onClick = { },
+                            onClick = action::onClickBalanceActivate,
                             text = stringResource(id = R.string.pg_login_btn_activate_balance),
                             style = PageLoginTheme.styles.buttonOutlined
                         )

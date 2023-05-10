@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 08/05/2023 14:37
+ *  Created by Tezov on 10/05/2023 22:21
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 08/05/2023 13:58
+ *  Last modified 10/05/2023 20:08
  *  First project bank / bank.app.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -39,6 +39,10 @@ class PageLoginAction private constructor(
 
     fun onClickMenu(index:Int) {
         navigationController.showSnackBarNotImplemented("click menu $index")
+    }
+
+    fun onClickBalanceActivate() {
+        navigationController.showSnackBarNotImplemented("click add")
     }
 
     fun onClickConnect() {

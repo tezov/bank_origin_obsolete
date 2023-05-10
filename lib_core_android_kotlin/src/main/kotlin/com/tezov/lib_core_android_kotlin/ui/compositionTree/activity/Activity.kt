@@ -1,8 +1,8 @@
 /*
  *  *********************************************************************************
- *  Created by Tezov on 06/05/2023 22:44
+ *  Created by Tezov on 10/05/2023 22:21
  *  Copyright (c) 2023 . All rights reserved.
- *  Last modified 06/05/2023 22:36
+ *  Last modified 10/05/2023 22:15
  *  First project bank / bank.lib_core_android_kotlin.main
  *  This file is private and it is not allowed to use it, copy it or modified it
  *  without the permission granted by the owner Tezov. For any request request,
@@ -12,13 +12,15 @@
 
 package com.tezov.lib_core_android_kotlin.ui.compositionTree.activity
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ProvidableCompositionLocal
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.layout.Layout
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import com.tezov.lib_core_android_kotlin.application.Application
+import com.tezov.lib_core_android_kotlin.type.primaire.DpSize
 import com.tezov.lib_core_android_kotlin.ui.activity.ActivityBase
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.base.Composition
 import com.tezov.lib_core_android_kotlin.ui.compositionTree.page.Page
@@ -46,19 +48,38 @@ interface Activity<S : ActivityState, A : ActivityAction<S>> : Composition<S, A>
 
         data class Bundle(
             val current: Activity<*, *>,
-        ){
-            val pages by lazy{ ArrayDeque<Page.Companion.Bundle>() }
+            val size: DpSize = DpSize((-1).dp, (-1).dp)
+        ) {
+            val pages by lazy { ArrayDeque<Page.Companion.Bundle>() }
         }
     }
 
     @Composable
     fun invokeContent() {
-        CompositionLocalProvider(
-            LocalLevel provides 0,
-            LocalApplication provides LocalContext.current.applicationContext as Application,
-            LocalActivityBundle provides Bundle(this),
-        ) {
-            content()
+        val bundle = Bundle(this)
+        Layout(
+            content = {
+                CompositionLocalProvider(
+                    LocalLevel provides 0,
+                    LocalApplication provides LocalContext.current.applicationContext as Application,
+                    LocalActivityBundle provides bundle,
+                ) {
+                    content()
+                }
+            }
+        ) { measurables, constraints ->
+            val placeables = measurables.map { measurable ->
+                measurable.measure(constraints)
+            }
+            bundle.size.apply {
+                width = constraints.maxWidth.toDp()
+                height = constraints.maxHeight.toDp()
+            }
+            layout(constraints.maxWidth, constraints.maxHeight) {
+                placeables.forEach { placeable ->
+                    placeable.placeRelative(x = 0, y = 0)
+                }
+            }
         }
     }
 
