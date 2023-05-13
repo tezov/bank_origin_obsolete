@@ -5,7 +5,7 @@ buildscript {
         defaultTargetCompileSdkVersion = 33
         javaCompileVersion = JavaVersion.VERSION_1_8
         jvmTarget = "1.8"
-        composeVersion = "1.2.0"
+        composeCompilerVersion = "1.2.0"
 
         version = [
                 classpath        : [
@@ -29,16 +29,16 @@ buildscript {
                                 reflection           : '1.8.21',
                         ],
                         compose: [
-                                ui                          : '1.5.0-alpha03',
-                                ui_util                     : '1.5.0-alpha03',
+                                ui                          : '1.4.3',
+                                ui_util                     : '1.4.3',
                                 ui_preview                  : "1.2.1",
-                                runtime                     : '1.5.0-alpha03',
-                                material                    : '1.5.0-alpha03',
+                                runtime                     : '1.4.3',
+                                material                    : '1.4.3',
                                 material_icons_core         : "1.1.1",
                                 material_icons_extended     : "1.1.1",
-                                foundation                  : '1.5.0-alpha03',
+                                foundation                  : '1.4.3',
                                 accompanist_pager_indicators: '0.31.1-alpha',
-                                animation                   : '1.5.0-alpha03',
+                                animation                   : '1.4.3',
                                 activity                    : '1.7.1',
                                 constraintlayout            : "1.0.1",
                                 viewmodel                   : '2.6.1',
@@ -58,7 +58,7 @@ buildscript {
                                 google_play_services_maps: "18.1.0",
                                 gson                     : "2.9.0",
                                 browser                  : "1.4.0",
-                                okhttp3_interceptor      : "5.0.0-alpha.10",
+                                okhttp3_interceptor      : "5.0.0-alpha.11",
                                 retrofit                 : "2.9.0",
                                 retrofit2_scalar         : "2.1.0",
                                 retrofit2_gson           : "2.9.0",

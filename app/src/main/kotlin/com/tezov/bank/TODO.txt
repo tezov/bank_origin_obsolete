@@ -1,20 +1,21 @@
+Un bon coups de propre à faire
+
 - Couleur Payment Lyf, Paypal, etc
 - Profil Date Connexion
 - retrait ripple des icones
 - scroll end blanc visible sous le bleu?
 
 - Animation navigation
-- Bug fermeture ouverture
+- Bug fermeture / ouverture -> component pas disposé correctement. Doit absolument finir le recyclage des components
 
 - Test Contenu text trés long pour voir le comportement
 
-2
+Disposition des composants
 --> login only when logged
 --> auth only when logged too
 --> help and service only when logged
------> comment depuis le dialog retourner quelque chose a celui a qui appelé ? Mettre à jour les canDispose et se logger
+-----> comment depuis le dialog retourner quelques chose a celui a qui appelé ? Mettre à jour les canDispose et se logger
 --> vérifier le scope activité -> le coroutine doit pas etre utilisé cross activité
-
 
 - OnClick Custom ripple unbounded
 - Snackbar selector

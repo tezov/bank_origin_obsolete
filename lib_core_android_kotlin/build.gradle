@@ -23,7 +23,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion composeVersion
+        kotlinCompilerExtensionVersion composeCompilerVersion
     }
     packagingOptions {
         resources {
@@ -31,7 +31,6 @@ android {
             excludes.add('META-INF/LICENSE')
             excludes.add('META-INF/LICENSE.txt')
             excludes.add('META-INF/license.txt')
-            excludes.add('META-INF/NOTICE')
             excludes.add('META-INF/NOTICE')
             excludes.add('META-INF/NOTICE.txt')
             excludes.add('META-INF/notice.txt')

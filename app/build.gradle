@@ -16,7 +16,7 @@ android {
     defaultConfig {
         applicationId "com.tezov.bank"
         resConfigs 'en', 'fr'
-        versionCode 1
+        versionCode 4
         minSdk defaultMinCompileSdkVersion
         targetSdk defaultTargetCompileSdkVersion
         testInstrumentationRunner "com.tezov.bank.jUnit.JUnitRunner"
@@ -25,7 +25,7 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion composeVersion
+        kotlinCompilerExtensionVersion composeCompilerVersion
     }
     packagingOptions {
         resources {
@@ -44,19 +44,40 @@ android {
 //            excludes.add("META-INF/**")
         }
     }
+    signingConfigs {
+        releaseConfig {
+            def keystoreReleaseProperties = new Properties()
+            keystoreReleaseProperties.load(new FileInputStream(file("keyStoreRelease.properties")))
+            storeFile file(keystoreReleaseProperties.storeFile)
+            storePassword keystoreReleaseProperties.storePassword
+            keyAlias keystoreReleaseProperties.keyAlias
+            keyPassword keystoreReleaseProperties.keyPassword
+        }
+        debugConfig {
+            def keystoreDebugProperties = new Properties()
+            keystoreDebugProperties.load(new FileInputStream(file("keyStoreDebug.properties")))
+            storeFile file(keystoreDebugProperties.storeFile)
+            storePassword keystoreDebugProperties.storePassword
+            keyAlias keystoreDebugProperties.keyAlias
+            keyPassword keystoreDebugProperties.keyPassword
+        }
+    }
     buildTypes {
         release {
-            shrinkResources true
-            minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            debuggable false
-            //signingConfig signingConfigs.releaseConfig
-        }
-        debug {
+            applicationIdSuffix ".rse"
             shrinkResources false
             minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            debuggable false
+            signingConfig signingConfigs.releaseConfig
+        }
+        debug {
+            applicationIdSuffix ".dbg"
+            shrinkResources false
+            minifyEnabled false
+//            proguardFiles file('../proguard/proguard-rules-test.txt')
             debuggable true
-            //signingConfig signingConfigs.debugConfig
+            signingConfig signingConfigs.debugConfig
         }
     }
     sourceSets {
@@ -109,6 +130,4 @@ dependencies {
     testImplementation project(':test_common')
     androidTestImplementation project(':test_common')
     debugImplementation dependencies_test.core_integration.compose_ui_manifest
-
-
 }
